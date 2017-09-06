@@ -10,6 +10,6 @@ clean:
 	find . -name "*.java~" -exec rm {} \;
 jar:
 	rm -f ./LARP.jar
-	jar cvfm LARP.jar Manifest.txt LARP.java LARP.class
+	jar cvfm LARP.jar Manifest.txt LARP.java LARP.class larp
 run:
 	java -jar LARP.jar
