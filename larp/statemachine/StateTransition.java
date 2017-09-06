@@ -10,4 +10,14 @@ public class StateTransition
         this.input = input;
         this.nextState = nextState;
     }
+
+    public Character getInput()
+    {
+        return this.input;
+    }
+
+    public State getNextState()
+    {
+        return this.nextState;
+    }
 }
