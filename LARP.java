@@ -1,3 +1,4 @@
+import larp.grammar.RegularExpressionSyntaxParser;
 import larp.statemachine.State;
 import larp.statemachine.StateMachine;
 import larp.statemachine.StateTransition;
@@ -16,5 +17,24 @@ public class LARP
         System.out.println(": " + machine.accepts(""));
         System.out.println("a: " + machine.accepts("a"));
         System.out.println("b: " + machine.accepts("b"));
+
+        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        try
+        {
+            parser.parse("test");
+            System.out.println("Success");
+        }
+        catch (Exception e)
+        {
+        }
+
+        try
+        {
+            parser.parse("(");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Success");
+        }
     }
 }
