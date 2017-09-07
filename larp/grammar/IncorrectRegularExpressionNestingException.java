@@ -1,5 +1,5 @@
 package larp.grammar;
 
-public class IncorrectRegularExpressionNestingException extends Exception
+public class IncorrectRegularExpressionNestingException extends RegularExpressionSyntaxTokenizerException
 {
 }

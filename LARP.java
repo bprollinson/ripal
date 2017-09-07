@@ -1,4 +1,5 @@
 import larp.grammar.RegularExpressionSyntaxTokenizer;
+import larp.grammar.RegularExpressionSyntaxTokenizerException;
 import larp.statemachine.State;
 import larp.statemachine.StateMachine;
 import larp.statemachine.StateTransition;
@@ -24,7 +25,7 @@ public class LARP
             tokenizer.tokenize("test");
             System.out.println("Success");
         }
-        catch (Exception e)
+        catch (RegularExpressionSyntaxTokenizerException e)
         {
             System.out.println("Failure");
         }
@@ -34,7 +35,7 @@ public class LARP
             tokenizer.tokenize("(");
             System.out.println("Failure");
         }
-        catch (Exception e)
+        catch (RegularExpressionSyntaxTokenizerException e)
         {
             System.out.println("Success");
         }
@@ -44,7 +45,7 @@ public class LARP
             tokenizer.tokenize(")(");
             System.out.println("Failure");
         }
-        catch (Exception e)
+        catch (RegularExpressionSyntaxTokenizerException e)
         {
             System.out.println("Success");
         }
@@ -54,7 +55,7 @@ public class LARP
             tokenizer.tokenize("a*");
             System.out.println("Success");
         }
-        catch (Exception e)
+        catch (RegularExpressionSyntaxTokenizerException e)
         {
             System.out.println("Failure");
         }
@@ -64,7 +65,7 @@ public class LARP
             tokenizer.tokenize("(a)*");
             System.out.println("Success");
         }
-        catch (Exception e)
+        catch (RegularExpressionSyntaxTokenizerException e)
         {
             System.out.println("Failure");
         }
@@ -74,7 +75,7 @@ public class LARP
             tokenizer.tokenize("(*)");
             System.out.println("Failure");
         }
-        catch (Exception e)
+        catch (RegularExpressionSyntaxTokenizerException e)
         {
             System.out.println("Success");
         }
@@ -84,7 +85,7 @@ public class LARP
             tokenizer.tokenize("*");
             System.out.println("Failure");
         }
-        catch (Exception e)
+        catch (RegularExpressionSyntaxTokenizerException e)
         {
             System.out.println("Success");
         }
@@ -94,7 +95,7 @@ public class LARP
             tokenizer.tokenize("a|b");
             System.out.println("Success");
         }
-        catch (Exception e)
+        catch (RegularExpressionSyntaxTokenizerException e)
         {
             System.out.println("Failure");
         }
@@ -104,7 +105,7 @@ public class LARP
             tokenizer.tokenize("(|a)");
             System.out.println("Failure");
         }
-        catch (Exception e)
+        catch (RegularExpressionSyntaxTokenizerException e)
         {
             System.out.println("Success");
         }
@@ -114,7 +115,7 @@ public class LARP
             tokenizer.tokenize("(a|)");
             System.out.println("Failure");
         }
-        catch (Exception e)
+        catch (RegularExpressionSyntaxTokenizerException e)
         {
             System.out.println("Success");
         }

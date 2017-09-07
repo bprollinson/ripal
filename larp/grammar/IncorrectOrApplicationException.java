@@ -1,5 +1,5 @@
 package larp.grammar;
 
-public class IncorrectOrApplicationException extends Exception
+public class IncorrectOrApplicationException extends RegularExpressionSyntaxTokenizerException
 {
 }

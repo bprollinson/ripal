@@ -7,7 +7,7 @@ public class RegularExpressionSyntaxTokenizer
     private char kleeneClosure = '*';
     private char or = '|';
 
-    public void tokenize(String expression) throws Exception
+    public void tokenize(String expression) throws RegularExpressionSyntaxTokenizerException
     {
         int nestingLevel = 0;
         Character lastCharacter = null;
