@@ -41,6 +41,11 @@ public class RegularExpressionSyntaxParser
                 throw new IncorrectOrApplicationException();
             }
 
+            if (currentCharacter == this.closeBrace && (lastCharacter == this.or))
+            {
+                throw new IncorrectCloseBraceApplicationException();
+            }
+
             lastCharacter = currentCharacter;
         }
 

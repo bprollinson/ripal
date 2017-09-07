@@ -91,7 +91,27 @@ public class LARP
 
         try
         {
-            parser.parse("(|)");
+            parser.parse("a|b");
+            System.out.println("Success");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Failure");
+        }
+
+        try
+        {
+            parser.parse("(|a)");
+            System.out.println("Failure");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Success");
+        }
+
+        try
+        {
+            parser.parse("(a|)");
             System.out.println("Failure");
         }
         catch (Exception e)
