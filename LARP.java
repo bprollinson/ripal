@@ -26,11 +26,13 @@ public class LARP
         }
         catch (Exception e)
         {
+            System.out.println("Failure");
         }
 
         try
         {
             parser.parse("(");
+            System.out.println("Failure");
         }
         catch (Exception e)
         {
@@ -40,6 +42,57 @@ public class LARP
         try
         {
             parser.parse(")(");
+            System.out.println("Failure");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Success");
+        }
+
+        try
+        {
+            parser.parse("a*");
+            System.out.println("Success");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Failure");
+        }
+
+        try
+        {
+            parser.parse("(a)*");
+            System.out.println("Success");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Failure");
+        }
+
+        try
+        {
+            parser.parse("(*)");
+            System.out.println("Failure");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Success");
+        }
+
+        try
+        {
+            parser.parse("*");
+            System.out.println("Failure");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Success");
+        }
+
+        try
+        {
+            parser.parse("(|)");
+            System.out.println("Failure");
         }
         catch (Exception e)
         {
