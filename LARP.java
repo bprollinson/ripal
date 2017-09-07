@@ -1,4 +1,4 @@
-import larp.grammar.RegularExpressionSyntaxParser;
+import larp.grammar.RegularExpressionSyntaxTokenizer;
 import larp.statemachine.State;
 import larp.statemachine.StateMachine;
 import larp.statemachine.StateTransition;
@@ -18,10 +18,10 @@ public class LARP
         System.out.println("a: " + machine.accepts("a"));
         System.out.println("b: " + machine.accepts("b"));
 
-        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
         try
         {
-            parser.parse("test");
+            tokenizer.tokenize("test");
             System.out.println("Success");
         }
         catch (Exception e)
@@ -31,7 +31,7 @@ public class LARP
 
         try
         {
-            parser.parse("(");
+            tokenizer.tokenize("(");
             System.out.println("Failure");
         }
         catch (Exception e)
@@ -41,7 +41,7 @@ public class LARP
 
         try
         {
-            parser.parse(")(");
+            tokenizer.tokenize(")(");
             System.out.println("Failure");
         }
         catch (Exception e)
@@ -51,7 +51,7 @@ public class LARP
 
         try
         {
-            parser.parse("a*");
+            tokenizer.tokenize("a*");
             System.out.println("Success");
         }
         catch (Exception e)
@@ -61,7 +61,7 @@ public class LARP
 
         try
         {
-            parser.parse("(a)*");
+            tokenizer.tokenize("(a)*");
             System.out.println("Success");
         }
         catch (Exception e)
@@ -71,7 +71,7 @@ public class LARP
 
         try
         {
-            parser.parse("(*)");
+            tokenizer.tokenize("(*)");
             System.out.println("Failure");
         }
         catch (Exception e)
@@ -81,7 +81,7 @@ public class LARP
 
         try
         {
-            parser.parse("*");
+            tokenizer.tokenize("*");
             System.out.println("Failure");
         }
         catch (Exception e)
@@ -91,7 +91,7 @@ public class LARP
 
         try
         {
-            parser.parse("a|b");
+            tokenizer.tokenize("a|b");
             System.out.println("Success");
         }
         catch (Exception e)
@@ -101,7 +101,7 @@ public class LARP
 
         try
         {
-            parser.parse("(|a)");
+            tokenizer.tokenize("(|a)");
             System.out.println("Failure");
         }
         catch (Exception e)
@@ -111,7 +111,7 @@ public class LARP
 
         try
         {
-            parser.parse("(a|)");
+            tokenizer.tokenize("(a|)");
             System.out.println("Failure");
         }
         catch (Exception e)

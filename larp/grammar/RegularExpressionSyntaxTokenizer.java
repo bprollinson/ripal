@@ -1,13 +1,13 @@
 package larp.grammar;
 
-public class RegularExpressionSyntaxParser
+public class RegularExpressionSyntaxTokenizer
 {
     private char openBrace = '(';
     private char closeBrace = ')';
     private char kleeneClosure = '*';
     private char or = '|';
 
-    public void parse(String expression) throws Exception
+    public void tokenize(String expression) throws Exception
     {
         int nestingLevel = 0;
         Character lastCharacter = null;
