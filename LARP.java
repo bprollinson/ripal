@@ -36,5 +36,14 @@ public class LARP
         {
             System.out.println("Success");
         }
+
+        try
+        {
+            parser.parse(")(");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Success");
+        }
     }
 }

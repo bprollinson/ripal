@@ -22,6 +22,11 @@ public class RegularExpressionSyntaxParser
             {
                 nestingLevel--;
             }
+
+            if (nestingLevel < 0)
+            {
+                throw new IncorrectRegularExpressionNestingException();
+            }
         }
 
         if (nestingLevel != 0)
