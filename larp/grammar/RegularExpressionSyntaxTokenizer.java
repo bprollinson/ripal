@@ -31,20 +31,7 @@ public class RegularExpressionSyntaxTokenizer
                 throw new IncorrectRegularExpressionNestingException();
             }
 
-            if (currentCharacter == this.kleeneClosure && (lastCharacter == null || lastCharacter == this.openBrace))
-            {
-                throw new IncorrectKleeneClosureApplicationException();
-            }
-
-            if (currentCharacter == this.or && (lastCharacter == null || lastCharacter == this.openBrace))
-            {
-                throw new IncorrectOrApplicationException();
-            }
-
-            if (currentCharacter == this.closeBrace && (lastCharacter == this.or))
-            {
-                throw new IncorrectCloseBraceApplicationException();
-            }
+            this.assertTokenSequence(lastCharacter, currentCharacter);
 
             lastCharacter = currentCharacter;
         }
@@ -52,6 +39,24 @@ public class RegularExpressionSyntaxTokenizer
         if (nestingLevel != 0)
         {
             throw new IncorrectRegularExpressionNestingException();
+        }
+    }
+
+    private void assertTokenSequence(Character lastCharacter, char currentCharacter) throws RegularExpressionSyntaxTokenizerException
+    {
+        if (currentCharacter == this.kleeneClosure && (lastCharacter == null || lastCharacter == this.openBrace))
+        {
+            throw new IncorrectKleeneClosureApplicationException();
+        }
+
+        if (currentCharacter == this.or && (lastCharacter == null || lastCharacter == this.openBrace))
+        {
+            throw new IncorrectOrApplicationException();
+        }
+
+        if (currentCharacter == this.closeBrace && (lastCharacter == this.or))
+        {
+            throw new IncorrectCloseBraceApplicationException();
         }
     }
 }
