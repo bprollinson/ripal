@@ -1,8 +1,15 @@
+import larp.grammar.CharacterToken;
+import larp.grammar.CloseBraceToken;
+import larp.grammar.KleeneClosureToken;
+import larp.grammar.OpenBraceToken;
+import larp.grammar.OrToken;
 import larp.grammar.RegularExpressionSyntaxTokenizer;
 import larp.grammar.RegularExpressionSyntaxTokenizerException;
 import larp.statemachine.State;
 import larp.statemachine.StateMachine;
 import larp.statemachine.StateTransition;
+
+import java.util.Vector;
 
 public class LARP
 {
@@ -22,8 +29,14 @@ public class LARP
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
         try
         {
-            tokenizer.tokenize("test");
-            System.out.println("Success");
+            Vector result = tokenizer.tokenize("test");
+            Vector expectedResult = new Vector();
+            expectedResult.add(new CharacterToken('t'));
+            expectedResult.add(new CharacterToken('e'));
+            expectedResult.add(new CharacterToken('s'));
+            expectedResult.add(new CharacterToken('t'));
+
+            System.out.println(result.equals(expectedResult) ? "Success" : "Failure");
         }
         catch (RegularExpressionSyntaxTokenizerException e)
         {
@@ -52,8 +65,12 @@ public class LARP
 
         try
         {
-            tokenizer.tokenize("a*");
-            System.out.println("Success");
+            Vector result =  tokenizer.tokenize("a*");
+            Vector expectedResult = new Vector();
+            expectedResult.add(new CharacterToken('a'));
+            expectedResult.add(new KleeneClosureToken());
+
+            System.out.println(result.equals(expectedResult) ? "Success" : "Failure");
         }
         catch (RegularExpressionSyntaxTokenizerException e)
         {
@@ -62,8 +79,14 @@ public class LARP
 
         try
         {
-            tokenizer.tokenize("(a)*");
-            System.out.println("Success");
+            Vector result = tokenizer.tokenize("(a)*");
+            Vector expectedResult = new Vector();
+            expectedResult.add(new OpenBraceToken());
+            expectedResult.add(new CharacterToken('a'));
+            expectedResult.add(new CloseBraceToken());
+            expectedResult.add(new KleeneClosureToken());
+
+            System.out.println(result.equals(expectedResult) ? "Success" : "Failure");
         }
         catch (RegularExpressionSyntaxTokenizerException e)
         {
@@ -92,8 +115,13 @@ public class LARP
 
         try
         {
-            tokenizer.tokenize("a|b");
-            System.out.println("Success");
+            Vector result = tokenizer.tokenize("a|b");
+            Vector expectedResult = new Vector();
+            expectedResult.add(new CharacterToken('a'));
+            expectedResult.add(new OrToken());
+            expectedResult.add(new CharacterToken('b'));
+
+            System.out.println(result.equals(expectedResult) ? "Success" : "Failure");
         }
         catch (RegularExpressionSyntaxTokenizerException e)
         {
