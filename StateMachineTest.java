@@ -1,4 +1,5 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.statemachine.State;
@@ -12,7 +13,7 @@ public class StateMachineTest
     {
         StateMachine machine = this.buildStateMachine();
 
-        assertEquals(false, machine.accepts(""));
+        assertFalse(machine.accepts(""));
     }
 
     @Test
@@ -20,7 +21,7 @@ public class StateMachineTest
     {
         StateMachine machine = this.buildStateMachine();
 
-        assertEquals(true, machine.accepts("a"));
+        assertTrue(machine.accepts("a"));
     }
 
     @Test
@@ -28,7 +29,7 @@ public class StateMachineTest
     {
         StateMachine machine = this.buildStateMachine();
 
-        assertEquals(false, machine.accepts("ab"));
+        assertFalse(machine.accepts("ab"));
     }
 
     private StateMachine buildStateMachine()
