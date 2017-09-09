@@ -7,8 +7,9 @@ program:
 	javac ./LARP.java
 test:
 	make clean
-	javac -cp .:junit-4.12.jar:hamcrest-core-1.3.jar ./StateMachineTest.java
+	javac -cp .:junit-4.12.jar:hamcrest-core-1.3.jar ./*Test.java
 	java -cp .:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore StateMachineTest
+	java -cp .:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore RegularExpressionSyntaxTokenizerTest
 	make clean
 clean:
 	find . -name "*.class" -exec rm {} \;
