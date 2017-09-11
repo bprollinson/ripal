@@ -3,9 +3,6 @@ import org.junit.Test;
 
 import larp.grammar.CharacterToken;
 import larp.grammar.CloseBraceToken;
-import larp.grammar.IncorrectCloseBraceApplicationException;
-import larp.grammar.IncorrectKleeneClosureApplicationException;
-import larp.grammar.IncorrectOrApplicationException;
 import larp.grammar.IncorrectRegularExpressionNestingException;
 import larp.grammar.OpenBraceToken;
 import larp.grammar.OrToken;
@@ -19,26 +16,20 @@ import java.util.Vector;
 public class RegularExpressionSyntaxTokenizerTest
 {
     @Test
-    public void testTokenizerTokenizesSimpleString() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerTokenizesString() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
-        Vector<RegularExpressionSyntaxToken> result = tokenizer.tokenize("test");
+        Vector<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(a|b)*");
         Vector<RegularExpressionSyntaxToken> expectedResult = new Vector();
-        expectedResult.add(new CharacterToken('t'));
-        expectedResult.add(new CharacterToken('e'));
-        expectedResult.add(new CharacterToken('s'));
-        expectedResult.add(new CharacterToken('t'));
+        expectedResult.add(new OpenBraceToken());
+        expectedResult.add(new CharacterToken('a'));
+        expectedResult.add(new OrToken());
+        expectedResult.add(new CharacterToken('b'));
+        expectedResult.add(new CloseBraceToken());
+        expectedResult.add(new KleeneClosureToken());
 
         assertEquals(expectedResult, result);
-    }
-
-    @Test(expected = IncorrectRegularExpressionNestingException.class)
-    public void testTokenizerThrowsExceptionForUnclosedBracketAtEndOfString() throws RegularExpressionSyntaxTokenizerException
-    {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
-
-        Vector<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(");
     }
 
     @Test(expected = IncorrectRegularExpressionNestingException.class)
@@ -49,77 +40,19 @@ public class RegularExpressionSyntaxTokenizerTest
         Vector<RegularExpressionSyntaxToken> result = tokenizer.tokenize(")(");
     }
 
-    @Test
-    public void testTokenizerTokenizesKleeneClosureFollowingCharacter() throws RegularExpressionSyntaxTokenizerException
+    @Test(expected = IncorrectRegularExpressionNestingException.class)
+    public void testTokenizerThrowsExceptionForUnclosedBracketAtEndOfString() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
-        Vector result =  tokenizer.tokenize("a*");
-        Vector expectedResult = new Vector();
-        expectedResult.add(new CharacterToken('a'));
-        expectedResult.add(new KleeneClosureToken());
-
-        assertEquals(expectedResult, result);
+        Vector<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(");
     }
 
-    @Test
-    public void testTokenizerTokenizesKleeneClosureFollowingCloseBracket() throws RegularExpressionSyntaxTokenizerException
+    @Test(expected = RegularExpressionSyntaxTokenizerException.class)
+    public void testTokenizerThrowsExceptionForIncorrecTokenSequence() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
-        Vector result = tokenizer.tokenize("(a)*");
-        Vector expectedResult = new Vector();
-        expectedResult.add(new OpenBraceToken());
-        expectedResult.add(new CharacterToken('a'));
-        expectedResult.add(new CloseBraceToken());
-        expectedResult.add(new KleeneClosureToken());
-
-        assertEquals(expectedResult, result);
-    }
-
-    @Test(expected = IncorrectKleeneClosureApplicationException.class)
-    public void testTokenizerThrowsExceptionForKleeneClosureFollowingOpenBracket() throws RegularExpressionSyntaxTokenizerException
-    {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
-
-        tokenizer.tokenize("(*)");
-    }
-
-    @Test(expected = IncorrectKleeneClosureApplicationException.class)
-    public void testTokenizerThrowsExceptionForKleeneClosureAtStartOfString() throws RegularExpressionSyntaxTokenizerException
-    {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
-
-        tokenizer.tokenize("*");
-    }
-
-    @Test
-    public void testTokenizerTokenizesOr() throws RegularExpressionSyntaxTokenizerException
-    {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
-
-        Vector result = tokenizer.tokenize("a|b");
-        Vector expectedResult = new Vector();
-        expectedResult.add(new CharacterToken('a'));
-        expectedResult.add(new OrToken());
-        expectedResult.add(new CharacterToken('b'));
-
-        assertEquals(expectedResult, result);
-    }
-
-    @Test(expected = IncorrectOrApplicationException.class)
-    public void testTokenizerThrowsExceptionForOrFollowingOpenBracket() throws RegularExpressionSyntaxTokenizerException
-    {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
-
-        tokenizer.tokenize("(|a)");
-    }
-
-    @Test(expected = IncorrectCloseBraceApplicationException.class)
-    public void testTokenizerThrowsExceptionForCloseBracketFollowingOr() throws RegularExpressionSyntaxTokenizerException
-    {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
-
-        tokenizer.tokenize("(a|)");
+        Vector<RegularExpressionSyntaxToken> result = tokenizer.tokenize("*");
     }
 }
