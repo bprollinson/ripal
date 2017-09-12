@@ -108,9 +108,15 @@ public class RegularExpressionSyntaxParserTest
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
         OrNode orNode = new OrNode();
-        orNode.addChild(new CharacterNode('a'));
-        orNode.addChild(new CharacterNode('b'));
-        orNode.addChild(new CharacterNode('c'));
+        ConcatenationNode child1 = new ConcatenationNode();
+        child1.addChild(new CharacterNode('a'));
+        orNode.addChild(child1);
+        ConcatenationNode child2 = new ConcatenationNode();
+        child2.addChild(new CharacterNode('b'));
+        orNode.addChild(child2);
+        ConcatenationNode child3 = new ConcatenationNode();
+        child3.addChild(new CharacterNode('c'));
+        orNode.addChild(child3);
         expectedRootNode.addChild(orNode);
 
         assertEquals(expectedRootNode, rootNode);

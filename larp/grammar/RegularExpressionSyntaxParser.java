@@ -10,6 +10,44 @@ public class RegularExpressionSyntaxParser
         int braceBalance = 0;
         int openBracePosition = -1;
 
+        Vector<Integer> orPositions = new Vector<Integer>();
+        for (int i = 0; i < tokens.size(); i++)
+        {
+            RegularExpressionSyntaxToken token = tokens.get(i);
+
+            if (token instanceof OrToken && braceBalance == 0)
+            {
+                orPositions.add(i);
+            }
+            else if (token instanceof OpenBraceToken)
+            {
+                braceBalance++;
+            }
+            else if (token instanceof CloseBraceToken)
+            {
+                braceBalance--;
+            }
+        }
+
+        if (orPositions.size() > 0)
+        {
+            OrNode orNode = new OrNode();
+
+            int startPosition = 0;
+            for (int i = 0; i < orPositions.size(); i++)
+            {
+                int endPosition = orPositions.get(i);
+                orNode.addChild(this.parse(new Vector(tokens.subList(startPosition, endPosition))));
+
+                startPosition = endPosition + +1;
+            }
+            orNode.addChild(this.parse(new Vector(tokens.subList(startPosition, tokens.size()))));
+
+            node.addChild(orNode);
+
+            return node;
+        }
+
         for (int i = 0; i < tokens.size(); i++)
         {
             RegularExpressionSyntaxToken token = tokens.get(i);
