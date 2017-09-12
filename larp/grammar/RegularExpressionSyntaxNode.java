@@ -10,4 +10,19 @@ public class RegularExpressionSyntaxNode
     {
         this.childNodes = new Vector<RegularExpressionSyntaxNode>();
     }
+
+    public Vector<RegularExpressionSyntaxNode> getChildNodes()
+    {
+        return this.childNodes;
+    }
+
+    public boolean equals(Object other)
+    {
+        if (!this.getClass().equals(other.getClass()))
+        {
+            return false;
+        }
+
+        return this.childNodes.equals(((RegularExpressionSyntaxNode)other).getChildNodes());
+    }
 }

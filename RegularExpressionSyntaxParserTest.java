@@ -1,6 +1,9 @@
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import larp.grammar.CharacterNode;
 import larp.grammar.CharacterToken;
+import larp.grammar.ConcatenationNode;
 import larp.grammar.RegularExpressionSyntaxNode;
 import larp.grammar.RegularExpressionSyntaxParser;
 import larp.grammar.RegularExpressionSyntaxToken;
@@ -17,5 +20,10 @@ public class RegularExpressionSyntaxParserTest
         Vector<RegularExpressionSyntaxToken> input = new Vector<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
         RegularExpressionSyntaxNode rootNode = parser.parse(input);
+
+        ConcatenationNode expectedRootNode = new ConcatenationNode();
+        expectedRootNode.addChild(new CharacterNode('a'));
+
+        assertEquals(expectedRootNode, rootNode);
     }
 }
