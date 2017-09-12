@@ -9,8 +9,20 @@ public class RegularExpressionSyntaxParser
         ConcatenationNode node = new ConcatenationNode();
         for (int i = 0; i < tokens.size(); i++)
         {
-            CharacterToken token = (CharacterToken)(tokens).get(i);
-            node.addChild(new CharacterNode(token.getCharacter()));
+            RegularExpressionSyntaxToken token = tokens.get(i);
+
+            if (token instanceof CharacterToken)
+            {
+                node.addChild(new CharacterNode(((CharacterToken)token).getCharacter()));
+            }
+            else if (token instanceof KleeneClosureToken)
+            {
+                Vector<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
+                RegularExpressionSyntaxNode lastNode = childNodes.lastElement();
+                KleeneClosureNode kleeneClosureNode = new KleeneClosureNode();
+                kleeneClosureNode.addChild(lastNode);
+                childNodes.set(childNodes.size() - 1, kleeneClosureNode);
+            }
         }
 
         return node;

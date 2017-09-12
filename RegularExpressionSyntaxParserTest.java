@@ -4,6 +4,8 @@ import org.junit.Test;
 import larp.grammar.CharacterNode;
 import larp.grammar.CharacterToken;
 import larp.grammar.ConcatenationNode;
+import larp.grammar.KleeneClosureNode;
+import larp.grammar.KleeneClosureToken;
 import larp.grammar.RegularExpressionSyntaxNode;
 import larp.grammar.RegularExpressionSyntaxParser;
 import larp.grammar.RegularExpressionSyntaxToken;
@@ -40,6 +42,26 @@ public class RegularExpressionSyntaxParserTest
         ConcatenationNode expectedRootNode = new ConcatenationNode();
         expectedRootNode.addChild(new CharacterNode('a'));
         expectedRootNode.addChild(new CharacterNode('b'));
+
+        assertEquals(expectedRootNode, rootNode);
+    }
+
+    @Test
+    public void testParseAddsKleeneClosureNode()
+    {
+        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+
+        Vector<RegularExpressionSyntaxToken> input = new Vector<RegularExpressionSyntaxToken>();
+        input.add(new CharacterToken('a'));
+        input.add(new CharacterToken('b'));
+        input.add(new KleeneClosureToken());
+        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+
+        ConcatenationNode expectedRootNode = new ConcatenationNode();
+        expectedRootNode.addChild(new CharacterNode('a'));
+        KleeneClosureNode kleeneClosureNode = new KleeneClosureNode();
+        kleeneClosureNode.addChild(new CharacterNode('b'));
+        expectedRootNode.addChild(kleeneClosureNode);
 
         assertEquals(expectedRootNode, rootNode);
     }
