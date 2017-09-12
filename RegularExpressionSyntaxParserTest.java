@@ -8,6 +8,8 @@ import larp.grammar.ConcatenationNode;
 import larp.grammar.KleeneClosureNode;
 import larp.grammar.KleeneClosureToken;
 import larp.grammar.OpenBraceToken;
+import larp.grammar.OrNode;
+import larp.grammar.OrToken;
 import larp.grammar.RegularExpressionSyntaxNode;
 import larp.grammar.RegularExpressionSyntaxParser;
 import larp.grammar.RegularExpressionSyntaxToken;
@@ -87,6 +89,29 @@ public class RegularExpressionSyntaxParserTest
         concatenationNode.addChild(new CharacterNode('b'));
         expectedRootNode.addChild(concatenationNode);
         expectedRootNode.addChild(new CharacterNode('c'));
+
+        assertEquals(expectedRootNode, rootNode);
+    }
+
+    @Test
+    public void testParseHandlesOr()
+    {
+        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+
+        Vector<RegularExpressionSyntaxToken> input = new Vector<RegularExpressionSyntaxToken>();
+        input.add(new CharacterToken('a'));
+        input.add(new OrToken());
+        input.add(new CharacterToken('b'));
+        input.add(new OrToken());
+        input.add(new CharacterToken('c'));
+        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+
+        ConcatenationNode expectedRootNode = new ConcatenationNode();
+        OrNode orNode = new OrNode();
+        orNode.addChild(new CharacterNode('a'));
+        orNode.addChild(new CharacterNode('b'));
+        orNode.addChild(new CharacterNode('c'));
+        expectedRootNode.addChild(orNode);
 
         assertEquals(expectedRootNode, rootNode);
     }
