@@ -7,8 +7,11 @@ public class RegularExpressionSyntaxParser
     public RegularExpressionSyntaxNode parse(Vector<RegularExpressionSyntaxToken> tokens)
     {
         ConcatenationNode node = new ConcatenationNode();
-        CharacterToken token = (CharacterToken)(tokens).get(0);
-        node.addChild(new CharacterNode(token.getCharacter()));
+        for (int i = 0; i < tokens.size(); i++)
+        {
+            CharacterToken token = (CharacterToken)(tokens).get(i);
+            node.addChild(new CharacterNode(token.getCharacter()));
+        }
 
         return node;
     }

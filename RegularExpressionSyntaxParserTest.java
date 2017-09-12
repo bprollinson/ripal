@@ -13,7 +13,7 @@ import java.util.Vector;
 public class RegularExpressionSyntaxParserTest
 {
     @Test
-    public void testParseReturnsConcatenateNodeForSingleCharacter()
+    public void testParseReturnsConcatenationNodeForSingleCharacter()
     {
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
@@ -23,6 +23,23 @@ public class RegularExpressionSyntaxParserTest
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
         expectedRootNode.addChild(new CharacterNode('a'));
+
+        assertEquals(expectedRootNode, rootNode);
+    }
+
+    @Test
+    public void testParseReturnsConcatenationNodeForMultipleCharacters()
+    {
+        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+
+        Vector<RegularExpressionSyntaxToken> input = new Vector<RegularExpressionSyntaxToken>();
+        input.add(new CharacterToken('a'));
+        input.add(new CharacterToken('b'));
+        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+
+        ConcatenationNode expectedRootNode = new ConcatenationNode();
+        expectedRootNode.addChild(new CharacterNode('a'));
+        expectedRootNode.addChild(new CharacterNode('b'));
 
         assertEquals(expectedRootNode, rootNode);
     }
