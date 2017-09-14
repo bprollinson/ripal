@@ -3,41 +3,41 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.automaton.State;
-import larp.automaton.StateMachine;
+import larp.automaton.DFA;
 import larp.automaton.StateTransition;
 
-public class StateMachineTest
+public class DFATest
 {
     @Test
     public void testAcceptsReturnsFalseInNonExceptingState()
     {
-        StateMachine machine = this.buildStateMachine();
+        DFA dfa = this.buildDFA();
 
-        assertFalse(machine.accepts(""));
+        assertFalse(dfa.accepts(""));
     }
 
     @Test
     public void testAcceptsReturnsTrueInExceptingState()
     {
-        StateMachine machine = this.buildStateMachine();
+        DFA dfa = this.buildDFA();
 
-        assertTrue(machine.accepts("a"));
+        assertTrue(dfa.accepts("a"));
     }
 
     @Test
     public void testAcceptsReturnsFalseForMissingTransition()
     {
-        StateMachine machine = this.buildStateMachine();
+        DFA dfa = this.buildDFA();
 
-        assertFalse(machine.accepts("ab"));
+        assertFalse(dfa.accepts("ab"));
     }
 
-    private StateMachine buildStateMachine()
+    private DFA buildDFA()
     {
         State state0 = new State("S0", false);
         State state1 = new State("S1", true);
         state0.addTransition(new StateTransition('a', state1));
 
-        return new StateMachine(state0);
+        return new DFA(state0);
     }
 }

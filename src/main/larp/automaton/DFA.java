@@ -1,10 +1,10 @@
 package larp.automaton;
 
-public class StateMachine
+public class DFA
 {
     private State startState;
 
-    public StateMachine(State startState)
+    public DFA(State startState)
     {
         this.startState = startState;
     }
