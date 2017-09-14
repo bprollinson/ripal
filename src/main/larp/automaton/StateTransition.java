@@ -1,4 +1,4 @@
-package larp.statemachine;
+package larp.automaton;
 
 public class StateTransition
 {
