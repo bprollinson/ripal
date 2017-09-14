@@ -4,7 +4,7 @@ full:
 	make jar
 	make clean
 program:
-	javac -cp ./src/main ./LARP.java
+	javac -cp ./src/main ./*.java
 test:
 	make clean
 	javac -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar ./src/test/*Test.java
