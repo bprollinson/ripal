@@ -38,4 +38,14 @@ public class State
 
         return null;
     }
+
+    public boolean equals(Object other)
+    {
+        if (!(other instanceof State))
+        {
+            return false;
+        }
+
+        return this.accepting == ((State)other).isAccepting();
+    }
 }
