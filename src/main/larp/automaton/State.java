@@ -25,6 +25,11 @@ public abstract class State
         return this.accepting;
     }
 
+    public int countTransitions()
+    {
+        return this.transitions.size();
+    }
+
     public boolean equals(Object other)
     {
         if (!(other instanceof State))
@@ -32,6 +37,11 @@ public abstract class State
             return false;
         }
 
-        return this.accepting == ((State)other).isAccepting();
+        if (this.accepting != ((State)other).isAccepting())
+        {
+            return false;
+        }
+
+        return this.transitions.size() == ((State)other).countTransitions();
     }
 }
