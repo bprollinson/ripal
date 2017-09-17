@@ -65,7 +65,7 @@ public abstract class State
 
             for (int i = 0; i < otherTransitions.size(); i++)
             {
-                if (current.getInput() == otherTransitions.get(i).getInput())                
+                if (current.getInput() == otherTransitions.get(i).getInput() && current.getNextState().equals(otherTransitions.get(i).getNextState()))                
                 {
                     found = true;
                     ourTransitions.remove(0);

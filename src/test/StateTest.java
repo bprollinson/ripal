@@ -63,6 +63,19 @@ public class StateTest
         State otherState = new TestState("S3", true);
         otherState.addTransition(new StateTransition('b', new TestState("S4", true)));
         otherState.addTransition(new StateTransition('a', new TestState("S5", true)));
+
+        assertTrue(state.equals(otherState));
+    }
+
+    @Test
+    public void testEqualsReturnsFalseForSubsequentStateInequality()
+    {
+        State state = new TestState("S0", true);
+        state.addTransition(new StateTransition('a', new TestState("S1", true)));
+        State otherState = new TestState("S2", true);
+        otherState.addTransition(new StateTransition('a', new TestState("S3", false)));
+
+        assertFalse(state.equals(otherState));
     }
 
     private class TestState extends State
