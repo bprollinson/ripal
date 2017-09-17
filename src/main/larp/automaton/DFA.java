@@ -2,9 +2,9 @@ package larp.automaton;
 
 public class DFA
 {
-    private State startState;
+    private DFAState startState;
 
-    public DFA(State startState)
+    public DFA(DFAState startState)
     {
         this.startState = startState;
     }
@@ -17,7 +17,7 @@ public class DFA
         while (currentState != null && characterPosition < inputString.length())
         {
             Character inputCharacter = inputString.charAt(characterPosition);
-            currentState = currentState.getNextState(inputCharacter);
+            currentState = ((DFAState)currentState).getNextState(inputCharacter);
 
             characterPosition++;
         }

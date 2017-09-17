@@ -16,8 +16,8 @@ public class RegularExpressionSyntaxCompiler
     {
         if (node instanceof CharacterNode)
         {
-            State startState = new State("", false);
-            State endState = new State("", false);
+            State startState = new EpsilonNFAState("", false);
+            State endState = new EpsilonNFAState("", false);
             startState.addTransition(new StateTransition(null, endState));
 
             return new StateGroup(startState, endState);

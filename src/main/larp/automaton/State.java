@@ -2,11 +2,11 @@ package larp.automaton;
 
 import java.util.Vector;
 
-public class State
+public abstract class State
 {
     private String name;
     private boolean accepting;
-    private Vector<StateTransition> transitions;
+    protected Vector<StateTransition> transitions;
 
     public State(String name, boolean accepting)
     {
@@ -23,20 +23,6 @@ public class State
     public boolean isAccepting()
     {
         return this.accepting;
-    }
-
-    public State getNextState(Character input)
-    {
-        for (int i = 0; i < this.transitions.size(); i++)
-        {
-            StateTransition transition = this.transitions.get(i);
-            if (input.equals(transition.getInput()))
-            {
-                return transition.getNextState();
-            }
-        }
-
-        return null;
     }
 
     public boolean equals(Object other)
