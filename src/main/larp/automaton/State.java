@@ -30,6 +30,11 @@ public abstract class State
         return this.transitions.size();
     }
 
+    public Vector<StateTransition> getTransitions()
+    {
+        return this.transitions;
+    }
+
     public boolean equals(Object other)
     {
         if (!(other instanceof State))
@@ -37,11 +42,44 @@ public abstract class State
             return false;
         }
 
-        if (this.accepting != ((State)other).isAccepting())
+        State otherState = (State)other;
+
+        if (this.accepting != otherState.isAccepting())
         {
             return false;
         }
 
-        return this.transitions.size() == ((State)other).countTransitions();
+        if (transitions.size() != otherState.countTransitions())
+        {
+            return false;
+        }
+
+        Vector<StateTransition> ourTransitions = (Vector<StateTransition>)this.transitions.clone();
+        Vector<StateTransition> otherTransitions = (Vector<StateTransition>)otherState.getTransitions().clone();
+
+        while (ourTransitions.size() > 0)
+        {
+            boolean found = false;
+
+            StateTransition current = ourTransitions.get(0);
+
+            for (int i = 0; i < otherTransitions.size(); i++)
+            {
+                if (current.getInput() == otherTransitions.get(i).getInput())                
+                {
+                    found = true;
+                    ourTransitions.remove(0);
+                    otherTransitions.remove(i);
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

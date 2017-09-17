@@ -43,6 +43,17 @@ public class StateTest
         assertFalse(state.equals(otherState));
     }
 
+    @Test
+    public void testEqualsReturnsTrueForSameTransitionChracters()
+    {
+        State state = new TestState("S0", true);
+        state.addTransition(new StateTransition('a', state));
+        State otherState = new TestState("S1", true);
+        otherState.addTransition(new StateTransition('a', otherState));
+
+        assertTrue(state.equals(otherState));
+    }
+
     private class TestState extends State
     {
         public TestState(String name, boolean accepting)
