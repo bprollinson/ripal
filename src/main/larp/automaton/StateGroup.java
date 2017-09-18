@@ -18,6 +18,6 @@ public class StateGroup
 
     public State getEndState()
     {
-        return this.getEndState();
+        return this.endState;
     }
 }
