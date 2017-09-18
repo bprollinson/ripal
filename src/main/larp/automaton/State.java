@@ -73,24 +73,28 @@ public abstract class State
             for (int i = 0; i < otherTransitions.size(); i++)
             {
                 StateTransition otherTransition = otherTransitions.get(i);
-                Vector<State> ourNextCoveredStates = (Vector<State>)ourCoveredStates.clone();
-                ourNextCoveredStates.add(this);
-                Vector<State> otherNextCoveredStates = (Vector<State>)otherCoveredStates.clone();
-                otherNextCoveredStates.add(otherState);
-                boolean nextStatesLoop = this.coveredStatesContain(ourCoveredStates, current.getNextState()) && this.coveredStatesContain(otherCoveredStates, otherTransition.getNextState());
-                boolean nextStatesEqual = false;
-                if (!nextStatesLoop)
-                {
-                    nextStatesEqual = current.getNextState().equalsState(otherTransition.getNextState(), ourNextCoveredStates, otherNextCoveredStates);
-                }
-                boolean equal = nextStatesEqual || nextStatesLoop;
 
-                if (current.getInput() == otherTransition.getInput() && equal)
+                if (current.getInput() == otherTransition.getInput())
                 {
-                    found = true;
-                    ourTransitions.remove(0);
-                    otherTransitions.remove(i);
-                    break;
+                    Vector<State> ourNextCoveredStates = (Vector<State>)ourCoveredStates.clone();
+                    ourNextCoveredStates.add(this);
+                    Vector<State> otherNextCoveredStates = (Vector<State>)otherCoveredStates.clone();
+                    otherNextCoveredStates.add(otherState);
+                    boolean nextStatesLoop = this.coveredStatesContain(ourCoveredStates, current.getNextState()) && this.coveredStatesContain(otherCoveredStates, otherTransition.getNextState());
+                    boolean nextStatesEqual = false;
+                    if (!nextStatesLoop)
+                    {
+                        nextStatesEqual = current.getNextState().equalsState(otherTransition.getNextState(), ourNextCoveredStates, otherNextCoveredStates);
+                    }
+                    boolean equal = nextStatesEqual || nextStatesLoop;
+
+                    if (equal)
+                    {
+                        found = true;
+                        ourTransitions.remove(0);
+                        otherTransitions.remove(i);
+                        break;
+                    }
                 }
             }
 
