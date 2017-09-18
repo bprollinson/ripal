@@ -89,6 +89,26 @@ public class StateTest
         assertTrue(state.equals(otherState));
     }
 
+    @Test
+    public void testEqualsReturnsFalseForStateGraphContainingDifferenceCycle()
+    {
+        State state1 = new TestState("S0", true);
+        State state2 = new TestState("S1", true);
+        State state3 = new TestState("S1", true);
+        state1.addTransition(new StateTransition('a', state2));
+        state2.addTransition(new StateTransition('a', state3));
+        state3.addTransition(new StateTransition('a', state1));
+
+        State otherState1 = new TestState("S0", true);
+        State otherState2 = new TestState("S1", true);
+        State otherState3 = new TestState("S1", true);
+        otherState1.addTransition(new StateTransition('a', otherState2));
+        otherState2.addTransition(new StateTransition('a', otherState3));
+        otherState3.addTransition(new StateTransition('a', otherState2));
+
+        assertFalse(state1.equals(otherState1));
+    }
+
     private class TestState extends State
     {
         public TestState(String name, boolean accepting)
