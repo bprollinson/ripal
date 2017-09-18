@@ -80,11 +80,19 @@ public abstract class State
                     ourNextCoveredStates.add(this);
                     Vector<State> otherNextCoveredStates = (Vector<State>)otherCoveredStates.clone();
                     otherNextCoveredStates.add(otherState);
-                    boolean ourNextStateLoops = this.coveredStatesContain(ourCoveredStates, current.getNextState());
-                    boolean otherNextStateLoops = this.coveredStatesContain(otherCoveredStates, otherTransition.getNextState());
+
+                    int ourNextStatePosition = this.coveredStatesPosition(ourCoveredStates, current.getNextState());
+                    boolean ourNextStateLoops = ourNextStatePosition != -1;
+                    int otherNextStatePosition = this.coveredStatesPosition(otherCoveredStates, otherTransition.getNextState());
+                    boolean otherNextStateLoops = otherNextStatePosition != -1;
                     boolean nextStatesLoop = ourNextStateLoops && otherNextStateLoops;
 
                     if (ourNextStateLoops && !nextStatesLoop || otherNextStateLoops && !nextStatesLoop)
+                    {
+                        return false;
+                    }
+
+                    if (nextStatesLoop && ourNextStatePosition != otherNextStatePosition)
                     {
                         return false;
                     }
@@ -115,16 +123,16 @@ public abstract class State
         return true;
     }
 
-    private boolean coveredStatesContain(Vector<State> coveredStates, State state)
+    private int coveredStatesPosition(Vector<State> coveredStates, State state)
     {
         for (int i = 0; i < coveredStates.size(); i++)
         {
             if (coveredStates.get(i) == state)
             {
-                return true;
+                return i;
             }
         }
 
-        return false;
+        return -1;
     }
 }
