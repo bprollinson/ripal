@@ -43,7 +43,14 @@ public abstract class State
         }
 
         State otherState = (State)other;
+        Vector<State> ourCoveredStates = new Vector<State>();
+        Vector<State> otherCoveredStates = new Vector<State>();
 
+        return this.equalsState(otherState, ourCoveredStates, otherCoveredStates);
+    }
+
+    private boolean equalsState(State otherState, Vector<State> ourCoveredStates, Vector<State> otherCoveredStates)
+    {
         if (this.accepting != otherState.isAccepting())
         {
             return false;
@@ -65,7 +72,20 @@ public abstract class State
 
             for (int i = 0; i < otherTransitions.size(); i++)
             {
-                if (current.getInput() == otherTransitions.get(i).getInput() && current.getNextState().equals(otherTransitions.get(i).getNextState()))                
+                StateTransition otherTransition = otherTransitions.get(i);
+                Vector<State> ourNextCoveredStates = (Vector<State>)ourCoveredStates.clone();
+                ourNextCoveredStates.add(this);
+                Vector<State> otherNextCoveredStates = (Vector<State>)otherCoveredStates.clone();
+                otherNextCoveredStates.add(otherState);
+                boolean nextStatesLoop = this.coveredStatesContain(ourCoveredStates, current.getNextState()) && this.coveredStatesContain(otherCoveredStates, otherTransition.getNextState());
+                boolean nextStatesEqual = false;
+                if (!nextStatesLoop)
+                {
+                    nextStatesEqual = current.getNextState().equalsState(otherTransition.getNextState(), ourNextCoveredStates, otherNextCoveredStates);
+                }
+                boolean equal = nextStatesEqual || nextStatesLoop;
+
+                if (current.getInput() == otherTransition.getInput() && equal)
                 {
                     found = true;
                     ourTransitions.remove(0);
@@ -81,5 +101,18 @@ public abstract class State
         }
 
         return true;
+    }
+
+    private boolean coveredStatesContain(Vector<State> coveredStates, State state)
+    {
+        for (int i = 0; i < coveredStates.size(); i++)
+        {
+            if (coveredStates.get(i) == state)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
