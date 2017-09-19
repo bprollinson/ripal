@@ -54,9 +54,13 @@ public class RegularExpressionSyntaxCompilerTest
         EpsilonNFAState state2 = new EpsilonNFAState("0", false);
         EpsilonNFAState state3 = new EpsilonNFAState("0", false);
         EpsilonNFAState state4 = new EpsilonNFAState("0", false);
+        EpsilonNFAState state5 = new EpsilonNFAState("0", false);
+        EpsilonNFAState state6 = new EpsilonNFAState("0", false);
         state1.addTransition(new StateTransition('a', state2));
-        state2.addTransition(new StateTransition('b', state3));
-        state3.addTransition(new StateTransition('c', state4));
+        state2.addTransition(new StateTransition(null, state3));
+        state3.addTransition(new StateTransition('b', state4));
+        state4.addTransition(new StateTransition(null, state5));
+        state5.addTransition(new StateTransition('c', state6));
         EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(state1);
 
         assertEquals(expectedEpsilonNFA, compiler.compile(rootNode));
