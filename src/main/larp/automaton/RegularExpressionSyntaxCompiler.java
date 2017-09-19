@@ -13,6 +13,7 @@ public class RegularExpressionSyntaxCompiler
     public EpsilonNFA compile(RegularExpressionSyntaxNode rootNode)
     {
         StateGroup stateGroup = this.compileStateGroup(rootNode);
+        stateGroup.getEndState().setAccepting(true);
 
         return new EpsilonNFA(stateGroup.getStartState());
     }

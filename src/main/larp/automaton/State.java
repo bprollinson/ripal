@@ -25,6 +25,11 @@ public abstract class State
         return this.accepting;
     }
 
+    public void setAccepting(boolean accepting)
+    {
+        this.accepting = accepting;
+    }
+
     public int countTransitions()
     {
         return this.transitions.size();

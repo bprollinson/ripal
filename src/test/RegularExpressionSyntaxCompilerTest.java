@@ -19,7 +19,7 @@ public class RegularExpressionSyntaxCompilerTest
         CharacterNode rootNode = new CharacterNode('a');
 
         EpsilonNFAState state = new EpsilonNFAState("S0", false);
-        state.addTransition(new StateTransition('a', new EpsilonNFAState("S1", false)));
+        state.addTransition(new StateTransition('a', new EpsilonNFAState("S1", true)));
         EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(state);
 
         assertEquals(expectedEpsilonNFA, compiler.compile(rootNode));
@@ -33,7 +33,7 @@ public class RegularExpressionSyntaxCompilerTest
         rootNode.addChild(new CharacterNode('a'));
 
         EpsilonNFAState state1 = new EpsilonNFAState("S0", false);
-        EpsilonNFAState state2 = new EpsilonNFAState("S1", false);
+        EpsilonNFAState state2 = new EpsilonNFAState("S1", true);
         state1.addTransition(new StateTransition('a', state2));
         state1.addTransition(new StateTransition(null, state2));
         state2.addTransition(new StateTransition(null, state1));
@@ -56,7 +56,7 @@ public class RegularExpressionSyntaxCompilerTest
         EpsilonNFAState state3 = new EpsilonNFAState("0", false);
         EpsilonNFAState state4 = new EpsilonNFAState("0", false);
         EpsilonNFAState state5 = new EpsilonNFAState("0", false);
-        EpsilonNFAState state6 = new EpsilonNFAState("0", false);
+        EpsilonNFAState state6 = new EpsilonNFAState("0", true);
         state1.addTransition(new StateTransition('a', state2));
         state2.addTransition(new StateTransition(null, state3));
         state3.addTransition(new StateTransition('b', state4));
@@ -83,7 +83,7 @@ public class RegularExpressionSyntaxCompilerTest
         EpsilonNFAState middleState2 = new EpsilonNFAState("0", false);
         EpsilonNFAState lowerState1 = new EpsilonNFAState("0", false);
         EpsilonNFAState lowerState2 = new EpsilonNFAState("0", false);
-        EpsilonNFAState endState = new EpsilonNFAState("0", false);
+        EpsilonNFAState endState = new EpsilonNFAState("0", true);
         startState.addTransition(new StateTransition(null, upperState1));
         startState.addTransition(new StateTransition(null, middleState1));
         startState.addTransition(new StateTransition(null, lowerState1));
