@@ -90,9 +90,9 @@ public class RegularExpressionSyntaxCompilerTest
         upperState1.addTransition(new StateTransition('a', upperState2));
         middleState1.addTransition(new StateTransition('b', middleState2));
         lowerState1.addTransition(new StateTransition('c', lowerState2));
-        upperState1.addTransition(new StateTransition(null, endState));
-        middleState1.addTransition(new StateTransition(null, endState));
-        lowerState1.addTransition(new StateTransition(null, endState));
+        upperState2.addTransition(new StateTransition(null, endState));
+        middleState2.addTransition(new StateTransition(null, endState));
+        lowerState2.addTransition(new StateTransition(null, endState));
         EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(startState);
 
         assertEquals(expectedEpsilonNFA, compiler.compile(rootNode));

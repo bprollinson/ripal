@@ -3,6 +3,7 @@ package larp.automaton;
 import larp.grammar.CharacterNode;
 import larp.grammar.ConcatenationNode;
 import larp.grammar.KleeneClosureNode;
+import larp.grammar.OrNode;
 import larp.grammar.RegularExpressionSyntaxNode;
 
 import java.util.Vector;
@@ -52,6 +53,21 @@ public class RegularExpressionSyntaxCompiler
             }
 
             return new StateGroup(childGroups[0].getStartState(), childGroups[childGroups.length - 1].getEndState());
+        }
+        if (node instanceof OrNode)
+        {
+            State startState = new EpsilonNFAState("", false);
+            State endState = new EpsilonNFAState("", false);
+
+            Vector<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
+            for (int i = 0; i < childNodes.size(); i++)
+            {
+                StateGroup currentGroup = this.compileStateGroup(childNodes.get(i));
+                startState.addTransition(new StateTransition(null, currentGroup.getStartState()));
+                currentGroup.getEndState().addTransition(new StateTransition(null, endState));
+            }
+
+            return new StateGroup(startState, endState);
         }
 
         return null;
