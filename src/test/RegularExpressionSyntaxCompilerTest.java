@@ -8,6 +8,7 @@ import larp.automaton.StateTransition;
 import larp.grammar.CharacterNode;
 import larp.grammar.ConcatenationNode;
 import larp.grammar.KleeneClosureNode;
+import larp.grammar.OrNode;
 
 public class RegularExpressionSyntaxCompilerTest
 {
@@ -62,6 +63,37 @@ public class RegularExpressionSyntaxCompilerTest
         state4.addTransition(new StateTransition(null, state5));
         state5.addTransition(new StateTransition('c', state6));
         EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(state1);
+
+        assertEquals(expectedEpsilonNFA, compiler.compile(rootNode));
+    }
+
+    @Test
+    public void testCompilerReturnsEpsilonNFAForOrNode()
+    {
+        RegularExpressionSyntaxCompiler compiler = new RegularExpressionSyntaxCompiler();
+        OrNode rootNode = new OrNode();
+        rootNode.addChild(new CharacterNode('a'));
+        rootNode.addChild(new CharacterNode('b'));
+        rootNode.addChild(new CharacterNode('c'));
+
+        EpsilonNFAState startState = new EpsilonNFAState("0", false);
+        EpsilonNFAState upperState1 = new EpsilonNFAState("0", false);
+        EpsilonNFAState upperState2 = new EpsilonNFAState("0", false);
+        EpsilonNFAState middleState1 = new EpsilonNFAState("0", false);
+        EpsilonNFAState middleState2 = new EpsilonNFAState("0", false);
+        EpsilonNFAState lowerState1 = new EpsilonNFAState("0", false);
+        EpsilonNFAState lowerState2 = new EpsilonNFAState("0", false);
+        EpsilonNFAState endState = new EpsilonNFAState("0", false);
+        startState.addTransition(new StateTransition(null, upperState1));
+        startState.addTransition(new StateTransition(null, middleState1));
+        startState.addTransition(new StateTransition(null, lowerState1));
+        upperState1.addTransition(new StateTransition('a', upperState2));
+        middleState1.addTransition(new StateTransition('b', middleState2));
+        lowerState1.addTransition(new StateTransition('c', lowerState2));
+        upperState1.addTransition(new StateTransition(null, endState));
+        middleState1.addTransition(new StateTransition(null, endState));
+        lowerState1.addTransition(new StateTransition(null, endState));
+        EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(startState);
 
         assertEquals(expectedEpsilonNFA, compiler.compile(rootNode));
     }
