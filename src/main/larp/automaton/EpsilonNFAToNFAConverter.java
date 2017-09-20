@@ -16,6 +16,10 @@ public class EpsilonNFAToNFAConverter
             {
                 startState.addTransition(new StateTransition(transition.getInput(), new NFAState("", transition.getNextState().isAccepting())));
             }
+            else if (transition.getNextState().isAccepting())
+            {
+                startState.setAccepting(true);
+            }
         }
 
         return new NFA(startState);
