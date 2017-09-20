@@ -1,17 +1,15 @@
 package larp.automaton;
 
-public class DFA
+public class DFA extends FiniteAutomata
 {
-    private DFAState startState;
-
-    public DFA(DFAState startState)
+    public DFA(State startState)
     {
-        this.startState = startState;
+        super(startState);
     }
 
     public boolean accepts(String inputString)
     {
-        State currentState = startState;
+        State currentState = this.startState;
         int characterPosition = 0;
 
         while (currentState != null && characterPosition < inputString.length())

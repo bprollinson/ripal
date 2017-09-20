@@ -1,8 +1,8 @@
 package larp.automaton;
 
-public class EpsilonNFA extends FiniteAutomata
+public class NFA extends FiniteAutomata
 {
-    public EpsilonNFA(State startState)
+    public NFA(State startState)
     {
         super(startState);
     }
