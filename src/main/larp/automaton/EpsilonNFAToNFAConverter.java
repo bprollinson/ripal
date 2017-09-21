@@ -21,9 +21,20 @@ public class EpsilonNFAToNFAConverter
             {
                 startState.addTransition(new StateTransition(transition.getInput(), this.convertNode(transition.getNextState())));
             }
-            else if (transition.getNextState().isAccepting())
+
+            if (transition.getInput() == null)
             {
-                startState.setAccepting(true);
+                if (transition.getNextState().isAccepting())
+                {
+                    startState.setAccepting(true);
+                }
+
+                Vector<StateTransition> nextTransitions = transition.getNextState().getTransitions();
+                for (int j = 0; j < nextTransitions.size(); j++)
+                {
+                    StateTransition nextTransition = nextTransitions.get(j);
+                    startState.addTransition(new StateTransition(nextTransition.getInput(), nextTransition.getNextState()));
+                }
             }
         }
 
