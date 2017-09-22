@@ -166,7 +166,19 @@ public class EpsilonNFAToNFAConverterTest
     }
 
     @Test
-    public void testCycleNavigated()
+    public void testCycleNavigatedForConcreteTransitions()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCycleNavigatedForFinalStateCalculationFromEpsilonTransitions()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCycleNavigatedForNextTransitionCalculationsFromEpsilonTransitions()
     {
         assertEquals(0, 1);
     }

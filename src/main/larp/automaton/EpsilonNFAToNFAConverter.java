@@ -30,14 +30,12 @@ public class EpsilonNFAToNFAConverter
 
             if (transition.getInput() == null)
             {
-                Vector<StateTransition> nextTransitions = transition.getNextState().getTransitions();
-                for (int j = 0; j < nextTransitions.size(); j++)
+                Vector<StateTransition> tangibleStateTransitions = this.tangibleStateTransitions(transition);
+
+                for (int j = 0; j < tangibleStateTransitions.size(); j++)
                 {
-                    StateTransition nextTransition = nextTransitions.get(j);
-                    if (nextTransition.getInput() != null)
-                    {
-                        startState.addTransition(new StateTransition(nextTransition.getInput(), nextTransition.getNextState()));
-                    }
+                    StateTransition nextTransition = tangibleStateTransitions.get(j);
+                    startState.addTransition(new StateTransition(nextTransition.getInput(), nextTransition.getNextState()));
                 }
             }
         }
@@ -63,5 +61,32 @@ public class EpsilonNFAToNFAConverter
         }
 
         return false;
+    }
+
+    private Vector<StateTransition> tangibleStateTransitions(StateTransition startTransition)
+    {
+        Vector<StateTransition> result = new Vector<StateTransition>();
+
+        State nextState = startTransition.getNextState();
+        Vector<StateTransition> nextStateTransitions = nextState.getTransitions();
+
+        for (int i = 0; i < nextStateTransitions.size(); i++)
+        {
+            StateTransition nextTransition = nextStateTransitions.get(i);
+            if (nextTransition.getInput() != null)
+            {
+                result.add(nextTransition);
+            }
+            else
+            {
+                Vector<StateTransition> subsequentTransitions = this.tangibleStateTransitions(nextTransition);
+                for (int j = 0; j < subsequentTransitions.size(); j++)
+                {
+                    result.add(subsequentTransitions.get(j));
+                }
+            }
+        }
+
+        return result;
     }
 }
