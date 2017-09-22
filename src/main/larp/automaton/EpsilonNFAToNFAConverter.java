@@ -30,7 +30,7 @@ public class EpsilonNFAToNFAConverter
 
             if (transition.getInput() == null)
             {
-                Vector<StateTransition> tangibleStateTransitions = this.tangibleStateTransitions(transition);
+                Vector<StateTransition> tangibleStateTransitions = this.tangibleStateTransitions(transition, new Vector<StateTransition>());
 
                 for (int j = 0; j < tangibleStateTransitions.size(); j++)
                 {
@@ -52,7 +52,6 @@ public class EpsilonNFAToNFAConverter
                 return false;
             }
         }
-
         processedStates.add(startState);
 
         if (startState.isAccepting())
@@ -73,9 +72,17 @@ public class EpsilonNFAToNFAConverter
         return false;
     }
 
-    private Vector<StateTransition> tangibleStateTransitions(StateTransition startTransition)
+    private Vector<StateTransition> tangibleStateTransitions(StateTransition startTransition, Vector<StateTransition> processedTransitions)
     {
         Vector<StateTransition> result = new Vector<StateTransition>();
+        for (int i = 0; i < processedTransitions.size(); i++)
+        {
+            if (processedTransitions.get(i) == startTransition)
+            {
+                return result;
+            }
+        }
+        processedTransitions.add(startTransition);
 
         State nextState = startTransition.getNextState();
         Vector<StateTransition> nextStateTransitions = nextState.getTransitions();
@@ -89,7 +96,7 @@ public class EpsilonNFAToNFAConverter
             }
             else
             {
-                Vector<StateTransition> subsequentTransitions = this.tangibleStateTransitions(nextTransition);
+                Vector<StateTransition> subsequentTransitions = this.tangibleStateTransitions(nextTransition, processedTransitions);
                 for (int j = 0; j < subsequentTransitions.size(); j++)
                 {
                     result.add(subsequentTransitions.get(j));
