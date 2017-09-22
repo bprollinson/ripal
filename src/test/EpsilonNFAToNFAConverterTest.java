@@ -140,7 +140,29 @@ public class EpsilonNFAToNFAConverterTest
     @Test
     public void testMultipleEpsilonTransitionsNavigated()
     {
-        assertEquals(0, 1);
+        EpsilonNFAToNFAConverter converter = new EpsilonNFAToNFAConverter();
+
+        NFAState expectedState1 = new NFAState("S0", false);
+        NFAState expectedState2 = new NFAState("S1", false);
+        NFAState expectedState3 = new NFAState("S2", false);
+        expectedState1.addTransition(new StateTransition('a', expectedState2));
+        expectedState1.addTransition(new StateTransition('b', expectedState3));
+        NFA expectedNFA = new NFA(expectedState1);
+
+        EpsilonNFAState state1 = new EpsilonNFAState("S0", false);
+        EpsilonNFAState state2 = new EpsilonNFAState("S1", false);
+        EpsilonNFAState state3 = new EpsilonNFAState("S2", false);
+        EpsilonNFAState state4 = new EpsilonNFAState("S3", false);
+        EpsilonNFAState state5 = new EpsilonNFAState("S4", false);
+        EpsilonNFAState state6 = new EpsilonNFAState("S5", false);
+        state1.addTransition(new StateTransition(null, state2));
+        state2.addTransition(new StateTransition(null, state3));
+        state3.addTransition(new StateTransition('a', state4));
+        state2.addTransition(new StateTransition(null, state5));
+        state5.addTransition(new StateTransition('b', state6));
+        EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
+
+        assertEquals(expectedNFA, converter.convert(epsilonNFA));
     }
 
     @Test
