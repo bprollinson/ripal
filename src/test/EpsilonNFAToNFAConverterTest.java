@@ -174,7 +174,20 @@ public class EpsilonNFAToNFAConverterTest
     @Test
     public void testCycleNavigatedForFinalStateCalculationFromEpsilonTransitions()
     {
-        assertEquals(0, 1);
+        EpsilonNFAToNFAConverter converter = new EpsilonNFAToNFAConverter();
+
+        NFAState expectedState1 = new NFAState("S0", false);
+        NFAState expectedState2 = new NFAState("S1", false);
+        expectedState1.addTransition(new StateTransition('a', expectedState2));
+        NFA expectedNFA = new NFA(expectedState1);
+
+        EpsilonNFAState state1 = new EpsilonNFAState("S0", false);
+        EpsilonNFAState state2 = new EpsilonNFAState("S1", false);
+        state1.addTransition(new StateTransition('a', state2));
+        state2.addTransition(new StateTransition(null, state2));
+        EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
+
+        assertEquals(expectedNFA, converter.convert(epsilonNFA));
     }
 
     @Test
