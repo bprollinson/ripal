@@ -13,7 +13,7 @@ public class EpsilonNFAToNFAConverter
     {
         State startState = new NFAState("", false);
 
-        boolean epsilonToAccepting = this.epsilonToAccepting(epsilonNFAState);
+        boolean epsilonToAccepting = this.epsilonToAccepting(epsilonNFAState, new Vector<State>());
         if (epsilonToAccepting)
         {
             startState.setAccepting(true);
@@ -43,8 +43,18 @@ public class EpsilonNFAToNFAConverter
         return startState;
     }
 
-    private boolean epsilonToAccepting(State startState)
+    private boolean epsilonToAccepting(State startState, Vector<State> processedStates)
     {
+        for (int i = 0; i < processedStates.size(); i++)
+        {
+            if (processedStates.get(i) == startState)
+            {
+                return false;
+            }
+        }
+
+        processedStates.add(startState);
+
         if (startState.isAccepting())
         {
             return true;
@@ -54,7 +64,7 @@ public class EpsilonNFAToNFAConverter
         for (int i = 0; i < transitions.size(); i++)
         {
             StateTransition transition = transitions.get(i);
-            if (transition.getInput() == null && this.epsilonToAccepting(transition.getNextState()))
+            if (transition.getInput() == null && this.epsilonToAccepting(transition.getNextState(), processedStates))
             {
                 return true;
             }
