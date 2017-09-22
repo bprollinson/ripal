@@ -11,7 +11,13 @@ public class EpsilonNFAToNFAConverter
 
     private State convertNode(State epsilonNFAState)
     {
-        State startState = new NFAState("", epsilonNFAState.isAccepting());
+        State startState = new NFAState("", false);
+
+        boolean epsilonToAccepting = this.epsilonToAccepting(epsilonNFAState);
+        if (epsilonToAccepting)
+        {
+            startState.setAccepting(true);
+        }
 
         Vector<StateTransition> transitions = epsilonNFAState.getTransitions();
         for (int i = 0; i < transitions.size(); i++)
@@ -24,20 +30,38 @@ public class EpsilonNFAToNFAConverter
 
             if (transition.getInput() == null)
             {
-                if (transition.getNextState().isAccepting())
-                {
-                    startState.setAccepting(true);
-                }
-
                 Vector<StateTransition> nextTransitions = transition.getNextState().getTransitions();
                 for (int j = 0; j < nextTransitions.size(); j++)
                 {
                     StateTransition nextTransition = nextTransitions.get(j);
-                    startState.addTransition(new StateTransition(nextTransition.getInput(), nextTransition.getNextState()));
+                    if (nextTransition.getInput() != null)
+                    {
+                        startState.addTransition(new StateTransition(nextTransition.getInput(), nextTransition.getNextState()));
+                    }
                 }
             }
         }
 
         return startState;
+    }
+
+    private boolean epsilonToAccepting(State startState)
+    {
+        if (startState.isAccepting())
+        {
+            return true;
+        }
+
+        Vector<StateTransition> transitions = startState.getTransitions();
+        for (int i = 0; i < transitions.size(); i++)
+        {
+            StateTransition transition = transitions.get(i);
+            if (transition.getInput() == null && this.epsilonToAccepting(transition.getNextState()))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
