@@ -1,7 +1,9 @@
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.automaton.NFA;
 import larp.automaton.NFAState;
+import larp.automaton.NFAToDFAConverter;
 import larp.automaton.StateTransition;
 
 public class NFAToDFAConverterTest
