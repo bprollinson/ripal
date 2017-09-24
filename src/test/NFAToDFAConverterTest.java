@@ -106,4 +106,25 @@ public class NFAToDFAConverterTest
 
         assertEquals(expectedDFA, converter.convert(NFA));
     }
+
+    @Test
+    public void testDuplicateSubsequentStateRemovedFromNextStateSetCalculation()
+    {
+        NFAToDFAConverter converter = new NFAToDFAConverter();
+
+        DFAState expectedState1 = new DFAState("S0", false);
+        DFAState expectedState2 = new DFAState("S1", false);
+        expectedState1.addTransition(new StateTransition('a', expectedState2));
+        expectedState2.addTransition(new StateTransition('a', expectedState2));
+        DFA expectedDFA = new DFA(expectedState1);
+
+        NFAState state1 = new NFAState("S0", false);
+        NFAState state2 = new NFAState("S1", false);
+        state1.addTransition(new StateTransition('a', state1));
+        state1.addTransition(new StateTransition('a', state2));
+        state2.addTransition(new StateTransition('a', state2));
+        NFA NFA = new NFA(state1);
+
+        assertEquals(expectedDFA, converter.convert(NFA));
+    }
 }
