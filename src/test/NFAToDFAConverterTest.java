@@ -127,4 +127,35 @@ public class NFAToDFAConverterTest
 
         assertEquals(expectedDFA, converter.convert(NFA));
     }
+
+    @Test
+    public void testSetConstructionRecognizesSameCompoundStateWithStatesInDifferentOrder()
+    {
+        NFAToDFAConverter converter = new NFAToDFAConverter();
+
+        DFAState expectedState1 = new DFAState("S0", false);
+        DFAState expectedState2 = new DFAState("S1", false);
+        DFAState expectedState3 = new DFAState("S2", false);
+        DFAState expectedState4 = new DFAState("S2", false);
+        expectedState1.addTransition(new StateTransition('a', expectedState2));
+        expectedState1.addTransition(new StateTransition('a', expectedState3));
+        expectedState2.addTransition(new StateTransition('a', expectedState4));
+        expectedState3.addTransition(new StateTransition('a', expectedState4));
+        DFA expectedDFA = new DFA(expectedState1);
+
+        NFAState state1 = new NFAState("S0", false);
+        NFAState state2 = new NFAState("S1", false);
+        NFAState state3 = new NFAState("S2", false);
+        NFAState state4 = new NFAState("S3", false);
+        NFAState state5 = new NFAState("S4", false);
+        state1.addTransition(new StateTransition('a', state2));
+        state1.addTransition(new StateTransition('a', state3));
+        state2.addTransition(new StateTransition('a', state4));
+        state2.addTransition(new StateTransition('a', state5));
+        state3.addTransition(new StateTransition('a', state5));
+        state3.addTransition(new StateTransition('a', state4));
+        NFA NFA = new NFA(state1);
+
+        assertEquals(expectedDFA, converter.convert(NFA));
+    }
 }
