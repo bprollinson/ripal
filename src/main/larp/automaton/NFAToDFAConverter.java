@@ -8,31 +8,42 @@ public class NFAToDFAConverter
 {
     public DFA convert(NFA nfa)
     {
-        return new DFA(this.convertNode(nfa.getStartState()));
+        Vector<State> stateSet = new Vector<State>();
+        stateSet.add(nfa.getStartState());
+        return new DFA(this.convertNode(stateSet));
     }
 
-    private State convertNode(State NFAState)
+    private State convertNode(Vector<State> stateSet)
     {
         State startState = new NFAState("", false);
 
         HashMap<Character, Vector<State>> characterToStateSet = new HashMap<Character, Vector<State>>();
 
-        Vector<StateTransition> transitions = NFAState.getTransitions();
-        for (int i = 0; i < transitions.size(); i++)
+        for (int i = 0; i < stateSet.size(); i++)
         {
-            StateTransition transition = transitions.get(i);
-            Vector<State> characterStateSet = characterToStateSet.get(transition.getInput());
-            if (characterStateSet == null)
+            State NFAState = stateSet.get(i);
+            Vector<StateTransition> transitions = NFAState.getTransitions();
+            for (int j = 0; j < transitions.size(); j++)
             {
-                 characterStateSet = new Vector<State>();
+                StateTransition transition = transitions.get(j);
+                Vector<State> characterStateSet = characterToStateSet.get(transition.getInput());
+                if (characterStateSet == null)
+                {
+                     characterStateSet = new Vector<State>();
+                }
+                characterStateSet.add(transition.getNextState());
+                characterToStateSet.put(transition.getInput(), characterStateSet);
             }
-            characterStateSet.add(transition.getNextState());
-            characterToStateSet.put(transition.getInput(), characterStateSet);
+
+            if (NFAState.isAccepting())
+            {
+                startState.setAccepting(true);
+            }
         }
 
         for (Map.Entry<Character, Vector<State>> entry: characterToStateSet.entrySet())
         {
-            startState.addTransition(new StateTransition(entry.getKey(), new NFAState("", false)));
+            startState.addTransition(new StateTransition(entry.getKey(), this.convertNode(entry.getValue())));
         }
 
         return startState;
