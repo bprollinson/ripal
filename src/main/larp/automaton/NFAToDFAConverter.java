@@ -41,7 +41,19 @@ public class NFAToDFAConverter
                 {
                      characterStateSet = new Vector<State>();
                 }
-                characterStateSet.add(transition.getNextState());
+                boolean found = false;
+                for (int k = 0; k < characterStateSet.size(); k++)
+                {
+                    if (transition.getNextState() == characterStateSet.get(k))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    characterStateSet.add(transition.getNextState());
+                }
                 characterToStateSet.put(transition.getInput(), characterStateSet);
             }
 
