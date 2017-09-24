@@ -10,12 +10,22 @@ public class NFAToDFAConverter
     {
         Vector<State> stateSet = new Vector<State>();
         stateSet.add(nfa.getStartState());
-        return new DFA(this.convertNode(stateSet));
+        return new DFA(this.convertNode(stateSet, new Vector<Vector<State>>(), new Vector<State>()));
     }
 
-    private State convertNode(Vector<State> stateSet)
+    private State convertNode(Vector<State> stateSet, Vector<Vector<State>> coveredStateSets, Vector<State> coveredStates)
     {
+        for (int i = 0; i < coveredStateSets.size(); i++)
+        {
+            if (this.stateSetsEqual(stateSet, coveredStateSets.get(i)))
+            {
+                return coveredStates.get(i);
+            }
+        }
+
         State startState = new NFAState("", false);
+        coveredStateSets.add(stateSet);
+        coveredStates.add(startState);
 
         HashMap<Character, Vector<State>> characterToStateSet = new HashMap<Character, Vector<State>>();
 
@@ -43,9 +53,27 @@ public class NFAToDFAConverter
 
         for (Map.Entry<Character, Vector<State>> entry: characterToStateSet.entrySet())
         {
-            startState.addTransition(new StateTransition(entry.getKey(), this.convertNode(entry.getValue())));
+            startState.addTransition(new StateTransition(entry.getKey(), this.convertNode(entry.getValue(), coveredStateSets, coveredStates)));
         }
 
         return startState;
+    }
+
+    private boolean stateSetsEqual(Vector<State> stateSet1, Vector<State> stateSet2)
+    {
+        if (stateSet1.size() != stateSet2.size())
+        {
+            return false;
+        }
+
+        for (int i = 0; i < stateSet1.size(); i++)
+        {
+            if (stateSet1.get(i) != stateSet2.get(i))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
