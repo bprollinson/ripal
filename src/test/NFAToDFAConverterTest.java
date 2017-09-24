@@ -138,7 +138,7 @@ public class NFAToDFAConverterTest
         DFAState expectedState3 = new DFAState("S2", false);
         DFAState expectedState4 = new DFAState("S2", false);
         expectedState1.addTransition(new StateTransition('a', expectedState2));
-        expectedState1.addTransition(new StateTransition('a', expectedState3));
+        expectedState1.addTransition(new StateTransition('b', expectedState3));
         expectedState2.addTransition(new StateTransition('a', expectedState4));
         expectedState3.addTransition(new StateTransition('a', expectedState4));
         DFA expectedDFA = new DFA(expectedState1);
@@ -149,7 +149,7 @@ public class NFAToDFAConverterTest
         NFAState state4 = new NFAState("S3", false);
         NFAState state5 = new NFAState("S4", false);
         state1.addTransition(new StateTransition('a', state2));
-        state1.addTransition(new StateTransition('a', state3));
+        state1.addTransition(new StateTransition('b', state3));
         state2.addTransition(new StateTransition('a', state4));
         state2.addTransition(new StateTransition('a', state5));
         state3.addTransition(new StateTransition('a', state5));
