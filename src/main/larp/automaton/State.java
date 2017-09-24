@@ -69,6 +69,11 @@ public abstract class State
         Vector<StateTransition> ourTransitions = (Vector<StateTransition>)this.transitions.clone();
         Vector<StateTransition> otherTransitions = (Vector<StateTransition>)otherState.getTransitions().clone();
 
+        Vector<State> ourNextCoveredStates = (Vector<State>)ourCoveredStates.clone();
+        ourNextCoveredStates.add(this);
+        Vector<State> otherNextCoveredStates = (Vector<State>)otherCoveredStates.clone();
+        otherNextCoveredStates.add(otherState);
+
         while (ourTransitions.size() > 0)
         {
             boolean found = false;
@@ -81,11 +86,6 @@ public abstract class State
 
                 if (current.getInput() == otherTransition.getInput())
                 {
-                    Vector<State> ourNextCoveredStates = (Vector<State>)ourCoveredStates.clone();
-                    ourNextCoveredStates.add(this);
-                    Vector<State> otherNextCoveredStates = (Vector<State>)otherCoveredStates.clone();
-                    otherNextCoveredStates.add(otherState);
-
                     int ourNextStatePosition = this.coveredStatesPosition(ourCoveredStates, current.getNextState());
                     boolean ourNextStateLoops = ourNextStatePosition != -1;
                     int otherNextStatePosition = this.coveredStatesPosition(otherCoveredStates, otherTransition.getNextState());
@@ -108,6 +108,14 @@ public abstract class State
                         nextStatesEqual = current.getNextState().equalsState(otherTransition.getNextState(), ourNextCoveredStates, otherNextCoveredStates);
                     }
                     boolean equal = nextStatesEqual || nextStatesLoop;
+                    if (nextStatesEqual)
+                    {
+                        for (int j = 0; j < ourNextCoveredStates.size(); j++)
+                        {
+                            ourCoveredStates.add(ourNextCoveredStates.get(j));
+                            otherCoveredStates.add(otherNextCoveredStates.get(j));
+                        }
+                    }
 
                     if (equal)
                     {
@@ -124,6 +132,9 @@ public abstract class State
                 return false;
             }
         }
+
+        ourCoveredStates.add(this);
+        otherCoveredStates.add(otherState);
 
         return true;
     }

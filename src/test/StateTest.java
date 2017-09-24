@@ -124,8 +124,8 @@ public class StateTest
         State otherState1 = new TestState("S0", false);
         State otherState2 = new TestState("S1", false);
         State otherState3 = new TestState("S2", false);
-        State otherState4 = new TestState("S3", false);
-        State otherState5 = new TestState("S3", false);
+        State otherState4 = new TestState("S4", false);
+        State otherState5 = new TestState("S5", false);
         otherState1.addTransition(new StateTransition('a', otherState2));
         otherState1.addTransition(new StateTransition('b', otherState3));
         otherState2.addTransition(new StateTransition('a', otherState4));
