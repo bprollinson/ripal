@@ -109,6 +109,31 @@ public class StateTest
         assertFalse(state1.equals(otherState1));
     }
 
+    @Test
+    public void testEqualsReturnsFalseForUnmatchedLoopFoundInParallelRecursion()
+    {
+        State state1 = new TestState("S0", false);
+        State state2 = new TestState("S1", false);
+        State state3 = new TestState("S2", false);
+        State state4 = new TestState("S3", false);
+        state1.addTransition(new StateTransition('a', state2));
+        state1.addTransition(new StateTransition('b', state3));
+        state2.addTransition(new StateTransition('a', state4));
+        state3.addTransition(new StateTransition('a', state4));
+
+        State otherState1 = new TestState("S0", false);
+        State otherState2 = new TestState("S1", false);
+        State otherState3 = new TestState("S2", false);
+        State otherState4 = new TestState("S3", false);
+        State otherState5 = new TestState("S3", false);
+        otherState1.addTransition(new StateTransition('a', otherState2));
+        otherState1.addTransition(new StateTransition('b', otherState3));
+        otherState2.addTransition(new StateTransition('a', otherState4));
+        otherState3.addTransition(new StateTransition('a', otherState5));
+
+        assertFalse(state1.equals(otherState1));
+    }
+
     private class TestState extends State
     {
         public TestState(String name, boolean accepting)
