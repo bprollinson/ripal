@@ -11,12 +11,10 @@ public class EpsilonNFAToNFAConverter
 
     private State convertNode(State epsilonNFAState, Vector<State> coveredEpsilonNFAStates, Vector<State> coveredNFAStates)
     {
-        for (int i = 0; i < coveredEpsilonNFAStates.size(); i++)
+        int firstIndexOfState = coveredEpsilonNFAStates.indexOf(epsilonNFAState);
+        if (firstIndexOfState != -1)
         {
-            if (coveredEpsilonNFAStates.get(i) == epsilonNFAState)
-            {
-                return coveredNFAStates.get(i);
-            }
+            return coveredNFAStates.get(firstIndexOfState);
         }
 
         State startState = new NFAState("", false);
@@ -55,12 +53,9 @@ public class EpsilonNFAToNFAConverter
 
     private boolean epsilonToAccepting(State startState, Vector<State> processedStates)
     {
-        for (int i = 0; i < processedStates.size(); i++)
+        if (processedStates.contains(startState))
         {
-            if (processedStates.get(i) == startState)
-            {
-                return false;
-            }
+            return false;
         }
         processedStates.add(startState);
 
@@ -85,12 +80,9 @@ public class EpsilonNFAToNFAConverter
     private Vector<StateTransition> tangibleStateTransitions(StateTransition startTransition, Vector<StateTransition> processedTransitions)
     {
         Vector<StateTransition> result = new Vector<StateTransition>();
-        for (int i = 0; i < processedTransitions.size(); i++)
+        if (processedTransitions.contains(startTransition))
         {
-            if (processedTransitions.get(i) == startTransition)
-            {
-                return result;
-            }
+            return result;
         }
         processedTransitions.add(startTransition);
 
@@ -107,10 +99,7 @@ public class EpsilonNFAToNFAConverter
             else
             {
                 Vector<StateTransition> subsequentTransitions = this.tangibleStateTransitions(nextTransition, processedTransitions);
-                for (int j = 0; j < subsequentTransitions.size(); j++)
-                {
-                    result.add(subsequentTransitions.get(j));
-                }
+                result.addAll(subsequentTransitions);
             }
         }
 
