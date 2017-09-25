@@ -13,4 +13,14 @@ public class FiniteAutomata
     {
         return this.startState;
     }
+
+    public boolean structureEquals(Object other)
+    {
+        if (!(other instanceof FiniteAutomata))
+        {
+            return false;
+        }
+
+        return this.startState.structureEquals(((FiniteAutomata)other).getStartState());
+    }
 }

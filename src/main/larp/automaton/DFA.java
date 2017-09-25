@@ -22,14 +22,4 @@ public class DFA extends FiniteAutomata
 
         return currentState != null && currentState.isAccepting();
     }
-
-    public boolean structureEquals(Object other)
-    {
-        if (!(other instanceof FiniteAutomata))
-        {
-            return false;
-        }
-
-        return this.startState.structureEquals(((FiniteAutomata)other).getStartState());
-    }
 }

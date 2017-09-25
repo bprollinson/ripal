@@ -6,14 +6,4 @@ public class EpsilonNFA extends FiniteAutomata
     {
         super(startState);
     }
-
-    public boolean structureEquals(Object other)
-    {
-        if (!(other instanceof FiniteAutomata))
-        {
-            return false;
-        }
-
-        return this.startState.structureEquals(((FiniteAutomata)other).getStartState());
-    }
 }
