@@ -78,9 +78,23 @@ public class NFAToDFAConverter
             return false;
         }
 
+        Vector<State> stateSet2Copy = (Vector<State>)stateSet2.clone();
+
         for (int i = 0; i < stateSet1.size(); i++)
         {
-            if (stateSet1.get(i) != stateSet2.get(i))
+            boolean found = false;
+
+            for (int j = 0; j < stateSet2Copy.size(); j++)
+            {
+                if (stateSet1.get(i) == stateSet2Copy.get(j))
+                {
+                    found = true;
+                    stateSet2Copy.remove(j);
+                    break;
+                }
+            }
+
+            if (!found)
             {
                 return false;
             }
