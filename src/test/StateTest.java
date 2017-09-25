@@ -8,54 +8,54 @@ import larp.automaton.StateTransition;
 public class StateTest
 {
     @Test
-    public void testEqualsReturnsTrueForSameAcceptsValueOnSingleState()
+    public void testStructureEqualsReturnsTrueForSameAcceptsValueOnSingleState()
     {
         State state = new TestState("S0", true);
 
-        assertTrue(state.equals(new TestState("S1", true)));
+        assertTrue(state.structureEquals(new TestState("S1", true)));
     }
 
     @Test
-    public void testEqualsReturnsFalseForDifferentAcceptsValueOnSingleState()
+    public void testStructureEqualsReturnsFalseForDifferentAcceptsValueOnSingleState()
     {
         State state = new TestState("S0", true);
 
-        assertFalse(state.equals(new TestState("S1", false)));
+        assertFalse(state.structureEquals(new TestState("S1", false)));
     }
 
     @Test
-    public void testEqualsReturnsFalseForDifferentNumberOfTransitions()
+    public void testStructureEqualsReturnsFalseForDifferentNumberOfTransitions()
     {
         State state = new TestState("S0", true);
         state.addTransition(new StateTransition('a', state));
 
-        assertFalse(state.equals(new TestState("S1", true)));
+        assertFalse(state.structureEquals(new TestState("S1", true)));
     }
 
     @Test
-    public void testEqualsReturnsFalseForDifferentTransitionChracters()
+    public void testStructureEqualsReturnsFalseForDifferentTransitionChracters()
     {
         State state = new TestState("S0", true);
         state.addTransition(new StateTransition('a', state));
         State otherState = new TestState("S1", true);
         otherState.addTransition(new StateTransition('b', otherState));
 
-        assertFalse(state.equals(otherState));
+        assertFalse(state.structureEquals(otherState));
     }
 
     @Test
-    public void testEqualsReturnsTrueForSameTransitionChracters()
+    public void testStructureEqualsReturnsTrueForSameTransitionChracters()
     {
         State state = new TestState("S0", true);
         state.addTransition(new StateTransition('a', new TestState("S1", true)));
         State otherState = new TestState("S2", true);
         otherState.addTransition(new StateTransition('a', new TestState("S3", true)));
 
-        assertTrue(state.equals(otherState));
+        assertTrue(state.structureEquals(otherState));
     }
 
     @Test
-    public void testEqualsReturnsTrueForSameTransitionCharactersInDifferentOrder()
+    public void testStructureEqualsReturnsTrueForSameTransitionCharactersInDifferentOrder()
     {
         State state = new TestState("S0", true);
         state.addTransition(new StateTransition('a', new TestState("S1", true)));
@@ -64,33 +64,33 @@ public class StateTest
         otherState.addTransition(new StateTransition('b', new TestState("S4", true)));
         otherState.addTransition(new StateTransition('a', new TestState("S5", true)));
 
-        assertTrue(state.equals(otherState));
+        assertTrue(state.structureEquals(otherState));
     }
 
     @Test
-    public void testEqualsReturnsFalseForSubsequentStateInequality()
+    public void testStructureEqualsReturnsFalseForSubsequentStateInequality()
     {
         State state = new TestState("S0", true);
         state.addTransition(new StateTransition('a', new TestState("S1", true)));
         State otherState = new TestState("S2", true);
         otherState.addTransition(new StateTransition('a', new TestState("S3", false)));
 
-        assertFalse(state.equals(otherState));
+        assertFalse(state.structureEquals(otherState));
     }
 
     @Test
-    public void testEqualsReturnsTrueForStateGraphContainingCycle()
+    public void testStructureEqualsReturnsTrueForStateGraphContainingCycle()
     {
         State state = new TestState("S0", true);
         state.addTransition(new StateTransition('a', state));
         State otherState = new TestState("S0", true);
         otherState.addTransition(new StateTransition('a', otherState));
 
-        assertTrue(state.equals(otherState));
+        assertTrue(state.structureEquals(otherState));
     }
 
     @Test
-    public void testEqualsReturnsFalseForStateGraphContainingDifferenceCycle()
+    public void testStructureEqualsReturnsFalseForStateGraphContainingDifferenceCycle()
     {
         State state1 = new TestState("S0", true);
         State state2 = new TestState("S1", true);
@@ -106,11 +106,11 @@ public class StateTest
         otherState2.addTransition(new StateTransition('a', otherState3));
         otherState3.addTransition(new StateTransition('a', otherState2));
 
-        assertFalse(state1.equals(otherState1));
+        assertFalse(state1.structureEquals(otherState1));
     }
 
     @Test
-    public void testEqualsReturnsFalseForUnmatchedLoopFoundInParallelRecursion()
+    public void testStructureEqualsReturnsFalseForUnmatchedLoopFoundInParallelRecursion()
     {
         State state1 = new TestState("S0", false);
         State state2 = new TestState("S1", false);
@@ -131,7 +131,7 @@ public class StateTest
         otherState2.addTransition(new StateTransition('a', otherState4));
         otherState3.addTransition(new StateTransition('a', otherState5));
 
-        assertFalse(state1.equals(otherState1));
+        assertFalse(state1.structureEquals(otherState1));
     }
 
     private class TestState extends State

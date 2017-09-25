@@ -1,4 +1,4 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.automaton.EpsilonNFA;
@@ -20,7 +20,7 @@ public class EpsilonNFAToNFAConverterTest
         expectedState1.addTransition(new StateTransition('a', expectedState2));
         EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(expectedState1);
 
-        assertEquals(expectedEpsilonNFA, converter.convert(expectedEpsilonNFA));
+        assertTrue(expectedEpsilonNFA.structureEquals(converter.convert(expectedEpsilonNFA)));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class EpsilonNFAToNFAConverterTest
         state1.addTransition(new StateTransition(null, state2));
         EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
 
-        assertEquals(expectedNFA, converter.convert(epsilonNFA));
+        assertTrue(expectedNFA.structureEquals(converter.convert(epsilonNFA)));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class EpsilonNFAToNFAConverterTest
         state2.addTransition(new StateTransition(null, state3));
         EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
 
-        assertEquals(expectedNFA, converter.convert(epsilonNFA));
+        assertTrue(expectedNFA.structureEquals(converter.convert(epsilonNFA)));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class EpsilonNFAToNFAConverterTest
         state1.addTransition(new StateTransition(null, state3));
         EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
 
-        assertEquals(expectedNFA, converter.convert(epsilonNFA));
+        assertTrue(expectedNFA.structureEquals(converter.convert(epsilonNFA)));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class EpsilonNFAToNFAConverterTest
         state2.addTransition(new StateTransition(null, state4));
         EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
 
-        assertEquals(expectedNFA, converter.convert(epsilonNFA));
+        assertTrue(expectedNFA.structureEquals(converter.convert(epsilonNFA)));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class EpsilonNFAToNFAConverterTest
         state2.addTransition(new StateTransition('a', state3));
         EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
 
-        assertEquals(expectedNFA, converter.convert(epsilonNFA));
+        assertTrue(expectedNFA.structureEquals(converter.convert(epsilonNFA)));
     }
 
     @Test
@@ -134,7 +134,7 @@ public class EpsilonNFAToNFAConverterTest
         state2.addTransition(new StateTransition(null, state3));
         EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
 
-        assertEquals(expectedNFA, converter.convert(epsilonNFA));
+        assertTrue(expectedNFA.structureEquals(converter.convert(epsilonNFA)));
     }
 
     @Test
@@ -162,7 +162,7 @@ public class EpsilonNFAToNFAConverterTest
         state5.addTransition(new StateTransition('b', state6));
         EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
 
-        assertEquals(expectedNFA, converter.convert(epsilonNFA));
+        assertTrue(expectedNFA.structureEquals(converter.convert(epsilonNFA)));
     }
 
     @Test
@@ -178,7 +178,7 @@ public class EpsilonNFAToNFAConverterTest
         expectedState3.addTransition(new StateTransition('c', expectedState1));
         EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(expectedState1);
 
-        assertEquals(expectedEpsilonNFA, converter.convert(expectedEpsilonNFA));
+        assertTrue(expectedEpsilonNFA.structureEquals(converter.convert(expectedEpsilonNFA)));
     }
 
     @Test
@@ -197,7 +197,7 @@ public class EpsilonNFAToNFAConverterTest
         state2.addTransition(new StateTransition(null, state2));
         EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
 
-        assertEquals(expectedNFA, converter.convert(epsilonNFA));
+        assertTrue(expectedNFA.structureEquals(converter.convert(epsilonNFA)));
     }
 
     @Test
@@ -215,6 +215,6 @@ public class EpsilonNFAToNFAConverterTest
         state2.addTransition(new StateTransition('a', state1));
         EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
 
-        assertEquals(expectedNFA, converter.convert(epsilonNFA));
+        assertTrue(expectedNFA.structureEquals(converter.convert(epsilonNFA)));
     }
 }

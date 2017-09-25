@@ -8,18 +8,18 @@ import larp.automaton.EpsilonNFAState;
 public class EpsilonNFATest
 {
     @Test
-    public void testEqualsReturnsTrue()
+    public void testStructureEqualsReturnsTrue()
     {
         EpsilonNFA nfa = new EpsilonNFA(new EpsilonNFAState("S0", true));
 
-        assertTrue(nfa.equals(new EpsilonNFA(new EpsilonNFAState("S1", true))));
+        assertTrue(nfa.structureEquals(new EpsilonNFA(new EpsilonNFAState("S1", true))));
     }
 
     @Test
-    public void testEqualsReturnsFalse()
+    public void testStructureEqualsReturnsFalse()
     {
         EpsilonNFA nfa = new EpsilonNFA(new EpsilonNFAState("S0", true));
 
-        assertFalse(nfa.equals(new EpsilonNFA(new EpsilonNFAState("S1", false))));
+        assertFalse(nfa.structureEquals(new EpsilonNFA(new EpsilonNFAState("S1", false))));
     }
 }

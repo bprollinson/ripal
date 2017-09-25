@@ -1,4 +1,4 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.automaton.DFA;
@@ -20,7 +20,7 @@ public class NFAToDFAConverterTest
         expectedState1.addTransition(new StateTransition('a', expectedState2));
         NFA expectedNFA = new NFA(expectedState1);
 
-        assertEquals(expectedNFA, converter.convert(expectedNFA));
+        assertTrue(expectedNFA.structureEquals(converter.convert(expectedNFA)));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class NFAToDFAConverterTest
         state1.addTransition(new StateTransition('a', state3));
         NFA NFA = new NFA(state1);
 
-        assertEquals(expectedDFA, converter.convert(NFA));
+        assertTrue(expectedDFA.structureEquals(converter.convert(NFA)));
     }
 
     @Test
@@ -61,7 +61,7 @@ public class NFAToDFAConverterTest
         state1.addTransition(new StateTransition('a', state3));
         NFA NFA = new NFA(state1);
 
-        assertEquals(expectedDFA, converter.convert(NFA));
+        assertTrue(expectedDFA.structureEquals(converter.convert(NFA)));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class NFAToDFAConverterTest
         state2.addTransition(new StateTransition('a', state3));
         NFA NFA = new NFA(state1);
 
-        assertEquals(expectedDFA, converter.convert(NFA));
+        assertTrue(expectedDFA.structureEquals(converter.convert(NFA)));
     }
 
     @Test
@@ -104,7 +104,7 @@ public class NFAToDFAConverterTest
         state1.addTransition(new StateTransition('a', state2));
         NFA NFA = new NFA(state1);
 
-        assertEquals(expectedDFA, converter.convert(NFA));
+        assertTrue(expectedDFA.structureEquals(converter.convert(NFA)));
     }
 
     @Test
@@ -125,7 +125,7 @@ public class NFAToDFAConverterTest
         state2.addTransition(new StateTransition('a', state2));
         NFA NFA = new NFA(state1);
 
-        assertEquals(expectedDFA, converter.convert(NFA));
+        assertTrue(expectedDFA.structureEquals(converter.convert(NFA)));
     }
 
     @Test
@@ -156,6 +156,6 @@ public class NFAToDFAConverterTest
         state3.addTransition(new StateTransition('a', state4));
         NFA NFA = new NFA(state1);
 
-        assertEquals(expectedDFA, converter.convert(NFA));
+        assertTrue(expectedDFA.structureEquals(converter.convert(NFA)));
     }
 }

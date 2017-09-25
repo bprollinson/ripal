@@ -40,7 +40,7 @@ public abstract class State
         return this.transitions;
     }
 
-    public boolean equals(Object other)
+    public boolean structureEquals(Object other)
     {
         if (!(other instanceof State))
         {

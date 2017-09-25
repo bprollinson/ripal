@@ -1,4 +1,4 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.automaton.EpsilonNFA;
@@ -22,7 +22,7 @@ public class RegularExpressionSyntaxCompilerTest
         state.addTransition(new StateTransition('a', new EpsilonNFAState("S1", true)));
         EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(state);
 
-        assertEquals(expectedEpsilonNFA, compiler.compile(rootNode));
+        assertTrue(expectedEpsilonNFA.structureEquals(compiler.compile(rootNode)));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class RegularExpressionSyntaxCompilerTest
         state2.addTransition(new StateTransition(null, state1));
         EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(state1);
 
-        assertEquals(expectedEpsilonNFA, compiler.compile(rootNode));
+        assertTrue(expectedEpsilonNFA.structureEquals(compiler.compile(rootNode)));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class RegularExpressionSyntaxCompilerTest
         state5.addTransition(new StateTransition('c', state6));
         EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(state1);
 
-        assertEquals(expectedEpsilonNFA, compiler.compile(rootNode));
+        assertTrue(expectedEpsilonNFA.structureEquals(compiler.compile(rootNode)));
     }
 
     @Test
@@ -95,6 +95,6 @@ public class RegularExpressionSyntaxCompilerTest
         lowerState2.addTransition(new StateTransition(null, endState));
         EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(startState);
 
-        assertEquals(expectedEpsilonNFA, compiler.compile(rootNode));
+        assertTrue(expectedEpsilonNFA.structureEquals(compiler.compile(rootNode)));
     }
 }
