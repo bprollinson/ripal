@@ -1,6 +1,7 @@
 package larp.automaton;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Vector;
 
@@ -17,7 +18,11 @@ public class NFAToDFAConverter
     {
         for (int i = 0; i < coveredStateSets.size(); i++)
         {
-            if (this.stateSetsEqual(stateSet, coveredStateSets.get(i)))
+            HashSet<State> testStateSet = new HashSet<State>();
+            testStateSet.addAll(stateSet);
+            HashSet<State> testCoveredStateSet = new HashSet<State>();
+            testCoveredStateSet.addAll(coveredStateSets.get(i));
+            if (testStateSet.equals(testCoveredStateSet))
             {
                 return coveredStates.get(i);
             }
@@ -60,37 +65,5 @@ public class NFAToDFAConverter
         }
 
         return startState;
-    }
-
-    private boolean stateSetsEqual(Vector<State> stateSet1, Vector<State> stateSet2)
-    {
-        if (stateSet1.size() != stateSet2.size())
-        {
-            return false;
-        }
-
-        Vector<State> stateSet2Copy = (Vector<State>)stateSet2.clone();
-
-        for (int i = 0; i < stateSet1.size(); i++)
-        {
-            boolean found = false;
-
-            for (int j = 0; j < stateSet2Copy.size(); j++)
-            {
-                if (stateSet1.get(i) == stateSet2Copy.get(j))
-                {
-                    found = true;
-                    stateSet2Copy.remove(j);
-                    break;
-                }
-            }
-
-            if (!found)
-            {
-                return false;
-            }
-        }
-
-        return true;
     }
 }
