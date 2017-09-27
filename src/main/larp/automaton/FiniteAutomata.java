@@ -1,6 +1,8 @@
 package larp.automaton;
 
-public class FiniteAutomata
+import larp.ComparableStructure;
+
+public class FiniteAutomata implements ComparableStructure
 {
     protected State startState;
 
