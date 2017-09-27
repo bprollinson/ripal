@@ -16,12 +16,9 @@ public class NFAToDFAConverter
 
     private State convertNode(HashSet<State> stateSet, HashMap<HashSet<State>, State> coveredStateSetsToStates)
     {
-        for (Map.Entry<HashSet<State>, State> entry: coveredStateSetsToStates.entrySet())
+        if (coveredStateSetsToStates.keySet().contains(stateSet))
         {
-            if (stateSet.equals(entry.getKey()))
-            {
-                return entry.getValue();
-            }
+            return coveredStateSetsToStates.get(stateSet);
         }
 
         State startState = new NFAState("", false);
