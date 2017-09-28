@@ -3,8 +3,8 @@ import org.junit.Test;
 
 import larp.automaton.EpsilonNFA;
 import larp.automaton.EpsilonNFAState;
-import larp.automaton.RegularExpressionSyntaxCompiler;
 import larp.automaton.StateTransition;
+import larp.automaton.regularlanguage.RegularExpressionSyntaxCompiler;
 import larp.grammar.CharacterNode;
 import larp.grammar.ConcatenationNode;
 import larp.grammar.KleeneClosureNode;

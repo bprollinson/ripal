@@ -1,5 +1,10 @@
-package larp.automaton;
+package larp.automaton.regularlanguage;
 
+import larp.automaton.EpsilonNFA;
+import larp.automaton.EpsilonNFAState;
+import larp.automaton.State;
+import larp.automaton.StateGroup;
+import larp.automaton.StateTransition;
 import larp.grammar.CharacterNode;
 import larp.grammar.ConcatenationNode;
 import larp.grammar.KleeneClosureNode;
