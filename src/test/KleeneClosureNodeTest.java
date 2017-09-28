@@ -2,8 +2,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.grammar.CharacterNode;
-import larp.grammar.KleeneClosureNode;
+import larp.grammar.regularlanguage.CharacterNode;
+import larp.grammar.regularlanguage.KleeneClosureNode;
 
 public class KleeneClosureNodeTest
 {

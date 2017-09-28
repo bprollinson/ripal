@@ -5,10 +5,10 @@ import larp.automaton.EpsilonNFA;
 import larp.automaton.EpsilonNFAState;
 import larp.automaton.StateTransition;
 import larp.automaton.regularlanguage.RegularExpressionSyntaxCompiler;
-import larp.grammar.CharacterNode;
-import larp.grammar.ConcatenationNode;
-import larp.grammar.KleeneClosureNode;
-import larp.grammar.OrNode;
+import larp.grammar.regularlanguage.CharacterNode;
+import larp.grammar.regularlanguage.ConcatenationNode;
+import larp.grammar.regularlanguage.KleeneClosureNode;
+import larp.grammar.regularlanguage.OrNode;
 
 public class RegularExpressionSyntaxCompilerTest
 {

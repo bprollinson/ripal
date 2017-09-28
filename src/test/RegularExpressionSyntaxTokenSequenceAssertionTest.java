@@ -1,10 +1,10 @@
 import org.junit.Test;
 
-import larp.grammar.IncorrectCloseBraceApplicationException;
-import larp.grammar.IncorrectKleeneClosureApplicationException;
-import larp.grammar.IncorrectOrApplicationException;
-import larp.grammar.RegularExpressionSyntaxTokenizerException;
-import larp.grammar.RegularExpressionSyntaxTokenSequenceAssertion;
+import larp.grammar.regularlanguage.IncorrectCloseBraceApplicationException;
+import larp.grammar.regularlanguage.IncorrectKleeneClosureApplicationException;
+import larp.grammar.regularlanguage.IncorrectOrApplicationException;
+import larp.grammar.regularlanguage.RegularExpressionSyntaxTokenizerException;
+import larp.grammar.regularlanguage.RegularExpressionSyntaxTokenSequenceAssertion;
 
 public class RegularExpressionSyntaxTokenSequenceAssertionTest
 {

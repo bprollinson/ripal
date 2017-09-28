@@ -1,18 +1,18 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.grammar.CharacterNode;
-import larp.grammar.CharacterToken;
-import larp.grammar.CloseBraceToken;
-import larp.grammar.ConcatenationNode;
-import larp.grammar.KleeneClosureNode;
-import larp.grammar.KleeneClosureToken;
-import larp.grammar.OpenBraceToken;
-import larp.grammar.OrNode;
-import larp.grammar.OrToken;
-import larp.grammar.RegularExpressionSyntaxNode;
-import larp.grammar.RegularExpressionSyntaxParser;
-import larp.grammar.RegularExpressionSyntaxToken;
+import larp.grammar.regularlanguage.CharacterNode;
+import larp.grammar.regularlanguage.CharacterToken;
+import larp.grammar.regularlanguage.CloseBraceToken;
+import larp.grammar.regularlanguage.ConcatenationNode;
+import larp.grammar.regularlanguage.KleeneClosureNode;
+import larp.grammar.regularlanguage.KleeneClosureToken;
+import larp.grammar.regularlanguage.OpenBraceToken;
+import larp.grammar.regularlanguage.OrNode;
+import larp.grammar.regularlanguage.OrToken;
+import larp.grammar.regularlanguage.RegularExpressionSyntaxNode;
+import larp.grammar.regularlanguage.RegularExpressionSyntaxParser;
+import larp.grammar.regularlanguage.RegularExpressionSyntaxToken;
 
 import java.util.Vector;
 

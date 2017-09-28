@@ -1,10 +1,10 @@
-package larp.grammar;
+package larp.grammar.regularlanguage;
 
-public class CharacterNode extends RegularExpressionSyntaxNode
+public class CharacterToken extends RegularExpressionSyntaxToken
 {
     private char character;
 
-    public CharacterNode(char character)
+    public CharacterToken(char character)
     {
         this.character = character;
     }
@@ -21,6 +21,6 @@ public class CharacterNode extends RegularExpressionSyntaxNode
             return false;
         }
 
-        return this.character == ((CharacterNode)other).getCharacter();
+        return this.character == ((CharacterToken)other).getCharacter();
     }
 }

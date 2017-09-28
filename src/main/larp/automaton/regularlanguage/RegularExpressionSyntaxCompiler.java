@@ -5,11 +5,11 @@ import larp.automaton.EpsilonNFAState;
 import larp.automaton.State;
 import larp.automaton.StateGroup;
 import larp.automaton.StateTransition;
-import larp.grammar.CharacterNode;
-import larp.grammar.ConcatenationNode;
-import larp.grammar.KleeneClosureNode;
-import larp.grammar.OrNode;
-import larp.grammar.RegularExpressionSyntaxNode;
+import larp.grammar.regularlanguage.CharacterNode;
+import larp.grammar.regularlanguage.ConcatenationNode;
+import larp.grammar.regularlanguage.KleeneClosureNode;
+import larp.grammar.regularlanguage.OrNode;
+import larp.grammar.regularlanguage.RegularExpressionSyntaxNode;
 
 import java.util.Vector;
 
