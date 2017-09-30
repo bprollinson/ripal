@@ -12,7 +12,7 @@ import java.util.Vector;
 public class ContextFreeGrammarSyntaxTokenizerTest
 {
     @Test
-    public void testTokenizerTokenizesSimpleNonTerminalProduction()
+    public void testTokenizerTokenizesSimpleSingleCharacterNonTerminalProduction()
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -21,6 +21,34 @@ public class ContextFreeGrammarSyntaxTokenizerTest
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
         expectedResult.add(new NonTerminalToken("S"));
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizerHandlesMultiCharacterNonTerminalOnLeftSideOfProduction()
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("Start:S");
+        Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
+        expectedResult.add(new NonTerminalToken("Start"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new NonTerminalToken("S"));
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizerHandlesMultiCharacterNonTerminalOnRightSideOfProduction()
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:Start");
+        Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new NonTerminalToken("Start"));
 
         assertEquals(expectedResult, result);
     }
