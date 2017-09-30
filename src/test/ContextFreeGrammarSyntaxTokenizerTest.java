@@ -12,15 +12,15 @@ import java.util.Vector;
 public class ContextFreeGrammarSyntaxTokenizerTest
 {
     @Test
-    public void testTokenizerTokenizesSimpleTerminalProduction()
+    public void testTokenizerTokenizesSimpleNonTerminalProduction()
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"a\"");
+        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:S");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
-        expectedResult.add(new TerminalToken("a"));
+        expectedResult.add(new NonTerminalToken("S"));
 
         assertEquals(expectedResult, result);
     }
