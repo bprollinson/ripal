@@ -8,4 +8,19 @@ public class TerminalToken extends ContextFreeGrammarSyntaxToken
     {
         this.value = value;
     }
+
+    public String getValue()
+    {
+        return this.value;
+    }
+
+    public boolean equals(Object other)
+    {
+        if (!super.equals(other))
+        {
+            return false;
+        }
+
+        return this.value.equals(((TerminalToken)other).getValue());
+    }
 }
