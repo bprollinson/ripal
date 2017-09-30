@@ -8,18 +8,24 @@ public class ContextFreeGrammarSyntaxTokenizer
     {
         Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
 
+        String buffer = "";
+
         for (int i = 0; i < expression.length(); i++)
         {
             char currentCharacter = expression.charAt(i);
             if (currentCharacter == ':')
             {
+                tokens.add(new NonTerminalToken(buffer));
+                buffer = "";
                 tokens.add(new SeparatorToken());
             }
             else
             {
-                tokens.add(new NonTerminalToken(currentCharacter + ""));
+                buffer += currentCharacter;
             }
         }
+
+        tokens.add(new NonTerminalToken(buffer));
 
         return tokens;
     }
