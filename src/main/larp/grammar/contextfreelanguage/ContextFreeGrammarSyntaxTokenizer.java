@@ -30,6 +30,14 @@ public class ContextFreeGrammarSyntaxTokenizer
                 buffer = "";
                 inTerminal = false;
             }
+            else if (currentCharacter == ' ' && !inTerminal)
+            {
+                if (buffer.length() > 0)
+                {
+                    tokens.add(new NonTerminalToken(buffer));
+                }
+                buffer = "";
+            }
             else
             {
                 buffer += currentCharacter;

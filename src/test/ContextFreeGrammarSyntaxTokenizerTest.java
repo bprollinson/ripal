@@ -80,4 +80,63 @@ public class ContextFreeGrammarSyntaxTokenizerTest
 
         assertEquals(expectedResult, result);
     }
+
+    @Test
+    public void testTokenizerHandlesMultipleTerminalsOnRightSideWithoutSpaceBetweenThem()
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal1\"\"terminal2\"");
+        Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new TerminalToken("terminal1"));
+        expectedResult.add(new TerminalToken("terminal2"));
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizerIgnoresSpaceBetweenTerminalTokens()
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal1\" \"terminal2\"");
+        Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new TerminalToken("terminal1"));
+        expectedResult.add(new TerminalToken("terminal2"));
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizerHandlesSpaceWithinTerminalToken()
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal 1\"");
+        Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new TerminalToken("terminal 1"));
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizerIgnoresSpaceBetweenNonTerminalTokens()
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:nonterminal1 nonterminal2");
+        Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new NonTerminalToken("nonterminal1"));
+        expectedResult.add(new NonTerminalToken("nonterminal2"));
+
+        assertEquals(expectedResult, result);
+    }
 }
