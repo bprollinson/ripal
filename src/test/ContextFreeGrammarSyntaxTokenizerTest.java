@@ -52,4 +52,32 @@ public class ContextFreeGrammarSyntaxTokenizerTest
 
         assertEquals(expectedResult, result);
     }
+
+    @Test
+    public void testTokenizerTokenizesSimpleSingleCharacterTerminalProduction()
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"a\"");
+        Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new TerminalToken("a"));
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizerHandlesMultiCharacterTerminalOnRightSideOfProduction()
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal\"");
+        Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new TerminalToken("terminal"));
+
+        assertEquals(expectedResult, result);
+    }
 }

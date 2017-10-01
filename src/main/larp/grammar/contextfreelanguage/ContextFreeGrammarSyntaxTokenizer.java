@@ -9,6 +9,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
 
         String buffer = "";
+        boolean inTerminal = false;
 
         for (int i = 0; i < expression.length(); i++)
         {
@@ -19,13 +20,26 @@ public class ContextFreeGrammarSyntaxTokenizer
                 buffer = "";
                 tokens.add(new SeparatorToken());
             }
+            else if (currentCharacter == '"' && !inTerminal)
+            {
+                inTerminal = true;
+            }
+            else if (currentCharacter == '"' && inTerminal)
+            {
+                tokens.add(new TerminalToken(buffer));
+                buffer = "";
+                inTerminal = false;
+            }
             else
             {
                 buffer += currentCharacter;
             }
         }
 
-        tokens.add(new NonTerminalToken(buffer));
+        if (buffer.length() > 0)
+        {
+            tokens.add(new NonTerminalToken(buffer));
+        }
 
         return tokens;
     }
