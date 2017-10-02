@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public class ContextFreeGrammarSyntaxTokenizer
 {
-    public Vector<ContextFreeGrammarSyntaxToken> tokenize(String expression)
+    public Vector<ContextFreeGrammarSyntaxToken> tokenize(String expression) throws ContextFreeGrammarSyntaxTokenizerException
     {
         Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
 
@@ -47,6 +47,11 @@ public class ContextFreeGrammarSyntaxTokenizer
         if (buffer.length() > 0)
         {
             tokens.add(new NonTerminalToken(buffer));
+        }
+
+        if (tokens.size() < 2)
+        {
+            throw new IncorrectContextFreeGrammarStatementPrefixException();
         }
 
         return tokens;

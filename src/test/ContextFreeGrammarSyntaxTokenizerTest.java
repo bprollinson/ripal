@@ -3,6 +3,8 @@ import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxTokenizer;
+import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
+import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 import larp.grammar.contextfreelanguage.NonTerminalToken;
 import larp.grammar.contextfreelanguage.SeparatorToken;
 import larp.grammar.contextfreelanguage.TerminalToken;
@@ -12,7 +14,7 @@ import java.util.Vector;
 public class ContextFreeGrammarSyntaxTokenizerTest
 {
     @Test
-    public void testTokenizerTokenizesSimpleSingleCharacterNonTerminalProduction()
+    public void testTokenizerTokenizesSimpleSingleCharacterNonTerminalProduction() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -26,7 +28,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerHandlesMultiCharacterNonTerminalOnLeftSideOfProduction()
+    public void testTokenizerHandlesMultiCharacterNonTerminalOnLeftSideOfProduction() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -40,7 +42,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerHandlesMultiCharacterNonTerminalOnRightSideOfProduction()
+    public void testTokenizerHandlesMultiCharacterNonTerminalOnRightSideOfProduction() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -54,7 +56,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerTokenizesSimpleSingleCharacterTerminalProduction()
+    public void testTokenizerTokenizesSimpleSingleCharacterTerminalProduction() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -68,7 +70,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerHandlesMultiCharacterTerminalOnRightSideOfProduction()
+    public void testTokenizerHandlesMultiCharacterTerminalOnRightSideOfProduction() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -82,7 +84,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerHandlesMultipleTerminalsOnRightSideWithoutSpaceBetweenThem()
+    public void testTokenizerHandlesMultipleTerminalsOnRightSideWithoutSpaceBetweenThem() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -97,7 +99,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerIgnoresSpaceBetweenTerminalTokens()
+    public void testTokenizerIgnoresSpaceBetweenTerminalTokens() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -112,7 +114,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerHandlesSpaceWithinTerminalToken()
+    public void testTokenizerHandlesSpaceWithinTerminalToken() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -126,7 +128,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerIgnoresSpaceBetweenNonTerminalTokens()
+    public void testTokenizerIgnoresSpaceBetweenNonTerminalTokens() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -140,26 +142,28 @@ public class ContextFreeGrammarSyntaxTokenizerTest
         assertEquals(expectedResult, result);
     }
 
+    @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
+    public void testTokenizerThrowsExceptionForFewerThanTwoTokens() throws ContextFreeGrammarSyntaxTokenizerException
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        tokenizer.tokenize("");
+    }
+
     @Test
-    public void testTokenizerThrowsExceptionForFewerThanTwoTokens()
+    public void testTokenizerThrowsExceptionWhenFirstTokenIsNotANonterminal() throws ContextFreeGrammarSyntaxTokenizerException
     {
         assertEquals(true, false);
     }
 
     @Test
-    public void testTokenizerThrowsExceptionWhenFirstTokenIsNotANonterminal()
+    public void testTokenizerThrowsExceptionWhenSecondTokenIsNotASeparator() throws ContextFreeGrammarSyntaxTokenizerException
     {
         assertEquals(true, false);
     }
 
     @Test
-    public void testTokenizerThrowsExceptionWhenSecondTokenIsNotASeparator()
-    {
-        assertEquals(true, false);
-    }
-
-    @Test
-    public void testTokenizerThrowsExceptionForUnclosedQuoteAtEndOfString()
+    public void testTokenizerThrowsExceptionForUnclosedQuoteAtEndOfString() throws ContextFreeGrammarSyntaxTokenizerException
     {
         assertEquals(true, false);
     }
