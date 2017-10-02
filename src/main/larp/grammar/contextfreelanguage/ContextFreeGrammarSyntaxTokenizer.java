@@ -53,6 +53,10 @@ public class ContextFreeGrammarSyntaxTokenizer
         {
             throw new IncorrectContextFreeGrammarStatementPrefixException();
         }
+        if (!(tokens.get(0) instanceof NonTerminalToken))
+        {
+            throw new IncorrectContextFreeGrammarStatementPrefixException();
+        }
 
         return tokens;
     }

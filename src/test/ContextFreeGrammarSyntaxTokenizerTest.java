@@ -150,10 +150,12 @@ public class ContextFreeGrammarSyntaxTokenizerTest
         tokenizer.tokenize("");
     }
 
-    @Test
+    @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
     public void testTokenizerThrowsExceptionWhenFirstTokenIsNotANonterminal() throws ContextFreeGrammarSyntaxTokenizerException
     {
-        assertEquals(true, false);
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        tokenizer.tokenize("::");
     }
 
     @Test
