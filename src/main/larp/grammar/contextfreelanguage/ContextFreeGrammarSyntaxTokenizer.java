@@ -57,6 +57,10 @@ public class ContextFreeGrammarSyntaxTokenizer
         {
             throw new IncorrectContextFreeGrammarStatementPrefixException();
         }
+        if (!(tokens.get(1) instanceof SeparatorToken))
+        {
+            throw new IncorrectContextFreeGrammarStatementPrefixException();
+        }
 
         return tokens;
     }
