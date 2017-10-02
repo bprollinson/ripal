@@ -139,4 +139,28 @@ public class ContextFreeGrammarSyntaxTokenizerTest
 
         assertEquals(expectedResult, result);
     }
+
+    @Test
+    public void testTokenizerThrowsExceptionForFewerThanTwoTokens()
+    {
+        assertEquals(true, false);
+    }
+
+    @Test
+    public void testTokenizerThrowsExceptionWhenFirstTokenIsNotANonterminal()
+    {
+        assertEquals(true, false);
+    }
+
+    @Test
+    public void testTokenizerThrowsExceptionWhenSecondTokenIsNotASeparator()
+    {
+        assertEquals(true, false);
+    }
+
+    @Test
+    public void testTokenizerThrowsExceptionForUnclosedQuoteAtEndOfString()
+    {
+        assertEquals(true, false);
+    }
 }
