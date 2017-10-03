@@ -4,6 +4,7 @@ import org.junit.Test;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxTokenizer;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
+import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarQuoteNestingException;
 import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 import larp.grammar.contextfreelanguage.NonTerminalToken;
 import larp.grammar.contextfreelanguage.SeparatorToken;
@@ -166,9 +167,11 @@ public class ContextFreeGrammarSyntaxTokenizerTest
         tokenizer.tokenize("S S");
     }
 
-    @Test
+    @Test(expected = IncorrectContextFreeGrammarQuoteNestingException.class)
     public void testTokenizerThrowsExceptionForUnclosedQuoteAtEndOfString() throws ContextFreeGrammarSyntaxTokenizerException
     {
-        assertEquals(true, false);
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        tokenizer.tokenize("S:\"a");
     }
 }

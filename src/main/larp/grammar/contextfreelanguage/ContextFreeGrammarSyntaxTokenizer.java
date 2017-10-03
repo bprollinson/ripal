@@ -49,6 +49,11 @@ public class ContextFreeGrammarSyntaxTokenizer
             tokens.add(new NonTerminalToken(buffer));
         }
 
+        if (inTerminal)
+        {
+            throw new IncorrectContextFreeGrammarQuoteNestingException();
+        }
+
         if (tokens.size() < 2)
         {
             throw new IncorrectContextFreeGrammarStatementPrefixException();
