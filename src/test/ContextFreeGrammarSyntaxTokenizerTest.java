@@ -5,6 +5,7 @@ import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxTokenizer;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
 import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarQuoteNestingException;
+import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarSeparatorException;
 import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 import larp.grammar.contextfreelanguage.NonTerminalToken;
 import larp.grammar.contextfreelanguage.SeparatorToken;
@@ -173,5 +174,13 @@ public class ContextFreeGrammarSyntaxTokenizerTest
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
         tokenizer.tokenize("S:\"a");
+    }
+
+    @Test(expected = IncorrectContextFreeGrammarSeparatorException.class)
+    public void testTokenizerThrowsExceptionForIncorrectNumberofSeparators() throws ContextFreeGrammarSyntaxTokenizerException
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        tokenizer.tokenize("S::");
     }
 }

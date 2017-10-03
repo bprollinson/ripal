@@ -10,6 +10,7 @@ public class ContextFreeGrammarSyntaxTokenizer
 
         String buffer = "";
         boolean inTerminal = false;
+        int numSeparators = 0;
 
         for (int i = 0; i < expression.length(); i++)
         {
@@ -18,6 +19,7 @@ public class ContextFreeGrammarSyntaxTokenizer
             {
                 tokens.add(new NonTerminalToken(buffer));
                 buffer = "";
+                numSeparators++;
                 tokens.add(new SeparatorToken());
             }
             else if (currentCharacter == '"' && !inTerminal)
@@ -65,6 +67,11 @@ public class ContextFreeGrammarSyntaxTokenizer
         if (!(tokens.get(1) instanceof SeparatorToken))
         {
             throw new IncorrectContextFreeGrammarStatementPrefixException();
+        }
+
+        if (numSeparators != 1)
+        {
+            throw new IncorrectContextFreeGrammarSeparatorException();
         }
 
         return tokens;
