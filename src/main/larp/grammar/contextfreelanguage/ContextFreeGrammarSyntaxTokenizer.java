@@ -59,18 +59,7 @@ public class ContextFreeGrammarSyntaxTokenizer
             throw new IncorrectContextFreeGrammarQuoteNestingException();
         }
 
-        if (tokens.size() < 2)
-        {
-            throw new IncorrectContextFreeGrammarStatementPrefixException();
-        }
-        if (!(tokens.get(0) instanceof NonTerminalToken))
-        {
-            throw new IncorrectContextFreeGrammarStatementPrefixException();
-        }
-        if (!(tokens.get(1) instanceof SeparatorToken))
-        {
-            throw new IncorrectContextFreeGrammarStatementPrefixException();
-        }
+        new ContextFreeGrammarStartingTokenAssertion(tokens).validate();
 
         if (numSeparators != 1)
         {
