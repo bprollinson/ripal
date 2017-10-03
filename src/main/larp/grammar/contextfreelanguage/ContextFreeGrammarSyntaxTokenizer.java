@@ -17,7 +17,10 @@ public class ContextFreeGrammarSyntaxTokenizer
             char currentCharacter = expression.charAt(i);
             if (currentCharacter == ':')
             {
-                tokens.add(new NonTerminalToken(buffer));
+                if (buffer.length() > 0)
+                {
+                    tokens.add(new NonTerminalToken(buffer));
+                }
                 buffer = "";
                 numSeparators++;
                 tokens.add(new SeparatorToken());
