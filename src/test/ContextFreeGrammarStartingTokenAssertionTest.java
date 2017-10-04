@@ -42,4 +42,15 @@ public class ContextFreeGrammarStartingTokenAssertionTest
 
         assertion.validate();
     }
+
+    @Test
+    public void TestValidateDoesNotThrowExceptionForValidTokenSequence() throws ContextFreeGrammarSyntaxTokenizerException
+    {
+        Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
+        tokens.add(new NonTerminalToken("S"));
+        tokens.add(new SeparatorToken());
+        ContextFreeGrammarStartingTokenAssertion assertion = new ContextFreeGrammarStartingTokenAssertion(tokens);
+
+        assertion.validate();
+    }
 }

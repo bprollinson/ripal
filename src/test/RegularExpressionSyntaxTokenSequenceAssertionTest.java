@@ -47,4 +47,12 @@ public class RegularExpressionSyntaxTokenSequenceAssertionTest
 
         assertion.validate('|', ')');
     }
+
+    @Test
+    public void TestValidateDoesNotThrowExceptionForValidTokenSequence() throws RegularExpressionSyntaxTokenizerException
+    {
+        RegularExpressionSyntaxTokenSequenceAssertion assertion = new RegularExpressionSyntaxTokenSequenceAssertion('(', ')', '*', '|');
+
+        assertion.validate('a', 'b');
+    }
 }
