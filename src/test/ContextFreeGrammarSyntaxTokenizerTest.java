@@ -145,27 +145,11 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
-    public void testTokenizerThrowsExceptionForFewerThanTwoTokens() throws ContextFreeGrammarSyntaxTokenizerException
+    public void testTokenizerThrowsExceptionForIncorrecTokenSequence() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
         tokenizer.tokenize("");
-    }
-
-    @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
-    public void testTokenizerThrowsExceptionWhenFirstTokenIsNotANonterminal() throws ContextFreeGrammarSyntaxTokenizerException
-    {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
-
-        tokenizer.tokenize("::");
-    }
-
-    @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
-    public void testTokenizerThrowsExceptionWhenSecondTokenIsNotASeparator() throws ContextFreeGrammarSyntaxTokenizerException
-    {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
-
-        tokenizer.tokenize("S S");
     }
 
     @Test(expected = IncorrectContextFreeGrammarQuoteNestingException.class)
