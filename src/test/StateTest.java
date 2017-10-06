@@ -90,7 +90,7 @@ public class StateTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForStateGraphContainingDifferenceCycle()
+    public void testStructureEqualsReturnsFalseForStateGraphContainingDifferentCycle()
     {
         State state1 = new TestState("S0", true);
         State state2 = new TestState("S1", true);

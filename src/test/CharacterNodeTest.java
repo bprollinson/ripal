@@ -16,7 +16,7 @@ public class CharacterNodeTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForCharacterNodeWithDifferenceCharacter()
+    public void testEqualsReturnsFalseForCharacterNodeWithDifferentCharacter()
     {
         CharacterNode node = new CharacterNode('a');
 
