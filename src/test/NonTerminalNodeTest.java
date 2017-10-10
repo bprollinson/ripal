@@ -1,23 +1,33 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+
+import larp.grammar.contextfreelanguage.ConcatenationNode;
+import larp.grammar.contextfreelanguage.NonTerminalNode;
 
 public class NonTerminalNodeTest
 {
     @Test
     public void testEqualsReturnsTrueForNonTerminalNodeWithSameName()
     {
-        assertEquals(0, 1);
+        NonTerminalNode node = new NonTerminalNode("S");
+
+        assertTrue(node.equals(new NonTerminalNode("S")));
     }
 
     @Test
     public void testEqualsReturnsFalseForNonTerminalNodeWithDifferentCharacter()
     {
-        assertEquals(0, 1);
+        NonTerminalNode node = new NonTerminalNode("S");
+
+        assertFalse(node.equals(new NonTerminalNode("T")));
     }
 
     @Test
     public void testEqualsReturnsFalseForNodeOfOtherType()
     {
-        assertEquals(0, 1);
+        NonTerminalNode node = new NonTerminalNode("S");
+
+        assertFalse(node.equals(new ConcatenationNode()));
     }
 }
