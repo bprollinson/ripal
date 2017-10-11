@@ -1,29 +1,54 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+
+import larp.grammar.contextfreelanguage.ConcatenationNode;
+import larp.grammar.contextfreelanguage.ProductionNode;
 
 public class ConcatenationNodeTest
 {
     @Test
     public void testEqualsReturnsTrueForConcatenationNodeWithNoChildren()
     {
-        assertEquals(0, 1);
+        ConcatenationNode node = new ConcatenationNode();
+
+        assertTrue(node.equals(new ConcatenationNode()));
     }
 
     @Test
     public void testEqualsReturnsTrueForConcatenationNodeWithSameSubtree()
     {
-        assertEquals(0, 1);
+        ConcatenationNode node = new ConcatenationNode();
+        node.addChild(new ConcatenationNode());
+        node.addChild(new ConcatenationNode());
+
+        ConcatenationNode expectedNode = new ConcatenationNode();
+        expectedNode.addChild(new ConcatenationNode());
+        expectedNode.addChild(new ConcatenationNode());
+
+        assertTrue(node.equals(expectedNode));
     }
 
     @Test
     public void testEqualsReturnsFalseForConcatenationNodeWithDifferentSubtree()
     {
-        assertEquals(0, 1);
+        ConcatenationNode node = new ConcatenationNode();
+        node.addChild(new ConcatenationNode());
+        node.addChild(new ConcatenationNode());
+
+        ConcatenationNode expectedNode = new ConcatenationNode();
+        expectedNode.addChild(new ConcatenationNode());
+        expectedNode.addChild(new ProductionNode());
+
+        assertFalse(node.equals(expectedNode));
     }
 
     @Test
     public void testEqualsReturnsFalseForNodeOfOtherType()
     {
-        assertEquals(0, 1);
+        ConcatenationNode node = new ConcatenationNode();
+
+        assertFalse(node.equals(new ProductionNode()));
     }
 }
