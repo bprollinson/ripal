@@ -6,6 +6,12 @@ public class ContextFreeGrammarSyntaxParser
 {
     public ContextFreeGrammarSyntaxNode parse(Vector<ContextFreeGrammarSyntaxToken> tokens)
     {
-        return null;
+        ProductionNode productionNode = new ProductionNode();
+        NonTerminalToken nonTerminalToken = (NonTerminalToken)tokens.get(0);
+        NonTerminalNode nonTerminalNode = new NonTerminalNode(nonTerminalToken.getName());
+        productionNode.addChild(nonTerminalNode);
+        productionNode.addChild(new ConcatenationNode());
+
+        return productionNode;
     }
 }
