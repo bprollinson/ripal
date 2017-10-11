@@ -8,4 +8,19 @@ public class TerminalNode extends ContextFreeGrammarSyntaxNode
     {
         this.value = value;
     }
+
+    public String getValue()
+    {
+        return this.value;
+    }
+
+    public boolean equals(Object other)
+    {
+        if (!super.equals(other))
+        {
+            return false;
+        }
+
+        return this.value == ((TerminalNode)other).getValue();
+    }
 }
