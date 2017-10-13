@@ -2,6 +2,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+import larp.grammar.contextfreelanguage.NonTerminalNode;
+import larp.grammar.contextfreelanguage.TerminalNode;
+import larp.grammar.contextfreelanguage.ProductionNode;
+import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1ParseTable;
 
 public class LL1ParseTableTest
@@ -9,7 +13,12 @@ public class LL1ParseTableTest
     @Test
     public void testAcceptsReturnsTrueForCorrectCharacterInSingleCharacterCFG()
     {
-        LL1ParseTable parseTable = new LL1ParseTable();
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        productionNode.addChild(new TerminalNode("a"));
+        contextFreeGrammar.addProduction(productionNode);
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
 
         assertTrue(parseTable.accepts("a"));
     }
@@ -17,7 +26,12 @@ public class LL1ParseTableTest
     @Test
     public void testAcceptsReturnsTrueForIncorrectCharacterInSingleCharacterCFG()
     {
-        LL1ParseTable parseTable = new LL1ParseTable();
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        productionNode.addChild(new TerminalNode("a"));
+        contextFreeGrammar.addProduction(productionNode);
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
 
         assertFalse(parseTable.accepts("b"));
     }
