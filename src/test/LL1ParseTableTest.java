@@ -19,6 +19,7 @@ public class LL1ParseTableTest
         productionNode.addChild(new TerminalNode("a"));
         contextFreeGrammar.addProduction(productionNode);
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         assertTrue(parseTable.accepts("a"));
     }
@@ -32,6 +33,7 @@ public class LL1ParseTableTest
         productionNode.addChild(new TerminalNode("a"));
         contextFreeGrammar.addProduction(productionNode);
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         assertFalse(parseTable.accepts("b"));
     }

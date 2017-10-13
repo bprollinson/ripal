@@ -1,6 +1,7 @@
 package larp.parsetable;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.grammar.contextfreelanguage.NonTerminalNode;
 
 import java.util.Vector;
 
@@ -16,5 +17,10 @@ public class ContextFreeGrammar
     public void addProduction(ContextFreeGrammarSyntaxNode productionNode)
     {
         this.productions.add(productionNode);
+    }
+
+    public NonTerminalNode getStartSymbol()
+    {
+        return null;
     }
 }
