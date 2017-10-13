@@ -1,4 +1,5 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.parsetable.LL1ParseTable;
@@ -10,12 +11,14 @@ public class LL1ParseTableTest
     {
         LL1ParseTable parseTable = new LL1ParseTable();
 
-        assertEquals(0, 1);
+        assertTrue(parseTable.accepts("a"));
     }
 
     @Test
     public void testAcceptsReturnsTrueForIncorrectCharacterInSingleCharacterCFG()
     {
-        assertEquals(0, 1);
+        LL1ParseTable parseTable = new LL1ParseTable();
+
+        assertFalse(parseTable.accepts("b"));
     }
 }
