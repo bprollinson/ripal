@@ -21,6 +21,6 @@ public class ContextFreeGrammar
 
     public NonTerminalNode getStartSymbol()
     {
-        return null;
+        return (NonTerminalNode)this.productions.get(0).getChildNodes().get(0);
     }
 }
