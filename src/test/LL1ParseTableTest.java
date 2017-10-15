@@ -2,6 +2,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+import larp.grammar.contextfreelanguage.ConcatenationNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.grammar.contextfreelanguage.ProductionNode;
@@ -16,7 +17,9 @@ public class LL1ParseTableTest
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(new NonTerminalNode("S"));
-        productionNode.addChild(new TerminalNode("a"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        productionNode.addChild(concatenationNode);
         contextFreeGrammar.addProduction(productionNode);
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
@@ -30,7 +33,9 @@ public class LL1ParseTableTest
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(new NonTerminalNode("S"));
-        productionNode.addChild(new TerminalNode("a"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        productionNode.addChild(concatenationNode);
         contextFreeGrammar.addProduction(productionNode);
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);

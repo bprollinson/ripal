@@ -52,7 +52,7 @@ public class LL1ParseTable
                     return false;
                 }
 
-                stack.add(this.contextFreeGrammar.getProduction(position).getChildNodes().get(1));
+                stack.add(this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes().get(0));
             }
             else
             {
