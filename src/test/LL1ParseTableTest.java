@@ -58,4 +58,20 @@ public class LL1ParseTableTest
 
         assertTrue(parseTable.accepts("ab"));
     }
+
+    @Test
+    public void testAcceptsReturnsFalseForCharacterMismatchInMultiCharacterCFG()
+    {
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("ab"));
+        productionNode.addChild(concatenationNode);
+        contextFreeGrammar.addProduction(productionNode);
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+
+        assertFalse(parseTable.accepts("ac"));
+    }
 }
