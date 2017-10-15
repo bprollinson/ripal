@@ -28,7 +28,7 @@ public class LL1ParseTable
 
         String remainingInput = inputString;
 
-        while (true)
+        while (remainingInput.length() > 0)
         {
             ContextFreeGrammarSyntaxNode topNode = stack.get(0);
             String nextCharacter = remainingInput.substring(0, 1);
@@ -56,9 +56,19 @@ public class LL1ParseTable
             }
             else
             {
-                return true;
+                if (!(((TerminalNode)topNode).getValue().substring(0, 1).equals(nextCharacter)))
+                {
+                    return false;
+                }
+
+                stack.remove(0);
+                stack.add(new TerminalNode(((TerminalNode)topNode).getValue().substring(1)));
+
+                remainingInput = remainingInput.substring(1);
             }
         }
+
+        return true;
     }
 
     public void addCell(NonTerminalNode nonTerminalNode, TerminalNode terminalNode, int contextFreeGrammarRuleIndex)
