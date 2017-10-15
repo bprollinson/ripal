@@ -45,13 +45,18 @@ public class LL1ParseTable
                     }
                 }
 
-                stack.removeElement(0);
+                stack.remove(0);
 
-                stack.add(this.nonTerminalNodes.get(position).getChildNodes().get(1).getChildNodes().get(0));
+                if (position == -1)
+                {
+                    return false;
+                }
+
+                stack.add(this.contextFreeGrammar.getProduction(position).getChildNodes().get(1));
             }
             else
             {
-                return nextCharacter.equals(((TerminalNode)topNode).getValue());
+                return true;
             }
         }
     }

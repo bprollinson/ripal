@@ -19,6 +19,11 @@ public class ContextFreeGrammar
         this.productions.add(productionNode);
     }
 
+    public ContextFreeGrammarSyntaxNode getProduction(int index)
+    {
+        return this.productions.get(index);
+    }
+
     public NonTerminalNode getStartSymbol()
     {
         return (NonTerminalNode)this.productions.get(0).getChildNodes().get(0);
