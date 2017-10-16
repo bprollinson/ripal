@@ -73,7 +73,7 @@ public class LL1ParseTable
             }
         }
 
-        return remainingInput.length() == 0;
+        return remainingInput.length() == 0 && stack.size() == 0;
     }
 
     public void addCell(NonTerminalNode nonTerminalNode, TerminalNode terminalNode, int contextFreeGrammarRuleIndex)
