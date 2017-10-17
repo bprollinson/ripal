@@ -60,6 +60,12 @@ public class LL1ParseTableTest
     }
 
     @Test
+    public void testAcceptsReturnsTrueForMultiCharacterCFGUsingMultipleTerminalNodes()
+    {
+        assertTrue(false);
+    }
+
+    @Test
     public void testAcceptsReturnsFalseForCharacterMismatchInMultiCharacterCFG()
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
@@ -105,5 +111,11 @@ public class LL1ParseTableTest
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         assertFalse(parseTable.accepts("a"));
+    }
+
+    @Test
+    public void testAcceptsReturnsTrueForNonterminalProductionChainDependingOnCollectionOrder()
+    {
+        assertTrue(false);
     }
 }
