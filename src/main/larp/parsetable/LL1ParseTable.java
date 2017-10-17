@@ -52,7 +52,11 @@ public class LL1ParseTable
                     return false;
                 }
 
-                stack.add(this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes().get(0));
+                Vector<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
+                for (int i = 0; i < childNodes.size(); i++)
+                {
+                    stack.add(childNodes.get(i));
+                }
             }
             else
             {

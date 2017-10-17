@@ -62,7 +62,18 @@ public class LL1ParseTableTest
     @Test
     public void testAcceptsReturnsTrueForMultiCharacterCFGUsingMultipleTerminalNodes()
     {
-        assertTrue(false);
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        concatenationNode.addChild(new TerminalNode("b"));
+        productionNode.addChild(concatenationNode);
+        contextFreeGrammar.addProduction(productionNode);
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+
+        assertTrue(parseTable.accepts("ab"));
     }
 
     @Test
