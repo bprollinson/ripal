@@ -125,7 +125,13 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testAcceptsReturnsTrueForNonterminalProductionChainDependingOnCollectionOrder()
+    public void testAcceptsReturnsTrueForNonterminalProductionChainDependingOnCollectionPrefixing()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testAcceptsReturnsTrueForTerminalProductionChainDependingOnCollectionPrefixing()
     {
         assertTrue(false);
     }
