@@ -53,9 +53,9 @@ public class LL1ParseTable
                 }
 
                 Vector<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
-                for (int i = 0; i < childNodes.size(); i++)
+                for (int i = childNodes.size() - 1; i >= 0; i--)
                 {
-                    stack.add(childNodes.get(i));
+                    stack.add(0, childNodes.get(i));
                 }
             }
             else
@@ -70,7 +70,7 @@ public class LL1ParseTable
                 String remainingTerminalContent = ((TerminalNode)topNode).getValue().substring(1);
                 if (remainingTerminalContent.length() > 0)
                 {
-                    stack.add(new TerminalNode(remainingTerminalContent));
+                    stack.add(0, new TerminalNode(remainingTerminalContent));
                 }
 
                 remainingInput = remainingInput.substring(1);
