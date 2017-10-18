@@ -133,6 +133,34 @@ public class LL1ParseTableTest
     @Test
     public void testAcceptsReturnsTrueForTerminalProductionChainDependingOnCollectionPrefixing()
     {
-        assertTrue(false);
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new NonTerminalNode("A"));
+        concatenationNode.addChild(new NonTerminalNode("C"));
+        productionNode.addChild(concatenationNode);
+        contextFreeGrammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("A"));
+        concatenationNode = new ConcatenationNode();
+        productionNode.addChild(concatenationNode);
+        concatenationNode.addChild(new TerminalNode("ab"));
+        contextFreeGrammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("C"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("c"));
+        productionNode.addChild(concatenationNode);
+        contextFreeGrammar.addProduction(productionNode);
+
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
+        parseTable.addCell(new NonTerminalNode("C"), new TerminalNode("c"), 2);
+
+        assertTrue(parseTable.accepts("abc"));
     }
 }
