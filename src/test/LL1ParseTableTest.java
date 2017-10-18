@@ -125,13 +125,7 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testAcceptsReturnsTrueForNonterminalProductionChainDependingOnCollectionPrefixing()
-    {
-        assertTrue(false);
-    }
-
-    @Test
-    public void testAcceptsReturnsTrueForTerminalProductionChainDependingOnCollectionPrefixing()
+    public void testAcceptsReturnsTrueForTerminalAndNonterminalProductionChainDependingOnCollectionPrefixing()
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
         ProductionNode productionNode = new ProductionNode();
