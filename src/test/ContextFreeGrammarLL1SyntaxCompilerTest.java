@@ -52,7 +52,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
 
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
-        expectedTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 0);
+        expectedTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
 
         assertEquals(expectedTable, compiler.compile(grammar));
     }
@@ -60,7 +60,37 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     @Test
     public void testCompileReturnsParseTableWithNonTerminalConcatenation()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new NonTerminalNode("A"));
+        concatenationNode.addChild(new NonTerminalNode("B"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("A"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("B"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("b"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        LL1ParseTable expectedTable = new LL1ParseTable(grammar);
+        expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        expectedTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
+        expectedTable.addCell(new NonTerminalNode("B"), new TerminalNode("b"), 2);
+
+        assertEquals(expectedTable, compiler.compile(grammar));
     }
 
     @Test
