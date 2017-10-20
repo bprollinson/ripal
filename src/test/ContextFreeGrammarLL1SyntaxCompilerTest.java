@@ -56,4 +56,34 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
 
         assertEquals(expectedTable, compiler.compile(grammar));
     }
+
+    @Test
+    public void testCompileReturnsParseTableWithNonTerminalConcatenation()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCompileReturnsParseTableWithNonTerminalChain()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoTerminals()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoNonTerminals()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCompileThrowsExceptionForFirstAmbiguityBetweenTerminalAndNonTerminal()
+    {
+        assertEquals(0, 1);
+    }
 }
