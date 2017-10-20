@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import larp.automaton.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.automaton.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
 import larp.grammar.contextfreelanguage.ConcatenationNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
@@ -137,10 +138,27 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         assertEquals(expectedTable, compiler.compile(grammar));
     }
 
-    @Test
+    @Test(expected = AmbiguousLL1ParseTableException.class)
     public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoTerminals()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("s"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("s"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        compiler.compile(grammar);
     }
 
     @Test
