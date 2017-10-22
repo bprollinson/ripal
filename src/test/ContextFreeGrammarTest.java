@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -76,6 +77,6 @@ public class ContextFreeGrammarTest
         expectedNode.addChild(new TerminalNode("c"));
         expectedCfg.addProduction(expectedNode);
 
-        assertTrue(cfg.equals(expectedCfg));
+        assertFalse(cfg.equals(expectedCfg));
     }
 }
