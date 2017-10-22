@@ -23,4 +23,22 @@ public class ContextFreeGrammarTest
 
         assertEquals(new NonTerminalNode("S"), contextFreeGrammar.getStartSymbol());
     }
+
+    @Test
+    public void testEqualsReturnsTrueForTwoEmptyCFGs()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testEqualsReturnsTrueForTwoCFGsWithTheSameProductions()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testEqualsReturnsFalseForTwoCFGSWithDifferentProductions()
+    {
+        assertEquals(0, 1);
+    }
 }
