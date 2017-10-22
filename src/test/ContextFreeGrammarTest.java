@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.NonTerminalNode;
@@ -27,18 +28,54 @@ public class ContextFreeGrammarTest
     @Test
     public void testEqualsReturnsTrueForTwoEmptyCFGs()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+
+        ContextFreeGrammar expectedCfg = new ContextFreeGrammar();
+
+        assertTrue(cfg.equals(expectedCfg));
     }
 
     @Test
     public void testEqualsReturnsTrueForTwoCFGsWithTheSameProductions()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        ProductionNode node = new ProductionNode();
+        node.addChild(new NonTerminalNode("S"));
+        node.addChild(new TerminalNode("a"));
+        cfg.addProduction(node);
+
+        ContextFreeGrammar expectedCfg = new ContextFreeGrammar();
+        ProductionNode expectedNode = new ProductionNode();
+        expectedNode.addChild(new NonTerminalNode("S"));
+        expectedNode.addChild(new TerminalNode("a"));
+        expectedCfg.addProduction(expectedNode);
+
+        assertTrue(cfg.equals(expectedCfg));
     }
 
     @Test
     public void testEqualsReturnsFalseForTwoCFGSWithDifferentProductions()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        ProductionNode node = new ProductionNode();
+        node.addChild(new NonTerminalNode("S"));
+        node.addChild(new TerminalNode("a"));
+        cfg.addProduction(node);
+        node = new ProductionNode();
+        node.addChild(new NonTerminalNode("S"));
+        node.addChild(new TerminalNode("b"));
+        cfg.addProduction(node);
+
+        ContextFreeGrammar expectedCfg = new ContextFreeGrammar();
+        ProductionNode expectedNode = new ProductionNode();
+        expectedNode.addChild(new NonTerminalNode("S"));
+        expectedNode.addChild(new TerminalNode("a"));
+        expectedCfg.addProduction(expectedNode);
+        expectedNode = new ProductionNode();
+        expectedNode.addChild(new NonTerminalNode("S"));
+        expectedNode.addChild(new TerminalNode("c"));
+        expectedCfg.addProduction(expectedNode);
+
+        assertTrue(cfg.equals(expectedCfg));
     }
 }
