@@ -198,9 +198,31 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         compiler.compile(grammar);
     }
 
-    @Test
+    @Test(expected = AmbiguousLL1ParseTableException.class)
     public void testCompileThrowsExceptionForFirstAmbiguityBetweenTerminalAndNonTerminal()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new NonTerminalNode("A"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("A"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
     }
 }
