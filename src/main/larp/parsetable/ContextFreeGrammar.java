@@ -24,8 +24,23 @@ public class ContextFreeGrammar
         return this.productions.get(index);
     }
 
+    public Vector<ContextFreeGrammarSyntaxNode> getProductions()
+    {
+        return this.productions;
+    }
+
     public NonTerminalNode getStartSymbol()
     {
         return (NonTerminalNode)this.productions.get(0).getChildNodes().get(0);
+    }
+
+    public boolean equals(Object other)
+    {
+        if (!(other instanceof ContextFreeGrammar))
+        {
+            return false;
+        }
+
+        return this.productions.equals(((ContextFreeGrammar)other).getProductions());
     }
 }
