@@ -21,6 +21,6 @@ public class TerminalNode extends ContextFreeGrammarSyntaxNode
             return false;
         }
 
-        return this.value == ((TerminalNode)other).getValue();
+        return this.value.equals(((TerminalNode)other).getValue());
     }
 }

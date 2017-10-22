@@ -21,6 +21,6 @@ public class NonTerminalNode extends ContextFreeGrammarSyntaxNode
             return false;
         }
 
-        return this.name == ((NonTerminalNode)other).getName();
+        return this.name.equals(((NonTerminalNode)other).getName());
     }
 }
