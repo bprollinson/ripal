@@ -157,4 +157,34 @@ public class LL1ParseTableTest
 
         assertTrue(parseTable.accepts("abc"));
     }
+
+    @Test
+    public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testEqualsReturnsTrueForNonSameCFGAndTableEntries()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testEqualsReturnsFalseForDifferentCFGs()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testEqualsReturnsFalseForDifferentTableEntries()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testEqualsReturnsTrueForSameTableEntriesInDifferentOrder()
+    {
+        assertTrue(false);
+    }
 }
