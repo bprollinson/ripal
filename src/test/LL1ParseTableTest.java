@@ -161,13 +161,32 @@ public class LL1ParseTableTest
     @Test
     public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
     {
-        assertTrue(false);
+        LL1ParseTable parseTable = new LL1ParseTable(new ContextFreeGrammar());
+        LL1ParseTable otherParseTable = new LL1ParseTable(new ContextFreeGrammar());
+
+        assertTrue(parseTable.equals(otherParseTable));
     }
 
     @Test
-    public void testEqualsReturnsTrueForNonSameCFGAndTableEntries()
+    public void testEqualsReturnsTrueForNonEmptyCFGAndTableEntries()
     {
-        assertTrue(false);
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        productionNode.addChild(new TerminalNode("a"));
+        cfg.addProduction(productionNode);
+        LL1ParseTable parseTable = new LL1ParseTable(cfg);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+
+        ContextFreeGrammar otherCfg = new ContextFreeGrammar();
+        ProductionNode otherProductionNode = new ProductionNode();
+        otherProductionNode.addChild(new NonTerminalNode("S"));
+        otherProductionNode.addChild(new TerminalNode("a"));
+        otherCfg.addProduction(otherProductionNode);
+        LL1ParseTable otherParseTable = new LL1ParseTable(cfg);
+        otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+
+        assertTrue(parseTable.equals(otherParseTable));
     }
 
     @Test
