@@ -4,21 +4,18 @@ import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 
+import java.util.HashMap;
 import java.util.Vector;
 
 public class LL1ParseTable
 {
     private ContextFreeGrammar contextFreeGrammar;
-    private Vector<NonTerminalNode> nonTerminalNodes;
-    private Vector<TerminalNode> terminalNodes;
-    private Vector<Integer> contextFreeGrammarRuleIndexes;
+    private HashMap<NonTerminalNode, HashMap<TerminalNode, Integer>> table;
 
     public LL1ParseTable(ContextFreeGrammar contextFreeGrammar)
     {
         this.contextFreeGrammar = contextFreeGrammar;
-        this.nonTerminalNodes = new Vector<NonTerminalNode>();
-        this.terminalNodes = new Vector<TerminalNode>();
-        this.contextFreeGrammarRuleIndexes = new Vector<Integer>();
+        this.table = new HashMap<NonTerminalNode, HashMap<TerminalNode, Integer>>();
     }
 
     public boolean accepts(String inputString)
@@ -35,19 +32,16 @@ public class LL1ParseTable
 
             if (topNode instanceof NonTerminalNode)
             {
-                int position = -1;
-                for (int i = 0; i < this.nonTerminalNodes.size(); i++)
+                Integer position = null;
+                HashMap<TerminalNode, Integer> entry = this.table.get(topNode);
+                if (entry != null)
                 {
-                    if (this.nonTerminalNodes.get(i).equals(topNode) && this.terminalNodes.get(i).getValue().equals(nextCharacter))
-                    {
-                        position = i;
-                        break;
-                    }
+                    position = entry.get(new TerminalNode(nextCharacter));
                 }
 
                 stack.remove(0);
 
-                if (position == -1)
+                if (position == null)
                 {
                     return false;
                 }
@@ -82,14 +76,24 @@ public class LL1ParseTable
 
     public void addCell(NonTerminalNode nonTerminalNode, TerminalNode terminalNode, int contextFreeGrammarRuleIndex)
     {
-        this.nonTerminalNodes.add(nonTerminalNode);
-        this.terminalNodes.add(terminalNode);
-        this.contextFreeGrammarRuleIndexes.add(contextFreeGrammarRuleIndex);
+        HashMap<TerminalNode, Integer> entry = this.table.get(nonTerminalNode);
+        if (entry == null)
+        {
+            entry = new HashMap<TerminalNode, Integer>();
+        }
+
+        entry.put(terminalNode, contextFreeGrammarRuleIndex);
+        this.table.put(nonTerminalNode, entry);
     }
 
     public ContextFreeGrammar getContextFreeGrammar()
     {
         return this.contextFreeGrammar;
+    }
+
+    public HashMap<NonTerminalNode, HashMap<TerminalNode, Integer>> getTable()
+    {
+        return this.table;
     }
 
     public boolean equals(Object other)
@@ -104,6 +108,6 @@ public class LL1ParseTable
             return false;
         }
 
-        return true;
+        return this.table.equals(((LL1ParseTable)other).getTable());
     }
 }

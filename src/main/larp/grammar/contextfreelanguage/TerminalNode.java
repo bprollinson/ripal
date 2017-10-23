@@ -23,4 +23,9 @@ public class TerminalNode extends ContextFreeGrammarSyntaxNode
 
         return this.value.equals(((TerminalNode)other).getValue());
     }
+
+    public int hashCode()
+    {
+        return this.value.hashCode();
+    }
 }

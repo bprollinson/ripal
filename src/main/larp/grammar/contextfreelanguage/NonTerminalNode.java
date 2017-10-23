@@ -23,4 +23,9 @@ public class NonTerminalNode extends ContextFreeGrammarSyntaxNode
 
         return this.name.equals(((NonTerminalNode)other).getName());
     }
+
+    public int hashCode()
+    {
+        return this.name.hashCode();
+    }
 }
