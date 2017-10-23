@@ -183,7 +183,7 @@ public class LL1ParseTableTest
         otherProductionNode.addChild(new NonTerminalNode("S"));
         otherProductionNode.addChild(new TerminalNode("a"));
         otherCfg.addProduction(otherProductionNode);
-        LL1ParseTable otherParseTable = new LL1ParseTable(cfg);
+        LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         assertTrue(parseTable.equals(otherParseTable));
@@ -205,7 +205,7 @@ public class LL1ParseTableTest
         otherProductionNode.addChild(new NonTerminalNode("S"));
         otherProductionNode.addChild(new TerminalNode("b"));
         otherCfg.addProduction(otherProductionNode);
-        LL1ParseTable otherParseTable = new LL1ParseTable(cfg);
+        LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         assertFalse(parseTable.equals(otherParseTable));
@@ -227,7 +227,7 @@ public class LL1ParseTableTest
         otherProductionNode.addChild(new NonTerminalNode("S"));
         otherProductionNode.addChild(new TerminalNode("a"));
         otherCfg.addProduction(otherProductionNode);
-        LL1ParseTable otherParseTable = new LL1ParseTable(cfg);
+        LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
 
         assertFalse(parseTable.equals(otherParseTable));
@@ -250,7 +250,7 @@ public class LL1ParseTableTest
         otherProductionNode.addChild(new NonTerminalNode("S"));
         otherProductionNode.addChild(new TerminalNode("a"));
         otherCfg.addProduction(otherProductionNode);
-        LL1ParseTable otherParseTable = new LL1ParseTable(cfg);
+        LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
