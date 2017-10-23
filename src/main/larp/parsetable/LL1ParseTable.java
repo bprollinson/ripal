@@ -99,6 +99,11 @@ public class LL1ParseTable
             return false;
         }
 
-        return this.contextFreeGrammar.equals(((LL1ParseTable)other).getContextFreeGrammar());
+        if (!this.contextFreeGrammar.equals(((LL1ParseTable)other).getContextFreeGrammar()))
+        {
+            return false;
+        }
+
+        return true;
     }
 }
