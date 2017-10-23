@@ -86,4 +86,19 @@ public class LL1ParseTable
         this.terminalNodes.add(terminalNode);
         this.contextFreeGrammarRuleIndexes.add(contextFreeGrammarRuleIndex);
     }
+
+    public ContextFreeGrammar getContextFreeGrammar()
+    {
+        return this.contextFreeGrammar;
+    }
+
+    public boolean equals(Object other)
+    {
+        if (!(other instanceof LL1ParseTable))
+        {
+            return false;
+        }
+
+        return this.contextFreeGrammar.equals(((LL1ParseTable)other).getContextFreeGrammar());
+    }
 }
