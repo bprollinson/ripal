@@ -45,7 +45,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         grammar.addProduction(productionNode);
 
         productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
+        productionNode.addChild(new NonTerminalNode("A"));
         concatenationNode = new ConcatenationNode();
         concatenationNode.addChild(new TerminalNode("a"));
         productionNode.addChild(concatenationNode);
