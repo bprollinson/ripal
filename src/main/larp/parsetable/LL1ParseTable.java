@@ -81,7 +81,7 @@ public class LL1ParseTable
         this.table.put(nonTerminalNode, entry);
     }
 
-    private Integer getCell(NonTerminalNode nonTerminalNode, TerminalNode terminalNode)
+    public Integer getCell(NonTerminalNode nonTerminalNode, TerminalNode terminalNode)
     {
         Integer position = null;
         HashMap<TerminalNode, Integer> entry = this.table.get(nonTerminalNode);

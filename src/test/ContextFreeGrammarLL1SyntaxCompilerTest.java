@@ -13,7 +13,7 @@ import larp.parsetable.LL1ParseTable;
 public class ContextFreeGrammarLL1SyntaxCompilerTest
 {
     @Test
-    public void testCompileReturnsParseTableForSingleCharacterProductionCFG()
+    public void testCompileReturnsParseTableForSingleCharacterProductionCFG() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
@@ -32,7 +32,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileReturnsParseTableForSingleNonTerminalAndSingleTerminalProductionCFG()
+    public void testCompileReturnsParseTableForSingleNonTerminalAndSingleTerminalProductionCFG() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
@@ -59,7 +59,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileReturnsParseTableWithNonTerminalConcatenation()
+    public void testCompileReturnsParseTableWithNonTerminalConcatenation() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
@@ -95,7 +95,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileReturnsParseTableWithNonTerminalChain()
+    public void testCompileReturnsParseTableWithNonTerminalChain() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
@@ -139,7 +139,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test(expected = AmbiguousLL1ParseTableException.class)
-    public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoTerminals()
+    public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoTerminals() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
@@ -162,7 +162,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test(expected = AmbiguousLL1ParseTableException.class)
-    public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoNonTerminals()
+    public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoNonTerminals() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
@@ -199,7 +199,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test(expected = AmbiguousLL1ParseTableException.class)
-    public void testCompileThrowsExceptionForFirstAmbiguityBetweenTerminalAndNonTerminal()
+    public void testCompileThrowsExceptionForFirstAmbiguityBetweenTerminalAndNonTerminal() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 

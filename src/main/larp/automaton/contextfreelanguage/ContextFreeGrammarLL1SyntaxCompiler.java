@@ -13,7 +13,7 @@ import java.util.Vector;
 
 public class ContextFreeGrammarLL1SyntaxCompiler
 {
-    public LL1ParseTable compile(ContextFreeGrammar grammar)
+    public LL1ParseTable compile(ContextFreeGrammar grammar) throws AmbiguousLL1ParseTableException
     {
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
 
@@ -34,12 +34,19 @@ public class ContextFreeGrammarLL1SyntaxCompiler
         }
 
         for (Map.Entry<NonTerminalNode, HashSet<Integer>> entry : nonTerminalRules.entrySet()) {
-            Integer firstRuleIndex = entry.getValue().iterator().next();
-            TerminalNode first = this.getFirst(nonTerminalRules, grammar, firstRuleIndex);
-
-            if (first != null)
+            for (Integer firstRuleIndex: entry.getValue())
             {
-                parseTable.addCell(entry.getKey(), first, firstRuleIndex);
+                TerminalNode first = this.getFirst(nonTerminalRules, grammar, firstRuleIndex);
+
+                if (first != null)
+                {
+                    if (parseTable.getCell(entry.getKey(), first) != null)
+                    {
+                        throw new AmbiguousLL1ParseTableException();
+                    }
+
+                    parseTable.addCell(entry.getKey(), first, firstRuleIndex);
+                }
             }
         }
 
