@@ -32,12 +32,7 @@ public class LL1ParseTable
 
             if (topNode instanceof NonTerminalNode)
             {
-                Integer position = null;
-                HashMap<TerminalNode, Integer> entry = this.table.get(topNode);
-                if (entry != null)
-                {
-                    position = entry.get(new TerminalNode(nextCharacter));
-                }
+                Integer position = this.getCell((NonTerminalNode)topNode, new TerminalNode(nextCharacter));
 
                 stack.remove(0);
 
@@ -84,6 +79,18 @@ public class LL1ParseTable
 
         entry.put(terminalNode, contextFreeGrammarRuleIndex);
         this.table.put(nonTerminalNode, entry);
+    }
+
+    private Integer getCell(NonTerminalNode nonTerminalNode, TerminalNode terminalNode)
+    {
+        Integer position = null;
+        HashMap<TerminalNode, Integer> entry = this.table.get(nonTerminalNode);
+        if (entry != null)
+        {
+            position = entry.get(terminalNode);
+        }
+
+        return position;
     }
 
     public ContextFreeGrammar getContextFreeGrammar()
