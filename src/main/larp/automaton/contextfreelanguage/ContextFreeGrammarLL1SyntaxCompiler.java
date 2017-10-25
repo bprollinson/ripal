@@ -35,7 +35,7 @@ public class ContextFreeGrammarLL1SyntaxCompiler
 
         for (Map.Entry<NonTerminalNode, HashSet<Integer>> entry : nonTerminalRules.entrySet()) {
             Integer firstRuleIndex = entry.getValue().iterator().next();
-            TerminalNode first = this.getFirst(grammar, firstRuleIndex);
+            TerminalNode first = this.getFirst(nonTerminalRules, grammar, firstRuleIndex);
 
             if (first != null)
             {
@@ -46,12 +46,20 @@ public class ContextFreeGrammarLL1SyntaxCompiler
         return parseTable;
     }
 
-    private TerminalNode getFirst(ContextFreeGrammar grammar, int ruleIndex)
+    private TerminalNode getFirst(HashMap<NonTerminalNode, HashSet<Integer>> nonTerminalRules, ContextFreeGrammar grammar, int ruleIndex)
     {
         ContextFreeGrammarSyntaxNode concatenationNode = grammar.getProduction(ruleIndex).getChildNodes().get(1);
         if (concatenationNode.getChildNodes().get(0) instanceof TerminalNode)
         {
             return (TerminalNode)concatenationNode.getChildNodes().get(0);
+        }
+        else
+        {
+            Integer childRuleIndex = nonTerminalRules.get(concatenationNode.getChildNodes().get(0)).iterator().next();
+            if (childRuleIndex != null)
+            {
+                return this.getFirst(nonTerminalRules, grammar, childRuleIndex);
+            }
         }
 
         return null;
