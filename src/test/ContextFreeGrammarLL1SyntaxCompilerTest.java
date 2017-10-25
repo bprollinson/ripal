@@ -224,5 +224,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         concatenationNode.addChild(new TerminalNode("a"));
         productionNode.addChild(concatenationNode);
         grammar.addProduction(productionNode);
+
+        compiler.compile(grammar);
     }
 }
