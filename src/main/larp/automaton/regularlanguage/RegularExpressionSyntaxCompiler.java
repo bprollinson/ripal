@@ -68,6 +68,16 @@ public class RegularExpressionSyntaxCompiler
     private StateGroup buildConcatenationStateGroup(RegularExpressionSyntaxNode node)
     {
         Vector<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
+
+        if (childNodes.size() == 0)
+        {
+            State startState = new EpsilonNFAState("", false);
+            State endState = new EpsilonNFAState("", false);
+            startState.addTransition(new StateTransition(null, endState));
+
+            return new StateGroup(startState, endState);
+        }
+
         StateGroup[] childGroups = new StateGroup[childNodes.size()];
 
         for (int i = 0; i < childNodes.size(); i++)
