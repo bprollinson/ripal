@@ -257,4 +257,32 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
 
         compiler.compile(grammar);
     }
+
+    @Test
+    public void testCompileReturnsParseTableForGrammarContainingCycle() throws AmbiguousLL1ParseTableException
+    {
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        concatenationNode.addChild(new NonTerminalNode("S"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("b"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        LL1ParseTable expectedTable = new LL1ParseTable(grammar);
+        expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 1);
+
+        assertEquals(expectedTable, compiler.compile(grammar));
+    }
 }
