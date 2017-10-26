@@ -19,6 +19,19 @@ import java.util.Vector;
 public class RegularExpressionSyntaxParserTest
 {
     @Test
+    public void testParseReturnsEmptyConcatenationNodeForEmptyString()
+    {
+        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+
+        Vector<RegularExpressionSyntaxToken> input = new Vector<RegularExpressionSyntaxToken>();
+        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+
+        ConcatenationNode expectedRootNode = new ConcatenationNode();
+
+        assertEquals(expectedRootNode, rootNode);
+    }
+
+    @Test
     public void testParseReturnsConcatenationNodeForSingleCharacter()
     {
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();

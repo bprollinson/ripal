@@ -16,6 +16,17 @@ import java.util.Vector;
 public class RegularExpressionSyntaxTokenizerTest
 {
     @Test
+    public void testTokenizerTokenizesEmptyString() throws RegularExpressionSyntaxTokenizerException
+    {
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        Vector<RegularExpressionSyntaxToken> result = tokenizer.tokenize("");
+        Vector<RegularExpressionSyntaxToken> expectedResult = new Vector();
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
     public void testTokenizerTokenizesString() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
