@@ -4,6 +4,7 @@ import org.junit.Test;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxTokenizer;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
+import larp.grammar.contextfreelanguage.EpsilonToken;
 import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarQuoteNestingException;
 import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarSeparatorException;
 import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
@@ -53,6 +54,20 @@ public class ContextFreeGrammarSyntaxTokenizerTest
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
         expectedResult.add(new NonTerminalToken("Start"));
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizerTokenizesEpsilonProduction() throws ContextFreeGrammarSyntaxTokenizerException
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"");
+        Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new EpsilonToken());
 
         assertEquals(expectedResult, result);
     }
