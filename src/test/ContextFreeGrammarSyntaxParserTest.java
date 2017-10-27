@@ -5,6 +5,8 @@ import larp.grammar.contextfreelanguage.ConcatenationNode;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxParser;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxToken;
+import larp.grammar.contextfreelanguage.EpsilonNode;
+import larp.grammar.contextfreelanguage.EpsilonToken;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.NonTerminalToken;
 import larp.grammar.contextfreelanguage.ProductionNode;
@@ -24,11 +26,13 @@ public class ContextFreeGrammarSyntaxParserTest
         Vector<ContextFreeGrammarSyntaxToken> input = new Vector<ContextFreeGrammarSyntaxToken>();
         input.add(new NonTerminalToken("S"));
         input.add(new SeparatorToken());
+        input.add(new EpsilonToken());
         ContextFreeGrammarSyntaxNode rootNode = parser.parse(input);
 
         ProductionNode expectedRootNode = new ProductionNode();
         expectedRootNode.addChild(new NonTerminalNode("S"));
         expectedRootNode.addChild(new ConcatenationNode());
+        expectedRootNode.addChild(new EpsilonNode());
 
         assertEquals(expectedRootNode, rootNode);
     }
