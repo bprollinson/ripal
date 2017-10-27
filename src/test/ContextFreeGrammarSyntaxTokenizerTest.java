@@ -159,6 +159,12 @@ public class ContextFreeGrammarSyntaxTokenizerTest
         assertEquals(expectedResult, result);
     }
 
+    @Test
+    public void testTokenizerRemovesEpsilonFromTokensFromRightHandSideContainingMultipleTokens()
+    {
+        assertEquals(0, 1);
+    }
+
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
     public void testTokenizerThrowsExceptionForIncorrecTokenSequence() throws ContextFreeGrammarSyntaxTokenizerException
     {
