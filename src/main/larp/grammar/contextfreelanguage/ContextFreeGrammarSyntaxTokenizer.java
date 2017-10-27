@@ -11,6 +11,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         String buffer = "";
         boolean inTerminal = false;
         int numSeparators = 0;
+        int numEpsilons = 0;
 
         for (int i = 0; i < expression.length(); i++)
         {
@@ -34,6 +35,7 @@ public class ContextFreeGrammarSyntaxTokenizer
                 if (buffer.length() == 0)
                 {
                     tokens.add(new EpsilonToken());
+                    numEpsilons++;
                 }
                 else
                 {
@@ -73,6 +75,15 @@ public class ContextFreeGrammarSyntaxTokenizer
             throw new IncorrectContextFreeGrammarSeparatorException();
         }
 
-        return tokens;
+        Vector<ContextFreeGrammarSyntaxToken> correctedTokens = new Vector<ContextFreeGrammarSyntaxToken>();
+        for (int i = 0; i < tokens.size(); i++)
+        {
+            if (!(tokens.get(i) instanceof EpsilonToken) || i == 2)
+            {
+                correctedTokens.add(tokens.get(i));
+            }
+        }
+
+        return correctedTokens;
     }
 }
