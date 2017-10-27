@@ -160,7 +160,13 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerRemovesEpsilonFromTokensFromRightHandSideContainingMultipleTokens()
+    public void testTokenizerRemovesEpsilonFromTokensFromRightHandSideContainingMultipleNonepsilonTokens()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testTokenizerRemovesExtraEpsilonFromRightHandSideContainingMultipleEpsilonTokens()
     {
         assertEquals(0, 1);
     }
