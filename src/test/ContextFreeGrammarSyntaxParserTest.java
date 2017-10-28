@@ -31,8 +31,9 @@ public class ContextFreeGrammarSyntaxParserTest
 
         ProductionNode expectedRootNode = new ProductionNode();
         expectedRootNode.addChild(new NonTerminalNode("S"));
-        expectedRootNode.addChild(new ConcatenationNode());
-        expectedRootNode.addChild(new EpsilonNode());
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new EpsilonNode());
+        expectedRootNode.addChild(concatenationNode);
 
         assertEquals(expectedRootNode, rootNode);
     }

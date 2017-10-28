@@ -27,6 +27,10 @@ public class ContextFreeGrammarSyntaxParser
                 TerminalToken innerToken = (TerminalToken)token;
                 concatenationNode.addChild(new TerminalNode(innerToken.getValue()));
             }
+            else if (token instanceof EpsilonToken)
+            {
+                concatenationNode.addChild(new EpsilonNode());
+            }
         }
 
         return productionNode;
