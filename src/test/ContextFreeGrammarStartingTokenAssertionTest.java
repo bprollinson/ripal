@@ -12,10 +12,11 @@ import java.util.Vector;
 public class ContextFreeGrammarStartingTokenAssertionTest
 {
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
-    public void testValidateThrowsExceptionForFewerThanTwoTokens() throws ContextFreeGrammarSyntaxTokenizerException
+    public void testValidateThrowsExceptionForFewerThanThreeTokens() throws ContextFreeGrammarSyntaxTokenizerException
     {
         Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
         tokens.add(new NonTerminalToken("S"));
+        tokens.add(new SeparatorToken());
         ContextFreeGrammarStartingTokenAssertion assertion = new ContextFreeGrammarStartingTokenAssertion(tokens);
 
         assertion.validate();
@@ -27,6 +28,7 @@ public class ContextFreeGrammarStartingTokenAssertionTest
         Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
         tokens.add(new SeparatorToken());
         tokens.add(new SeparatorToken());
+        tokens.add(new NonTerminalToken("S"));
         ContextFreeGrammarStartingTokenAssertion assertion = new ContextFreeGrammarStartingTokenAssertion(tokens);
 
         assertion.validate();
@@ -36,6 +38,7 @@ public class ContextFreeGrammarStartingTokenAssertionTest
     public void testValidateThrowsExceptionWhenSecondTokenIsNotASeparator() throws ContextFreeGrammarSyntaxTokenizerException
     {
         Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
+        tokens.add(new NonTerminalToken("S"));
         tokens.add(new NonTerminalToken("S"));
         tokens.add(new NonTerminalToken("S"));
         ContextFreeGrammarStartingTokenAssertion assertion = new ContextFreeGrammarStartingTokenAssertion(tokens);
@@ -49,6 +52,7 @@ public class ContextFreeGrammarStartingTokenAssertionTest
         Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
         tokens.add(new NonTerminalToken("S"));
         tokens.add(new SeparatorToken());
+        tokens.add(new NonTerminalToken("S"));
         ContextFreeGrammarStartingTokenAssertion assertion = new ContextFreeGrammarStartingTokenAssertion(tokens);
 
         assertion.validate();

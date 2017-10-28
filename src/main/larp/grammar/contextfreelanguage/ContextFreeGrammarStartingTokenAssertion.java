@@ -13,7 +13,7 @@ public class ContextFreeGrammarStartingTokenAssertion
 
     public void validate() throws ContextFreeGrammarSyntaxTokenizerException
     {
-        if (tokens.size() < 2)
+        if (tokens.size() < 3)
         {
             throw new IncorrectContextFreeGrammarStatementPrefixException();
         }
