@@ -122,6 +122,42 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test
+    public void testBanana() throws AmbiguousLL1ParseTableException
+    {
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new NonTerminalNode("A"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("A"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("A"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("b"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        LL1ParseTable expectedTable = new LL1ParseTable(grammar);
+        expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
+        expectedTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
+        expectedTable.addCell(new NonTerminalNode("A"), new TerminalNode("b"), 2);
+
+        assertEquals(expectedTable, compiler.compile(grammar));
+    }
+
+    @Test
     public void testCompileReturnsParseTableWithNonTerminalChain() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
