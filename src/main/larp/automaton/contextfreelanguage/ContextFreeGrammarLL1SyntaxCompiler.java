@@ -37,9 +37,9 @@ public class ContextFreeGrammarLL1SyntaxCompiler
             for (Integer firstRuleIndex: entry.getValue())
             {
                 HashSet<Integer> rulesUsed = new HashSet<Integer>();
-                TerminalNode first = this.getFirst(nonTerminalRules, grammar, firstRuleIndex, rulesUsed);
+                HashSet<TerminalNode> firsts = this.getFirst(nonTerminalRules, grammar, firstRuleIndex, rulesUsed);
 
-                if (first != null)
+                for (TerminalNode first: firsts)
                 {
                     if (parseTable.getCell(entry.getKey(), first) != null)
                     {
@@ -54,26 +54,30 @@ public class ContextFreeGrammarLL1SyntaxCompiler
         return parseTable;
     }
 
-    private TerminalNode getFirst(HashMap<NonTerminalNode, HashSet<Integer>> nonTerminalRules, ContextFreeGrammar grammar, int ruleIndex, HashSet<Integer> rulesUsed)
+    private HashSet<TerminalNode> getFirst(HashMap<NonTerminalNode, HashSet<Integer>> nonTerminalRules, ContextFreeGrammar grammar, int ruleIndex, HashSet<Integer> rulesUsed)
     {
         rulesUsed.add(ruleIndex);
 
         ContextFreeGrammarSyntaxNode concatenationNode = grammar.getProduction(ruleIndex).getChildNodes().get(1);
         if (concatenationNode.getChildNodes().get(0) instanceof TerminalNode)
         {
-            return (TerminalNode)concatenationNode.getChildNodes().get(0);
+            HashSet<TerminalNode> results = new HashSet<TerminalNode>();
+            results.add((TerminalNode)concatenationNode.getChildNodes().get(0));
+
+            return results;
         }
         else
         {
+            HashSet<TerminalNode> results = new HashSet<TerminalNode>();
             for (Integer childRuleIndex: nonTerminalRules.get(concatenationNode.getChildNodes().get(0)))
             {
                 if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))
                 {
-                    return this.getFirst(nonTerminalRules, grammar, childRuleIndex, rulesUsed);
+                    results.addAll(this.getFirst(nonTerminalRules, grammar, childRuleIndex, rulesUsed));
                 }
             }
-        }
 
-        return null;
+            return results;
+        }
     }
 }
