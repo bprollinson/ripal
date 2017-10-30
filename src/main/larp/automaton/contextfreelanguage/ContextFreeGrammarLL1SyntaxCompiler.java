@@ -36,8 +36,7 @@ public class ContextFreeGrammarLL1SyntaxCompiler
         for (Map.Entry<NonTerminalNode, HashSet<Integer>> entry : nonTerminalRules.entrySet()) {
             for (Integer firstRuleIndex: entry.getValue())
             {
-                HashSet<Integer> rulesUsed = new HashSet<Integer>();
-                HashSet<TerminalNode> firsts = this.getFirst(nonTerminalRules, grammar, firstRuleIndex, rulesUsed);
+                HashSet<TerminalNode> firsts = this.getFirst(nonTerminalRules, grammar, firstRuleIndex);
 
                 for (TerminalNode first: firsts)
                 {
@@ -54,8 +53,8 @@ public class ContextFreeGrammarLL1SyntaxCompiler
         return parseTable;
     }
 
-    private HashSet<TerminalNode> getFirst(HashMap<NonTerminalNode, HashSet<Integer>> nonTerminalRules, ContextFreeGrammar grammar, int ruleIndex, HashSet<Integer> rulesUsed)
+    private HashSet<TerminalNode> getFirst(HashMap<NonTerminalNode, HashSet<Integer>> nonTerminalRules, ContextFreeGrammar grammar, int ruleIndex)
     {
-        return new FirstSetCalculator().getFirst(nonTerminalRules, grammar, ruleIndex, rulesUsed);
+        return new FirstSetCalculator().getFirst(nonTerminalRules, grammar, ruleIndex);
     }
 }

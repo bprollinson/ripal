@@ -10,7 +10,14 @@ import java.util.HashSet;
 
 public class FirstSetCalculator
 {
-    public HashSet<TerminalNode> getFirst(HashMap<NonTerminalNode, HashSet<Integer>> nonTerminalRules, ContextFreeGrammar grammar, int ruleIndex, HashSet<Integer> rulesUsed)
+    public HashSet<TerminalNode> getFirst(HashMap<NonTerminalNode, HashSet<Integer>> nonTerminalRules, ContextFreeGrammar grammar, int ruleIndex)
+    {
+        HashSet<Integer> rulesUsed = new HashSet<Integer>();
+
+        return this.getFirstRecursive(nonTerminalRules, grammar, ruleIndex, rulesUsed);
+    }
+
+    private HashSet<TerminalNode> getFirstRecursive(HashMap<NonTerminalNode, HashSet<Integer>> nonTerminalRules, ContextFreeGrammar grammar, int ruleIndex, HashSet<Integer> rulesUsed)
     {
         rulesUsed.add(ruleIndex);
 
@@ -29,7 +36,7 @@ public class FirstSetCalculator
             {
                 if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))
                 {
-                    results.addAll(this.getFirst(nonTerminalRules, grammar, childRuleIndex, rulesUsed));
+                    results.addAll(this.getFirstRecursive(nonTerminalRules, grammar, childRuleIndex, rulesUsed));
                 }
             }
 
