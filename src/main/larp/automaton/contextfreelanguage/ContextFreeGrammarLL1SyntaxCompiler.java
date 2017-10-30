@@ -56,28 +56,6 @@ public class ContextFreeGrammarLL1SyntaxCompiler
 
     private HashSet<TerminalNode> getFirst(HashMap<NonTerminalNode, HashSet<Integer>> nonTerminalRules, ContextFreeGrammar grammar, int ruleIndex, HashSet<Integer> rulesUsed)
     {
-        rulesUsed.add(ruleIndex);
-
-        ContextFreeGrammarSyntaxNode concatenationNode = grammar.getProduction(ruleIndex).getChildNodes().get(1);
-        if (concatenationNode.getChildNodes().get(0) instanceof TerminalNode)
-        {
-            HashSet<TerminalNode> results = new HashSet<TerminalNode>();
-            results.add((TerminalNode)concatenationNode.getChildNodes().get(0));
-
-            return results;
-        }
-        else
-        {
-            HashSet<TerminalNode> results = new HashSet<TerminalNode>();
-            for (Integer childRuleIndex: nonTerminalRules.get(concatenationNode.getChildNodes().get(0)))
-            {
-                if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))
-                {
-                    results.addAll(this.getFirst(nonTerminalRules, grammar, childRuleIndex, rulesUsed));
-                }
-            }
-
-            return results;
-        }
+        return new FirstSetCalculator().getFirst(nonTerminalRules, grammar, ruleIndex, rulesUsed);
     }
 }
