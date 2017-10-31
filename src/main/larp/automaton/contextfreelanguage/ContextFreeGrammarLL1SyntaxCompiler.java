@@ -2,7 +2,6 @@ package larp.automaton.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
-import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1ParseTable;
 
@@ -20,10 +19,10 @@ public class ContextFreeGrammarLL1SyntaxCompiler
 
         for (int firstRuleIndex = 0; firstRuleIndex < productions.size(); firstRuleIndex++)
         {
-            HashSet<TerminalNode> firsts = firstCalculator.getFirst(firstRuleIndex);
+            HashSet<ContextFreeGrammarSyntaxNode> firsts = firstCalculator.getFirst(firstRuleIndex);
             NonTerminalNode nonTerminalNode = (NonTerminalNode)productions.get(firstRuleIndex).getChildNodes().get(0);
 
-            for (TerminalNode first: firsts)
+            for (ContextFreeGrammarSyntaxNode first: firsts)
             {
                 if (parseTable.getCell(nonTerminalNode, first) != null)
                 {

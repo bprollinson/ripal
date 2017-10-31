@@ -33,28 +33,28 @@ public class FirstSetCalculator
         }
     }
 
-    public HashSet<TerminalNode> getFirst(int ruleIndex)
+    public HashSet<ContextFreeGrammarSyntaxNode> getFirst(int ruleIndex)
     {
         HashSet<Integer> rulesUsed = new HashSet<Integer>();
 
         return this.getFirstRecursive(ruleIndex, rulesUsed);
     }
 
-    private HashSet<TerminalNode> getFirstRecursive(int ruleIndex, HashSet<Integer> rulesUsed)
+    private HashSet<ContextFreeGrammarSyntaxNode> getFirstRecursive(int ruleIndex, HashSet<Integer> rulesUsed)
     {
         rulesUsed.add(ruleIndex);
 
         ContextFreeGrammarSyntaxNode concatenationNode = grammar.getProduction(ruleIndex).getChildNodes().get(1);
         if (concatenationNode.getChildNodes().get(0) instanceof TerminalNode)
         {
-            HashSet<TerminalNode> results = new HashSet<TerminalNode>();
+            HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
             results.add((TerminalNode)concatenationNode.getChildNodes().get(0));
 
             return results;
         }
         else
         {
-            HashSet<TerminalNode> results = new HashSet<TerminalNode>();
+            HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
             for (Integer childRuleIndex: nonTerminalRules.get(concatenationNode.getChildNodes().get(0)))
             {
                 if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))

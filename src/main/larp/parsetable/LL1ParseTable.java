@@ -10,12 +10,12 @@ import java.util.Vector;
 public class LL1ParseTable
 {
     private ContextFreeGrammar contextFreeGrammar;
-    private HashMap<NonTerminalNode, HashMap<TerminalNode, Integer>> table;
+    private HashMap<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>> table;
 
     public LL1ParseTable(ContextFreeGrammar contextFreeGrammar)
     {
         this.contextFreeGrammar = contextFreeGrammar;
-        this.table = new HashMap<NonTerminalNode, HashMap<TerminalNode, Integer>>();
+        this.table = new HashMap<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>>();
     }
 
     public boolean accepts(String inputString)
@@ -69,22 +69,22 @@ public class LL1ParseTable
         return remainingInput.length() == 0 && stack.size() == 0;
     }
 
-    public void addCell(NonTerminalNode nonTerminalNode, TerminalNode terminalNode, int contextFreeGrammarRuleIndex)
+    public void addCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode, int contextFreeGrammarRuleIndex)
     {
-        HashMap<TerminalNode, Integer> entry = this.table.get(nonTerminalNode);
+        HashMap<ContextFreeGrammarSyntaxNode, Integer> entry = this.table.get(nonTerminalNode);
         if (entry == null)
         {
-            entry = new HashMap<TerminalNode, Integer>();
+            entry = new HashMap<ContextFreeGrammarSyntaxNode, Integer>();
         }
 
         entry.put(terminalNode, contextFreeGrammarRuleIndex);
         this.table.put(nonTerminalNode, entry);
     }
 
-    public Integer getCell(NonTerminalNode nonTerminalNode, TerminalNode terminalNode)
+    public Integer getCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode)
     {
         Integer position = null;
-        HashMap<TerminalNode, Integer> entry = this.table.get(nonTerminalNode);
+        HashMap<ContextFreeGrammarSyntaxNode, Integer> entry = this.table.get(nonTerminalNode);
         if (entry != null)
         {
             position = entry.get(terminalNode);
@@ -98,7 +98,7 @@ public class LL1ParseTable
         return this.contextFreeGrammar;
     }
 
-    public HashMap<NonTerminalNode, HashMap<TerminalNode, Integer>> getTable()
+    public HashMap<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>> getTable()
     {
         return this.table;
     }
