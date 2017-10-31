@@ -6,9 +6,7 @@ import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1ParseTable;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Vector;
 
 public class ContextFreeGrammarLL1SyntaxCompiler
@@ -16,45 +14,26 @@ public class ContextFreeGrammarLL1SyntaxCompiler
     public LL1ParseTable compile(ContextFreeGrammar grammar) throws AmbiguousLL1ParseTableException
     {
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
-
         Vector<ContextFreeGrammarSyntaxNode> productions = grammar.getProductions();
 
-        HashMap<NonTerminalNode, HashSet<Integer>> nonTerminalRules = new HashMap<NonTerminalNode, HashSet<Integer>>();
+        FirstSetCalculator firstCalculator = new FirstSetCalculator(grammar);
 
-        for (int i = 0; i < productions.size(); i++)
+        for (int firstRuleIndex = 0; firstRuleIndex < productions.size(); firstRuleIndex++)
         {
-            ContextFreeGrammarSyntaxNode productionNode = productions.get(i);
-            HashSet<Integer> existingSet = nonTerminalRules.get(productionNode.getChildNodes().get(0));
-            if (existingSet == null)
-            {
-                existingSet = new HashSet<Integer>();
-            }
-            existingSet.add(i);
-            nonTerminalRules.put((NonTerminalNode)productionNode.getChildNodes().get(0), existingSet);
-        }
+            HashSet<TerminalNode> firsts = firstCalculator.getFirst(firstRuleIndex);
+            NonTerminalNode nonTerminalNode = (NonTerminalNode)productions.get(firstRuleIndex).getChildNodes().get(0);
 
-        for (Map.Entry<NonTerminalNode, HashSet<Integer>> entry : nonTerminalRules.entrySet()) {
-            for (Integer firstRuleIndex: entry.getValue())
+            for (TerminalNode first: firsts)
             {
-                HashSet<TerminalNode> firsts = this.getFirst(nonTerminalRules, grammar, firstRuleIndex);
-
-                for (TerminalNode first: firsts)
+                if (parseTable.getCell(nonTerminalNode, first) != null)
                 {
-                    if (parseTable.getCell(entry.getKey(), first) != null)
-                    {
-                        throw new AmbiguousLL1ParseTableException();
-                    }
-
-                    parseTable.addCell(entry.getKey(), first, firstRuleIndex);
+                    throw new AmbiguousLL1ParseTableException();
                 }
+
+                parseTable.addCell(nonTerminalNode, first, firstRuleIndex);
             }
         }
 
         return parseTable;
-    }
-
-    private HashSet<TerminalNode> getFirst(HashMap<NonTerminalNode, HashSet<Integer>> nonTerminalRules, ContextFreeGrammar grammar, int ruleIndex)
-    {
-        return new FirstSetCalculator().getFirst(nonTerminalRules, grammar, ruleIndex);
     }
 }
