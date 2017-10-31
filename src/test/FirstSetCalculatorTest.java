@@ -152,4 +152,37 @@ public class FirstSetCalculatorTest
         expectedFirsts.add(new TerminalNode("b"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
+
+    @Test
+    public void testGetFirstReturnsMultipleTerminalsWhenFirstNonTerminalGoesToTerminalOrNull()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new NonTerminalNode("A"));
+        concatenationNode.addChild(new TerminalNode("b"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("A"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("A"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new EpsilonNode());
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        FirstSetCalculator calculator = new FirstSetCalculator(grammar);
+        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        expectedFirsts.add(new TerminalNode("a"));
+        expectedFirsts.add(new TerminalNode("b"));
+        assertEquals(expectedFirsts, calculator.getFirst(0));
+    }
 }
