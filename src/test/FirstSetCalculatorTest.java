@@ -217,4 +217,37 @@ public class FirstSetCalculatorTest
         expectedFirsts.add(new EpsilonNode());
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
+
+    @Test
+    public void testGetFirstReturnsTerminalAfterSeriesOfEpsilonNonTerminals()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new NonTerminalNode("A"));
+        concatenationNode.addChild(new NonTerminalNode("B"));
+        concatenationNode.addChild(new TerminalNode("c"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("A"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new EpsilonNode());
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("B"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new EpsilonNode());
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        FirstSetCalculator calculator = new FirstSetCalculator(grammar);
+        HashSet<ContextFreeGrammarSyntaxNode> expectedFirsts = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedFirsts.add(new TerminalNode("c"));
+        assertEquals(expectedFirsts, calculator.getFirst(0));
+    }
 }
