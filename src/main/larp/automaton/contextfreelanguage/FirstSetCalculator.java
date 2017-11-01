@@ -62,6 +62,13 @@ public class FirstSetCalculator
             while (index < concatenationNode.getChildNodes().size() && epsilonFound)
             {
                 epsilonFound = false;
+
+                if (concatenationNode.getChildNodes().get(index) instanceof TerminalNode)
+                {
+                    results.add(concatenationNode.getChildNodes().get(index));
+                    break;
+                }
+
                 for (Integer childRuleIndex: nonTerminalRules.get(concatenationNode.getChildNodes().get(index)))
                 {
                     if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))
