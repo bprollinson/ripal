@@ -56,12 +56,29 @@ public class FirstSetCalculator
         else if (concatenationNode.getChildNodes().get(0) instanceof NonTerminalNode)
         {
             HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
-            for (Integer childRuleIndex: nonTerminalRules.get(concatenationNode.getChildNodes().get(0)))
+
+            int index = 0;
+            boolean epsilonFound = true;
+            while (index < concatenationNode.getChildNodes().size() && epsilonFound)
             {
-                if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))
+                epsilonFound = false;
+                for (Integer childRuleIndex: nonTerminalRules.get(concatenationNode.getChildNodes().get(index)))
                 {
-                    results.addAll(this.getFirstRecursive(childRuleIndex, rulesUsed));
+                    if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))
+                    {
+                        HashSet<ContextFreeGrammarSyntaxNode> childSet = this.getFirstRecursive(childRuleIndex, rulesUsed);
+                        epsilonFound = childSet.contains(new EpsilonNode());
+                        childSet.remove(new EpsilonNode());
+                        results.addAll(childSet);
+                    }
                 }
+
+                index++;
+            }
+
+            if (results.size() == 0)
+            {
+                results.add(new EpsilonNode());
             }
 
             return results;
