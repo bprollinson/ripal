@@ -1,6 +1,7 @@
 package larp.automaton.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
@@ -52,7 +53,7 @@ public class FirstSetCalculator
 
             return results;
         }
-        else
+        else if (concatenationNode.getChildNodes().get(0) instanceof NonTerminalNode)
         {
             HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
             for (Integer childRuleIndex: nonTerminalRules.get(concatenationNode.getChildNodes().get(0)))
@@ -65,5 +66,14 @@ public class FirstSetCalculator
 
             return results;
         }
+        else if (concatenationNode.getChildNodes().get(0) instanceof EpsilonNode)
+        {
+            HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
+            results.add(new EpsilonNode());
+
+            return results;
+        }
+
+        return null;
     }
 }
