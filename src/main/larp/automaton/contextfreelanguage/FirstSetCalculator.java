@@ -48,10 +48,7 @@ public class FirstSetCalculator
         ContextFreeGrammarSyntaxNode concatenationNode = grammar.getProduction(ruleIndex).getChildNodes().get(1);
         if (concatenationNode.getChildNodes().get(0) instanceof TerminalNode)
         {
-            HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
-            results.add((TerminalNode)concatenationNode.getChildNodes().get(0));
-
-            return results;
+            return this.getFirstFromTerminalNode(concatenationNode.getChildNodes().get(0));
         }
         else if (concatenationNode.getChildNodes().get(0) instanceof NonTerminalNode)
         {
@@ -98,12 +95,25 @@ public class FirstSetCalculator
         }
         else if (concatenationNode.getChildNodes().get(0) instanceof EpsilonNode)
         {
-            HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
-            results.add(new EpsilonNode());
-
-            return results;
+            return this.getFirstFromEpsilon();
         }
 
         return null;
+    }
+
+    private HashSet<ContextFreeGrammarSyntaxNode> getFirstFromTerminalNode(ContextFreeGrammarSyntaxNode terminalNode)
+    {
+        HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
+        results.add(terminalNode);
+
+        return results;
+    }
+
+    private HashSet<ContextFreeGrammarSyntaxNode> getFirstFromEpsilon()
+    {
+        HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
+        results.add(new EpsilonNode());
+
+        return results;
     }
 }
