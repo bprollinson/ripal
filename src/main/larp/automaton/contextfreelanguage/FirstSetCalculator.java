@@ -69,21 +69,27 @@ public class FirstSetCalculator
                     break;
                 }
 
-                for (Integer childRuleIndex: nonTerminalRules.get(concatenationNode.getChildNodes().get(index)))
+                HashSet<Integer> childRuleIndices = this.nonTerminalRules.get(concatenationNode.getChildNodes().get(index));
+                if (childRuleIndices != null)
                 {
-                    if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))
+                    for (Integer childRuleIndex: childRuleIndices)
                     {
-                        HashSet<ContextFreeGrammarSyntaxNode> childSet = this.getFirstRecursive(childRuleIndex, rulesUsed);
-                        epsilonFound = childSet.contains(new EpsilonNode());
-                        childSet.remove(new EpsilonNode());
-                        results.addAll(childSet);
+                        if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))
+                        {
+                            HashSet<ContextFreeGrammarSyntaxNode> childSet = this.getFirstRecursive(childRuleIndex, rulesUsed);
+                            epsilonFound = childSet.contains(new EpsilonNode());
+                            childSet.remove(new EpsilonNode());
+                            results.addAll(childSet);
+                        }
                     }
+                } else {
+                    epsilonFound = false;
                 }
 
                 index++;
             }
 
-            if (results.size() == 0)
+            if (results.size() == 0 && epsilonFound)
             {
                 results.add(new EpsilonNode());
             }
