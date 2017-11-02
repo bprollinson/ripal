@@ -52,46 +52,7 @@ public class FirstSetCalculator
         }
         else if (concatenationNode.getChildNodes().get(0) instanceof NonTerminalNode)
         {
-            HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
-
-            int index = 0;
-            boolean epsilonFound = true;
-            while (index < concatenationNode.getChildNodes().size() && epsilonFound)
-            {
-                epsilonFound = false;
-
-                if (concatenationNode.getChildNodes().get(index) instanceof TerminalNode)
-                {
-                    results.add(concatenationNode.getChildNodes().get(index));
-                    break;
-                }
-
-                HashSet<Integer> childRuleIndices = this.nonTerminalRules.get(concatenationNode.getChildNodes().get(index));
-                if (childRuleIndices != null)
-                {
-                    for (Integer childRuleIndex: childRuleIndices)
-                    {
-                        if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))
-                        {
-                            HashSet<ContextFreeGrammarSyntaxNode> childSet = this.getFirstRecursive(childRuleIndex, rulesUsed);
-                            epsilonFound = childSet.contains(new EpsilonNode());
-                            childSet.remove(new EpsilonNode());
-                            results.addAll(childSet);
-                        }
-                    }
-                } else {
-                    epsilonFound = false;
-                }
-
-                index++;
-            }
-
-            if (results.size() == 0 && epsilonFound)
-            {
-                results.add(new EpsilonNode());
-            }
-
-            return results;
+            return this.getFirstFromNonterminalNode(concatenationNode, rulesUsed);
         }
         else if (concatenationNode.getChildNodes().get(0) instanceof EpsilonNode)
         {
@@ -105,6 +66,50 @@ public class FirstSetCalculator
     {
         HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
         results.add(terminalNode);
+
+        return results;
+    }
+
+    private HashSet<ContextFreeGrammarSyntaxNode> getFirstFromNonterminalNode(ContextFreeGrammarSyntaxNode concatenationNode, HashSet<Integer> rulesUsed)
+    {
+        HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
+
+        int index = 0;
+        boolean epsilonFound = true;
+        while (index < concatenationNode.getChildNodes().size() && epsilonFound)
+        {
+            epsilonFound = false;
+
+            if (concatenationNode.getChildNodes().get(index) instanceof TerminalNode)
+            {
+                results.add(concatenationNode.getChildNodes().get(index));
+                break;
+            }
+
+            HashSet<Integer> childRuleIndices = this.nonTerminalRules.get(concatenationNode.getChildNodes().get(index));
+            if (childRuleIndices != null)
+            {
+                for (Integer childRuleIndex: childRuleIndices)
+                {
+                    if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))
+                    {
+                        HashSet<ContextFreeGrammarSyntaxNode> childSet = this.getFirstRecursive(childRuleIndex, rulesUsed);
+                        epsilonFound = childSet.contains(new EpsilonNode());
+                        childSet.remove(new EpsilonNode());
+                        results.addAll(childSet);
+                    }
+                }
+            } else {
+                epsilonFound = false;
+            }
+
+            index++;
+        }
+
+        if (results.size() == 0 && epsilonFound)
+        {
+            results.add(new EpsilonNode());
+        }
 
         return results;
     }
