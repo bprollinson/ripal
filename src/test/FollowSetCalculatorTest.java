@@ -30,4 +30,30 @@ public class FollowSetCalculatorTest
         expectedFollows.add(new EndOfStringNode());
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("S")));
     }
+
+    @Test
+    public void testGetFollowReturnsTerminalNodeAndEndOfStringSymbolForStartTerminalFollowedByTerminal()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new NonTerminalNode("S"));
+        concatenationNode.addChild(new TerminalNode("b"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        FollowSetCalculator calculator = new FollowSetCalculator(grammar);
+        HashSet<ContextFreeGrammarSyntaxNode> expectedFollows = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedFollows.add(new EndOfStringNode());
+        expectedFollows.add(new TerminalNode("b"));
+        assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("S")));
+    }
 }
