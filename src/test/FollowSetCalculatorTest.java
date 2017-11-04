@@ -91,7 +91,7 @@ public class FollowSetCalculatorTest
     }
 
     @Test
-    public void testGetFollowReturnsEndOfStringSymbolForTerminalProducedFromStartNonTerminal()
+    public void testGetFollowReturnsEndOfStringSymbolForNonTerminalProducedFromStartNonTerminal()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         ProductionNode productionNode = new ProductionNode();
