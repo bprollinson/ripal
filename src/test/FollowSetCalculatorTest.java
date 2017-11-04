@@ -237,6 +237,7 @@ public class FollowSetCalculatorTest
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("C")));
     }
 
+    @Test
     public void testGetFollowReturnsEndOfStringSymbolWhenNextNonTerminalGoesToEpsilon()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
@@ -268,6 +269,7 @@ public class FollowSetCalculatorTest
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
 
+    @Test
     public void testGetFollowReturnsEndOfStringSymbolWhenNextNonTerminalSometimesGoesToEpsilon()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
@@ -303,6 +305,47 @@ public class FollowSetCalculatorTest
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
         HashSet<ContextFreeGrammarSyntaxNode> expectedFollows = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedFollows.add(new TerminalNode("b"));
+        expectedFollows.add(new EndOfStringNode());
+        assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
+    }
+
+    @Test
+    public void testGetFollowReturnsSubsequentTerminalNodeWhenNextNonTerminalNodeGoesToEpsilon()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new NonTerminalNode("A"));
+        concatenationNode.addChild(new NonTerminalNode("B"));
+        concatenationNode.addChild(new TerminalNode("c"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("A"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("B"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new EpsilonNode());
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("C"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("c"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        FollowSetCalculator calculator = new FollowSetCalculator(grammar);
+        HashSet<ContextFreeGrammarSyntaxNode> expectedFollows = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedFollows.add(new TerminalNode("c"));
         expectedFollows.add(new EndOfStringNode());
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
