@@ -84,6 +84,31 @@ public class FollowSetCalculatorTest
     }
 
     @Test
+    public void testGetFollowReturnsFirstCharacterFromMultipleCharacterTerminalToken()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new NonTerminalNode("S"));
+        concatenationNode.addChild(new TerminalNode("aa"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("b"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        FollowSetCalculator calculator = new FollowSetCalculator(grammar);
+        HashSet<ContextFreeGrammarSyntaxNode> expectedFollows = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedFollows.add(new TerminalNode("a"));
+        assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("S")));
+    }
+
+    @Test
     public void testGetFollowReturnsFollowFromMultipleProductions()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
