@@ -172,7 +172,7 @@ public class FollowSetCalculatorTest
     }
 
     @Test
-    public void testGetFollowReturnsParentFollowForNonTerminalProducedFromNonStartNonTerminal()
+    public void testGetFollowReturnsAncestorFollowForNonTerminalProducedFromNonStartNonTerminal()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         ProductionNode productionNode = new ProductionNode();
