@@ -22,6 +22,7 @@ public class FollowSetCalculator
         this.follows = new HashMap<NonTerminalNode, HashSet<ContextFreeGrammarSyntaxNode>>();
 
         this.add(grammar.getStartSymbol(), new EndOfStringNode());
+
         Vector<ContextFreeGrammarSyntaxNode> productions = grammar.getProductions();
         for (int i = 0; i < productions.size(); i++)
         {
@@ -38,6 +39,20 @@ public class FollowSetCalculator
                 }
 
                 previousNode = node;
+            }
+        }
+
+        for (int i = 0; i < productions.size(); i++)
+        {
+            ContextFreeGrammarSyntaxNode production = productions.get(i);
+            if (production.getChildNodes().get(0).equals(grammar.getStartSymbol()))
+            {
+                ContextFreeGrammarSyntaxNode rightHandSide = production.getChildNodes().get(1);
+                ContextFreeGrammarSyntaxNode lastNode = rightHandSide.getChildNodes().get(rightHandSide.getChildNodes().size() - 1);
+                if (lastNode instanceof NonTerminalNode)
+                {
+                    this.add((NonTerminalNode)lastNode, new EndOfStringNode());
+                }
             }
         }
     }
