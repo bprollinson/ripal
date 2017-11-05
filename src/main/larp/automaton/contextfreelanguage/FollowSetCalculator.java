@@ -34,7 +34,7 @@ public class FollowSetCalculator
 
                 if (previousNode instanceof NonTerminalNode && node instanceof TerminalNode)
                 {
-                    this.add((NonTerminalNode)previousNode, node);
+                    this.add((NonTerminalNode)previousNode, new TerminalNode(((TerminalNode)node).getValue().substring(0, 1)));
                 }
 
                 previousNode = node;

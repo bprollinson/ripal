@@ -104,6 +104,7 @@ public class FollowSetCalculatorTest
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
         HashSet<ContextFreeGrammarSyntaxNode> expectedFollows = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedFollows.add(new EndOfStringNode());
         expectedFollows.add(new TerminalNode("a"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("S")));
     }
