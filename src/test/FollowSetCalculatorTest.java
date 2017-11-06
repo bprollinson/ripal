@@ -298,6 +298,45 @@ public class FollowSetCalculatorTest
     }
 
     @Test
+    public void testGetFollowChainsParentFollowInArbitraryOrder()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new NonTerminalNode("B"));
+        concatenationNode.addChild(new TerminalNode("a"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("D"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("d"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("C"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new NonTerminalNode("D"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("B"));
+        concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new NonTerminalNode("C"));
+        productionNode.addChild(concatenationNode);
+        grammar.addProduction(productionNode);
+
+        FollowSetCalculator calculator = new FollowSetCalculator(grammar);
+        HashSet<ContextFreeGrammarSyntaxNode> expectedFollows = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedFollows.add(new TerminalNode("a"));
+        assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("D")));
+    }
+
+    @Test
     public void testGetFollowReturnsEndOfStringSymbolWhenNextNonTerminalGoesToEpsilon()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
