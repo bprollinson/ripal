@@ -42,21 +42,40 @@ public class FollowSetCalculator
             }
         }
 
-        for (int i = 0; i < productions.size(); i++)
-        {
-            ContextFreeGrammarSyntaxNode production = productions.get(i);
-            NonTerminalNode leftHandSide = (NonTerminalNode)production.getChildNodes().get(0);
-            HashSet<ContextFreeGrammarSyntaxNode> leftHandFollow = this.follows.get(leftHandSide);
+        boolean done = false;
 
-            if (leftHandFollow != null)
+        while (!done)
+        {
+            done = true;
+            for (int i = 0; i < productions.size(); i++)
             {
-                ContextFreeGrammarSyntaxNode rightHandSide = production.getChildNodes().get(1);
-                ContextFreeGrammarSyntaxNode lastNode = rightHandSide.getChildNodes().get(rightHandSide.getChildNodes().size() - 1);
-                if (lastNode instanceof NonTerminalNode)
+                ContextFreeGrammarSyntaxNode production = productions.get(i);
+                NonTerminalNode leftHandSide = (NonTerminalNode)production.getChildNodes().get(0);
+                HashSet<ContextFreeGrammarSyntaxNode> leftHandFollow = this.follows.get(leftHandSide);
+
+                if (leftHandFollow != null)
                 {
-                    for (ContextFreeGrammarSyntaxNode parentFollow : leftHandFollow)
+                    ContextFreeGrammarSyntaxNode rightHandSide = production.getChildNodes().get(1);
+                    ContextFreeGrammarSyntaxNode lastNode = rightHandSide.getChildNodes().get(rightHandSide.getChildNodes().size() - 1);
+                    if (lastNode instanceof NonTerminalNode)
                     {
-                        this.add((NonTerminalNode)lastNode, parentFollow);
+                        for (ContextFreeGrammarSyntaxNode parentFollow : leftHandFollow)
+                        {
+                            int sizeBefore = 0;
+                            HashSet<ContextFreeGrammarSyntaxNode> currentFollows = this.follows.get((NonTerminalNode)lastNode);
+                            if (currentFollows != null)
+                            {
+                                 sizeBefore = currentFollows.size();
+                            }
+
+                            this.add((NonTerminalNode)lastNode, parentFollow);
+                            int sizeAfter = this.follows.get((NonTerminalNode)lastNode).size();
+
+                            if (sizeBefore != sizeAfter)
+                            {
+                                done = false;
+                            }
+                        }
                     }
                 }
             }
