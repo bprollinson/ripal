@@ -45,13 +45,19 @@ public class FollowSetCalculator
         for (int i = 0; i < productions.size(); i++)
         {
             ContextFreeGrammarSyntaxNode production = productions.get(i);
-            if (production.getChildNodes().get(0).equals(grammar.getStartSymbol()))
+            NonTerminalNode leftHandSide = (NonTerminalNode)production.getChildNodes().get(0);
+            HashSet<ContextFreeGrammarSyntaxNode> leftHandFollow = this.follows.get(leftHandSide);
+
+            if (leftHandFollow != null)
             {
                 ContextFreeGrammarSyntaxNode rightHandSide = production.getChildNodes().get(1);
                 ContextFreeGrammarSyntaxNode lastNode = rightHandSide.getChildNodes().get(rightHandSide.getChildNodes().size() - 1);
                 if (lastNode instanceof NonTerminalNode)
                 {
-                    this.add((NonTerminalNode)lastNode, new EndOfStringNode());
+                    for (ContextFreeGrammarSyntaxNode parentFollow : leftHandFollow)
+                    {
+                        this.add((NonTerminalNode)lastNode, parentFollow);
+                    }
                 }
             }
         }
