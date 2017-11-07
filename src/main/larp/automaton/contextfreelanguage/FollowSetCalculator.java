@@ -3,6 +3,7 @@ package larp.automaton.contextfreelanguage;
 import larp.grammar.contextfreelanguage.ConcatenationNode;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.grammar.contextfreelanguage.EndOfStringNode;
+import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
@@ -40,7 +41,18 @@ public class FollowSetCalculator
 
     private void addFollowNodes()
     {
+        HashSet<NonTerminalNode> nullableNonTerminals = new HashSet<NonTerminalNode>();
         Vector<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
+        for (int i = 0; i < productions.size(); i++)
+        {
+            ContextFreeGrammarSyntaxNode production = productions.get(i);
+            ContextFreeGrammarSyntaxNode rightHandSide = production.getChildNodes().get(1);
+            if (rightHandSide.getChildNodes().size() == 1 && rightHandSide.getChildNodes().get(0) instanceof EpsilonNode)
+            {
+                nullableNonTerminals.add((NonTerminalNode)production.getChildNodes().get(0));
+            }
+        }
+
         for (int i = 0; i < productions.size(); i++)
         {
             ContextFreeGrammarSyntaxNode production = productions.get(i);
