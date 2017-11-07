@@ -45,25 +45,28 @@ public class FollowSetCalculator
         {
             ContextFreeGrammarSyntaxNode production = productions.get(i);
             ContextFreeGrammarSyntaxNode rightHandSide = production.getChildNodes().get(1);
-            ContextFreeGrammarSyntaxNode previousNode = null;
-            for (int j = 0; j < rightHandSide.getChildNodes().size(); j++)
-            {
-                ContextFreeGrammarSyntaxNode node = rightHandSide.getChildNodes().get(j);
 
-                if (previousNode instanceof NonTerminalNode && node instanceof TerminalNode)
+            for (int j = 0; j < rightHandSide.getChildNodes().size() - 1; j++)
+            {
+                ContextFreeGrammarSyntaxNode previousNode = rightHandSide.getChildNodes().get(j);
+
+                for (int k = j + 1; k < j + 2; k++)
                 {
-                    this.add((NonTerminalNode)previousNode, new TerminalNode(((TerminalNode)node).getValue().substring(0, 1)));
-                }
-                if (previousNode instanceof NonTerminalNode && node instanceof NonTerminalNode)
-                {
-                    HashSet<ContextFreeGrammarSyntaxNode> firstNodes = this.firstSetCalculator.getFirst((NonTerminalNode)node);
-                    for (ContextFreeGrammarSyntaxNode firstNode: firstNodes)
+                    ContextFreeGrammarSyntaxNode node = rightHandSide.getChildNodes().get(k);
+
+                    if (previousNode instanceof NonTerminalNode && node instanceof TerminalNode)
                     {
-                        this.add((NonTerminalNode)previousNode, firstNode);
+                        this.add((NonTerminalNode)previousNode, new TerminalNode(((TerminalNode)node).getValue().substring(0, 1)));
+                    }
+                    if (previousNode instanceof NonTerminalNode && node instanceof NonTerminalNode)
+                    {
+                        HashSet<ContextFreeGrammarSyntaxNode> firstNodes = this.firstSetCalculator.getFirst((NonTerminalNode)node);
+                        for (ContextFreeGrammarSyntaxNode firstNode: firstNodes)
+                        {
+                            this.add((NonTerminalNode)previousNode, firstNode);
+                        }
                     }
                 }
-
-                previousNode = node;
             }
         }
     }
