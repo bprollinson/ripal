@@ -62,8 +62,12 @@ public class FollowSetCalculator
             {
                 ContextFreeGrammarSyntaxNode previousNode = rightHandSide.getChildNodes().get(j);
 
-                for (int k = j + 1; k < j + 2; k++)
+                boolean done = false;
+                int k = j + 1;
+                while (k < rightHandSide.getChildNodes().size() && !done)
                 {
+                    done = true;
+
                     ContextFreeGrammarSyntaxNode node = rightHandSide.getChildNodes().get(k);
 
                     if (previousNode instanceof NonTerminalNode && node instanceof TerminalNode)
@@ -73,11 +77,18 @@ public class FollowSetCalculator
                     if (previousNode instanceof NonTerminalNode && node instanceof NonTerminalNode)
                     {
                         HashSet<ContextFreeGrammarSyntaxNode> firstNodes = this.firstSetCalculator.getFirst((NonTerminalNode)node);
+                        if (firstNodes.contains(new EpsilonNode()))
+                        {
+                            done = false;
+                            firstNodes.remove(new EpsilonNode());
+                        }
                         for (ContextFreeGrammarSyntaxNode firstNode: firstNodes)
                         {
                             this.add((NonTerminalNode)previousNode, firstNode);
                         }
                     }
+
+                    k++;
                 }
             }
         }
