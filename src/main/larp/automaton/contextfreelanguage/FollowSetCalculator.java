@@ -21,9 +21,24 @@ public class FollowSetCalculator
         this.grammar = grammar;
         this.follows = new HashMap<NonTerminalNode, HashSet<ContextFreeGrammarSyntaxNode>>();
 
-        this.add(grammar.getStartSymbol(), new EndOfStringNode());
+        this.addStartSymbolDefaultNode();
+        this.addFollowNodes();
+        this.propagateFollowNodes();
+    }
 
-        Vector<ContextFreeGrammarSyntaxNode> productions = grammar.getProductions();
+    public HashSet<ContextFreeGrammarSyntaxNode> getFollow(NonTerminalNode nonTerminal)
+    {
+        return this.follows.get(nonTerminal);
+    }
+
+    private void addStartSymbolDefaultNode()
+    {
+        this.add(this.grammar.getStartSymbol(), new EndOfStringNode());
+    }
+
+    private void addFollowNodes()
+    {
+        Vector<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
         for (int i = 0; i < productions.size(); i++)
         {
             ContextFreeGrammarSyntaxNode production = productions.get(i);
@@ -41,7 +56,11 @@ public class FollowSetCalculator
                 previousNode = node;
             }
         }
+    }
 
+    private void propagateFollowNodes()
+    {
+        Vector<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
         boolean done = false;
 
         while (!done)
@@ -80,11 +99,6 @@ public class FollowSetCalculator
                 }
             }
         }
-    }
-
-    public HashSet<ContextFreeGrammarSyntaxNode> getFollow(NonTerminalNode nonTerminal)
-    {
-        return follows.get(nonTerminal);
     }
 
     private void add(NonTerminalNode nonTerminal, ContextFreeGrammarSyntaxNode first)
