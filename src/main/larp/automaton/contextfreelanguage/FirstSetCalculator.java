@@ -41,6 +41,21 @@ public class FirstSetCalculator
         return this.getFirstRecursive(ruleIndex, rulesUsed);
     }
 
+    public HashSet<ContextFreeGrammarSyntaxNode> getFirst(NonTerminalNode node)
+    {
+        HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
+        HashSet<Integer> existingSet = this.nonTerminalRules.get(node);
+        if (existingSet != null)
+        {
+            for (int index: existingSet)
+            {
+                results.addAll(this.getFirst(index));
+            }
+        }
+
+        return results;
+    }
+
     private HashSet<ContextFreeGrammarSyntaxNode> getFirstRecursive(int ruleIndex, HashSet<Integer> rulesUsed)
     {
         rulesUsed.add(ruleIndex);

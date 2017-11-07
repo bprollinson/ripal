@@ -15,11 +15,13 @@ public class FollowSetCalculator
 {
     private ContextFreeGrammar grammar;
     private HashMap<NonTerminalNode, HashSet<ContextFreeGrammarSyntaxNode>> follows;
+    private FirstSetCalculator firstSetCalculator;
 
     public FollowSetCalculator(ContextFreeGrammar grammar)
     {
         this.grammar = grammar;
         this.follows = new HashMap<NonTerminalNode, HashSet<ContextFreeGrammarSyntaxNode>>();
+        this.firstSetCalculator = new FirstSetCalculator(this.grammar);
 
         this.addStartSymbolDefaultNode();
         this.addFollowNodes();
@@ -51,6 +53,14 @@ public class FollowSetCalculator
                 if (previousNode instanceof NonTerminalNode && node instanceof TerminalNode)
                 {
                     this.add((NonTerminalNode)previousNode, new TerminalNode(((TerminalNode)node).getValue().substring(0, 1)));
+                }
+                if (previousNode instanceof NonTerminalNode && node instanceof NonTerminalNode)
+                {
+                    HashSet<ContextFreeGrammarSyntaxNode> firstNodes = this.firstSetCalculator.getFirst((NonTerminalNode)node);
+                    for (ContextFreeGrammarSyntaxNode firstNode: firstNodes)
+                    {
+                        this.add((NonTerminalNode)previousNode, firstNode);
+                    }
                 }
 
                 previousNode = node;
