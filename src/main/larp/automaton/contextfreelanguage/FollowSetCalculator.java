@@ -111,26 +111,43 @@ public class FollowSetCalculator
                 if (leftHandFollow != null)
                 {
                     ContextFreeGrammarSyntaxNode rightHandSide = production.getChildNodes().get(1);
-                    ContextFreeGrammarSyntaxNode lastNode = rightHandSide.getChildNodes().get(rightHandSide.getChildNodes().size() - 1);
-                    if (lastNode instanceof NonTerminalNode)
+
+                    boolean innerDone = false;
+                    int j = rightHandSide.getChildNodes().size() - 1;
+
+                    while (j >= 0 && !innerDone)
                     {
-                        for (ContextFreeGrammarSyntaxNode parentFollow : leftHandFollow)
+                        innerDone = true;
+
+                        ContextFreeGrammarSyntaxNode lastNode = rightHandSide.getChildNodes().get(j);
+                        if (lastNode instanceof NonTerminalNode)
                         {
-                            int sizeBefore = 0;
-                            HashSet<ContextFreeGrammarSyntaxNode> currentFollows = this.follows.get((NonTerminalNode)lastNode);
-                            if (currentFollows != null)
+                            for (ContextFreeGrammarSyntaxNode parentFollow : leftHandFollow)
                             {
-                                 sizeBefore = currentFollows.size();
+                                int sizeBefore = 0;
+                                HashSet<ContextFreeGrammarSyntaxNode> currentFollows = this.follows.get((NonTerminalNode)lastNode);
+                                if (currentFollows != null)
+                                {
+                                     sizeBefore = currentFollows.size();
+                                }
+
+                                this.add((NonTerminalNode)lastNode, parentFollow);
+                                int sizeAfter = this.follows.get((NonTerminalNode)lastNode).size();
+
+                                if (sizeBefore != sizeAfter)
+                                {
+                                    done = false;
+                                }
                             }
 
-                            this.add((NonTerminalNode)lastNode, parentFollow);
-                            int sizeAfter = this.follows.get((NonTerminalNode)lastNode).size();
-
-                            if (sizeBefore != sizeAfter)
+                            HashSet<ContextFreeGrammarSyntaxNode> firsts = this.firstSetCalculator.getFirst((NonTerminalNode)lastNode);
+                            if (firsts.contains(new EpsilonNode()))
                             {
-                                done = false;
+                                innerDone = false;
                             }
                         }
+
+                        j--;
                     }
                 }
             }
