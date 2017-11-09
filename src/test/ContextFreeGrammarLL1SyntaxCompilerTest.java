@@ -3,9 +3,7 @@ import org.junit.Test;
 
 import larp.automaton.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.automaton.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
-import larp.grammar.contextfreelanguage.ConcatenationNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
-import larp.grammar.contextfreelanguage.ProductionNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1ParseTable;
@@ -18,12 +16,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
@@ -37,19 +30,8 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new NonTerminalNode("A"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("A"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
@@ -64,27 +46,9 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new NonTerminalNode("A"));
-        concatenationNode.addChild(new NonTerminalNode("B"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("A"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("B"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("b"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
 
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
@@ -100,19 +64,8 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("b"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
@@ -127,26 +80,9 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new NonTerminalNode("A"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("A"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("A"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("b"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("b"));
 
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
@@ -163,34 +99,10 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new NonTerminalNode("A"));
-        concatenationNode.addChild(new NonTerminalNode("C"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("A"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new NonTerminalNode("B"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("B"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("b"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("C"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("c"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("C"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
+        grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
 
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
@@ -207,19 +119,8 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("s"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("s"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("s"));
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("s"));
 
         compiler.compile(grammar);
     }
@@ -230,33 +131,10 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new NonTerminalNode("A"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new NonTerminalNode("B"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("A"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("B"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("a"));
 
         compiler.compile(grammar);
     }
@@ -267,26 +145,9 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new NonTerminalNode("A"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("A"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
         compiler.compile(grammar);
     }
@@ -297,26 +158,9 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new NonTerminalNode("A"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("A"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new NonTerminalNode("S"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("A"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("S"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
         compiler.compile(grammar);
     }
@@ -327,20 +171,8 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        concatenationNode.addChild(new NonTerminalNode("S"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("b"));
-        productionNode.addChild(concatenationNode);
-        grammar.addProduction(productionNode);
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("S"));
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);

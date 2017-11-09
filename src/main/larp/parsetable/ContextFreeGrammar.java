@@ -1,5 +1,7 @@
 package larp.parsetable;
 
+import larp.grammar.contextfreelanguage.ConcatenationNode;
+import larp.grammar.contextfreelanguage.ProductionNode;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 
@@ -17,6 +19,21 @@ public class ContextFreeGrammar
     public void addProduction(ContextFreeGrammarSyntaxNode productionNode)
     {
         this.productions.add(productionNode);
+    }
+
+    public void addProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
+    {
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(nonTerminalNode);
+
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        for (ContextFreeGrammarSyntaxNode rightHandNode: rightHandNodes)
+        {
+            concatenationNode.addChild(rightHandNode);
+        }
+        productionNode.addChild(concatenationNode);
+
+        this.addProduction(productionNode);
     }
 
     public ContextFreeGrammarSyntaxNode getProduction(int index)
