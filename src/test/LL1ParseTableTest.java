@@ -2,10 +2,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.ConcatenationNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
-import larp.grammar.contextfreelanguage.ProductionNode;
 import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1ParseTable;
 
@@ -15,12 +13,8 @@ public class LL1ParseTableTest
     public void testAcceptsReturnsTrueForCorrectCharacterInSingleCharacterCFG()
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        contextFreeGrammar.addProduction(productionNode);
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
@@ -28,15 +22,11 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testAcceptsReturnsTrueForIncorrectCharacterInSingleCharacterCFG()
+    public void testAcceptsReturnsFalseForIncorrectCharacterInSingleCharacterCFG()
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        contextFreeGrammar.addProduction(productionNode);
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
@@ -47,12 +37,8 @@ public class LL1ParseTableTest
     public void testAcceptsReturnsTrueForMultiCharacterCFG()
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("ab"));
-        productionNode.addChild(concatenationNode);
-        contextFreeGrammar.addProduction(productionNode);
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
+
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
@@ -63,13 +49,8 @@ public class LL1ParseTableTest
     public void testAcceptsReturnsTrueForMultiCharacterCFGUsingMultipleTerminalNodes()
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        concatenationNode.addChild(new TerminalNode("b"));
-        productionNode.addChild(concatenationNode);
-        contextFreeGrammar.addProduction(productionNode);
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
+
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
@@ -80,12 +61,8 @@ public class LL1ParseTableTest
     public void testAcceptsReturnsFalseForCharacterMismatchInMultiCharacterCFG()
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("ab"));
-        productionNode.addChild(concatenationNode);
-        contextFreeGrammar.addProduction(productionNode);
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
+
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
@@ -96,12 +73,8 @@ public class LL1ParseTableTest
     public void testAcceptsReturnsFalseForUnmatchedInputCharacter()
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-        contextFreeGrammar.addProduction(productionNode);
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
@@ -112,12 +85,8 @@ public class LL1ParseTableTest
     public void testAcceptsReturnsFalseForUnmatchedCFGCharacter()
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("ab"));
-        productionNode.addChild(concatenationNode);
-        contextFreeGrammar.addProduction(productionNode);
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
+
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
@@ -128,27 +97,9 @@ public class LL1ParseTableTest
     public void testAcceptsReturnsTrueForTerminalAndNonterminalProductionChainDependingOnCollectionPrefixing()
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new NonTerminalNode("A"));
-        concatenationNode.addChild(new NonTerminalNode("C"));
-        productionNode.addChild(concatenationNode);
-        contextFreeGrammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("A"));
-        concatenationNode = new ConcatenationNode();
-        productionNode.addChild(concatenationNode);
-        concatenationNode.addChild(new TerminalNode("ab"));
-        contextFreeGrammar.addProduction(productionNode);
-
-        productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("C"));
-        concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("c"));
-        productionNode.addChild(concatenationNode);
-        contextFreeGrammar.addProduction(productionNode);
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("C"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("ab"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
 
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
@@ -171,18 +122,14 @@ public class LL1ParseTableTest
     public void testEqualsReturnsTrueForNonEmptyCFGAndTableEntries()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        productionNode.addChild(new TerminalNode("a"));
-        cfg.addProduction(productionNode);
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
         LL1ParseTable parseTable = new LL1ParseTable(cfg);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         ContextFreeGrammar otherCfg = new ContextFreeGrammar();
-        ProductionNode otherProductionNode = new ProductionNode();
-        otherProductionNode.addChild(new NonTerminalNode("S"));
-        otherProductionNode.addChild(new TerminalNode("a"));
-        otherCfg.addProduction(otherProductionNode);
+        otherCfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
         LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
@@ -193,18 +140,14 @@ public class LL1ParseTableTest
     public void testEqualsReturnsFalseForDifferentCFGs()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        productionNode.addChild(new TerminalNode("a"));
-        cfg.addProduction(productionNode);
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
         LL1ParseTable parseTable = new LL1ParseTable(cfg);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         ContextFreeGrammar otherCfg = new ContextFreeGrammar();
-        ProductionNode otherProductionNode = new ProductionNode();
-        otherProductionNode.addChild(new NonTerminalNode("S"));
-        otherProductionNode.addChild(new TerminalNode("b"));
-        otherCfg.addProduction(otherProductionNode);
+        otherCfg.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
+
         LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
@@ -215,18 +158,14 @@ public class LL1ParseTableTest
     public void testEqualsReturnsFalseForDifferentTableEntries()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        productionNode.addChild(new TerminalNode("a"));
-        cfg.addProduction(productionNode);
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
         LL1ParseTable parseTable = new LL1ParseTable(cfg);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         ContextFreeGrammar otherCfg = new ContextFreeGrammar();
-        ProductionNode otherProductionNode = new ProductionNode();
-        otherProductionNode.addChild(new NonTerminalNode("S"));
-        otherProductionNode.addChild(new TerminalNode("a"));
-        otherCfg.addProduction(otherProductionNode);
+        otherCfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
         LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
 
@@ -237,19 +176,15 @@ public class LL1ParseTableTest
     public void testEqualsReturnsTrueForSameTableEntriesInDifferentOrder()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        productionNode.addChild(new TerminalNode("a"));
-        cfg.addProduction(productionNode);
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
         LL1ParseTable parseTable = new LL1ParseTable(cfg);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
 
         ContextFreeGrammar otherCfg = new ContextFreeGrammar();
-        ProductionNode otherProductionNode = new ProductionNode();
-        otherProductionNode.addChild(new NonTerminalNode("S"));
-        otherProductionNode.addChild(new TerminalNode("a"));
-        otherCfg.addProduction(otherProductionNode);
+        otherCfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
         LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
