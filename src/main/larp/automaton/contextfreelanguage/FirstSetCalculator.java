@@ -7,7 +7,6 @@ import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
 import larp.util.SetMap;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
 
