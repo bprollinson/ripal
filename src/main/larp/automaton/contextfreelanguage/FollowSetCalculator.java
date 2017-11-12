@@ -7,21 +7,21 @@ import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
+import larp.util.SetMap;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
 
 public class FollowSetCalculator
 {
     private ContextFreeGrammar grammar;
-    private HashMap<NonTerminalNode, HashSet<ContextFreeGrammarSyntaxNode>> follows;
+    private SetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode> follows;
     private FirstSetCalculator firstSetCalculator;
 
     public FollowSetCalculator(ContextFreeGrammar grammar)
     {
         this.grammar = grammar;
-        this.follows = new HashMap<NonTerminalNode, HashSet<ContextFreeGrammarSyntaxNode>>();
+        this.follows = new SetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode>();
         this.firstSetCalculator = new FirstSetCalculator(this.grammar);
 
         this.addStartSymbolDefaultNode();
@@ -36,7 +36,7 @@ public class FollowSetCalculator
 
     private void addStartSymbolDefaultNode()
     {
-        this.add(this.grammar.getStartSymbol(), new EndOfStringNode());
+        this.follows.put(this.grammar.getStartSymbol(), new EndOfStringNode());
     }
 
     private void addFollowNodes()
@@ -72,7 +72,7 @@ public class FollowSetCalculator
 
                     if (previousNode instanceof NonTerminalNode && node instanceof TerminalNode)
                     {
-                        this.add((NonTerminalNode)previousNode, new TerminalNode(((TerminalNode)node).getValue().substring(0, 1)));
+                        this.follows.put(previousNode, new TerminalNode(((TerminalNode)node).getValue().substring(0, 1)));
                     }
                     if (previousNode instanceof NonTerminalNode && node instanceof NonTerminalNode)
                     {
@@ -84,7 +84,7 @@ public class FollowSetCalculator
                         }
                         for (ContextFreeGrammarSyntaxNode firstNode: firstNodes)
                         {
-                            this.add((NonTerminalNode)previousNode, firstNode);
+                            this.follows.put(previousNode, firstNode);
                         }
                     }
 
@@ -125,14 +125,14 @@ public class FollowSetCalculator
                             for (ContextFreeGrammarSyntaxNode parentFollow : leftHandFollow)
                             {
                                 int sizeBefore = 0;
-                                HashSet<ContextFreeGrammarSyntaxNode> currentFollows = this.follows.get((NonTerminalNode)lastNode);
+                                HashSet<ContextFreeGrammarSyntaxNode> currentFollows = this.follows.get(lastNode);
                                 if (currentFollows != null)
                                 {
                                      sizeBefore = currentFollows.size();
                                 }
 
-                                this.add((NonTerminalNode)lastNode, parentFollow);
-                                int sizeAfter = this.follows.get((NonTerminalNode)lastNode).size();
+                                this.follows.put(lastNode, parentFollow);
+                                int sizeAfter = this.follows.get(lastNode).size();
 
                                 if (sizeBefore != sizeAfter)
                                 {
@@ -152,17 +152,5 @@ public class FollowSetCalculator
                 }
             }
         }
-    }
-
-    private void add(NonTerminalNode nonTerminal, ContextFreeGrammarSyntaxNode first)
-    {
-        HashSet<ContextFreeGrammarSyntaxNode> firstSet = this.follows.get(nonTerminal);
-        if (firstSet == null)
-        {
-            firstSet = new HashSet<ContextFreeGrammarSyntaxNode>();
-            this.follows.put(nonTerminal, firstSet);
-        }
-
-        firstSet.add(first);
     }
 }
