@@ -5,6 +5,7 @@ import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
+import larp.util.SetMap;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,24 +14,18 @@ import java.util.Vector;
 public class FirstSetCalculator
 {
     private ContextFreeGrammar grammar;
-    private HashMap<NonTerminalNode, HashSet<Integer>> nonTerminalRules;
+    private SetMap<ContextFreeGrammarSyntaxNode, Integer> nonTerminalRules;
 
     public FirstSetCalculator(ContextFreeGrammar grammar)
     {
         this.grammar = grammar;
-        this.nonTerminalRules = new HashMap<NonTerminalNode, HashSet<Integer>>();
+        this.nonTerminalRules = new SetMap<ContextFreeGrammarSyntaxNode, Integer>();
 
         Vector<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
         for (int i = 0; i < productions.size(); i++)
         {
             ContextFreeGrammarSyntaxNode productionNode = productions.get(i);
-            HashSet<Integer> existingSet = this.nonTerminalRules.get(productionNode.getChildNodes().get(0));
-            if (existingSet == null)
-            {
-                existingSet = new HashSet<Integer>();
-            }
-            existingSet.add(i);
-            this.nonTerminalRules.put((NonTerminalNode)productionNode.getChildNodes().get(0), existingSet);
+            this.nonTerminalRules.put(productionNode.getChildNodes().get(0), i);
         }
     }
 
