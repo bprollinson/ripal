@@ -31,6 +31,12 @@ public class ContextFreeGrammarSyntaxTokenizer
             }
             else if (currentCharacter == '"' && !inTerminal)
             {
+                if (buffer.length() > 0)
+                {
+                    tokens.add(new NonTerminalToken(buffer));
+                    numNonTerminals++;
+                    buffer = "";
+                }
                 inTerminal = true;
             }
             else if (currentCharacter == '"' && inTerminal)
