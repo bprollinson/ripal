@@ -160,11 +160,25 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerRemovesEpsilonFromTokensFromRightHandSideContainingMultipleNonepsilonTokens() throws ContextFreeGrammarSyntaxTokenizerException
+    public void testTokenizerRemovesEpsilonFromTokensFromRightHandSideContainingNonepsilonTokenBeforeEpsilon() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
         Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal 1\"\"\"");
+        Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new TerminalToken("terminal 1"));
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizerRemovesEpsilonFromTokensFromRightHandSideContainingNonepsilonTokenAfterEpsilon() throws ContextFreeGrammarSyntaxTokenizerException
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"\"terminal 1\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -183,6 +197,20 @@ public class ContextFreeGrammarSyntaxTokenizerTest
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
         expectedResult.add(new EpsilonToken());
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizerRemovesExtraEpsilonFromRightHandSideContainingNonEpsilonAndMultipleEpsilonTokens() throws ContextFreeGrammarSyntaxTokenizerException
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal 1\"\"\"\"\"");
+        Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new TerminalToken("terminal 1"));
 
         assertEquals(expectedResult, result);
     }
