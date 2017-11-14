@@ -87,9 +87,15 @@ public class ContextFreeGrammarSyntaxTokenizer
             throw new IncorrectContextFreeGrammarSeparatorException();
         }
 
+        return this.correctEpsilonSetupInTokens(tokens, numTerminals, numNonTerminals);
+    }
+
+    private Vector<ContextFreeGrammarSyntaxToken> correctEpsilonSetupInTokens(Vector<ContextFreeGrammarSyntaxToken> tokens, int numTerminals, int numNonTerminals)
+    {
+        Vector<ContextFreeGrammarSyntaxToken> correctedTokens = new Vector<ContextFreeGrammarSyntaxToken>();
+
         boolean epsilonAdded = false;
 
-        Vector<ContextFreeGrammarSyntaxToken> correctedTokens = new Vector<ContextFreeGrammarSyntaxToken>();
         for (int i = 0; i < tokens.size(); i++)
         {
             if (!(tokens.get(i) instanceof EpsilonToken))
