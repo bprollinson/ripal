@@ -160,7 +160,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerRemovesEpsilonFromTokensFromRightHandSideContainingNonepsilonTokenBeforeEpsilon() throws ContextFreeGrammarSyntaxTokenizerException
+    public void testTokenizerRemovesEpsilonFromTokensFromRightHandSideContainingTerminalTokenBeforeEpsilon() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -174,7 +174,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerRemovesEpsilonFromTokensFromRightHandSideContainingNonepsilonTokenAfterEpsilon() throws ContextFreeGrammarSyntaxTokenizerException
+    public void testTokenizerRemovesEpsilonFromTokensFromRightHandSideContainingTerminalTokenAfterEpsilon() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -202,7 +202,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerRemovesExtraEpsilonFromRightHandSideContainingNonEpsilonAndMultipleEpsilonTokens() throws ContextFreeGrammarSyntaxTokenizerException
+    public void testTokenizerRemovesExtraEpsilonFromRightHandSideContainingTerminalAndMultipleEpsilonTokens() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
