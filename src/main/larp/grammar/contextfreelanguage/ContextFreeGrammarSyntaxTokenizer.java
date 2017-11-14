@@ -12,6 +12,8 @@ public class ContextFreeGrammarSyntaxTokenizer
         boolean inTerminal = false;
         int numSeparators = 0;
         int numEpsilons = 0;
+        int numNonTerminals = 0;
+        int numTerminals = 0;
 
         for (int i = 0; i < expression.length(); i++)
         {
@@ -21,6 +23,7 @@ public class ContextFreeGrammarSyntaxTokenizer
                 if (buffer.length() > 0)
                 {
                     tokens.add(new NonTerminalToken(buffer));
+                    numNonTerminals++;
                 }
                 buffer = "";
                 numSeparators++;
@@ -40,6 +43,7 @@ public class ContextFreeGrammarSyntaxTokenizer
                 else
                 {
                     tokens.add(new TerminalToken(buffer));
+                    numTerminals++;
                 }
                 buffer = "";
                 inTerminal = false;
@@ -49,6 +53,7 @@ public class ContextFreeGrammarSyntaxTokenizer
                 if (buffer.length() > 0)
                 {
                     tokens.add(new NonTerminalToken(buffer));
+                    numNonTerminals++;
                 }
                 buffer = "";
             }
@@ -61,6 +66,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         if (buffer.length() > 0)
         {
             tokens.add(new NonTerminalToken(buffer));
+            numNonTerminals++;
         }
 
         if (inTerminal)
@@ -75,12 +81,20 @@ public class ContextFreeGrammarSyntaxTokenizer
             throw new IncorrectContextFreeGrammarSeparatorException();
         }
 
+        boolean epsilonAdded = false;
+
         Vector<ContextFreeGrammarSyntaxToken> correctedTokens = new Vector<ContextFreeGrammarSyntaxToken>();
         for (int i = 0; i < tokens.size(); i++)
         {
-            if (!(tokens.get(i) instanceof EpsilonToken) || i == 2)
+            if (!(tokens.get(i) instanceof EpsilonToken))
             {
                 correctedTokens.add(tokens.get(i));
+            }
+
+            if (tokens.get(i) instanceof EpsilonToken && numTerminals == 0 && numNonTerminals == 1 && !epsilonAdded)
+            {
+                correctedTokens.add(tokens.get(i));
+                epsilonAdded = true;
             }
         }
 
