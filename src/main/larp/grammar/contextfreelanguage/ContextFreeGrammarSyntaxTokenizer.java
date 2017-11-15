@@ -38,60 +38,10 @@ public class ContextFreeGrammarSyntaxTokenizer
         Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
 
         String buffer = "";
-        int numEpsilons = 0;
 
         for (int i = 0; i < expression.length(); i++)
         {
-            char currentCharacter = expression.charAt(i);
-            if (currentCharacter == ':')
-            {
-                if (buffer.length() > 0)
-                {
-                    tokens.add(new NonTerminalToken(buffer));
-                    this.numNonTerminals++;
-                }
-                buffer = "";
-                this.numSeparators++;
-                tokens.add(new SeparatorToken());
-            }
-            else if (currentCharacter == '"' && !this.inTerminal)
-            {
-                if (buffer.length() > 0)
-                {
-                    tokens.add(new NonTerminalToken(buffer));
-                    this.numNonTerminals++;
-                    buffer = "";
-                }
-                this.inTerminal = true;
-            }
-            else if (currentCharacter == '"' && this.inTerminal)
-            {
-                if (buffer.length() == 0)
-                {
-                    tokens.add(new EpsilonToken());
-                    numEpsilons++;
-                }
-                else
-                {
-                    tokens.add(new TerminalToken(buffer));
-                    this.numTerminals++;
-                }
-                buffer = "";
-                this.inTerminal = false;
-            }
-            else if (currentCharacter == ' ' && !this.inTerminal)
-            {
-                if (buffer.length() > 0)
-                {
-                    tokens.add(new NonTerminalToken(buffer));
-                    this.numNonTerminals++;
-                }
-                buffer = "";
-            }
-            else
-            {
-                buffer += currentCharacter;
-            }
+            buffer = this.processCharacter(tokens, buffer, expression.charAt(i));
         }
 
         if (buffer.length() > 0)
@@ -101,6 +51,60 @@ public class ContextFreeGrammarSyntaxTokenizer
         }
 
         return tokens;
+    }
+
+    private String processCharacter(Vector<ContextFreeGrammarSyntaxToken> tokens, String buffer, char currentCharacter)
+    {
+        if (currentCharacter == ':')
+        {
+            if (buffer.length() > 0)
+            {
+                tokens.add(new NonTerminalToken(buffer));
+                this.numNonTerminals++;
+            }
+            buffer = "";
+            this.numSeparators++;
+            tokens.add(new SeparatorToken());
+        }
+        else if (currentCharacter == '"' && !this.inTerminal)
+        {
+            if (buffer.length() > 0)
+            {
+                tokens.add(new NonTerminalToken(buffer));
+                this.numNonTerminals++;
+                buffer = "";
+            }
+            this.inTerminal = true;
+        }
+        else if (currentCharacter == '"' && this.inTerminal)
+        {
+            if (buffer.length() == 0)
+            {
+                tokens.add(new EpsilonToken());
+            }
+            else
+            {
+                tokens.add(new TerminalToken(buffer));
+                this.numTerminals++;
+            }
+            buffer = "";
+            this.inTerminal = false;
+        }
+        else if (currentCharacter == ' ' && !this.inTerminal)
+        {
+            if (buffer.length() > 0)
+            {
+                tokens.add(new NonTerminalToken(buffer));
+                this.numNonTerminals++;
+            }
+            buffer = "";
+        }
+        else
+        {
+            buffer += currentCharacter;
+        }
+
+        return buffer;
     }
 
     private Vector<ContextFreeGrammarSyntaxToken> correctEpsilonSetupInTokens(Vector<ContextFreeGrammarSyntaxToken> tokens)
