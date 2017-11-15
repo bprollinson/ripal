@@ -4,16 +4,41 @@ import java.util.Vector;
 
 public class ContextFreeGrammarSyntaxTokenizer
 {
+    private boolean inTerminal;
+    private int numSeparators;
+    private int numTerminals;
+    private int numNonTerminals;
+
     public Vector<ContextFreeGrammarSyntaxToken> tokenize(String expression) throws ContextFreeGrammarSyntaxTokenizerException
+    {
+        this.inTerminal = false;
+        this.numSeparators = 0;
+        this.numTerminals = 0;
+        this.numNonTerminals = 0;
+
+        Vector<ContextFreeGrammarSyntaxToken> tokens = this.convertCharactersToTokens(expression);
+
+        if (this.inTerminal)
+        {
+            throw new IncorrectContextFreeGrammarQuoteNestingException();
+        }
+
+        new ContextFreeGrammarStartingTokenAssertion(tokens).validate();
+
+        if (this.numSeparators != 1)
+        {
+            throw new IncorrectContextFreeGrammarSeparatorException();
+        }
+
+        return this.correctEpsilonSetupInTokens(tokens);
+    }
+
+    private Vector<ContextFreeGrammarSyntaxToken> convertCharactersToTokens(String expression)
     {
         Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
 
         String buffer = "";
-        boolean inTerminal = false;
-        int numSeparators = 0;
         int numEpsilons = 0;
-        int numNonTerminals = 0;
-        int numTerminals = 0;
 
         for (int i = 0; i < expression.length(); i++)
         {
@@ -23,23 +48,23 @@ public class ContextFreeGrammarSyntaxTokenizer
                 if (buffer.length() > 0)
                 {
                     tokens.add(new NonTerminalToken(buffer));
-                    numNonTerminals++;
+                    this.numNonTerminals++;
                 }
                 buffer = "";
-                numSeparators++;
+                this.numSeparators++;
                 tokens.add(new SeparatorToken());
             }
-            else if (currentCharacter == '"' && !inTerminal)
+            else if (currentCharacter == '"' && !this.inTerminal)
             {
                 if (buffer.length() > 0)
                 {
                     tokens.add(new NonTerminalToken(buffer));
-                    numNonTerminals++;
+                    this.numNonTerminals++;
                     buffer = "";
                 }
-                inTerminal = true;
+                this.inTerminal = true;
             }
-            else if (currentCharacter == '"' && inTerminal)
+            else if (currentCharacter == '"' && this.inTerminal)
             {
                 if (buffer.length() == 0)
                 {
@@ -49,17 +74,17 @@ public class ContextFreeGrammarSyntaxTokenizer
                 else
                 {
                     tokens.add(new TerminalToken(buffer));
-                    numTerminals++;
+                    this.numTerminals++;
                 }
                 buffer = "";
-                inTerminal = false;
+                this.inTerminal = false;
             }
-            else if (currentCharacter == ' ' && !inTerminal)
+            else if (currentCharacter == ' ' && !this.inTerminal)
             {
                 if (buffer.length() > 0)
                 {
                     tokens.add(new NonTerminalToken(buffer));
-                    numNonTerminals++;
+                    this.numNonTerminals++;
                 }
                 buffer = "";
             }
@@ -72,25 +97,13 @@ public class ContextFreeGrammarSyntaxTokenizer
         if (buffer.length() > 0)
         {
             tokens.add(new NonTerminalToken(buffer));
-            numNonTerminals++;
+            this.numNonTerminals++;
         }
 
-        if (inTerminal)
-        {
-            throw new IncorrectContextFreeGrammarQuoteNestingException();
-        }
-
-        new ContextFreeGrammarStartingTokenAssertion(tokens).validate();
-
-        if (numSeparators != 1)
-        {
-            throw new IncorrectContextFreeGrammarSeparatorException();
-        }
-
-        return this.correctEpsilonSetupInTokens(tokens, numTerminals, numNonTerminals);
+        return tokens;
     }
 
-    private Vector<ContextFreeGrammarSyntaxToken> correctEpsilonSetupInTokens(Vector<ContextFreeGrammarSyntaxToken> tokens, int numTerminals, int numNonTerminals)
+    private Vector<ContextFreeGrammarSyntaxToken> correctEpsilonSetupInTokens(Vector<ContextFreeGrammarSyntaxToken> tokens)
     {
         Vector<ContextFreeGrammarSyntaxToken> correctedTokens = new Vector<ContextFreeGrammarSyntaxToken>();
 
@@ -103,7 +116,7 @@ public class ContextFreeGrammarSyntaxTokenizer
                 correctedTokens.add(tokens.get(i));
             }
 
-            if (tokens.get(i) instanceof EpsilonToken && numTerminals == 0 && numNonTerminals == 1 && !epsilonAdded)
+            if (tokens.get(i) instanceof EpsilonToken && this.numTerminals == 0 && this.numNonTerminals == 1 && !epsilonAdded)
             {
                 correctedTokens.add(tokens.get(i));
                 epsilonAdded = true;
