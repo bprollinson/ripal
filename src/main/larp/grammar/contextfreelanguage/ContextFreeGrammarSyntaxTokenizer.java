@@ -57,14 +57,7 @@ public class ContextFreeGrammarSyntaxTokenizer
     {
         if (currentCharacter == ':')
         {
-            if (buffer.length() > 0)
-            {
-                tokens.add(new NonTerminalToken(buffer));
-                this.numNonTerminals++;
-            }
-            buffer = "";
-            this.numSeparators++;
-            tokens.add(new SeparatorToken());
+            buffer = this.processSeparatorCharacter(tokens, buffer);
         }
         else if (currentCharacter == '"' && !this.inTerminal)
         {
@@ -103,6 +96,20 @@ public class ContextFreeGrammarSyntaxTokenizer
         {
             buffer += currentCharacter;
         }
+
+        return buffer;
+    }
+
+    private String processSeparatorCharacter(Vector<ContextFreeGrammarSyntaxToken> tokens, String buffer)
+    {
+        if (buffer.length() > 0)
+        {
+            tokens.add(new NonTerminalToken(buffer));
+            this.numNonTerminals++;
+        }
+        buffer = "";
+        this.numSeparators++;
+        tokens.add(new SeparatorToken());
 
         return buffer;
     }
