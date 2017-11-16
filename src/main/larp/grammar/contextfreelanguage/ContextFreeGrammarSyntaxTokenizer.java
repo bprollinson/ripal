@@ -69,12 +69,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         }
         else if (currentCharacter == ' ' && !this.inTerminal)
         {
-            if (buffer.length() > 0)
-            {
-                tokens.add(new NonTerminalToken(buffer));
-                this.numNonTerminals++;
-            }
-            buffer = "";
+            buffer = this.processSpaceCharacter(tokens, buffer);
         }
         else
         {
@@ -124,6 +119,18 @@ public class ContextFreeGrammarSyntaxTokenizer
         }
         buffer = "";
         this.inTerminal = false;
+
+        return buffer;
+    }
+
+    private String processSpaceCharacter(Vector<ContextFreeGrammarSyntaxToken> tokens, String buffer)
+    {
+        if (buffer.length() > 0)
+        {
+            tokens.add(new NonTerminalToken(buffer));
+            this.numNonTerminals++;
+        }
+        buffer = "";
 
         return buffer;
     }
