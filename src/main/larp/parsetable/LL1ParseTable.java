@@ -23,50 +23,61 @@ public class LL1ParseTable
         Vector<ContextFreeGrammarSyntaxNode> stack = new Vector<ContextFreeGrammarSyntaxNode>();
         stack.add(contextFreeGrammar.getStartSymbol());
 
-        String remainingInput = inputString;
+        StringBuffer remainingInput = new StringBuffer(inputString);
 
         while (remainingInput.length() > 0 && stack.size() > 0)
         {
-            ContextFreeGrammarSyntaxNode topNode = stack.get(0);
-            String nextCharacter = remainingInput.substring(0, 1);
-
-            if (topNode instanceof NonTerminalNode)
+            boolean continueProcessing = this.processInputCharacter(stack, remainingInput);
+            if (!continueProcessing)
             {
-                Integer position = this.getCell((NonTerminalNode)topNode, new TerminalNode(nextCharacter));
-
-                stack.remove(0);
-
-                if (position == null)
-                {
-                    return false;
-                }
-
-                Vector<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
-                for (int i = childNodes.size() - 1; i >= 0; i--)
-                {
-                    stack.add(0, childNodes.get(i));
-                }
-            }
-            else
-            {
-                if (!(((TerminalNode)topNode).getValue().substring(0, 1).equals(nextCharacter)))
-                {
-                    return false;
-                }
-
-                stack.remove(0);
-
-                String remainingTerminalContent = ((TerminalNode)topNode).getValue().substring(1);
-                if (remainingTerminalContent.length() > 0)
-                {
-                    stack.add(0, new TerminalNode(remainingTerminalContent));
-                }
-
-                remainingInput = remainingInput.substring(1);
+                return false;
             }
         }
 
         return remainingInput.length() == 0 && stack.size() == 0;
+    }
+
+    private boolean processInputCharacter(Vector<ContextFreeGrammarSyntaxNode> stack, StringBuffer remainingInput)
+    {
+        ContextFreeGrammarSyntaxNode topNode = stack.get(0);
+        String nextCharacter = remainingInput.substring(0, 1);
+
+        if (topNode instanceof NonTerminalNode)
+        {
+            Integer position = this.getCell((NonTerminalNode)topNode, new TerminalNode(nextCharacter));
+
+            stack.remove(0);
+
+            if (position == null)
+            {
+                return false;
+            }
+
+            Vector<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
+            for (int i = childNodes.size() - 1; i >= 0; i--)
+            {
+                stack.add(0, childNodes.get(i));
+            }
+        }
+        else
+        {
+            if (!(((TerminalNode)topNode).getValue().substring(0, 1).equals(nextCharacter)))
+            {
+                return false;
+            }
+
+            stack.remove(0);
+
+            String remainingTerminalContent = ((TerminalNode)topNode).getValue().substring(1);
+            if (remainingTerminalContent.length() > 0)
+            {
+                stack.add(0, new TerminalNode(remainingTerminalContent));
+            }
+
+            remainingInput.deleteCharAt(0);
+        }
+
+        return true;
     }
 
     public void addCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode, int contextFreeGrammarRuleIndex)
