@@ -44,19 +44,10 @@ public class LL1ParseTable
 
         if (topNode instanceof NonTerminalNode)
         {
-            Integer position = this.getCell((NonTerminalNode)topNode, new TerminalNode(nextCharacter));
-
-            stack.remove(0);
-
-            if (position == null)
+            boolean continueProcessing = this.processInputCharacterForNonTerminalNode(stack, (NonTerminalNode)topNode, nextCharacter);
+            if (!continueProcessing)
             {
                 return false;
-            }
-
-            Vector<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
-            for (int i = childNodes.size() - 1; i >= 0; i--)
-            {
-                stack.add(0, childNodes.get(i));
             }
         }
         else
@@ -75,6 +66,26 @@ public class LL1ParseTable
             }
 
             remainingInput.deleteCharAt(0);
+        }
+
+        return true;
+    }
+
+    private boolean processInputCharacterForNonTerminalNode(Vector<ContextFreeGrammarSyntaxNode> stack, NonTerminalNode topNode, String nextCharacter)
+    {
+        Integer position = this.getCell(topNode, new TerminalNode(nextCharacter));
+
+        stack.remove(0);
+
+        if (position == null)
+        {
+            return false;
+        }
+
+        Vector<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
+        for (int i = childNodes.size() - 1; i >= 0; i--)
+        {
+            stack.add(0, childNodes.get(i));
         }
 
         return true;
