@@ -52,20 +52,11 @@ public class LL1ParseTable
         }
         else
         {
-            if (!(((TerminalNode)topNode).getValue().substring(0, 1).equals(nextCharacter)))
+            boolean continueProcessing = this.processInputCharacterForTerminalNode(stack, (TerminalNode)topNode, nextCharacter, remainingInput);
+            if (!continueProcessing)
             {
                 return false;
             }
-
-            stack.remove(0);
-
-            String remainingTerminalContent = ((TerminalNode)topNode).getValue().substring(1);
-            if (remainingTerminalContent.length() > 0)
-            {
-                stack.add(0, new TerminalNode(remainingTerminalContent));
-            }
-
-            remainingInput.deleteCharAt(0);
         }
 
         return true;
@@ -87,6 +78,26 @@ public class LL1ParseTable
         {
             stack.add(0, childNodes.get(i));
         }
+
+        return true;
+    }
+
+    private boolean processInputCharacterForTerminalNode(Vector<ContextFreeGrammarSyntaxNode> stack, TerminalNode topNode, String nextCharacter, StringBuffer remainingInput)
+    {
+        if (!(((TerminalNode)topNode).getValue().substring(0, 1).equals(nextCharacter)))
+        {
+            return false;
+        }
+
+        stack.remove(0);
+
+        String remainingTerminalContent = ((TerminalNode)topNode).getValue().substring(1);
+        if (remainingTerminalContent.length() > 0)
+        {
+            stack.add(0, new TerminalNode(remainingTerminalContent));
+        }
+
+        remainingInput.deleteCharAt(0);
 
         return true;
     }
