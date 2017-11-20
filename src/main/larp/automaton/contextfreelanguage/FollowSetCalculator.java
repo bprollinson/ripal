@@ -72,31 +72,36 @@ public class FollowSetCalculator
             int j = i + 1;
             while (j < rightHandSide.getChildNodes().size() && !done)
             {
-                done = true;
-
                 ContextFreeGrammarSyntaxNode node = rightHandSide.getChildNodes().get(j);
-
-                if (previousNode instanceof NonTerminalNode && node instanceof TerminalNode)
-                {
-                    this.follows.put(previousNode, new TerminalNode(((TerminalNode)node).getValue().substring(0, 1)));
-                }
-                if (previousNode instanceof NonTerminalNode && node instanceof NonTerminalNode)
-                {
-                    HashSet<ContextFreeGrammarSyntaxNode> firstNodes = this.firstSetCalculator.getFirst((NonTerminalNode)node);
-                    if (firstNodes.contains(new EpsilonNode()))
-                    {
-                        done = false;
-                        firstNodes.remove(new EpsilonNode());
-                    }
-                    for (ContextFreeGrammarSyntaxNode firstNode: firstNodes)
-                    {
-                        this.follows.put(previousNode, firstNode);
-                    }
-                }
-
+                done = this.addFollowNodesForProductionNode(previousNode, node);
                 j++;
             }
         }
+    }
+
+    private boolean addFollowNodesForProductionNode(ContextFreeGrammarSyntaxNode previousNode, ContextFreeGrammarSyntaxNode node)
+    {
+        boolean done = true;
+
+        if (previousNode instanceof NonTerminalNode && node instanceof TerminalNode)
+        {
+            this.follows.put(previousNode, new TerminalNode(((TerminalNode)node).getValue().substring(0, 1)));
+        }
+        if (previousNode instanceof NonTerminalNode && node instanceof NonTerminalNode)
+        {
+            HashSet<ContextFreeGrammarSyntaxNode> firstNodes = this.firstSetCalculator.getFirst((NonTerminalNode)node);
+            if (firstNodes.contains(new EpsilonNode()))
+            {
+                done = false;
+                firstNodes.remove(new EpsilonNode());
+            }
+            for (ContextFreeGrammarSyntaxNode firstNode: firstNodes)
+            {
+                this.follows.put(previousNode, firstNode);
+            }
+        }
+
+        return done;
     }
 
     private void propagateFollowNodes()
