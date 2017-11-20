@@ -84,14 +84,14 @@ public class LL1ParseTable
 
     private boolean processInputCharacterForTerminalNode(Vector<ContextFreeGrammarSyntaxNode> stack, TerminalNode topNode, String nextCharacter, StringBuffer remainingInput)
     {
-        if (!(((TerminalNode)topNode).getValue().substring(0, 1).equals(nextCharacter)))
+        if (!topNode.getValue().substring(0, 1).equals(nextCharacter))
         {
             return false;
         }
 
         stack.remove(0);
 
-        String remainingTerminalContent = ((TerminalNode)topNode).getValue().substring(1);
+        String remainingTerminalContent = topNode.getValue().substring(1);
         if (remainingTerminalContent.length() > 0)
         {
             stack.add(0, new TerminalNode(remainingTerminalContent));
