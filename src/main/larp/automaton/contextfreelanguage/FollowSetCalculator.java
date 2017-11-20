@@ -137,17 +137,8 @@ public class FollowSetCalculator
                 {
                     for (ContextFreeGrammarSyntaxNode parentFollow : leftHandFollow)
                     {
-                        int sizeBefore = 0;
-                        HashSet<ContextFreeGrammarSyntaxNode> currentFollows = this.follows.get(lastNode);
-                        if (currentFollows != null)
-                        {
-                             sizeBefore = currentFollows.size();
-                        }
-
-                        this.follows.put(lastNode, parentFollow);
-                        int sizeAfter = this.follows.get(lastNode).size();
-
-                        if (sizeBefore != sizeAfter)
+                        boolean followAdded = this.addParentFollow(lastNode, parentFollow);
+                        if (followAdded)
                         {
                             done = false;
                         }
@@ -165,5 +156,20 @@ public class FollowSetCalculator
         }
 
         return done;
+    }
+
+    private boolean addParentFollow(ContextFreeGrammarSyntaxNode lastNode, ContextFreeGrammarSyntaxNode parentFollow)
+    {
+        int sizeBefore = 0;
+        HashSet<ContextFreeGrammarSyntaxNode> currentFollows = this.follows.get(lastNode);
+        if (currentFollows != null)
+        {
+             sizeBefore = currentFollows.size();
+        }
+
+        this.follows.put(lastNode, parentFollow);
+        int sizeAfter = this.follows.get(lastNode).size();
+
+        return sizeBefore != sizeAfter;
     }
 }
