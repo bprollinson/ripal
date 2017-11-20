@@ -56,40 +56,45 @@ public class FollowSetCalculator
         for (int i = 0; i < productions.size(); i++)
         {
             ContextFreeGrammarSyntaxNode production = productions.get(i);
-            ContextFreeGrammarSyntaxNode rightHandSide = production.getChildNodes().get(1);
+            this.addFollowNodesForProduction(production);
+        }
+    }
 
-            for (int j = 0; j < rightHandSide.getChildNodes().size() - 1; j++)
+    private void addFollowNodesForProduction(ContextFreeGrammarSyntaxNode production)
+    {
+        ContextFreeGrammarSyntaxNode rightHandSide = production.getChildNodes().get(1);
+
+        for (int i = 0; i < rightHandSide.getChildNodes().size() - 1; i++)
+        {
+            ContextFreeGrammarSyntaxNode previousNode = rightHandSide.getChildNodes().get(i);
+
+            boolean done = false;
+            int j = i + 1;
+            while (j < rightHandSide.getChildNodes().size() && !done)
             {
-                ContextFreeGrammarSyntaxNode previousNode = rightHandSide.getChildNodes().get(j);
+                done = true;
 
-                boolean done = false;
-                int k = j + 1;
-                while (k < rightHandSide.getChildNodes().size() && !done)
+                ContextFreeGrammarSyntaxNode node = rightHandSide.getChildNodes().get(j);
+
+                if (previousNode instanceof NonTerminalNode && node instanceof TerminalNode)
                 {
-                    done = true;
-
-                    ContextFreeGrammarSyntaxNode node = rightHandSide.getChildNodes().get(k);
-
-                    if (previousNode instanceof NonTerminalNode && node instanceof TerminalNode)
-                    {
-                        this.follows.put(previousNode, new TerminalNode(((TerminalNode)node).getValue().substring(0, 1)));
-                    }
-                    if (previousNode instanceof NonTerminalNode && node instanceof NonTerminalNode)
-                    {
-                        HashSet<ContextFreeGrammarSyntaxNode> firstNodes = this.firstSetCalculator.getFirst((NonTerminalNode)node);
-                        if (firstNodes.contains(new EpsilonNode()))
-                        {
-                            done = false;
-                            firstNodes.remove(new EpsilonNode());
-                        }
-                        for (ContextFreeGrammarSyntaxNode firstNode: firstNodes)
-                        {
-                            this.follows.put(previousNode, firstNode);
-                        }
-                    }
-
-                    k++;
+                    this.follows.put(previousNode, new TerminalNode(((TerminalNode)node).getValue().substring(0, 1)));
                 }
+                if (previousNode instanceof NonTerminalNode && node instanceof NonTerminalNode)
+                {
+                    HashSet<ContextFreeGrammarSyntaxNode> firstNodes = this.firstSetCalculator.getFirst((NonTerminalNode)node);
+                    if (firstNodes.contains(new EpsilonNode()))
+                    {
+                        done = false;
+                        firstNodes.remove(new EpsilonNode());
+                    }
+                    for (ContextFreeGrammarSyntaxNode firstNode: firstNodes)
+                    {
+                        this.follows.put(previousNode, firstNode);
+                    }
+                }
+
+                j++;
             }
         }
     }
