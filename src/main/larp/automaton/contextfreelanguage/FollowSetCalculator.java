@@ -111,10 +111,12 @@ public class FollowSetCalculator
 
         while (!done)
         {
+            done = true;
+
             for (int i = 0; i < productions.size(); i++)
             {
                 ContextFreeGrammarSyntaxNode production = productions.get(i);
-                done = this.propagateFollowNodesForProduction(production);
+                done = done & this.propagateFollowNodesForProduction(production);
             }
         }
     }
