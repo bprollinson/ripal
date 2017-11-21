@@ -74,7 +74,8 @@ public class FirstSetCalculator
     private HashSet<ContextFreeGrammarSyntaxNode> getFirstFromTerminalNode(ContextFreeGrammarSyntaxNode terminalNode)
     {
         HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
-        results.add(terminalNode);
+        String value = ((TerminalNode)terminalNode).getValue();
+        results.add(new TerminalNode(value.substring(0, 1)));
 
         return results;
     }
