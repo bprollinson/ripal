@@ -162,18 +162,14 @@ public class FollowSetCalculator
 
     private boolean propagateAllParentFollows(ContextFreeGrammarSyntaxNode lastNode, HashSet<ContextFreeGrammarSyntaxNode> leftHandFollow)
     {
-        boolean result = false;
+        boolean followAdded = false;
 
         for (ContextFreeGrammarSyntaxNode parentFollow : leftHandFollow)
         {
-            boolean followAdded = this.addParentFollow(lastNode, parentFollow);
-            if (followAdded)
-            {
-                result = true;
-            }
+            followAdded = followAdded | this.addParentFollow(lastNode, parentFollow);
         }
 
-        return result;
+        return followAdded;
     }
 
     private boolean addParentFollow(ContextFreeGrammarSyntaxNode lastNode, ContextFreeGrammarSyntaxNode parentFollow)
