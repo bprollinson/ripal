@@ -109,6 +109,19 @@ public class LL1ParseTableTest
         assertTrue(parseTable.accepts("abc"));
     }
 
+
+    @Test
+    public void testAcceptsReturnsTrueWhenEndOfStringNodeMatchesNonTerminal()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testAcceptsReturnsFalseWhenEndOfStringNonTerminalExistsWithoutEndOfStringInInput()
+    {
+        assertTrue(false);
+    }
+
     @Test
     public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
     {
