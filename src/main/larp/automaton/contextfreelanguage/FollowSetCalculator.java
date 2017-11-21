@@ -140,13 +140,10 @@ public class FollowSetCalculator
                 ContextFreeGrammarSyntaxNode lastNode = rightHandSide.getChildNodes().get(i);
                 if (lastNode instanceof NonTerminalNode)
                 {
-                    for (ContextFreeGrammarSyntaxNode parentFollow : leftHandFollow)
+                    boolean followAdded = this.propagateAllParentFollows(lastNode, leftHandFollow);
+                    if (followAdded)
                     {
-                        boolean followAdded = this.addParentFollow(lastNode, parentFollow);
-                        if (followAdded)
-                        {
-                            done = false;
-                        }
+                        done = false;
                     }
 
                     HashSet<ContextFreeGrammarSyntaxNode> firsts = this.firstSetCalculator.getFirst((NonTerminalNode)lastNode);
@@ -161,6 +158,22 @@ public class FollowSetCalculator
         }
 
         return done;
+    }
+
+    private boolean propagateAllParentFollows(ContextFreeGrammarSyntaxNode lastNode, HashSet<ContextFreeGrammarSyntaxNode> leftHandFollow)
+    {
+        boolean result = false;
+
+        for (ContextFreeGrammarSyntaxNode parentFollow : leftHandFollow)
+        {
+            boolean followAdded = this.addParentFollow(lastNode, parentFollow);
+            if (followAdded)
+            {
+                result = true;
+            }
+        }
+
+        return result;
     }
 
     private boolean addParentFollow(ContextFreeGrammarSyntaxNode lastNode, ContextFreeGrammarSyntaxNode parentFollow)
