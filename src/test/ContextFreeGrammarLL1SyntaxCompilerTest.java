@@ -180,4 +180,18 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
 
         assertEquals(expectedTable, compiler.compile(grammar));
     }
+
+    @Test
+    public void testCompileOnlyConsidersFirstCharacterFromMultiCharacterTerminal() throws AmbiguousLL1ParseTableException
+    {
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
+
+        LL1ParseTable expectedTable = new LL1ParseTable(grammar);
+        expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+
+        assertEquals(expectedTable, compiler.compile(grammar));
+    }
 }
