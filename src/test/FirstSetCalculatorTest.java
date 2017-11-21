@@ -37,6 +37,18 @@ public class FirstSetCalculatorTest
     }
 
     @Test
+    public void testGetFirstIgnoresSubsequentCharacterInSameTerminal()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
+
+        FirstSetCalculator calculator = new FirstSetCalculator(grammar);
+        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        expectedFirsts.add(new TerminalNode("a"));
+        assertEquals(expectedFirsts, calculator.getFirst(0));
+    }
+
+    @Test
     public void testGetFirstReturnsSingleTerminalWithIntermediateNonTerminalProduction()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
