@@ -1,6 +1,7 @@
 package larp.parsetable;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.grammar.contextfreelanguage.EndOfStringNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 
@@ -32,6 +33,23 @@ public class LL1ParseTable
             {
                 return false;
             }
+        }
+
+        while (remainingInput.length() == 0 && stack.size() > 0)
+        {
+            ContextFreeGrammarSyntaxNode topNode = stack.get(0);
+            if (!(topNode instanceof NonTerminalNode))
+            {
+                break;
+            }
+
+            Integer position = this.getCell((NonTerminalNode)topNode, new EndOfStringNode());
+            if (position == null)
+            {
+                break;
+            }
+
+            stack.remove(0);
         }
 
         return remainingInput.length() == 0 && stack.size() == 0;
