@@ -2,6 +2,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+import larp.grammar.contextfreelanguage.EndOfStringNode;
+import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
@@ -113,13 +115,33 @@ public class LL1ParseTableTest
     @Test
     public void testAcceptsReturnsTrueWhenEndOfStringNodeMatchesNonTerminal()
     {
-        assertTrue(false);
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
+
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
+        parseTable.addCell(new NonTerminalNode("B"), new EndOfStringNode(), 2);
+
+        assertTrue(parseTable.accepts("a"));
     }
 
     @Test
     public void testAcceptsReturnsFalseWhenEndOfStringNonTerminalExistsWithoutEndOfStringInInput()
     {
-        assertTrue(false);
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
+
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
+        parseTable.addCell(new NonTerminalNode("B"), new EndOfStringNode(), 2);
+
+        assertFalse(parseTable.accepts("ab"));
     }
 
     @Test
