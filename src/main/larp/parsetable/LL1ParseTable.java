@@ -35,22 +35,7 @@ public class LL1ParseTable
             }
         }
 
-        while (remainingInput.length() == 0 && stack.size() > 0)
-        {
-            ContextFreeGrammarSyntaxNode topNode = stack.get(0);
-            if (!(topNode instanceof NonTerminalNode))
-            {
-                break;
-            }
-
-            Integer position = this.getCell((NonTerminalNode)topNode, new EndOfStringNode());
-            if (position == null)
-            {
-                break;
-            }
-
-            stack.remove(0);
-        }
+        this.processNonTerminalsAtEndOfString(stack, remainingInput);
 
         return remainingInput.length() == 0 && stack.size() == 0;
     }
@@ -118,6 +103,26 @@ public class LL1ParseTable
         remainingInput.deleteCharAt(0);
 
         return true;
+    }
+
+    private void processNonTerminalsAtEndOfString(Vector<ContextFreeGrammarSyntaxNode> stack, StringBuffer remainingInput)
+    {
+        while (remainingInput.length() == 0 && stack.size() > 0)
+        {
+            ContextFreeGrammarSyntaxNode topNode = stack.get(0);
+            if (!(topNode instanceof NonTerminalNode))
+            {
+                break;
+            }
+
+            Integer position = this.getCell((NonTerminalNode)topNode, new EndOfStringNode());
+            if (position == null)
+            {
+                break;
+            }
+
+            stack.remove(0);
+        }
     }
 
     public void addCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode, int contextFreeGrammarRuleIndex)
