@@ -145,6 +145,18 @@ public class LL1ParseTableTest
     }
 
     @Test
+    public void testAcceptsReturnsTrueForEmptyStringMatchingSequenceOfEndOfStringProductions()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testAcceptsReturnsFalseForNonEmptyStringWithOnlyEndOfStringProduction()
+    {
+        assertTrue(false);
+    }
+
+    @Test
     public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
     {
         LL1ParseTable parseTable = new LL1ParseTable(new ContextFreeGrammar());
