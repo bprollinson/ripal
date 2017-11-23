@@ -177,6 +177,36 @@ public class LL1ParseTableTest
     }
 
     @Test
+    public void testGetAppliedRulesReturnsEmptyListBeforeParseIsRun()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testGetAppliedRulesReturnsRuleIndexesOnSuccessfulParse()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testGetAppliedRulesReturnsRuleIndexesUntilTableLookupFailure()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testGetAppliedRulesReturnsRuleIndexesUntilEndStateFailure()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testGetAppliedRulesReturnsRuleIndexesForSequenceOfEndOfStringProductions()
+    {
+        assertTrue(false);
+    }
+
+    @Test
     public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
     {
         LL1ParseTable parseTable = new LL1ParseTable(new ContextFreeGrammar());
