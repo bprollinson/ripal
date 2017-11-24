@@ -80,6 +80,8 @@ public class LL1ParseTable
             return false;
         }
 
+        this.appliedRules.add(position);
+
         Vector<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
         for (int i = childNodes.size() - 1; i >= 0; i--)
         {
