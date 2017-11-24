@@ -12,15 +12,19 @@ public class LL1ParseTable
 {
     private ContextFreeGrammar contextFreeGrammar;
     private HashMap<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>> table;
+    private Vector<Integer> appliedRules;
 
     public LL1ParseTable(ContextFreeGrammar contextFreeGrammar)
     {
         this.contextFreeGrammar = contextFreeGrammar;
         this.table = new HashMap<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>>();
+        this.appliedRules = new Vector<Integer>();
     }
 
     public boolean accepts(String inputString)
     {
+        this.appliedRules = new Vector<Integer>();
+
         Vector<ContextFreeGrammarSyntaxNode> stack = new Vector<ContextFreeGrammarSyntaxNode>();
         stack.add(contextFreeGrammar.getStartSymbol());
 
@@ -151,7 +155,7 @@ public class LL1ParseTable
 
     public Vector getAppliedRules()
     {
-        return null;
+        return this.appliedRules;
     }
 
     public ContextFreeGrammar getContextFreeGrammar()
