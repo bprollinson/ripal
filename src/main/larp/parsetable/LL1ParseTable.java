@@ -149,6 +149,11 @@ public class LL1ParseTable
         return position;
     }
 
+    public Vector getAppliedRules()
+    {
+        return null;
+    }
+
     public ContextFreeGrammar getContextFreeGrammar()
     {
         return this.contextFreeGrammar;

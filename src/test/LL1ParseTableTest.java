@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -8,6 +9,8 @@ import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1ParseTable;
+
+import java.util.Vector;
 
 public class LL1ParseTableTest
 {
@@ -179,31 +182,98 @@ public class LL1ParseTableTest
     @Test
     public void testGetAppliedRulesReturnsEmptyListBeforeParseIsRun()
     {
-        assertTrue(false);
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
+
+        Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
+
+        assertEquals(expectedRuleIndexes, parseTable.getAppliedRules());
     }
 
     @Test
     public void testGetAppliedRulesReturnsRuleIndexesOnSuccessfulParse()
     {
-        assertTrue(false);
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
+        parseTable.accepts("a");
+
+        Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
+        expectedRuleIndexes.add(0);
+        expectedRuleIndexes.add(1);
+
+        assertEquals(expectedRuleIndexes, parseTable.getAppliedRules());
     }
 
     @Test
     public void testGetAppliedRulesReturnsRuleIndexesUntilTableLookupFailure()
     {
-        assertTrue(false);
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
+        parseTable.accepts("ab");
+
+        Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
+        expectedRuleIndexes.add(0);
+        expectedRuleIndexes.add(1);
+
+        assertEquals(expectedRuleIndexes, parseTable.getAppliedRules());
     }
 
     @Test
     public void testGetAppliedRulesReturnsRuleIndexesUntilEndStateFailure()
     {
-        assertTrue(false);
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
+
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
+        parseTable.addCell(new NonTerminalNode("B"), new TerminalNode("b"), 2);
+        parseTable.accepts("a");
+
+        Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
+        expectedRuleIndexes.add(0);
+        expectedRuleIndexes.add(1);
+
+        assertEquals(expectedRuleIndexes, parseTable.getAppliedRules());
     }
 
     @Test
     public void testGetAppliedRulesReturnsRuleIndexesForSequenceOfEndOfStringProductions()
     {
-        assertTrue(false);
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        contextFreeGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        contextFreeGrammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
+
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        parseTable.addCell(new NonTerminalNode("S"), new EndOfStringNode(), 0);
+        parseTable.addCell(new NonTerminalNode("A"), new EndOfStringNode(), 1);
+        parseTable.addCell(new NonTerminalNode("B"), new EndOfStringNode(), 2);
+        parseTable.accepts("");
+
+        Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
+        expectedRuleIndexes.add(0);
+        expectedRuleIndexes.add(1);
+        expectedRuleIndexes.add(2);
+
+        assertEquals(expectedRuleIndexes, parseTable.getAppliedRules());
     }
 
     @Test
