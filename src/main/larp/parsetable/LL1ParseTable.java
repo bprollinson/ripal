@@ -2,6 +2,7 @@ package larp.parsetable;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.grammar.contextfreelanguage.EndOfStringNode;
+import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 
@@ -127,7 +128,17 @@ public class LL1ParseTable
                 break;
             }
 
+            this.appliedRules.add(position);
+
             stack.remove(0);
+            Vector<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
+            for (int i = childNodes.size() - 1; i >= 0; i--)
+            {
+                if (!(childNodes.get(i) instanceof EpsilonNode))
+                {
+                    stack.add(0, childNodes.get(i));
+                }
+            }
         }
     }
 
