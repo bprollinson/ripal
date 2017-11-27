@@ -141,7 +141,7 @@ public class LL1Parser
         }
     }
 
-    public Vector getAppliedRules()
+    public Vector<Integer> getAppliedRules()
     {
         return this.appliedRules;
     }
