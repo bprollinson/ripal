@@ -12,6 +12,7 @@ import larp.grammar.contextfreelanguage.NonTerminalToken;
 import larp.grammar.contextfreelanguage.SeparatorToken;
 import larp.grammar.contextfreelanguage.TerminalToken;
 
+import java.util.List;
 import java.util.Vector;
 
 public class ContextFreeGrammarSyntaxTokenizerTest
@@ -21,7 +22,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:S");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:S");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -35,7 +36,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("Start:S");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("Start:S");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("Start"));
         expectedResult.add(new SeparatorToken());
@@ -49,7 +50,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:Start");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:Start");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -63,7 +64,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -77,7 +78,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"a\"");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"a\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -91,7 +92,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal\"");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -105,7 +106,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal1\"\"terminal2\"");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal1\"\"terminal2\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -120,7 +121,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal1\" \"terminal2\"");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal1\" \"terminal2\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -135,7 +136,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal 1\"");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal 1\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -149,7 +150,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:nonterminal1 nonterminal2");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:nonterminal1 nonterminal2");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -164,7 +165,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal\"S");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal\"S");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -179,7 +180,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal 1\"\"\"");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal 1\"\"\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -193,7 +194,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:S\"\"");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:S\"\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -207,7 +208,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"\"terminal 1\"");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"\"terminal 1\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -221,7 +222,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"S");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"S");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -235,7 +236,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"\"\"");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"\"\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -249,7 +250,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal 1\"\"\"\"\"");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal 1\"\"\"\"\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
@@ -263,7 +264,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
-        Vector<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:S\"\"\"\"");
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:S\"\"\"\"");
         Vector<ContextFreeGrammarSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());

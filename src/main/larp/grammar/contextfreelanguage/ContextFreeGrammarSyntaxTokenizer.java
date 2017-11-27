@@ -1,5 +1,6 @@
 package larp.grammar.contextfreelanguage;
 
+import java.util.List;
 import java.util.Vector;
 
 public class ContextFreeGrammarSyntaxTokenizer
@@ -9,7 +10,7 @@ public class ContextFreeGrammarSyntaxTokenizer
     private int numTerminals;
     private int numNonTerminals;
 
-    public Vector<ContextFreeGrammarSyntaxToken> tokenize(String expression) throws ContextFreeGrammarSyntaxTokenizerException
+    public List<ContextFreeGrammarSyntaxToken> tokenize(String expression) throws ContextFreeGrammarSyntaxTokenizerException
     {
         this.inTerminal = false;
         this.numSeparators = 0;
