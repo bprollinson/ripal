@@ -1,5 +1,6 @@
 package larp.grammar.regularlanguage;
 
+import java.util.List;
 import java.util.Vector;
 
 public class RegularExpressionSyntaxTokenizer
@@ -9,7 +10,7 @@ public class RegularExpressionSyntaxTokenizer
     private char kleeneClosure = '*';
     private char or = '|';
 
-    public Vector<RegularExpressionSyntaxToken> tokenize(String expression) throws RegularExpressionSyntaxTokenizerException
+    public List<RegularExpressionSyntaxToken> tokenize(String expression) throws RegularExpressionSyntaxTokenizerException
     {
         Vector<RegularExpressionSyntaxToken> tokens = new Vector<RegularExpressionSyntaxToken>();
 

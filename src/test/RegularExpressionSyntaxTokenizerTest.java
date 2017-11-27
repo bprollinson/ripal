@@ -11,6 +11,7 @@ import larp.grammar.regularlanguage.RegularExpressionSyntaxToken;
 import larp.grammar.regularlanguage.RegularExpressionSyntaxTokenizer;
 import larp.grammar.regularlanguage.RegularExpressionSyntaxTokenizerException;
 
+import java.util.List;
 import java.util.Vector;
 
 public class RegularExpressionSyntaxTokenizerTest
@@ -20,7 +21,7 @@ public class RegularExpressionSyntaxTokenizerTest
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
-        Vector<RegularExpressionSyntaxToken> result = tokenizer.tokenize("");
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("");
         Vector<RegularExpressionSyntaxToken> expectedResult = new Vector();
 
         assertEquals(expectedResult, result);
@@ -31,7 +32,7 @@ public class RegularExpressionSyntaxTokenizerTest
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
-        Vector<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(a|b)*");
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(a|b)*");
         Vector<RegularExpressionSyntaxToken> expectedResult = new Vector();
         expectedResult.add(new OpenBraceToken());
         expectedResult.add(new CharacterToken('a'));
@@ -48,7 +49,7 @@ public class RegularExpressionSyntaxTokenizerTest
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
-        Vector<RegularExpressionSyntaxToken> result = tokenizer.tokenize(")(");
+        tokenizer.tokenize(")(");
     }
 
     @Test(expected = IncorrectRegularExpressionNestingException.class)
@@ -56,7 +57,7 @@ public class RegularExpressionSyntaxTokenizerTest
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
-        Vector<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(");
+        tokenizer.tokenize("(");
     }
 
     @Test(expected = RegularExpressionSyntaxTokenizerException.class)
@@ -64,6 +65,6 @@ public class RegularExpressionSyntaxTokenizerTest
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
-        Vector<RegularExpressionSyntaxToken> result = tokenizer.tokenize("*");
+        tokenizer.tokenize("*");
     }
 }
