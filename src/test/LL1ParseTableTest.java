@@ -7,8 +7,6 @@ import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1ParseTable;
 
-import java.util.Vector;
-
 public class LL1ParseTableTest
 {
     @Test

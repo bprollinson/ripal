@@ -8,6 +8,7 @@ import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
+import larp.parsetable.LL1Parser;
 import larp.parsetable.LL1ParseTable;
 
 import java.util.Vector;
@@ -22,8 +23,9 @@ public class LL1ParserTest
 
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        LL1Parser parser = new LL1Parser(parseTable);
 
-        assertTrue(parseTable.accepts("a"));
+        assertTrue(parser.accepts("a"));
     }
 
     @Test
@@ -34,8 +36,9 @@ public class LL1ParserTest
 
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        LL1Parser parser = new LL1Parser(parseTable);
 
-        assertFalse(parseTable.accepts("b"));
+        assertFalse(parser.accepts("b"));
     }
 
     @Test
@@ -46,8 +49,9 @@ public class LL1ParserTest
 
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        LL1Parser parser = new LL1Parser(parseTable);
 
-        assertTrue(parseTable.accepts("ab"));
+        assertTrue(parser.accepts("ab"));
     }
 
     @Test
@@ -58,8 +62,9 @@ public class LL1ParserTest
 
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        LL1Parser parser = new LL1Parser(parseTable);
 
-        assertTrue(parseTable.accepts("ab"));
+        assertTrue(parser.accepts("ab"));
     }
 
     @Test
@@ -70,8 +75,9 @@ public class LL1ParserTest
 
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        LL1Parser parser = new LL1Parser(parseTable);
 
-        assertFalse(parseTable.accepts("ac"));
+        assertFalse(parser.accepts("ac"));
     }
 
     @Test
@@ -82,8 +88,9 @@ public class LL1ParserTest
 
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        LL1Parser parser = new LL1Parser(parseTable);
 
-        assertFalse(parseTable.accepts("ab"));
+        assertFalse(parser.accepts("ab"));
     }
 
     @Test
@@ -94,8 +101,9 @@ public class LL1ParserTest
 
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        LL1Parser parser = new LL1Parser(parseTable);
 
-        assertFalse(parseTable.accepts("a"));
+        assertFalse(parser.accepts("a"));
     }
 
     @Test
@@ -110,8 +118,9 @@ public class LL1ParserTest
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
         parseTable.addCell(new NonTerminalNode("C"), new TerminalNode("c"), 2);
+        LL1Parser parser = new LL1Parser(parseTable);
 
-        assertTrue(parseTable.accepts("abc"));
+        assertTrue(parser.accepts("abc"));
     }
 
 
@@ -127,8 +136,9 @@ public class LL1ParserTest
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
         parseTable.addCell(new NonTerminalNode("B"), new EndOfStringNode(), 2);
+        LL1Parser parser = new LL1Parser(parseTable);
 
-        assertTrue(parseTable.accepts("a"));
+        assertTrue(parser.accepts("a"));
     }
 
     @Test
@@ -143,8 +153,9 @@ public class LL1ParserTest
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
         parseTable.addCell(new NonTerminalNode("B"), new EndOfStringNode(), 2);
+        LL1Parser parser = new LL1Parser(parseTable);
 
-        assertFalse(parseTable.accepts("ab"));
+        assertFalse(parser.accepts("ab"));
     }
 
     @Test
@@ -159,8 +170,9 @@ public class LL1ParserTest
         parseTable.addCell(new NonTerminalNode("S"), new EndOfStringNode(), 0);
         parseTable.addCell(new NonTerminalNode("A"), new EndOfStringNode(), 1);
         parseTable.addCell(new NonTerminalNode("B"), new EndOfStringNode(), 2);
+        LL1Parser parser = new LL1Parser(parseTable);
 
-        assertTrue(parseTable.accepts(""));
+        assertTrue(parser.accepts(""));
     }
 
     @Test
@@ -175,8 +187,9 @@ public class LL1ParserTest
         parseTable.addCell(new NonTerminalNode("S"), new EndOfStringNode(), 0);
         parseTable.addCell(new NonTerminalNode("A"), new EndOfStringNode(), 1);
         parseTable.addCell(new NonTerminalNode("B"), new EndOfStringNode(), 2);
+        LL1Parser parser = new LL1Parser(parseTable);
 
-        assertFalse(parseTable.accepts("a"));
+        assertFalse(parser.accepts("a"));
     }
 
     @Test
@@ -189,10 +202,11 @@ public class LL1ParserTest
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
+        LL1Parser parser = new LL1Parser(parseTable);
 
         Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
 
-        assertEquals(expectedRuleIndexes, parseTable.getAppliedRules());
+        assertEquals(expectedRuleIndexes, parser.getAppliedRules());
     }
 
     @Test
@@ -205,13 +219,14 @@ public class LL1ParserTest
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
-        parseTable.accepts("a");
+        LL1Parser parser = new LL1Parser(parseTable);
+        parser.accepts("a");
 
         Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
         expectedRuleIndexes.add(0);
         expectedRuleIndexes.add(1);
 
-        assertEquals(expectedRuleIndexes, parseTable.getAppliedRules());
+        assertEquals(expectedRuleIndexes, parser.getAppliedRules());
     }
 
     @Test
@@ -224,13 +239,14 @@ public class LL1ParserTest
         LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
-        parseTable.accepts("ab");
+        LL1Parser parser = new LL1Parser(parseTable);
+        parser.accepts("ab");
 
         Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
         expectedRuleIndexes.add(0);
         expectedRuleIndexes.add(1);
 
-        assertEquals(expectedRuleIndexes, parseTable.getAppliedRules());
+        assertEquals(expectedRuleIndexes, parser.getAppliedRules());
     }
 
     @Test
@@ -245,13 +261,14 @@ public class LL1ParserTest
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
         parseTable.addCell(new NonTerminalNode("B"), new TerminalNode("b"), 2);
-        parseTable.accepts("a");
+        LL1Parser parser = new LL1Parser(parseTable);
+        parser.accepts("a");
 
         Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
         expectedRuleIndexes.add(0);
         expectedRuleIndexes.add(1);
 
-        assertEquals(expectedRuleIndexes, parseTable.getAppliedRules());
+        assertEquals(expectedRuleIndexes, parser.getAppliedRules());
     }
 
     @Test
@@ -266,13 +283,14 @@ public class LL1ParserTest
         parseTable.addCell(new NonTerminalNode("S"), new EndOfStringNode(), 0);
         parseTable.addCell(new NonTerminalNode("A"), new EndOfStringNode(), 1);
         parseTable.addCell(new NonTerminalNode("B"), new EndOfStringNode(), 2);
-        parseTable.accepts("");
+        LL1Parser parser = new LL1Parser(parseTable);
+        parser.accepts("");
 
         Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
         expectedRuleIndexes.add(0);
         expectedRuleIndexes.add(1);
         expectedRuleIndexes.add(2);
 
-        assertEquals(expectedRuleIndexes, parseTable.getAppliedRules());
+        assertEquals(expectedRuleIndexes, parser.getAppliedRules());
     }
 }
