@@ -6,6 +6,7 @@ import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 
+import java.util.List;
 import java.util.Vector;
 
 public class LL1Parser
@@ -141,7 +142,7 @@ public class LL1Parser
         }
     }
 
-    public Vector<Integer> getAppliedRules()
+    public List<Integer> getAppliedRules()
     {
         return this.appliedRules;
     }
