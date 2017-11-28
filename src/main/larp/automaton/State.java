@@ -2,6 +2,7 @@ package larp.automaton;
 
 import larp.ComparableStructure;
 
+import java.util.List;
 import java.util.Vector;
 
 public abstract class State implements ComparableStructure
@@ -37,7 +38,7 @@ public abstract class State implements ComparableStructure
         return this.transitions.size();
     }
 
-    public Vector<StateTransition> getTransitions()
+    public List<StateTransition> getTransitions()
     {
         return this.transitions;
     }
@@ -69,7 +70,7 @@ public abstract class State implements ComparableStructure
         }
 
         Vector<StateTransition> ourTransitions = (Vector<StateTransition>)this.transitions.clone();
-        Vector<StateTransition> otherTransitions = (Vector<StateTransition>)otherState.getTransitions().clone();
+        Vector<StateTransition> otherTransitions = new Vector<StateTransition>(otherState.getTransitions());
 
         Vector<State> ourNextCoveredStates = (Vector<State>)ourCoveredStates.clone();
         ourNextCoveredStates.add(this);

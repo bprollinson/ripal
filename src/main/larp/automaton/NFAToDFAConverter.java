@@ -2,8 +2,8 @@ package larp.automaton;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 public class NFAToDFAConverter
 {
@@ -28,7 +28,7 @@ public class NFAToDFAConverter
 
         for (State NFAState: stateSet)
         {
-            Vector<StateTransition> transitions = NFAState.getTransitions();
+            List<StateTransition> transitions = NFAState.getTransitions();
             for (int j = 0; j < transitions.size(); j++)
             {
                 StateTransition transition = transitions.get(j);

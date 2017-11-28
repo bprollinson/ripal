@@ -1,5 +1,6 @@
 package larp.automaton;
 
+import java.util.List;
 import java.util.Vector;
 
 public class EpsilonNFAToNFAConverter
@@ -27,7 +28,7 @@ public class EpsilonNFAToNFAConverter
             startState.setAccepting(true);
         }
 
-        Vector<StateTransition> transitions = epsilonNFAState.getTransitions();
+        List<StateTransition> transitions = epsilonNFAState.getTransitions();
         for (int i = 0; i < transitions.size(); i++)
         {
             StateTransition transition = transitions.get(i);
@@ -64,7 +65,7 @@ public class EpsilonNFAToNFAConverter
             return true;
         }
 
-        Vector<StateTransition> transitions = startState.getTransitions();
+        List<StateTransition> transitions = startState.getTransitions();
         for (int i = 0; i < transitions.size(); i++)
         {
             StateTransition transition = transitions.get(i);
@@ -87,7 +88,7 @@ public class EpsilonNFAToNFAConverter
         processedTransitions.add(startTransition);
 
         State nextState = startTransition.getNextState();
-        Vector<StateTransition> nextStateTransitions = nextState.getTransitions();
+        List<StateTransition> nextStateTransitions = nextState.getTransitions();
 
         for (int i = 0; i < nextStateTransitions.size(); i++)
         {
