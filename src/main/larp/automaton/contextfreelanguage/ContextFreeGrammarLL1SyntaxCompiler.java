@@ -6,14 +6,14 @@ import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1ParseTable;
 
 import java.util.HashSet;
-import java.util.Vector;
+import java.util.List;
 
 public class ContextFreeGrammarLL1SyntaxCompiler
 {
     public LL1ParseTable compile(ContextFreeGrammar grammar) throws AmbiguousLL1ParseTableException
     {
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
-        Vector<ContextFreeGrammarSyntaxNode> productions = grammar.getProductions();
+        List<ContextFreeGrammarSyntaxNode> productions = grammar.getProductions();
 
         FirstSetCalculator firstCalculator = new FirstSetCalculator(grammar);
 

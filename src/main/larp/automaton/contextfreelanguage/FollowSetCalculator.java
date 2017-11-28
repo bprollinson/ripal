@@ -10,7 +10,7 @@ import larp.parsetable.ContextFreeGrammar;
 import larp.util.SetMap;
 
 import java.util.HashSet;
-import java.util.Vector;
+import java.util.List;
 
 public class FollowSetCalculator
 {
@@ -42,7 +42,7 @@ public class FollowSetCalculator
     private void addFollowNodes()
     {
         HashSet<NonTerminalNode> nullableNonTerminals = new HashSet<NonTerminalNode>();
-        Vector<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
+        List<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
         for (int i = 0; i < productions.size(); i++)
         {
             ContextFreeGrammarSyntaxNode production = productions.get(i);
@@ -106,7 +106,7 @@ public class FollowSetCalculator
 
     private void propagateFollowNodes()
     {
-        Vector<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
+        List<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
         boolean done = false;
 
         while (!done)

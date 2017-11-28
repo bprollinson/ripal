@@ -8,7 +8,7 @@ import larp.parsetable.ContextFreeGrammar;
 import larp.util.SetMap;
 
 import java.util.HashSet;
-import java.util.Vector;
+import java.util.List;
 
 public class FirstSetCalculator
 {
@@ -20,7 +20,7 @@ public class FirstSetCalculator
         this.grammar = grammar;
         this.nonTerminalRules = new SetMap<ContextFreeGrammarSyntaxNode, Integer>();
 
-        Vector<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
+        List<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
         for (int i = 0; i < productions.size(); i++)
         {
             ContextFreeGrammarSyntaxNode productionNode = productions.get(i);

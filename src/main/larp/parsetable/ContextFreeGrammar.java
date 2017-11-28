@@ -5,6 +5,7 @@ import larp.grammar.contextfreelanguage.ProductionNode;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 
+import java.util.List;
 import java.util.Vector;
 
 public class ContextFreeGrammar
@@ -41,7 +42,7 @@ public class ContextFreeGrammar
         return this.productions.get(index);
     }
 
-    public Vector<ContextFreeGrammarSyntaxNode> getProductions()
+    public List<ContextFreeGrammarSyntaxNode> getProductions()
     {
         return this.productions;
     }
