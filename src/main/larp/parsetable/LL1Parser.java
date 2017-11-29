@@ -13,7 +13,7 @@ public class LL1Parser
 {
     private LL1ParseTable parseTable;
     private ContextFreeGrammar contextFreeGrammar;
-    private Vector<Integer> appliedRules;
+    private List<Integer> appliedRules;
 
     public LL1Parser(LL1ParseTable parseTable)
     {
@@ -26,7 +26,7 @@ public class LL1Parser
     {
         this.appliedRules = new Vector<Integer>();
 
-        Vector<ContextFreeGrammarSyntaxNode> stack = new Vector<ContextFreeGrammarSyntaxNode>();
+        List<ContextFreeGrammarSyntaxNode> stack = new Vector<ContextFreeGrammarSyntaxNode>();
         stack.add(contextFreeGrammar.getStartSymbol());
 
         StringBuffer remainingInput = new StringBuffer(inputString);
@@ -45,7 +45,7 @@ public class LL1Parser
         return remainingInput.length() == 0 && stack.size() == 0;
     }
 
-    private boolean processInputCharacter(Vector<ContextFreeGrammarSyntaxNode> stack, StringBuffer remainingInput)
+    private boolean processInputCharacter(List<ContextFreeGrammarSyntaxNode> stack, StringBuffer remainingInput)
     {
         ContextFreeGrammarSyntaxNode topNode = stack.get(0);
         String nextCharacter = remainingInput.substring(0, 1);
@@ -70,7 +70,7 @@ public class LL1Parser
         return true;
     }
 
-    private boolean processInputCharacterForNonTerminalNode(Vector<ContextFreeGrammarSyntaxNode> stack, NonTerminalNode topNode, String nextCharacter)
+    private boolean processInputCharacterForNonTerminalNode(List<ContextFreeGrammarSyntaxNode> stack, NonTerminalNode topNode, String nextCharacter)
     {
         Integer position = this.parseTable.getCell(topNode, new TerminalNode(nextCharacter));
 
@@ -92,7 +92,7 @@ public class LL1Parser
         return true;
     }
 
-    private boolean processInputCharacterForTerminalNode(Vector<ContextFreeGrammarSyntaxNode> stack, TerminalNode topNode, String nextCharacter, StringBuffer remainingInput)
+    private boolean processInputCharacterForTerminalNode(List<ContextFreeGrammarSyntaxNode> stack, TerminalNode topNode, String nextCharacter, StringBuffer remainingInput)
     {
         if (!topNode.getValue().substring(0, 1).equals(nextCharacter))
         {
@@ -112,7 +112,7 @@ public class LL1Parser
         return true;
     }
 
-    private void processNonTerminalsAtEndOfString(Vector<ContextFreeGrammarSyntaxNode> stack, StringBuffer remainingInput)
+    private void processNonTerminalsAtEndOfString(List<ContextFreeGrammarSyntaxNode> stack, StringBuffer remainingInput)
     {
         while (remainingInput.length() == 0 && stack.size() > 0)
         {
