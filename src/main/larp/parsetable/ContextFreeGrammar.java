@@ -10,7 +10,7 @@ import java.util.Vector;
 
 public class ContextFreeGrammar
 {
-    private Vector<ContextFreeGrammarSyntaxNode> productions;
+    private List<ContextFreeGrammarSyntaxNode> productions;
 
     public ContextFreeGrammar()
     {
