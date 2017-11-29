@@ -1,5 +1,6 @@
 package larp.grammar.contextfreelanguage;
 
+import java.util.List;
 import java.util.Vector;
 
 public class ContextFreeGrammarSyntaxNode
@@ -11,7 +12,7 @@ public class ContextFreeGrammarSyntaxNode
         this.childNodes = new Vector<ContextFreeGrammarSyntaxNode>();
     }
 
-    public Vector<ContextFreeGrammarSyntaxNode> getChildNodes()
+    public List<ContextFreeGrammarSyntaxNode> getChildNodes()
     {
         return this.childNodes;
     }

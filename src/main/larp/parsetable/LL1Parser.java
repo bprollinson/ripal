@@ -83,7 +83,7 @@ public class LL1Parser
 
         this.appliedRules.add(position);
 
-        Vector<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
+        List<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
         for (int i = childNodes.size() - 1; i >= 0; i--)
         {
             stack.add(0, childNodes.get(i));
@@ -131,7 +131,7 @@ public class LL1Parser
             this.appliedRules.add(position);
 
             stack.remove(0);
-            Vector<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
+            List<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
             for (int i = childNodes.size() - 1; i >= 0; i--)
             {
                 if (!(childNodes.get(i) instanceof EpsilonNode))
