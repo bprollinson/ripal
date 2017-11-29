@@ -10,7 +10,7 @@ public class EpsilonNFAToNFAConverter
         return new NFA(this.convertNode(nfa.getStartState(), new Vector<State>(), new Vector<State>()));
     }
 
-    private State convertNode(State epsilonNFAState, Vector<State> coveredEpsilonNFAStates, Vector<State> coveredNFAStates)
+    private State convertNode(State epsilonNFAState, List<State> coveredEpsilonNFAStates, List<State> coveredNFAStates)
     {
         int firstIndexOfState = coveredEpsilonNFAStates.indexOf(epsilonNFAState);
         if (firstIndexOfState != -1)
@@ -39,7 +39,7 @@ public class EpsilonNFAToNFAConverter
 
             if (transition.getInput() == null)
             {
-                Vector<StateTransition> tangibleStateTransitions = this.tangibleStateTransitions(transition, new Vector<StateTransition>());
+                List<StateTransition> tangibleStateTransitions = this.tangibleStateTransitions(transition, new Vector<StateTransition>());
 
                 for (int j = 0; j < tangibleStateTransitions.size(); j++)
                 {
@@ -52,7 +52,7 @@ public class EpsilonNFAToNFAConverter
         return startState;
     }
 
-    private boolean epsilonToAccepting(State startState, Vector<State> processedStates)
+    private boolean epsilonToAccepting(State startState, List<State> processedStates)
     {
         if (processedStates.contains(startState))
         {
@@ -78,9 +78,9 @@ public class EpsilonNFAToNFAConverter
         return false;
     }
 
-    private Vector<StateTransition> tangibleStateTransitions(StateTransition startTransition, Vector<StateTransition> processedTransitions)
+    private List<StateTransition> tangibleStateTransitions(StateTransition startTransition, List<StateTransition> processedTransitions)
     {
-        Vector<StateTransition> result = new Vector<StateTransition>();
+        List<StateTransition> result = new Vector<StateTransition>();
         if (processedTransitions.contains(startTransition))
         {
             return result;
@@ -99,7 +99,7 @@ public class EpsilonNFAToNFAConverter
             }
             else
             {
-                Vector<StateTransition> subsequentTransitions = this.tangibleStateTransitions(nextTransition, processedTransitions);
+                List<StateTransition> subsequentTransitions = this.tangibleStateTransitions(nextTransition, processedTransitions);
                 result.addAll(subsequentTransitions);
             }
         }
