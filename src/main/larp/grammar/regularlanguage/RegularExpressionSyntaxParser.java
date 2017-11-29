@@ -5,7 +5,7 @@ import java.util.Vector;
 
 public class RegularExpressionSyntaxParser
 {
-    public RegularExpressionSyntaxNode parse(Vector<RegularExpressionSyntaxToken> tokens)
+    public RegularExpressionSyntaxNode parse(List<RegularExpressionSyntaxToken> tokens)
     {
         RegularExpressionSyntaxNode orNode = this.parseOrExpression(tokens);
         if (orNode != null)
@@ -53,7 +53,7 @@ public class RegularExpressionSyntaxParser
         return node;
     }
 
-    private RegularExpressionSyntaxNode parseOrExpression(Vector<RegularExpressionSyntaxToken> tokens)
+    private RegularExpressionSyntaxNode parseOrExpression(List<RegularExpressionSyntaxToken> tokens)
     {
         ConcatenationNode node = new ConcatenationNode();
         int braceBalance = 0;

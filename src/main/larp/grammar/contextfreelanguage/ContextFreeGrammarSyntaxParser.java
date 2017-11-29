@@ -1,10 +1,10 @@
 package larp.grammar.contextfreelanguage;
 
-import java.util.Vector;
+import java.util.List;
 
 public class ContextFreeGrammarSyntaxParser
 {
-    public ContextFreeGrammarSyntaxNode parse(Vector<ContextFreeGrammarSyntaxToken> tokens)
+    public ContextFreeGrammarSyntaxNode parse(List<ContextFreeGrammarSyntaxToken> tokens)
     {
         ProductionNode productionNode = new ProductionNode();
         NonTerminalToken nonTerminalToken = (NonTerminalToken)tokens.get(0);
