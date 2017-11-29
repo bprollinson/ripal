@@ -1,5 +1,6 @@
 package larp.grammar.regularlanguage;
 
+import java.util.List;
 import java.util.Vector;
 
 public class RegularExpressionSyntaxParser
@@ -26,8 +27,8 @@ public class RegularExpressionSyntaxParser
             }
             else if (token instanceof KleeneClosureToken && braceBalance == 0)
             {
-                Vector<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
-                RegularExpressionSyntaxNode lastNode = childNodes.lastElement();
+                List<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
+                RegularExpressionSyntaxNode lastNode = childNodes.get(childNodes.size() - 1);
                 KleeneClosureNode kleeneClosureNode = new KleeneClosureNode();
                 kleeneClosureNode.addChild(lastNode);
                 childNodes.set(childNodes.size() - 1, kleeneClosureNode);

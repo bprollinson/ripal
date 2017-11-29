@@ -1,5 +1,6 @@
 package larp.grammar.regularlanguage;
 
+import java.util.List;
 import java.util.Vector;
 
 public class RegularExpressionSyntaxNode
@@ -11,7 +12,7 @@ public class RegularExpressionSyntaxNode
         this.childNodes = new Vector<RegularExpressionSyntaxNode>();
     }
 
-    public Vector<RegularExpressionSyntaxNode> getChildNodes()
+    public List<RegularExpressionSyntaxNode> getChildNodes()
     {
         return this.childNodes;
     }

@@ -11,7 +11,7 @@ import larp.grammar.regularlanguage.KleeneClosureNode;
 import larp.grammar.regularlanguage.OrNode;
 import larp.grammar.regularlanguage.RegularExpressionSyntaxNode;
 
-import java.util.Vector;
+import java.util.List;
 
 public class RegularExpressionSyntaxCompiler
 {
@@ -67,7 +67,7 @@ public class RegularExpressionSyntaxCompiler
 
     private StateGroup buildConcatenationStateGroup(RegularExpressionSyntaxNode node)
     {
-        Vector<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
+        List<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
 
         if (childNodes.size() == 0)
         {
@@ -98,7 +98,7 @@ public class RegularExpressionSyntaxCompiler
         State startState = new EpsilonNFAState("", false);
         State endState = new EpsilonNFAState("", false);
 
-        Vector<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
+        List<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
         for (int i = 0; i < childNodes.size(); i++)
         {
             StateGroup currentGroup = this.compileStateGroup(childNodes.get(i));
