@@ -17,7 +17,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         this.numTerminals = 0;
         this.numNonTerminals = 0;
 
-        Vector<ContextFreeGrammarSyntaxToken> tokens = this.convertCharactersToTokens(expression);
+        List<ContextFreeGrammarSyntaxToken> tokens = this.convertCharactersToTokens(expression);
 
         if (this.inTerminal)
         {
@@ -34,9 +34,9 @@ public class ContextFreeGrammarSyntaxTokenizer
         return this.correctEpsilonSetupInTokens(tokens);
     }
 
-    private Vector<ContextFreeGrammarSyntaxToken> convertCharactersToTokens(String expression)
+    private List<ContextFreeGrammarSyntaxToken> convertCharactersToTokens(String expression)
     {
-        Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
 
         String buffer = "";
 
@@ -54,7 +54,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         return tokens;
     }
 
-    private String processCharacter(Vector<ContextFreeGrammarSyntaxToken> tokens, String buffer, char currentCharacter)
+    private String processCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer, char currentCharacter)
     {
         if (currentCharacter == ':')
         {
@@ -80,7 +80,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         return buffer;
     }
 
-    private String processSeparatorCharacter(Vector<ContextFreeGrammarSyntaxToken> tokens, String buffer)
+    private String processSeparatorCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer)
     {
         if (buffer.length() > 0)
         {
@@ -94,7 +94,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         return buffer;
     }
 
-    private String processTerminalStartQuoteCharacter(Vector<ContextFreeGrammarSyntaxToken> tokens, String buffer)
+    private String processTerminalStartQuoteCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer)
     {
         if (buffer.length() > 0)
         {
@@ -107,7 +107,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         return buffer;
     }
 
-    private String processTerminalEndQuoteCharacter(Vector<ContextFreeGrammarSyntaxToken> tokens, String buffer)
+    private String processTerminalEndQuoteCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer)
     {
         if (buffer.length() == 0)
         {
@@ -124,7 +124,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         return buffer;
     }
 
-    private String processSpaceCharacter(Vector<ContextFreeGrammarSyntaxToken> tokens, String buffer)
+    private String processSpaceCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer)
     {
         if (buffer.length() > 0)
         {
@@ -136,9 +136,9 @@ public class ContextFreeGrammarSyntaxTokenizer
         return buffer;
     }
 
-    private Vector<ContextFreeGrammarSyntaxToken> correctEpsilonSetupInTokens(Vector<ContextFreeGrammarSyntaxToken> tokens)
+    private List<ContextFreeGrammarSyntaxToken> correctEpsilonSetupInTokens(List<ContextFreeGrammarSyntaxToken> tokens)
     {
-        Vector<ContextFreeGrammarSyntaxToken> correctedTokens = new Vector<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarSyntaxToken> correctedTokens = new Vector<ContextFreeGrammarSyntaxToken>();
 
         boolean epsilonAdded = false;
 

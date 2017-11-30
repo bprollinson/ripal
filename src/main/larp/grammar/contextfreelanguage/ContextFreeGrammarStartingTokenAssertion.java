@@ -1,12 +1,12 @@
 package larp.grammar.contextfreelanguage;
 
-import java.util.Vector;
+import java.util.List;
 
 public class ContextFreeGrammarStartingTokenAssertion
 {
-    private Vector<ContextFreeGrammarSyntaxToken> tokens;
+    private List<ContextFreeGrammarSyntaxToken> tokens;
 
-    public ContextFreeGrammarStartingTokenAssertion(Vector<ContextFreeGrammarSyntaxToken> tokens)
+    public ContextFreeGrammarStartingTokenAssertion(List<ContextFreeGrammarSyntaxToken> tokens)
     {
         this.tokens = tokens;
     }
