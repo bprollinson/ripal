@@ -5,7 +5,7 @@ import java.util.Vector;
 
 public class ContextFreeGrammarSyntaxNode
 {
-    protected Vector<ContextFreeGrammarSyntaxNode> childNodes;
+    protected List<ContextFreeGrammarSyntaxNode> childNodes;
 
     public ContextFreeGrammarSyntaxNode()
     {
