@@ -7,14 +7,15 @@ import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarStatementPref
 import larp.grammar.contextfreelanguage.NonTerminalToken;
 import larp.grammar.contextfreelanguage.SeparatorToken;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContextFreeGrammarStartingTokenAssertionTest
 {
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
     public void testValidateThrowsExceptionForFewerThanThreeTokens() throws ContextFreeGrammarSyntaxTokenizerException
     {
-        Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarSyntaxToken> tokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
         tokens.add(new NonTerminalToken("S"));
         tokens.add(new SeparatorToken());
         ContextFreeGrammarStartingTokenAssertion assertion = new ContextFreeGrammarStartingTokenAssertion(tokens);
@@ -25,7 +26,7 @@ public class ContextFreeGrammarStartingTokenAssertionTest
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
     public void testValidateThrowsExceptionWhenFirstTokenIsNotANonterminal() throws ContextFreeGrammarSyntaxTokenizerException
     {
-        Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarSyntaxToken> tokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
         tokens.add(new SeparatorToken());
         tokens.add(new SeparatorToken());
         tokens.add(new NonTerminalToken("S"));
@@ -37,7 +38,7 @@ public class ContextFreeGrammarStartingTokenAssertionTest
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
     public void testValidateThrowsExceptionWhenSecondTokenIsNotASeparator() throws ContextFreeGrammarSyntaxTokenizerException
     {
-        Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarSyntaxToken> tokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
         tokens.add(new NonTerminalToken("S"));
         tokens.add(new NonTerminalToken("S"));
         tokens.add(new NonTerminalToken("S"));
@@ -49,7 +50,7 @@ public class ContextFreeGrammarStartingTokenAssertionTest
     @Test
     public void TestValidateDoesNotThrowExceptionForValidTokenSequence() throws ContextFreeGrammarSyntaxTokenizerException
     {
-        Vector<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarSyntaxToken> tokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
         tokens.add(new NonTerminalToken("S"));
         tokens.add(new SeparatorToken());
         tokens.add(new NonTerminalToken("S"));

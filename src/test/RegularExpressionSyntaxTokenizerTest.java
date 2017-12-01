@@ -11,8 +11,8 @@ import larp.grammar.regularlanguage.RegularExpressionSyntaxToken;
 import larp.grammar.regularlanguage.RegularExpressionSyntaxTokenizer;
 import larp.grammar.regularlanguage.RegularExpressionSyntaxTokenizerException;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class RegularExpressionSyntaxTokenizerTest
 {
@@ -22,7 +22,7 @@ public class RegularExpressionSyntaxTokenizerTest
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("");
-        Vector<RegularExpressionSyntaxToken> expectedResult = new Vector();
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList();
 
         assertEquals(expectedResult, result);
     }
@@ -33,7 +33,7 @@ public class RegularExpressionSyntaxTokenizerTest
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(a|b)*");
-        Vector<RegularExpressionSyntaxToken> expectedResult = new Vector();
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList();
         expectedResult.add(new OpenBraceToken());
         expectedResult.add(new CharacterToken('a'));
         expectedResult.add(new OrToken());
