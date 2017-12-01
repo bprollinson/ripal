@@ -1,7 +1,7 @@
 package larp.grammar.contextfreelanguage;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class ContextFreeGrammarSyntaxTokenizer
 {
@@ -36,7 +36,7 @@ public class ContextFreeGrammarSyntaxTokenizer
 
     private List<ContextFreeGrammarSyntaxToken> convertCharactersToTokens(String expression)
     {
-        List<ContextFreeGrammarSyntaxToken> tokens = new Vector<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarSyntaxToken> tokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
 
         String buffer = "";
 
@@ -138,7 +138,7 @@ public class ContextFreeGrammarSyntaxTokenizer
 
     private List<ContextFreeGrammarSyntaxToken> correctEpsilonSetupInTokens(List<ContextFreeGrammarSyntaxToken> tokens)
     {
-        List<ContextFreeGrammarSyntaxToken> correctedTokens = new Vector<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarSyntaxToken> correctedTokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
 
         boolean epsilonAdded = false;
 
