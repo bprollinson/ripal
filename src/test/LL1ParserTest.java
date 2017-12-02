@@ -11,7 +11,8 @@ import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1Parser;
 import larp.parsetable.LL1ParseTable;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LL1ParserTest
 {
@@ -204,7 +205,7 @@ public class LL1ParserTest
         parseTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
         LL1Parser parser = new LL1Parser(parseTable);
 
-        Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
+        List<Integer> expectedRuleIndexes = new ArrayList<Integer>();
 
         assertEquals(expectedRuleIndexes, parser.getAppliedRules());
     }
@@ -222,7 +223,7 @@ public class LL1ParserTest
         LL1Parser parser = new LL1Parser(parseTable);
         parser.accepts("a");
 
-        Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
+        List<Integer> expectedRuleIndexes = new ArrayList<Integer>();
         expectedRuleIndexes.add(0);
         expectedRuleIndexes.add(1);
 
@@ -242,7 +243,7 @@ public class LL1ParserTest
         LL1Parser parser = new LL1Parser(parseTable);
         parser.accepts("ab");
 
-        Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
+        List<Integer> expectedRuleIndexes = new ArrayList<Integer>();
         expectedRuleIndexes.add(0);
         expectedRuleIndexes.add(1);
 
@@ -264,7 +265,7 @@ public class LL1ParserTest
         LL1Parser parser = new LL1Parser(parseTable);
         parser.accepts("a");
 
-        Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
+        List<Integer> expectedRuleIndexes = new ArrayList<Integer>();
         expectedRuleIndexes.add(0);
         expectedRuleIndexes.add(1);
 
@@ -286,7 +287,7 @@ public class LL1ParserTest
         LL1Parser parser = new LL1Parser(parseTable);
         parser.accepts("");
 
-        Vector<Integer> expectedRuleIndexes = new Vector<Integer>();
+        List<Integer> expectedRuleIndexes = new ArrayList<Integer>();
         expectedRuleIndexes.add(0);
         expectedRuleIndexes.add(1);
         expectedRuleIndexes.add(2);
