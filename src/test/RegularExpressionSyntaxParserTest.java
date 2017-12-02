@@ -14,7 +14,8 @@ import larp.grammar.regularlanguage.RegularExpressionSyntaxNode;
 import larp.grammar.regularlanguage.RegularExpressionSyntaxParser;
 import larp.grammar.regularlanguage.RegularExpressionSyntaxToken;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegularExpressionSyntaxParserTest
 {
@@ -23,7 +24,7 @@ public class RegularExpressionSyntaxParserTest
     {
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
-        Vector<RegularExpressionSyntaxToken> input = new Vector<RegularExpressionSyntaxToken>();
+        List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         RegularExpressionSyntaxNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
@@ -36,7 +37,7 @@ public class RegularExpressionSyntaxParserTest
     {
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
-        Vector<RegularExpressionSyntaxToken> input = new Vector<RegularExpressionSyntaxToken>();
+        List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
         RegularExpressionSyntaxNode rootNode = parser.parse(input);
 
@@ -51,7 +52,7 @@ public class RegularExpressionSyntaxParserTest
     {
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
-        Vector<RegularExpressionSyntaxToken> input = new Vector<RegularExpressionSyntaxToken>();
+        List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
         input.add(new CharacterToken('b'));
         RegularExpressionSyntaxNode rootNode = parser.parse(input);
@@ -68,7 +69,7 @@ public class RegularExpressionSyntaxParserTest
     {
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
-        Vector<RegularExpressionSyntaxToken> input = new Vector<RegularExpressionSyntaxToken>();
+        List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
         input.add(new CharacterToken('b'));
         input.add(new KleeneClosureToken());
@@ -88,7 +89,7 @@ public class RegularExpressionSyntaxParserTest
     {
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
-        Vector<RegularExpressionSyntaxToken> input = new Vector<RegularExpressionSyntaxToken>();
+        List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
         input.add(new OpenBraceToken());
         input.add(new CharacterToken('b'));
@@ -111,7 +112,7 @@ public class RegularExpressionSyntaxParserTest
     {
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
-        Vector<RegularExpressionSyntaxToken> input = new Vector<RegularExpressionSyntaxToken>();
+        List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
         input.add(new OrToken());
         input.add(new CharacterToken('b'));
