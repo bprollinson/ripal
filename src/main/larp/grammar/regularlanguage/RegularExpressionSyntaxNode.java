@@ -1,15 +1,15 @@
 package larp.grammar.regularlanguage;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class RegularExpressionSyntaxNode
 {
-    protected Vector<RegularExpressionSyntaxNode> childNodes;
+    protected List<RegularExpressionSyntaxNode> childNodes;
 
     public RegularExpressionSyntaxNode()
     {
-        this.childNodes = new Vector<RegularExpressionSyntaxNode>();
+        this.childNodes = new ArrayList<RegularExpressionSyntaxNode>();
     }
 
     public List<RegularExpressionSyntaxNode> getChildNodes()
