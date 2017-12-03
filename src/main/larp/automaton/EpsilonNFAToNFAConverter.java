@@ -1,13 +1,13 @@
 package larp.automaton;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class EpsilonNFAToNFAConverter
 {
     public NFA convert(EpsilonNFA nfa)
     {
-        return new NFA(this.convertNode(nfa.getStartState(), new Vector<State>(), new Vector<State>()));
+        return new NFA(this.convertNode(nfa.getStartState(), new ArrayList<State>(), new ArrayList<State>()));
     }
 
     private State convertNode(State epsilonNFAState, List<State> coveredEpsilonNFAStates, List<State> coveredNFAStates)
@@ -22,7 +22,7 @@ public class EpsilonNFAToNFAConverter
         coveredEpsilonNFAStates.add(epsilonNFAState);
         coveredNFAStates.add(startState);
 
-        boolean epsilonToAccepting = this.epsilonToAccepting(epsilonNFAState, new Vector<State>());
+        boolean epsilonToAccepting = this.epsilonToAccepting(epsilonNFAState, new ArrayList<State>());
         if (epsilonToAccepting)
         {
             startState.setAccepting(true);
@@ -39,7 +39,7 @@ public class EpsilonNFAToNFAConverter
 
             if (transition.getInput() == null)
             {
-                List<StateTransition> tangibleStateTransitions = this.tangibleStateTransitions(transition, new Vector<StateTransition>());
+                List<StateTransition> tangibleStateTransitions = this.tangibleStateTransitions(transition, new ArrayList<StateTransition>());
 
                 for (int j = 0; j < tangibleStateTransitions.size(); j++)
                 {
@@ -80,7 +80,7 @@ public class EpsilonNFAToNFAConverter
 
     private List<StateTransition> tangibleStateTransitions(StateTransition startTransition, List<StateTransition> processedTransitions)
     {
-        List<StateTransition> result = new Vector<StateTransition>();
+        List<StateTransition> result = new ArrayList<StateTransition>();
         if (processedTransitions.contains(startTransition))
         {
             return result;
