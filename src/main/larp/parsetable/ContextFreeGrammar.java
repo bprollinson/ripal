@@ -5,8 +5,8 @@ import larp.grammar.contextfreelanguage.ProductionNode;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class ContextFreeGrammar
 {
@@ -14,7 +14,7 @@ public class ContextFreeGrammar
 
     public ContextFreeGrammar()
     {
-        this.productions = new Vector<ContextFreeGrammarSyntaxNode>();
+        this.productions = new ArrayList<ContextFreeGrammarSyntaxNode>();
     }
 
     public void addProduction(ContextFreeGrammarSyntaxNode productionNode)
