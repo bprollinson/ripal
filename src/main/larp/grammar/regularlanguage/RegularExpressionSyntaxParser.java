@@ -1,7 +1,7 @@
 package larp.grammar.regularlanguage;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class RegularExpressionSyntaxParser
 {
@@ -44,7 +44,7 @@ public class RegularExpressionSyntaxParser
 
                 if (braceBalance == 0)
                 {
-                    node.addChild(this.parse(new Vector(tokens.subList(openBracePosition + 1, i))));
+                    node.addChild(this.parse(new ArrayList(tokens.subList(openBracePosition + 1, i))));
                     openBracePosition = -1;
                 }
             }
@@ -59,7 +59,7 @@ public class RegularExpressionSyntaxParser
         int braceBalance = 0;
         int openBracePosition = -1;
 
-        Vector<Integer> orPositions = new Vector<Integer>();
+        List<Integer> orPositions = new ArrayList<Integer>();
         for (int i = 0; i < tokens.size(); i++)
         {
             RegularExpressionSyntaxToken token = tokens.get(i);
@@ -86,11 +86,11 @@ public class RegularExpressionSyntaxParser
             for (int i = 0; i < orPositions.size(); i++)
             {
                 int endPosition = orPositions.get(i);
-                orNode.addChild(this.parse(new Vector(tokens.subList(startPosition, endPosition))));
+                orNode.addChild(this.parse(new ArrayList(tokens.subList(startPosition, endPosition))));
 
                 startPosition = endPosition + +1;
             }
-            orNode.addChild(this.parse(new Vector(tokens.subList(startPosition, tokens.size()))));
+            orNode.addChild(this.parse(new ArrayList(tokens.subList(startPosition, tokens.size()))));
 
             node.addChild(orNode);
 
