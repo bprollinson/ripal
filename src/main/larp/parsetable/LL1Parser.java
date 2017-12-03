@@ -6,8 +6,8 @@ import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class LL1Parser
 {
@@ -19,14 +19,14 @@ public class LL1Parser
     {
         this.parseTable = parseTable;
         this.contextFreeGrammar = parseTable.getContextFreeGrammar();
-        this.appliedRules = new Vector<Integer>();
+        this.appliedRules = new ArrayList<Integer>();
     }
 
     public boolean accepts(String inputString)
     {
-        this.appliedRules = new Vector<Integer>();
+        this.appliedRules = new ArrayList<Integer>();
 
-        List<ContextFreeGrammarSyntaxNode> stack = new Vector<ContextFreeGrammarSyntaxNode>();
+        List<ContextFreeGrammarSyntaxNode> stack = new ArrayList<ContextFreeGrammarSyntaxNode>();
         stack.add(contextFreeGrammar.getStartSymbol());
 
         StringBuffer remainingInput = new StringBuffer(inputString);
