@@ -1,7 +1,7 @@
 package larp.grammar.regularlanguage;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class RegularExpressionSyntaxTokenizer
 {
@@ -12,7 +12,7 @@ public class RegularExpressionSyntaxTokenizer
 
     public List<RegularExpressionSyntaxToken> tokenize(String expression) throws RegularExpressionSyntaxTokenizerException
     {
-        Vector<RegularExpressionSyntaxToken> tokens = new Vector<RegularExpressionSyntaxToken>();
+        List<RegularExpressionSyntaxToken> tokens = new ArrayList<RegularExpressionSyntaxToken>();
 
         int nestingLevel = 0;
         Character lastCharacter = null;
