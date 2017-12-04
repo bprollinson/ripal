@@ -89,9 +89,9 @@ public abstract class State implements ComparableStructure
 
                 if (current.getInput() == otherTransition.getInput())
                 {
-                    int ourNextStatePosition = this.coveredStatesPosition(ourCoveredStates, current.getNextState());
+                    int ourNextStatePosition = ourCoveredStates.indexOf(current.getNextState());
                     boolean ourNextStateLoops = ourNextStatePosition != -1;
-                    int otherNextStatePosition = this.coveredStatesPosition(otherCoveredStates, otherTransition.getNextState());
+                    int otherNextStatePosition = otherCoveredStates.indexOf(otherTransition.getNextState());
                     boolean otherNextStateLoops = otherNextStatePosition != -1;
                     boolean nextStatesLoop = ourNextStateLoops && otherNextStateLoops;
 
@@ -140,18 +140,5 @@ public abstract class State implements ComparableStructure
         otherCoveredStates.add(otherState);
 
         return true;
-    }
-
-    private int coveredStatesPosition(List<State> coveredStates, State state)
-    {
-        for (int i = 0; i < coveredStates.size(); i++)
-        {
-            if (coveredStates.get(i) == state)
-            {
-                return i;
-            }
-        }
-
-        return -1;
     }
 }
