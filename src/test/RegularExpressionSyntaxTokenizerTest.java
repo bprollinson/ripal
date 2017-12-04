@@ -22,7 +22,7 @@ public class RegularExpressionSyntaxTokenizerTest
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("");
-        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList();
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
 
         assertEquals(expectedResult, result);
     }
@@ -33,7 +33,7 @@ public class RegularExpressionSyntaxTokenizerTest
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(a|b)*");
-        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList();
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
         expectedResult.add(new OpenBraceToken());
         expectedResult.add(new CharacterToken('a'));
         expectedResult.add(new OrToken());

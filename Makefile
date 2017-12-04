@@ -4,10 +4,10 @@ full:
 	make jar
 	make clean
 program:
-	javac -cp ./src/main ./*.java
+	javac -cp ./src/main -Xlint:unchecked ./*.java
 test:
 	make clean
-	javac -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar ./src/test/*Test.java
+	javac -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar -Xlint:unchecked ./src/test/*Test.java
 	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore DFATest
 	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore RegularExpressionSyntaxTokenizerTest
 	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore RegularExpressionSyntaxTokenSequenceAssertionTest

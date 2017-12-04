@@ -44,7 +44,7 @@ public class RegularExpressionSyntaxParser
 
                 if (braceBalance == 0)
                 {
-                    node.addChild(this.parse(new ArrayList(tokens.subList(openBracePosition + 1, i))));
+                    node.addChild(this.parse(new ArrayList<RegularExpressionSyntaxToken>(tokens.subList(openBracePosition + 1, i))));
                     openBracePosition = -1;
                 }
             }
@@ -86,11 +86,11 @@ public class RegularExpressionSyntaxParser
             for (int i = 0; i < orPositions.size(); i++)
             {
                 int endPosition = orPositions.get(i);
-                orNode.addChild(this.parse(new ArrayList(tokens.subList(startPosition, endPosition))));
+                orNode.addChild(this.parse(new ArrayList<RegularExpressionSyntaxToken>(tokens.subList(startPosition, endPosition))));
 
                 startPosition = endPosition + +1;
             }
-            orNode.addChild(this.parse(new ArrayList(tokens.subList(startPosition, tokens.size()))));
+            orNode.addChild(this.parse(new ArrayList<RegularExpressionSyntaxToken>(tokens.subList(startPosition, tokens.size()))));
 
             node.addChild(orNode);
 

@@ -13,7 +13,7 @@ public class SetMapTest
         SetMap<String, Integer> setMap = new SetMap<String, Integer>();
         setMap.put("key", 1);
 
-        HashSet expectedSet = new HashSet<Integer>();
+        HashSet<Integer> expectedSet = new HashSet<Integer>();
         expectedSet.add(1);
 
         assertEquals(expectedSet, setMap.get("key"));
@@ -26,7 +26,7 @@ public class SetMapTest
         setMap.put("key", 1);
         setMap.put("key", 2);
 
-        HashSet expectedSet = new HashSet<Integer>();
+        HashSet<Integer> expectedSet = new HashSet<Integer>();
         expectedSet.add(1);
         expectedSet.add(2);
 
@@ -40,11 +40,11 @@ public class SetMapTest
         setMap.put("key1", 1);
         setMap.put("key2", 2);
 
-        HashSet expectedSet1 = new HashSet<Integer>();
+        HashSet<Integer> expectedSet1 = new HashSet<Integer>();
         expectedSet1.add(1);
         assertEquals(expectedSet1, setMap.get("key1"));
 
-        HashSet expectedSet2 = new HashSet<Integer>();
+        HashSet<Integer> expectedSet2 = new HashSet<Integer>();
         expectedSet2.add(2);
         assertEquals(expectedSet2, setMap.get("key2"));
     }
@@ -58,12 +58,12 @@ public class SetMapTest
         setMap.put("key2", 3);
         setMap.put("key2", 4);
 
-        HashSet expectedSet1 = new HashSet<Integer>();
+        HashSet<Integer> expectedSet1 = new HashSet<Integer>();
         expectedSet1.add(1);
         expectedSet1.add(2);
         assertEquals(expectedSet1, setMap.get("key1"));
 
-        HashSet expectedSet2 = new HashSet<Integer>();
+        HashSet<Integer> expectedSet2 = new HashSet<Integer>();
         expectedSet2.add(3);
         expectedSet2.add(4);
         assertEquals(expectedSet2, setMap.get("key2"));
