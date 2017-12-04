@@ -2,20 +2,20 @@ package larp.automaton;
 
 import larp.ComparableStructure;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public abstract class State implements ComparableStructure
 {
     private String name;
     private boolean accepting;
-    protected Vector<StateTransition> transitions;
+    protected List<StateTransition> transitions;
 
     public State(String name, boolean accepting)
     {
         this.name = name;
         this.accepting = accepting;
-        this.transitions = new Vector<StateTransition>();
+        this.transitions = new ArrayList<StateTransition>();
     }
 
     public void addTransition(StateTransition transition)
@@ -51,13 +51,13 @@ public abstract class State implements ComparableStructure
         }
 
         State otherState = (State)other;
-        Vector<State> ourCoveredStates = new Vector<State>();
-        Vector<State> otherCoveredStates = new Vector<State>();
+        List<State> ourCoveredStates = new ArrayList<State>();
+        List<State> otherCoveredStates = new ArrayList<State>();
 
         return this.equalsState(otherState, ourCoveredStates, otherCoveredStates);
     }
 
-    private boolean equalsState(State otherState, Vector<State> ourCoveredStates, Vector<State> otherCoveredStates)
+    private boolean equalsState(State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
     {
         if (this.accepting != otherState.isAccepting())
         {
@@ -69,12 +69,12 @@ public abstract class State implements ComparableStructure
             return false;
         }
 
-        Vector<StateTransition> ourTransitions = (Vector<StateTransition>)this.transitions.clone();
-        Vector<StateTransition> otherTransitions = new Vector<StateTransition>(otherState.getTransitions());
+        List<StateTransition> ourTransitions = new ArrayList<StateTransition>(this.transitions);
+        List<StateTransition> otherTransitions = new ArrayList<StateTransition>(otherState.getTransitions());
 
-        Vector<State> ourNextCoveredStates = (Vector<State>)ourCoveredStates.clone();
+        List<State> ourNextCoveredStates = new ArrayList<State>(ourCoveredStates);
         ourNextCoveredStates.add(this);
-        Vector<State> otherNextCoveredStates = (Vector<State>)otherCoveredStates.clone();
+        List<State> otherNextCoveredStates = new ArrayList<State>(otherCoveredStates);
         otherNextCoveredStates.add(otherState);
 
         while (ourTransitions.size() > 0)
@@ -142,7 +142,7 @@ public abstract class State implements ComparableStructure
         return true;
     }
 
-    private int coveredStatesPosition(Vector<State> coveredStates, State state)
+    private int coveredStatesPosition(List<State> coveredStates, State state)
     {
         for (int i = 0; i < coveredStates.size(); i++)
         {
