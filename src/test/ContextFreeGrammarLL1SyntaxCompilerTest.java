@@ -194,4 +194,16 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
 
         assertEquals(expectedTable, compiler.compile(grammar));
     }
+
+    @Test
+    public void testCompileHandlesTerminalFollowSets()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCompileHandlesEndOfStringFollowSets()
+    {
+        assertEquals(0, 1);
+    }
 }
