@@ -211,7 +211,7 @@ public class FollowSetCalculatorTest
     }
 
     @Test
-    public void testGetFollowReturnsSubsequentNonTerminalNodeWhenNextNonTerminalNodeGoesToEpsilon()
+    public void testGetFollowReturnsTerminalNodeFromSubsequentNonTerminalNodeWhenNextNonTerminalNodeGoesToEpsilon()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"), new NonTerminalNode("C"));
