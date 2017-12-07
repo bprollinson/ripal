@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import larp.automaton.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.automaton.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
+import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
@@ -196,9 +197,22 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileHandlesTerminalFollowSets()
+    public void testCompileHandlesTerminalFollowSets() throws AmbiguousLL1ParseTableException
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"), new TerminalNode("b"), new NonTerminalNode("C"), new TerminalNode("c"), new NonTerminalNode("C"), new TerminalNode("d"));
+        grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
+        grammar.addProduction(new NonTerminalNode("C"), new EpsilonNode());
+
+        LL1ParseTable expectedTable = new LL1ParseTable(grammar);
+        expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        expectedTable.addCell(new NonTerminalNode("B"), new TerminalNode("b"), 1);
+        expectedTable.addCell(new NonTerminalNode("C"), new TerminalNode("c"), 2);
+        expectedTable.addCell(new NonTerminalNode("C"), new TerminalNode("d"), 2);
+
+        assertEquals(expectedTable, compiler.compile(grammar));
     }
 
     @Test
