@@ -1,6 +1,7 @@
 package larp.automaton.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1ParseTable;
@@ -16,6 +17,7 @@ public class ContextFreeGrammarLL1SyntaxCompiler
         List<ContextFreeGrammarSyntaxNode> productions = grammar.getProductions();
 
         FirstSetCalculator firstCalculator = new FirstSetCalculator(grammar);
+        FollowSetCalculator followSetCalculator = new FollowSetCalculator(grammar);
 
         for (int firstRuleIndex = 0; firstRuleIndex < productions.size(); firstRuleIndex++)
         {
@@ -24,6 +26,17 @@ public class ContextFreeGrammarLL1SyntaxCompiler
 
             for (ContextFreeGrammarSyntaxNode first: firsts)
             {
+                if (first instanceof EpsilonNode)
+                {
+                    HashSet<ContextFreeGrammarSyntaxNode> follows = followSetCalculator.getFollow(nonTerminalNode);
+                    for (ContextFreeGrammarSyntaxNode follow: follows)
+                    {
+                        parseTable.addCell(nonTerminalNode, follow, firstRuleIndex);
+                    }
+
+                    continue;
+                }
+
                 if (parseTable.getCell(nonTerminalNode, first) != null)
                 {
                     throw new AmbiguousLL1ParseTableException();
