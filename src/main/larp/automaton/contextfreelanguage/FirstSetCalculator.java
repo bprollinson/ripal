@@ -116,7 +116,7 @@ public class FirstSetCalculator
             index++;
         }
 
-        if (results.size() == 0 && epsilonFound)
+        if (epsilonFound)
         {
             results.add(new EpsilonNode());
         }
