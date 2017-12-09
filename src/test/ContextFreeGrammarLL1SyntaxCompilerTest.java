@@ -236,4 +236,31 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
 
         assertEquals(expectedTable, compiler.compile(grammar));
     }
+
+    @Test(expected = AmbiguousLL1ParseTableException.class)
+    public void testCompileThrowsExceptionForFirstFollowAmbiguity() throws AmbiguousLL1ParseTableException
+    {
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("b"));
+        grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("b"));
+
+        compiler.compile(grammar);
+    }
+
+    @Test(expected = AmbiguousLL1ParseTableException.class)
+    public void testCompileThrowsExceptionForFollowFollowAmbiguity() throws AmbiguousLL1ParseTableException
+    {
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"));
+        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+
+        compiler.compile(grammar);
+    }
 }
