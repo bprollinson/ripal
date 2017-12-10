@@ -2,6 +2,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+import larp.automaton.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.ContextFreeGrammar;
@@ -9,6 +10,17 @@ import larp.parsetable.LL1ParseTable;
 
 public class LL1ParseTableTest
 {
+    @Test(expected = AmbiguousLL1ParseTableException.class)
+    public void testAddCellThrowsExceptionForTwoCellsWithTheSameNonTerminalAndTerminal()
+    {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LL1ParseTable parseTable = new LL1ParseTable(cfg);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+    }
+
     @Test
     public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
     {
