@@ -31,26 +31,26 @@ public class ContextFreeGrammarLL1SyntaxCompiler
                     HashSet<ContextFreeGrammarSyntaxNode> follows = followSetCalculator.getFollow(nonTerminalNode);
                     for (ContextFreeGrammarSyntaxNode follow: follows)
                     {
-                        if (parseTable.getCell(nonTerminalNode, follow) != null)
-                        {
-                            throw new AmbiguousLL1ParseTableException();
-                        }
-
-                        parseTable.addCell(nonTerminalNode, follow, firstRuleIndex);
+                        this.addCell(parseTable, nonTerminalNode, follow, firstRuleIndex);
                     }
 
                     continue;
                 }
 
-                if (parseTable.getCell(nonTerminalNode, first) != null)
-                {
-                    throw new AmbiguousLL1ParseTableException();
-                }
-
-                parseTable.addCell(nonTerminalNode, first, firstRuleIndex);
+                this.addCell(parseTable, nonTerminalNode, first, firstRuleIndex);
             }
         }
 
         return parseTable;
+    }
+
+    private void addCell(LL1ParseTable parseTable, NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode, int ruleIndex) throws AmbiguousLL1ParseTableException
+    {
+        if (parseTable.getCell(nonTerminalNode, terminalNode) != null)
+        {
+            throw new AmbiguousLL1ParseTableException();
+        }
+
+        parseTable.addCell(nonTerminalNode, terminalNode, ruleIndex);
     }
 }
