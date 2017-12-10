@@ -61,7 +61,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileReturnsParseTableForProductionWithMultipleCharactersInFirstSet() throws AmbiguousLL1ParseTableException
+    public void testCompileReturnsParseTableForProductionWithMultipleCharactersInFirstSetViaDirectProductions() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
@@ -77,7 +77,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test
-    public void testBanana() throws AmbiguousLL1ParseTableException
+    public void testCompileReturnsParseTableForProductionWithMultipleCharactersInFirstSetViaIndirectProductions() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
