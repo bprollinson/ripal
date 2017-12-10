@@ -31,6 +31,11 @@ public class ContextFreeGrammarLL1SyntaxCompiler
                     HashSet<ContextFreeGrammarSyntaxNode> follows = followSetCalculator.getFollow(nonTerminalNode);
                     for (ContextFreeGrammarSyntaxNode follow: follows)
                     {
+                        if (parseTable.getCell(nonTerminalNode, follow) != null)
+                        {
+                            throw new AmbiguousLL1ParseTableException();
+                        }
+
                         parseTable.addCell(nonTerminalNode, follow, firstRuleIndex);
                     }
 
