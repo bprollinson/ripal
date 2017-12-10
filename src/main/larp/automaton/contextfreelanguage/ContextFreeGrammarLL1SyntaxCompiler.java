@@ -3,6 +3,7 @@ package larp.automaton.contextfreelanguage;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
+import larp.parsetable.AmbiguousLL1ParseTableException;
 import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1ParseTable;
 
@@ -31,13 +32,13 @@ public class ContextFreeGrammarLL1SyntaxCompiler
                     HashSet<ContextFreeGrammarSyntaxNode> follows = followSetCalculator.getFollow(nonTerminalNode);
                     for (ContextFreeGrammarSyntaxNode follow: follows)
                     {
-                        this.addCell(parseTable, nonTerminalNode, follow, firstRuleIndex);
+                        parseTable.addCell(nonTerminalNode, follow, firstRuleIndex);
                     }
 
                     continue;
                 }
 
-                this.addCell(parseTable, nonTerminalNode, first, firstRuleIndex);
+                parseTable.addCell(nonTerminalNode, first, firstRuleIndex);
             }
         }
 

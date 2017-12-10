@@ -16,8 +16,13 @@ public class LL1ParseTable
         this.table = new HashMap<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>>();
     }
 
-    public void addCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode, int contextFreeGrammarRuleIndex)
+    public void addCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode, int contextFreeGrammarRuleIndex) throws AmbiguousLL1ParseTableException
     {
+        if (this.getCell(nonTerminalNode, terminalNode) != null)
+        {
+            throw new AmbiguousLL1ParseTableException();
+        }
+
         HashMap<ContextFreeGrammarSyntaxNode, Integer> entry = this.table.get(nonTerminalNode);
         if (entry == null)
         {

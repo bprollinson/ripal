@@ -2,16 +2,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.automaton.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
+import larp.parsetable.AmbiguousLL1ParseTableException;
 import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1ParseTable;
 
 public class LL1ParseTableTest
 {
     @Test(expected = AmbiguousLL1ParseTableException.class)
-    public void testAddCellThrowsExceptionForTwoCellsWithTheSameNonTerminalAndTerminal()
+    public void testAddCellThrowsExceptionForTwoCellsWithTheSameNonTerminalAndTerminal() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -31,7 +31,7 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsTrueForNonEmptyCFGAndTableEntries()
+    public void testEqualsReturnsTrueForNonEmptyCFGAndTableEntries() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -49,7 +49,7 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForDifferentCFGs()
+    public void testEqualsReturnsFalseForDifferentCFGs() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -67,7 +67,7 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForDifferentTableEntries()
+    public void testEqualsReturnsFalseForDifferentTableEntries() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -85,7 +85,7 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsTrueForSameTableEntriesInDifferentOrder()
+    public void testEqualsReturnsTrueForSameTableEntriesInDifferentOrder() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
