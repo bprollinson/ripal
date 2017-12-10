@@ -245,8 +245,8 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
-        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("b"));
-        grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("b"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("b"));
+        grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
 
         compiler.compile(grammar);
     }
