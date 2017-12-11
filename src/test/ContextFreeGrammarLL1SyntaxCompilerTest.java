@@ -273,6 +273,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
-        compiler.compile(grammar);
+        LL1ParseTable expectedTable = new LL1ParseTable(grammar);
+        assertEquals(expectedTable, compiler.compile(grammar));
     }
 }
