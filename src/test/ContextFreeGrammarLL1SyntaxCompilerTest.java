@@ -263,4 +263,16 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
 
         compiler.compile(grammar);
     }
+
+    @Test(expected = AmbiguousLL1ParseTableException.class)
+    public void testCompileHandlesDanglingNonTerminalAfterNonTerminalThatGoesToEpsilon() throws AmbiguousLL1ParseTableException
+    {
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+
+        compiler.compile(grammar);
+    }
 }
