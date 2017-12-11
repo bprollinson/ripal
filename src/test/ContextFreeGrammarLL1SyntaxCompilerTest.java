@@ -13,6 +13,17 @@ import larp.parsetable.LL1ParseTable;
 public class ContextFreeGrammarLL1SyntaxCompilerTest
 {
     @Test
+    public void testCompileReturnsEmptyParseTableForEmptyCFG() throws AmbiguousLL1ParseTableException
+    {
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        LL1ParseTable expectedTable = new LL1ParseTable(grammar);
+
+        assertEquals(expectedTable, compiler.compile(grammar));
+    }
+
+    @Test
     public void testCompileReturnsParseTableForSingleCharacterProductionCFG() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
