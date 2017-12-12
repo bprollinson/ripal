@@ -8,6 +8,15 @@ import java.util.HashSet;
 public class SetMapTest
 {
     @Test
+    public void testGetReturnsEmptySetForNonExistentKey()
+    {
+        SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+
+        HashSet<Integer> expectedSet = new HashSet<Integer>();
+        assertEquals(expectedSet, setMap.get("key"));
+    }
+
+    @Test
     public void testSetMapMapsSingleKeyToSingleEntry()
     {
         SetMap<String, Integer> setMap = new SetMap<String, Integer>();
