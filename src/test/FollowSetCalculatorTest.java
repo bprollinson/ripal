@@ -14,6 +14,38 @@ import java.util.HashSet;
 public class FollowSetCalculatorTest
 {
     @Test
+    public void testGetFollowReturnsEmptySetForEmptyCFG()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+
+        FollowSetCalculator calculator = new FollowSetCalculator(grammar);
+        HashSet<ContextFreeGrammarSyntaxNode> expectedFollows = new HashSet<ContextFreeGrammarSyntaxNode>();
+        assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("S")));
+    }
+
+    @Test
+    public void testGetFollowReturnsEmptySetForNonTerminalNodeNotAppearingInCFG()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        FollowSetCalculator calculator = new FollowSetCalculator(grammar);
+        HashSet<ContextFreeGrammarSyntaxNode> expectedFollows = new HashSet<ContextFreeGrammarSyntaxNode>();
+        assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
+    }
+
+    @Test
+    public void testGetFollowReturnsEmptySetForDanglingNonTerminal()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        FollowSetCalculator calculator = new FollowSetCalculator(grammar);
+        HashSet<ContextFreeGrammarSyntaxNode> expectedFollows = new HashSet<ContextFreeGrammarSyntaxNode>();
+        assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
+    }
+
+    @Test
     public void testGetFollowReturnsEndOfStringSymbolForStartNonTerminal()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
@@ -222,6 +254,18 @@ public class FollowSetCalculatorTest
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
         HashSet<ContextFreeGrammarSyntaxNode> expectedFollows = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedFollows.add(new TerminalNode("c"));
+        assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
+    }
+
+    @Test
+    public void testGetFollowReturnsFollowForNonDanglingProductionPath()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+
+        FollowSetCalculator calculator = new FollowSetCalculator(grammar);
+        HashSet<ContextFreeGrammarSyntaxNode> expectedFollows = new HashSet<ContextFreeGrammarSyntaxNode>();
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
 }
