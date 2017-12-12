@@ -287,4 +287,23 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
         assertEquals(expectedTable, compiler.compile(grammar));
     }
+
+    @Test
+    public void testCompileReturnsParseTableForNonDanglingProductionPath() throws AmbiguousLL1ParseTableException
+    {
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("D"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"), new NonTerminalNode("C"));
+        grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
+        grammar.addProduction(new NonTerminalNode("D"), new TerminalNode("d"));
+
+        LL1ParseTable expectedTable = new LL1ParseTable(grammar);
+        expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("d"), 1);
+        expectedTable.addCell(new NonTerminalNode("D"), new TerminalNode("d"), 4);
+
+        assertEquals(expectedTable, compiler.compile(grammar));
+    }
 }
