@@ -14,6 +14,11 @@ public class SetMap<K, V>
 
     public HashSet<V> get(K key)
     {
+        if (!this.map.containsKey(key))
+        {
+            return new HashSet<V>();
+        }
+
         return this.map.get(key);
     }
 
