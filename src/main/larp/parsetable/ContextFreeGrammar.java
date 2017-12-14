@@ -49,6 +49,11 @@ public class ContextFreeGrammar
 
     public NonTerminalNode getStartSymbol()
     {
+        if (this.productions.size() == 0)
+        {
+            return null;
+        }
+
         return (NonTerminalNode)this.productions.get(0).getChildNodes().get(0);
     }
 
