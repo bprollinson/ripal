@@ -143,6 +143,21 @@ public class FollowSetCalculatorTest
     }
 
     @Test
+    public void testGetFollowReturnsTerminalNodeFromASeriesOfProductions()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
+        grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("d"));
+
+        FollowSetCalculator calculator = new FollowSetCalculator(grammar);
+        HashSet<ContextFreeGrammarSyntaxNode> expectedFollows = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedFollows.add(new TerminalNode("d"));
+        assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
+    }
+
+    @Test
     public void testGetFollowReturnsEndOfStringSymbolForNonTerminalProducedFromStartNonTerminal()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
