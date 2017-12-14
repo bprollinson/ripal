@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -24,6 +25,14 @@ public class ContextFreeGrammarTest
         contextFreeGrammar.addProduction(productionNode);
 
         assertEquals(new NonTerminalNode("S"), contextFreeGrammar.getStartSymbol());
+    }
+
+    @Test
+    public void testGetStartSymbolReturnsNullForEmptyCFG()
+    {
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+
+        assertNull(contextFreeGrammar.getStartSymbol());
     }
 
     @Test
