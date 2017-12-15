@@ -77,4 +77,15 @@ public class SetMapTest
         expectedSet2.add(4);
         assertEquals(expectedSet2, setMap.get("key2"));
     }
+
+    @Test
+    public void testSetMapMapsNullKey()
+    {
+        SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+        setMap.put(null, 1);
+
+        HashSet<Integer> expectedSet = new HashSet<Integer>();
+        expectedSet.add(1);
+        assertEquals(expectedSet, setMap.get(null));
+    }
 }
