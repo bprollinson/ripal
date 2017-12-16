@@ -179,6 +179,19 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test
+    public void testCompileReturnsEmptyTableForDeadEndNonTerminalProduction() throws AmbiguousLL1ParseTableException
+    {
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+
+        LL1ParseTable expectedTable = new LL1ParseTable(grammar);
+
+        assertEquals(expectedTable, compiler.compile(grammar));
+    }
+
+    @Test
     public void testCompileReturnsParseTableForGrammarContainingCycle() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();

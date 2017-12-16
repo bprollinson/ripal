@@ -77,6 +77,17 @@ public class FirstSetCalculatorTest
     }
 
     @Test
+    public void testGetFirstReturnsEmptySetForDeadEndNonTerminalProduction()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+
+        FirstSetCalculator calculator = new FirstSetCalculator(grammar);
+        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        assertEquals(expectedFirsts, calculator.getFirst(0));
+    }
+
+    @Test
     public void testGetFirstDetectsCycle()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
