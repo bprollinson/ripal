@@ -57,7 +57,13 @@ public class RegularExpressionSyntaxCompilerTest
     }
 
     @Test
-    public void testCompilerReturnsEpsilonNFAForConcatenationNode()
+    public void testCompilerReturnsEpsilonNFAForConcatenationNodeWithSingleChild()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testCompilerReturnsEpsilonNFAForConcatenationNodeWithMultipleChildren()
     {
         RegularExpressionSyntaxCompiler compiler = new RegularExpressionSyntaxCompiler();
         ConcatenationNode rootNode = new ConcatenationNode();
