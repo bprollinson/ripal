@@ -59,7 +59,17 @@ public class RegularExpressionSyntaxCompilerTest
     @Test
     public void testCompilerReturnsEpsilonNFAForConcatenationNodeWithSingleChild()
     {
-        assertTrue(false);
+        RegularExpressionSyntaxCompiler compiler = new RegularExpressionSyntaxCompiler();
+        ConcatenationNode rootNode = new ConcatenationNode();
+        rootNode.addChild(new CharacterNode('a'));
+
+        EpsilonNFAState state1 = new EpsilonNFAState("0", false);
+        EpsilonNFAState state2 = new EpsilonNFAState("0", true);
+
+        state1.addTransition(new StateTransition('a', state2));
+        EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(state1);
+
+        assertTrue(expectedEpsilonNFA.structureEquals(compiler.compile(rootNode)));
     }
 
     @Test
