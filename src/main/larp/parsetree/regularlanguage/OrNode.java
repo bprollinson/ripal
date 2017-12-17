@@ -1,4 +1,4 @@
-package larp.grammar.regularlanguage;
+package larp.parsetree.regularlanguage;
 
 public class OrNode extends RegularExpressionSyntaxNode
 {

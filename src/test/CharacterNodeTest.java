@@ -2,8 +2,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.grammar.regularlanguage.CharacterNode;
-import larp.grammar.regularlanguage.ConcatenationNode;
+import larp.parsetree.regularlanguage.CharacterNode;
+import larp.parsetree.regularlanguage.ConcatenationNode;
 
 public class CharacterNodeTest
 {

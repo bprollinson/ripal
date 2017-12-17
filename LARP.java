@@ -1,5 +1,5 @@
 import larp.automaton.regularlanguage.RegularExpressionSyntaxCompiler;
-import larp.grammar.regularlanguage.ConcatenationNode;
+import larp.parsetree.regularlanguage.ConcatenationNode;
 
 public class LARP
 {

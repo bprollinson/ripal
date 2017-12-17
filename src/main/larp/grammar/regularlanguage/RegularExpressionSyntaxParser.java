@@ -1,5 +1,11 @@
 package larp.grammar.regularlanguage;
 
+import larp.parsetree.regularlanguage.CharacterNode;
+import larp.parsetree.regularlanguage.ConcatenationNode;
+import larp.parsetree.regularlanguage.KleeneClosureNode;
+import larp.parsetree.regularlanguage.OrNode;
+import larp.parsetree.regularlanguage.RegularExpressionSyntaxNode;
+
 import java.util.ArrayList;
 import java.util.List;
 

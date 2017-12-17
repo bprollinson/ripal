@@ -1,4 +1,4 @@
-package larp.grammar.regularlanguage;
+package larp.parsetree.regularlanguage;
 
 import java.util.ArrayList;
 import java.util.List;

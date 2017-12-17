@@ -1,6 +1,6 @@
-package larp.grammar.regularlanguage;
+package larp.parsetree.regularlanguage;
 
-public class KleeneClosureNode extends RegularExpressionSyntaxNode
+public class ConcatenationNode extends RegularExpressionSyntaxNode
 {
     public void addChild(RegularExpressionSyntaxNode childNode)
     {
