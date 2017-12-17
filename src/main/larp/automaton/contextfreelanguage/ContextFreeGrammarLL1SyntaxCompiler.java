@@ -1,10 +1,10 @@
 package larp.automaton.contextfreelanguage;
 
+import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.parsetable.AmbiguousLL1ParseTableException;
-import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1ParseTable;
 
 import java.util.HashSet;

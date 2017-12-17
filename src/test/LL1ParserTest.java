@@ -3,12 +3,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.grammar.contextfreelanguage.EndOfStringNode;
 import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.parsetable.AmbiguousLL1ParseTableException;
-import larp.parsetable.ContextFreeGrammar;
 import larp.parsetable.LL1Parser;
 import larp.parsetable.LL1ParseTable;
 

@@ -1,5 +1,6 @@
 package larp.parsetable;
 
+import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 

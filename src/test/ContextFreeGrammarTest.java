@@ -4,10 +4,10 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.ProductionNode;
 import larp.grammar.contextfreelanguage.TerminalNode;
-import larp.parsetable.ContextFreeGrammar;
 
 public class ContextFreeGrammarTest
 {

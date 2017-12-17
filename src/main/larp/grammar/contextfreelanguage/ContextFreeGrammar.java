@@ -1,9 +1,4 @@
-package larp.parsetable;
-
-import larp.grammar.contextfreelanguage.ConcatenationNode;
-import larp.grammar.contextfreelanguage.ProductionNode;
-import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
-import larp.grammar.contextfreelanguage.NonTerminalNode;
+package larp.grammar.contextfreelanguage;
 
 import java.util.ArrayList;
 import java.util.List;
