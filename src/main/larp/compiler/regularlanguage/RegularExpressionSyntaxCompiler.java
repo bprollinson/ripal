@@ -1,4 +1,4 @@
-package larp.automaton.regularlanguage;
+package larp.compiler.regularlanguage;
 
 import larp.automaton.EpsilonNFA;
 import larp.automaton.EpsilonNFAState;

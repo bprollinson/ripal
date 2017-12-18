@@ -1,4 +1,4 @@
-import larp.automaton.regularlanguage.RegularExpressionSyntaxCompiler;
+import larp.compiler.regularlanguage.RegularExpressionSyntaxCompiler;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 
 public class LARP
