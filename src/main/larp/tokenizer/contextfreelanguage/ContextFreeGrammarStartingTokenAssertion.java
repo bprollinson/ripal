@@ -1,4 +1,8 @@
-package larp.grammar.contextfreelanguage;
+package larp.tokenizer.contextfreelanguage;
+
+import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxToken;
+import larp.grammar.contextfreelanguage.NonTerminalToken;
+import larp.grammar.contextfreelanguage.SeparatorToken;
 
 import java.util.List;
 

@@ -2,15 +2,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxToken;
-import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxTokenizer;
-import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
 import larp.grammar.contextfreelanguage.EpsilonToken;
-import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarQuoteNestingException;
-import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarSeparatorException;
-import larp.grammar.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 import larp.grammar.contextfreelanguage.NonTerminalToken;
 import larp.grammar.contextfreelanguage.SeparatorToken;
 import larp.grammar.contextfreelanguage.TerminalToken;
+import larp.tokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizer;
+import larp.tokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
+import larp.tokenizer.contextfreelanguage.IncorrectContextFreeGrammarQuoteNestingException;
+import larp.tokenizer.contextfreelanguage.IncorrectContextFreeGrammarSeparatorException;
+import larp.tokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package larp.grammar.contextfreelanguage;
+package larp.tokenizer.contextfreelanguage;
 
 public class IncorrectContextFreeGrammarQuoteNestingException extends ContextFreeGrammarSyntaxTokenizerException
 {
