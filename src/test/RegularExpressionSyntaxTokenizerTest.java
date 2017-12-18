@@ -3,13 +3,13 @@ import org.junit.Test;
 
 import larp.grammar.regularlanguage.CharacterToken;
 import larp.grammar.regularlanguage.CloseBraceToken;
-import larp.grammar.regularlanguage.IncorrectRegularExpressionNestingException;
 import larp.grammar.regularlanguage.OpenBraceToken;
 import larp.grammar.regularlanguage.OrToken;
 import larp.grammar.regularlanguage.KleeneClosureToken;
 import larp.grammar.regularlanguage.RegularExpressionSyntaxToken;
-import larp.grammar.regularlanguage.RegularExpressionSyntaxTokenizer;
-import larp.grammar.regularlanguage.RegularExpressionSyntaxTokenizerException;
+import larp.tokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
+import larp.tokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
+import larp.tokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
 
 import java.util.ArrayList;
 import java.util.List;

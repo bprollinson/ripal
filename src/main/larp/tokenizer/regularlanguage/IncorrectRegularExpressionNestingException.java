@@ -1,4 +1,4 @@
-package larp.grammar.regularlanguage;
+package larp.tokenizer.regularlanguage;
 
 public class IncorrectRegularExpressionNestingException extends RegularExpressionSyntaxTokenizerException
 {

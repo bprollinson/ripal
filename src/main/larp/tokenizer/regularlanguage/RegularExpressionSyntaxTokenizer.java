@@ -1,4 +1,11 @@
-package larp.grammar.regularlanguage;
+package larp.tokenizer.regularlanguage;
+
+import larp.grammar.regularlanguage.CharacterToken;
+import larp.grammar.regularlanguage.CloseBraceToken;
+import larp.grammar.regularlanguage.KleeneClosureToken;
+import larp.grammar.regularlanguage.OpenBraceToken;
+import larp.grammar.regularlanguage.OrToken;
+import larp.grammar.regularlanguage.RegularExpressionSyntaxToken;
 
 import java.util.ArrayList;
 import java.util.List;
