@@ -3,10 +3,10 @@ import org.junit.Test;
 
 import larp.automaton.contextfreelanguage.FirstSetCalculator;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
-import larp.grammar.contextfreelanguage.EpsilonNode;
-import larp.grammar.contextfreelanguage.NonTerminalNode;
-import larp.grammar.contextfreelanguage.TerminalNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.EpsilonNode;
+import larp.parsetree.contextfreelanguage.NonTerminalNode;
+import larp.parsetree.contextfreelanguage.TerminalNode;
 
 import java.util.HashSet;
 

@@ -1,4 +1,4 @@
-package larp.grammar.contextfreelanguage;
+package larp.parsetree.contextfreelanguage;
 
 import java.util.ArrayList;
 import java.util.List;

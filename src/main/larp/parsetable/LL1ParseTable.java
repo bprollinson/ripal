@@ -1,8 +1,8 @@
 package larp.parsetable;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
-import larp.grammar.contextfreelanguage.NonTerminalNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.NonTerminalNode;
 
 import java.util.HashMap;
 

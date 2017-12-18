@@ -2,8 +2,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.ConcatenationNode;
-import larp.grammar.contextfreelanguage.ProductionNode;
+import larp.parsetree.contextfreelanguage.ConcatenationNode;
+import larp.parsetree.contextfreelanguage.ProductionNode;
 
 public class ConcatenationNodeTest
 {

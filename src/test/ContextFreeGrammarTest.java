@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.grammar.contextfreelanguage.NonTerminalNode;
-import larp.grammar.contextfreelanguage.ProductionNode;
-import larp.grammar.contextfreelanguage.TerminalNode;
+import larp.parsetree.contextfreelanguage.NonTerminalNode;
+import larp.parsetree.contextfreelanguage.ProductionNode;
+import larp.parsetree.contextfreelanguage.TerminalNode;
 
 public class ContextFreeGrammarTest
 {

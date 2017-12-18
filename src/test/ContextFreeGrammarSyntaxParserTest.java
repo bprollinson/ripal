@@ -1,18 +1,18 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.ConcatenationNode;
-import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxParser;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxToken;
-import larp.grammar.contextfreelanguage.EpsilonNode;
 import larp.grammar.contextfreelanguage.EpsilonToken;
-import larp.grammar.contextfreelanguage.NonTerminalNode;
 import larp.grammar.contextfreelanguage.NonTerminalToken;
-import larp.grammar.contextfreelanguage.ProductionNode;
 import larp.grammar.contextfreelanguage.SeparatorToken;
-import larp.grammar.contextfreelanguage.TerminalNode;
 import larp.grammar.contextfreelanguage.TerminalToken;
+import larp.parsetree.contextfreelanguage.ConcatenationNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.EpsilonNode;
+import larp.parsetree.contextfreelanguage.NonTerminalNode;
+import larp.parsetree.contextfreelanguage.ProductionNode;
+import larp.parsetree.contextfreelanguage.TerminalNode;
 
 import java.util.ArrayList;
 import java.util.List;
