@@ -1,5 +1,11 @@
-package larp.grammar.regularlanguage;
+package larp.parser.regularlanguage;
 
+import larp.grammar.regularlanguage.CharacterToken;
+import larp.grammar.regularlanguage.CloseBraceToken;
+import larp.grammar.regularlanguage.KleeneClosureToken;
+import larp.grammar.regularlanguage.OpenBraceToken;
+import larp.grammar.regularlanguage.OrToken;
+import larp.grammar.regularlanguage.RegularExpressionSyntaxToken;
 import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;
