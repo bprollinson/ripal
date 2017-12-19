@@ -1,5 +1,9 @@
-package larp.grammar.contextfreelanguage;
+package larp.parser.contextfreelanguage;
 
+import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxToken;
+import larp.grammar.contextfreelanguage.EpsilonToken;
+import larp.grammar.contextfreelanguage.NonTerminalToken;
+import larp.grammar.contextfreelanguage.TerminalToken;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;

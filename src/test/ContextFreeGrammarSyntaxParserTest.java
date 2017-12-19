@@ -1,12 +1,12 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxParser;
 import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 import larp.grammar.contextfreelanguage.EpsilonToken;
 import larp.grammar.contextfreelanguage.NonTerminalToken;
 import larp.grammar.contextfreelanguage.SeparatorToken;
 import larp.grammar.contextfreelanguage.TerminalToken;
+import larp.parser.contextfreelanguage.ContextFreeGrammarSyntaxParser;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
