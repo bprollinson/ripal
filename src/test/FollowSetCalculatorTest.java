@@ -1,7 +1,7 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.automaton.contextfreelanguage.FollowSetCalculator;
+import larp.compiler.contextfreelanguage.FollowSetCalculator;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;

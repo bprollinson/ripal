@@ -1,7 +1,7 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.automaton.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
+import larp.compiler.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parsetable.AmbiguousLL1ParseTableException;
 import larp.parsetable.LL1ParseTable;
