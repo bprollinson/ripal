@@ -1,4 +1,4 @@
-package larp.grammar.regularlanguage;
+package larp.token.regularlanguage;
 
 public class RegularExpressionSyntaxToken
 {

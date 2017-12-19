@@ -1,16 +1,16 @@
 package larp.parser.regularlanguage;
 
-import larp.grammar.regularlanguage.CharacterToken;
-import larp.grammar.regularlanguage.CloseBraceToken;
-import larp.grammar.regularlanguage.KleeneClosureToken;
-import larp.grammar.regularlanguage.OpenBraceToken;
-import larp.grammar.regularlanguage.OrToken;
-import larp.grammar.regularlanguage.RegularExpressionSyntaxToken;
 import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;
 import larp.parsetree.regularlanguage.OrNode;
 import larp.parsetree.regularlanguage.RegularExpressionSyntaxNode;
+import larp.token.regularlanguage.CharacterToken;
+import larp.token.regularlanguage.CloseBraceToken;
+import larp.token.regularlanguage.KleeneClosureToken;
+import larp.token.regularlanguage.OpenBraceToken;
+import larp.token.regularlanguage.OrToken;
+import larp.token.regularlanguage.RegularExpressionSyntaxToken;
 
 import java.util.ArrayList;
 import java.util.List;
