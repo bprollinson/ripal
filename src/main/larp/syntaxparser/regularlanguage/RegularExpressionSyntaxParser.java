@@ -1,4 +1,4 @@
-package larp.parser.regularlanguage;
+package larp.syntaxparser.regularlanguage;
 
 import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;

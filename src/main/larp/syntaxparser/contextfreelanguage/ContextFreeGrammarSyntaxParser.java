@@ -1,4 +1,4 @@
-package larp.parser.contextfreelanguage;
+package larp.syntaxparser.contextfreelanguage;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;

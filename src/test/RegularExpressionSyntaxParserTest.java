@@ -1,12 +1,12 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.parser.regularlanguage.RegularExpressionSyntaxParser;
 import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;
 import larp.parsetree.regularlanguage.OrNode;
 import larp.parsetree.regularlanguage.RegularExpressionSyntaxNode;
+import larp.syntaxparser.regularlanguage.RegularExpressionSyntaxParser;
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseBraceToken;
 import larp.token.regularlanguage.KleeneClosureToken;
