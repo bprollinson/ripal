@@ -1,7 +1,6 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.compiler.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parsetable.AmbiguousLL1ParseTableException;
 import larp.parsetable.LL1ParseTable;
@@ -9,6 +8,7 @@ import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
+import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
 
 public class ContextFreeGrammarLL1SyntaxCompilerTest
 {

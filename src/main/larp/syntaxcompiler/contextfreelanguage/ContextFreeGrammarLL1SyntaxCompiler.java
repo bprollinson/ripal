@@ -1,4 +1,4 @@
-package larp.compiler.contextfreelanguage;
+package larp.syntaxcompiler.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parsetable.AmbiguousLL1ParseTableException;
