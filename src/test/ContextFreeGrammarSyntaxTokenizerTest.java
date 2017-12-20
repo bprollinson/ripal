@@ -6,11 +6,11 @@ import larp.token.contextfreelanguage.EpsilonToken;
 import larp.token.contextfreelanguage.NonTerminalToken;
 import larp.token.contextfreelanguage.SeparatorToken;
 import larp.token.contextfreelanguage.TerminalToken;
-import larp.tokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizer;
-import larp.tokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
-import larp.tokenizer.contextfreelanguage.IncorrectContextFreeGrammarQuoteNestingException;
-import larp.tokenizer.contextfreelanguage.IncorrectContextFreeGrammarSeparatorException;
-import larp.tokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
+import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizer;
+import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
+import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarQuoteNestingException;
+import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarSeparatorException;
+import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 
 import java.util.ArrayList;
 import java.util.List;

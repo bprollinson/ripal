@@ -1,4 +1,4 @@
-package larp.tokenizer.contextfreelanguage;
+package larp.syntaxtokenizer.contextfreelanguage;
 
 import larp.token.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 import larp.token.contextfreelanguage.NonTerminalToken;

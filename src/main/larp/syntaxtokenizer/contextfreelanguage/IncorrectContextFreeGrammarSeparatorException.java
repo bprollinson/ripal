@@ -1,4 +1,4 @@
-package larp.tokenizer.contextfreelanguage;
+package larp.syntaxtokenizer.contextfreelanguage;
 
 public class IncorrectContextFreeGrammarSeparatorException extends ContextFreeGrammarSyntaxTokenizerException
 {

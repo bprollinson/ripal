@@ -1,4 +1,4 @@
-package larp.tokenizer.regularlanguage;
+package larp.syntaxtokenizer.regularlanguage;
 
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseBraceToken;

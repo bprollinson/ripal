@@ -3,9 +3,9 @@ import org.junit.Test;
 import larp.token.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 import larp.token.contextfreelanguage.NonTerminalToken;
 import larp.token.contextfreelanguage.SeparatorToken;
-import larp.tokenizer.contextfreelanguage.ContextFreeGrammarStartingTokenAssertion;
-import larp.tokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
-import larp.tokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
+import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarStartingTokenAssertion;
+import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
+import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 
 import java.util.ArrayList;
 import java.util.List;

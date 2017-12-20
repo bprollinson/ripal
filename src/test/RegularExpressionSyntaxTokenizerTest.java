@@ -7,9 +7,9 @@ import larp.token.regularlanguage.KleeneClosureToken;
 import larp.token.regularlanguage.OpenBraceToken;
 import larp.token.regularlanguage.OrToken;
 import larp.token.regularlanguage.RegularExpressionSyntaxToken;
-import larp.tokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
-import larp.tokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
-import larp.tokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
+import larp.syntaxtokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
+import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
+import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
 
 import java.util.ArrayList;
 import java.util.List;
