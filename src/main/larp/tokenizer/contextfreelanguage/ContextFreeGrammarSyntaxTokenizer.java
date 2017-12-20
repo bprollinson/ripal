@@ -1,10 +1,10 @@
 package larp.tokenizer.contextfreelanguage;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammarSyntaxToken;
-import larp.grammar.contextfreelanguage.EpsilonToken;
-import larp.grammar.contextfreelanguage.NonTerminalToken;
-import larp.grammar.contextfreelanguage.SeparatorToken;
-import larp.grammar.contextfreelanguage.TerminalToken;
+import larp.token.contextfreelanguage.ContextFreeGrammarSyntaxToken;
+import larp.token.contextfreelanguage.EpsilonToken;
+import larp.token.contextfreelanguage.NonTerminalToken;
+import larp.token.contextfreelanguage.SeparatorToken;
+import larp.token.contextfreelanguage.TerminalToken;
 
 import java.util.ArrayList;
 import java.util.List;

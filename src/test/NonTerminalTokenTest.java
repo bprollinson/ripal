@@ -2,8 +2,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.NonTerminalToken;
-import larp.grammar.contextfreelanguage.SeparatorToken;
+import larp.token.contextfreelanguage.NonTerminalToken;
+import larp.token.contextfreelanguage.SeparatorToken;
 
 public class NonTerminalTokenTest
 {

@@ -1,4 +1,4 @@
-package larp.grammar.contextfreelanguage;
+package larp.token.contextfreelanguage;
 
 public class NonTerminalToken extends ContextFreeGrammarSyntaxToken
 {
