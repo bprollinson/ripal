@@ -1,8 +1,8 @@
 package larp.syntaxcompiler.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.parsetable.AmbiguousLL1ParseTableException;
-import larp.parsetable.LL1ParseTable;
+import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
+import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;

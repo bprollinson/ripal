@@ -4,9 +4,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.parsetable.AmbiguousLL1ParseTableException;
-import larp.parsetable.LL1Parser;
-import larp.parsetable.LL1ParseTable;
+import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
+import larp.parser.contextfreelanguage.LL1Parser;
+import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
