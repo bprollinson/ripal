@@ -1,10 +1,10 @@
 package larp.syntaxcompiler.regularlanguage;
 
-import larp.automaton.EpsilonNFA;
-import larp.automaton.EpsilonNFAState;
-import larp.automaton.State;
-import larp.automaton.StateGroup;
-import larp.automaton.StateTransition;
+import larp.parser.regularlanguage.EpsilonNFA;
+import larp.parser.regularlanguage.EpsilonNFAState;
+import larp.parser.regularlanguage.State;
+import larp.parser.regularlanguage.StateGroup;
+import larp.parser.regularlanguage.StateTransition;
 import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;

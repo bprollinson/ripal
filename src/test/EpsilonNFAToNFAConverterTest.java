@@ -1,12 +1,12 @@
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.automaton.EpsilonNFA;
-import larp.automaton.EpsilonNFAState;
-import larp.automaton.EpsilonNFAToNFAConverter;
-import larp.automaton.NFA;
-import larp.automaton.NFAState;
-import larp.automaton.StateTransition;
+import larp.parser.regularlanguage.EpsilonNFA;
+import larp.parser.regularlanguage.EpsilonNFAState;
+import larp.parser.regularlanguage.EpsilonNFAToNFAConverter;
+import larp.parser.regularlanguage.NFA;
+import larp.parser.regularlanguage.NFAState;
+import larp.parser.regularlanguage.StateTransition;
 
 public class EpsilonNFAToNFAConverterTest
 {

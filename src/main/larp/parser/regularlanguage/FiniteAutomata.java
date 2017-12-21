@@ -1,4 +1,4 @@
-package larp.automaton;
+package larp.parser.regularlanguage;
 
 import larp.ComparableStructure;
 

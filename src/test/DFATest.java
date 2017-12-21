@@ -2,9 +2,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.automaton.DFA;
-import larp.automaton.DFAState;
-import larp.automaton.StateTransition;
+import larp.parser.regularlanguage.DFA;
+import larp.parser.regularlanguage.DFAState;
+import larp.parser.regularlanguage.StateTransition;
 
 public class DFATest
 {

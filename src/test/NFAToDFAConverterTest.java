@@ -1,12 +1,12 @@
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.automaton.DFA;
-import larp.automaton.DFAState;
-import larp.automaton.NFA;
-import larp.automaton.NFAState;
-import larp.automaton.NFAToDFAConverter;
-import larp.automaton.StateTransition;
+import larp.parser.regularlanguage.DFA;
+import larp.parser.regularlanguage.DFAState;
+import larp.parser.regularlanguage.NFA;
+import larp.parser.regularlanguage.NFAState;
+import larp.parser.regularlanguage.NFAToDFAConverter;
+import larp.parser.regularlanguage.StateTransition;
 
 public class NFAToDFAConverterTest
 {

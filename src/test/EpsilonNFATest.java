@@ -2,8 +2,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.automaton.EpsilonNFA;
-import larp.automaton.EpsilonNFAState;
+import larp.parser.regularlanguage.EpsilonNFA;
+import larp.parser.regularlanguage.EpsilonNFAState;
 
 public class EpsilonNFATest
 {
