@@ -4,6 +4,10 @@ import larp.parser.regularlanguage.DFA;
 import larp.syntaxcompiler.regularlanguage.RegularExpressionSyntaxCompiler;
 import larp.syntaxparser.regularlanguage.RegularExpressionSyntaxParser;
 import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
+import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
+import larp.token.regularlanguage.RegularExpressionSyntaxToken;
+
+import java.util.List;
 
 public class RegularLanguageParserFactory
 {
@@ -18,8 +22,10 @@ public class RegularLanguageParserFactory
         this.compiler = new RegularExpressionSyntaxCompiler();
     }
 
-    public DFA factory(String regularExpression)
+    public DFA factory(String regularExpression) throws RegularExpressionSyntaxTokenizerException
     {
+        List<RegularExpressionSyntaxToken> tokenList = this.tokenizer.tokenize(regularExpression);
+
         return null;
     }
 }

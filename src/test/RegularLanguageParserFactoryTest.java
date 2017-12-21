@@ -5,11 +5,12 @@ import larp.parser.regularlanguage.DFA;
 import larp.parser.regularlanguage.DFAState;
 import larp.parser.regularlanguage.StateTransition;
 import larp.parserfactory.regularlanguage.RegularLanguageParserFactory;
+import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
 
 public class RegularLanguageParserFactoryTest
 {
     @Test
-    public void testFactoryCreatesDFAForRegularExpression()
+    public void testFactoryCreatesDFAForRegularExpression() throws RegularExpressionSyntaxTokenizerException
     {
         RegularLanguageParserFactory factory = new RegularLanguageParserFactory();
         DFA dfa = factory.factory("a");
