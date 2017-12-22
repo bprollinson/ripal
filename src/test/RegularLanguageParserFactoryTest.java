@@ -5,6 +5,7 @@ import larp.parser.regularlanguage.DFA;
 import larp.parser.regularlanguage.DFAState;
 import larp.parser.regularlanguage.StateTransition;
 import larp.parserfactory.regularlanguage.RegularLanguageParserFactory;
+import larp.syntaxtokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
 import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
 
 public class RegularLanguageParserFactoryTest
@@ -24,5 +25,12 @@ public class RegularLanguageParserFactoryTest
         DFA expectedDFA = new DFA(state1);
 
         assertTrue(expectedDFA.structureEquals(dfa));
+    }
+
+    @Test(expected = IncorrectRegularExpressionNestingException.class)
+    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectRegularExpression() throws RegularExpressionSyntaxTokenizerException
+    {
+        RegularLanguageParserFactory factory = new RegularLanguageParserFactory();
+        DFA dfa = factory.factory(")(");
     }
 }
