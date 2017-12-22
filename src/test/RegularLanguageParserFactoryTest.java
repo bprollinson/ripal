@@ -13,11 +13,14 @@ public class RegularLanguageParserFactoryTest
     public void testFactoryCreatesDFAForRegularExpression() throws RegularExpressionSyntaxTokenizerException
     {
         RegularLanguageParserFactory factory = new RegularLanguageParserFactory();
-        DFA dfa = factory.factory("a");
+        DFA dfa = factory.factory("ab*");
 
         DFAState state1 = new DFAState("0", false);
         DFAState state2 = new DFAState("0", true);
+        DFAState state3 = new DFAState("0", true);
         state1.addTransition(new StateTransition('a', state2));
+        state2.addTransition(new StateTransition('b', state3));
+        state3.addTransition(new StateTransition('b', state3));
         DFA expectedDFA = new DFA(state1);
 
         assertTrue(expectedDFA.structureEquals(dfa));
