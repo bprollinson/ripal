@@ -8,6 +8,7 @@ import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parserfactory.contextfreelanguage.ContextFreeLanguageParserFactory;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
+import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 public class ContextFreeLanguageParserFactoryTest
 {
     @Test
-    public void testFactoryCreatesDFAForRegularExpression() throws AmbiguousLL1ParseTableException
+    public void testFactoryCreatesDFAForRegularExpression() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousLL1ParseTableException
     {
         ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
         List<String> input = new ArrayList<String>();
