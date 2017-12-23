@@ -1,5 +1,6 @@
 package larp.parserfactory.contextfreelanguage;
 
+import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.LL1Parser;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.syntaxparser.contextfreelanguage.ContextFreeGrammarSyntaxParser;
@@ -22,10 +23,12 @@ public class ContextFreeLanguageParserFactory
 
     public LL1Parser factory(List<String> input) throws ContextFreeGrammarSyntaxTokenizerException
     {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
         for (String inputString: input)
         {
             List<ContextFreeGrammarSyntaxToken> tokenList = this.tokenizer.tokenize(inputString);
             ContextFreeGrammarSyntaxNode rootNode = this.parser.parse(tokenList);
+            cfg.addProduction(rootNode);
         }
 
         return null;

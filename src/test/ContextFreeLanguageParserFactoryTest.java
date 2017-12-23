@@ -16,7 +16,7 @@ import java.util.List;
 public class ContextFreeLanguageParserFactoryTest
 {
     @Test
-    public void testFactoryCreatesDFAForRegularExpression() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousLL1ParseTableException
+    public void testFactoryCreatesParseTableForContextFreeGrammar() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousLL1ParseTableException
     {
         ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
         List<String> input = new ArrayList<String>();
