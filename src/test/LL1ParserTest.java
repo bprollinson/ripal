@@ -295,4 +295,16 @@ public class LL1ParserTest
 
         assertEquals(expectedRuleIndexes, parser.getAppliedRules());
     }
+
+    @Test
+    public void testEqualsReturnsTrueWhenParseTablesEqual()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testEqualsReturnsFalseWhenParseTablesNotEqual()
+    {
+        assertEquals(0, 1);
+    }
 }
