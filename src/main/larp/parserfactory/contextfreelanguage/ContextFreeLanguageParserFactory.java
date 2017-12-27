@@ -38,6 +38,6 @@ public class ContextFreeLanguageParserFactory
 
         LL1ParseTable parseTable = this.compiler.compile(cfg);
 
-        return null;
+        return new LL1Parser(parseTable);
     }
 }
