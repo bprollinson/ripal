@@ -36,4 +36,16 @@ public class ContextFreeLanguageParserFactoryTest
         LL1Parser expectedParser = new LL1Parser(expectedTable);
         assertEquals(expectedParser, parser);
     }
+
+    @Test
+    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectContextFreeGrammar()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testFactoryThrowsAmbiguousLL1ParseTableExceptionForNonLL1ContextFreeGrammar()
+    {
+        assertEquals(0, 1);
+    }
 }
