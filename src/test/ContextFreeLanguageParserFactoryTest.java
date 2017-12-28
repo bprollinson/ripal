@@ -20,7 +20,7 @@ public class ContextFreeLanguageParserFactoryTest
     {
         ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
         List<String> input = new ArrayList<String>();
-        input.add("S: AB");
+        input.add("S: A B");
         input.add("A: \"a\"");
         input.add("B: \"b\"");
         LL1Parser parser = factory.factory(input);
@@ -31,8 +31,8 @@ public class ContextFreeLanguageParserFactoryTest
         expectedCFG.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
         LL1ParseTable expectedTable = new LL1ParseTable(expectedCFG);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
-        expectedTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 0);
-        expectedTable.addCell(new NonTerminalNode("B"), new TerminalNode("b"), 1);
+        expectedTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
+        expectedTable.addCell(new NonTerminalNode("B"), new TerminalNode("b"), 2);
         LL1Parser expectedParser = new LL1Parser(expectedTable);
         assertEquals(expectedParser, parser);
     }
