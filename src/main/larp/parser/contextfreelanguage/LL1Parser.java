@@ -23,6 +23,11 @@ public class LL1Parser
         this.appliedRules = new ArrayList<Integer>();
     }
 
+    public LL1ParseTable getParseTable()
+    {
+        return this.parseTable;
+    }
+
     public boolean accepts(String inputString)
     {
         this.appliedRules = new ArrayList<Integer>();
@@ -146,5 +151,15 @@ public class LL1Parser
     public List<Integer> getAppliedRules()
     {
         return this.appliedRules;
+    }
+
+    public boolean equals(Object other)
+    {
+        if (!(other instanceof LL1Parser))
+        {
+            return false;
+        }
+
+        return this.parseTable.equals(((LL1Parser)other).getParseTable());
     }
 }
