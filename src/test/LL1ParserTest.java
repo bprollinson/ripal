@@ -297,14 +297,44 @@ public class LL1ParserTest
     }
 
     @Test
-    public void testEqualsReturnsTrueWhenParseTablesEqual()
+    public void testEqualsReturnsTrueWhenParseTablesEqual() throws AmbiguousLL1ParseTableException
     {
-        assertEquals(0, 1);
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LL1ParseTable parseTable = new LL1ParseTable(cfg);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
+        LL1Parser parser = new LL1Parser(parseTable);
+
+        ContextFreeGrammar otherCfg = new ContextFreeGrammar();
+        otherCfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
+        otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
+        otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        LL1Parser otherParser = new LL1Parser(otherParseTable);
+
+        assertTrue(parser.equals(otherParser));
     }
 
     @Test
-    public void testEqualsReturnsFalseWhenParseTablesNotEqual()
+    public void testEqualsReturnsFalseWhenParseTablesNotEqual() throws AmbiguousLL1ParseTableException
     {
-        assertEquals(0, 1);
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LL1ParseTable parseTable = new LL1ParseTable(cfg);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        LL1Parser parser = new LL1Parser(parseTable);
+
+        ContextFreeGrammar otherCfg = new ContextFreeGrammar();
+        otherCfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
+        otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
+        LL1Parser otherParser = new LL1Parser(otherParseTable);
+
+        assertFalse(parser.equals(otherParser));
     }
 }
