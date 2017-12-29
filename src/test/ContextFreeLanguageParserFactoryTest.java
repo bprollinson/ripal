@@ -9,6 +9,7 @@ import larp.parserfactory.contextfreelanguage.ContextFreeLanguageParserFactory;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
+import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +38,13 @@ public class ContextFreeLanguageParserFactoryTest
         assertEquals(expectedParser, parser);
     }
 
-    @Test
-    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectContextFreeGrammar()
+    @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
+    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectContextFreeGrammar() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousLL1ParseTableException
     {
-        assertEquals(0, 1);
+        ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
+        List<String> input = new ArrayList<String>();
+        input.add("");
+        factory.factory(input);
     }
 
     @Test
