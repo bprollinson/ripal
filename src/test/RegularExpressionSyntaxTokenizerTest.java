@@ -98,7 +98,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerTokenizesKleeneCLosureAppliedtoEpsilon() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerTokenizesKleeneClosureAppliedtoEpsilon() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -111,7 +111,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerTokenizesKleeneCLosureAppliedtoSpace() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerTokenizesKleeneClosureAppliedtoSpace() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
