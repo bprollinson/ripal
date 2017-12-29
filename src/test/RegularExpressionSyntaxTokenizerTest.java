@@ -110,6 +110,19 @@ public class RegularExpressionSyntaxTokenizerTest
         assertEquals(expectedResult, result);
     }
 
+    @Test
+    public void testTokenizerTokenizesKleeneCLosureAppliedtoSpace() throws RegularExpressionSyntaxTokenizerException
+    {
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize(" *");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new CharacterToken(' '));
+        expectedResult.add(new KleeneClosureToken());
+
+        assertEquals(expectedResult, result);
+    }
+
     @Test(expected = IncorrectRegularExpressionNestingException.class)
     public void testTokenizerThrowsExceptionForNegativeBracketNesting() throws RegularExpressionSyntaxTokenizerException
     {
