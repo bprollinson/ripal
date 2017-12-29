@@ -22,11 +22,6 @@ public class RegularExpressionSyntaxTokenSequenceAssertion
             throw new IncorrectKleeneClosureApplicationException();
         }
 
-        if (currentCharacter == this.or && (lastCharacter == null || lastCharacter == this.openBrace))
-        {
-            throw new IncorrectOrApplicationException();
-        }
-
         if (currentCharacter == this.closeBrace && (lastCharacter == this.or))
         {
             throw new IncorrectCloseBraceApplicationException();

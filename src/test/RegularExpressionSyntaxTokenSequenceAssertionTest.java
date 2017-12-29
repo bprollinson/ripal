@@ -2,7 +2,6 @@ import org.junit.Test;
 
 import larp.syntaxtokenizer.regularlanguage.IncorrectCloseBraceApplicationException;
 import larp.syntaxtokenizer.regularlanguage.IncorrectKleeneClosureApplicationException;
-import larp.syntaxtokenizer.regularlanguage.IncorrectOrApplicationException;
 import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
 import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenSequenceAssertion;
 
@@ -22,22 +21,6 @@ public class RegularExpressionSyntaxTokenSequenceAssertionTest
         RegularExpressionSyntaxTokenSequenceAssertion assertion = new RegularExpressionSyntaxTokenSequenceAssertion('(', ')', '*', '|');
 
         assertion.validate('(', '*');
-    }
-
-    @Test(expected = IncorrectOrApplicationException.class)
-    public void testValidateThrowsExceptionForOrAtStartOfString() throws RegularExpressionSyntaxTokenizerException
-    {
-        RegularExpressionSyntaxTokenSequenceAssertion assertion = new RegularExpressionSyntaxTokenSequenceAssertion('(', ')', '*', '|');
-
-        assertion.validate(null, '|');
-    }
-
-    @Test(expected = IncorrectOrApplicationException.class)
-    public void testValidateThrowsExceptionForOrAfterOpenBracket() throws RegularExpressionSyntaxTokenizerException
-    {
-        RegularExpressionSyntaxTokenSequenceAssertion assertion = new RegularExpressionSyntaxTokenSequenceAssertion('(', ')', '*', '|');
-
-        assertion.validate('(', '|');
     }
 
     @Test(expected = IncorrectCloseBraceApplicationException.class)
