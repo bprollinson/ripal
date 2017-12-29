@@ -9,6 +9,7 @@ import larp.parsetree.regularlanguage.RegularExpressionSyntaxNode;
 import larp.syntaxparser.regularlanguage.RegularExpressionSyntaxParser;
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseBraceToken;
+import larp.token.regularlanguage.EpsilonToken;
 import larp.token.regularlanguage.KleeneClosureToken;
 import larp.token.regularlanguage.OpenBraceToken;
 import larp.token.regularlanguage.OrToken;
@@ -25,6 +26,20 @@ public class RegularExpressionSyntaxParserTest
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
+        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+
+        ConcatenationNode expectedRootNode = new ConcatenationNode();
+
+        assertEquals(expectedRootNode, rootNode);
+    }
+
+    @Test
+    public void testParseReturnsEmptyConcatenationNodeForEpsilonToken()
+    {
+        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+
+        List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
+        input.add(new EpsilonToken());
         RegularExpressionSyntaxNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
