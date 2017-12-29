@@ -54,6 +54,11 @@ public class RegularExpressionSyntaxTokenizer
             }
             else if (currentCharacter == this.kleeneClosure)
             {
+                if (tokens.size() == 0)
+                {
+                    tokens.add(new EpsilonToken());
+                }
+
                 tokens.add(new KleeneClosureToken());
             }
             else if (currentCharacter == this.or)

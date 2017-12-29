@@ -87,7 +87,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerTokenizesKleeneClosureAppliedtoEpsilon() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerTokenizesKleeneClosureAppliedtoLeadingEpsilon() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
