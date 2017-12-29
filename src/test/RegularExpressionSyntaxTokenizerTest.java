@@ -128,6 +128,36 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
+    public void testTokenizerTokenizesCloseBracketAfterOpenBracket()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testTokenizerTokenizesOrAfterOpenBracket()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testTokenizerTokenizesKleeneClosureAfterOpenBracket()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testTokenizerTokenizesCloseBracketAfterOr()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testTokenizerTokenizesKleeneClosureAfterOr()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
     public void testTokenizerTokenizesKleeneClosureAppliedtoSpace() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
@@ -147,6 +177,7 @@ public class RegularExpressionSyntaxTokenizerTest
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("*(|* *)*");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new EpsilonToken());
         expectedResult.add(new KleeneClosureToken());
         expectedResult.add(new OpenBraceToken());
         expectedResult.add(new EpsilonToken());
