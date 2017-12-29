@@ -189,6 +189,22 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
+    public void testTokenizerTokenizesOrAfterOr() throws RegularExpressionSyntaxTokenizerException
+    {
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("a||b");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new CharacterToken('a'));
+        expectedResult.add(new OrToken());
+        expectedResult.add(new EpsilonToken());
+        expectedResult.add(new OrToken());
+        expectedResult.add(new CharacterToken('b'));
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
     public void testTokenizerTokenizesKleeneClosureAfterOr() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
