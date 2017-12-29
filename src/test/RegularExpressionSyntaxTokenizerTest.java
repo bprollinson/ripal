@@ -100,6 +100,20 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
+    public void testTokenizerTokenizesOrAppliedtoLeadingEpsilon() throws RegularExpressionSyntaxTokenizerException
+    {
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("|a");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new EpsilonToken());
+        expectedResult.add(new OrToken());
+        expectedResult.add(new CharacterToken('a'));
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
     public void testTokenizerTokenizesKleeneClosureAppliedtoSpace() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
