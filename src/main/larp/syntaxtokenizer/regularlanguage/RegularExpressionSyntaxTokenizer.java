@@ -50,48 +50,21 @@ public class RegularExpressionSyntaxTokenizer
             }
             else if (currentCharacter == this.closeBrace)
             {
-                if (lastCharacter != null && lastCharacter == this.openBrace)
-                {
-                    tokens.add(new EpsilonToken());
-                }
-                if (lastCharacter != null && lastCharacter == this.or)
-                {
-                    tokens.add(new EpsilonToken());
-                }
+                this.addEpsilonBasedOnTokenSequence(tokens, lastCharacter);
 
                 tokens.add(new CloseBraceToken());
             }
             else if (currentCharacter == this.kleeneClosure)
             {
-                if (tokens.size() == 0)
-                {
-                    tokens.add(new EpsilonToken());
-                }
-                if (lastCharacter != null && lastCharacter == this.openBrace)
-                {
-                    tokens.add(new EpsilonToken());
-                }
-                if (lastCharacter != null && lastCharacter == this.or)
-                {
-                    tokens.add(new EpsilonToken());
-                }
+                this.addPrefixEpsilon(tokens);
+                this.addEpsilonBasedOnTokenSequence(tokens, lastCharacter);
 
                 tokens.add(new KleeneClosureToken());
             }
             else if (currentCharacter == this.or)
             {
-                if (tokens.size() == 0)
-                {
-                    tokens.add(new EpsilonToken());
-                }
-                if (lastCharacter != null && lastCharacter == this.openBrace)
-                {
-                    tokens.add(new EpsilonToken());
-                }
-                if (lastCharacter != null && lastCharacter == this.or)
-                {
-                    tokens.add(new EpsilonToken());
-                }
+                this.addPrefixEpsilon(tokens);
+                this.addEpsilonBasedOnTokenSequence(tokens, lastCharacter);
 
                 tokens.add(new OrToken());
             }
@@ -108,6 +81,33 @@ public class RegularExpressionSyntaxTokenizer
             throw new IncorrectRegularExpressionNestingException();
         }
 
+        this.addPostfixEpsilon(tokens, lastCharacter);
+
+        return tokens;
+    }
+
+    private void addEpsilonBasedOnTokenSequence(List<RegularExpressionSyntaxToken> tokens, Character lastCharacter)
+    {
+        if (lastCharacter != null && lastCharacter == this.openBrace)
+        {
+            tokens.add(new EpsilonToken());
+        }
+        if (lastCharacter != null && lastCharacter == this.or)
+        {
+            tokens.add(new EpsilonToken());
+        }
+    }
+
+    private void addPrefixEpsilon(List<RegularExpressionSyntaxToken> tokens)
+    {
+        if (tokens.size() == 0)
+        {
+            tokens.add(new EpsilonToken());
+        }
+    }
+
+    private void addPostfixEpsilon(List<RegularExpressionSyntaxToken> tokens, Character lastCharacter)
+    {
         if (tokens.size() == 0)
         {
             tokens.add(new EpsilonToken());
@@ -116,7 +116,5 @@ public class RegularExpressionSyntaxTokenizer
         {
             tokens.add(new EpsilonToken());
         }
-
-        return tokens;
     }
 }
