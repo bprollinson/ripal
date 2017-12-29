@@ -87,7 +87,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerTokenizesKleeneClosureAppliedtoLeadingEpsilon() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerTokenizesKleeneClosureAppliedToLeadingEpsilon() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -100,7 +100,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerTokenizesOrAppliedtoLeadingEpsilon() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerTokenizesOrAppliedToLeadingEpsilon() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -109,6 +109,20 @@ public class RegularExpressionSyntaxTokenizerTest
         expectedResult.add(new EpsilonToken());
         expectedResult.add(new OrToken());
         expectedResult.add(new CharacterToken('a'));
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizerTokenizesOrAppliedToTrailingEpsilon() throws RegularExpressionSyntaxTokenizerException
+    {
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("a|");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new CharacterToken('a'));
+        expectedResult.add(new OrToken());
+        expectedResult.add(new EpsilonToken());
 
         assertEquals(expectedResult, result);
     }

@@ -87,6 +87,10 @@ public class RegularExpressionSyntaxTokenizer
         {
             tokens.add(new EpsilonToken());
         }
+        if (lastCharacter != null && lastCharacter == this.or)
+        {
+            tokens.add(new EpsilonToken());
+        }
 
         return tokens;
     }
