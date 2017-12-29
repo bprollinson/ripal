@@ -50,11 +50,28 @@ public class RegularExpressionSyntaxTokenizer
             }
             else if (currentCharacter == this.closeBrace)
             {
+                if (lastCharacter != null && lastCharacter == this.openBrace)
+                {
+                    tokens.add(new EpsilonToken());
+                }
+                if (lastCharacter != null && lastCharacter == this.or)
+                {
+                    tokens.add(new EpsilonToken());
+                }
+
                 tokens.add(new CloseBraceToken());
             }
             else if (currentCharacter == this.kleeneClosure)
             {
                 if (tokens.size() == 0)
+                {
+                    tokens.add(new EpsilonToken());
+                }
+                if (lastCharacter != null && lastCharacter == this.openBrace)
+                {
+                    tokens.add(new EpsilonToken());
+                }
+                if (lastCharacter != null && lastCharacter == this.or)
                 {
                     tokens.add(new EpsilonToken());
                 }
@@ -64,6 +81,10 @@ public class RegularExpressionSyntaxTokenizer
             else if (currentCharacter == this.or)
             {
                 if (tokens.size() == 0)
+                {
+                    tokens.add(new EpsilonToken());
+                }
+                if (lastCharacter != null && lastCharacter == this.openBrace)
                 {
                     tokens.add(new EpsilonToken());
                 }
