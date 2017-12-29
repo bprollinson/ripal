@@ -128,33 +128,79 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerTokenizesCloseBracketAfterOpenBracket()
+    public void testTokenizerTokenizesCloseBracketAfterOpenBracket() throws RegularExpressionSyntaxTokenizerException
     {
-        assertEquals(0, 1);
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("()");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new OpenBraceToken());
+        expectedResult.add(new EpsilonToken());
+        expectedResult.add(new CloseBraceToken());
+
+        assertEquals(expectedResult, result);
     }
 
     @Test
-    public void testTokenizerTokenizesOrAfterOpenBracket()
+    public void testTokenizerTokenizesOrAfterOpenBracket() throws RegularExpressionSyntaxTokenizerException
     {
-        assertEquals(0, 1);
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(|a)");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new OpenBraceToken());
+        expectedResult.add(new EpsilonToken());
+        expectedResult.add(new OrToken());
+        expectedResult.add(new CharacterToken('a'));
+        expectedResult.add(new CloseBraceToken());
+
+        assertEquals(expectedResult, result);
     }
 
     @Test
-    public void testTokenizerTokenizesKleeneClosureAfterOpenBracket()
+    public void testTokenizerTokenizesKleeneClosureAfterOpenBracket() throws RegularExpressionSyntaxTokenizerException
     {
-        assertEquals(0, 1);
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(*)");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new OpenBraceToken());
+        expectedResult.add(new EpsilonToken());
+        expectedResult.add(new KleeneClosureToken());
+        expectedResult.add(new CloseBraceToken());
+
+        assertEquals(expectedResult, result);
     }
 
     @Test
-    public void testTokenizerTokenizesCloseBracketAfterOr()
+    public void testTokenizerTokenizesCloseBracketAfterOr() throws RegularExpressionSyntaxTokenizerException
     {
-        assertEquals(0, 1);
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(a|)");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new OpenBraceToken());
+        expectedResult.add(new CharacterToken('a'));
+        expectedResult.add(new OrToken());
+        expectedResult.add(new EpsilonToken());
+        expectedResult.add(new CloseBraceToken());
+
+        assertEquals(expectedResult, result);
     }
 
     @Test
-    public void testTokenizerTokenizesKleeneClosureAfterOr()
+    public void testTokenizerTokenizesKleeneClosureAfterOr() throws RegularExpressionSyntaxTokenizerException
     {
-        assertEquals(0, 1);
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("a|*");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new CharacterToken('a'));
+        expectedResult.add(new OrToken());
+        expectedResult.add(new EpsilonToken());
+        expectedResult.add(new KleeneClosureToken());
+
+        assertEquals(expectedResult, result);
     }
 
     @Test
