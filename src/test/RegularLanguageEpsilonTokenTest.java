@@ -2,10 +2,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import larp.token.contextfreelanguage.EpsilonToken;
-import larp.token.contextfreelanguage.TerminalToken;
+import larp.token.regularlanguage.CharacterToken;
+import larp.token.regularlanguage.EpsilonToken;
 
-public class EpsilonTokenTest
+public class RegularLanguageEpsilonTokenTest
 {
     @Test
     public void testEqualsReturnsTrueForNodeWithSameClass()
@@ -20,6 +20,6 @@ public class EpsilonTokenTest
     {
         EpsilonToken token = new EpsilonToken();
 
-        assertFalse(token.equals(new TerminalToken("a")));
+        assertFalse(token.equals(new CharacterToken('a')));
     }
 }
