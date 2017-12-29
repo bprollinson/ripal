@@ -2,6 +2,7 @@ package larp.syntaxtokenizer.regularlanguage;
 
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseBraceToken;
+import larp.token.regularlanguage.EpsilonToken;
 import larp.token.regularlanguage.KleeneClosureToken;
 import larp.token.regularlanguage.OpenBraceToken;
 import larp.token.regularlanguage.OrToken;
@@ -70,6 +71,11 @@ public class RegularExpressionSyntaxTokenizer
         if (nestingLevel != 0)
         {
             throw new IncorrectRegularExpressionNestingException();
+        }
+
+        if (tokens.size() == 0)
+        {
+            tokens.add(new EpsilonToken());
         }
 
         return tokens;

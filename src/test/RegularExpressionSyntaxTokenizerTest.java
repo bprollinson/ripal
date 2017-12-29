@@ -18,17 +18,6 @@ import java.util.List;
 public class RegularExpressionSyntaxTokenizerTest
 {
     @Test
-    public void testTokenizerTokenizesEmptyString() throws RegularExpressionSyntaxTokenizerException
-    {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
-
-        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("");
-        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
-
-        assertEquals(expectedResult, result);
-    }
-
-    @Test
     public void testTokenizerTokenizesString() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
