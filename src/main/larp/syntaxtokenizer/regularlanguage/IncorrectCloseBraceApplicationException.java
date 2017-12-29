@@ -1,5 +1,0 @@
-package larp.syntaxtokenizer.regularlanguage;
-
-public class IncorrectCloseBraceApplicationException extends RegularExpressionSyntaxTokenizerException
-{
-}

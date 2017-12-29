@@ -43,8 +43,6 @@ public class RegularExpressionSyntaxTokenizer
                 throw new IncorrectRegularExpressionNestingException();
             }
 
-            this.assertTokenSequence(lastCharacter, currentCharacter);
-
             if (currentCharacter == this.openBrace)
             {
                 tokens.add(new OpenBraceToken());
@@ -75,10 +73,5 @@ public class RegularExpressionSyntaxTokenizer
         }
 
         return tokens;
-    }
-
-    private void assertTokenSequence(Character lastCharacter, char currentCharacter) throws RegularExpressionSyntaxTokenizerException
-    {
-        new RegularExpressionSyntaxTokenSequenceAssertion(this.closeBrace, this.or).validate(lastCharacter, currentCharacter);
     }
 }

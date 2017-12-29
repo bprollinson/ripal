@@ -159,12 +159,4 @@ public class RegularExpressionSyntaxTokenizerTest
 
         tokenizer.tokenize("(");
     }
-
-    @Test(expected = RegularExpressionSyntaxTokenizerException.class)
-    public void testTokenizerThrowsExceptionForIncorrecTokenSequence() throws RegularExpressionSyntaxTokenizerException
-    {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
-
-        tokenizer.tokenize("*");
-    }
 }
