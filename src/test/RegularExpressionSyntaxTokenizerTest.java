@@ -6,6 +6,7 @@ import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
 import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseBraceToken;
+import larp.token.regularlanguage.EpsilonToken;
 import larp.token.regularlanguage.KleeneClosureToken;
 import larp.token.regularlanguage.OpenBraceToken;
 import larp.token.regularlanguage.OrToken;
@@ -40,6 +41,18 @@ public class RegularExpressionSyntaxTokenizerTest
         expectedResult.add(new CharacterToken('b'));
         expectedResult.add(new CloseBraceToken());
         expectedResult.add(new KleeneClosureToken());
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizerTokenizesEpsilonExpression() throws RegularExpressionSyntaxTokenizerException
+    {
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new EpsilonToken());
 
         assertEquals(expectedResult, result);
     }
