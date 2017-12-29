@@ -33,12 +33,13 @@ public class RegularExpressionSyntaxTokenizerTest
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
-        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(a|b)*");
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(ab|c)*");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
         expectedResult.add(new OpenBraceToken());
         expectedResult.add(new CharacterToken('a'));
-        expectedResult.add(new OrToken());
         expectedResult.add(new CharacterToken('b'));
+        expectedResult.add(new OrToken());
+        expectedResult.add(new CharacterToken('c'));
         expectedResult.add(new CloseBraceToken());
         expectedResult.add(new KleeneClosureToken());
 
