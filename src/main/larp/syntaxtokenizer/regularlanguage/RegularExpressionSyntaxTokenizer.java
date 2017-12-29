@@ -79,6 +79,6 @@ public class RegularExpressionSyntaxTokenizer
 
     private void assertTokenSequence(Character lastCharacter, char currentCharacter) throws RegularExpressionSyntaxTokenizerException
     {
-        new RegularExpressionSyntaxTokenSequenceAssertion(this.openBrace, this.closeBrace, this.kleeneClosure, this.or).validate(lastCharacter, currentCharacter);
+        new RegularExpressionSyntaxTokenSequenceAssertion(this.closeBrace, this.or).validate(lastCharacter, currentCharacter);
     }
 }
