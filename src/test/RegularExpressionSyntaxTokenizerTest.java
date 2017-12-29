@@ -89,7 +89,7 @@ public class RegularExpressionSyntaxTokenizerTest
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
-        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize(" ");
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("  ");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
         expectedResult.add(new CharacterToken(' '));
         expectedResult.add(new CharacterToken(' '));
