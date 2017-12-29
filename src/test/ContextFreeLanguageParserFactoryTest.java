@@ -47,9 +47,13 @@ public class ContextFreeLanguageParserFactoryTest
         factory.factory(input);
     }
 
-    @Test
-    public void testFactoryThrowsAmbiguousLL1ParseTableExceptionForNonLL1ContextFreeGrammar()
+    @Test(expected = AmbiguousLL1ParseTableException.class)
+    public void testFactoryThrowsAmbiguousLL1ParseTableExceptionForNonLL1ContextFreeGrammar() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousLL1ParseTableException
     {
-        assertEquals(0, 1);
+        ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
+        List<String> input = new ArrayList<String>();
+        input.add("S: \"s\"");
+        input.add("S: \"s\"");
+        LL1Parser parser = factory.factory(input);
     }
 }
