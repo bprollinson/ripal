@@ -30,6 +30,6 @@ public class SetMap<K, V>
             existingSet = new HashSet<V>();
         }
         existingSet.add(value);
-        map.put(key, existingSet);
+        this.map.put(key, existingSet);
     }
 }
