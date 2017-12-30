@@ -100,7 +100,7 @@ public class RegularExpressionSyntaxParser
                 int endPosition = orPositions.get(i);
                 orNode.addChild(this.parse(new ArrayList<RegularExpressionSyntaxToken>(tokens.subList(startPosition, endPosition))));
 
-                startPosition = endPosition + +1;
+                startPosition = endPosition + 1;
             }
             orNode.addChild(this.parse(new ArrayList<RegularExpressionSyntaxToken>(tokens.subList(startPosition, tokens.size()))));
 
