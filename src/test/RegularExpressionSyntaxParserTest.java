@@ -123,6 +123,33 @@ public class RegularExpressionSyntaxParserTest
     }
 
     @Test
+    public void testParseHandlesNestedBraces()
+    {
+        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+
+        List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
+        input.add(new CharacterToken('a'));
+        input.add(new OpenBraceToken());
+        input.add(new OpenBraceToken());
+        input.add(new CharacterToken('b'));
+        input.add(new CloseBraceToken());
+        input.add(new CloseBraceToken());
+        input.add(new CharacterToken('c'));
+        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+
+        ConcatenationNode expectedRootNode = new ConcatenationNode();
+        expectedRootNode.addChild(new CharacterNode('a'));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        ConcatenationNode subConcatenationNode = new ConcatenationNode();
+        subConcatenationNode.addChild(new CharacterNode('b'));
+        concatenationNode.addChild(subConcatenationNode);
+        expectedRootNode.addChild(concatenationNode);
+        expectedRootNode.addChild(new CharacterNode('c'));
+
+        assertEquals(expectedRootNode, rootNode);
+    }
+
+    @Test
     public void testParseHandlesOr()
     {
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();

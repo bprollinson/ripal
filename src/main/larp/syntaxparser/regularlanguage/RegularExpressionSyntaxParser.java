@@ -47,8 +47,11 @@ public class RegularExpressionSyntaxParser
             }
             else if (token instanceof OpenBraceToken)
             {
+                if (braceBalance == 0)
+                {
+                    openBracePosition = i;
+                }
                 braceBalance++;
-                openBracePosition = i;
             }
             else if (token instanceof CloseBraceToken)
             {
