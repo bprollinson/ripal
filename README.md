@@ -18,6 +18,19 @@
 
 ### Step 2: Convert Token List to Parse Tree
 
+* If there is at least one or token at the top level (not within parentheses)
+  * Create a concatenation node
+  * For each segment of the token list separated by top-level or tokens (excluding the or token), perform the conversion recursively, appending the result as a child of the concatenation node
+  * Return the concatenation node
+* Otherwise, create a concatenation node
+* Initialize parenthesis depth as 0
+* For each token in the list
+  * If the token is an open parenthesis, increment parenthesis depth
+  * If the token is a close parenthesis, decrement parenthesis depth
+  * If the token is a character and parenthesis depth is 0, append a character node as a child of the concatenation node
+  * If the token is a kleene closure symbol and parenthesis depth is 0, re-parent the previous child as a child of a new kleene closure node
+  * If the token is a close parenthesis token which brings parenthesis depth back to 0, perform the conversion recursively on the contents of the parentheses, appending the result as the child of a concatenation node
+
 ### Step 3: Convert Parse Tree to Epsilon-NFA
 
 ### Step 4: Convert Epsilon-NFA to NFA
