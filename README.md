@@ -15,6 +15,7 @@
   * If the character is a an open parenthesis, close parenthesis, kleene closure, or symbol or character, add it to the list
 * If parenthesis depth is not zero, fail
 * If the token list contains no tokens or the last token was an or symbol, append epsilon to the token list
+* Return the token list
 
 ### Step 2: Convert Token List to Parse Tree
 
@@ -30,6 +31,7 @@
   * If the token is a character and parenthesis depth is 0, append a character node as a child of the concatenation node
   * If the token is a kleene closure symbol and parenthesis depth is 0, re-parent the previous child as a child of a new kleene closure node
   * If the token is a close parenthesis token which brings parenthesis depth back to 0, perform the conversion recursively on the contents of the parentheses, appending the result as the child of a concatenation node
+* Return the concatenation node
 
 ### Step 3: Convert Parse Tree to Epsilon-NFA
 
