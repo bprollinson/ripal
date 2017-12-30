@@ -177,4 +177,22 @@ public class RegularExpressionSyntaxParserTest
 
         assertEquals(expectedRootNode, rootNode);
     }
+
+    @Test
+    public void testParseHandlesCharacterBelowParentheses()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testParseHandlesKleeneClosureBelowParentheses()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testParseHandlesOrBelowParentheses()
+    {
+        assertEquals(0, 1);
+    }
 }
