@@ -7,8 +7,8 @@
 * Initialize an empty list of tokens found
 * Initialize parenthesis depth as 0
 * For each character in the regular expression
-  * If the character is an open parenthsis, increment parenthesis depth
-  * If the character is a close parenthsis, decrement parenthesis depth
+  * If the character is an open parenthesis, increment parenthesis depth
+  * If the character is a close parenthesis, decrement parenthesis depth
   * If parenthesis depth is negative, fail
   * If the current character is a kleene closure or an or symbol and the token list is empty, append epsilon to the token list
   * If the current character is a close parenthesis, kleene closure or and or symbol and the last token was an open parenthesis or an or token, append epsilon to the token list
