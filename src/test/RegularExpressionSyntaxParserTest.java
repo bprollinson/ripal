@@ -222,6 +222,28 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseHandlesOrBelowParentheses()
     {
-        assertEquals(0, 1);
+        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+
+        List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
+        input.add(new OpenBraceToken());
+        input.add(new CharacterToken('a'));
+        input.add(new OrToken());
+        input.add(new CharacterToken('b'));
+        input.add(new CloseBraceToken());
+        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+
+        ConcatenationNode expectedRootNode = new ConcatenationNode();
+        OrNode orNode = new OrNode();
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        ConcatenationNode concatenationNode1 = new ConcatenationNode();
+        concatenationNode1.addChild(new CharacterNode('a'));
+        orNode.addChild(concatenationNode1);
+        ConcatenationNode concatenationNode2 = new ConcatenationNode();
+        concatenationNode2.addChild(new CharacterNode('b'));
+        orNode.addChild(concatenationNode2);
+        concatenationNode.addChild(orNode);
+        expectedRootNode.addChild(concatenationNode);
+
+        assertEquals(expectedRootNode, rootNode);
     }
 }
