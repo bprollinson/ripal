@@ -200,7 +200,23 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseHandlesKleeneClosureBelowParentheses()
     {
-        assertEquals(0, 1);
+        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+
+        List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
+        input.add(new OpenBraceToken());
+        input.add(new CharacterToken('a'));
+        input.add(new KleeneClosureToken());
+        input.add(new CloseBraceToken());
+        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+
+        ConcatenationNode expectedRootNode = new ConcatenationNode();
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        KleeneClosureNode kleeneClosureNode = new KleeneClosureNode();
+        kleeneClosureNode.addChild(new CharacterNode('a'));
+        concatenationNode.addChild(kleeneClosureNode);
+        expectedRootNode.addChild(concatenationNode);
+
+        assertEquals(expectedRootNode, rootNode);
     }
 
     @Test
