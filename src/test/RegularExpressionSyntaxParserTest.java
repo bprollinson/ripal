@@ -181,7 +181,20 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseHandlesCharacterBelowParentheses()
     {
-        assertEquals(0, 1);
+        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+
+        List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
+        input.add(new OpenBraceToken());
+        input.add(new CharacterToken('a'));
+        input.add(new CloseBraceToken());
+        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+
+        ConcatenationNode expectedRootNode = new ConcatenationNode();
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new CharacterNode('a'));
+        expectedRootNode.addChild(concatenationNode);
+
+        assertEquals(expectedRootNode, rootNode);
     }
 
     @Test
