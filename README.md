@@ -78,7 +78,9 @@ Run the following algorithm for the set containing a single element - the start 
 * Initialize the current state to the DFA's start state
 * Initialize the current character position to 0
 * While the current state exists and the character position is less than the size of the input string
-  * Update the current state to the state following from the current state's transition with input string character at the current character position
+  * Calculate the current input character as input string character at the current character position
+  * Update the current state to the state following from the current state's transition with the current input character
+  * Increment the current character position
 * If the current state exists and is accepting, return true, otherwise return false
 
 ## Context-Free Languages
