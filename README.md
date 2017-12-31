@@ -44,6 +44,19 @@
 
 ### Step 4: Convert Epsilon-NFA to NFA
 
+Run the following algorithm for the start state of the Epsilon-NFA:
+
+* If the provided Epsilon-NFA state has already been covered, return the corresponding mapped NFA state
+* Create a new start state
+* Map the provided Epsilon-NFA state to this new start state, flagging the Epsilon-NFA state as having been covered
+* If the provided Epsilon-NFA state is accepting or an accepting Epsilon-NFA state is reachable from that state via a sequence of epsilon transitions, flag the new start state as accepting
+* For each non-epsilon transition from the provided Epsilon-NFA state
+  * Apply this conversion recursively on the Epsilon-NFA state following the transition, then add a transition from the new start state to the resulting NFA
+* For each epsilon transition from the provided Epsilon-NFA state
+  * Obtain all tangible Epsilon-NFA state transitions reachable from the provided Epsilon-NFA state via a sequence of epsilon transitions
+  * For each such transition, apply this conversion recursively on the Epsilon-NFA state following the transition, then add a transition from the new start state to the resulting NFA
+* Return the new start state
+
 ### Step 5: Convert NFA to DFA
 
 ### Step 6: Feed String to DFA
