@@ -40,7 +40,7 @@
   * If the parse tree node is a character node, the state group has two-node Epsilon-NFA with a transition between the states matching the character from the node
   * If the parse tree node is a kleene closure node, build the child node state group, then add epsilon transitions in both directions between the resulting start and end states
   * If the parse tree node is a concatenation node, build state groups for all child nodes, then insert epsilon transitions from a new state state to each group's start state and from each group's end state to a new end state
-* Return an Epsilon-NFA with a start state matching that of the top-level state group, setting the corresponding final state to accepting
+* Return an Epsilon-NFA with a start state matching that of the top-level state group, setting the corresponding end state to accepting
 
 ### Step 4: Convert Epsilon-NFA to NFA
 
