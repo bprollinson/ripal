@@ -54,10 +54,24 @@ Run the following algorithm for the start state of the Epsilon-NFA:
   * Apply this conversion recursively on the Epsilon-NFA state following the transition, then add a transition from the new start state to the resulting NFA
 * For each epsilon transition from the provided Epsilon-NFA state
   * Obtain all tangible Epsilon-NFA state transitions reachable from the provided Epsilon-NFA state via a sequence of epsilon transitions
-  * For each such transition, apply this conversion recursively on the Epsilon-NFA state following the transition, then add a transition from the new start state to the resulting NFA
+  * For each such transition, apply this conversion recursively on the Epsilon-NFA state following the transition, then add a transition from the new start state to the resulting NFA, using that transition's input character as the transition input
 * Return the new start state
 
 ### Step 5: Convert NFA to DFA
+
+Run the following algorithm for the set containing a single element - the start state of the NFA:
+
+* If the provided set of NFA states has alraedy been covered, return the corresponding mapped DFA state
+* Create a new start state
+* Map the provided set of NFA states to this new start state, flagging the NFA state as having been covered
+* Create an empty mapping of input characters to sets of NFA states
+* For each NFA state in the provided set of NFA states
+  * Add the mapping entry of input character to subsequent NFA state to the mapping, appending to the set corresponding to that input character if one or more elements already exist for that character
+  * If the NFA state is accepting, flag the new start state as accepting
+* For each entry in the mapping of input characters to NFA states
+  * Apply this conversion recursively on the set of NFA states corresponding to that input character
+  * Add a transition from the new start state to the resulting DFA, using that input character as the transition input
+* Return the new start state
 
 ### Step 6: Feed String to DFA
 
