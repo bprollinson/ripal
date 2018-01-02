@@ -87,8 +87,28 @@ Run the following algorithm for the set containing a single element - the start 
 
 ### Step 1: Tokenize Context-Free Grammar
 
+* Initialize an empty list of tokens found
+* Initialize a buffer of pending characters to the empty string
+* Initialze a flag tracking whether tokenization is currently within a terminal string
+* For each character in the context-free grammar production
+  * If the character is a colon, flush the buffer, then add a separator token to the token list
+  * If the character is a double quote and tokenization is not currently within a terminal string, flush the buffer, then flag that tokenization is within a terminal string
+  * If the character is a double quote and tokenization is currently within a terminal string, flush the buffer, then flag that tokenization is not within a terminal string
+  * If the character is a space and tokenization is not currently within a terminal string, flush the buffer
+  * If the character is none of the above, append it to the buffer
+* If tokenization is currently within a terminal string, fail
+* If the token list has fewer than three tokens, or doesn't start with a non-terminal token followed by a separator token, fail
+* If the number of separator tokens is not one, fail
+* Remove all epsilon tokens from the result unless the right-hand side of the production is equivalent to a single epsilon, in which case reduce the right-hand side to a single epsilon
+* Return the token list
+
+The process of flushing the buffer can be defined as:
+
+* If the triggering character is a colon, an opening double-quote or a space, add a non-terminal with name equal to the buffer contents to the token list (if not empty), then empty the buffer
+* If the triggering character is a closing double-quote, add a terminal with value equal to the buffer contents to the token list (or an epsilon token if the buffer is empty), then empty the buffer
+
 ### Step 2: Convert Token List to Parse Tree
 
-### Step 3: Convert Parse Tree into Parse Table
+### Step 3: Convert Parse Tree into Parse Table (LL1)
 
-### Step 4: Attempt to Match String using Parse Table
+### Step 4: Attempt to Match String using Parse Table (LL1)
