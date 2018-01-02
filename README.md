@@ -109,6 +109,12 @@ The process of flushing the buffer can be defined as:
 
 ### Step 2: Convert Token List to Parse Tree
 
+* Initialize a production node
+* Initialize a non-terminal node with value equal to the value of the first (non-terminal) token from the provided token list, appending it as the first child of the production node
+* Initialize a concatenation node, appending it as the second child of the production node
+* For each token in the provided token list, create a corresponding node, appending it as a child of the concatenation node
+* Return the production node
+
 ### Step 3: Convert Parse Tree into Parse Table (LL1)
 
 ### Step 4: Attempt to Match String using Parse Table (LL1)
