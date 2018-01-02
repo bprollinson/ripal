@@ -117,4 +117,11 @@ The process of flushing the buffer can be defined as:
 
 ### Step 3: Convert Parse Tree into Parse Table (LL1)
 
+* Initialize a parse table
+* For each production in the provided context-free grammar
+  * Calculate the first set for the production rule
+  * For each non-epsilon terminal in that first set, map the combination of that rule's left-hand non-terminal node and that terminal from the first set to the production rule index
+  * If epsilon is part of the first set, for each terminal in the follow set of that rule's left-hand non-terminal node, map the combination of that rule's left-hand non-terminal and the follow set terminal to the production rule index
+* Return the parse table
+
 ### Step 4: Attempt to Match String using Parse Table (LL1)
