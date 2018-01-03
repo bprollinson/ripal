@@ -124,4 +124,12 @@ The process of flushing the buffer can be defined as:
   * If epsilon is part of the first set, for each terminal in the follow set of that rule's left-hand non-terminal node, map the combination of that rule's left-hand non-terminal and the follow set terminal to the production rule index
 * Return the parse table
 
+To calculate the first set for a production node:
+
+* Initialize an empty set of nodes
+* If the first token on the right-hand side of the production rule is a terminal node, append that node to the set of nodes
+* If the first token on the right-hand side of the production rule is an epsilon node, append that node to the set of nodes
+* If the first token on the right-hand size of the production rule is a non-terminal node
+  * ...
+
 ### Step 4: Attempt to Match String using Parse Table (LL1)
