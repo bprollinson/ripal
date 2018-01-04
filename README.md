@@ -124,12 +124,17 @@ The process of flushing the buffer can be defined as:
   * If epsilon is part of the first set, for each terminal in the follow set of that rule's left-hand non-terminal node, map the combination of that rule's left-hand non-terminal and the follow set terminal to the production rule index
 * Return the parse table
 
-To calculate the first set for a production node:
+To calculate the first set for a production node, initialize an empty set of nodes processed, then call the following with that set:
 
 * Initialize an empty set of nodes
+* Add the provided production node to the set of nodes processed
 * If the first token on the right-hand side of the production rule is a terminal node, append that node to the set of nodes
 * If the first token on the right-hand side of the production rule is an epsilon node, append that node to the set of nodes
 * If the first token on the right-hand size of the production rule is a non-terminal node
-  * ...
+  * For each production node (rule) in the grammar with that non-terminal on the left-hand size, recursively add the first set from that production to the set of nodes, with the exception of epsilon nodes
+  * If the right-hand side is in the form of a sequence of non-terminal nodes that go to epsilon followed by a terminal node, add that terminal node to the set of nodes
+  * If the right-hand side is in the form of a sequence of non-terminal nodes that go to epsilon, add epsilon to the set of nodes
+  * If the right-hand side is in the form of a sequence of non-terminal nodes that go to epsilon followed by a non-terminal node that goes to something other than epsilon, add the first set from that non-terminal node to the set of nodes by performing this calculation recursively for each production node with that non-terminal on the left-hand side (if the production node does not belong to the set of nodes already processed)
+* Return the set of nodes
 
 ### Step 4: Attempt to Match String using Parse Table (LL1)
