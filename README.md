@@ -81,7 +81,7 @@ Run the following algorithm for the set containing a single element - the start 
   * Calculate the current input character as input string character at the current character position
   * Update the current state to the state following from the current state's transition with the current input character
   * Increment the current character position
-* If the current state exists and is accepting, return true, otherwise return false
+* If the current state exists and is accepting, accept, otherwise reject
 
 ## Context-Free Languages
 
@@ -153,3 +153,11 @@ To calculate the follow set for a non-terminal node:
 * Return the mapping
 
 ### Step 4: Attempt to Match String using Parse Table (LL1)
+
+* Initialize a stack of syntax nodes to contain the start symbol
+* Initialize the remaining input to contain the input string
+* While the stack still contains a symbol and the remaining input is not empty
+  * If the top symbol of the stack is a non-terminal node, remove the top symbol, then add the right-hand side of the context-free-grammar rule corresponding to the parse table entry for that non-terminal node combined the first character of the remaining input (reject if one doesn't exist)
+  * If the top symbol of the stack is a terminal node, remove the first character of that terminal node and remaining input if they match (rejecting otherwise), adding back the remaining content of the terminal node to the stack if the remaining content is not empty
+* While the remaining input is empty and the top symbol of the stack is a non-terminal node corresponding to a parse table entry mapping to the end-of-string node, remove the top symbol, then add the right-hand side of the context-free-grammar rule corresponding to that context-free-grammar rule
+* If the stack and remaining input string are empty, accept, otherwise reject
