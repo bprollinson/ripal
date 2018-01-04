@@ -137,4 +137,17 @@ To calculate the first set for a production node, initialize an empty set of nod
   * If the right-hand side is in the form of a sequence of non-terminal nodes that go to epsilon followed by a non-terminal node that goes to something other than epsilon, add the first set from that non-terminal node to the set of nodes by performing this calculation recursively for each production node with that non-terminal on the left-hand side (if the production node does not belong to the set of nodes already processed)
 * Return the set of nodes
 
+To calculate the follow set for a non-terminal node:
+
+* Create a mapping of non-terminal nodes to sets of follow nodes
+* Add an end-of-string node to the set for the grammar's start symbol
+* Calculate which non-terminals go to epsilon by looking for production rules where the right-hand-side is simply an epsilon node
+* For each production in the context-free grammar
+  * For any non-terminal node directly followed by a terminal node, store the first character of the terminal node in the mapping as belonging to the follow of the non-terminal node
+  * For any non-terminal node followed by a series of non-terminals that go to epsilon, then a terminal node, store the first character of the terminal node in the mapping as belonging to the follow of the non-terminal node
+  * For any non-terminal node directly followed by a non-terminal node, store the first set of the second non-terminal node (excluding epsilon) as belonging to the follow of the first non-terminal node
+  * For any non-terminal node directly followed by aseries of non-terminals that go to epsilon, then a non-terminal node, store the first set of the second non-terminal node (excluding epsilon) as belonging to the follow of the first non-terminal node
+* ...
+* Return the mapping
+
 ### Step 4: Attempt to Match String using Parse Table (LL1)
