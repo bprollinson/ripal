@@ -148,8 +148,8 @@ To calculate the follow set for a non-terminal node:
   * For any non-terminal node directly followed by a non-terminal node, store the first set of the second non-terminal node (excluding epsilon) in the mapping as belonging to the follow of the first non-terminal node
   * For any non-terminal node directly followed by aseries of non-terminals that go to epsilon, then a non-terminal node, store the first set of the second non-terminal node (excluding epsilon) in the mapping as belonging to the follow of the first non-terminal node
 * While there still exists some follow in the subsequent form to propagate
-  * For each production ending in a non-terminal, store the follow set of the left-hand non-terminal node as belonging to the final right-hand non-terminal
-  * For each production ending in a sequence of non-terminals that go to epsilon proceeded by another non-terminal, store the follow set of the left-hand non-terminal node as belonging to that non-terminal
+  * For each production ending in a non-terminal, store the follow set of the left-hand non-terminal node in the mapping as belonging to the final right-hand non-terminal
+  * For each production ending in a sequence of non-terminals that go to epsilon proceeded by another non-terminal, store the follow set of the left-hand non-terminal node in the mapping as belonging to that non-terminal
 * Return the mapping
 
 ### Step 4: Attempt to Match String using Parse Table (LL1)
