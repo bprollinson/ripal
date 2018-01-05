@@ -100,7 +100,7 @@ public class RegularExpressionSyntaxParserTest
     }
 
     @Test
-    public void testParseHandlesBraces()
+    public void testParseHandlesParentheses()
     {
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
@@ -123,7 +123,7 @@ public class RegularExpressionSyntaxParserTest
     }
 
     @Test
-    public void testParseHandlesNestedBraces()
+    public void testParseHandlesNestedParentheses()
     {
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
