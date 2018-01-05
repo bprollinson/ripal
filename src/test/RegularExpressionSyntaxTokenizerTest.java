@@ -8,7 +8,7 @@ import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseBraceToken;
 import larp.token.regularlanguage.EpsilonToken;
 import larp.token.regularlanguage.KleeneClosureToken;
-import larp.token.regularlanguage.OpenBraceToken;
+import larp.token.regularlanguage.OpenParenthesisToken;
 import larp.token.regularlanguage.OrToken;
 import larp.token.regularlanguage.RegularExpressionSyntaxToken;
 
@@ -24,7 +24,7 @@ public class RegularExpressionSyntaxTokenizerTest
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(ab|c)*");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
-        expectedResult.add(new OpenBraceToken());
+        expectedResult.add(new OpenParenthesisToken());
         expectedResult.add(new CharacterToken('a'));
         expectedResult.add(new CharacterToken('b'));
         expectedResult.add(new OrToken());
@@ -134,7 +134,7 @@ public class RegularExpressionSyntaxTokenizerTest
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("()");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
-        expectedResult.add(new OpenBraceToken());
+        expectedResult.add(new OpenParenthesisToken());
         expectedResult.add(new EpsilonToken());
         expectedResult.add(new CloseBraceToken());
 
@@ -148,7 +148,7 @@ public class RegularExpressionSyntaxTokenizerTest
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(|a)");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
-        expectedResult.add(new OpenBraceToken());
+        expectedResult.add(new OpenParenthesisToken());
         expectedResult.add(new EpsilonToken());
         expectedResult.add(new OrToken());
         expectedResult.add(new CharacterToken('a'));
@@ -164,7 +164,7 @@ public class RegularExpressionSyntaxTokenizerTest
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(*)");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
-        expectedResult.add(new OpenBraceToken());
+        expectedResult.add(new OpenParenthesisToken());
         expectedResult.add(new EpsilonToken());
         expectedResult.add(new KleeneClosureToken());
         expectedResult.add(new CloseBraceToken());
@@ -179,7 +179,7 @@ public class RegularExpressionSyntaxTokenizerTest
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(a|)");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
-        expectedResult.add(new OpenBraceToken());
+        expectedResult.add(new OpenParenthesisToken());
         expectedResult.add(new CharacterToken('a'));
         expectedResult.add(new OrToken());
         expectedResult.add(new EpsilonToken());

@@ -11,7 +11,7 @@ import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseBraceToken;
 import larp.token.regularlanguage.EpsilonToken;
 import larp.token.regularlanguage.KleeneClosureToken;
-import larp.token.regularlanguage.OpenBraceToken;
+import larp.token.regularlanguage.OpenParenthesisToken;
 import larp.token.regularlanguage.OrToken;
 import larp.token.regularlanguage.RegularExpressionSyntaxToken;
 
@@ -106,7 +106,7 @@ public class RegularExpressionSyntaxParserTest
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
-        input.add(new OpenBraceToken());
+        input.add(new OpenParenthesisToken());
         input.add(new CharacterToken('b'));
         input.add(new CloseBraceToken());
         input.add(new CharacterToken('c'));
@@ -129,8 +129,8 @@ public class RegularExpressionSyntaxParserTest
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
-        input.add(new OpenBraceToken());
-        input.add(new OpenBraceToken());
+        input.add(new OpenParenthesisToken());
+        input.add(new OpenParenthesisToken());
         input.add(new CharacterToken('b'));
         input.add(new CloseBraceToken());
         input.add(new CloseBraceToken());
@@ -184,7 +184,7 @@ public class RegularExpressionSyntaxParserTest
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
-        input.add(new OpenBraceToken());
+        input.add(new OpenParenthesisToken());
         input.add(new CharacterToken('a'));
         input.add(new CloseBraceToken());
         RegularExpressionSyntaxNode rootNode = parser.parse(input);
@@ -203,7 +203,7 @@ public class RegularExpressionSyntaxParserTest
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
-        input.add(new OpenBraceToken());
+        input.add(new OpenParenthesisToken());
         input.add(new CharacterToken('a'));
         input.add(new KleeneClosureToken());
         input.add(new CloseBraceToken());
@@ -225,7 +225,7 @@ public class RegularExpressionSyntaxParserTest
         RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
-        input.add(new OpenBraceToken());
+        input.add(new OpenParenthesisToken());
         input.add(new CharacterToken('a'));
         input.add(new OrToken());
         input.add(new CharacterToken('b'));

@@ -8,7 +8,7 @@ import larp.parsetree.regularlanguage.RegularExpressionSyntaxNode;
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseBraceToken;
 import larp.token.regularlanguage.KleeneClosureToken;
-import larp.token.regularlanguage.OpenBraceToken;
+import larp.token.regularlanguage.OpenParenthesisToken;
 import larp.token.regularlanguage.OrToken;
 import larp.token.regularlanguage.RegularExpressionSyntaxToken;
 
@@ -45,7 +45,7 @@ public class RegularExpressionSyntaxParser
                 kleeneClosureNode.addChild(lastNode);
                 childNodes.set(childNodes.size() - 1, kleeneClosureNode);
             }
-            else if (token instanceof OpenBraceToken)
+            else if (token instanceof OpenParenthesisToken)
             {
                 if (braceBalance == 0)
                 {
@@ -83,7 +83,7 @@ public class RegularExpressionSyntaxParser
             {
                 orPositions.add(i);
             }
-            else if (token instanceof OpenBraceToken)
+            else if (token instanceof OpenParenthesisToken)
             {
                 braceBalance++;
             }

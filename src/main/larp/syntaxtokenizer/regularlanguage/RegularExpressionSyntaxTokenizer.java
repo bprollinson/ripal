@@ -4,7 +4,7 @@ import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseBraceToken;
 import larp.token.regularlanguage.EpsilonToken;
 import larp.token.regularlanguage.KleeneClosureToken;
-import larp.token.regularlanguage.OpenBraceToken;
+import larp.token.regularlanguage.OpenParenthesisToken;
 import larp.token.regularlanguage.OrToken;
 import larp.token.regularlanguage.RegularExpressionSyntaxToken;
 
@@ -46,7 +46,7 @@ public class RegularExpressionSyntaxTokenizer
 
             if (currentCharacter == this.openBrace)
             {
-                tokens.add(new OpenBraceToken());
+                tokens.add(new OpenParenthesisToken());
             }
             else if (currentCharacter == this.closeBrace)
             {
