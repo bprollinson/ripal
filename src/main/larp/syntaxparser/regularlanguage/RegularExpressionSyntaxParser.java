@@ -26,18 +26,18 @@ public class RegularExpressionSyntaxParser
         }
 
         ConcatenationNode node = new ConcatenationNode();
-        int braceBalance = 0;
-        int openBracePosition = -1;
+        int parenthesisBalance = 0;
+        int openParenthesisPosition = -1;
 
         for (int i = 0; i < tokens.size(); i++)
         {
             RegularExpressionSyntaxToken token = tokens.get(i);
 
-            if (token instanceof CharacterToken && braceBalance == 0)
+            if (token instanceof CharacterToken && parenthesisBalance == 0)
             {
                 node.addChild(new CharacterNode(((CharacterToken)token).getCharacter()));
             }
-            else if (token instanceof KleeneClosureToken && braceBalance == 0)
+            else if (token instanceof KleeneClosureToken && parenthesisBalance == 0)
             {
                 List<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
                 RegularExpressionSyntaxNode lastNode = childNodes.get(childNodes.size() - 1);
@@ -47,20 +47,20 @@ public class RegularExpressionSyntaxParser
             }
             else if (token instanceof OpenParenthesisToken)
             {
-                if (braceBalance == 0)
+                if (parenthesisBalance == 0)
                 {
-                    openBracePosition = i;
+                    openParenthesisPosition = i;
                 }
-                braceBalance++;
+                parenthesisBalance++;
             }
             else if (token instanceof CloseParenthesisToken)
             {
-                braceBalance--;
+                parenthesisBalance--;
 
-                if (braceBalance == 0)
+                if (parenthesisBalance == 0)
                 {
-                    node.addChild(this.parse(new ArrayList<RegularExpressionSyntaxToken>(tokens.subList(openBracePosition + 1, i))));
-                    openBracePosition = -1;
+                    node.addChild(this.parse(new ArrayList<RegularExpressionSyntaxToken>(tokens.subList(openParenthesisPosition + 1, i))));
+                    openParenthesisPosition = -1;
                 }
             }
         }
@@ -71,25 +71,25 @@ public class RegularExpressionSyntaxParser
     private RegularExpressionSyntaxNode parseOrExpression(List<RegularExpressionSyntaxToken> tokens)
     {
         ConcatenationNode node = new ConcatenationNode();
-        int braceBalance = 0;
-        int openBracePosition = -1;
+        int parenthesisBalance = 0;
+        int openParenthesisPosition = -1;
 
         List<Integer> orPositions = new ArrayList<Integer>();
         for (int i = 0; i < tokens.size(); i++)
         {
             RegularExpressionSyntaxToken token = tokens.get(i);
 
-            if (token instanceof OrToken && braceBalance == 0)
+            if (token instanceof OrToken && parenthesisBalance == 0)
             {
                 orPositions.add(i);
             }
             else if (token instanceof OpenParenthesisToken)
             {
-                braceBalance++;
+                parenthesisBalance++;
             }
             else if (token instanceof CloseParenthesisToken)
             {
-                braceBalance--;
+                parenthesisBalance--;
             }
         }
 
