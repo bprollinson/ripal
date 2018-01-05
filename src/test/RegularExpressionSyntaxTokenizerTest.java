@@ -5,7 +5,7 @@ import larp.syntaxtokenizer.regularlanguage.IncorrectRegularExpressionNestingExc
 import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
 import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
 import larp.token.regularlanguage.CharacterToken;
-import larp.token.regularlanguage.CloseBraceToken;
+import larp.token.regularlanguage.CloseParenthesisToken;
 import larp.token.regularlanguage.EpsilonToken;
 import larp.token.regularlanguage.KleeneClosureToken;
 import larp.token.regularlanguage.OpenParenthesisToken;
@@ -29,7 +29,7 @@ public class RegularExpressionSyntaxTokenizerTest
         expectedResult.add(new CharacterToken('b'));
         expectedResult.add(new OrToken());
         expectedResult.add(new CharacterToken('c'));
-        expectedResult.add(new CloseBraceToken());
+        expectedResult.add(new CloseParenthesisToken());
         expectedResult.add(new KleeneClosureToken());
 
         assertEquals(expectedResult, result);
@@ -136,7 +136,7 @@ public class RegularExpressionSyntaxTokenizerTest
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
         expectedResult.add(new OpenParenthesisToken());
         expectedResult.add(new EpsilonToken());
-        expectedResult.add(new CloseBraceToken());
+        expectedResult.add(new CloseParenthesisToken());
 
         assertEquals(expectedResult, result);
     }
@@ -152,7 +152,7 @@ public class RegularExpressionSyntaxTokenizerTest
         expectedResult.add(new EpsilonToken());
         expectedResult.add(new OrToken());
         expectedResult.add(new CharacterToken('a'));
-        expectedResult.add(new CloseBraceToken());
+        expectedResult.add(new CloseParenthesisToken());
 
         assertEquals(expectedResult, result);
     }
@@ -167,7 +167,7 @@ public class RegularExpressionSyntaxTokenizerTest
         expectedResult.add(new OpenParenthesisToken());
         expectedResult.add(new EpsilonToken());
         expectedResult.add(new KleeneClosureToken());
-        expectedResult.add(new CloseBraceToken());
+        expectedResult.add(new CloseParenthesisToken());
 
         assertEquals(expectedResult, result);
     }
@@ -183,7 +183,7 @@ public class RegularExpressionSyntaxTokenizerTest
         expectedResult.add(new CharacterToken('a'));
         expectedResult.add(new OrToken());
         expectedResult.add(new EpsilonToken());
-        expectedResult.add(new CloseBraceToken());
+        expectedResult.add(new CloseParenthesisToken());
 
         assertEquals(expectedResult, result);
     }

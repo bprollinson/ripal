@@ -1,7 +1,7 @@
 package larp.syntaxtokenizer.regularlanguage;
 
 import larp.token.regularlanguage.CharacterToken;
-import larp.token.regularlanguage.CloseBraceToken;
+import larp.token.regularlanguage.CloseParenthesisToken;
 import larp.token.regularlanguage.EpsilonToken;
 import larp.token.regularlanguage.KleeneClosureToken;
 import larp.token.regularlanguage.OpenParenthesisToken;
@@ -52,7 +52,7 @@ public class RegularExpressionSyntaxTokenizer
             {
                 this.addEpsilonBasedOnTokenSequence(tokens, lastCharacter);
 
-                tokens.add(new CloseBraceToken());
+                tokens.add(new CloseParenthesisToken());
             }
             else if (currentCharacter == this.kleeneClosure)
             {
