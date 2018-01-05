@@ -13,8 +13,8 @@ import java.util.List;
 
 public class RegularExpressionSyntaxTokenizer
 {
-    private char openBrace = '(';
-    private char closeBrace = ')';
+    private char openParenthesis = '(';
+    private char closeParenthesis = ')';
     private char kleeneClosure = '*';
     private char or = '|';
 
@@ -29,12 +29,12 @@ public class RegularExpressionSyntaxTokenizer
         {
             char currentCharacter = expression.charAt(i);
 
-            if (currentCharacter == this.openBrace)
+            if (currentCharacter == this.openParenthesis)
             {
                 nestingLevel++;
             }
 
-            if (currentCharacter == this.closeBrace)
+            if (currentCharacter == this.closeParenthesis)
             {
                 nestingLevel--;
             }
@@ -44,11 +44,11 @@ public class RegularExpressionSyntaxTokenizer
                 throw new IncorrectRegularExpressionNestingException();
             }
 
-            if (currentCharacter == this.openBrace)
+            if (currentCharacter == this.openParenthesis)
             {
                 tokens.add(new OpenParenthesisToken());
             }
-            else if (currentCharacter == this.closeBrace)
+            else if (currentCharacter == this.closeParenthesis)
             {
                 this.addEpsilonBasedOnTokenSequence(tokens, lastCharacter);
 
@@ -88,7 +88,7 @@ public class RegularExpressionSyntaxTokenizer
 
     private void addEpsilonBasedOnTokenSequence(List<RegularExpressionSyntaxToken> tokens, Character lastCharacter)
     {
-        if (lastCharacter != null && lastCharacter == this.openBrace)
+        if (lastCharacter != null && lastCharacter == this.openParenthesis)
         {
             tokens.add(new EpsilonToken());
         }
