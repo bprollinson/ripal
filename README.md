@@ -154,6 +154,7 @@ To calculate the follow set for a non-terminal node:
 
 ### Step 4: Attempt to Match String using Parse Table (LL1)
 
+* If the provided context-free-grammar has no rules, reject
 * Initialize a stack of syntax nodes to contain the start symbol
 * Initialize the remaining input to contain the input string
 * While the stack still contains a symbol and the remaining input is not empty

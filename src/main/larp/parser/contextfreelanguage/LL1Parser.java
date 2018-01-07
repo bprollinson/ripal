@@ -33,7 +33,12 @@ public class LL1Parser
         this.appliedRules = new ArrayList<Integer>();
 
         List<ContextFreeGrammarSyntaxNode> stack = new ArrayList<ContextFreeGrammarSyntaxNode>();
-        stack.add(contextFreeGrammar.getStartSymbol());
+        NonTerminalNode startSymbol = contextFreeGrammar.getStartSymbol();
+        if (startSymbol == null)
+        {
+            return false;
+        }
+        stack.add(startSymbol);
 
         StringBuffer remainingInput = new StringBuffer(inputString);
 
