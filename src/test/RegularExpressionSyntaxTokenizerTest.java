@@ -128,7 +128,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerTokenizesCloseBracketAfterOpenBracket() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerTokenizesCloseParenthesisAfterOpenParenthesis() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -142,7 +142,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerTokenizesOrAfterOpenBracket() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerTokenizesOrAfterOpenParenthesis() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -158,7 +158,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerTokenizesKleeneClosureAfterOpenBracket() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerTokenizesKleeneClosureAfterOpenParenthesis() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -173,7 +173,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerTokenizesCloseBracketAfterOr() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerTokenizesCloseParenthesisAfterOr() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -233,7 +233,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test(expected = IncorrectRegularExpressionNestingException.class)
-    public void testTokenizerThrowsExceptionForNegativeBracketNesting() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerThrowsExceptionForNegativeParenthesisNesting() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -241,7 +241,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test(expected = IncorrectRegularExpressionNestingException.class)
-    public void testTokenizerThrowsExceptionForUnclosedBracketAtEndOfString() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerThrowsExceptionForUnclosedParenthesisAtEndOfString() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
