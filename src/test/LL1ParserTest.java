@@ -195,6 +195,28 @@ public class LL1ParserTest
     }
 
     @Test
+    public void testAcceptsReturnsFalseForEmptyStringWhenCFGIsEmpty()
+    {
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        LL1Parser parser = new LL1Parser(parseTable);
+
+        assertFalse(parser.accepts(""));
+    }
+
+    @Test
+    public void testAcceptsReturnsFalseForNonEmptyStringWhenCFGIsEmpty()
+    {
+        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+
+        LL1ParseTable parseTable = new LL1ParseTable(contextFreeGrammar);
+        LL1Parser parser = new LL1Parser(parseTable);
+
+        assertFalse(parser.accepts("a"));
+    }
+
+    @Test
     public void testGetAppliedRulesReturnsEmptyListBeforeParseIsRun() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
