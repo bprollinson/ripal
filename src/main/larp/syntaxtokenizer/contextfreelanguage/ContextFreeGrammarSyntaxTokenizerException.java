@@ -1,5 +1,7 @@
 package larp.syntaxtokenizer.contextfreelanguage;
 
-public class ContextFreeGrammarSyntaxTokenizerException extends Exception
+import larp.assertion.AssertException;
+
+public class ContextFreeGrammarSyntaxTokenizerException extends AssertException
 {
 }
