@@ -1,5 +1,7 @@
 package larp.parser.contextfreelanguage;
 
-public class AmbiguousLL1ParseTableException extends Exception
+import larp.assertion.AssertException;
+
+public class AmbiguousLL1ParseTableException extends AssertException
 {
 }
