@@ -44,14 +44,4 @@ public class ContextFreeGrammarLL1SyntaxCompiler
 
         return parseTable;
     }
-
-    private void addCell(LL1ParseTable parseTable, NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode, int ruleIndex) throws AmbiguousLL1ParseTableException
-    {
-        if (parseTable.getCell(nonTerminalNode, terminalNode) != null)
-        {
-            throw new AmbiguousLL1ParseTableException();
-        }
-
-        parseTable.addCell(nonTerminalNode, terminalNode, ruleIndex);
-    }
 }
