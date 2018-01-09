@@ -76,7 +76,7 @@ public class RegularExpressionSyntaxTokenizer
             lastCharacter = currentCharacter;
         }
 
-        new RegularExpressionNestingLevelValidAssertion(nestingLevel).validate();
+        new RegularExpressionFinalNestingLevelValidAssertion(nestingLevel).validate();
 
         this.addPostfixEpsilon(tokens, lastCharacter);
 

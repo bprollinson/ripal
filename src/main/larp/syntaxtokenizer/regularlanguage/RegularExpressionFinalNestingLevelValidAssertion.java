@@ -2,11 +2,11 @@ package larp.syntaxtokenizer.regularlanguage;
 
 import larp.assertion.Assertion;
 
-public class RegularExpressionNestingLevelValidAssertion implements Assertion
+public class RegularExpressionFinalNestingLevelValidAssertion implements Assertion
 {
     private int nestingLevel;
 
-    public RegularExpressionNestingLevelValidAssertion(int nestingLevel)
+    public RegularExpressionFinalNestingLevelValidAssertion(int nestingLevel)
     {
         this.nestingLevel = nestingLevel;
     }
