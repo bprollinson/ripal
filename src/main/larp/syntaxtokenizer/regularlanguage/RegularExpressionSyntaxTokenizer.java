@@ -39,10 +39,7 @@ public class RegularExpressionSyntaxTokenizer
                 nestingLevel--;
             }
 
-            if (nestingLevel < 0)
-            {
-                throw new IncorrectRegularExpressionNestingException();
-            }
+            new RegularExpressionIntermediateNestingLevelValidAssertion(nestingLevel).validate();
 
             if (currentCharacter == this.openParenthesis)
             {
