@@ -31,11 +31,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         }
 
         new ContextFreeGrammarStartingTokenAssertion(tokens).validate();
-
-        if (this.numSeparators != 1)
-        {
-            throw new IncorrectContextFreeGrammarSeparatorException();
-        }
+        new ContextFreeGrammarCorrectNumberOfSeparatorsAssertion(this.numSeparators).validate();
 
         return this.correctEpsilonSetupInTokens(tokens);
     }
