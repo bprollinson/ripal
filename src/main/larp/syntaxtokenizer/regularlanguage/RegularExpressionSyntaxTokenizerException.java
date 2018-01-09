@@ -1,5 +1,7 @@
 package larp.syntaxtokenizer.regularlanguage;
 
-public class RegularExpressionSyntaxTokenizerException extends Exception
+import larp.assertion.AssertException;
+
+public class RegularExpressionSyntaxTokenizerException extends AssertException
 {
 }
