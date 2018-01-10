@@ -25,11 +25,7 @@ public class ContextFreeGrammarSyntaxTokenizer
 
         List<ContextFreeGrammarSyntaxToken> tokens = this.convertCharactersToTokens(expression);
 
-        if (this.inTerminal)
-        {
-            throw new IncorrectContextFreeGrammarQuoteNestingException();
-        }
-
+        new ContextFreeGrammarFinalQuoteNestingCorrectAssertion(this.inTerminal).validate();
         new ContextFreeGrammarStartingTokenAssertion(tokens).validate();
         new ContextFreeGrammarCorrectNumberOfSeparatorsAssertion(this.numSeparators).validate();
 
