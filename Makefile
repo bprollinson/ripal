@@ -27,7 +27,7 @@ test:
 	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeLanguageEpsilonTokenTest
 	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarSyntaxTokenizerTest
 	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarFinalQuoteNestingCorrectAssertionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarStartingTokenAssertionTest
+	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarStartingTokensValidAssertionTest
 	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarCorrectNumberOfSeparatorsAssertionTest
 	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ProductionNodeTest
 	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore NonTerminalNodeTest

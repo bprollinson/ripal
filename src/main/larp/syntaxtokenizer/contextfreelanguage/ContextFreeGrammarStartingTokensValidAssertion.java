@@ -7,11 +7,11 @@ import larp.token.contextfreelanguage.SeparatorToken;
 
 import java.util.List;
 
-public class ContextFreeGrammarStartingTokenAssertion implements Assertion
+public class ContextFreeGrammarStartingTokensValidAssertion implements Assertion
 {
     private List<ContextFreeGrammarSyntaxToken> tokens;
 
-    public ContextFreeGrammarStartingTokenAssertion(List<ContextFreeGrammarSyntaxToken> tokens)
+    public ContextFreeGrammarStartingTokensValidAssertion(List<ContextFreeGrammarSyntaxToken> tokens)
     {
         this.tokens = tokens;
     }
