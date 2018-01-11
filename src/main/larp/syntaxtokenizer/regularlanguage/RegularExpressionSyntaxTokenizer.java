@@ -86,6 +86,7 @@ public class RegularExpressionSyntaxTokenizer
         }
 
         new RegularExpressionFinalNestingLevelValidAssertion(nestingLevel).validate();
+        new RegularExpressionFinalEscapingStatusValidAssertion(escaping).validate();
 
         this.addPostfixEpsilon(tokens, lastCharacter);
 

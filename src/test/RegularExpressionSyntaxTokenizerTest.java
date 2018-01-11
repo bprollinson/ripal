@@ -1,7 +1,7 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.syntaxtokenizer.regularlanguage.DanglingRegularExpressionSeparatorException;
+import larp.syntaxtokenizer.regularlanguage.DanglingRegularExpressionEscapeCharacterException;
 import larp.syntaxtokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
 import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
 import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
@@ -265,7 +265,7 @@ public class RegularExpressionSyntaxTokenizerTest
         assertEquals(expectedResult, result);
     }
 
-    @Test(expected = DanglingRegularExpressionSeparatorException.class)
+    @Test(expected = DanglingRegularExpressionEscapeCharacterException.class)
     public void testTokenizerThrowsExceptionForDanglingEscapeCharacter() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();

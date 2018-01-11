@@ -1,0 +1,5 @@
+package larp.syntaxtokenizer.regularlanguage;
+
+public class DanglingRegularExpressionEscapeCharacterException extends RegularExpressionSyntaxTokenizerException
+{
+}
