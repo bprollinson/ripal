@@ -17,12 +17,14 @@ public class RegularExpressionSyntaxTokenizer
     private char closeParenthesis = ')';
     private char kleeneClosure = '*';
     private char or = '|';
+    private char escape = '\\';
 
     public List<RegularExpressionSyntaxToken> tokenize(String expression) throws RegularExpressionSyntaxTokenizerException
     {
         List<RegularExpressionSyntaxToken> tokens = new ArrayList<RegularExpressionSyntaxToken>();
 
         int nestingLevel = 0;
+        boolean escaping = false;
         Character lastCharacter = null;
 
         for (int i = 0; i < expression.length(); i++)
@@ -33,10 +35,20 @@ public class RegularExpressionSyntaxTokenizer
             {
                 nestingLevel++;
             }
-
             if (currentCharacter == this.closeParenthesis)
             {
                 nestingLevel--;
+            }
+            if (currentCharacter == this.escape && !escaping)
+            {
+                escaping = true;
+                continue;
+            }
+            if (escaping)
+            {
+                escaping = false;
+                tokens.add(new CharacterToken(currentCharacter));
+                continue;
             }
 
             new RegularExpressionIntermediateNestingLevelValidAssertion(nestingLevel).validate();
