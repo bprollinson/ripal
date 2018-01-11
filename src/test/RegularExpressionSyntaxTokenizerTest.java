@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import larp.syntaxtokenizer.regularlanguage.DanglingRegularExpressionSeparatorException;
 import larp.syntaxtokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
 import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
 import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
@@ -262,5 +263,13 @@ public class RegularExpressionSyntaxTokenizerTest
         expectedResult.add(new CharacterToken('\\'));
 
         assertEquals(expectedResult, result);
+    }
+
+    @Test(expected = DanglingRegularExpressionSeparatorException.class)
+    public void testTokenizerThrowsExceptionForDanglingEscapeCharacter() throws RegularExpressionSyntaxTokenizerException
+    {
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("\\");
     }
 }
