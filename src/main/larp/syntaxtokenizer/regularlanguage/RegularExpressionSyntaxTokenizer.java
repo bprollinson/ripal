@@ -19,78 +19,86 @@ public class RegularExpressionSyntaxTokenizer
     private char or = '|';
     private char escape = '\\';
 
+    private int nestingLevel;
+    private boolean escaping;
+
     public List<RegularExpressionSyntaxToken> tokenize(String expression) throws RegularExpressionSyntaxTokenizerException
     {
         List<RegularExpressionSyntaxToken> tokens = new ArrayList<RegularExpressionSyntaxToken>();
 
-        int nestingLevel = 0;
-        boolean escaping = false;
+        this.nestingLevel = 0;
+        this.escaping = false;
+
         Character lastCharacter = null;
 
         for (int i = 0; i < expression.length(); i++)
         {
             char currentCharacter = expression.charAt(i);
-
-            if (currentCharacter == this.openParenthesis)
-            {
-                nestingLevel++;
-            }
-            if (currentCharacter == this.closeParenthesis)
-            {
-                nestingLevel--;
-            }
-            if (currentCharacter == this.escape && !escaping)
-            {
-                escaping = true;
-                continue;
-            }
-            if (escaping)
-            {
-                escaping = false;
-                tokens.add(new CharacterToken(currentCharacter));
-                continue;
-            }
-
-            new RegularExpressionIntermediateNestingLevelValidAssertion(nestingLevel).validate();
-
-            if (currentCharacter == this.openParenthesis)
-            {
-                tokens.add(new OpenParenthesisToken());
-            }
-            else if (currentCharacter == this.closeParenthesis)
-            {
-                this.addEpsilonBasedOnTokenSequence(tokens, lastCharacter);
-
-                tokens.add(new CloseParenthesisToken());
-            }
-            else if (currentCharacter == this.kleeneClosure)
-            {
-                this.addPrefixEpsilon(tokens);
-                this.addEpsilonBasedOnTokenSequence(tokens, lastCharacter);
-
-                tokens.add(new KleeneClosureToken());
-            }
-            else if (currentCharacter == this.or)
-            {
-                this.addPrefixEpsilon(tokens);
-                this.addEpsilonBasedOnTokenSequence(tokens, lastCharacter);
-
-                tokens.add(new OrToken());
-            }
-            else
-            {
-                tokens.add(new CharacterToken(currentCharacter));
-            }
+            this.processCharacter(tokens, currentCharacter, lastCharacter);
 
             lastCharacter = currentCharacter;
         }
 
-        new RegularExpressionFinalNestingLevelValidAssertion(nestingLevel).validate();
-        new RegularExpressionFinalEscapingStatusValidAssertion(escaping).validate();
+        new RegularExpressionFinalNestingLevelValidAssertion(this.nestingLevel).validate();
+        new RegularExpressionFinalEscapingStatusValidAssertion(this.escaping).validate();
 
         this.addPostfixEpsilon(tokens, lastCharacter);
 
         return tokens;
+    }
+
+    private void processCharacter(List<RegularExpressionSyntaxToken> tokens, char currentCharacter, Character lastCharacter) throws RegularExpressionSyntaxTokenizerException
+    {
+        if (currentCharacter == this.openParenthesis)
+        {
+            this.nestingLevel++;
+        }
+        if (currentCharacter == this.closeParenthesis)
+        {
+            this.nestingLevel--;
+        }
+        if (currentCharacter == this.escape && !this.escaping)
+        {
+            this.escaping = true;
+            return;
+        }
+        if (this.escaping)
+        {
+            this.escaping = false;
+            tokens.add(new CharacterToken(currentCharacter));
+            return;
+        }
+
+        new RegularExpressionIntermediateNestingLevelValidAssertion(this.nestingLevel).validate();
+
+        if (currentCharacter == this.openParenthesis)
+        {
+            tokens.add(new OpenParenthesisToken());
+        }
+        else if (currentCharacter == this.closeParenthesis)
+        {
+            this.addEpsilonBasedOnTokenSequence(tokens, lastCharacter);
+
+            tokens.add(new CloseParenthesisToken());
+        }
+        else if (currentCharacter == this.kleeneClosure)
+        {
+            this.addPrefixEpsilon(tokens);
+            this.addEpsilonBasedOnTokenSequence(tokens, lastCharacter);
+
+            tokens.add(new KleeneClosureToken());
+        }
+        else if (currentCharacter == this.or)
+        {
+            this.addPrefixEpsilon(tokens);
+            this.addEpsilonBasedOnTokenSequence(tokens, lastCharacter);
+
+            tokens.add(new OrToken());
+        }
+        else
+        {
+            tokens.add(new CharacterToken(currentCharacter));
+        }
     }
 
     private void addEpsilonBasedOnTokenSequence(List<RegularExpressionSyntaxToken> tokens, Character lastCharacter)
