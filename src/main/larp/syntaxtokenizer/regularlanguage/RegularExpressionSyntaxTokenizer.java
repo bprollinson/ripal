@@ -49,11 +49,11 @@ public class RegularExpressionSyntaxTokenizer
 
     private void processCharacter(List<RegularExpressionSyntaxToken> tokens, char currentCharacter, Character lastCharacter) throws RegularExpressionSyntaxTokenizerException
     {
-        if (currentCharacter == this.openParenthesis)
+        if (currentCharacter == this.openParenthesis && !this.escaping)
         {
             this.nestingLevel++;
         }
-        if (currentCharacter == this.closeParenthesis)
+        if (currentCharacter == this.closeParenthesis && !this.escaping)
         {
             this.nestingLevel--;
         }
