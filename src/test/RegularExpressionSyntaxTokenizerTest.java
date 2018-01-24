@@ -272,4 +272,16 @@ public class RegularExpressionSyntaxTokenizerTest
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("\\");
     }
+
+    @Test
+    public void testTokenizerDoesNotAdjustParenthesisNestingLevelOnEscapedOpenParenthesis()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testTokenizerDoesNotAdjustParenthesisNestingLevelOnEscapedCloseParenthesis()
+    {
+        assertEquals(0, 1);
+    }
 }
