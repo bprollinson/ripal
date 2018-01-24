@@ -274,14 +274,26 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerDoesNotAdjustParenthesisNestingLevelOnEscapedOpenParenthesis()
+    public void testTokenizerDoesNotAdjustParenthesisNestingLevelOnEscapedOpenParenthesis() throws RegularExpressionSyntaxTokenizerException
     {
-        assertEquals(0, 1);
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("\\(");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new CharacterToken('('));
+
+        assertEquals(expectedResult, result);
     }
 
     @Test
-    public void testTokenizerDoesNotAdjustParenthesisNestingLevelOnEscapedCloseParenthesis()
+    public void testTokenizerDoesNotAdjustParenthesisNestingLevelOnEscapedCloseParenthesis() throws RegularExpressionSyntaxTokenizerException
     {
-        assertEquals(0, 1);
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("\\)");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new CharacterToken(')'));
+
+        assertEquals(expectedResult, result);
     }
 }
