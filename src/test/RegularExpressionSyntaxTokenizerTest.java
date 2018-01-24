@@ -250,7 +250,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTolkenizerTokenizesEscapedSpecialCharacters() throws RegularExpressionSyntaxTokenizerException
+    public void testTolkenizerTokenizesEscapesSpecialCharacters() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
