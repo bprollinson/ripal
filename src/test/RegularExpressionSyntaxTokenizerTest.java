@@ -296,4 +296,16 @@ public class RegularExpressionSyntaxTokenizerTest
 
         assertEquals(expectedResult, result);
     }
+
+    @Test
+    public void testTokenizerGeneratesStandardCharacterTokenAfterEscapeCharacter() throws RegularExpressionSyntaxTokenizerException
+    {
+        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+
+        List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("\\a");
+        List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
+        expectedResult.add(new CharacterToken('a'));
+
+        assertEquals(expectedResult, result);
+    }
 }
