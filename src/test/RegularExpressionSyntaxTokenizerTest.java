@@ -298,7 +298,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerGeneratesStandardCharacterTokenAfterEscapeCharacter() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizerGeneratesStandardCharacterTokenFromCharacterAfterEscapeCharacter() throws RegularExpressionSyntaxTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
