@@ -6,14 +6,18 @@
 
 * Initialize an empty list of tokens found
 * Initialize parenthesis depth as 0
+* Initialize an escape status flag to not escaping
 * For each character in the regular expression
+  * If escaping, add the current character as a character token to the result, set escape status to not escaping and move on to the next character
   * If the character is an open parenthesis, increment parenthesis depth
   * If the character is a close parenthesis, decrement parenthesis depth
+  * If the current character is the escape symbol, set the escape status flag to escaping and move on the to the next character
   * If parenthesis depth is negative, fail
   * If the current character is a kleene closure or an or symbol and the token list is empty, append epsilon to the token list
   * If the current character is a close parenthesis, kleene closure or and or symbol and the last token was an open parenthesis or an or token, append epsilon to the token list
   * If the character is a an open parenthesis, close parenthesis, kleene closure, or symbol or character, add it to the list
 * If parenthesis depth is not zero, fail
+* If escaping, fail
 * If the token list contains no tokens or the last token was an or symbol, append epsilon to the token list
 * Return the token list
 
@@ -89,7 +93,7 @@ Run the following algorithm for the set containing a single element - the start 
 
 * Initialize an empty list of tokens found
 * Initialize a buffer of pending characters to the empty string
-* Initialze a flag tracking whether tokenization is currently within a terminal string
+* Initialze a flag tracking whether tokenization is currently within a terminal string to not being within a terminal string
 * For each character in the context-free grammar production
   * If the character is a colon, flush the buffer, then add a separator token to the token list
   * If the character is a double quote and tokenization is not currently within a terminal string, flush the buffer, then flag that tokenization is within a terminal string
