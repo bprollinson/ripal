@@ -296,4 +296,18 @@ public class ContextFreeGrammarSyntaxTokenizerTest
 
         tokenizer.tokenize("S::");
     }
+
+    @Test
+    public void testTokenizerTokenizesColonWithinTerminalString() throws ContextFreeGrammarSyntaxTokenizerException
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\":\"");
+        List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new TerminalToken(":"));
+
+        assertEquals(expectedResult, result);
+    }
 }
