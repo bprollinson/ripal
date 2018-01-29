@@ -298,7 +298,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizerTokenizesColonWithinTerminalString() throws ContextFreeGrammarSyntaxTokenizerException
+    public void testTokenizeTokenizesColonWithinTerminalString() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
@@ -309,5 +309,17 @@ public class ContextFreeGrammarSyntaxTokenizerTest
         expectedResult.add(new TerminalToken(":"));
 
         assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizeTokenizesEscapedDoubleQuoteCharacterWithinTerminalString() throws ContextFreeGrammarSyntaxTokenizerException
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\\\"\"");
+        List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new TerminalToken("\""));
     }
 }
