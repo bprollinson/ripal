@@ -322,5 +322,21 @@ public class ContextFreeGrammarSyntaxTokenizerTest
         expectedResult.add(new SeparatorToken());
         expectedResult.add(new TerminalToken("\""));
         expectedResult.add(new TerminalToken("\\"));
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testTokenizeGeneratesStandardCharacterTokenFromCharacterAfterEscapeCharacter() throws ContextFreeGrammarSyntaxTokenizerException
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\\a\"");
+        List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        expectedResult.add(new NonTerminalToken("S"));
+        expectedResult.add(new SeparatorToken());
+        expectedResult.add(new TerminalToken("a"));
+
+        assertEquals(expectedResult, result);
     }
 }
