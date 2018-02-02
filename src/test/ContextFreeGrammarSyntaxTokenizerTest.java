@@ -348,4 +348,12 @@ public class ContextFreeGrammarSyntaxTokenizerTest
 
         assertEquals(expectedResult, result);
     }
+
+    @Test(expected = IncorrectContextFreeGrammarQuoteNestingException.class)
+    public void testTokenizeThrowsExceptionForUnclosedQuoteAtEndOfStringContainingEscapedQuote() throws ContextFreeGrammarSyntaxTokenizerException
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        tokenizer.tokenize("S:\"\\\"");
+    }
 }
