@@ -1,0 +1,5 @@
+package larp.syntaxtokenizer.contextfreelanguage;
+
+public class IncorrectContextFreeGrammarEscapeCharacterPositionException extends ContextFreeGrammarSyntaxTokenizerException
+{
+}

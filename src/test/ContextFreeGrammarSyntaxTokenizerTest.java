@@ -4,6 +4,7 @@ import org.junit.Test;
 import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizer;
 import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
 import larp.syntaxtokenizer.contextfreelanguage.DanglingContextFreeGrammarEscapeCharacterException;
+import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarEscapeCharacterPositionException;
 import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarQuoteNestingException;
 import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarSeparatorException;
 import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
@@ -355,5 +356,13 @@ public class ContextFreeGrammarSyntaxTokenizerTest
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
         tokenizer.tokenize("S:\"\\\"");
+    }
+
+    @Test(expected = IncorrectContextFreeGrammarEscapeCharacterPositionException.class)
+    public void testTokenizeThrowExceptionForEscapeCharacterOutsideTerminalString() throws ContextFreeGrammarSyntaxTokenizerException
+    {
+        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+
+        tokenizer.tokenize("S:\\\\");
     }
 }
