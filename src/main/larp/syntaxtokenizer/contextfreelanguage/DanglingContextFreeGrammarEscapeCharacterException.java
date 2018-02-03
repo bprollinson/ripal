@@ -1,5 +1,0 @@
-package larp.syntaxtokenizer.contextfreelanguage;
-
-public class DanglingContextFreeGrammarEscapeCharacterException extends ContextFreeGrammarSyntaxTokenizerException
-{
-}
