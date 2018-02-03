@@ -34,7 +34,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         return this.correctEpsilonSetupInTokens(tokens);
     }
 
-    private List<ContextFreeGrammarSyntaxToken> convertCharactersToTokens(String expression)
+    private List<ContextFreeGrammarSyntaxToken> convertCharactersToTokens(String expression) throws ContextFreeGrammarSyntaxTokenizerException
     {
         List<ContextFreeGrammarSyntaxToken> tokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
 
@@ -54,7 +54,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         return tokens;
     }
 
-    private String processCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer, char currentCharacter)
+    private String processCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer, char currentCharacter) throws ContextFreeGrammarSyntaxTokenizerException
     {
         if (this.escaping)
         {
@@ -66,6 +66,10 @@ public class ContextFreeGrammarSyntaxTokenizer
 
         if (currentCharacter == '\\')
         {
+            if (!this.inTerminal)
+            {
+                throw new IncorrectContextFreeGrammarEscapeCharacterPositionException();
+            }
             this.escaping = true;
 
             return buffer;

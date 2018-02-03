@@ -358,7 +358,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     }
 
     @Test(expected = IncorrectContextFreeGrammarEscapeCharacterPositionException.class)
-    public void testTokenizeThrowExceptionForEscapeCharacterOutsideTerminalString() throws ContextFreeGrammarSyntaxTokenizerException
+    public void testTokenizeThrowsExceptionForEscapeCharacterOutsideTerminalString() throws ContextFreeGrammarSyntaxTokenizerException
     {
         ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
 
