@@ -322,8 +322,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
         expectedResult.add(new NonTerminalToken("S"));
         expectedResult.add(new SeparatorToken());
-        expectedResult.add(new TerminalToken("\""));
-        expectedResult.add(new TerminalToken("\\"));
+        expectedResult.add(new TerminalToken("\"\\"));
 
         assertEquals(expectedResult, result);
     }
