@@ -12,6 +12,7 @@ import java.util.List;
 public class ContextFreeGrammarSyntaxTokenizer
 {
     private boolean inTerminal;
+    private boolean escaping;
     private int numSeparators;
     private int numTerminals;
     private int numNonTerminals;
@@ -19,6 +20,7 @@ public class ContextFreeGrammarSyntaxTokenizer
     public List<ContextFreeGrammarSyntaxToken> tokenize(String expression) throws ContextFreeGrammarSyntaxTokenizerException
     {
         this.inTerminal = false;
+        this.escaping = false;
         this.numSeparators = 0;
         this.numTerminals = 0;
         this.numNonTerminals = 0;
@@ -54,6 +56,21 @@ public class ContextFreeGrammarSyntaxTokenizer
 
     private String processCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer, char currentCharacter)
     {
+        if (this.escaping)
+        {
+            this.escaping = false;
+            buffer += currentCharacter;
+
+            return buffer;
+        }
+
+        if (currentCharacter == '\\')
+        {
+            this.escaping = true;
+
+            return buffer;
+        }
+
         if (currentCharacter == ':' && !this.inTerminal)
         {
             buffer = this.processSeparatorCharacter(tokens, buffer);

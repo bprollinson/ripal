@@ -53,6 +53,7 @@ public class RegularExpressionSyntaxTokenizer
         {
             this.escaping = false;
             tokens.add(new CharacterToken(currentCharacter));
+
             return;
         }
 
@@ -67,6 +68,7 @@ public class RegularExpressionSyntaxTokenizer
         if (currentCharacter == this.escape)
         {
             this.escaping = true;
+
             return;
         }
 
