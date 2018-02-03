@@ -54,7 +54,7 @@ public class ContextFreeGrammarSyntaxTokenizer
 
     private String processCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer, char currentCharacter)
     {
-        if (currentCharacter == ':')
+        if (currentCharacter == ':' && !this.inTerminal)
         {
             buffer = this.processSeparatorCharacter(tokens, buffer);
         }
