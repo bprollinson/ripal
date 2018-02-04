@@ -66,7 +66,7 @@ public class ContextFreeGrammarSyntaxTokenizer
 
         if (currentCharacter == '\\')
         {
-            new ContextFreeGrammarEscapeCharacterPositionCorrectException(this.inTerminal).validate();
+            new ContextFreeGrammarEscapeCharacterPositionCorrectAssertion(this.inTerminal).validate();
             this.escaping = true;
 
             return buffer;

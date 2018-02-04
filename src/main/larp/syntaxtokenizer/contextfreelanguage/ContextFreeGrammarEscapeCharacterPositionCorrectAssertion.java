@@ -2,11 +2,11 @@ package larp.syntaxtokenizer.contextfreelanguage;
 
 import larp.assertion.Assertion;
 
-public class ContextFreeGrammarEscapeCharacterPositionCorrectException implements Assertion
+public class ContextFreeGrammarEscapeCharacterPositionCorrectAssertion implements Assertion
 {
     private boolean inTerminal;
 
-    public ContextFreeGrammarEscapeCharacterPositionCorrectException(boolean inTerminal)
+    public ContextFreeGrammarEscapeCharacterPositionCorrectAssertion(boolean inTerminal)
     {
         this.inTerminal = inTerminal;
     }
