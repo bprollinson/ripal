@@ -1,17 +1,23 @@
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+
+import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarEscapeCharacterPositionCorrectAssertion;
+import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarEscapeCharacterPositionException;
 
 public class ContextFreeGrammarEscapeCharacterPositionCorrectAssertionTest
 {
-    @Test
-    public void testValidateThrowsExceptionWhenNotInTerminal()
+    @Test(expected = IncorrectContextFreeGrammarEscapeCharacterPositionException.class)
+    public void testValidateThrowsExceptionWhenNotInTerminal() throws IncorrectContextFreeGrammarEscapeCharacterPositionException
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarEscapeCharacterPositionCorrectAssertion assertion = new ContextFreeGrammarEscapeCharacterPositionCorrectAssertion(false);
+
+        assertion.validate();
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionWhenInTerminal()
+    public void testValidateDoesNotThrowExceptionWhenInTerminal() throws IncorrectContextFreeGrammarEscapeCharacterPositionException
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarEscapeCharacterPositionCorrectAssertion assertion = new ContextFreeGrammarEscapeCharacterPositionCorrectAssertion(true);
+
+        assertion.validate();
     }
 }
