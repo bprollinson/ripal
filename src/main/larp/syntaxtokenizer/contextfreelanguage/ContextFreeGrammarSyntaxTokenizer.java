@@ -11,6 +11,11 @@ import java.util.List;
 
 public class ContextFreeGrammarSyntaxTokenizer
 {
+    private char separator = ':';
+    private char doubleQuote = '"';
+    private char space = ' ';
+    private char escape = '\\';
+
     private boolean inTerminal;
     private boolean escaping;
     private int numSeparators;
@@ -64,7 +69,7 @@ public class ContextFreeGrammarSyntaxTokenizer
             return buffer;
         }
 
-        if (currentCharacter == '\\')
+        if (currentCharacter == this.escape)
         {
             new ContextFreeGrammarEscapeCharacterPositionCorrectAssertion(this.inTerminal).validate();
             this.escaping = true;
@@ -72,19 +77,19 @@ public class ContextFreeGrammarSyntaxTokenizer
             return buffer;
         }
 
-        if (currentCharacter == ':' && !this.inTerminal)
+        if (currentCharacter == this.separator && !this.inTerminal)
         {
             buffer = this.processSeparatorCharacter(tokens, buffer);
         }
-        else if (currentCharacter == '"' && !this.inTerminal)
+        else if (currentCharacter == this.doubleQuote && !this.inTerminal)
         {
             buffer = this.processTerminalStartQuoteCharacter(tokens, buffer);
         }
-        else if (currentCharacter == '"' && this.inTerminal)
+        else if (currentCharacter == this.doubleQuote && this.inTerminal)
         {
             buffer = this.processTerminalEndQuoteCharacter(tokens, buffer);
         }
-        else if (currentCharacter == ' ' && !this.inTerminal)
+        else if (currentCharacter == this.space && !this.inTerminal)
         {
             buffer = this.processSpaceCharacter(tokens, buffer);
         }
