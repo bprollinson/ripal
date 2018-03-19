@@ -94,8 +94,12 @@ Run the following algorithm for the set containing a single element - the start 
 * Initialize an empty list of tokens found
 * Initialize a buffer of pending characters to the empty string
 * Initialze a flag tracking whether tokenization is currently within a terminal string to not being within a terminal string
+* Initialize an escape status flag to not escaping
 * For each character in the context-free grammar production
-  * If the character is a colon, flush the buffer, then add a separator token to the token list
+  * If escaping, appending it to the buffer and set escape status to not escaping
+  * If the character is the escape character and tokenization is not currently within a terminal string, fail
+  * If the character is the escape character and tokenization is currently within a terminal string, set escape status to escaping
+  * If the character is a colon and tokenization is not currently within a terminal string, flush the buffer, then add a separator token to the token list
   * If the character is a double quote and tokenization is not currently within a terminal string, flush the buffer, then flag that tokenization is within a terminal string
   * If the character is a double quote and tokenization is currently within a terminal string, flush the buffer, then flag that tokenization is not within a terminal string
   * If the character is a space and tokenization is not currently within a terminal string, flush the buffer
