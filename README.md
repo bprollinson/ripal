@@ -1,5 +1,10 @@
 # LARP: Language Analysis and Responsive Parsing
 
+## Version History
+
+### 1.0.0
+1. Initial Beta release with support for regular language parsing and LL1 parsing
+
 ## Regular Languages
 
 ### Step 1: Tokenize Regular Expression
