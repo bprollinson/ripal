@@ -17,10 +17,10 @@ public class ContextFreeGrammarAugmentorTest
         cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         cfg.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
-        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"));
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
-        assertEquals(expectedGrammar, augmentor.augment(cfg));
+        ContextFreeGrammar expectedCfg = new ContextFreeGrammar();
+        expectedCfg.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"));
+        expectedCfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        expectedCfg.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        assertEquals(expectedCfg, augmentor.augment(cfg));
     }
 }
