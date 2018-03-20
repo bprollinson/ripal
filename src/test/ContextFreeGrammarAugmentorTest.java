@@ -23,4 +23,18 @@ public class ContextFreeGrammarAugmentorTest
         expectedCfg.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         assertEquals(expectedCfg, augmentor.augment(cfg));
     }
+
+    @Test
+    public void testAugmentCalculatesNewStartSymbolNameFromExistingStartSymbol()
+    {
+        ContextFreeGrammarAugmentor augmentor = new ContextFreeGrammarAugmentor();
+
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("Q"), new NonTerminalNode("R"));
+
+        ContextFreeGrammar expectedCfg = new ContextFreeGrammar();
+        expectedCfg.addProduction(new NonTerminalNode("Q'"), new NonTerminalNode("Q"));
+        expectedCfg.addProduction(new NonTerminalNode("Q"), new NonTerminalNode("R"));
+        assertEquals(expectedCfg, augmentor.augment(cfg));
+    }
 }
