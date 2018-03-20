@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
@@ -15,6 +16,11 @@ public class ContextFreeGrammarAugmentorTest
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         cfg.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
-        ContextFreeGrammar augmentedGrammar = augmentor.augment(cfg);
+
+        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"));
+        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        cfg.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        assertEquals(expectedGrammar, augmentor.augment(cfg));
     }
 }
