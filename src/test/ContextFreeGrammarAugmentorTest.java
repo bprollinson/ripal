@@ -37,4 +37,10 @@ public class ContextFreeGrammarAugmentorTest
         expectedCfg.addProduction(new NonTerminalNode("Q"), new NonTerminalNode("R"));
         assertEquals(expectedCfg, augmentor.augment(cfg));
     }
+
+    @Test
+    public void testAugmentResolvesNamingConflictRelatedtoNewStartSymbolName()
+    {
+        assertEquals(0, 1);
+    }
 }
