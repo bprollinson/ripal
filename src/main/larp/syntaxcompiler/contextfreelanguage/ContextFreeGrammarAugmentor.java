@@ -25,6 +25,19 @@ public class ContextFreeGrammarAugmentor
 
     private NonTerminalNode calculateNewStartSymbol(ContextFreeGrammar cfg)
     {
+        Set<String> existingNames = this.calculateExistingNonTerminalNames(cfg);
+
+        String newStartSymbolName = cfg.getStartSymbol().getName() + "'";
+        while (existingNames.contains(newStartSymbolName))
+        {
+            newStartSymbolName += "'";
+        }
+
+        return new NonTerminalNode(newStartSymbolName);
+    }
+
+    private Set<String> calculateExistingNonTerminalNames(ContextFreeGrammar cfg)
+    {
         Set<String> existingNames = new HashSet<String>();
         for (ContextFreeGrammarSyntaxNode production: cfg.getProductions())
         {
@@ -41,12 +54,6 @@ public class ContextFreeGrammarAugmentor
             }
         }
 
-        String newStartSymbolName = cfg.getStartSymbol().getName() + "'";
-        while (existingNames.contains(newStartSymbolName))
-        {
-            newStartSymbolName += "'";
-        }
-
-        return new NonTerminalNode(newStartSymbolName);
+        return existingNames;
     }
 }
