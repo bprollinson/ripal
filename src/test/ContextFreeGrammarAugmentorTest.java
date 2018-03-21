@@ -41,6 +41,18 @@ public class ContextFreeGrammarAugmentorTest
     @Test
     public void testAugmentResolvesNamingConflictRelatedtoNewStartSymbolName()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarAugmentor augmentor = new ContextFreeGrammarAugmentor();
+
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S'"));
+        cfg.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S''"));
+        cfg.addProduction(new NonTerminalNode("S''"), new NonTerminalNode("S'''"));
+
+        ContextFreeGrammar expectedCfg = new ContextFreeGrammar();
+        expectedCfg.addProduction(new NonTerminalNode("S''''"), new NonTerminalNode("S"));
+        expectedCfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S'"));
+        expectedCfg.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S''"));
+        expectedCfg.addProduction(new NonTerminalNode("S''"), new NonTerminalNode("S'''"));
+        assertEquals(expectedCfg, augmentor.augment(cfg));
     }
 }
