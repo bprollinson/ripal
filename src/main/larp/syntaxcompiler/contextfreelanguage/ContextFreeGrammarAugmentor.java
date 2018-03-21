@@ -11,7 +11,9 @@ public class ContextFreeGrammarAugmentor
     public ContextFreeGrammar augment(ContextFreeGrammar cfg)
     {
         ContextFreeGrammar newCfg = new ContextFreeGrammar();
-        newCfg.addProduction(new NonTerminalNode("S'"), cfg.getStartSymbol());
+        NonTerminalNode startSymbol = cfg.getStartSymbol();
+
+        newCfg.addProduction(new NonTerminalNode(startSymbol.getName() + "'"), cfg.getStartSymbol());
 
         List<ContextFreeGrammarSyntaxNode> productions = cfg.getProductions();
         for (ContextFreeGrammarSyntaxNode production: productions)
