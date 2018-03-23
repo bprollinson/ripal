@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.DotNode;
@@ -19,13 +20,17 @@ public class ContextFreeGrammarLR0ProductionClosureCalculatorTest
     {
         ContextFreeGrammarLR0ProductionClosureCalculator calculator = new ContextFreeGrammarLR0ProductionClosureCalculator();
 
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
-        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("S")));
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A")));
 
         Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
-        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("S")));
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A")));
 
-        assertEquals(expectedProductionSet, calculator.calculateClosure(productionSet));
+        assertEquals(expectedProductionSet, calculator.calculateClosure(cfg, productionSet));
     }
 
     @Test
@@ -33,13 +38,17 @@ public class ContextFreeGrammarLR0ProductionClosureCalculatorTest
     {
         ContextFreeGrammarLR0ProductionClosureCalculator calculator = new ContextFreeGrammarLR0ProductionClosureCalculator();
 
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("A"));
+        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a"), new NonTerminalNode("S")));
 
         Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a"), new NonTerminalNode("S")));
 
-        assertEquals(expectedProductionSet, calculator.calculateClosure(productionSet));
+        assertEquals(expectedProductionSet, calculator.calculateClosure(cfg, productionSet));
     }
 
     @Test
@@ -47,13 +56,17 @@ public class ContextFreeGrammarLR0ProductionClosureCalculatorTest
     {
         ContextFreeGrammarLR0ProductionClosureCalculator calculator = new ContextFreeGrammarLR0ProductionClosureCalculator();
 
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
-        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("S"), new DotNode()));
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode()));
 
         Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
-        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("S"), new DotNode()));
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode()));
 
-        assertEquals(expectedProductionSet, calculator.calculateClosure(productionSet));
+        assertEquals(expectedProductionSet, calculator.calculateClosure(cfg, productionSet));
     }
 
     @Test
