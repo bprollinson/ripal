@@ -16,7 +16,7 @@ import java.util.Set;
 public class ContextFreeGrammarLR0ProductionClosureCalculatorTest
 {
     @Test
-    public void testCalculateClosureDoesNotAddItemsWhenDotNotPresent()
+    public void testCalculateClosureDoesNotAddProductionWhenDotNotPresent()
     {
         ContextFreeGrammarLR0ProductionClosureCalculator calculator = new ContextFreeGrammarLR0ProductionClosureCalculator();
 
@@ -34,7 +34,7 @@ public class ContextFreeGrammarLR0ProductionClosureCalculatorTest
     }
 
     @Test
-    public void testCalculateClosureDoesNotAddItemsWhenDotIsNotBeforeNonTerminal()
+    public void testCalculateClosureDoesNotAddProductionWhenDotIsNotBeforeNonTerminal()
     {
         ContextFreeGrammarLR0ProductionClosureCalculator calculator = new ContextFreeGrammarLR0ProductionClosureCalculator();
 
@@ -52,7 +52,7 @@ public class ContextFreeGrammarLR0ProductionClosureCalculatorTest
     }
 
     @Test
-    public void testCalculateClosureDoesNotAddItemsWhenDotAtEndOfProduction()
+    public void testCalculateClosureDoesNotAddProductionWhenDotAtEndOfProduction()
     {
         ContextFreeGrammarLR0ProductionClosureCalculator calculator = new ContextFreeGrammarLR0ProductionClosureCalculator();
 
