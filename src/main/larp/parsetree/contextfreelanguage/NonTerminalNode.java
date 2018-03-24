@@ -26,6 +26,6 @@ public class NonTerminalNode extends ContextFreeGrammarSyntaxNode
 
     public int hashCode()
     {
-        return this.name.hashCode();
+        return super.hashCode() + this.name.hashCode();
     }
 }

@@ -26,6 +26,6 @@ public class TerminalNode extends ContextFreeGrammarSyntaxNode
 
     public int hashCode()
     {
-        return this.value.hashCode();
+        return super.hashCode() + this.value.hashCode();
     }
 }

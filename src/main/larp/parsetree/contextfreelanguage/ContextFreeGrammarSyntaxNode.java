@@ -26,4 +26,18 @@ public class ContextFreeGrammarSyntaxNode
 
         return this.childNodes.equals(((ContextFreeGrammarSyntaxNode)other).getChildNodes());
     }
+
+    public int hashCode()
+    {
+        int total = this.getClass().getName().hashCode() + this.childNodes.size();
+
+        for (int i = 0; i < this.childNodes.size(); i++)
+        {
+            int multiplier = i + 1;
+
+            total += multiplier * this.childNodes.get(i).hashCode();
+        }
+
+        return total;
+    }
 }
