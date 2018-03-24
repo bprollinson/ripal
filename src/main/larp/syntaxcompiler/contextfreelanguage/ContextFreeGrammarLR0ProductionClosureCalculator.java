@@ -1,9 +1,11 @@
 package larp.syntaxcompiler.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
+import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.util.SetMap;
 
 import java.util.HashSet;
@@ -62,5 +64,21 @@ public class ContextFreeGrammarLR0ProductionClosureCalculator
 
     private void addProductionsForNonTerminal(ContextFreeGrammar cfg, Set<Integer> productions, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
     {
+        for (int i: productions)
+        {
+            ContextFreeGrammarSyntaxNode production = cfg.getProductions().get(i);
+
+            ProductionNode productionNode = new ProductionNode();
+            productionNode.addChild(production.getChildNodes().get(0));
+            ConcatenationNode concatenationNode = new ConcatenationNode();
+            concatenationNode.addChild(new DotNode());
+            for (ContextFreeGrammarSyntaxNode childNode: production.getChildNodes().get(1).getChildNodes())
+            {
+                concatenationNode.addChild(childNode);
+            }
+            productionNode.addChild(concatenationNode);
+
+            productionsClosure.add(productionNode);
+        }
     }
 }
