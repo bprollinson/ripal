@@ -233,8 +233,8 @@ public class ContextFreeGrammarLR0ProductionClosureCalculatorTest
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
 
         Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
-        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        productionSet.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("S")));
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("S")));
 
         assertEquals(expectedProductionSet, calculator.calculateClosure(cfg, productionSet));
     }
