@@ -20,7 +20,11 @@ public class ContextFreeGrammarLR0ProductionClosureCalculator
         productionsClosure.addAll(productions);
 
         SetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductions = this.calculateStartingNonTerminalProductionsMap(cfg);
-        this.expandClosure(cfg, startingNonTerminalProductions, productionsClosure);
+        boolean continueExpansion = true;
+        while (continueExpansion)
+        {
+            continueExpansion = this.expandClosure(cfg, startingNonTerminalProductions, productionsClosure);
+        }
 
         return productionsClosure;
     }
@@ -36,8 +40,10 @@ public class ContextFreeGrammarLR0ProductionClosureCalculator
         return startingTerminalProductions;
     }
 
-    private void expandClosure(ContextFreeGrammar cfg, SetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductions, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
+    private boolean expandClosure(ContextFreeGrammar cfg, SetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductions, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
     {
+        boolean productionAdded = false;
+
         for (ContextFreeGrammarSyntaxNode production: productionsClosure)
         {
             List<ContextFreeGrammarSyntaxNode> childNodes = production.getChildNodes();
@@ -54,16 +60,20 @@ public class ContextFreeGrammarLR0ProductionClosureCalculator
 
                 if (childNode instanceof NonTerminalNode && lastNodeWasDot)
                 {
-                    this.addProductionsForNonTerminal(cfg, startingNonTerminalProductions.get(childNode), productionsClosure);
+                    productionAdded = this.addProductionsForNonTerminal(cfg, startingNonTerminalProductions.get(childNode), productionsClosure) || productionAdded;
                 }
 
                 lastNodeWasDot = false;
             }
         }
+
+        return productionAdded;
     }
 
-    private void addProductionsForNonTerminal(ContextFreeGrammar cfg, Set<Integer> productions, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
+    private boolean addProductionsForNonTerminal(ContextFreeGrammar cfg, Set<Integer> productions, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
     {
+        boolean productionAdded = false;
+
         for (int i: productions)
         {
             ContextFreeGrammarSyntaxNode production = cfg.getProductions().get(i);
@@ -78,7 +88,9 @@ public class ContextFreeGrammarLR0ProductionClosureCalculator
             }
             productionNode.addChild(concatenationNode);
 
-            productionsClosure.add(productionNode);
+            productionAdded = productionsClosure.add(productionNode) || productionAdded;
         }
+
+        return productionAdded;
     }
 }
