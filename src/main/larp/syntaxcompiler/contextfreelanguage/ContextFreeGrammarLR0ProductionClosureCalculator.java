@@ -18,12 +18,12 @@ public class ContextFreeGrammarLR0ProductionClosureCalculator
     {
         Set<ContextFreeGrammarSyntaxNode> productionsClosure = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionsClosure.addAll(productions);
+        SetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap = this.calculateStartingNonTerminalProductionsMap(cfg);
 
-        SetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductions = this.calculateStartingNonTerminalProductionsMap(cfg);
         boolean continueExpansion = true;
         while (continueExpansion)
         {
-            continueExpansion = this.expandClosure(cfg, startingNonTerminalProductions, productionsClosure);
+            continueExpansion = this.expandClosure(cfg, startingNonTerminalProductionsMap, productionsClosure);
         }
 
         return productionsClosure;
@@ -40,7 +40,7 @@ public class ContextFreeGrammarLR0ProductionClosureCalculator
         return startingTerminalProductions;
     }
 
-    private boolean expandClosure(ContextFreeGrammar cfg, SetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductions, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
+    private boolean expandClosure(ContextFreeGrammar cfg, SetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
     {
         Set<ContextFreeGrammarSyntaxNode> productionsToAdd = new HashSet<ContextFreeGrammarSyntaxNode>();
 
@@ -48,10 +48,11 @@ public class ContextFreeGrammarLR0ProductionClosureCalculator
         {
             List<ContextFreeGrammarSyntaxNode> childNodes = production.getChildNodes();
             boolean lastNodeWasDot = false;
+            ContextFreeGrammarSyntaxNode rightSide = childNodes.get(1);
 
             for (int i = 0; i < childNodes.get(1).getChildNodes().size(); i++)
             {
-                ContextFreeGrammarSyntaxNode childNode = childNodes.get(1).getChildNodes().get(i);
+                ContextFreeGrammarSyntaxNode childNode = rightSide.getChildNodes().get(i);
                 if (childNode instanceof DotNode)
                 {
                     lastNodeWasDot = true;
@@ -60,7 +61,7 @@ public class ContextFreeGrammarLR0ProductionClosureCalculator
 
                 if (childNode instanceof NonTerminalNode && lastNodeWasDot)
                 {
-                    this.addProductionsForNonTerminal(cfg, startingNonTerminalProductions.get(childNode), productionsToAdd);
+                    this.addProductionsForNonTerminal(cfg, startingNonTerminalProductionsMap.get(childNode), productionsToAdd);
                 }
 
                 lastNodeWasDot = false;
@@ -70,17 +71,18 @@ public class ContextFreeGrammarLR0ProductionClosureCalculator
         return productionsClosure.addAll(productionsToAdd);
     }
 
-    private void addProductionsForNonTerminal(ContextFreeGrammar cfg, Set<Integer> productions, Set<ContextFreeGrammarSyntaxNode> productionsToAdd)
+    private void addProductionsForNonTerminal(ContextFreeGrammar cfg, Set<Integer> productionIndices, Set<ContextFreeGrammarSyntaxNode> productionsToAdd)
     {
-        for (int i: productions)
+        for (int productionIndex: productionIndices)
         {
-            ContextFreeGrammarSyntaxNode production = cfg.getProductions().get(i);
+            ContextFreeGrammarSyntaxNode production = cfg.getProductions().get(productionIndex);
 
             ProductionNode productionNode = new ProductionNode();
             productionNode.addChild(production.getChildNodes().get(0));
             ConcatenationNode concatenationNode = new ConcatenationNode();
             concatenationNode.addChild(new DotNode());
-            for (ContextFreeGrammarSyntaxNode childNode: production.getChildNodes().get(1).getChildNodes())
+            ContextFreeGrammarSyntaxNode existingRightSide = production.getChildNodes().get(1);
+            for (ContextFreeGrammarSyntaxNode childNode: existingRightSide.getChildNodes())
             {
                 concatenationNode.addChild(childNode);
             }
