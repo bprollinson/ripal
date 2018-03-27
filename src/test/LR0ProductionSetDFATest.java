@@ -4,22 +4,53 @@ import org.junit.Test;
 
 import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
+import larp.parsetree.contextfreelanguage.ConcatenationNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.DotNode;
+import larp.parsetree.contextfreelanguage.NonTerminalNode;
+import larp.parsetree.contextfreelanguage.ProductionNode;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class LR0ProductionSetDFATest
 {
     @Test
     public void testStructureEqualsReturnsTrue()
     {
-        LR0ProductionSetDFA nfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true));
+        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        LR0ProductionSetDFA nfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet));
 
-        assertTrue(nfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true))));
+        Set<ContextFreeGrammarSyntaxNode> otherProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        assertTrue(nfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet))));
     }
 
     @Test
     public void testStructureEqualsReturnsFalse()
     {
-        LR0ProductionSetDFA nfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true));
+        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        LR0ProductionSetDFA nfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet));
 
-        assertFalse(nfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", false))));
+        Set<ContextFreeGrammarSyntaxNode> otherProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        assertFalse(nfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", false, otherProductionSet))));
+    }
+
+    private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
+    {
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(nonTerminalNode);
+
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        for (ContextFreeGrammarSyntaxNode rightHandNode: rightHandNodes)
+        {
+            concatenationNode.addChild(rightHandNode);
+        }
+        productionNode.addChild(concatenationNode);
+
+        return productionNode;
     }
 }
