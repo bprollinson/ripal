@@ -28,7 +28,7 @@ public class LR0ProductionSetDFATest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalse()
+    public void testStructureEqualsReturnsFalseWhenStatesNotEqual()
     {
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -37,6 +37,12 @@ public class LR0ProductionSetDFATest
         Set<ContextFreeGrammarSyntaxNode> otherProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         assertFalse(nfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", false, otherProductionSet))));
+    }
+
+    @Test
+    public void testStructureEqualsReturnsFalseWhenProductionSetsNotEqual()
+    {
+        assertTrue(false);
     }
 
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
