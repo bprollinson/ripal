@@ -57,7 +57,7 @@ public abstract class State implements ComparableStructure
         return this.equalsState(otherState, ourCoveredStates, otherCoveredStates);
     }
 
-    private boolean equalsState(State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
+    protected boolean equalsState(State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
     {
         if (this.accepting != otherState.isAccepting())
         {
