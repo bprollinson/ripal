@@ -138,6 +138,15 @@ public class StateTest
     public void testStructureEqualsReturnsFalseForDifferentStateClass()
     {
         State state = new TestState("S0", true);
+        State otherState = new OtherTestState("S1", true);
+
+        assertFalse(state.structureEquals(otherState));
+    }
+
+    @Test
+    public void testStructureEqualsReturnsFalseForDifferentStateClassInSubsequentState()
+    {
+        State state = new TestState("S0", true);
         State nextState = new TestState("S1", true);
         state.addTransition(new StateTransition('a', nextState));
 
@@ -146,12 +155,6 @@ public class StateTest
         otherState.addTransition(new StateTransition('a', otherNextState));
 
         assertFalse(state.structureEquals(otherState));
-    }
-
-    @Test
-    public void testStructureEqualsReturnsFalseForDifferentStateClassInSubsequentState()
-    {
-        assertTrue(false);
     }
 
     private class TestState extends State
