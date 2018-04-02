@@ -85,6 +85,12 @@ public class LR0ProductionSetDFAStateTest
         assertFalse(state.structureEquals(new LR0ProductionSetDFAState("S1", true, new HashSet<ContextFreeGrammarSyntaxNode>())));
     }
 
+    @Test
+    public void testStructureEqualsReturnsFalseForDifferentStateClass()
+    {
+        assertTrue(false);
+    }
+
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
     {
         ProductionNode productionNode = new ProductionNode();
