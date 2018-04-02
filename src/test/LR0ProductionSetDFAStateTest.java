@@ -65,13 +65,13 @@ public class LR0ProductionSetDFAStateTest
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFAState nextState = new LR0ProductionSetDFAState("S0", true, productionSet);
+        LR0ProductionSetDFAState nextState = new LR0ProductionSetDFAState("S1", true, productionSet);
         state.addTransition(new StateTransition('a', nextState));
 
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("S2", true, new HashSet<ContextFreeGrammarSyntaxNode>());
         Set<ContextFreeGrammarSyntaxNode> otherProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("B")));
-        LR0ProductionSetDFAState otherNextState = new LR0ProductionSetDFAState("S0", true, otherProductionSet);
+        LR0ProductionSetDFAState otherNextState = new LR0ProductionSetDFAState("S3", true, otherProductionSet);
         otherState.addTransition(new StateTransition('a', otherNextState));
 
         assertFalse(state.structureEquals(otherState));
@@ -98,7 +98,16 @@ public class LR0ProductionSetDFAStateTest
     @Test
     public void testStructureEqualsReturnsFalseForDifferentStateClassInSubsequentState()
     {
-        assertEquals(0, 1);
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        LR0ProductionSetDFAState nextState = new LR0ProductionSetDFAState("S1", true, productionSet);
+        state.addTransition(new StateTransition('a', nextState));
+
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("S2", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        State otherNextState = new TestState("S3", true);
+        otherState.addTransition(new StateTransition('a', otherNextState));
+
+        assertFalse(state.structureEquals(otherState));
     }
 
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
