@@ -143,6 +143,12 @@ public class StateTest
         assertFalse(state.structureEquals(otherState));
     }
 
+    @Test
+    public void testStructureEqualsReturnsFalseForDifferentStateClassInSubsequentState()
+    {
+        assertTrue(false);
+    }
+
     private class TestState extends State
     {
         public TestState(String name, boolean accepting)
