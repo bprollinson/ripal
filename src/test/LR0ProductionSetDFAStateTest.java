@@ -99,8 +99,7 @@ public class LR0ProductionSetDFAStateTest
     public void testStructureEqualsReturnsFalseForDifferentStateClassInSubsequentState()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
-        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
-        LR0ProductionSetDFAState nextState = new LR0ProductionSetDFAState("S1", true, productionSet);
+        LR0ProductionSetDFAState nextState = new LR0ProductionSetDFAState("S1", true, new HashSet<ContextFreeGrammarSyntaxNode>());
         state.addTransition(new StateTransition('a', nextState));
 
         LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("S2", true, new HashSet<ContextFreeGrammarSyntaxNode>());
