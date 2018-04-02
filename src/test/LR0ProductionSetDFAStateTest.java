@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
+import larp.parser.regularlanguage.State;
 import larp.parser.regularlanguage.StateTransition;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
@@ -88,7 +89,10 @@ public class LR0ProductionSetDFAStateTest
     @Test
     public void testStructureEqualsReturnsFalseForDifferentStateClass()
     {
-        assertTrue(false);
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        State otherState = new TestState("S1", true);
+
+        assertFalse(state.structureEquals(otherState));
     }
 
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
@@ -104,5 +108,13 @@ public class LR0ProductionSetDFAStateTest
         productionNode.addChild(concatenationNode);
 
         return productionNode;
+    }
+
+    private class TestState extends State
+    {
+        public TestState(String name, boolean accepting)
+        {
+            super(name, accepting);
+        }
     }
 }
