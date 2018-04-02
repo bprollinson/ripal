@@ -138,7 +138,12 @@ public class StateTest
     public void testStructureEqualsReturnsFalseForDifferentStateClass()
     {
         State state = new TestState("S0", true);
-        State otherState = new OtherTestState("S1", true);
+        State nextState = new TestState("S1", true);
+        state.addTransition(new StateTransition('a', nextState));
+
+        State otherState = new TestState("S2", true);
+        State otherNextState = new OtherTestState("S3", true);
+        otherState.addTransition(new StateTransition('a', otherNextState));
 
         assertFalse(state.structureEquals(otherState));
     }
