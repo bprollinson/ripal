@@ -15,12 +15,17 @@ public class EpsilonNFAToNFAConverterTest
     {
         EpsilonNFAToNFAConverter converter = new EpsilonNFAToNFAConverter();
 
-        EpsilonNFAState expectedState1 = new EpsilonNFAState("S0", false);
-        EpsilonNFAState expectedState2 = new EpsilonNFAState("S1", true);
+        NFAState expectedState1 = new NFAState("S0", false);
+        NFAState expectedState2 = new NFAState("S1", true);
         expectedState1.addTransition(new StateTransition('a', expectedState2));
-        EpsilonNFA expectedEpsilonNFA = new EpsilonNFA(expectedState1);
+        NFA expectedNFA = new NFA(expectedState1);
 
-        assertTrue(expectedEpsilonNFA.structureEquals(converter.convert(expectedEpsilonNFA)));
+        EpsilonNFAState state1 = new EpsilonNFAState("S0", false);
+        EpsilonNFAState state2 = new EpsilonNFAState("S1", true);
+        state1.addTransition(new StateTransition('a', state2));
+        EpsilonNFA epsilonNFA = new EpsilonNFA(expectedState1);
+
+        assertTrue(expectedNFA.structureEquals(converter.convert(epsilonNFA)));
     }
 
     @Test
