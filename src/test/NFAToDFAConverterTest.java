@@ -15,12 +15,17 @@ public class NFAToDFAConverterTest
     {
         NFAToDFAConverter converter = new NFAToDFAConverter();
 
-        NFAState expectedState1 = new NFAState("S0", false);
-        NFAState expectedState2 = new NFAState("S1", false);
+        DFAState expectedState1 = new DFAState("S0", false);
+        DFAState expectedState2 = new DFAState("S1", false);
         expectedState1.addTransition(new StateTransition('a', expectedState2));
-        NFA expectedNFA = new NFA(expectedState1);
+        DFA expectedDFA = new DFA(expectedState1);
 
-        assertTrue(expectedNFA.structureEquals(converter.convert(expectedNFA)));
+        NFAState state1 = new NFAState("S0", false);
+        NFAState state2 = new NFAState("S1", false);
+        state1.addTransition(new StateTransition('a', state2));
+        NFA NFA = new NFA(expectedState1);
+
+        assertTrue(expectedDFA.structureEquals(converter.convert(NFA)));
     }
 
     @Test
