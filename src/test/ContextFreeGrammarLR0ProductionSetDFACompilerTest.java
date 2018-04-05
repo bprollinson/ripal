@@ -8,4 +8,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testCompileCreatesDFAForNonTerminalRule()
+    {
+        assertEquals(0, 1);
+    }
 }
