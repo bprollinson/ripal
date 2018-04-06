@@ -20,4 +20,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testCompileCreateDFAForTerminalFuleFromSubsequentState()
+    {
+        assertEquals(0, 1);
+    }
 }
