@@ -38,4 +38,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testCompileAddsDeepClosureToStartState()
+    {
+        assertEquals(0, 1);
+    }
 }
