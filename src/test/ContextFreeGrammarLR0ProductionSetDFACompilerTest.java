@@ -22,7 +22,13 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     }
 
     @Test
-    public void testCompileCreateDFAForTerminalFuleFromSubsequentState()
+    public void testCompileCreateDFAForTerminalRuleFromSubsequentState()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCompileCreateDFAForNonTerminalRuleFromSubsequentState()
     {
         assertEquals(0, 1);
     }
