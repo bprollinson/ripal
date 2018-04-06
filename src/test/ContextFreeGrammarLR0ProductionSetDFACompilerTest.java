@@ -32,4 +32,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testCompileCreateDFAForTerminalAndNonTerminalRuleFromSubsequentState()
+    {
+        assertEquals(0, 1);
+    }
 }
