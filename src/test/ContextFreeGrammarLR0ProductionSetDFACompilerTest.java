@@ -56,4 +56,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testCompileCreatesStateChain()
+    {
+        assertEquals(0, 1);
+    }
 }
