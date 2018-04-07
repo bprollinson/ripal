@@ -68,4 +68,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testCompileRemovesDuplicateProduction()
+    {
+        assertEquals(0, 1);
+    }
 }
