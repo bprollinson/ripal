@@ -50,4 +50,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testCompileLoopsTransitionToExistingState()
+    {
+        assertEquals(0, 1);
+    }
 }
