@@ -62,4 +62,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testCompileAddsMultipleProductionsToNextStateBasedOnSameSymbol()
+    {
+        assertEquals(0, 1);
+    }
 }
