@@ -44,4 +44,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testCompileAddsDeepClosureToSubsequentState()
+    {
+        assertEquals(0, 1);
+    }
 }
