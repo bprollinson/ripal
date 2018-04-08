@@ -22,7 +22,13 @@ public class StateTransitionTest
     }
 
     @Test
-    public void testInputEqualsReturnsFalseWhenEmptyInputDoesNotMatchExpectedEmptyInput()
+    public void testInputEqualsReturnsFalseWhenNonEmptyInputDoesNotMatchExpectedEmptyInput()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testInputEqualsReturnsFalseWhenEmptyInputDoesNotMatchExpectedNonEmptyInput()
     {
         assertEquals(0, 1);
     }
