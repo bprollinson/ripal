@@ -1,6 +1,8 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarLR0ProductionSetDFACompiler;
 
 public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
@@ -9,6 +11,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     public void testCompileCreatesDFAForTerminalRuleFromStartState()
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFA productionSetDFA = compiler.compile(new ContextFreeGrammar());
 
         assertEquals(0, 1);
     }
