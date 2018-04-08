@@ -16,6 +16,11 @@ public class StateTransition
         return this.input;
     }
 
+    public boolean inputEquals(Character otherInput)
+    {
+        return false;
+    }
+
     public State getNextState()
     {
         return this.nextState;
