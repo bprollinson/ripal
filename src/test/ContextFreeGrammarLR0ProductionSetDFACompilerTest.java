@@ -1,11 +1,15 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarLR0ProductionSetDFACompiler;
+
 public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
 {
     @Test
     public void testCompileCreatesDFAForTerminalRuleFromStartState()
     {
+        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+
         assertEquals(0, 1);
     }
 
