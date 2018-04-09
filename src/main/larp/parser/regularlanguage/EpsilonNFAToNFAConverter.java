@@ -32,7 +32,7 @@ public class EpsilonNFAToNFAConverter
         for (int i = 0; i < transitions.size(); i++)
         {
             StateTransition transition = transitions.get(i);
-            if (transition.getInput() != null)
+            if (!transition.inputEquals(null))
             {
                 startState.addTransition(new StateTransition(transition.getInput(), this.convertNode(transition.getNextState(), coveredEpsilonNFAStates, coveredNFAStates)));
             }
