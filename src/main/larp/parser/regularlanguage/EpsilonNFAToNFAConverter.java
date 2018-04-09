@@ -37,7 +37,7 @@ public class EpsilonNFAToNFAConverter
                 startState.addTransition(new StateTransition(transition.getInput(), this.convertNode(transition.getNextState(), coveredEpsilonNFAStates, coveredNFAStates)));
             }
 
-            if (transition.getInput() == null)
+            if (transition.inputEquals(null))
             {
                 List<StateTransition> tangibleStateTransitions = this.tangibleStateTransitions(transition, new ArrayList<StateTransition>());
 
