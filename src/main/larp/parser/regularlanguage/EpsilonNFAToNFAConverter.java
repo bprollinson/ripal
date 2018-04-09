@@ -69,7 +69,7 @@ public class EpsilonNFAToNFAConverter
         for (int i = 0; i < transitions.size(); i++)
         {
             StateTransition transition = transitions.get(i);
-            if (transition.getInput() == null && this.epsilonToAccepting(transition.getNextState(), processedStates))
+            if (transition.inputEquals(null) && this.epsilonToAccepting(transition.getNextState(), processedStates))
             {
                 return true;
             }
