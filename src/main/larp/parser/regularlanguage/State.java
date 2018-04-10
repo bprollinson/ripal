@@ -92,7 +92,7 @@ public abstract class State implements ComparableStructure
             {
                 StateTransition otherTransition = otherTransitions.get(i);
 
-                if (current.getInput() == otherTransition.getInput())
+                if (current.inputEqualsOtherTransition(otherTransition))
                 {
                     int ourNextStatePosition = ourCoveredStates.indexOf(current.getNextState());
                     boolean ourNextStateLoops = ourNextStatePosition != -1;
