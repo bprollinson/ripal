@@ -52,6 +52,36 @@ public class StateTransitionTest
         assertFalse(transition.inputEquals(null));
     }
 
+    @Test
+    public void testInputEqualsReturnsTrueWhenStateTransitionInputMatchesExpectedInput()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testInputEqualsReturnsFalseWhenStateTransitionInputDoesNotMatchExpectedInput()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testInputEqualsReturnsTrueWhenEmptyStateTransitionInputMatchesExpectedEmptyInput()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testInputEqualsReturnsFalseWhenNonEmptyStateTransitionInputDoesNotMatchExpectedEmptyInput()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testInputEqualsReturnsFalseWhenEmptyStateTransitionInputDoesNotMatchExpectedNonEmptyInput()
+    {
+        assertTrue(false);
+    }
+
     private class TestState extends State
     {
         public TestState(String name, boolean accepting)
