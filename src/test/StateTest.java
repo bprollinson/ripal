@@ -33,7 +33,7 @@ public class StateTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForDifferentTransitionChracters()
+    public void testStructureEqualsReturnsFalseForDifferentTransitionCharacters()
     {
         State state = new TestState("S0", true);
         state.addTransition(new StateTransition('a', state));
