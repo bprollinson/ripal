@@ -53,53 +53,53 @@ public class StateTransitionTest
     }
 
     @Test
-    public void testInputEqualsOtherStateReturnsTrueWhenInputMatchesExpectedInput()
+    public void testInputEqualsOtherTransitionReturnsTrueWhenInputMatchesExpectedInput()
     {
         State state = new TestState("S0", true);
         StateTransition transition = new StateTransition('a', state);
         StateTransition otherTransition = new StateTransition('a', state);
 
-        assertTrue(transition.inputEqualsOtherState(otherTransition));
+        assertTrue(transition.inputEqualsOtherTransition(otherTransition));
     }
 
     @Test
-    public void testInputEqualsOtherStateReturnsFalseWhenInputDoesNotMatchExpectedInput()
+    public void testInputEqualsOtherTransitionReturnsFalseWhenInputDoesNotMatchExpectedInput()
     {
         State state = new TestState("S0", true);
         StateTransition transition = new StateTransition('a', state);
         StateTransition otherTransition = new StateTransition('b', state);
 
-        assertFalse(transition.inputEqualsOtherState(otherTransition));
+        assertFalse(transition.inputEqualsOtherTransition(otherTransition));
     }
 
     @Test
-    public void testInputEqualsOtherStateReturnsTrueWhenEmptyInputMatchesExpectedEmptyInput()
+    public void testInputEqualsOtherTransitionReturnsTrueWhenEmptyInputMatchesExpectedEmptyInput()
     {
         State state = new TestState("S0", true);
         StateTransition transition = new StateTransition(null, state);
         StateTransition otherTransition = new StateTransition(null, state);
 
-        assertTrue(transition.inputEqualsOtherState(otherTransition));
+        assertTrue(transition.inputEqualsOtherTransition(otherTransition));
     }
 
     @Test
-    public void testInputEqualsOtherStateReturnsFalseWhenNonEmptyInputDoesNotMatchExpectedEmptyInput()
+    public void testInputEqualsOtherTransitionReturnsFalseWhenNonEmptyInputDoesNotMatchExpectedEmptyInput()
     {
         State state = new TestState("S0", true);
         StateTransition transition = new StateTransition(null, state);
         StateTransition otherTransition = new StateTransition('a', state);
 
-        assertFalse(transition.inputEqualsOtherState(otherTransition));
+        assertFalse(transition.inputEqualsOtherTransition(otherTransition));
     }
 
     @Test
-    public void testInputEqualsOtherStateReturnsFalseWhenEmptyInputDoesNotMatchExpectedNonEmptyInput()
+    public void testInputEqualsOtherTransitionReturnsFalseWhenEmptyInputDoesNotMatchExpectedNonEmptyInput()
     {
         State state = new TestState("S0", true);
         StateTransition transition = new StateTransition('a', state);
         StateTransition otherTransition = new StateTransition(null, state);
 
-        assertFalse(transition.inputEqualsOtherState(otherTransition));
+        assertFalse(transition.inputEqualsOtherTransition(otherTransition));
     }
 
     private class TestState extends State

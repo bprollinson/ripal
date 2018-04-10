@@ -26,7 +26,7 @@ public class StateTransition
         return this.input.equals(otherInput);
     }
 
-    public boolean inputEqualsOtherState(StateTransition otherTransition)
+    public boolean inputEqualsOtherTransition(StateTransition otherTransition)
     {
         return otherTransition.inputEquals(this.input);
     }
