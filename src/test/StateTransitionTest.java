@@ -8,7 +8,7 @@ import larp.parser.regularlanguage.StateTransition;
 public class StateTransitionTest
 {
     @Test
-    public void testInputEqualsReturnsTrueWhenInputMatchesExpectedInput()
+    public void testInputEqualsReturnsTrueWhenCharacterInputMatchesExpectedInput()
     {
         State state = new TestState("S0", true);
         StateTransition transition = new StateTransition('a', state);
@@ -17,7 +17,7 @@ public class StateTransitionTest
     }
 
     @Test
-    public void testInputEqualsReturnsFalseWhenInputDoesNotMatchExpectedInput()
+    public void testInputEqualsReturnsFalseWhenCharacterInputDoesNotMatchExpectedInput()
     {
         State state = new TestState("S0", true);
         StateTransition transition = new StateTransition('a', state);
@@ -26,7 +26,7 @@ public class StateTransitionTest
     }
 
     @Test
-    public void testInputEqualsReturnsTrueWhenEmptyInputMatchesExpectedEmptyInput()
+    public void testInputEqualsReturnsTrueWhenEmptyCharacterInputMatchesExpectedEmptyInput()
     {
         State state = new TestState("S0", true);
         StateTransition transition = new StateTransition(null, state);
@@ -35,7 +35,7 @@ public class StateTransitionTest
     }
 
     @Test
-    public void testInputEqualsReturnsFalseWhenNonEmptyInputDoesNotMatchExpectedEmptyInput()
+    public void testInputEqualsReturnsFalseWhenNonEmptyCharacterInputDoesNotMatchExpectedEmptyInput()
     {
         State state = new TestState("S0", true);
         StateTransition transition = new StateTransition(null, state);
@@ -44,7 +44,7 @@ public class StateTransitionTest
     }
 
     @Test
-    public void testInputEqualsReturnsFalseWhenEmptyInputDoesNotMatchExpectedNonEmptyInput()
+    public void testInputEqualsReturnsFalseWhenEmptyCharacterInputDoesNotMatchExpectedNonEmptyInput()
     {
         State state = new TestState("S0", true);
         StateTransition transition = new StateTransition('a', state);
