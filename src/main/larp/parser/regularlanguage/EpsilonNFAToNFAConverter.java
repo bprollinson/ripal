@@ -93,7 +93,7 @@ public class EpsilonNFAToNFAConverter
         for (int i = 0; i < nextStateTransitions.size(); i++)
         {
             StateTransition nextTransition = nextStateTransitions.get(i);
-            if (nextTransition.getInput() != null)
+            if (!nextTransition.inputEquals(null))
             {
                 result.add(nextTransition);
             }
