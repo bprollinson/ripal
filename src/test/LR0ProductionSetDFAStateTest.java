@@ -109,6 +109,12 @@ public class LR0ProductionSetDFAStateTest
         assertFalse(state.structureEquals(otherState));
     }
 
+    @Test
+    public void testImplementOtherStructureEqualsChecks()
+    {
+        assertTrue(false);
+    }
+
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
     {
         ProductionNode productionNode = new ProductionNode();
