@@ -44,7 +44,7 @@ public class StateTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrueForSameTransitionChracters()
+    public void testStructureEqualsReturnsTrueForSameTransitionCharacters()
     {
         State state = new TestState("S0", true);
         state.addTransition(new StateTransition('a', new TestState("S1", true)));
