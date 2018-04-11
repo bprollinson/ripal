@@ -59,6 +59,17 @@ public class LR0ProductionSetDFAStateTest
     }
 
     @Test
+    public void testStructureEqualsReturnsFalseForDifferentTransitionCharacters()
+    {
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        state.addTransition(new StateTransition('a', state));
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("S1", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        otherState.addTransition(new StateTransition('b', otherState));
+
+        assertFalse(state.structureEquals(otherState));
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrueForSameSubsequentProductionSet()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
