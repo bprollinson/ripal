@@ -30,6 +30,14 @@ public class LR0ProductionSetDFAStateTest
     }
 
     @Test
+    public void testStructureEqualsReturnsFalseForDifferentAcceptsValueOnSingleState()
+    {
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        assertFalse(state.structureEquals(new LR0ProductionSetDFAState("S1", false, new HashSet<ContextFreeGrammarSyntaxNode>())));
+    }
+
+    @Test
     public void testStructureEqualsReturnsFalseForDifferentProductionSet()
     {
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
