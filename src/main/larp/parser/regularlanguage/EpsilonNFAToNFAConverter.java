@@ -28,7 +28,7 @@ public class EpsilonNFAToNFAConverter
             startState.setAccepting(true);
         }
 
-        List<StateTransition> transitions = epsilonNFAState.getTransitions();
+        List<StateTransition<Character>> transitions = epsilonNFAState.getTransitions();
         for (int i = 0; i < transitions.size(); i++)
         {
             StateTransition transition = transitions.get(i);
@@ -65,7 +65,7 @@ public class EpsilonNFAToNFAConverter
             return true;
         }
 
-        List<StateTransition> transitions = startState.getTransitions();
+        List<StateTransition<Character>> transitions = startState.getTransitions();
         for (int i = 0; i < transitions.size(); i++)
         {
             StateTransition transition = transitions.get(i);
@@ -88,7 +88,7 @@ public class EpsilonNFAToNFAConverter
         processedTransitions.add(startTransition);
 
         State nextState = startTransition.getNextState();
-        List<StateTransition> nextStateTransitions = nextState.getTransitions();
+        List<StateTransition<Character>> nextStateTransitions = nextState.getTransitions();
 
         for (int i = 0; i < nextStateTransitions.size(); i++)
         {

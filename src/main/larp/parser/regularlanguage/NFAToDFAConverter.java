@@ -28,10 +28,10 @@ public class NFAToDFAConverter
 
         for (State NFAState: stateSet)
         {
-            List<StateTransition> transitions = NFAState.getTransitions();
+            List<StateTransition<Character>> transitions = NFAState.getTransitions();
             for (int j = 0; j < transitions.size(); j++)
             {
-                StateTransition transition = transitions.get(j);
+                StateTransition<Character> transition = transitions.get(j);
                 HashSet<State> characterStateSet = characterToStateSet.get(transition.getInput());
                 if (characterStateSet == null)
                 {

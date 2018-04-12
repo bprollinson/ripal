@@ -1,22 +1,22 @@
 package larp.parser.regularlanguage;
 
-public class StateTransition
+public class StateTransition<I>
 {
-    private Character input;
+    private I input;
     private State nextState;
 
-    public StateTransition(Character input, State nextState)
+    public StateTransition(I input, State nextState)
     {
         this.input = input;
         this.nextState = nextState;
     }
 
-    public Character getInput()
+    public I getInput()
     {
         return this.input;
     }
 
-    public boolean inputEquals(Character otherInput)
+    public boolean inputEquals(I otherInput)
     {
         if (this.input == null)
         {
