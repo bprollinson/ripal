@@ -18,7 +18,7 @@ public abstract class State implements ComparableStructure
         this.transitions = new ArrayList<StateTransition<Character>>();
     }
 
-    public void addTransition(StateTransition transition)
+    public void addTransition(StateTransition<Character> transition)
     {
         this.transitions.add(transition);
     }

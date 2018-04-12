@@ -36,7 +36,7 @@ public class DFATest
     {
         DFAState state0 = new DFAState("S0", false);
         DFAState state1 = new DFAState("S1", true);
-        state0.addTransition(new StateTransition('a', state1));
+        state0.addTransition(new StateTransition<Character>('a', state1));
 
         return new DFA(state0);
     }
