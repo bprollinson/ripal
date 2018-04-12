@@ -141,6 +141,17 @@ public class LR0ProductionSetDFAStateTest
     }
 
     @Test
+    public void testStructureEqualsReturnsTrueForStateGraphContainingCycle()
+    {
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        state.addTransition(new StateTransition('a', state));
+        State otherState = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        otherState.addTransition(new StateTransition('a', otherState));
+
+        assertTrue(state.structureEquals(otherState));
+    }
+
+    @Test
     public void testStructureEqualsReturnsFalseForDifferentStateClass()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
