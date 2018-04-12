@@ -172,6 +172,31 @@ public class LR0ProductionSetDFAStateTest
     }
 
     @Test
+    public void testStructureEqualsReturnsFalseForUnmatchedLoopFoundInParallelRecursion()
+    {
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("S0", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("S1", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("S2", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("S3", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        state1.addTransition(new StateTransition('a', state2));
+        state1.addTransition(new StateTransition('b', state3));
+        state2.addTransition(new StateTransition('a', state4));
+        state3.addTransition(new StateTransition('a', state4));
+
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("S0", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("S1", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState3 = new LR0ProductionSetDFAState("S2", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState4 = new LR0ProductionSetDFAState("S4", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState5 = new LR0ProductionSetDFAState("S5", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        otherState1.addTransition(new StateTransition('a', otherState2));
+        otherState1.addTransition(new StateTransition('b', otherState3));
+        otherState2.addTransition(new StateTransition('a', otherState4));
+        otherState3.addTransition(new StateTransition('a', otherState5));
+
+        assertFalse(state1.structureEquals(otherState1));
+    }
+
+    @Test
     public void testStructureEqualsReturnsFalseForDifferentStateClass()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
