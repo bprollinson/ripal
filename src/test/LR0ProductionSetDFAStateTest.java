@@ -152,6 +152,26 @@ public class LR0ProductionSetDFAStateTest
     }
 
     @Test
+    public void testStructureEqualsReturnsFalseForStateGraphContainingDifferentCycle()
+    {
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("S1", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("S1", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        state1.addTransition(new StateTransition('a', state2));
+        state2.addTransition(new StateTransition('a', state3));
+        state3.addTransition(new StateTransition('a', state1));
+
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("S1", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState3 = new LR0ProductionSetDFAState("S1", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        otherState1.addTransition(new StateTransition('a', otherState2));
+        otherState2.addTransition(new StateTransition('a', otherState3));
+        otherState3.addTransition(new StateTransition('a', otherState2));
+
+        assertFalse(state1.structureEquals(otherState1));
+    }
+
+    @Test
     public void testStructureEqualsReturnsFalseForDifferentStateClass()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
