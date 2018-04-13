@@ -31,10 +31,10 @@ public class EpsilonNFAToNFAConverter
         List<StateTransition<Character>> transitions = epsilonNFAState.getTransitions();
         for (int i = 0; i < transitions.size(); i++)
         {
-            StateTransition transition = transitions.get(i);
+            StateTransition<Character> transition = transitions.get(i);
             if (!transition.inputEquals(null))
             {
-                startState.addTransition(new StateTransition(transition.getInput(), this.convertNode(transition.getNextState(), coveredEpsilonNFAStates, coveredNFAStates)));
+                startState.addTransition(new StateTransition<Character>(transition.getInput(), this.convertNode(transition.getNextState(), coveredEpsilonNFAStates, coveredNFAStates)));
             }
 
             if (transition.inputEquals(null))
@@ -43,8 +43,8 @@ public class EpsilonNFAToNFAConverter
 
                 for (int j = 0; j < tangibleStateTransitions.size(); j++)
                 {
-                    StateTransition nextTransition = tangibleStateTransitions.get(j);
-                    startState.addTransition(new StateTransition(nextTransition.getInput(), this.convertNode(nextTransition.getNextState(), coveredEpsilonNFAStates, coveredNFAStates)));
+                    StateTransition<Character> nextTransition = tangibleStateTransitions.get(j);
+                    startState.addTransition(new StateTransition<Character>(nextTransition.getInput(), this.convertNode(nextTransition.getNextState(), coveredEpsilonNFAStates, coveredNFAStates)));
                 }
             }
         }
@@ -68,7 +68,7 @@ public class EpsilonNFAToNFAConverter
         List<StateTransition<Character>> transitions = startState.getTransitions();
         for (int i = 0; i < transitions.size(); i++)
         {
-            StateTransition transition = transitions.get(i);
+            StateTransition<Character> transition = transitions.get(i);
             if (transition.inputEquals(null) && this.epsilonToAccepting(transition.getNextState(), processedStates))
             {
                 return true;

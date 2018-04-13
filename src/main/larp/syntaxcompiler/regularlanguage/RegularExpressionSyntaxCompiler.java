@@ -49,7 +49,7 @@ public class RegularExpressionSyntaxCompiler
     {
         State startState = new EpsilonNFAState("", false);
         State endState = new EpsilonNFAState("", false);
-        startState.addTransition(new StateTransition(((CharacterNode)node).getCharacter(), endState));
+        startState.addTransition(new StateTransition<Character>(((CharacterNode)node).getCharacter(), endState));
 
         return new StateGroup(startState, endState);
     }
@@ -59,8 +59,8 @@ public class RegularExpressionSyntaxCompiler
         StateGroup childGroup = this.compileStateGroup(node.getChildNodes().get(0));
         State startState = childGroup.getStartState();
         State endState = childGroup.getEndState();
-        startState.addTransition(new StateTransition(null, endState));
-        endState.addTransition(new StateTransition(null, startState));
+        startState.addTransition(new StateTransition<Character>(null, endState));
+        endState.addTransition(new StateTransition<Character>(null, startState));
 
         return new StateGroup(startState, endState);
     }
@@ -73,7 +73,7 @@ public class RegularExpressionSyntaxCompiler
         {
             State startState = new EpsilonNFAState("", false);
             State endState = new EpsilonNFAState("", false);
-            startState.addTransition(new StateTransition(null, endState));
+            startState.addTransition(new StateTransition<Character>(null, endState));
 
             return new StateGroup(startState, endState);
         }
@@ -86,7 +86,7 @@ public class RegularExpressionSyntaxCompiler
             childGroups[i] = currentGroup;
             if (i > 0)
             {
-                childGroups[i - 1].getEndState().addTransition(new StateTransition(null, currentGroup.getStartState()));
+                childGroups[i - 1].getEndState().addTransition(new StateTransition<Character>(null, currentGroup.getStartState()));
             }
         }
 
@@ -102,8 +102,8 @@ public class RegularExpressionSyntaxCompiler
         for (int i = 0; i < childNodes.size(); i++)
         {
             StateGroup currentGroup = this.compileStateGroup(childNodes.get(i));
-            startState.addTransition(new StateTransition(null, currentGroup.getStartState()));
-            currentGroup.getEndState().addTransition(new StateTransition(null, endState));
+            startState.addTransition(new StateTransition<Character>(null, currentGroup.getStartState()));
+            currentGroup.getEndState().addTransition(new StateTransition<Character>(null, endState));
         }
 
         return new StateGroup(startState, endState);

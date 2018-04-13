@@ -11,7 +11,7 @@ public class StateTransitionTest
     public void testInputEqualsReturnsTrueWhenInputMatchesExpectedInput()
     {
         State state = new TestState("S0", true);
-        StateTransition transition = new StateTransition('a', state);
+        StateTransition<Character> transition = new StateTransition<Character>('a', state);
 
         assertTrue(transition.inputEquals('a'));
     }
@@ -20,7 +20,7 @@ public class StateTransitionTest
     public void testInputEqualsReturnsFalseWhenInputDoesNotMatchExpectedInput()
     {
         State state = new TestState("S0", true);
-        StateTransition transition = new StateTransition('a', state);
+        StateTransition<Character> transition = new StateTransition<Character>('a', state);
 
         assertFalse(transition.inputEquals('b'));
     }
@@ -29,7 +29,7 @@ public class StateTransitionTest
     public void testInputEqualsReturnsTrueWhenEmptyInputMatchesExpectedEmptyInput()
     {
         State state = new TestState("S0", true);
-        StateTransition transition = new StateTransition(null, state);
+        StateTransition<Character> transition = new StateTransition<Character>(null, state);
 
         assertTrue(transition.inputEquals(null));
     }
@@ -38,7 +38,7 @@ public class StateTransitionTest
     public void testInputEqualsReturnsFalseWhenNonEmptyInputDoesNotMatchExpectedEmptyInput()
     {
         State state = new TestState("S0", true);
-        StateTransition transition = new StateTransition(null, state);
+        StateTransition<Character> transition = new StateTransition<Character>(null, state);
 
         assertFalse(transition.inputEquals('a'));
     }
@@ -47,7 +47,7 @@ public class StateTransitionTest
     public void testInputEqualsReturnsFalseWhenEmptyInputDoesNotMatchExpectedNonEmptyInput()
     {
         State state = new TestState("S0", true);
-        StateTransition transition = new StateTransition('a', state);
+        StateTransition<Character> transition = new StateTransition<Character>('a', state);
 
         assertFalse(transition.inputEquals(null));
     }
@@ -56,8 +56,8 @@ public class StateTransitionTest
     public void testInputEqualsOtherTransitionReturnsTrueWhenInputMatchesExpectedInput()
     {
         State state = new TestState("S0", true);
-        StateTransition transition = new StateTransition('a', state);
-        StateTransition otherTransition = new StateTransition('a', state);
+        StateTransition<Character> transition = new StateTransition<Character>('a', state);
+        StateTransition<Character> otherTransition = new StateTransition<Character>('a', state);
 
         assertTrue(transition.inputEqualsOtherTransition(otherTransition));
     }
@@ -66,8 +66,8 @@ public class StateTransitionTest
     public void testInputEqualsOtherTransitionReturnsFalseWhenInputDoesNotMatchExpectedInput()
     {
         State state = new TestState("S0", true);
-        StateTransition transition = new StateTransition('a', state);
-        StateTransition otherTransition = new StateTransition('b', state);
+        StateTransition<Character> transition = new StateTransition<Character>('a', state);
+        StateTransition<Character> otherTransition = new StateTransition<Character>('b', state);
 
         assertFalse(transition.inputEqualsOtherTransition(otherTransition));
     }
@@ -76,8 +76,8 @@ public class StateTransitionTest
     public void testInputEqualsOtherTransitionReturnsTrueWhenEmptyInputMatchesExpectedEmptyInput()
     {
         State state = new TestState("S0", true);
-        StateTransition transition = new StateTransition(null, state);
-        StateTransition otherTransition = new StateTransition(null, state);
+        StateTransition<Character> transition = new StateTransition<Character>(null, state);
+        StateTransition<Character> otherTransition = new StateTransition<Character>(null, state);
 
         assertTrue(transition.inputEqualsOtherTransition(otherTransition));
     }
@@ -86,8 +86,8 @@ public class StateTransitionTest
     public void testInputEqualsOtherTransitionReturnsFalseWhenNonEmptyInputDoesNotMatchExpectedEmptyInput()
     {
         State state = new TestState("S0", true);
-        StateTransition transition = new StateTransition(null, state);
-        StateTransition otherTransition = new StateTransition('a', state);
+        StateTransition<Character> transition = new StateTransition<Character>(null, state);
+        StateTransition<Character> otherTransition = new StateTransition<Character>('a', state);
 
         assertFalse(transition.inputEqualsOtherTransition(otherTransition));
     }
@@ -96,8 +96,8 @@ public class StateTransitionTest
     public void testInputEqualsOtherTransitionReturnsFalseWhenEmptyInputDoesNotMatchExpectedNonEmptyInput()
     {
         State state = new TestState("S0", true);
-        StateTransition transition = new StateTransition('a', state);
-        StateTransition otherTransition = new StateTransition(null, state);
+        StateTransition<Character> transition = new StateTransition<Character>('a', state);
+        StateTransition<Character> otherTransition = new StateTransition<Character>(null, state);
 
         assertFalse(transition.inputEqualsOtherTransition(otherTransition));
     }
