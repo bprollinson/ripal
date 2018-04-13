@@ -19,9 +19,9 @@ public class RegularLanguageParserFactoryTest
         DFAState state1 = new DFAState("0", false);
         DFAState state2 = new DFAState("0", true);
         DFAState state3 = new DFAState("0", true);
-        state1.addTransition(new StateTransition('a', state2));
-        state2.addTransition(new StateTransition('b', state3));
-        state3.addTransition(new StateTransition('b', state3));
+        state1.addTransition(new StateTransition<Character>('a', state2));
+        state2.addTransition(new StateTransition<Character>('b', state3));
+        state3.addTransition(new StateTransition<Character>('b', state3));
         DFA expectedDFA = new DFA(state1);
 
         assertTrue(expectedDFA.structureEquals(dfa));
