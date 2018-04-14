@@ -55,7 +55,10 @@ public class StateTransitionTest
     @Test
     public void testInputEqualsReturnsFalseWhenInputDoesNotMatchExpectedInputOfAnotherType()
     {
-        assertTrue(false);
+        State state = new TestState("S0", true);
+        StateTransition<Character> transition = new StateTransition<Character>('a', state);
+
+        assertFalse(transition.inputEquals(1));
     }
 
     @Test
@@ -111,7 +114,11 @@ public class StateTransitionTest
     @Test
     public void testInputEqualsOtherTransitionReturnsFalseWhenInputDoesNotMatchExpectedInputOfAnotherType()
     {
-        assertTrue(false);
+        State state = new TestState("S0", true);
+        StateTransition<Character> transition = new StateTransition<Character>('a', state);
+        StateTransition<Character> otherTransition = new StateTransition<Character>('1', state);
+
+        assertFalse(transition.inputEqualsOtherTransition(otherTransition));
     }
 
     private class TestState extends State
