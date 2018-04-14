@@ -16,7 +16,7 @@ public class StateTransition<I>
         return this.input;
     }
 
-    public boolean inputEquals(I otherInput)
+    public boolean inputEquals(Object otherInput)
     {
         if (this.input == null)
         {
