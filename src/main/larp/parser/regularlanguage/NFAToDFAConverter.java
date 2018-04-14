@@ -49,7 +49,7 @@ public class NFAToDFAConverter
 
         for (Map.Entry<Character, HashSet<State>> entry: characterToStateSet.entrySet())
         {
-            startState.addTransition(new StateTransition(entry.getKey(), this.convertNode(entry.getValue(), coveredStateSetsToStates)));
+            startState.addTransition(new StateTransition<Character>(entry.getKey(), this.convertNode(entry.getValue(), coveredStateSetsToStates)));
         }
 
         return startState;

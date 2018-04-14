@@ -39,7 +39,7 @@ public class EpsilonNFAToNFAConverter
 
             if (transition.inputEquals(null))
             {
-                List<StateTransition> tangibleStateTransitions = this.tangibleStateTransitions(transition, new ArrayList<StateTransition>());
+                List<StateTransition<Character>> tangibleStateTransitions = this.tangibleStateTransitions(transition, new ArrayList<StateTransition>());
 
                 for (int j = 0; j < tangibleStateTransitions.size(); j++)
                 {
@@ -78,9 +78,9 @@ public class EpsilonNFAToNFAConverter
         return false;
     }
 
-    private List<StateTransition> tangibleStateTransitions(StateTransition startTransition, List<StateTransition> processedTransitions)
+    private List<StateTransition<Character>> tangibleStateTransitions(StateTransition startTransition, List<StateTransition> processedTransitions)
     {
-        List<StateTransition> result = new ArrayList<StateTransition>();
+        List<StateTransition<Character>> result = new ArrayList<StateTransition<Character>>();
         if (processedTransitions.contains(startTransition))
         {
             return result;
@@ -92,14 +92,14 @@ public class EpsilonNFAToNFAConverter
 
         for (int i = 0; i < nextStateTransitions.size(); i++)
         {
-            StateTransition nextTransition = nextStateTransitions.get(i);
+            StateTransition<Character> nextTransition = nextStateTransitions.get(i);
             if (!nextTransition.inputEquals(null))
             {
                 result.add(nextTransition);
             }
             else
             {
-                List<StateTransition> subsequentTransitions = this.tangibleStateTransitions(nextTransition, processedTransitions);
+                List<StateTransition<Character>> subsequentTransitions = this.tangibleStateTransitions(nextTransition, processedTransitions);
                 result.addAll(subsequentTransitions);
             }
         }
