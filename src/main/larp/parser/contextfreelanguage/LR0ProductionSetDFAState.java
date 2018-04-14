@@ -24,11 +24,6 @@ public class LR0ProductionSetDFAState extends State
 
     protected boolean equalsState(State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
     {
-        if (!(otherState instanceof LR0ProductionSetDFAState))
-        {
-            return false;
-        }
-
         if (!super.equalsState(otherState, ourCoveredStates, otherCoveredStates))
         {
             return false;
