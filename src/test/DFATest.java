@@ -32,6 +32,18 @@ public class DFATest
         assertFalse(dfa.accepts("ab"));
     }
 
+    @Test
+    public void testAcceptsReturnsFalseForInitialNonDFAState()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testAcceptsReturnsFalseForSubsequentNonDFAState()
+    {
+        assertTrue(false);
+    }
+
     private DFA buildDFA()
     {
         DFAState state0 = new DFAState("S0", false);
