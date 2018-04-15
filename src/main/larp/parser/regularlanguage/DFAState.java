@@ -7,6 +7,11 @@ public class DFAState extends State
         super(name, accepting);
     }
 
+    public int countTransitions()
+    {
+        return this.transitions.size();
+    }
+
     public State getNextState(Character input)
     {
         for (int i = 0; i < this.transitions.size(); i++)

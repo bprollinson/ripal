@@ -22,6 +22,11 @@ public class LR0ProductionSetDFAState extends State
         return this.productionSet;
     }
 
+    public int countTransitions()
+    {
+        return this.transitions.size();
+    }
+
     protected boolean equalsState(State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
     {
         if (!super.equalsState(otherState, ourCoveredStates, otherCoveredStates))

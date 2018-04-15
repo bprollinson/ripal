@@ -240,5 +240,10 @@ public class LR0ProductionSetDFAStateTest
         {
             super(name, accepting);
         }
+
+        public int countTransitions()
+        {
+            return this.transitions.size();
+        }
     }
 }

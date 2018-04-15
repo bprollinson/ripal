@@ -6,4 +6,9 @@ public class EpsilonNFAState extends State
     {
         super(name, accepting);
     }
+
+    public int countTransitions()
+    {
+        return this.transitions.size();
+    }
 }

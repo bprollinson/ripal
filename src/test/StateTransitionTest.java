@@ -127,5 +127,10 @@ public class StateTransitionTest
         {
             super(name, accepting);
         }
+
+        public int countTransitions()
+        {
+            return this.transitions.size();
+        }
     }
 }

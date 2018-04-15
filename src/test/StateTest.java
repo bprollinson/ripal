@@ -163,6 +163,11 @@ public class StateTest
         {
             super(name, accepting);
         }
+
+        public int countTransitions()
+        {
+            return this.transitions.size();
+        }
     }
 
     private class OtherTestState extends State
@@ -170,6 +175,11 @@ public class StateTest
         public OtherTestState(String name, boolean accepting)
         {
             super(name, accepting);
+        }
+
+        public int countTransitions()
+        {
+            return this.transitions.size();
         }
     }
 }

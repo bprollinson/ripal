@@ -33,10 +33,7 @@ public abstract class State implements ComparableStructure
         this.accepting = accepting;
     }
 
-    public int countTransitions()
-    {
-        return this.transitions.size();
-    }
+    public abstract int countTransitions();
 
     public List<StateTransition<Character>> getTransitions()
     {
