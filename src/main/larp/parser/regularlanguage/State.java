@@ -66,7 +66,7 @@ public abstract class State implements ComparableStructure
             return false;
         }
 
-        if (transitions.size() != otherState.countTransitions())
+        if (this.countTransitions() != otherState.countTransitions())
         {
             return false;
         }
