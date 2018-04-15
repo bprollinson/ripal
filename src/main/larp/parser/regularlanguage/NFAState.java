@@ -7,6 +7,11 @@ public class NFAState extends State
         super(name, accepting);
     }
 
+    public void addTransition(StateTransition<Character> transition)
+    {
+        this.transitions.add(transition);
+    }
+
     public int countTransitions()
     {
         return this.transitions.size();

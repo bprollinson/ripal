@@ -164,6 +164,11 @@ public class StateTest
             super(name, accepting);
         }
 
+        public void addTransition(StateTransition<Character> transition)
+        {
+            this.transitions.add(transition);
+        }
+
         public int countTransitions()
         {
             return this.transitions.size();
@@ -175,6 +180,11 @@ public class StateTest
         public OtherTestState(String name, boolean accepting)
         {
             super(name, accepting);
+        }
+
+        public void addTransition(StateTransition<Character> transition)
+        {
+            this.transitions.add(transition);
         }
 
         public int countTransitions()

@@ -1,6 +1,7 @@
 package larp.parser.contextfreelanguage;
 
 import larp.parser.regularlanguage.State;
+import larp.parser.regularlanguage.StateTransition;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 
 import java.util.List;
@@ -15,6 +16,11 @@ public class LR0ProductionSetDFAState extends State
         super(name, accepting);
 
         this.productionSet = productionSet;
+    }
+
+    public void addTransition(StateTransition<Character> transition)
+    {
+        this.transitions.add(transition);
     }
 
     public Set<ContextFreeGrammarSyntaxNode> getProductionSet()
