@@ -33,6 +33,11 @@ public class LR0ProductionSetDFAState extends State
         return this.transitions.size();
     }
 
+    public List<StateTransition<Character>> getTransitions()
+    {
+        return this.transitions;
+    }
+
     protected boolean equalsState(State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
     {
         if (!super.equalsState(otherState, ourCoveredStates, otherCoveredStates))

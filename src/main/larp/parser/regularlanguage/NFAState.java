@@ -1,5 +1,7 @@
 package larp.parser.regularlanguage;
 
+import java.util.List;
+
 public class NFAState extends State
 {
     public NFAState(String name, boolean accepting)
@@ -15,5 +17,10 @@ public class NFAState extends State
     public int countTransitions()
     {
         return this.transitions.size();
+    }
+
+    public List<StateTransition<Character>> getTransitions()
+    {
+        return this.transitions;
     }
 }

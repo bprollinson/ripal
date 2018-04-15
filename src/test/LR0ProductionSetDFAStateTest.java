@@ -13,6 +13,7 @@ import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class LR0ProductionSetDFAStateTest
@@ -249,6 +250,11 @@ public class LR0ProductionSetDFAStateTest
         public int countTransitions()
         {
             return this.transitions.size();
+        }
+
+        public List<StateTransition<Character>> getTransitions()
+        {
+            return this.transitions;
         }
     }
 }

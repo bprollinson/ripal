@@ -32,10 +32,7 @@ public abstract class State implements ComparableStructure
 
     public abstract int countTransitions();
 
-    public List<StateTransition<Character>> getTransitions()
-    {
-        return this.transitions;
-    }
+    public abstract List<StateTransition<Character>> getTransitions();
 
     public boolean structureEquals(Object other)
     {

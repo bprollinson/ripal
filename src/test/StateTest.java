@@ -5,6 +5,8 @@ import org.junit.Test;
 import larp.parser.regularlanguage.State;
 import larp.parser.regularlanguage.StateTransition;
 
+import java.util.List;
+
 public class StateTest
 {
     @Test
@@ -173,6 +175,11 @@ public class StateTest
         {
             return this.transitions.size();
         }
+
+        public List<StateTransition<Character>> getTransitions()
+        {
+            return this.transitions;
+        }
     }
 
     private class OtherTestState extends State
@@ -190,6 +197,11 @@ public class StateTest
         public int countTransitions()
         {
             return this.transitions.size();
+        }
+
+        public List<StateTransition<Character>> getTransitions()
+        {
+            return this.transitions;
         }
     }
 }

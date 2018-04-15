@@ -1,5 +1,7 @@
 package larp.parser.regularlanguage;
 
+import java.util.List;
+
 public class DFAState extends State
 {
     public DFAState(String name, boolean accepting)
@@ -15,6 +17,11 @@ public class DFAState extends State
     public int countTransitions()
     {
         return this.transitions.size();
+    }
+
+    public List<StateTransition<Character>> getTransitions()
+    {
+        return this.transitions;
     }
 
     public State getNextState(Character input)
