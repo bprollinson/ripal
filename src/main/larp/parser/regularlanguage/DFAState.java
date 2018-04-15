@@ -12,7 +12,7 @@ public class DFAState extends State
         for (int i = 0; i < this.transitions.size(); i++)
         {
             StateTransition transition = this.transitions.get(i);
-            if (input.equals(transition.getInput()))
+            if (transition.inputEquals(input))
             {
                 return transition.getNextState();
             }
