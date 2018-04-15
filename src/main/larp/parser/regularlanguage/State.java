@@ -65,7 +65,7 @@ public abstract class State implements ComparableStructure
             return false;
         }
 
-        List<StateTransition> ourTransitions = new ArrayList<StateTransition>(this.transitions);
+        List<StateTransition> ourTransitions = new ArrayList<StateTransition>(this.getTransitions());
         List<StateTransition> otherTransitions = new ArrayList<StateTransition>(otherState.getTransitions());
 
         List<State> ourNextCoveredStates = new ArrayList<State>(ourCoveredStates);
