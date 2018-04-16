@@ -171,11 +171,6 @@ public class StateTest
             this.transitions.add(transition);
         }
 
-        public int countTransitions()
-        {
-            return this.transitions.size();
-        }
-
         public List<StateTransition<Character>> getTransitions()
         {
             return this.transitions;
@@ -192,11 +187,6 @@ public class StateTest
         public void addTransition(StateTransition<Character> transition)
         {
             this.transitions.add(transition);
-        }
-
-        public int countTransitions()
-        {
-            return this.transitions.size();
         }
 
         public List<StateTransition<Character>> getTransitions()

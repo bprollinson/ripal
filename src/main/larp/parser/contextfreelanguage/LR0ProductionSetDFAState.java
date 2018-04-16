@@ -28,11 +28,6 @@ public class LR0ProductionSetDFAState extends State<Character>
         return this.productionSet;
     }
 
-    public int countTransitions()
-    {
-        return this.transitions.size();
-    }
-
     public List<StateTransition<Character>> getTransitions()
     {
         return this.transitions;
