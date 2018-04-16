@@ -5,7 +5,6 @@ import org.junit.Test;
 import larp.parser.regularlanguage.State;
 import larp.parser.regularlanguage.StateTransition;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StateTransitionTest
@@ -126,13 +125,9 @@ public class StateTransitionTest
 
     private class TestState extends State<Character>
     {
-        protected List<StateTransition<Character>> transitions;
-
         public TestState(String name, boolean accepting)
         {
             super(name, accepting);
-
-            this.transitions = new ArrayList<StateTransition<Character>>();
         }
 
         public void addTransition(StateTransition<Character> transition)

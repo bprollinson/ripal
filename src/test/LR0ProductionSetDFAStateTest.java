@@ -12,7 +12,6 @@ import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -238,13 +237,9 @@ public class LR0ProductionSetDFAStateTest
 
     private class TestState extends State<Character>
     {
-        protected List<StateTransition<Character>> transitions;
-
         public TestState(String name, boolean accepting)
         {
             super(name, accepting);
-
-            this.transitions = new ArrayList<StateTransition<Character>>();
         }
 
         public void addTransition(StateTransition<Character> transition)

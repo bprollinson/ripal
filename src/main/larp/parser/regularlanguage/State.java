@@ -9,11 +9,13 @@ public abstract class State<I> implements ComparableStructure
 {
     private String name;
     private boolean accepting;
+    protected List<StateTransition<I>> transitions;
 
     public State(String name, boolean accepting)
     {
         this.name = name;
         this.accepting = accepting;
+        this.transitions = new ArrayList<StateTransition<I>>();
     }
 
     public abstract void addTransition(StateTransition<Character> transition);

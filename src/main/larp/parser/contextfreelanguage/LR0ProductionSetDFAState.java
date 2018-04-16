@@ -4,20 +4,17 @@ import larp.parser.regularlanguage.State;
 import larp.parser.regularlanguage.StateTransition;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class LR0ProductionSetDFAState extends State<Character>
 {
-    protected List<StateTransition<Character>> transitions;
     private Set<ContextFreeGrammarSyntaxNode> productionSet;
 
     public LR0ProductionSetDFAState(String name, boolean accepting, Set<ContextFreeGrammarSyntaxNode> productionSet)
     {
         super(name, accepting);
 
-        this.transitions = new ArrayList<StateTransition<Character>>();
         this.productionSet = productionSet;
     }
 

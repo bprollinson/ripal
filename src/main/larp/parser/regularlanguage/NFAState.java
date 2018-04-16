@@ -1,17 +1,12 @@
 package larp.parser.regularlanguage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NFAState extends State<Character>
 {
-    protected List<StateTransition<Character>> transitions;
-
     public NFAState(String name, boolean accepting)
     {
         super(name, accepting);
-
-        this.transitions = new ArrayList<StateTransition<Character>>();
     }
 
     public void addTransition(StateTransition<Character> transition)
