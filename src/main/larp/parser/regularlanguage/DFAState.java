@@ -3,7 +3,7 @@ package larp.parser.regularlanguage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DFAState extends State
+public class DFAState extends State<Character>
 {
     protected List<StateTransition<Character>> transitions;
 

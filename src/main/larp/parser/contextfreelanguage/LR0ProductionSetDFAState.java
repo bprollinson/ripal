@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class LR0ProductionSetDFAState extends State
+public class LR0ProductionSetDFAState extends State<Character>
 {
     protected List<StateTransition<Character>> transitions;
     private Set<ContextFreeGrammarSyntaxNode> productionSet;

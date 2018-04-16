@@ -160,7 +160,7 @@ public class StateTest
         assertFalse(state.structureEquals(otherState));
     }
 
-    private class TestState extends State
+    private class TestState extends State<Character>
     {
         protected List<StateTransition<Character>> transitions;
 
@@ -187,7 +187,7 @@ public class StateTest
         }
     }
 
-    private class OtherTestState extends State
+    private class OtherTestState extends State<Character>
     {
         protected List<StateTransition<Character>> transitions;
 

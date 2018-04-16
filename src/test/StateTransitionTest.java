@@ -124,7 +124,7 @@ public class StateTransitionTest
         assertFalse(transition.inputEqualsOtherTransition(otherTransition));
     }
 
-    private class TestState extends State
+    private class TestState extends State<Character>
     {
         protected List<StateTransition<Character>> transitions;
 

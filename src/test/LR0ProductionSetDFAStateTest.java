@@ -236,7 +236,7 @@ public class LR0ProductionSetDFAStateTest
         return productionNode;
     }
 
-    private class TestState extends State
+    private class TestState extends State<Character>
     {
         protected List<StateTransition<Character>> transitions;
 

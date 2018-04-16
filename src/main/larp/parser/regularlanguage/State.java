@@ -5,7 +5,7 @@ import larp.ComparableStructure;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class State implements ComparableStructure
+public abstract class State<I> implements ComparableStructure
 {
     private String name;
     private boolean accepting;
