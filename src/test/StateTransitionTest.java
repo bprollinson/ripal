@@ -130,11 +130,6 @@ public class StateTransitionTest
             super(name, accepting);
         }
 
-        public void addTransition(StateTransition<Character> transition)
-        {
-            this.transitions.add(transition);
-        }
-
         public List<StateTransition<Character>> getTransitions()
         {
             return this.transitions;

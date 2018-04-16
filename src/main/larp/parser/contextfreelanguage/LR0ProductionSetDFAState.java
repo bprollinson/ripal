@@ -18,11 +18,6 @@ public class LR0ProductionSetDFAState extends State<Character>
         this.productionSet = productionSet;
     }
 
-    public void addTransition(StateTransition<Character> transition)
-    {
-        this.transitions.add(transition);
-    }
-
     public Set<ContextFreeGrammarSyntaxNode> getProductionSet()
     {
         return this.productionSet;

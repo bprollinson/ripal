@@ -166,11 +166,6 @@ public class StateTest
             super(name, accepting);
         }
 
-        public void addTransition(StateTransition<Character> transition)
-        {
-            this.transitions.add(transition);
-        }
-
         public List<StateTransition<Character>> getTransitions()
         {
             return this.transitions;
@@ -182,11 +177,6 @@ public class StateTest
         public OtherTestState(String name, boolean accepting)
         {
             super(name, accepting);
-        }
-
-        public void addTransition(StateTransition<Character> transition)
-        {
-            this.transitions.add(transition);
         }
 
         public List<StateTransition<Character>> getTransitions()
