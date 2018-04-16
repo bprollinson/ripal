@@ -5,8 +5,6 @@ import org.junit.Test;
 import larp.parser.regularlanguage.State;
 import larp.parser.regularlanguage.StateTransition;
 
-import java.util.List;
-
 public class StateTransitionTest
 {
     @Test
@@ -128,11 +126,6 @@ public class StateTransitionTest
         public TestState(String name, boolean accepting)
         {
             super(name, accepting);
-        }
-
-        public List<StateTransition<Character>> getTransitions()
-        {
-            return this.transitions;
         }
     }
 }

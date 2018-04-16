@@ -38,7 +38,10 @@ public abstract class State<I> implements ComparableStructure
         return this.transitions.size();
     }
 
-    public abstract List<StateTransition<Character>> getTransitions();
+    public List<StateTransition<I>> getTransitions()
+    {
+        return this.transitions;
+    }
 
     public boolean structureEquals(Object other)
     {
