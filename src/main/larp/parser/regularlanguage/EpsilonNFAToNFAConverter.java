@@ -18,7 +18,7 @@ public class EpsilonNFAToNFAConverter
             return coveredNFAStates.get(firstIndexOfState);
         }
 
-        State startState = new NFAState("", false);
+        NFAState startState = new NFAState("", false);
         coveredEpsilonNFAStates.add(epsilonNFAState);
         coveredNFAStates.add(startState);
 
