@@ -1,22 +1,22 @@
 package larp.parser.regularlanguage;
 
-public class StateGroup
+public class StateGroup<S extends State>
 {
-    private State startState;
-    private State endState;
+    private S startState;
+    private S endState;
 
-    public StateGroup(State startState, State endState)
+    public StateGroup(S startState, S endState)
     {
         this.startState = startState;
         this.endState = endState;
     }
 
-    public State getStartState()
+    public S getStartState()
     {
         return this.startState;
     }
 
-    public State getEndState()
+    public S getEndState()
     {
         return this.endState;
     }
