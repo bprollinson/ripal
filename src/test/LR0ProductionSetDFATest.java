@@ -16,6 +16,12 @@ import java.util.Set;
 public class LR0ProductionSetDFATest
 {
     @Test
+    public void testGetStartStateReturnsLR0ProductionSetDFAState()
+    {
+        assertTrue(false);
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrue()
     {
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();

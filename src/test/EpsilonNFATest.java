@@ -8,6 +8,12 @@ import larp.parser.regularlanguage.EpsilonNFAState;
 public class EpsilonNFATest
 {
     @Test
+    public void testGetStartStateReturnsEpsilonNFAState()
+    {
+        assertTrue(false);
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrue()
     {
         EpsilonNFA nfa = new EpsilonNFA(new EpsilonNFAState("S0", true));

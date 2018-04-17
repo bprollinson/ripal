@@ -10,6 +10,12 @@ import larp.parser.regularlanguage.StateTransition;
 public class DFATest
 {
     @Test
+    public void testGetStartStateReturnsDFAState()
+    {
+        assertTrue(false);
+    }
+
+    @Test
     public void testAcceptsReturnsFalseInNonExceptingState()
     {
         DFA dfa = this.buildDFA();
