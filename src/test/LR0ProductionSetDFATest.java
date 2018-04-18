@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -18,7 +19,11 @@ public class LR0ProductionSetDFATest
     @Test
     public void testGetStartStateReturnsLR0ProductionSetDFAState()
     {
-        assertTrue(false);
+        LR0ProductionSetDFAState expectedStartState = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(expectedStartState);
+
+        LR0ProductionSetDFAState startState = dfa.getStartState();
+        assertEquals(expectedStartState, startState);
     }
 
     @Test

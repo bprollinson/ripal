@@ -2,16 +2,16 @@ package larp.parser.regularlanguage;
 
 import larp.ComparableStructure;
 
-public class FiniteAutomata implements ComparableStructure
+public class FiniteAutomata<S extends State> implements ComparableStructure
 {
-    protected State startState;
+    protected S startState;
 
-    public FiniteAutomata(State startState)
+    public FiniteAutomata(S startState)
     {
         this.startState = startState;
     }
 
-    public State getStartState()
+    public S getStartState()
     {
         return this.startState;
     }

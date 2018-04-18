@@ -1,8 +1,8 @@
 package larp.parser.regularlanguage;
 
-public class DFA extends FiniteAutomata
+public class DFA extends FiniteAutomata<DFAState>
 {
-    public DFA(State startState)
+    public DFA(DFAState startState)
     {
         super(startState);
     }
@@ -10,11 +10,6 @@ public class DFA extends FiniteAutomata
     public boolean accepts(String inputString)
     {
         State currentState = this.startState;
-        if (!(currentState instanceof DFAState))
-        {
-            return false;
-        }
-
         int characterPosition = 0;
 
         while (currentState != null && characterPosition < inputString.length())

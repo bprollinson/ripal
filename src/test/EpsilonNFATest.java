@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -10,7 +11,11 @@ public class EpsilonNFATest
     @Test
     public void testGetStartStateReturnsEpsilonNFAState()
     {
-        assertTrue(false);
+        EpsilonNFAState expectedStartState = new EpsilonNFAState("S0", true);
+        EpsilonNFA nfa = new EpsilonNFA(expectedStartState);
+
+        EpsilonNFAState startState = nfa.getStartState();
+        assertEquals(expectedStartState, startState);
     }
 
     @Test

@@ -23,7 +23,7 @@ public class NFAToDFAConverterTest
         NFAState state1 = new NFAState("S0", false);
         NFAState state2 = new NFAState("S1", false);
         state1.addTransition(new StateTransition<Character>('a', state2));
-        NFA NFA = new NFA(expectedState1);
+        NFA NFA = new NFA(state1);
 
         assertTrue(expectedDFA.structureEquals(converter.convert(NFA)));
     }

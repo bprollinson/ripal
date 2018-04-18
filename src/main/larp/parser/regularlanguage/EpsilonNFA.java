@@ -1,8 +1,8 @@
 package larp.parser.regularlanguage;
 
-public class EpsilonNFA extends FiniteAutomata
+public class EpsilonNFA extends FiniteAutomata<EpsilonNFAState>
 {
-    public EpsilonNFA(State startState)
+    public EpsilonNFA(EpsilonNFAState startState)
     {
         super(startState);
     }

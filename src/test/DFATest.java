@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -12,7 +13,11 @@ public class DFATest
     @Test
     public void testGetStartStateReturnsDFAState()
     {
-        assertTrue(false);
+        DFAState expectedStartState = new DFAState("S0", true);
+        DFA dfa = new DFA(expectedStartState);
+
+        DFAState startState = dfa.getStartState();
+        assertEquals(expectedStartState, startState);
     }
 
     @Test
@@ -37,15 +42,6 @@ public class DFATest
         DFA dfa = this.buildDFA();
 
         assertFalse(dfa.accepts("ab"));
-    }
-
-    @Test
-    public void testAcceptsReturnsFalseForInitialNonDFAState()
-    {
-        NFAState state0 = new NFAState("S0", true);
-        DFA dfa = new DFA(state0);
-
-        assertFalse(dfa.accepts(""));
     }
 
     @Test

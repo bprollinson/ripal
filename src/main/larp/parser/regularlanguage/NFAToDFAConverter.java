@@ -11,10 +11,10 @@ public class NFAToDFAConverter
     {
         HashSet<State> stateSet = new HashSet<State>();
         stateSet.add(nfa.getStartState());
-        return new DFA(this.convertNode(stateSet, new HashMap<HashSet<State>, State>()));
+        return new DFA(this.convertNode(stateSet, new HashMap<HashSet<State>, DFAState>()));
     }
 
-    private State convertNode(HashSet<State> stateSet, HashMap<HashSet<State>, State> coveredStateSetsToStates)
+    private DFAState convertNode(HashSet<State> stateSet, HashMap<HashSet<State>, DFAState> coveredStateSetsToStates)
     {
         if (coveredStateSetsToStates.keySet().contains(stateSet))
         {

@@ -7,10 +7,10 @@ public class EpsilonNFAToNFAConverter
 {
     public NFA convert(EpsilonNFA nfa)
     {
-        return new NFA(this.convertNode(nfa.getStartState(), new ArrayList<State>(), new ArrayList<State>()));
+        return new NFA(this.convertNode(nfa.getStartState(), new ArrayList<State>(), new ArrayList<NFAState>()));
     }
 
-    private State convertNode(State epsilonNFAState, List<State> coveredEpsilonNFAStates, List<State> coveredNFAStates)
+    private NFAState convertNode(State epsilonNFAState, List<State> coveredEpsilonNFAStates, List<NFAState> coveredNFAStates)
     {
         int firstIndexOfState = coveredEpsilonNFAStates.indexOf(epsilonNFAState);
         if (firstIndexOfState != -1)

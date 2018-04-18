@@ -23,7 +23,7 @@ public class EpsilonNFAToNFAConverterTest
         EpsilonNFAState state1 = new EpsilonNFAState("S0", false);
         EpsilonNFAState state2 = new EpsilonNFAState("S1", true);
         state1.addTransition(new StateTransition<Character>('a', state2));
-        EpsilonNFA epsilonNFA = new EpsilonNFA(expectedState1);
+        EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
 
         assertTrue(expectedNFA.structureEquals(converter.convert(epsilonNFA)));
     }
