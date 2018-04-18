@@ -121,6 +121,12 @@ public class StateTransitionTest
         assertFalse(transition.inputEqualsOtherTransition(otherTransition));
     }
 
+    @Test
+    public void testGetNextStateReturnsStateOfExpectedType()
+    {
+        assertTrue(false);
+    }
+
     private class TestState extends State<Character>
     {
         public TestState(String name, boolean accepting)
