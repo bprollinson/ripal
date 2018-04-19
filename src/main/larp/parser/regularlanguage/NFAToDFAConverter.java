@@ -9,12 +9,12 @@ public class NFAToDFAConverter
 {
     public DFA convert(NFA nfa)
     {
-        HashSet<State> stateSet = new HashSet<State>();
+        HashSet<NFAState> stateSet = new HashSet<NFAState>();
         stateSet.add(nfa.getStartState());
-        return new DFA(this.convertNode(stateSet, new HashMap<HashSet<State>, DFAState>()));
+        return new DFA(this.convertNode(stateSet, new HashMap<HashSet<NFAState>, DFAState>()));
     }
 
-    private DFAState convertNode(HashSet<State> stateSet, HashMap<HashSet<State>, DFAState> coveredStateSetsToStates)
+    private DFAState convertNode(HashSet<NFAState> stateSet, HashMap<HashSet<NFAState>, DFAState> coveredStateSetsToStates)
     {
         if (coveredStateSetsToStates.keySet().contains(stateSet))
         {
@@ -24,18 +24,18 @@ public class NFAToDFAConverter
         DFAState startState = new DFAState("", false);
         coveredStateSetsToStates.put(stateSet, startState);
 
-        HashMap<Character, HashSet<State>> characterToStateSet = new HashMap<Character, HashSet<State>>();
+        HashMap<Character, HashSet<NFAState>> characterToStateSet = new HashMap<Character, HashSet<NFAState>>();
 
-        for (State NFAState: stateSet)
+        for (NFAState NFAState: stateSet)
         {
-            List<StateTransition<Character, State>> transitions = NFAState.getTransitions();
+            List<StateTransition<Character, NFAState>> transitions = NFAState.getTransitions();
             for (int j = 0; j < transitions.size(); j++)
             {
-                StateTransition<Character, State> transition = transitions.get(j);
-                HashSet<State> characterStateSet = characterToStateSet.get(transition.getInput());
+                StateTransition<Character, NFAState> transition = transitions.get(j);
+                HashSet<NFAState> characterStateSet = characterToStateSet.get(transition.getInput());
                 if (characterStateSet == null)
                 {
-                     characterStateSet = new HashSet<State>();
+                     characterStateSet = new HashSet<NFAState>();
                 }
                 characterStateSet.add(transition.getNextState());
                 characterToStateSet.put(transition.getInput(), characterStateSet);
@@ -47,7 +47,7 @@ public class NFAToDFAConverter
             }
         }
 
-        for (Map.Entry<Character, HashSet<State>> entry: characterToStateSet.entrySet())
+        for (Map.Entry<Character, HashSet<NFAState>> entry: characterToStateSet.entrySet())
         {
             startState.addTransition(new StateTransition<Character, DFAState>(entry.getKey(), this.convertNode(entry.getValue(), coveredStateSetsToStates)));
         }
