@@ -1,11 +1,11 @@
 package larp.parser.regularlanguage;
 
-public class StateTransition<I>
+public class StateTransition<I, S extends State>
 {
     private I input;
-    private State nextState;
+    private S nextState;
 
-    public StateTransition(I input, State nextState)
+    public StateTransition(I input, S nextState)
     {
         this.input = input;
         this.nextState = nextState;
@@ -31,7 +31,7 @@ public class StateTransition<I>
         return otherTransition.inputEquals(this.input);
     }
 
-    public State getNextState()
+    public S getNextState()
     {
         return this.nextState;
     }

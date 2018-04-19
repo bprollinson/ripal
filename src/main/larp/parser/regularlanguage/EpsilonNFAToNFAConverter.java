@@ -10,7 +10,7 @@ public class EpsilonNFAToNFAConverter
         return new NFA(this.convertNode(nfa.getStartState(), new ArrayList<State>(), new ArrayList<NFAState>()));
     }
 
-    private NFAState convertNode(State epsilonNFAState, List<State> coveredEpsilonNFAStates, List<NFAState> coveredNFAStates)
+    private NFAState convertNode(EpsilonNFAState epsilonNFAState, List<State> coveredEpsilonNFAStates, List<NFAState> coveredNFAStates)
     {
         int firstIndexOfState = coveredEpsilonNFAStates.indexOf(epsilonNFAState);
         if (firstIndexOfState != -1)
@@ -28,23 +28,23 @@ public class EpsilonNFAToNFAConverter
             startState.setAccepting(true);
         }
 
-        List<StateTransition<Character>> transitions = epsilonNFAState.getTransitions();
+        List<StateTransition<Character, EpsilonNFAState>> transitions = epsilonNFAState.getTransitions();
         for (int i = 0; i < transitions.size(); i++)
         {
-            StateTransition<Character> transition = transitions.get(i);
+            StateTransition<Character, EpsilonNFAState> transition = transitions.get(i);
             if (!transition.inputEquals(null))
             {
-                startState.addTransition(new StateTransition<Character>(transition.getInput(), this.convertNode(transition.getNextState(), coveredEpsilonNFAStates, coveredNFAStates)));
+                startState.addTransition(new StateTransition<Character, NFAState>(transition.getInput(), this.convertNode(transition.getNextState(), coveredEpsilonNFAStates, coveredNFAStates)));
             }
 
             if (transition.inputEquals(null))
             {
-                List<StateTransition<Character>> tangibleStateTransitions = this.tangibleStateTransitions(transition, new ArrayList<StateTransition>());
+                List<StateTransition<Character, EpsilonNFAState>> tangibleStateTransitions = this.tangibleStateTransitions(transition, new ArrayList<StateTransition>());
 
                 for (int j = 0; j < tangibleStateTransitions.size(); j++)
                 {
-                    StateTransition<Character> nextTransition = tangibleStateTransitions.get(j);
-                    startState.addTransition(new StateTransition<Character>(nextTransition.getInput(), this.convertNode(nextTransition.getNextState(), coveredEpsilonNFAStates, coveredNFAStates)));
+                    StateTransition<Character, EpsilonNFAState> nextTransition = tangibleStateTransitions.get(j);
+                    startState.addTransition(new StateTransition<Character, NFAState>(nextTransition.getInput(), this.convertNode(nextTransition.getNextState(), coveredEpsilonNFAStates, coveredNFAStates)));
                 }
             }
         }
@@ -65,10 +65,10 @@ public class EpsilonNFAToNFAConverter
             return true;
         }
 
-        List<StateTransition<Character>> transitions = startState.getTransitions();
+        List<StateTransition<Character, State>> transitions = startState.getTransitions();
         for (int i = 0; i < transitions.size(); i++)
         {
-            StateTransition<Character> transition = transitions.get(i);
+            StateTransition<Character, State> transition = transitions.get(i);
             if (transition.inputEquals(null) && this.epsilonToAccepting(transition.getNextState(), processedStates))
             {
                 return true;
@@ -78,9 +78,9 @@ public class EpsilonNFAToNFAConverter
         return false;
     }
 
-    private List<StateTransition<Character>> tangibleStateTransitions(StateTransition startTransition, List<StateTransition> processedTransitions)
+    private List<StateTransition<Character, EpsilonNFAState>> tangibleStateTransitions(StateTransition<Character, EpsilonNFAState> startTransition, List<StateTransition> processedTransitions)
     {
-        List<StateTransition<Character>> result = new ArrayList<StateTransition<Character>>();
+        List<StateTransition<Character, EpsilonNFAState>> result = new ArrayList<StateTransition<Character, EpsilonNFAState>>();
         if (processedTransitions.contains(startTransition))
         {
             return result;
@@ -88,18 +88,18 @@ public class EpsilonNFAToNFAConverter
         processedTransitions.add(startTransition);
 
         State nextState = startTransition.getNextState();
-        List<StateTransition<Character>> nextStateTransitions = nextState.getTransitions();
+        List<StateTransition<Character, EpsilonNFAState>> nextStateTransitions = nextState.getTransitions();
 
         for (int i = 0; i < nextStateTransitions.size(); i++)
         {
-            StateTransition<Character> nextTransition = nextStateTransitions.get(i);
+            StateTransition<Character, EpsilonNFAState> nextTransition = nextStateTransitions.get(i);
             if (!nextTransition.inputEquals(null))
             {
                 result.add(nextTransition);
             }
             else
             {
-                List<StateTransition<Character>> subsequentTransitions = this.tangibleStateTransitions(nextTransition, processedTransitions);
+                List<StateTransition<Character, EpsilonNFAState>> subsequentTransitions = this.tangibleStateTransitions(nextTransition, processedTransitions);
                 result.addAll(subsequentTransitions);
             }
         }

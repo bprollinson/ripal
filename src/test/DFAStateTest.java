@@ -19,7 +19,7 @@ public class DFAStateTest
     {
         DFAState state0 = new DFAState("S0", true);
         DFAState state1 = new DFAState("S1", true);
-        state0.addTransition(new StateTransition<Character>('a', state1));
+        state0.addTransition(new StateTransition<Character, DFAState>('a', state1));
 
         assertEquals(state1, state0.getNextState('a'));
     }
@@ -30,8 +30,8 @@ public class DFAStateTest
         DFAState state0 = new DFAState("S0", true);
         DFAState state1 = new DFAState("S1", true);
         DFAState state2 = new DFAState("S2", true);
-        state0.addTransition(new StateTransition<Character>('a', state1));
-        state0.addTransition(new StateTransition<Character>('b', state2));
+        state0.addTransition(new StateTransition<Character, DFAState>('a', state1));
+        state0.addTransition(new StateTransition<Character, DFAState>('b', state2));
 
         assertEquals(state2, state0.getNextState('b'));
     }

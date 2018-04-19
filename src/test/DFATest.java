@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import larp.parser.regularlanguage.DFA;
 import larp.parser.regularlanguage.DFAState;
-import larp.parser.regularlanguage.NFAState;
 import larp.parser.regularlanguage.StateTransition;
 
 public class DFATest
@@ -44,22 +43,11 @@ public class DFATest
         assertFalse(dfa.accepts("ab"));
     }
 
-    @Test
-    public void testAcceptsReturnsFalseForSubsequentNonDFAState()
-    {
-        DFAState state0 = new DFAState("S0", false);
-        NFAState state1 = new NFAState("S1", true);
-        state0.addTransition(new StateTransition<Character>('a', state1));
-        DFA dfa = new DFA(state0);
-
-        assertFalse(dfa.accepts("a"));
-    }
-
     private DFA buildDFA()
     {
         DFAState state0 = new DFAState("S0", false);
         DFAState state1 = new DFAState("S1", true);
-        state0.addTransition(new StateTransition<Character>('a', state1));
+        state0.addTransition(new StateTransition<Character, DFAState>('a', state1));
 
         return new DFA(state0);
     }

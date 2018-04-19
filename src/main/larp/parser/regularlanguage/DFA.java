@@ -17,11 +17,6 @@ public class DFA extends FiniteAutomata<DFAState>
             Character inputCharacter = inputString.charAt(characterPosition);
             currentState = ((DFAState)currentState).getNextState(inputCharacter);
 
-            if (!(currentState instanceof DFAState))
-            {
-                return false;
-            }
-
             characterPosition++;
         }
 

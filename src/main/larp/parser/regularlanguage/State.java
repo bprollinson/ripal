@@ -5,20 +5,20 @@ import larp.ComparableStructure;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class State<I> implements ComparableStructure
+public abstract class State<I, S extends State> implements ComparableStructure
 {
     private String name;
     private boolean accepting;
-    protected List<StateTransition<I>> transitions;
+    protected List<StateTransition<I, S>> transitions;
 
     public State(String name, boolean accepting)
     {
         this.name = name;
         this.accepting = accepting;
-        this.transitions = new ArrayList<StateTransition<I>>();
+        this.transitions = new ArrayList<StateTransition<I, S>>();
     }
 
-    public void addTransition(StateTransition<I> transition)
+    public void addTransition(StateTransition<I, S> transition)
     {
         this.transitions.add(transition);
     }
@@ -38,7 +38,7 @@ public abstract class State<I> implements ComparableStructure
         return this.transitions.size();
     }
 
-    public List<StateTransition<I>> getTransitions()
+    public List<StateTransition<I, S>> getTransitions()
     {
         return this.transitions;
     }

@@ -28,10 +28,10 @@ public class NFAToDFAConverter
 
         for (State NFAState: stateSet)
         {
-            List<StateTransition<Character>> transitions = NFAState.getTransitions();
+            List<StateTransition<Character, State>> transitions = NFAState.getTransitions();
             for (int j = 0; j < transitions.size(); j++)
             {
-                StateTransition<Character> transition = transitions.get(j);
+                StateTransition<Character, State> transition = transitions.get(j);
                 HashSet<State> characterStateSet = characterToStateSet.get(transition.getInput());
                 if (characterStateSet == null)
                 {
@@ -49,7 +49,7 @@ public class NFAToDFAConverter
 
         for (Map.Entry<Character, HashSet<State>> entry: characterToStateSet.entrySet())
         {
-            startState.addTransition(new StateTransition<Character>(entry.getKey(), this.convertNode(entry.getValue(), coveredStateSetsToStates)));
+            startState.addTransition(new StateTransition<Character, DFAState>(entry.getKey(), this.convertNode(entry.getValue(), coveredStateSetsToStates)));
         }
 
         return startState;

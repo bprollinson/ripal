@@ -1,6 +1,6 @@
 package larp.parser.regularlanguage;
 
-public class DFAState extends State<Character>
+public class DFAState extends State<Character, DFAState>
 {
     public DFAState(String name, boolean accepting)
     {

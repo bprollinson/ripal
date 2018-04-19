@@ -49,7 +49,7 @@ public class RegularExpressionSyntaxCompiler
     {
         EpsilonNFAState startState = new EpsilonNFAState("", false);
         EpsilonNFAState endState = new EpsilonNFAState("", false);
-        startState.addTransition(new StateTransition<Character>(((CharacterNode)node).getCharacter(), endState));
+        startState.addTransition(new StateTransition<Character, EpsilonNFAState>(((CharacterNode)node).getCharacter(), endState));
 
         return new StateGroup<EpsilonNFAState>(startState, endState);
     }
@@ -59,8 +59,8 @@ public class RegularExpressionSyntaxCompiler
         StateGroup<EpsilonNFAState> childGroup = this.compileStateGroup(node.getChildNodes().get(0));
         EpsilonNFAState startState = childGroup.getStartState();
         EpsilonNFAState endState = childGroup.getEndState();
-        startState.addTransition(new StateTransition<Character>(null, endState));
-        endState.addTransition(new StateTransition<Character>(null, startState));
+        startState.addTransition(new StateTransition<Character, EpsilonNFAState>(null, endState));
+        endState.addTransition(new StateTransition<Character, EpsilonNFAState>(null, startState));
 
         return new StateGroup<EpsilonNFAState>(startState, endState);
     }
@@ -73,7 +73,7 @@ public class RegularExpressionSyntaxCompiler
         {
             EpsilonNFAState startState = new EpsilonNFAState("", false);
             EpsilonNFAState endState = new EpsilonNFAState("", false);
-            startState.addTransition(new StateTransition<Character>(null, endState));
+            startState.addTransition(new StateTransition<Character, EpsilonNFAState>(null, endState));
 
             return new StateGroup<EpsilonNFAState>(startState, endState);
         }
@@ -86,7 +86,7 @@ public class RegularExpressionSyntaxCompiler
             childGroups[i] = currentGroup;
             if (i > 0)
             {
-                childGroups[i - 1].getEndState().addTransition(new StateTransition<Character>(null, currentGroup.getStartState()));
+                childGroups[i - 1].getEndState().addTransition(new StateTransition<Character, EpsilonNFAState>(null, currentGroup.getStartState()));
             }
         }
 
@@ -102,8 +102,8 @@ public class RegularExpressionSyntaxCompiler
         for (int i = 0; i < childNodes.size(); i++)
         {
             StateGroup<EpsilonNFAState> currentGroup = this.compileStateGroup(childNodes.get(i));
-            startState.addTransition(new StateTransition<Character>(null, currentGroup.getStartState()));
-            currentGroup.getEndState().addTransition(new StateTransition<Character>(null, endState));
+            startState.addTransition(new StateTransition<Character, EpsilonNFAState>(null, currentGroup.getStartState()));
+            currentGroup.getEndState().addTransition(new StateTransition<Character, EpsilonNFAState>(null, endState));
         }
 
         return new StateGroup<EpsilonNFAState>(startState, endState);

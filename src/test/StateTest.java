@@ -27,7 +27,7 @@ public class StateTest
     public void testStructureEqualsReturnsFalseForDifferentNumberOfTransitions()
     {
         TestState state = new TestState("S0", true);
-        state.addTransition(new StateTransition<Character>('a', state));
+        state.addTransition(new StateTransition<Character, TestState>('a', state));
 
         assertFalse(state.structureEquals(new TestState("S1", true)));
     }
@@ -36,9 +36,9 @@ public class StateTest
     public void testStructureEqualsReturnsFalseForDifferentTransitionCharacters()
     {
         TestState state = new TestState("S0", true);
-        state.addTransition(new StateTransition<Character>('a', state));
+        state.addTransition(new StateTransition<Character, TestState>('a', state));
         TestState otherState = new TestState("S1", true);
-        otherState.addTransition(new StateTransition<Character>('b', otherState));
+        otherState.addTransition(new StateTransition<Character, TestState>('b', otherState));
 
         assertFalse(state.structureEquals(otherState));
     }
@@ -47,9 +47,9 @@ public class StateTest
     public void testStructureEqualsReturnsTrueForSameTransitionCharacters()
     {
         TestState state = new TestState("S0", true);
-        state.addTransition(new StateTransition<Character>('a', new TestState("S1", true)));
+        state.addTransition(new StateTransition<Character, TestState>('a', new TestState("S1", true)));
         TestState otherState = new TestState("S2", true);
-        otherState.addTransition(new StateTransition<Character>('a', new TestState("S3", true)));
+        otherState.addTransition(new StateTransition<Character, TestState>('a', new TestState("S3", true)));
 
         assertTrue(state.structureEquals(otherState));
     }
@@ -58,11 +58,11 @@ public class StateTest
     public void testStructureEqualsReturnsTrueForSameTransitionCharactersInDifferentOrder()
     {
         TestState state = new TestState("S0", true);
-        state.addTransition(new StateTransition<Character>('a', new TestState("S1", true)));
-        state.addTransition(new StateTransition<Character>('b', new TestState("S2", true)));
+        state.addTransition(new StateTransition<Character, TestState>('a', new TestState("S1", true)));
+        state.addTransition(new StateTransition<Character, TestState>('b', new TestState("S2", true)));
         TestState otherState = new TestState("S3", true);
-        otherState.addTransition(new StateTransition<Character>('b', new TestState("S4", true)));
-        otherState.addTransition(new StateTransition<Character>('a', new TestState("S5", true)));
+        otherState.addTransition(new StateTransition<Character, TestState>('b', new TestState("S4", true)));
+        otherState.addTransition(new StateTransition<Character, TestState>('a', new TestState("S5", true)));
 
         assertTrue(state.structureEquals(otherState));
     }
@@ -71,9 +71,9 @@ public class StateTest
     public void testStructureEqualsReturnsFalseForSubsequentStateInequality()
     {
         TestState state = new TestState("S0", true);
-        state.addTransition(new StateTransition<Character>('a', new TestState("S1", true)));
+        state.addTransition(new StateTransition<Character, TestState>('a', new TestState("S1", true)));
         TestState otherState = new TestState("S2", true);
-        otherState.addTransition(new StateTransition<Character>('a', new TestState("S3", false)));
+        otherState.addTransition(new StateTransition<Character, TestState>('a', new TestState("S3", false)));
 
         assertFalse(state.structureEquals(otherState));
     }
@@ -82,9 +82,9 @@ public class StateTest
     public void testStructureEqualsReturnsTrueForStateGraphContainingCycle()
     {
         TestState state = new TestState("S0", true);
-        state.addTransition(new StateTransition<Character>('a', state));
+        state.addTransition(new StateTransition<Character, TestState>('a', state));
         TestState otherState = new TestState("S0", true);
-        otherState.addTransition(new StateTransition<Character>('a', otherState));
+        otherState.addTransition(new StateTransition<Character, TestState>('a', otherState));
 
         assertTrue(state.structureEquals(otherState));
     }
@@ -95,16 +95,16 @@ public class StateTest
         TestState state1 = new TestState("S0", true);
         TestState state2 = new TestState("S1", true);
         TestState state3 = new TestState("S1", true);
-        state1.addTransition(new StateTransition<Character>('a', state2));
-        state2.addTransition(new StateTransition<Character>('a', state3));
-        state3.addTransition(new StateTransition<Character>('a', state1));
+        state1.addTransition(new StateTransition<Character, TestState>('a', state2));
+        state2.addTransition(new StateTransition<Character, TestState>('a', state3));
+        state3.addTransition(new StateTransition<Character, TestState>('a', state1));
 
         TestState otherState1 = new TestState("S0", true);
         TestState otherState2 = new TestState("S1", true);
         TestState otherState3 = new TestState("S1", true);
-        otherState1.addTransition(new StateTransition<Character>('a', otherState2));
-        otherState2.addTransition(new StateTransition<Character>('a', otherState3));
-        otherState3.addTransition(new StateTransition<Character>('a', otherState2));
+        otherState1.addTransition(new StateTransition<Character, TestState>('a', otherState2));
+        otherState2.addTransition(new StateTransition<Character, TestState>('a', otherState3));
+        otherState3.addTransition(new StateTransition<Character, TestState>('a', otherState2));
 
         assertFalse(state1.structureEquals(otherState1));
     }
@@ -116,20 +116,20 @@ public class StateTest
         TestState state2 = new TestState("S1", false);
         TestState state3 = new TestState("S2", false);
         TestState state4 = new TestState("S3", false);
-        state1.addTransition(new StateTransition<Character>('a', state2));
-        state1.addTransition(new StateTransition<Character>('b', state3));
-        state2.addTransition(new StateTransition<Character>('a', state4));
-        state3.addTransition(new StateTransition<Character>('a', state4));
+        state1.addTransition(new StateTransition<Character, TestState>('a', state2));
+        state1.addTransition(new StateTransition<Character, TestState>('b', state3));
+        state2.addTransition(new StateTransition<Character, TestState>('a', state4));
+        state3.addTransition(new StateTransition<Character, TestState>('a', state4));
 
         TestState otherState1 = new TestState("S0", false);
         TestState otherState2 = new TestState("S1", false);
         TestState otherState3 = new TestState("S2", false);
         TestState otherState4 = new TestState("S4", false);
         TestState otherState5 = new TestState("S5", false);
-        otherState1.addTransition(new StateTransition<Character>('a', otherState2));
-        otherState1.addTransition(new StateTransition<Character>('b', otherState3));
-        otherState2.addTransition(new StateTransition<Character>('a', otherState4));
-        otherState3.addTransition(new StateTransition<Character>('a', otherState5));
+        otherState1.addTransition(new StateTransition<Character, TestState>('a', otherState2));
+        otherState1.addTransition(new StateTransition<Character, TestState>('b', otherState3));
+        otherState2.addTransition(new StateTransition<Character, TestState>('a', otherState4));
+        otherState3.addTransition(new StateTransition<Character, TestState>('a', otherState5));
 
         assertFalse(state1.structureEquals(otherState1));
     }
@@ -143,21 +143,7 @@ public class StateTest
         assertFalse(state.structureEquals(otherState));
     }
 
-    @Test
-    public void testStructureEqualsReturnsFalseForDifferentStateClassInSubsequentState()
-    {
-        TestState state = new TestState("S0", true);
-        TestState nextState = new TestState("S1", true);
-        state.addTransition(new StateTransition<Character>('a', nextState));
-
-        TestState otherState = new TestState("S2", true);
-        OtherTestState otherNextState = new OtherTestState("S3", true);
-        otherState.addTransition(new StateTransition<Character>('a', otherNextState));
-
-        assertFalse(state.structureEquals(otherState));
-    }
-
-    private class TestState extends State<Character>
+    private class TestState extends State<Character, TestState>
     {
         public TestState(String name, boolean accepting)
         {
@@ -165,7 +151,7 @@ public class StateTest
         }
     }
 
-    private class OtherTestState extends State<Character>
+    private class OtherTestState extends State<Character, OtherTestState>
     {
         public OtherTestState(String name, boolean accepting)
         {
