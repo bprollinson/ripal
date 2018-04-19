@@ -87,7 +87,7 @@ public class EpsilonNFAToNFAConverter
         }
         processedTransitions.add(startTransition);
 
-        State nextState = startTransition.getNextState();
+        EpsilonNFAState nextState = startTransition.getNextState();
         List<StateTransition<Character, EpsilonNFAState>> nextStateTransitions = nextState.getTransitions();
 
         for (int i = 0; i < nextStateTransitions.size(); i++)
