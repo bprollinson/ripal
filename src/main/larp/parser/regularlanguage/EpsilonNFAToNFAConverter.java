@@ -52,7 +52,7 @@ public class EpsilonNFAToNFAConverter
         return startState;
     }
 
-    private boolean epsilonToAccepting(State startState, List<State> processedStates)
+    private boolean epsilonToAccepting(EpsilonNFAState startState, List<State> processedStates)
     {
         if (processedStates.contains(startState))
         {
@@ -65,10 +65,10 @@ public class EpsilonNFAToNFAConverter
             return true;
         }
 
-        List<StateTransition<Character, State>> transitions = startState.getTransitions();
+        List<StateTransition<Character, EpsilonNFAState>> transitions = startState.getTransitions();
         for (int i = 0; i < transitions.size(); i++)
         {
-            StateTransition<Character, State> transition = transitions.get(i);
+            StateTransition<Character, EpsilonNFAState> transition = transitions.get(i);
             if (transition.inputEquals(null) && this.epsilonToAccepting(transition.getNextState(), processedStates))
             {
                 return true;
