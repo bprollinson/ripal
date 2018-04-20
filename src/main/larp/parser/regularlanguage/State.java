@@ -75,7 +75,7 @@ public abstract class State<I, S extends State> implements ComparableStructure
         }
 
         List<StateTransition> ourTransitions = new ArrayList<StateTransition>(this.transitions);
-        List<StateTransition<Object, State>> otherTransitions = new ArrayList<StateTransition<Object, State>>();
+        List<StateTransition> otherTransitions = new ArrayList<StateTransition>();
         for (Object rawStateTransition: otherState.getTransitions())
         {
             StateTransition stateTransition = (StateTransition)rawStateTransition;
