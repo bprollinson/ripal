@@ -22,13 +22,21 @@ public class LR0ProductionSetDFAState extends State<Character, LR0ProductionSetD
         return this.productionSet;
     }
 
-    protected boolean equalsState(State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
+    protected StateComparator buildStateComparator()
     {
-        if (!super.equalsState(otherState, ourCoveredStates, otherCoveredStates))
-        {
-            return false;
-        }
+        return new LR0ProductionSetDFAStateComparator();
+    }
 
-        return this.productionSet.equals(((LR0ProductionSetDFAState)otherState).getProductionSet());
+    private class LR0ProductionSetDFAStateComparator extends StateComparator
+    {
+        public boolean equalsState(State state, State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
+        {
+            if (!super.equalsState(state, otherState, ourCoveredStates, otherCoveredStates))
+            {
+                return false;
+            }
+
+            return ((LR0ProductionSetDFAState)state).getProductionSet().equals(((LR0ProductionSetDFAState)otherState).getProductionSet());
+        }
     }
 }

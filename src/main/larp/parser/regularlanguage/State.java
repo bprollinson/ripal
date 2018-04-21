@@ -59,10 +59,15 @@ public abstract class State<I, S extends State> implements ComparableStructure
 
     protected boolean equalsState(State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
     {
-        return new StateComparator().equalsState(this, otherState, ourCoveredStates, otherCoveredStates);
+        return this.buildStateComparator().equalsState(this, otherState, ourCoveredStates, otherCoveredStates);
     }
 
-    private class StateComparator
+    protected StateComparator buildStateComparator()
+    {
+        return new StateComparator();
+    }
+
+    public class StateComparator
     {
         public boolean equalsState(State state, State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
         {
@@ -133,7 +138,7 @@ public abstract class State<I, S extends State> implements ComparableStructure
                         boolean nextStatesEqual = false;
                         if (!nextStatesLoop)
                         {
-                            nextStatesEqual = current.getNextState().equalsState(otherTransition.getNextState(), ourNextCoveredStates, otherNextCoveredStates);
+                            nextStatesEqual = this.equalsState(current.getNextState(), otherTransition.getNextState(), ourNextCoveredStates, otherNextCoveredStates);
                         }
                         boolean equal = nextStatesEqual || nextStatesLoop;
                         if (nextStatesEqual)
