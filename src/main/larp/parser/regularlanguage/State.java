@@ -67,7 +67,7 @@ public abstract class State<I, S extends State> implements ComparableStructure
         return new StateComparator();
     }
 
-    public class StateComparator
+    protected class StateComparator
     {
         public boolean equalsState(State state, State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
         {
