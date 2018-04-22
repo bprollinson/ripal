@@ -71,17 +71,7 @@ public abstract class State<I, S extends State> implements ComparableStructure
     {
         public boolean equalsState(State state, State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
         {
-            if (!otherState.getClass().equals(state.getClass()))
-            {
-                return false;
-            }
-
-            if (state.isAccepting() != otherState.isAccepting())
-            {
-                return false;
-            }
-
-            if (state.countTransitions() != otherState.countTransitions())
+            if (this.statesObviouslyNotEqual(state, otherState))
             {
                 return false;
             }
@@ -170,6 +160,26 @@ public abstract class State<I, S extends State> implements ComparableStructure
             otherCoveredStates.add(otherState);
 
             return true;
+        }
+
+        private boolean statesObviouslyNotEqual(State state, State otherState)
+        {
+            if (!otherState.getClass().equals(state.getClass()))
+            {
+                return true;
+            }
+
+            if (state.isAccepting() != otherState.isAccepting())
+            {
+                return true;
+            }
+
+            if (state.countTransitions() != otherState.countTransitions())
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
