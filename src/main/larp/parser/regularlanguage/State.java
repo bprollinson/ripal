@@ -76,21 +76,8 @@ public abstract class State<I, S extends State> implements ComparableStructure
                 return false;
             }
 
-            List<StateTransition> ourTransitions = new ArrayList<StateTransition>();
-            for (Object rawStateTransition: state.getTransitions())
-            {
-                StateTransition stateTransition = (StateTransition)rawStateTransition;
-                StateTransition<Object, State> testTransition = new StateTransition<Object, State>(stateTransition.getInput(), stateTransition.getNextState());
-                ourTransitions.add(testTransition);
-            }
-
-            List<StateTransition> otherTransitions = new ArrayList<StateTransition>();
-            for (Object rawStateTransition: otherState.getTransitions())
-            {
-                StateTransition stateTransition = (StateTransition)rawStateTransition;
-                StateTransition<Object, State> testTransition = new StateTransition<Object, State>(stateTransition.getInput(), stateTransition.getNextState());
-                otherTransitions.add(testTransition);
-            }
+            List<StateTransition> ourTransitions = this.cloneTransitions(state.getTransitions());
+            List<StateTransition> otherTransitions = this.cloneTransitions(otherState.getTransitions());
 
             List<State> ourNextCoveredStates = new ArrayList<State>(ourCoveredStates);
             ourNextCoveredStates.add(state);
@@ -180,6 +167,19 @@ public abstract class State<I, S extends State> implements ComparableStructure
             }
 
             return false;
+        }
+
+        private List<StateTransition> cloneTransitions(List stateTransitions)
+        {
+            List<StateTransition> clonedTransitions = new ArrayList<StateTransition>();
+            for (Object rawStateTransition: stateTransitions)
+            {
+                StateTransition stateTransition = (StateTransition)rawStateTransition;
+                StateTransition<Object, State> clonedTransition = new StateTransition<Object, State>(stateTransition.getInput(), stateTransition.getNextState());
+                clonedTransitions.add(clonedTransition);
+            }
+
+            return clonedTransitions;
         }
     }
 }
