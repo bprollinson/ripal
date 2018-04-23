@@ -6,7 +6,7 @@ import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import java.util.List;
 import java.util.Set;
 
-public class LR0ProductionSetDFAState extends State<Character, LR0ProductionSetDFAState>
+public class LR0ProductionSetDFAState extends State<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>
 {
     private Set<ContextFreeGrammarSyntaxNode> productionSet;
 
