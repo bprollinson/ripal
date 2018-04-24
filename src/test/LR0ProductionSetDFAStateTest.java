@@ -60,7 +60,7 @@ public class LR0ProductionSetDFAStateTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForDifferentTransitionCharacters()
+    public void testStructureEqualsReturnsFalseForDifferentTransitionTerminalNodes()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
         state.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("a"), state));
@@ -71,7 +71,7 @@ public class LR0ProductionSetDFAStateTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrueForSameTransitionCharacters()
+    public void testStructureEqualsReturnsTrueForSameTransitionTerminalNodes()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
         state.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("a"), new LR0ProductionSetDFAState("S1", true, new HashSet<ContextFreeGrammarSyntaxNode>())));
@@ -79,6 +79,18 @@ public class LR0ProductionSetDFAStateTest
         otherState.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("a"), new LR0ProductionSetDFAState("S3", true, new HashSet<ContextFreeGrammarSyntaxNode>())));
 
         assertTrue(state.structureEquals(otherState));
+    }
+
+    @Test
+    public void testStructureEqualsReturnsFalseForDifferentTransitionNonTerminalNodes()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testStructureEqualsReturnsTrueForSameTransitionNonTerminalNodes()
+    {
+        assertTrue(false);
     }
 
     @Test
