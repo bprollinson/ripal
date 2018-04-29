@@ -15,10 +15,12 @@ import java.util.Set;
 public class ContextFreeGrammarLR0ProductionSetDFACompiler
 {
     private ContextFreeGrammarAugmentor grammarAugmentor;
+    private ContextFreeGrammarClosureCalculator closureCalculator;
 
     public ContextFreeGrammarLR0ProductionSetDFACompiler()
     {
         this.grammarAugmentor = new ContextFreeGrammarAugmentor();
+        this.closureCalculator = new ContextFreeGrammarClosureCalculator();
     }
 
     public LR0ProductionSetDFA compile(ContextFreeGrammar cfg)
@@ -28,6 +30,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         ContextFreeGrammarSyntaxNode firstProductionWithDot = this.addDotToProductionRightHandSide(augmentedCfg.getProduction(0));
         productionSet.add(firstProductionWithDot);
+        productionSet = this.closureCalculator.calculateProductionSetClosure(productionSet);
         LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", false, productionSet);
 
         return new LR0ProductionSetDFA(startState);
