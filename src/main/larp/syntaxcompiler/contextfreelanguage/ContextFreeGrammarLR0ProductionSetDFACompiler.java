@@ -30,7 +30,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         ContextFreeGrammarSyntaxNode firstProductionWithDot = this.addDotToProductionRightHandSide(augmentedCfg.getProduction(0));
         productionSet.add(firstProductionWithDot);
-        productionSet = this.closureCalculator.calculateProductionSetClosure(productionSet);
+        productionSet = this.closureCalculator.calculate(cfg, productionSet);
         LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", false, productionSet);
 
         return new LR0ProductionSetDFA(startState);
