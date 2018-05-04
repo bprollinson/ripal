@@ -169,7 +169,20 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateCalculatesClosureIgnoringImmediateInfiniteLoop()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S"));
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("S")));
+
+        Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("S")));
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a")));
+
+        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
     }
 
     @Test
