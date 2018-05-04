@@ -133,7 +133,19 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateDoesNotAddProductionsForNonTerminal()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
+        cfg.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
+
+        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a"), new NonTerminalNode("B")));
+
+        Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a"), new NonTerminalNode("B")));
+
+        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
     }
 
     @Test
