@@ -210,7 +210,22 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateExpandsImmediateNonTerminalIntoParallelTerminals()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        cfg.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        cfg.addProduction(new NonTerminalNode("A"), new TerminalNode("b"));
+
+        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+
+        Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new TerminalNode("b")));
+
+        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
     }
 
     @Test
