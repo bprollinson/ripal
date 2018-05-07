@@ -89,7 +89,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     }
 
     @Test
-    public void testCalculateAddsTerminalChain()
+    public void testCalculateAddsNonTerminalChain()
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
@@ -131,7 +131,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     }
 
     @Test
-    public void testCalculateDoesNotAddProductionsForNonTerminal()
+    public void testCalculateDoesNotAddProductionsForTerminal()
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
@@ -296,7 +296,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     }
 
     @Test
-    public void testCalculateAddsTerminalChainInReverseOrder()
+    public void testCalculateAddsNonTerminalChainInReverseOrder()
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
