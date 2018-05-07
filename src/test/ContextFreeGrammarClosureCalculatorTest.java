@@ -321,7 +321,19 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateDoesNotExpandProductionSetWhenDotMissing()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+
+        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A")));
+
+        Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A")));
+
+        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
     }
 
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
