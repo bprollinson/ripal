@@ -31,6 +31,22 @@ public class ContextFreeGrammarClosureCalculatorTest
     }
 
     @Test
+    public void testCalculateDoesNotAddProductionWhenContextFreeGrammarIsEmpty()
+    {
+        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+
+        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+
+        Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+
+        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+    }
+
+    @Test
     public void testCalculateAddsSimpleTerminalProduction()
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
