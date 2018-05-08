@@ -367,6 +367,24 @@ public class ContextFreeGrammarClosureCalculatorTest
         assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
     }
 
+    @Test
+    public void testCalculateClosureDoesNotAddProductionWhenDotAtEndOfProduction()
+    {
+        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+
+        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode()));
+
+        Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode()));
+
+        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+    }
+
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
     {
         ProductionNode productionNode = new ProductionNode();
