@@ -290,7 +290,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
-        cfg.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
+        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("C"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
