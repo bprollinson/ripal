@@ -16,6 +16,21 @@ import java.util.Set;
 public class ContextFreeGrammarClosureCalculatorTest
 {
     @Test
+    public void testCalculatDoesNotAddProductionWhenInitialProductionSetIsEmpty()
+    {
+        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+
+        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+
+        Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+
+        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+    }
+
+    @Test
     public void testCalculateAddsSimpleTerminalProduction()
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
