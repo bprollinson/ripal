@@ -39,6 +39,8 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
 
         this.productionSetToStateMap.put(productionSet, startState);
 
+        this.compileAndAttachAdjacentStates(startState);
+
         return new LR0ProductionSetDFA(startState);
     }
 
@@ -57,5 +59,9 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         newProductionNode.addChild(newConcatenationNode);
 
         return newProductionNode;
+    }
+
+    private void compileAndAttachAdjacentStates(LR0ProductionSetDFAState state)
+    {
     }
 }
