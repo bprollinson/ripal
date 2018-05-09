@@ -41,7 +41,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         ProductionNode newProductionNode = new ProductionNode();
         newProductionNode.addChild(productionNode.getChildNodes().get(0));
 
-        List<ContextFreeGrammarSyntaxNode> childNodes = productionNode.getChildNodes();
+        List<ContextFreeGrammarSyntaxNode> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
         ConcatenationNode newConcatenationNode = new ConcatenationNode();
         newConcatenationNode.addChild(new DotNode());
         for (ContextFreeGrammarSyntaxNode childNode: childNodes)
