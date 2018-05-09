@@ -8,6 +8,7 @@ import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
 {
     private ContextFreeGrammarAugmentor grammarAugmentor;
     private ContextFreeGrammarClosureCalculator closureCalculator;
+    private HashMap<HashSet<ContextFreeGrammarSyntaxNode>, LR0ProductionSetDFAState> productionSetToStateMap;
 
     public ContextFreeGrammarLR0ProductionSetDFACompiler()
     {
@@ -25,6 +27,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
 
     public LR0ProductionSetDFA compile(ContextFreeGrammar cfg)
     {
+        this.productionSetToStateMap = new HashMap<HashSet<ContextFreeGrammarSyntaxNode>, LR0ProductionSetDFAState>();
         ContextFreeGrammar augmentedCfg = this.grammarAugmentor.augment(cfg);
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
