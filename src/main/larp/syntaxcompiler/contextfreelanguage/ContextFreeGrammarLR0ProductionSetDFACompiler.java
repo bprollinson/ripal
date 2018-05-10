@@ -98,6 +98,29 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
 
     private ContextFreeGrammarSyntaxNode shiftDotInProduction(ContextFreeGrammarSyntaxNode productionNode)
     {
-        return null;
+        ProductionNode newProductionNode = new ProductionNode();
+        newProductionNode.addChild(productionNode.getChildNodes().get(0));
+
+        List<ContextFreeGrammarSyntaxNode> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
+        ConcatenationNode newConcatenationNode = new ConcatenationNode();
+        boolean lastNodeWasDot = false;
+        for (ContextFreeGrammarSyntaxNode childNode: childNodes)
+        {
+            boolean currentNodeIsDot = childNode instanceof DotNode;
+            if (currentNodeIsDot)
+            {
+                lastNodeWasDot = true;
+                continue;
+            }
+            newConcatenationNode.addChild(childNode);
+            if (lastNodeWasDot)
+            {
+                newConcatenationNode.addChild(new DotNode());
+            }
+            lastNodeWasDot = false;
+        }
+        newProductionNode.addChild(newConcatenationNode);
+
+        return newProductionNode;
     }
 }
