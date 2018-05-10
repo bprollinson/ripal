@@ -67,23 +67,36 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         SetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode> symbolToNextClosureMap = new SetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode>();
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = state.getProductionSet();
-        for (ContextFreeGrammarSyntaxNode production: productionSet)
+        for (ContextFreeGrammarSyntaxNode productionNode: productionSet)
         {
-            ContextFreeGrammarSyntaxNode nextSymbol = this.findProductionSymbolAfterDot(production);
+            ContextFreeGrammarSyntaxNode nextSymbol = this.findProductionSymbolAfterDot(productionNode);
             if (nextSymbol != null)
             {
-                ContextFreeGrammarSyntaxNode productionWithDotShifted = this.shiftDotInProduction(production);
+                ContextFreeGrammarSyntaxNode productionWithDotShifted = this.shiftDotInProduction(productionNode);
                 symbolToNextClosureMap.put(nextSymbol, productionWithDotShifted);
             }
         }
     }
 
-    private ContextFreeGrammarSyntaxNode findProductionSymbolAfterDot(ContextFreeGrammarSyntaxNode production)
+    private ContextFreeGrammarSyntaxNode findProductionSymbolAfterDot(ContextFreeGrammarSyntaxNode productionNode)
     {
+        List<ContextFreeGrammarSyntaxNode> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
+
+        boolean lastNodeWasDot = false;
+        for (ContextFreeGrammarSyntaxNode childNode: childNodes)
+        {
+            if (lastNodeWasDot)
+            {
+                return childNode;
+            }
+
+            lastNodeWasDot = childNode instanceof DotNode;
+        }
+
         return null;
     }
 
-    private ContextFreeGrammarSyntaxNode shiftDotInProduction(ContextFreeGrammarSyntaxNode production)
+    private ContextFreeGrammarSyntaxNode shiftDotInProduction(ContextFreeGrammarSyntaxNode productionNode)
     {
         return null;
     }
