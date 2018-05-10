@@ -88,4 +88,16 @@ public class SetMapTest
         expectedSet.add(1);
         assertEquals(expectedSet, setMap.get(null));
     }
+
+    @Test
+    public void testEntrySetReturnsEmptySetForEmptySetMap()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testEntrySetReturnsEntrySetForNonEmptySetMap()
+    {
+        assertEquals(0, 1);
+    }
 }
