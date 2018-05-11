@@ -3,7 +3,9 @@ import org.junit.Test;
 
 import larp.util.SetMap;
 
+import java.util.AbstractMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class SetMapTest
 {
@@ -92,12 +94,22 @@ public class SetMapTest
     @Test
     public void testEntrySetReturnsEmptySetForEmptySetMap()
     {
-        assertEquals(0, 1);
+        SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+
+        HashSet<Map.Entry<String, Integer>> expectedSet = new HashSet<Map.Entry<String, Integer>>();
+        assertEquals(expectedSet, setMap.entrySet());
     }
 
     @Test
     public void testEntrySetReturnsEntrySetForNonEmptySetMap()
     {
-        assertEquals(0, 1);
+        SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+        setMap.put("key1", 1);
+        setMap.put("key2", 2);
+
+        HashSet<Map.Entry<String, Integer>> expectedSet = new HashSet<Map.Entry<String, Integer>>();
+        expectedSet.add(new AbstractMap.SimpleEntry<String, Integer>("key1", 1));
+        expectedSet.add(new AbstractMap.SimpleEntry<String, Integer>("key2", 2));
+        assertEquals(expectedSet, setMap.entrySet());
     }
 }

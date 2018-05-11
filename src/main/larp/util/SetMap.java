@@ -2,6 +2,8 @@ package larp.util;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class SetMap<K, V>
 {
@@ -31,5 +33,10 @@ public class SetMap<K, V>
         }
         existingSet.add(value);
         this.map.put(key, existingSet);
+    }
+
+    public Set<Map.Entry<K, HashSet<V>>> entrySet()
+    {
+        return this.map.entrySet();
     }
 }
