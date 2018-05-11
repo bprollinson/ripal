@@ -104,12 +104,20 @@ public class SetMapTest
     public void testEntrySetReturnsEntrySetForNonEmptySetMap()
     {
         SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+        setMap.put(null, 0);
         setMap.put("key1", 1);
         setMap.put("key2", 2);
 
-        HashSet<Map.Entry<String, Integer>> expectedSet = new HashSet<Map.Entry<String, Integer>>();
-        expectedSet.add(new AbstractMap.SimpleEntry<String, Integer>("key1", 1));
-        expectedSet.add(new AbstractMap.SimpleEntry<String, Integer>("key2", 2));
+        HashSet<Map.Entry<String, HashSet<Integer>>> expectedSet = new HashSet<Map.Entry<String, HashSet<Integer>>>();
+        HashSet<Integer> set0 = new HashSet<Integer>();
+        set0.add(0);
+        expectedSet.add(new AbstractMap.SimpleEntry<String, HashSet<Integer>>(null, set0));
+        HashSet<Integer> set1 = new HashSet<Integer>();
+        set1.add(1);
+        expectedSet.add(new AbstractMap.SimpleEntry<String, HashSet<Integer>>("key1", set1));
+        HashSet<Integer> set2 = new HashSet<Integer>();
+        set2.add(2);
+        expectedSet.add(new AbstractMap.SimpleEntry<String, HashSet<Integer>>("key2", set2));
         assertEquals(expectedSet, setMap.entrySet());
     }
 }
