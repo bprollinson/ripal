@@ -6,6 +6,7 @@ import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.DotNode;
+import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.util.SetMap;
 
@@ -36,15 +37,15 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         ContextFreeGrammarSyntaxNode firstProductionWithDot = this.addDotToProductionRightHandSide(augmentedCfg.getProduction(0));
         productionSet.add(firstProductionWithDot);
 
-        LR0ProductionSetDFAState startState = this.compileState(cfg, productionSet);
+        LR0ProductionSetDFAState startState = this.compileState(cfg, productionSet, false);
 
         return new LR0ProductionSetDFA(startState);
     }
 
-    private LR0ProductionSetDFAState compileState(ContextFreeGrammar cfg, Set<ContextFreeGrammarSyntaxNode> productionSet)
+    private LR0ProductionSetDFAState compileState(ContextFreeGrammar cfg, Set<ContextFreeGrammarSyntaxNode> productionSet, boolean accepting)
     {
         productionSet = this.closureCalculator.calculate(cfg, productionSet);
-        LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", false, productionSet);
+        LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", accepting, productionSet);
 
         LR0ProductionSetDFAState cachedStartState = this.productionSetToStateMap.get(productionSet);
         if (cachedStartState != null)
@@ -95,7 +96,8 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
             ContextFreeGrammarSyntaxNode input = mapEntry.getKey();
             HashSet<ContextFreeGrammarSyntaxNode> nextStateProductionSet = mapEntry.getValue();
 
-            LR0ProductionSetDFAState nextState = this.compileState(cfg, nextStateProductionSet);
+            boolean nextStateAccepting = input instanceof EndOfStringNode;
+            LR0ProductionSetDFAState nextState = this.compileState(cfg, nextStateProductionSet, nextStateAccepting);
         }
     }
 
