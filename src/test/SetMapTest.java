@@ -107,6 +107,7 @@ public class SetMapTest
         setMap.put(null, 0);
         setMap.put("key1", 1);
         setMap.put("key2", 2);
+        setMap.put("key2", 3);
 
         HashSet<Map.Entry<String, HashSet<Integer>>> expectedSet = new HashSet<Map.Entry<String, HashSet<Integer>>>();
         HashSet<Integer> set0 = new HashSet<Integer>();
@@ -117,6 +118,7 @@ public class SetMapTest
         expectedSet.add(new AbstractMap.SimpleEntry<String, HashSet<Integer>>("key1", set1));
         HashSet<Integer> set2 = new HashSet<Integer>();
         set2.add(2);
+        set2.add(3);
         expectedSet.add(new AbstractMap.SimpleEntry<String, HashSet<Integer>>("key2", set2));
         assertEquals(expectedSet, setMap.entrySet());
     }
