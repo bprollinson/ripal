@@ -76,6 +76,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
                 symbolToNextClosureMap.put(nextSymbol, productionWithDotShifted);
             }
         }
+
+        for (Map.Entry<ContextFreeGrammarSyntaxNode, HashSet<ContextFreeGrammarSyntaxNode>> mapEntry: symbolToNextClosureMap.entrySet())
+        {
+        }
     }
 
     private ContextFreeGrammarSyntaxNode findProductionSymbolAfterDot(ContextFreeGrammarSyntaxNode productionNode)
