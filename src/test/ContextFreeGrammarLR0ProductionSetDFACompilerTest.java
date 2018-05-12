@@ -87,7 +87,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     }
 
     @Test
-    public void testCompileCreateDFAForTerminalAndNonTerminalRuleFromStartState()
+    public void testCompileCreatesDFAForTerminalAndNonTerminalRuleFromStartState()
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
@@ -127,7 +127,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     }
 
     @Test
-    public void testCompileCreateDFAForTerminalRuleFromSubsequentState()
+    public void testCompileCreatesDFAForTerminalRuleFromSubsequentState()
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
@@ -165,7 +165,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     }
 
     @Test
-    public void testCompileCreateDFAForNonTerminalRuleFromSubsequentState()
+    public void testCompileCreatesDFAForNonTerminalRuleFromSubsequentState()
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
@@ -203,7 +203,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     }
 
     @Test
-    public void testCompileCreateDFAForTerminalAndNonTerminalRuleFromSubsequentState()
+    public void testCompileCreatesDFAForTerminalAndNonTerminalRuleFromSubsequentState()
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
