@@ -35,14 +35,21 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         ContextFreeGrammarSyntaxNode firstProductionWithDot = this.addDotToProductionRightHandSide(augmentedCfg.getProduction(0));
         productionSet.add(firstProductionWithDot);
+
+        LR0ProductionSetDFAState startState = this.compileState(cfg, productionSet);
+
+        return new LR0ProductionSetDFA(startState);
+    }
+
+    private LR0ProductionSetDFAState compileState(ContextFreeGrammar cfg, Set<ContextFreeGrammarSyntaxNode> productionSet)
+    {
         productionSet = this.closureCalculator.calculate(cfg, productionSet);
         LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", false, productionSet);
 
         this.productionSetToStateMap.put(productionSet, startState);
-
         this.compileAndAttachAdjacentStates(startState);
 
-        return new LR0ProductionSetDFA(startState);
+        return startState;
     }
 
     private ContextFreeGrammarSyntaxNode addDotToProductionRightHandSide(ContextFreeGrammarSyntaxNode productionNode)
