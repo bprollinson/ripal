@@ -46,8 +46,14 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         productionSet = this.closureCalculator.calculate(cfg, productionSet);
         LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", false, productionSet);
 
+        LR0ProductionSetDFAState cachedStartState = this.productionSetToStateMap.get(productionSet);
+        if (cachedStartState != null)
+        {
+            return cachedStartState;
+        }
+
         this.productionSetToStateMap.put(productionSet, startState);
-        this.compileAndAttachAdjacentStates(startState);
+        this.compileAndAttachAdjacentStates(cfg, startState);
 
         return startState;
     }
@@ -69,7 +75,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         return newProductionNode;
     }
 
-    private void compileAndAttachAdjacentStates(LR0ProductionSetDFAState state)
+    private void compileAndAttachAdjacentStates(ContextFreeGrammar cfg, LR0ProductionSetDFAState state)
     {
         SetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode> symbolToNextClosureMap = new SetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode>();
 
@@ -86,6 +92,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
 
         for (Map.Entry<ContextFreeGrammarSyntaxNode, HashSet<ContextFreeGrammarSyntaxNode>> mapEntry: symbolToNextClosureMap.entrySet())
         {
+            ContextFreeGrammarSyntaxNode input = mapEntry.getKey();
+            HashSet<ContextFreeGrammarSyntaxNode> nextStateProductionSet = mapEntry.getValue();
+
+            LR0ProductionSetDFAState nextState = this.compileState(cfg, nextStateProductionSet);
         }
     }
 
