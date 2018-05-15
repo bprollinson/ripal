@@ -42,7 +42,7 @@ public class FollowSetCalculator
 
     private void addFollowNodes()
     {
-        HashSet<NonTerminalNode> nullableNonTerminals = new HashSet<NonTerminalNode>();
+        Set<NonTerminalNode> nullableNonTerminals = new HashSet<NonTerminalNode>();
         List<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
         for (int i = 0; i < productions.size(); i++)
         {
