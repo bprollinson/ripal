@@ -369,16 +369,22 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         productionSet0.add(this.buildProduction(new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         productionSet0.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new NonTerminalNode("S")));
         productionSet0.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
+        productionSet0.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new TerminalNode("b")));
         LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<ContextFreeGrammarSyntaxNode> productionSet1 = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet1.add(this.buildProduction(new NonTerminalNode("A"), new TerminalNode("a"), new DotNode()));
         LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
+        Set<ContextFreeGrammarSyntaxNode> productionSet99 = new HashSet<ContextFreeGrammarSyntaxNode>();
+        productionSet99.add(this.buildProduction(new NonTerminalNode("S"), new TerminalNode("b"), new DotNode()));
+        LR0ProductionSetDFAState s99 = new LR0ProductionSetDFAState("", false, productionSet99);
+
         Set<ContextFreeGrammarSyntaxNode> productionSet2 = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet2.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("S")));
         productionSet2.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new NonTerminalNode("S")));
         productionSet2.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
+        productionSet2.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new TerminalNode("b")));
         LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<ContextFreeGrammarSyntaxNode> productionSet3 = new HashSet<ContextFreeGrammarSyntaxNode>();
@@ -394,9 +400,11 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", true, productionSet5);
 
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
+        s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("b"), s99));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("A"), s2));
         s2.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("A"), s2));
         s2.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
+        s2.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("b"), s99));
         s2.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s3));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s4));
         s4.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s5));
@@ -405,6 +413,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("S"));
         cfg.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(cfg)));
     }
