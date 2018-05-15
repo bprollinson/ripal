@@ -31,14 +31,14 @@ public class FirstSetCalculator
 
     public Set<ContextFreeGrammarSyntaxNode> getFirst(int ruleIndex)
     {
-        HashSet<Integer> rulesUsed = new HashSet<Integer>();
+        Set<Integer> rulesUsed = new HashSet<Integer>();
 
         return this.getFirstRecursive(ruleIndex, rulesUsed);
     }
 
     public Set<ContextFreeGrammarSyntaxNode> getFirst(NonTerminalNode node)
     {
-        HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
         Set<Integer> existingSet = this.nonTerminalRules.get(node);
         if (existingSet != null)
         {
@@ -51,7 +51,7 @@ public class FirstSetCalculator
         return results;
     }
 
-    private HashSet<ContextFreeGrammarSyntaxNode> getFirstRecursive(int ruleIndex, HashSet<Integer> rulesUsed)
+    private Set<ContextFreeGrammarSyntaxNode> getFirstRecursive(int ruleIndex, Set<Integer> rulesUsed)
     {
         rulesUsed.add(ruleIndex);
 
@@ -72,18 +72,18 @@ public class FirstSetCalculator
         return null;
     }
 
-    private HashSet<ContextFreeGrammarSyntaxNode> getFirstFromTerminalNode(ContextFreeGrammarSyntaxNode terminalNode)
+    private Set<ContextFreeGrammarSyntaxNode> getFirstFromTerminalNode(ContextFreeGrammarSyntaxNode terminalNode)
     {
-        HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
         String value = ((TerminalNode)terminalNode).getValue();
         results.add(new TerminalNode(value.substring(0, 1)));
 
         return results;
     }
 
-    private HashSet<ContextFreeGrammarSyntaxNode> getFirstFromNonterminalNode(ContextFreeGrammarSyntaxNode concatenationNode, HashSet<Integer> rulesUsed)
+    private Set<ContextFreeGrammarSyntaxNode> getFirstFromNonterminalNode(ContextFreeGrammarSyntaxNode concatenationNode, Set<Integer> rulesUsed)
     {
-        HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
 
         int index = 0;
         boolean epsilonFound = true;
@@ -104,7 +104,7 @@ public class FirstSetCalculator
                 {
                     if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))
                     {
-                        HashSet<ContextFreeGrammarSyntaxNode> childSet = this.getFirstRecursive(childRuleIndex, rulesUsed);
+                        Set<ContextFreeGrammarSyntaxNode> childSet = this.getFirstRecursive(childRuleIndex, rulesUsed);
                         epsilonFound = childSet.contains(new EpsilonNode());
                         childSet.remove(new EpsilonNode());
                         results.addAll(childSet);
@@ -125,9 +125,9 @@ public class FirstSetCalculator
         return results;
     }
 
-    private HashSet<ContextFreeGrammarSyntaxNode> getFirstFromEpsilon()
+    private Set<ContextFreeGrammarSyntaxNode> getFirstFromEpsilon()
     {
-        HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
         results.add(new EpsilonNode());
 
         return results;
