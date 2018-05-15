@@ -14,7 +14,7 @@ public class SetMap<K, V>
         this.map = new HashMap<K, HashSet<V>>();
     }
 
-    public HashSet<V> get(K key)
+    public Set<V> get(K key)
     {
         if (!this.map.containsKey(key))
         {

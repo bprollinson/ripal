@@ -9,6 +9,7 @@ import larp.util.SetMap;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FirstSetCalculator
 {
@@ -38,7 +39,7 @@ public class FirstSetCalculator
     public HashSet<ContextFreeGrammarSyntaxNode> getFirst(NonTerminalNode node)
     {
         HashSet<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
-        HashSet<Integer> existingSet = this.nonTerminalRules.get(node);
+        Set<Integer> existingSet = this.nonTerminalRules.get(node);
         if (existingSet != null)
         {
             for (int index: existingSet)
@@ -96,7 +97,7 @@ public class FirstSetCalculator
                 break;
             }
 
-            HashSet<Integer> childRuleIndices = this.nonTerminalRules.get(concatenationNode.getChildNodes().get(index));
+            Set<Integer> childRuleIndices = this.nonTerminalRules.get(concatenationNode.getChildNodes().get(index));
             if (childRuleIndices != null)
             {
                 for (Integer childRuleIndex: childRuleIndices)

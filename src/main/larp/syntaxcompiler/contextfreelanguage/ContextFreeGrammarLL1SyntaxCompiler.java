@@ -9,6 +9,7 @@ import larp.parsetree.contextfreelanguage.NonTerminalNode;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContextFreeGrammarLL1SyntaxCompiler
 {
@@ -29,7 +30,7 @@ public class ContextFreeGrammarLL1SyntaxCompiler
             {
                 if (first instanceof EpsilonNode)
                 {
-                    HashSet<ContextFreeGrammarSyntaxNode> follows = followSetCalculator.getFollow(nonTerminalNode);
+                    Set<ContextFreeGrammarSyntaxNode> follows = followSetCalculator.getFollow(nonTerminalNode);
                     for (ContextFreeGrammarSyntaxNode follow: follows)
                     {
                         parseTable.addCell(nonTerminalNode, follow, firstRuleIndex);

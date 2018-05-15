@@ -11,6 +11,7 @@ import larp.util.SetMap;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FollowSetCalculator
 {
@@ -29,7 +30,7 @@ public class FollowSetCalculator
         this.propagateFollowNodes();
     }
 
-    public HashSet<ContextFreeGrammarSyntaxNode> getFollow(NonTerminalNode nonTerminal)
+    public Set<ContextFreeGrammarSyntaxNode> getFollow(NonTerminalNode nonTerminal)
     {
         return this.follows.get(nonTerminal);
     }
@@ -126,7 +127,7 @@ public class FollowSetCalculator
         boolean done = true;
 
         NonTerminalNode leftHandSide = (NonTerminalNode)production.getChildNodes().get(0);
-        HashSet<ContextFreeGrammarSyntaxNode> leftHandFollow = this.follows.get(leftHandSide);
+        Set<ContextFreeGrammarSyntaxNode> leftHandFollow = this.follows.get(leftHandSide);
 
         if (leftHandFollow != null)
         {
@@ -156,7 +157,7 @@ public class FollowSetCalculator
         return done;
     }
 
-    private boolean propagateAllParentFollows(ContextFreeGrammarSyntaxNode lastNode, HashSet<ContextFreeGrammarSyntaxNode> leftHandFollow)
+    private boolean propagateAllParentFollows(ContextFreeGrammarSyntaxNode lastNode, Set<ContextFreeGrammarSyntaxNode> leftHandFollow)
     {
         boolean followAdded = false;
 
@@ -171,7 +172,7 @@ public class FollowSetCalculator
     private boolean addParentFollow(ContextFreeGrammarSyntaxNode lastNode, ContextFreeGrammarSyntaxNode parentFollow)
     {
         int sizeBefore = 0;
-        HashSet<ContextFreeGrammarSyntaxNode> currentFollows = this.follows.get(lastNode);
+        Set<ContextFreeGrammarSyntaxNode> currentFollows = this.follows.get(lastNode);
         if (currentFollows != null)
         {
              sizeBefore = currentFollows.size();
