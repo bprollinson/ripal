@@ -7,7 +7,6 @@ import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +22,7 @@ public class ContextFreeGrammarLL1SyntaxCompiler
 
         for (int firstRuleIndex = 0; firstRuleIndex < productions.size(); firstRuleIndex++)
         {
-            HashSet<ContextFreeGrammarSyntaxNode> firsts = firstCalculator.getFirst(firstRuleIndex);
+            Set<ContextFreeGrammarSyntaxNode> firsts = firstCalculator.getFirst(firstRuleIndex);
             NonTerminalNode nonTerminalNode = (NonTerminalNode)productions.get(firstRuleIndex).getChildNodes().get(0);
 
             for (ContextFreeGrammarSyntaxNode first: firsts)

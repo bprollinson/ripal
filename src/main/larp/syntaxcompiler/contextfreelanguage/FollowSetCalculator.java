@@ -90,7 +90,7 @@ public class FollowSetCalculator
         }
         if (previousNode instanceof NonTerminalNode && node instanceof NonTerminalNode)
         {
-            HashSet<ContextFreeGrammarSyntaxNode> firstNodes = this.firstSetCalculator.getFirst((NonTerminalNode)node);
+            Set<ContextFreeGrammarSyntaxNode> firstNodes = this.firstSetCalculator.getFirst((NonTerminalNode)node);
             if (firstNodes.contains(new EpsilonNode()))
             {
                 done = false;
@@ -146,7 +146,7 @@ public class FollowSetCalculator
                     boolean followAdded = this.propagateAllParentFollows(lastNode, leftHandFollow);
                     done = done && !followAdded;
 
-                    HashSet<ContextFreeGrammarSyntaxNode> firsts = this.firstSetCalculator.getFirst((NonTerminalNode)lastNode);
+                    Set<ContextFreeGrammarSyntaxNode> firsts = this.firstSetCalculator.getFirst((NonTerminalNode)lastNode);
                     innerDone = innerDone && !firsts.contains(new EpsilonNode());
                 }
 
