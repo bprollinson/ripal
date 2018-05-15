@@ -4,17 +4,18 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class NFAToDFAConverter
 {
     public DFA convert(NFA nfa)
     {
-        HashSet<NFAState> stateSet = new HashSet<NFAState>();
+        Set<NFAState> stateSet = new HashSet<NFAState>();
         stateSet.add(nfa.getStartState());
-        return new DFA(this.convertNode(stateSet, new HashMap<HashSet<NFAState>, DFAState>()));
+        return new DFA(this.convertNode(stateSet, new HashMap<Set<NFAState>, DFAState>()));
     }
 
-    private DFAState convertNode(HashSet<NFAState> stateSet, HashMap<HashSet<NFAState>, DFAState> coveredStateSetsToStates)
+    private DFAState convertNode(Set<NFAState> stateSet, HashMap<Set<NFAState>, DFAState> coveredStateSetsToStates)
     {
         if (coveredStateSetsToStates.keySet().contains(stateSet))
         {
@@ -24,7 +25,7 @@ public class NFAToDFAConverter
         DFAState startState = new DFAState("", false);
         coveredStateSetsToStates.put(stateSet, startState);
 
-        HashMap<Character, HashSet<NFAState>> characterToStateSet = new HashMap<Character, HashSet<NFAState>>();
+        HashMap<Character, Set<NFAState>> characterToStateSet = new HashMap<Character, Set<NFAState>>();
 
         for (NFAState NFAState: stateSet)
         {
@@ -32,7 +33,7 @@ public class NFAToDFAConverter
             for (int j = 0; j < transitions.size(); j++)
             {
                 StateTransition<Character, NFAState> transition = transitions.get(j);
-                HashSet<NFAState> characterStateSet = characterToStateSet.get(transition.getInput());
+                Set<NFAState> characterStateSet = characterToStateSet.get(transition.getInput());
                 if (characterStateSet == null)
                 {
                      characterStateSet = new HashSet<NFAState>();
@@ -47,7 +48,7 @@ public class NFAToDFAConverter
             }
         }
 
-        for (Map.Entry<Character, HashSet<NFAState>> entry: characterToStateSet.entrySet())
+        for (Map.Entry<Character, Set<NFAState>> entry: characterToStateSet.entrySet())
         {
             startState.addTransition(new StateTransition<Character, DFAState>(entry.getKey(), this.convertNode(entry.getValue(), coveredStateSetsToStates)));
         }
