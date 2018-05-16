@@ -92,10 +92,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
             }
         }
 
-        for (Map.Entry<ContextFreeGrammarSyntaxNode, HashSet<ContextFreeGrammarSyntaxNode>> mapEntry: symbolToNextClosureMap.entrySet())
+        for (Map.Entry<ContextFreeGrammarSyntaxNode, Set<ContextFreeGrammarSyntaxNode>> mapEntry: symbolToNextClosureMap.entrySet())
         {
             ContextFreeGrammarSyntaxNode input = mapEntry.getKey();
-            HashSet<ContextFreeGrammarSyntaxNode> nextStateProductionSet = mapEntry.getValue();
+            Set<ContextFreeGrammarSyntaxNode> nextStateProductionSet = mapEntry.getValue();
 
             boolean nextStateAccepting = input instanceof EndOfStringNode;
             LR0ProductionSetDFAState nextState = this.compileState(cfg, nextStateProductionSet, nextStateAccepting);

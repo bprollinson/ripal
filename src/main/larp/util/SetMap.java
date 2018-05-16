@@ -7,11 +7,11 @@ import java.util.Set;
 
 public class SetMap<K, V>
 {
-    private HashMap<K, HashSet<V>> map;
+    private Map<K, Set<V>> map;
 
     public SetMap()
     {
-        this.map = new HashMap<K, HashSet<V>>();
+        this.map = new HashMap<K, Set<V>>();
     }
 
     public Set<V> get(K key)
@@ -26,7 +26,7 @@ public class SetMap<K, V>
 
     public void put(K key, V value)
     {
-        HashSet<V> existingSet = this.map.get(key);
+        Set<V> existingSet = this.map.get(key);
         if (existingSet == null)
         {
             existingSet = new HashSet<V>();
@@ -35,7 +35,7 @@ public class SetMap<K, V>
         this.map.put(key, existingSet);
     }
 
-    public Set<Map.Entry<K, HashSet<V>>> entrySet()
+    public Set<Map.Entry<K, Set<V>>> entrySet()
     {
         return this.map.entrySet();
     }
