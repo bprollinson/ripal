@@ -9,6 +9,7 @@ import larp.parsetree.contextfreelanguage.TerminalNode;
 import larp.syntaxcompiler.contextfreelanguage.FirstSetCalculator;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class FirstSetCalculatorTest
 {
@@ -19,7 +20,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("a"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -31,7 +32,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("a"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -43,7 +44,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("a"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -56,7 +57,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("a"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -70,7 +71,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("b"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("a"));
         expectedFirsts.add(new TerminalNode("b"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
@@ -83,7 +84,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
 
@@ -95,7 +96,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("a"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -107,7 +108,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
 
@@ -118,7 +119,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<ContextFreeGrammarSyntaxNode> expectedFirsts = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarSyntaxNode> expectedFirsts = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedFirsts.add(new EpsilonNode());
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -131,7 +132,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("b"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -145,7 +146,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("a"));
         expectedFirsts.add(new TerminalNode("b"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
@@ -160,7 +161,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<ContextFreeGrammarSyntaxNode> expectedFirsts = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarSyntaxNode> expectedFirsts = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedFirsts.add(new EpsilonNode());
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -174,7 +175,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<ContextFreeGrammarSyntaxNode> expectedFirsts = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarSyntaxNode> expectedFirsts = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedFirsts.add(new TerminalNode("c"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -189,7 +190,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<ContextFreeGrammarSyntaxNode> expectedFirsts = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarSyntaxNode> expectedFirsts = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedFirsts.add(new TerminalNode("c"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -202,7 +203,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("b"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -217,7 +218,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("b"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -230,7 +231,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        HashSet<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("a"));
         expectedFirsts.add(new TerminalNode("b"));
         assertEquals(expectedFirsts, calculator.getFirst(new NonTerminalNode("S")));
