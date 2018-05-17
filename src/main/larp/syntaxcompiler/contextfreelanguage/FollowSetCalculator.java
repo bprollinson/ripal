@@ -15,24 +15,38 @@ import java.util.Set;
 
 public class FollowSetCalculator
 {
+    private boolean initialized;
     private ContextFreeGrammar grammar;
     private SetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode> follows;
     private FirstSetCalculator firstSetCalculator;
 
     public FollowSetCalculator(ContextFreeGrammar grammar)
     {
+        this.initialized = false;
         this.grammar = grammar;
         this.follows = new SetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode>();
         this.firstSetCalculator = new FirstSetCalculator(this.grammar);
-
-        this.addStartSymbolDefaultNode();
-        this.addFollowNodes();
-        this.propagateFollowNodes();
     }
 
     public Set<ContextFreeGrammarSyntaxNode> getFollow(NonTerminalNode nonTerminal)
     {
+        this.initialize();
+
         return this.follows.get(nonTerminal);
+    }
+
+    private void initialize()
+    {
+        if (this.initialized)
+        {
+            return;
+        }
+
+        this.addStartSymbolDefaultNode();
+        this.addFollowNodes();
+        this.propagateFollowNodes();
+
+        this.initialized = true;
     }
 
     private void addStartSymbolDefaultNode()
