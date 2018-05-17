@@ -10,19 +10,19 @@ import java.util.Map;
 public class LL1ParseTable
 {
     private ContextFreeGrammar contextFreeGrammar;
-    private Map<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>> table;
+    private Map<NonTerminalNode, Map<ContextFreeGrammarSyntaxNode, Integer>> table;
 
     public LL1ParseTable(ContextFreeGrammar contextFreeGrammar)
     {
         this.contextFreeGrammar = contextFreeGrammar;
-        this.table = new HashMap<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>>();
+        this.table = new HashMap<NonTerminalNode, Map<ContextFreeGrammarSyntaxNode, Integer>>();
     }
 
     public void addCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode, int contextFreeGrammarRuleIndex) throws AmbiguousLL1ParseTableException
     {
         new LL1ParseTableCellAvailableAssertion(this, nonTerminalNode, terminalNode).validate();
 
-        HashMap<ContextFreeGrammarSyntaxNode, Integer> entry = this.table.get(nonTerminalNode);
+        Map<ContextFreeGrammarSyntaxNode, Integer> entry = this.table.get(nonTerminalNode);
         if (entry == null)
         {
             entry = new HashMap<ContextFreeGrammarSyntaxNode, Integer>();
@@ -35,7 +35,7 @@ public class LL1ParseTable
     public Integer getCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode)
     {
         Integer position = null;
-        HashMap<ContextFreeGrammarSyntaxNode, Integer> entry = this.table.get(nonTerminalNode);
+        Map<ContextFreeGrammarSyntaxNode, Integer> entry = this.table.get(nonTerminalNode);
         if (entry != null)
         {
             position = entry.get(terminalNode);
@@ -49,7 +49,7 @@ public class LL1ParseTable
         return this.contextFreeGrammar;
     }
 
-    public Map<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>> getTable()
+    public Map<NonTerminalNode, Map<ContextFreeGrammarSyntaxNode, Integer>> getTable()
     {
         return this.table;
     }
