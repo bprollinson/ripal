@@ -25,7 +25,7 @@ public class NFAToDFAConverter
         DFAState startState = new DFAState("", false);
         coveredStateSetsToStates.put(stateSet, startState);
 
-        HashMap<Character, Set<NFAState>> characterToStateSet = new HashMap<Character, Set<NFAState>>();
+        Map<Character, Set<NFAState>> characterToStateSet = new HashMap<Character, Set<NFAState>>();
 
         for (NFAState NFAState: stateSet)
         {
