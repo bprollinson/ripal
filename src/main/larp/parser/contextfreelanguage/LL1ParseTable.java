@@ -10,7 +10,7 @@ import java.util.Map;
 public class LL1ParseTable
 {
     private ContextFreeGrammar contextFreeGrammar;
-    private HashMap<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>> table;
+    private Map<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>> table;
 
     public LL1ParseTable(ContextFreeGrammar contextFreeGrammar)
     {
