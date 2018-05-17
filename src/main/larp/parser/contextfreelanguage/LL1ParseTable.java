@@ -5,6 +5,7 @@ import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class LL1ParseTable
 {
@@ -48,7 +49,7 @@ public class LL1ParseTable
         return this.contextFreeGrammar;
     }
 
-    public HashMap<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>> getTable()
+    public Map<NonTerminalNode, HashMap<ContextFreeGrammarSyntaxNode, Integer>> getTable()
     {
         return this.table;
     }
