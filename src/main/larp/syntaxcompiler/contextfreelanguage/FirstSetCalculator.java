@@ -13,24 +13,21 @@ import java.util.Set;
 
 public class FirstSetCalculator
 {
+    private boolean initialized;
     private ContextFreeGrammar grammar;
     private SetMap<ContextFreeGrammarSyntaxNode, Integer> nonTerminalRules;
 
     public FirstSetCalculator(ContextFreeGrammar grammar)
     {
+        this.initialized = false;
         this.grammar = grammar;
         this.nonTerminalRules = new SetMap<ContextFreeGrammarSyntaxNode, Integer>();
-
-        List<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
-        for (int i = 0; i < productions.size(); i++)
-        {
-            ContextFreeGrammarSyntaxNode productionNode = productions.get(i);
-            this.nonTerminalRules.put(productionNode.getChildNodes().get(0), i);
-        }
     }
 
     public Set<ContextFreeGrammarSyntaxNode> getFirst(int ruleIndex)
     {
+        this.initialize();
+
         Set<Integer> rulesUsed = new HashSet<Integer>();
 
         return this.getFirstRecursive(ruleIndex, rulesUsed);
@@ -38,6 +35,8 @@ public class FirstSetCalculator
 
     public Set<ContextFreeGrammarSyntaxNode> getFirst(NonTerminalNode node)
     {
+        this.initialize();
+
         Set<ContextFreeGrammarSyntaxNode> results = new HashSet<ContextFreeGrammarSyntaxNode>();
         Set<Integer> existingSet = this.nonTerminalRules.get(node);
         if (existingSet != null)
@@ -49,6 +48,23 @@ public class FirstSetCalculator
         }
 
         return results;
+    }
+
+    private void initialize()
+    {
+        if (this.initialized)
+        {
+            return;
+        }
+
+        List<ContextFreeGrammarSyntaxNode> productions = this.grammar.getProductions();
+        for (int i = 0; i < productions.size(); i++)
+        {
+            ContextFreeGrammarSyntaxNode productionNode = productions.get(i);
+            this.nonTerminalRules.put(productionNode.getChildNodes().get(0), i);
+        }
+
+        this.initialized = true;
     }
 
     private Set<ContextFreeGrammarSyntaxNode> getFirstRecursive(int ruleIndex, Set<Integer> rulesUsed)
