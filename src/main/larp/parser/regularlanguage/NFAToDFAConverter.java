@@ -15,7 +15,7 @@ public class NFAToDFAConverter
         return new DFA(this.convertNode(stateSet, new HashMap<Set<NFAState>, DFAState>()));
     }
 
-    private DFAState convertNode(Set<NFAState> stateSet, HashMap<Set<NFAState>, DFAState> coveredStateSetsToStates)
+    private DFAState convertNode(Set<NFAState> stateSet, Map<Set<NFAState>, DFAState> coveredStateSetsToStates)
     {
         if (coveredStateSetsToStates.keySet().contains(stateSet))
         {
