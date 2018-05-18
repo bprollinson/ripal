@@ -4,16 +4,21 @@ import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.DotNode;
-import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.util.SetMap;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class ContextFreeGrammarClosureCalculator
 {
+    private ProductionNodeDotRepository productionNodeDotRepository;
+
+    public ContextFreeGrammarClosureCalculator()
+    {
+        this.productionNodeDotRepository = new ProductionNodeDotRepository();
+    }
+
     public Set<ContextFreeGrammarSyntaxNode> calculate(ContextFreeGrammar cfg, Set<ContextFreeGrammarSyntaxNode> productionSet)
     {
         Set<ContextFreeGrammarSyntaxNode> productionsClosure = new HashSet<ContextFreeGrammarSyntaxNode>();
@@ -31,40 +36,25 @@ public class ContextFreeGrammarClosureCalculator
 
     private SetMap<ContextFreeGrammarSyntaxNode, Integer> calculateStartingNonTerminalProductionsMap(ContextFreeGrammar cfg)
     {
-        SetMap<ContextFreeGrammarSyntaxNode, Integer> startingTerminalProductions = new SetMap<ContextFreeGrammarSyntaxNode, Integer>();
+        SetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductions = new SetMap<ContextFreeGrammarSyntaxNode, Integer>();
         for (int i = 0; i < cfg.getProductions().size(); i++)
         {
-            startingTerminalProductions.put(cfg.getProduction(i).getChildNodes().get(0), i);
+            startingNonTerminalProductions.put(cfg.getProduction(i).getChildNodes().get(0), i);
         }
 
-        return startingTerminalProductions;
+        return startingNonTerminalProductions;
     }
 
     private boolean expandClosure(ContextFreeGrammar cfg, SetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
     {
         Set<ContextFreeGrammarSyntaxNode> productionsToAdd = new HashSet<ContextFreeGrammarSyntaxNode>();
 
-        for (ContextFreeGrammarSyntaxNode production: productionsClosure)
+        for (ContextFreeGrammarSyntaxNode productionNode: productionsClosure)
         {
-            List<ContextFreeGrammarSyntaxNode> childNodes = production.getChildNodes();
-            boolean lastNodeWasDot = false;
-            ContextFreeGrammarSyntaxNode rightSide = childNodes.get(1);
-
-            for (int i = 0; i < childNodes.get(1).getChildNodes().size(); i++)
+            ContextFreeGrammarSyntaxNode nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode);
+            if (nextSymbol != null)
             {
-                ContextFreeGrammarSyntaxNode childNode = rightSide.getChildNodes().get(i);
-                if (childNode instanceof DotNode)
-                {
-                    lastNodeWasDot = true;
-                    continue;
-                }
-
-                if (childNode instanceof NonTerminalNode && lastNodeWasDot)
-                {
-                    this.addProductionsForNonTerminal(cfg, startingNonTerminalProductionsMap.get(childNode), productionsToAdd);
-                }
-
-                lastNodeWasDot = false;
+                this.addProductionsForNonTerminal(cfg, startingNonTerminalProductionsMap.get(nextSymbol), productionsToAdd);
             }
         }
 
