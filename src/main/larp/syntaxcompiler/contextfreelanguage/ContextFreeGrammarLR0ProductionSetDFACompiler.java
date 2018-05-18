@@ -5,15 +5,11 @@ import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.regularlanguage.StateTransition;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
-import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
-import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.util.SetMap;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -72,7 +68,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
             ContextFreeGrammarSyntaxNode nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode);
             if (nextSymbol != null)
             {
-                ContextFreeGrammarSyntaxNode productionWithDotShifted = this.shiftDotInProduction(productionNode);
+                ContextFreeGrammarSyntaxNode productionWithDotShifted = this.productionNodeDotRepository.shiftDotInProduction(productionNode);
                 symbolToNextClosureMap.put(nextSymbol, productionWithDotShifted);
             }
         }
@@ -86,33 +82,5 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
             LR0ProductionSetDFAState nextState = this.compileState(cfg, nextStateProductionSet, nextStateAccepting);
             state.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(input, nextState));
         }
-    }
-
-    private ContextFreeGrammarSyntaxNode shiftDotInProduction(ContextFreeGrammarSyntaxNode productionNode)
-    {
-        ProductionNode newProductionNode = new ProductionNode();
-        newProductionNode.addChild(productionNode.getChildNodes().get(0));
-
-        List<ContextFreeGrammarSyntaxNode> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
-        ConcatenationNode newConcatenationNode = new ConcatenationNode();
-        boolean lastNodeWasDot = false;
-        for (ContextFreeGrammarSyntaxNode childNode: childNodes)
-        {
-            boolean currentNodeIsDot = childNode instanceof DotNode;
-            if (currentNodeIsDot)
-            {
-                lastNodeWasDot = true;
-                continue;
-            }
-            newConcatenationNode.addChild(childNode);
-            if (lastNodeWasDot)
-            {
-                newConcatenationNode.addChild(new DotNode());
-            }
-            lastNodeWasDot = false;
-        }
-        newProductionNode.addChild(newConcatenationNode);
-
-        return newProductionNode;
     }
 }
