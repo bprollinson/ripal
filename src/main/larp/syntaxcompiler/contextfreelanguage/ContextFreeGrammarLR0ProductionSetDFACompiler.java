@@ -37,7 +37,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         ContextFreeGrammar augmentedCfg = this.grammarAugmentor.augment(cfg);
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
-        ContextFreeGrammarSyntaxNode firstProductionWithDot = this.addDotToProductionRightHandSide(augmentedCfg.getProduction(0));
+        ContextFreeGrammarSyntaxNode firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(augmentedCfg.getProduction(0));
         productionSet.add(firstProductionWithDot);
 
         LR0ProductionSetDFAState startState = this.compileState(cfg, productionSet, false);
@@ -60,23 +60,6 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         this.compileAndAttachAdjacentStates(cfg, startState);
 
         return startState;
-    }
-
-    private ContextFreeGrammarSyntaxNode addDotToProductionRightHandSide(ContextFreeGrammarSyntaxNode productionNode)
-    {
-        ProductionNode newProductionNode = new ProductionNode();
-        newProductionNode.addChild(productionNode.getChildNodes().get(0));
-
-        List<ContextFreeGrammarSyntaxNode> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
-        ConcatenationNode newConcatenationNode = new ConcatenationNode();
-        newConcatenationNode.addChild(new DotNode());
-        for (ContextFreeGrammarSyntaxNode childNode: childNodes)
-        {
-            newConcatenationNode.addChild(childNode);
-        }
-        newProductionNode.addChild(newConcatenationNode);
-
-        return newProductionNode;
     }
 
     private void compileAndAttachAdjacentStates(ContextFreeGrammar cfg, LR0ProductionSetDFAState state)
