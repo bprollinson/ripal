@@ -2,9 +2,6 @@ package larp.syntaxcompiler.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
-import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.DotNode;
-import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.util.SetMap;
 
 import java.util.HashSet;
@@ -67,17 +64,7 @@ public class ContextFreeGrammarClosureCalculator
         {
             ContextFreeGrammarSyntaxNode production = cfg.getProductions().get(productionIndex);
 
-            ProductionNode productionNode = new ProductionNode();
-            productionNode.addChild(production.getChildNodes().get(0));
-            ConcatenationNode concatenationNode = new ConcatenationNode();
-            concatenationNode.addChild(new DotNode());
-            ContextFreeGrammarSyntaxNode existingRightSide = production.getChildNodes().get(1);
-            for (ContextFreeGrammarSyntaxNode childNode: existingRightSide.getChildNodes())
-            {
-                concatenationNode.addChild(childNode);
-            }
-            productionNode.addChild(concatenationNode);
-
+            ContextFreeGrammarSyntaxNode productionNode = this.productionNodeDotRepository.addDotToProductionRightHandSide(production);
             productionsToAdd.add(productionNode);
         }
     }

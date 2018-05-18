@@ -27,7 +27,7 @@ public class ProductionNodeDotRepository
         return null;
     }
 
-    public ContextFreeGrammarSyntaxNode addDotToProductionRightHandSide(ContextFreeGrammarSyntaxNode productionNode)
+    public ProductionNode addDotToProductionRightHandSide(ContextFreeGrammarSyntaxNode productionNode)
     {
         ProductionNode newProductionNode = new ProductionNode();
         newProductionNode.addChild(productionNode.getChildNodes().get(0));
