@@ -21,12 +21,14 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
 {
     private ContextFreeGrammarAugmentor grammarAugmentor;
     private ContextFreeGrammarClosureCalculator closureCalculator;
+    private ProductionNodeDotRepository productionNodeDotRepository;
     private Map<Set<ContextFreeGrammarSyntaxNode>, LR0ProductionSetDFAState> productionSetToStateMap;
 
     public ContextFreeGrammarLR0ProductionSetDFACompiler()
     {
         this.grammarAugmentor = new ContextFreeGrammarAugmentor();
         this.closureCalculator = new ContextFreeGrammarClosureCalculator();
+        this.productionNodeDotRepository = new ProductionNodeDotRepository();
     }
 
     public LR0ProductionSetDFA compile(ContextFreeGrammar cfg)
@@ -84,7 +86,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         Set<ContextFreeGrammarSyntaxNode> productionSet = state.getProductionSet();
         for (ContextFreeGrammarSyntaxNode productionNode: productionSet)
         {
-            ContextFreeGrammarSyntaxNode nextSymbol = this.findProductionSymbolAfterDot(productionNode);
+            ContextFreeGrammarSyntaxNode nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode);
             if (nextSymbol != null)
             {
                 ContextFreeGrammarSyntaxNode productionWithDotShifted = this.shiftDotInProduction(productionNode);
@@ -101,24 +103,6 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
             LR0ProductionSetDFAState nextState = this.compileState(cfg, nextStateProductionSet, nextStateAccepting);
             state.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(input, nextState));
         }
-    }
-
-    private ContextFreeGrammarSyntaxNode findProductionSymbolAfterDot(ContextFreeGrammarSyntaxNode productionNode)
-    {
-        List<ContextFreeGrammarSyntaxNode> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
-
-        boolean lastNodeWasDot = false;
-        for (ContextFreeGrammarSyntaxNode childNode: childNodes)
-        {
-            if (lastNodeWasDot)
-            {
-                return childNode;
-            }
-
-            lastNodeWasDot = childNode instanceof DotNode;
-        }
-
-        return null;
     }
 
     private ContextFreeGrammarSyntaxNode shiftDotInProduction(ContextFreeGrammarSyntaxNode productionNode)
