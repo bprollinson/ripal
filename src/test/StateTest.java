@@ -110,7 +110,7 @@ public class StateTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForUnmatchedLoopFoundInParallelRecursion()
+    public void testStructureEqualsReturnsFalseForUnmatchedCycleFoundInParallelRecursion()
     {
         TestState state1 = new TestState("S0", false);
         TestState state2 = new TestState("S1", false);

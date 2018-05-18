@@ -195,7 +195,7 @@ public class LR0ProductionSetDFAStateTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForUnmatchedLoopFoundInParallelRecursion()
+    public void testStructureEqualsReturnsFalseForUnmatchedCycleFoundInParallelRecursion()
     {
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("S0", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("S1", false, new HashSet<ContextFreeGrammarSyntaxNode>());
