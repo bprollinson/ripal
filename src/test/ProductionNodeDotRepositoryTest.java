@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import org.junit.Test;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
@@ -30,7 +31,16 @@ public class ProductionNodeDotRepositoryTest
     @Test
     public void testFindProductionSymbolAfterDotReturnsNullWhenDotNotPresent()
     {
-        assertEquals(0, 1);
+        ProductionNodeDotRepository repository = new ProductionNodeDotRepository();
+
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        concatenationNode.addChild(new TerminalNode("b"));
+        productionNode.addChild(concatenationNode);
+
+        assertNull(repository.findProductionSymbolAfterDot(productionNode));
     }
 
     @Test
