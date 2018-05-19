@@ -1,6 +1,5 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
@@ -64,12 +63,30 @@ public class ProductionNodeDotRepositoryTest
         expectedConcatenationNode.addChild(new TerminalNode("b"));
         expectedProductionNode.addChild(expectedConcatenationNode);
 
-        assertTrue(expectedProductionNode.equals(repository.addDotToProductionRightHandSide(productionNode)));
+        assertEquals(expectedProductionNode, repository.addDotToProductionRightHandSide(productionNode));
     }
 
     @Test
     public void testShiftDotInProductionShiftsDot()
     {
-        assertEquals(0, 1);
+        ProductionNodeDotRepository repository = new ProductionNodeDotRepository();
+
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        concatenationNode.addChild(new DotNode());
+        concatenationNode.addChild(new TerminalNode("b"));
+        productionNode.addChild(concatenationNode);
+
+        ProductionNode expectedProductionNode = new ProductionNode();
+        expectedProductionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode expectedConcatenationNode = new ConcatenationNode();
+        expectedConcatenationNode.addChild(new TerminalNode("a"));
+        expectedConcatenationNode.addChild(new TerminalNode("b"));
+        expectedConcatenationNode.addChild(new DotNode());
+        expectedProductionNode.addChild(expectedConcatenationNode);
+
+        assertEquals(expectedProductionNode, repository.shiftDotInProduction(productionNode));
     }
 }
