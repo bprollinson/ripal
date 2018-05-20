@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
@@ -14,28 +15,24 @@ import java.util.HashSet;
 
 public class LR0ParseTableTest
 {
-    @Test
+    @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testAddCellThrowsExceptionForTwoShiftActionsWithTheSameStateAndSymbol()
     {
-        assertEquals(0, 1);
     }
 
-    @Test
+    @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testAddCellThrowsExceptionForTwoReduceActionsWithTheSameState()
     {
-        assertEquals(0, 1);
     }
 
-    @Test
+    @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testAddCellThrowsExceptionForShiftActionConflictingWithExistingReduceActionWithSameState()
     {
-        assertEquals(0, 1);
     }
 
-    @Test
+    @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testAddCellThrowsExceptionForReduceActionConflictingWithExistingShiftActionWithSameState()
     {
-        assertEquals(0, 1);
     }
 
     @Test
