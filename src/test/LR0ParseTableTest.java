@@ -26,4 +26,40 @@ public class LR0ParseTableTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testEqualsReturnsTrueForNonEmptyCFGAndTableEntries()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testEqualsReturnsFalseForDifferentCFGs()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testEqualsReturnsFalseForDifferentShiftTableEntries()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testEqualsReturnsFalseForDifferentReduceTableEntries()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testEqualsReturnsTrueForSameTableEntriesInDifferentOrder()
+    {
+        assertEquals(0, 1);
+    }
 }
