@@ -1,5 +1,9 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+
+import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.parser.contextfreelanguage.LR0ParseTable;
 
 public class LR0ParseTableTest
 {
@@ -30,7 +34,10 @@ public class LR0ParseTableTest
     @Test
     public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
     {
-        assertEquals(0, 1);
+        LR0ParseTable parseTable = new LR0ParseTable(new ContextFreeGrammar());
+        LR0ParseTable otherParseTable = new LR0ParseTable(new ContextFreeGrammar());
+
+        assertTrue(parseTable.equals(otherParseTable));
     }
 
     @Test
