@@ -8,13 +8,13 @@ import larp.parser.contextfreelanguage.LR0ParseTable;
 public class LR0ParseTableTest
 {
     @Test
-    public void testAddCellThrowsExceptionForTwoCellsWithTheSameStateAndSymbol()
+    public void testAddCellThrowsExceptionForTwoShiftActionsWithTheSameStateAndSymbol()
     {
         assertEquals(0, 1);
     }
 
     @Test
-    public void testAddCellThrowsExceptionForTwoReduceActionsWithSameState()
+    public void testAddCellThrowsExceptionForTwoReduceActionsWithTheSameState()
     {
         assertEquals(0, 1);
     }
