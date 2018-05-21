@@ -33,9 +33,14 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testAddCellDoesNotThrowExceptionForTwoCellsWithDifferentNonTerminalsAndTheSameTerminal()
+    public void testAddCellDoesNotThrowExceptionForTwoCellsWithDifferentNonTerminalsAndTheSameTerminal() throws AmbiguousLL1ParseTableException
     {
-        assertTrue(false);
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LL1ParseTable parseTable = new LL1ParseTable(cfg);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        parseTable.addCell(new NonTerminalNode("T"), new TerminalNode("a"), 0);
     }
 
     @Test
