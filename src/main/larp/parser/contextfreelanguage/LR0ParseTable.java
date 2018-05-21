@@ -15,6 +15,7 @@ public class LR0ParseTable
 
     public void addCell(State state, ContextFreeGrammarSyntaxNode syntaxNode, LR0ParseTableAction action)
     {
+        new LR0ParseTableCellAvailableAssertion(this, syntaxNode, action).validate();
     }
 
     public ContextFreeGrammar getContextFreeGrammar()
