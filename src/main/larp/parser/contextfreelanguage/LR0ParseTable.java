@@ -13,7 +13,7 @@ public class LR0ParseTable
         this.contextFreeGrammar = contextFreeGrammar;
     }
 
-    public void addCell(State state, ContextFreeGrammarSyntaxNode syntaxNode)
+    public void addCell(State state, ContextFreeGrammarSyntaxNode syntaxNode, LR0ParseTableAction action)
     {
     }
 

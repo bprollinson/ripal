@@ -7,6 +7,7 @@ import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
+import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
@@ -18,16 +19,24 @@ public class LR0ParseTableTest
     @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testAddCellThrowsExceptionForTwoShiftActionsWithTheSameStateAndSymbol()
     {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
     }
 
     @Test
-    public void testAddCellThrowsExceptionForTwoShiftActionsWithTheSameStateAndDifferentSymbols()
+    public void testAddCellDoesNotThrowExceptionForTwoShiftActionsWithTheSameStateAndDifferentSymbols()
     {
         assertEquals(0, 1);
     }
 
     @Test
-    public void testAddCellThrowsExceptionForTwoShiftActionsWithDifferentStatesAndTheSameSymbol()
+    public void testAddCellDoesNotThrowExceptionForTwoShiftActionsWithDifferentStatesAndTheSameSymbol()
     {
         assertEquals(0, 1);
     }
@@ -71,13 +80,13 @@ public class LR0ParseTableTest
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"));
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
 
         ContextFreeGrammar otherCfg = new ContextFreeGrammar();
         otherCfg.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
         LR0ParseTable otherParseTable = new LR0ParseTable(otherCfg);
-        otherParseTable.addCell(state, new TerminalNode("a"));
+        otherParseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
 
         assertFalse(parseTable.equals(otherParseTable));
     }
