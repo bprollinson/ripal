@@ -22,6 +22,18 @@ public class LL1ParseTableTest
     }
 
     @Test
+    public void testAddCellDoesNotThrowExceptionForTwoCellsWithTheSameNonTerminalAndDifferentTerminals()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testAddCellDoesNotThrowExceptionForTwoCellsWithDifferentNonTerminalsAndTheSameTerminal()
+    {
+        assertTrue(false);
+    }
+
+    @Test
     public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
     {
         LL1ParseTable parseTable = new LL1ParseTable(new ContextFreeGrammar());

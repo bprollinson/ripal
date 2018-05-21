@@ -20,6 +20,18 @@ public class LR0ParseTableTest
     {
     }
 
+    @Test
+    public void testAddCellThrowsExceptionForTwoShiftActionsWithTheSameStateAndDifferentSymbols()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testAddCellThrowsExceptionForTwoShiftActionsWithDifferentStatesAndTheSameSymbol()
+    {
+        assertEquals(0, 1);
+    }
+
     @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testAddCellThrowsExceptionForTwoReduceActionsWithTheSameState()
     {
