@@ -23,7 +23,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForShiftActionWhenTableContainsShiftActionWithTheSameState()
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsReduceActionWithTheSameState()
     {
     }
 }
