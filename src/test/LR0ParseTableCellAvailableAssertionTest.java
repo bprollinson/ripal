@@ -15,4 +15,10 @@ public class LR0ParseTableCellAvailableAssertionTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForShiftActionWhenCellContainsDifferentStateAndTheSameSymbol()
+    {
+        assertEquals(0, 1);
+    }
 }
