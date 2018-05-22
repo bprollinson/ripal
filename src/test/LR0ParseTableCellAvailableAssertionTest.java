@@ -21,4 +21,9 @@ public class LR0ParseTableCellAvailableAssertionTest
     {
         assertEquals(0, 1);
     }
+
+    @Test(expected = AmbiguousLR0ParseTableException.class)
+    public void testValidateThrowsExceptionForShiftActionWhenTableContainsShiftActionWithTheSameState()
+    {
+    }
 }
