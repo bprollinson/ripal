@@ -26,4 +26,14 @@ public class LR0ParseTableCellAvailableAssertionTest
     public void testValidateThrowsExceptionForReduceActionWhenTableContainsReduceActionWithTheSameState()
     {
     }
+
+    @Test(expected = AmbiguousLR0ParseTableException.class)
+    public void testValidateThrowsExceptionForShiftActionWhenTableContainsReduceActionWithSameState()
+    {
+    }
+
+    @Test(expected = AmbiguousLR0ParseTableException.class)
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsShiftActionWithSameState()
+    {
+    }
 }
