@@ -26,7 +26,7 @@ public class LR0ParseTableCellAvailableAssertionTest
         LR0ParseTable parseTable = new LR0ParseTable(cfg);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
 
-        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, new TerminalNode("a"), new LR0ShiftAction(0));
+        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("a"), new LR0ShiftAction(0));
         assertion.validate();
     }
 
