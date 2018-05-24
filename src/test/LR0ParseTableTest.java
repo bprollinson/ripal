@@ -97,6 +97,18 @@ public class LR0ParseTableTest
     }
 
     @Test
+    public void testAddCellDoesNotThrowExceptionForShiftActionWhenTableContainsReduceActionWithDifferentState()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testAddCellDoesNotThrowExceptionForReduceActionWhenTableContainsShiftActionWithDifferentState()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
     public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
     {
         LR0ParseTable parseTable = new LR0ParseTable(new ContextFreeGrammar());

@@ -106,4 +106,16 @@ public class LR0ParseTableCellAvailableAssertionTest
         LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("b"), new LR0ReduceAction(0));
         assertion.validate();
     }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsReduceActionWithDifferentState()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsShiftActionWithDifferentState()
+    {
+        assertEquals(0, 1);
+    }
 }
