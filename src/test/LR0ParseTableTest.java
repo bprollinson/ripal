@@ -45,7 +45,15 @@ public class LR0ParseTableTest
     @Test
     public void testAddCellDoesNotThrowExceptionForTwoShiftActionsWithDifferentStatesAndTheSameSymbol()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
+        parseTable.addCell(otherState, new TerminalNode("a"), new LR0ShiftAction(0));
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
