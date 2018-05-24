@@ -86,6 +86,14 @@ public class LR0ParseTableTest
     @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testAddCellThrowsExceptionForReduceActionConflictingWithExistingShiftActionWithSameState()
     {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
+        parseTable.addCell(state, new TerminalNode("b"), new LR0ReduceAction(0));
     }
 
     @Test
