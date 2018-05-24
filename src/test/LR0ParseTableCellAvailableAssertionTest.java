@@ -80,6 +80,16 @@ public class LR0ParseTableCellAvailableAssertionTest
     @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testValidateThrowsExceptionForShiftActionWhenTableContainsReduceActionWithSameState()
     {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("b"), new LR0ShiftAction(0));
+        assertion.validate();
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
