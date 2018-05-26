@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class LR0ParseTableTest
 {
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testAddCellThrowsExceptionForTwoShiftActionsWithTheSameStateAndSymbol()
+    public void testAddCellThrowsExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndSymbol()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -31,7 +31,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testAddCellDoesNotThrowExceptionForTwoShiftActionsWithTheSameStateAndDifferentSymbols()
+    public void testAddCellDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndDifferentSymbol()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -44,7 +44,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testAddCellDoesNotThrowExceptionForTwoShiftActionsWithDifferentStatesAndTheSameSymbol()
+    public void testAddCellDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForDifferentStateAndTheSameSymbol()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -58,7 +58,7 @@ public class LR0ParseTableTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testAddCellThrowsExceptionForTwoReduceActionsWithTheSameState()
+    public void testAddCellThrowsExceptionForReduceActionWhenTableContainsReduceForTheSameState()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -71,7 +71,7 @@ public class LR0ParseTableTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testAddCellThrowsExceptionForShiftActionConflictingWithExistingReduceActionWithSameState()
+    public void testAddCellThrowsExceptionForShiftActionWhenTableContainsReduceActionWithTheSameState()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -84,7 +84,7 @@ public class LR0ParseTableTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testAddCellThrowsExceptionForReduceActionConflictingWithExistingShiftActionWithSameState()
+    public void testAddCellThrowsExceptionForReduceActionWhenTableContainsShiftActionWithTheSameState()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -97,7 +97,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testAddCellDoesNotThrowExceptionForShiftActionWhenTableContainsReduceActionWithDifferentState()
+    public void testAddDoesNotThrowExceptionForShiftActionWhenTableContainsReduceActionWithDifferentState()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));

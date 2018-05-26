@@ -16,7 +16,7 @@ import java.util.HashSet;
 public class LR0ParseTableCellAvailableAssertionTest
 {
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndDifferentSymbol()
+    public void testValidateThrowsExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndSymbol()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
