@@ -196,10 +196,12 @@ public class LR0ParseTableTest
 
         LR0ParseTable parseTable = new LR0ParseTable(cfg);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
+        parseTable.addCell(state, new TerminalNode("b"), new LR0ShiftAction(1));
         parseTable.addCell(otherState, new TerminalNode("a"), new LR0ReduceAction(0));
 
         LR0ParseTable otherParseTable = new LR0ParseTable(cfg);
         otherParseTable.addCell(otherState, new TerminalNode("a"), new LR0ReduceAction(0));
+        parseTable.addCell(state, new TerminalNode("b"), new LR0ShiftAction(1));
         otherParseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
 
         assertTrue(parseTable.equals(otherParseTable));
