@@ -16,7 +16,7 @@ import java.util.HashSet;
 public class LR0ParseTableCellAvailableAssertionTest
 {
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForShiftActionWhenCellContainsExistingShiftAction()
+    public void testValidateThrowsExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndDifferentSymbol()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -31,7 +31,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForShiftActionWhenCellContainsTheSameStateAndDifferentSymbol()
+    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndDifferentSymbol()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -46,7 +46,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForShiftActionWhenCellContainsDifferentStateAndTheSameSymbol()
+    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForDifferentStateAndTheSameSymbol()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -62,7 +62,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForReduceActionWhenTableContainsReduceActionWithTheSameState()
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsReduceForTheSameState()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -77,7 +77,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForShiftActionWhenTableContainsReduceActionWithSameState()
+    public void testValidateThrowsExceptionForShiftActionWhenTableContainsReduceActionWithTheSameState()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -92,7 +92,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForReduceActionWhenTableContainsShiftActionWithSameState()
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsShiftActionWithTheSameState()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
