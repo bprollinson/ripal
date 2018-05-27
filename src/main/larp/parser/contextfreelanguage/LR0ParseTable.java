@@ -32,6 +32,18 @@ public class LR0ParseTable
         this.table.put(state, entry);
     }
 
+    public LR0ParseTableAction getCell(State state, ContextFreeGrammarSyntaxNode syntaxNode)
+    {
+        LR0ParseTableAction action = null;
+        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> entry = this.table.get(state);
+        if (entry != null)
+        {
+            action = entry.get(syntaxNode);
+        }
+
+        return action;
+    }
+
     public ContextFreeGrammar getContextFreeGrammar()
     {
         return this.contextFreeGrammar;
