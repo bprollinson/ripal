@@ -4,18 +4,32 @@ import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.regularlanguage.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LR0ParseTable
 {
     private ContextFreeGrammar contextFreeGrammar;
+    private Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> table;
 
     public LR0ParseTable(ContextFreeGrammar contextFreeGrammar)
     {
         this.contextFreeGrammar = contextFreeGrammar;
+        this.table = new HashMap<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>>();
     }
 
     public void addCell(State state, ContextFreeGrammarSyntaxNode syntaxNode, LR0ParseTableAction action)
     {
         new LR0ParseTableCellAvailableAssertion(this, state, syntaxNode, action).validate();
+
+        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> entry = this.table.get(state);
+        if (entry == null)
+        {
+            entry = new HashMap<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+        }
+
+        entry.put(syntaxNode, action);
+        this.table.put(state, entry);
     }
 
     public ContextFreeGrammar getContextFreeGrammar()
