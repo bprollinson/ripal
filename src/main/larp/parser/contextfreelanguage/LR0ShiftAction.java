@@ -8,4 +8,9 @@ public class LR0ShiftAction extends LR0ParseTableAction
     {
         this.stateIndex = stateIndex;
     }
+
+    public boolean isRowLevelAction()
+    {
+        return false;
+    }
 }

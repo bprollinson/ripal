@@ -1,5 +1,6 @@
 package larp.parser.contextfreelanguage;
 
-public class LR0ParseTableAction
+public abstract class LR0ParseTableAction
 {
+    public abstract boolean isRowLevelAction();
 }

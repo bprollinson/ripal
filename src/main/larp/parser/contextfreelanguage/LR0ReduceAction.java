@@ -8,4 +8,9 @@ public class LR0ReduceAction extends LR0ParseTableAction
     {
         this.productionIndex = productionIndex;
     }
+
+    public boolean isRowLevelAction()
+    {
+        return true;
+    }
 }
