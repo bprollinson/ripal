@@ -106,7 +106,7 @@ public class LR0ParseTableTest
 
         LR0ParseTable parseTable = new LR0ParseTable(cfg);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
+        parseTable.addCell(otherState, new TerminalNode("a"), new LR0ShiftAction(0));
     }
 
     @Test
