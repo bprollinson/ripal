@@ -59,6 +59,11 @@ public class LR0ParseTable
         return action;
     }
 
+    public boolean hasCellWithinRow(State state)
+    {
+        return this.table.get(state) != null;
+    }
+
     public ContextFreeGrammar getContextFreeGrammar()
     {
         return this.contextFreeGrammar;
