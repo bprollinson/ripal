@@ -18,7 +18,7 @@ public class LR0ParseTable
         this.table = new HashMap<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>>();
     }
 
-    public void addCell(State state, ContextFreeGrammarSyntaxNode syntaxNode, LR0ParseTableAction action)
+    public void addCell(State state, ContextFreeGrammarSyntaxNode syntaxNode, LR0ParseTableAction action) throws AmbiguousLR0ParseTableException
     {
         new LR0ParseTableCellAvailableAssertion(this, state, syntaxNode, action).validate();
 

@@ -16,7 +16,7 @@ import java.util.HashSet;
 public class LR0ParseTableCellAvailableAssertionTest
 {
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndSymbol()
+    public void testValidateThrowsExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -31,7 +31,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndDifferentSymbol()
+    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndDifferentSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -46,7 +46,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForDifferentStateAndTheSameSymbol()
+    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForDifferentStateAndTheSameSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -62,7 +62,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForReduceActionWhenTableContainsReduceForTheSameState()
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsReduceForTheSameState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -77,7 +77,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForShiftActionWhenTableContainsReduceActionWithTheSameState()
+    public void testValidateThrowsExceptionForShiftActionWhenTableContainsReduceActionWithTheSameState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -92,7 +92,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForReduceActionWhenTableContainsShiftActionWithTheSameState()
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsShiftActionWithTheSameState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -107,7 +107,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsReduceActionWithDifferentState()
+    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsReduceActionWithDifferentState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -123,7 +123,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsShiftActionWithDifferentState()
+    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsShiftActionWithDifferentState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));

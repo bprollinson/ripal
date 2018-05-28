@@ -17,7 +17,7 @@ import java.util.HashSet;
 public class LR0ParseTableTest
 {
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testAddCellThrowsExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndSymbol()
+    public void testAddCellThrowsExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -30,7 +30,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testAddCellDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndDifferentSymbol()
+    public void testAddCellDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndDifferentSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -43,7 +43,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testAddCellDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForDifferentStateAndTheSameSymbol()
+    public void testAddCellDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForDifferentStateAndTheSameSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -57,7 +57,7 @@ public class LR0ParseTableTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testAddCellThrowsExceptionForReduceActionWhenTableContainsReduceForTheSameState()
+    public void testAddCellThrowsExceptionForReduceActionWhenTableContainsReduceForTheSameState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -70,7 +70,7 @@ public class LR0ParseTableTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testAddCellThrowsExceptionForShiftActionWhenTableContainsReduceActionWithTheSameState()
+    public void testAddCellThrowsExceptionForShiftActionWhenTableContainsReduceActionWithTheSameState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -83,7 +83,7 @@ public class LR0ParseTableTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testAddCellThrowsExceptionForReduceActionWhenTableContainsShiftActionWithTheSameState()
+    public void testAddCellThrowsExceptionForReduceActionWhenTableContainsShiftActionWithTheSameState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -96,7 +96,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testAddDoesNotThrowExceptionForShiftActionWhenTableContainsReduceActionWithDifferentState()
+    public void testAddDoesNotThrowExceptionForShiftActionWhenTableContainsReduceActionWithDifferentState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -110,7 +110,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testAddCellDoesNotThrowExceptionForReduceActionWhenTableContainsShiftActionWithDifferentState()
+    public void testAddCellDoesNotThrowExceptionForReduceActionWhenTableContainsShiftActionWithDifferentState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -124,7 +124,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
+    public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries() throws AmbiguousLR0ParseTableException
     {
         LR0ParseTable parseTable = new LR0ParseTable(new ContextFreeGrammar());
         LR0ParseTable otherParseTable = new LR0ParseTable(new ContextFreeGrammar());
@@ -133,7 +133,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsTrueForNonEmptyCFGAndTableEntries()
+    public void testEqualsReturnsTrueForNonEmptyCFGAndTableEntries() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -153,7 +153,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForDifferentCFGs()
+    public void testEqualsReturnsFalseForDifferentCFGs() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -173,7 +173,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForDifferentShiftTableStates()
+    public void testEqualsReturnsFalseForDifferentShiftTableStates() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -191,7 +191,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForDifferentShiftTableSymbols()
+    public void testEqualsReturnsFalseForDifferentShiftTableSymbols() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -208,7 +208,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForDifferentReduceTableStates()
+    public void testEqualsReturnsFalseForDifferentReduceTableStates() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -226,7 +226,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsTrueForSameTableEntriesInDifferentOrder()
+    public void testEqualsReturnsTrueForSameTableEntriesInDifferentOrder() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
