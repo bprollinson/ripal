@@ -10,11 +10,14 @@ import java.util.Map;
 public class LR0ParseTable
 {
     private ContextFreeGrammar contextFreeGrammar;
+    private Map<State, LR0ParseTableAction> rows;
     private Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> table;
+
 
     public LR0ParseTable(ContextFreeGrammar contextFreeGrammar)
     {
         this.contextFreeGrammar = contextFreeGrammar;
+        this.rows = new HashMap<State, LR0ParseTableAction>();
         this.table = new HashMap<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>>();
     }
 
@@ -22,14 +25,26 @@ public class LR0ParseTable
     {
         new LR0ParseTableCellAvailableAssertion(this, state, syntaxNode, action).validate();
 
-        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> entry = this.table.get(state);
-        if (entry == null)
+        if (action.isRowLevelAction())
         {
-            entry = new HashMap<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+            this.rows.put(state, action);
         }
+        else
+        {
+            Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> entry = this.table.get(state);
+            if (entry == null)
+            {
+                entry = new HashMap<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+            }
 
-        entry.put(syntaxNode, action);
-        this.table.put(state, entry);
+            entry.put(syntaxNode, action);
+            this.table.put(state, entry);
+        }
+    }
+
+    public LR0ParseTableAction getRow(State state)
+    {
+        return this.rows.get(state);
     }
 
     public LR0ParseTableAction getCell(State state, ContextFreeGrammarSyntaxNode syntaxNode)
