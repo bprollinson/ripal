@@ -246,4 +246,28 @@ public class LR0ParseTableTest
 
         assertTrue(parseTable.equals(otherParseTable));
     }
+
+    @Test
+    public void testCellsEqualOtherTableReturnsTrueWhenCellsMatchExpectedCells()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testCellsEqualOtherTableReturnsFalseWhenCellsDoNotMatchExpectedCells()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testRowsEqualOtherTableReturnsTrueWhenRowsMatchExpectedRows()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testRowsEqualOtherTableReturnsFalseWhenRowsDoNotMatchExpectedRows()
+    {
+        assertTrue(false);
+    }
 }
