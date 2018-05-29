@@ -265,9 +265,20 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testCellsEqualOtherTableReturnsFalseWhenCellsDoNotMatchExpectedCells()
+    public void testCellsEqualOtherTableReturnsFalseWhenCellsDoNotMatchExpectedCells() throws AmbiguousLR0ParseTableException
     {
-        assertTrue(false);
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
+
+        LR0ParseTable otherParseTable = new LR0ParseTable(cfg);
+        otherParseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(1));
+
+        assertFalse(parseTable.cellsEqualOtherTable(otherParseTable));
     }
 
     @Test
