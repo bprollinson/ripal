@@ -13,7 +13,6 @@ public class LR0ParseTable
     private Map<State, LR0ParseTableAction> rows;
     private Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> table;
 
-
     public LR0ParseTable(ContextFreeGrammar contextFreeGrammar)
     {
         this.contextFreeGrammar = contextFreeGrammar;
@@ -67,6 +66,11 @@ public class LR0ParseTable
     public ContextFreeGrammar getContextFreeGrammar()
     {
         return this.contextFreeGrammar;
+    }
+
+    public boolean cellsEqualOtherTable(LR0ParseTable otherTable)
+    {
+        return true;
     }
 
     public boolean equals(Object other)
