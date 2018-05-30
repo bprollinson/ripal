@@ -68,14 +68,24 @@ public class LR0ParseTable
         return this.contextFreeGrammar;
     }
 
+    public boolean cellsEqual(Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherCells)
+    {
+        return this.table.equals(otherCells);
+    }
+
+    public boolean rowsEqual(Map<State, LR0ParseTableAction> otherRows)
+    {
+        return this.rows.equals(otherRows);
+    }
+
     public boolean cellsEqualOtherTable(LR0ParseTable otherTable)
     {
-        return true;
+        return otherTable.cellsEqual(this.table);
     }
 
     public boolean rowsEqualOtherTable(LR0ParseTable otherTable)
     {
-        return true;
+        return otherTable.rowsEqual(this.rows);
     }
 
     public boolean equals(Object other)
@@ -90,6 +100,6 @@ public class LR0ParseTable
             return false;
         }
 
-        return true;
+        return this.cellsEqualOtherTable((LR0ParseTable)other) && this.rowsEqualOtherTable((LR0ParseTable)other);
     }
 }
