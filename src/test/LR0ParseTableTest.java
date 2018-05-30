@@ -295,7 +295,7 @@ public class LR0ParseTableTest
         LR0ParseTable otherParseTable = new LR0ParseTable(cfg);
         otherParseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
 
-        assertTrue(parseTable.cellsEqualOtherTable(otherParseTable));
+        assertTrue(parseTable.rowsEqualOtherTable(otherParseTable));
     }
 
     @Test
@@ -312,6 +312,6 @@ public class LR0ParseTableTest
         LR0ParseTable otherParseTable = new LR0ParseTable(cfg);
         otherParseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(1));
 
-        assertFalse(parseTable.cellsEqualOtherTable(otherParseTable));
+        assertFalse(parseTable.rowsEqualOtherTable(otherParseTable));
     }
 }

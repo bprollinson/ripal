@@ -73,6 +73,11 @@ public class LR0ParseTable
         return true;
     }
 
+    public boolean rowsEqualOtherTable(LR0ParseTable otherTable)
+    {
+        return true;
+    }
+
     public boolean equals(Object other)
     {
         if (!(other instanceof LR0ParseTable))
