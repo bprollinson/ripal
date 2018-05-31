@@ -13,4 +13,19 @@ public class LR0ShiftAction extends LR0ParseTableAction
     {
         return false;
     }
+
+    public int getStateIndex()
+    {
+        return this.stateIndex;
+    }
+
+    public boolean equals(Object other)
+    {
+        if (!(other instanceof LR0ShiftAction))
+        {
+            return false;
+        }
+
+        return this.stateIndex == ((LR0ShiftAction)other).getStateIndex();
+    }
 }
