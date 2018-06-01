@@ -73,14 +73,14 @@ public class LR0ParseTable
         return this.table.equals(otherCells);
     }
 
-    public boolean rowsEqual(Map<State, LR0ParseTableAction> otherRows)
-    {
-        return this.rows.equals(otherRows);
-    }
-
     public boolean cellsEqualOtherTable(LR0ParseTable otherTable)
     {
         return otherTable.cellsEqual(this.table);
+    }
+
+    public boolean rowsEqual(Map<State, LR0ParseTableAction> otherRows)
+    {
+        return this.rows.equals(otherRows);
     }
 
     public boolean rowsEqualOtherTable(LR0ParseTable otherTable)
