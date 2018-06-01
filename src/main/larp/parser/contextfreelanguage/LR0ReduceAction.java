@@ -13,4 +13,19 @@ public class LR0ReduceAction extends LR0ParseTableAction
     {
         return true;
     }
+
+    public int getProductionIndex()
+    {
+        return this.productionIndex;
+    }
+
+    public boolean equals(Object other)
+    {
+        if (!(other instanceof LR0ReduceAction))
+        {
+            return false;
+        }
+
+        return this.productionIndex == ((LR0ReduceAction)other).getProductionIndex();
+    }
 }
