@@ -5,14 +5,18 @@ import org.junit.Test;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
 import larp.parser.contextfreelanguage.LR0ParseTable;
+import larp.parser.contextfreelanguage.LR0ParseTableAction;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
+import larp.parser.regularlanguage.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class LR0ParseTableTest
 {
@@ -250,7 +254,20 @@ public class LR0ParseTableTest
     @Test
     public void testCellsEqualReturnsTrueWhenCellsMatchExpectedCells() throws AmbiguousLR0ParseTableException
     {
-        assertTrue(false);
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
+
+        Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherCells = new HashMap<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>>();
+        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> innerMap = new HashMap<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+        innerMap.put(new TerminalNode("a"), new LR0ShiftAction(0));
+        otherCells.put(state, innerMap);
+
+        assertTrue(parseTable.cellsEqual(otherCells));
     }
 
     @Test
