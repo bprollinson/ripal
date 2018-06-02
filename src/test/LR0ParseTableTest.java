@@ -271,6 +271,12 @@ public class LR0ParseTableTest
     }
 
     @Test
+    public void testCellsEqualIgnoresRows() throws AmbiguousLR0ParseTableException
+    {
+        assertTrue(false);
+    }
+
+    @Test
     public void testCellsEqualReturnsFalseWhenCellsDoNotMatchExpectedCells() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
@@ -304,6 +310,12 @@ public class LR0ParseTableTest
         otherParseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
 
         assertTrue(parseTable.cellsEqualOtherTable(otherParseTable));
+    }
+
+    @Test
+    public void testCellsEqualOtherTableIgnoresRows() throws AmbiguousLR0ParseTableException
+    {
+        assertTrue(false);
     }
 
     @Test
@@ -341,7 +353,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testRowsEqualIgnoresColumns() throws AmbiguousLR0ParseTableException
+    public void testRowsEqualIgnoresCells() throws AmbiguousLR0ParseTableException
     {
         assertTrue(false);
     }
@@ -381,7 +393,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testColumnsEqualIgnoresRows() throws AmbiguousLR0ParseTableException
+    public void testRowsEqualOtherTableIgnoresCells() throws AmbiguousLR0ParseTableException
     {
         assertTrue(false);
     }
