@@ -26,19 +26,29 @@ public class LR0ParseTable
 
         if (action.isRowLevelAction())
         {
-            this.rows.put(state, action);
+            this.addRowEntry(state, action);
         }
         else
         {
-            Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> entry = this.cells.get(state);
-            if (entry == null)
-            {
-                entry = new HashMap<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
-            }
-
-            entry.put(syntaxNode, action);
-            this.cells.put(state, entry);
+            this.addCellEntry(state, syntaxNode, action);
         }
+    }
+
+    private void addRowEntry(State state, LR0ParseTableAction action)
+    {
+        this.rows.put(state, action);
+    }
+
+    private void addCellEntry(State state, ContextFreeGrammarSyntaxNode syntaxNode, LR0ParseTableAction action)
+    {
+        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> entry = this.cells.get(state);
+        if (entry == null)
+        {
+            entry = new HashMap<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+        }
+
+        entry.put(syntaxNode, action);
+        this.cells.put(state, entry);
     }
 
     public LR0ParseTableAction getRow(State state)
