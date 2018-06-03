@@ -11,13 +11,13 @@ public class LR0ParseTable
 {
     private ContextFreeGrammar contextFreeGrammar;
     private Map<State, LR0ParseTableAction> rows;
-    private Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> table;
+    private Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> cells;
 
     public LR0ParseTable(ContextFreeGrammar contextFreeGrammar)
     {
         this.contextFreeGrammar = contextFreeGrammar;
         this.rows = new HashMap<State, LR0ParseTableAction>();
-        this.table = new HashMap<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>>();
+        this.cells = new HashMap<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>>();
     }
 
     public void addCell(State state, ContextFreeGrammarSyntaxNode syntaxNode, LR0ParseTableAction action) throws AmbiguousLR0ParseTableException
@@ -30,14 +30,14 @@ public class LR0ParseTable
         }
         else
         {
-            Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> entry = this.table.get(state);
+            Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> entry = this.cells.get(state);
             if (entry == null)
             {
                 entry = new HashMap<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
             }
 
             entry.put(syntaxNode, action);
-            this.table.put(state, entry);
+            this.cells.put(state, entry);
         }
     }
 
@@ -49,7 +49,7 @@ public class LR0ParseTable
     public LR0ParseTableAction getCell(State state, ContextFreeGrammarSyntaxNode syntaxNode)
     {
         LR0ParseTableAction action = null;
-        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> entry = this.table.get(state);
+        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> entry = this.cells.get(state);
         if (entry != null)
         {
             action = entry.get(syntaxNode);
@@ -60,7 +60,7 @@ public class LR0ParseTable
 
     public boolean hasCellWithinRow(State state)
     {
-        return this.table.get(state) != null;
+        return this.cells.get(state) != null;
     }
 
     public ContextFreeGrammar getContextFreeGrammar()
@@ -70,12 +70,12 @@ public class LR0ParseTable
 
     public boolean cellsEqual(Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherCells)
     {
-        return this.table.equals(otherCells);
+        return this.cells.equals(otherCells);
     }
 
     public boolean cellsEqualOtherTable(LR0ParseTable otherTable)
     {
-        return otherTable.cellsEqual(this.table);
+        return otherTable.cellsEqual(this.cells);
     }
 
     public boolean rowsEqual(Map<State, LR0ParseTableAction> otherRows)
