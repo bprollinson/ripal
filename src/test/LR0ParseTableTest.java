@@ -273,7 +273,22 @@ public class LR0ParseTableTest
     @Test
     public void testCellsEqualIgnoresRows() throws AmbiguousLR0ParseTableException
     {
-        assertTrue(false);
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
+        parseTable.addCell(otherState, new TerminalNode("b"), new LR0ReduceAction(0));
+
+        Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherCells = new HashMap<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>>();
+        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> innerMap = new HashMap<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+        innerMap.put(new TerminalNode("a"), new LR0ShiftAction(0));
+        otherCells.put(state, innerMap);
+
+        assertTrue(parseTable.cellsEqual(otherCells));
     }
 
     @Test
