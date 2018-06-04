@@ -78,16 +78,6 @@ public class LR0ParseTable
         return this.contextFreeGrammar;
     }
 
-    public boolean cellsEqual(Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherCells)
-    {
-        return this.cells.equals(otherCells);
-    }
-
-    public boolean cellsEqualOtherTable(LR0ParseTable otherTable)
-    {
-        return otherTable.cellsEqual(this.cells);
-    }
-
     public boolean rowsEqual(Map<State, LR0ParseTableAction> otherRows)
     {
         return this.rows.equals(otherRows);
@@ -96,6 +86,16 @@ public class LR0ParseTable
     public boolean rowsEqualOtherTable(LR0ParseTable otherTable)
     {
         return otherTable.rowsEqual(this.rows);
+    }
+
+    public boolean cellsEqual(Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherCells)
+    {
+        return this.cells.equals(otherCells);
+    }
+
+    public boolean cellsEqualOtherTable(LR0ParseTable otherTable)
+    {
+        return otherTable.cellsEqual(this.cells);
     }
 
     public boolean equals(Object other)
