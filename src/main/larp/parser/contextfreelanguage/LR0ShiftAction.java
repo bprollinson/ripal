@@ -1,6 +1,6 @@
 package larp.parser.contextfreelanguage;
 
-public class LR0ShiftAction extends LR0ParseTableAction
+public class LR0ShiftAction implements LR0ParseTableAction
 {
     private int stateIndex;
 

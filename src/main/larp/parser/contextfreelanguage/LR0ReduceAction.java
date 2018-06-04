@@ -1,6 +1,6 @@
 package larp.parser.contextfreelanguage;
 
-public class LR0ReduceAction extends LR0ParseTableAction
+public class LR0ReduceAction implements LR0ParseTableAction
 {
     private int productionIndex;
 
