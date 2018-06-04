@@ -252,6 +252,113 @@ public class LR0ParseTableTest
     }
 
     @Test
+    public void testRowsEqualReturnsTrueWhenRowsMatchExpectedRows() throws AmbiguousLR0ParseTableException
+    {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        Map<State, LR0ParseTableAction> otherRows = new HashMap<State, LR0ParseTableAction>();
+        otherRows.put(state, new LR0ReduceAction(0));
+
+        assertTrue(parseTable.rowsEqual(otherRows));
+    }
+
+    @Test
+    public void testRowsEqualIgnoresCells() throws AmbiguousLR0ParseTableException
+    {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+        parseTable.addCell(otherState, new TerminalNode("a"), new LR0ShiftAction(0));
+
+        Map<State, LR0ParseTableAction> otherRows = new HashMap<State, LR0ParseTableAction>();
+        otherRows.put(state, new LR0ReduceAction(0));
+
+        assertTrue(parseTable.rowsEqual(otherRows));
+    }
+
+    @Test
+    public void testRowsEqualReturnsFalseWhenRowsDoNotMatchExpectedRows() throws AmbiguousLR0ParseTableException
+    {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        Map<State, LR0ParseTableAction> otherRows = new HashMap<State, LR0ParseTableAction>();
+        otherRows.put(state, new LR0ReduceAction(1));
+
+        assertFalse(parseTable.rowsEqual(otherRows));
+    }
+
+    @Test
+    public void testRowsEqualOtherTableReturnsTrueWhenRowsMatchExpectedRows() throws AmbiguousLR0ParseTableException
+    {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        LR0ParseTable otherParseTable = new LR0ParseTable(cfg);
+        otherParseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        assertTrue(parseTable.rowsEqualOtherTable(otherParseTable));
+    }
+
+    @Test
+    public void testRowsEqualOtherTableIgnoresCells() throws AmbiguousLR0ParseTableException
+    {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+        parseTable.addCell(otherState, new TerminalNode("a"), new LR0ShiftAction(0));
+
+        LR0ParseTable otherParseTable = new LR0ParseTable(cfg);
+        otherParseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+        otherParseTable.addCell(otherState, new TerminalNode("a"), new LR0ShiftAction(1));
+
+        assertTrue(parseTable.rowsEqualOtherTable(otherParseTable));
+    }
+
+    @Test
+    public void testRowsEqualOtherTableReturnsFalseWhenRowsDoNotMatchExpectedRows() throws AmbiguousLR0ParseTableException
+    {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        LR0ParseTable otherParseTable = new LR0ParseTable(cfg);
+        otherParseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(1));
+
+        assertFalse(parseTable.rowsEqualOtherTable(otherParseTable));
+    }
+
+    @Test
     public void testCellsEqualReturnsTrueWhenCellsMatchExpectedCells() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
@@ -362,112 +469,5 @@ public class LR0ParseTableTest
         otherParseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(1));
 
         assertFalse(parseTable.cellsEqualOtherTable(otherParseTable));
-    }
-
-    @Test
-    public void testRowsEqualReturnsTrueWhenRowsMatchExpectedRows() throws AmbiguousLR0ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-
-        Map<State, LR0ParseTableAction> otherRows = new HashMap<State, LR0ParseTableAction>();
-        otherRows.put(state, new LR0ReduceAction(0));
-
-        assertTrue(parseTable.rowsEqual(otherRows));
-    }
-
-    @Test
-    public void testRowsEqualIgnoresCells() throws AmbiguousLR0ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-        parseTable.addCell(otherState, new TerminalNode("a"), new LR0ShiftAction(0));
-
-        Map<State, LR0ParseTableAction> otherRows = new HashMap<State, LR0ParseTableAction>();
-        otherRows.put(state, new LR0ReduceAction(0));
-
-        assertTrue(parseTable.rowsEqual(otherRows));
-    }
-
-    @Test
-    public void testRowsEqualReturnsFalseWhenRowsDoNotMatchExpectedRows() throws AmbiguousLR0ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-
-        Map<State, LR0ParseTableAction> otherRows = new HashMap<State, LR0ParseTableAction>();
-        otherRows.put(state, new LR0ReduceAction(1));
-
-        assertFalse(parseTable.rowsEqual(otherRows));
-    }
-
-    @Test
-    public void testRowsEqualOtherTableReturnsTrueWhenRowsMatchExpectedRows() throws AmbiguousLR0ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-
-        LR0ParseTable otherParseTable = new LR0ParseTable(cfg);
-        otherParseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-
-        assertTrue(parseTable.rowsEqualOtherTable(otherParseTable));
-    }
-
-    @Test
-    public void testRowsEqualOtherTableIgnoresCells() throws AmbiguousLR0ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-        parseTable.addCell(otherState, new TerminalNode("a"), new LR0ShiftAction(0));
-
-        LR0ParseTable otherParseTable = new LR0ParseTable(cfg);
-        otherParseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-        otherParseTable.addCell(otherState, new TerminalNode("a"), new LR0ShiftAction(1));
-
-        assertTrue(parseTable.rowsEqualOtherTable(otherParseTable));
-    }
-
-    @Test
-    public void testRowsEqualOtherTableReturnsFalseWhenRowsDoNotMatchExpectedRows() throws AmbiguousLR0ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-
-        LR0ParseTable otherParseTable = new LR0ParseTable(cfg);
-        otherParseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(1));
-
-        assertFalse(parseTable.rowsEqualOtherTable(otherParseTable));
     }
 }
