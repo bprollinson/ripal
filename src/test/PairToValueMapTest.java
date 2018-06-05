@@ -1,11 +1,15 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import larp.util.PairToValueMap;
+
 public class PairToValueMapTest
 {
     @Test
     public void testGetReturnsNullForNonExistentKeyPair()
     {
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+
         assertEquals(0, 1);
     }
 
