@@ -10,7 +10,7 @@ public class PairToValueMapTest
     {
         PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
 
-        assertEquals(0, 1);
+        assertEquals(null, pairToValueMap.get("a", "b"));
     }
 
     @Test
