@@ -16,7 +16,10 @@ public class PairToValueMapTest
     @Test
     public void testGetReturnsNullWhenOnlyFirstKeyMatchesSomeValue()
     {
-        assertEquals(0, 1);
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+        pairToValueMap.put("a", "b", 1);
+
+        assertEquals(null, pairToValueMap.get("a", "c"));
     }
 
     @Test
