@@ -34,7 +34,10 @@ public class PairToValueMapTest
     @Test
     public void testGetReturnsValueForValidKeyPair()
     {
-        assertEquals(0, 1);
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+        pairToValueMap.put("a", "b", 1);
+
+        assertEquals(new Integer(1), pairToValueMap.get("a", "b"));
     }
 
     @Test
