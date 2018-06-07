@@ -43,7 +43,10 @@ public class PairToValueMapTest
     @Test
     public void testGetReturnsValueForNullFirstKey()
     {
-        assertEquals(0, 1);
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+        pairToValueMap.put(null, "b", 1);
+
+        assertEquals(new Integer(1), pairToValueMap.get(null, "b"));
     }
 
     @Test
