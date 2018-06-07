@@ -52,6 +52,9 @@ public class PairToValueMapTest
     @Test
     public void testGetReturnsValueForNullSecondKey()
     {
-        assertEquals(0, 1);
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+        pairToValueMap.put("a", null, 1);
+
+        assertEquals(new Integer(1), pairToValueMap.get("a", null));
     }
 }
