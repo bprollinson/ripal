@@ -41,6 +41,26 @@ public class PairToValueMapTest
     }
 
     @Test
+    public void testGetReturnsValueForValidKeyPairWhenFirstKeyUsedMultipleTimes()
+    {
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+        pairToValueMap.put("a", "b", 1);
+        pairToValueMap.put("a", "c", 2);
+
+        assertEquals(new Integer(2), pairToValueMap.get("a", "c"));
+    }
+
+    @Test
+    public void testGetReturnsValueForValidKeyPairWhenSecondKeyUsedMultipleTimes()
+    {
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+        pairToValueMap.put("a", "b", 1);
+        pairToValueMap.put("c", "b", 2);
+
+        assertEquals(new Integer(2), pairToValueMap.get("c", "b"));
+    }
+
+    @Test
     public void testGetReturnsValueForNullFirstKey()
     {
         PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
