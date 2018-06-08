@@ -3,6 +3,7 @@ package larp.parser.contextfreelanguage;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.regularlanguage.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.util.PairToValueMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,13 +12,13 @@ public class LR0ParseTable
 {
     private ContextFreeGrammar contextFreeGrammar;
     private Map<State, LR0ParseTableAction> rows;
-    private Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> cells;
+    private PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> cells;
 
     public LR0ParseTable(ContextFreeGrammar contextFreeGrammar)
     {
         this.contextFreeGrammar = contextFreeGrammar;
         this.rows = new HashMap<State, LR0ParseTableAction>();
-        this.cells = new HashMap<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>>();
+        this.cells = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
     }
 
     public void addCell(State state, ContextFreeGrammarSyntaxNode syntaxNode, LR0ParseTableAction action) throws AmbiguousLR0ParseTableException
@@ -41,14 +42,7 @@ public class LR0ParseTable
 
     private void addCellEntry(State state, ContextFreeGrammarSyntaxNode syntaxNode, LR0ParseTableAction action)
     {
-        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> entry = this.cells.get(state);
-        if (entry == null)
-        {
-            entry = new HashMap<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
-        }
-
-        entry.put(syntaxNode, action);
-        this.cells.put(state, entry);
+        this.cells.put(state, syntaxNode, action);
     }
 
     public LR0ParseTableAction getRow(State state)
@@ -58,19 +52,12 @@ public class LR0ParseTable
 
     public LR0ParseTableAction getCell(State state, ContextFreeGrammarSyntaxNode syntaxNode)
     {
-        LR0ParseTableAction action = null;
-        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> entry = this.cells.get(state);
-        if (entry != null)
-        {
-            action = entry.get(syntaxNode);
-        }
-
-        return action;
+        return this.cells.get(state, syntaxNode);
     }
 
     public boolean hasCellWithinRow(State state)
     {
-        return this.cells.get(state) != null;
+        return false;
     }
 
     public ContextFreeGrammar getContextFreeGrammar()
@@ -95,7 +82,7 @@ public class LR0ParseTable
 
     public boolean cellsEqualOtherTable(LR0ParseTable otherTable)
     {
-        return otherTable.cellsEqual(this.cells);
+        return false;
     }
 
     public boolean equals(Object other)
