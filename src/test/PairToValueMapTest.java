@@ -1,4 +1,6 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.util.PairToValueMap;
@@ -81,12 +83,18 @@ public class PairToValueMapTest
     @Test
     public void testHasValueForFirstKeyReturnsTrueWhenValuePresent()
     {
-        assertEquals(0, 1);
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+        pairToValueMap.put("a", null, 1);
+
+        assertTrue(pairToValueMap.hasValueForFirstKey("a"));
     }
 
     @Test
     public void testHasValueForFirstKeyReturnsFalseWhenValueNotPresent()
     {
-        assertEquals(0, 1);
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+        pairToValueMap.put("a", null, 1);
+
+        assertFalse(pairToValueMap.hasValueForFirstKey("b"));
     }
 }
