@@ -57,7 +57,7 @@ public class LR0ParseTable
 
     public boolean hasCellWithinRow(State state)
     {
-        return false;
+        return this.cells.hasValueForFirstKey(state);
     }
 
     public ContextFreeGrammar getContextFreeGrammar()
