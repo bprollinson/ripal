@@ -38,6 +38,6 @@ public class PairToValueMap<K1, K2, V>
 
     public boolean hasValueForFirstKey(K1 key1)
     {
-        return false;
+        return this.map.containsKey(key1);
     }
 }
