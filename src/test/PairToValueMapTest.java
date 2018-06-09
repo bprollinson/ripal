@@ -77,4 +77,16 @@ public class PairToValueMapTest
 
         assertEquals(new Integer(1), pairToValueMap.get("a", null));
     }
+
+    @Test
+    public void testHasValueForFirstKeyReturnsTrueWhenValuePresent()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testHasValueForFirstKeyReturnsFalseWhenValueNotPresent()
+    {
+        assertEquals(0, 1);
+    }
 }

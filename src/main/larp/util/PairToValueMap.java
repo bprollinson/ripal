@@ -35,4 +35,9 @@ public class PairToValueMap<K1, K2, V>
         entry.put(key2, value);
         this.map.put(key1, entry);
     }
+
+    public boolean hasValueForFirstKey(K1 key1)
+    {
+        return false;
+    }
 }
