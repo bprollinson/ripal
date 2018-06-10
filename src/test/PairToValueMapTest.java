@@ -101,18 +101,33 @@ public class PairToValueMapTest
     @Test
     public void testEqualsReturnsTrue()
     {
-        assertEquals(0, 1);
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+        pairToValueMap.put("a", "b", 1);
+        PairToValueMap<String, String, Integer> otherPairToValueMap = new PairToValueMap<String, String, Integer>();
+        otherPairToValueMap.put("a", "b", 1);
+
+        assertTrue(pairToValueMap.equals(otherPairToValueMap));
     }
 
     @Test
     public void testEqualsReturnsFalseForDifferentFirstKey()
     {
-        assertEquals(0, 1);
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+        pairToValueMap.put("a", "b", 1);
+        PairToValueMap<String, String, Integer> otherPairToValueMap = new PairToValueMap<String, String, Integer>();
+        otherPairToValueMap.put("c", "b", 1);
+
+        assertFalse(pairToValueMap.equals(otherPairToValueMap));
     }
 
     @Test
     public void testEqualsReturnsFalseForDifferentSecondKey()
     {
-        assertEquals(0, 1);
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+        pairToValueMap.put("a", "b", 1);
+        PairToValueMap<String, String, Integer> otherPairToValueMap = new PairToValueMap<String, String, Integer>();
+        otherPairToValueMap.put("a", "c", 1);
+
+        assertFalse(pairToValueMap.equals(otherPairToValueMap));
     }
 }
