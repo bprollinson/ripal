@@ -1,19 +1,19 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.util.SetMap;
+import larp.util.ValueToSetMap;
 
 import java.util.AbstractMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class SetMapTest
+public class ValueToSetMapTest
 {
     @Test
     public void testGetReturnsEmptySetForNonExistentKey()
     {
-        SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+        ValueToSetMap<String, Integer> setMap = new ValueToSetMap<String, Integer>();
 
         Set<Integer> expectedSet = new HashSet<Integer>();
         assertEquals(expectedSet, setMap.get("key"));
@@ -22,7 +22,7 @@ public class SetMapTest
     @Test
     public void testSetMapMapsSingleKeyToSingleEntry()
     {
-        SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+        ValueToSetMap<String, Integer> setMap = new ValueToSetMap<String, Integer>();
         setMap.put("key", 1);
 
         Set<Integer> expectedSet = new HashSet<Integer>();
@@ -34,7 +34,7 @@ public class SetMapTest
     @Test
     public void testSetMapMapsSingleKeyToMultipleEntries()
     {
-        SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+        ValueToSetMap<String, Integer> setMap = new ValueToSetMap<String, Integer>();
         setMap.put("key", 1);
         setMap.put("key", 2);
 
@@ -48,7 +48,7 @@ public class SetMapTest
     @Test
     public void testSetMapMapsMultileKeysToSingleEntryEach()
     {
-        SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+        ValueToSetMap<String, Integer> setMap = new ValueToSetMap<String, Integer>();
         setMap.put("key1", 1);
         setMap.put("key2", 2);
 
@@ -64,7 +64,7 @@ public class SetMapTest
     @Test
     public void testSetMapMapsMultipleKeysToMultipleEntriesEach()
     {
-        SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+        ValueToSetMap<String, Integer> setMap = new ValueToSetMap<String, Integer>();
         setMap.put("key1", 1);
         setMap.put("key1", 2);
         setMap.put("key2", 3);
@@ -84,7 +84,7 @@ public class SetMapTest
     @Test
     public void testSetMapMapsNullKey()
     {
-        SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+        ValueToSetMap<String, Integer> setMap = new ValueToSetMap<String, Integer>();
         setMap.put(null, 1);
 
         Set<Integer> expectedSet = new HashSet<Integer>();
@@ -95,7 +95,7 @@ public class SetMapTest
     @Test
     public void testEntrySetReturnsEmptySetForEmptySetMap()
     {
-        SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+        ValueToSetMap<String, Integer> setMap = new ValueToSetMap<String, Integer>();
 
         Set<Map.Entry<String, Integer>> expectedSet = new HashSet<Map.Entry<String, Integer>>();
         assertEquals(expectedSet, setMap.entrySet());
@@ -104,7 +104,7 @@ public class SetMapTest
     @Test
     public void testEntrySetReturnsEntrySetForNonEmptySetMap()
     {
-        SetMap<String, Integer> setMap = new SetMap<String, Integer>();
+        ValueToSetMap<String, Integer> setMap = new ValueToSetMap<String, Integer>();
         setMap.put(null, 0);
         setMap.put("key1", 1);
         setMap.put("key2", 2);

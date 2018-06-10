@@ -5,7 +5,7 @@ import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
-import larp.util.SetMap;
+import larp.util.ValueToSetMap;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,13 +15,13 @@ public class FirstSetCalculator
 {
     private boolean initialized;
     private ContextFreeGrammar grammar;
-    private SetMap<ContextFreeGrammarSyntaxNode, Integer> nonTerminalRules;
+    private ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> nonTerminalRules;
 
     public FirstSetCalculator(ContextFreeGrammar grammar)
     {
         this.initialized = false;
         this.grammar = grammar;
-        this.nonTerminalRules = new SetMap<ContextFreeGrammarSyntaxNode, Integer>();
+        this.nonTerminalRules = new ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer>();
     }
 
     public Set<ContextFreeGrammarSyntaxNode> getFirst(int ruleIndex)

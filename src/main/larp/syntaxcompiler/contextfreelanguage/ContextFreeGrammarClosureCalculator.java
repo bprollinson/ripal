@@ -2,7 +2,7 @@ package larp.syntaxcompiler.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
-import larp.util.SetMap;
+import larp.util.ValueToSetMap;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,7 @@ public class ContextFreeGrammarClosureCalculator
     {
         Set<ContextFreeGrammarSyntaxNode> productionsClosure = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionsClosure.addAll(productionSet);
-        SetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap = this.calculateStartingNonTerminalProductionsMap(cfg);
+        ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap = this.calculateStartingNonTerminalProductionsMap(cfg);
 
         boolean continueExpansion = true;
         while (continueExpansion)
@@ -31,9 +31,9 @@ public class ContextFreeGrammarClosureCalculator
         return productionsClosure;
     }
 
-    private SetMap<ContextFreeGrammarSyntaxNode, Integer> calculateStartingNonTerminalProductionsMap(ContextFreeGrammar cfg)
+    private ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> calculateStartingNonTerminalProductionsMap(ContextFreeGrammar cfg)
     {
-        SetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductions = new SetMap<ContextFreeGrammarSyntaxNode, Integer>();
+        ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductions = new ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer>();
         for (int i = 0; i < cfg.getProductions().size(); i++)
         {
             startingNonTerminalProductions.put(cfg.getProduction(i).getChildNodes().get(0), i);
@@ -42,7 +42,7 @@ public class ContextFreeGrammarClosureCalculator
         return startingNonTerminalProductions;
     }
 
-    private boolean expandClosure(ContextFreeGrammar cfg, SetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
+    private boolean expandClosure(ContextFreeGrammar cfg, ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
     {
         Set<ContextFreeGrammarSyntaxNode> productionsToAdd = new HashSet<ContextFreeGrammarSyntaxNode>();
 

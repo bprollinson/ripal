@@ -6,7 +6,7 @@ import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.regularlanguage.StateTransition;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
-import larp.util.SetMap;
+import larp.util.ValueToSetMap;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -60,7 +60,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
 
     private void compileAndAttachAdjacentStates(ContextFreeGrammar cfg, LR0ProductionSetDFAState state)
     {
-        SetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode> symbolToNextClosureMap = new SetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode>();
+        ValueToSetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode> symbolToNextClosureMap = new ValueToSetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode>();
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = state.getProductionSet();
         for (ContextFreeGrammarSyntaxNode productionNode: productionSet)

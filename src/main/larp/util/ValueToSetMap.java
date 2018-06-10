@@ -5,11 +5,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class SetMap<K, V>
+public class ValueToSetMap<K, V>
 {
     private Map<K, Set<V>> map;
 
-    public SetMap()
+    public ValueToSetMap()
     {
         this.map = new HashMap<K, Set<V>>();
     }

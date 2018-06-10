@@ -7,7 +7,7 @@ import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
-import larp.util.SetMap;
+import larp.util.ValueToSetMap;
 
 import java.util.HashSet;
 import java.util.List;
@@ -17,14 +17,14 @@ public class FollowSetCalculator
 {
     private boolean initialized;
     private ContextFreeGrammar grammar;
-    private SetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode> follows;
+    private ValueToSetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode> follows;
     private FirstSetCalculator firstSetCalculator;
 
     public FollowSetCalculator(ContextFreeGrammar grammar)
     {
         this.initialized = false;
         this.grammar = grammar;
-        this.follows = new SetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode>();
+        this.follows = new ValueToSetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode>();
         this.firstSetCalculator = new FirstSetCalculator(this.grammar);
     }
 
