@@ -97,4 +97,22 @@ public class PairToValueMapTest
 
         assertFalse(pairToValueMap.hasValueForFirstKey("b"));
     }
+
+    @Test
+    public void testEqualsReturnsTrue()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testEqualsReturnsFalseForDifferentFirstKey()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testEqualsReturnsFalseForDifferentSecondKey()
+    {
+        assertEquals(0, 1);
+    }
 }
