@@ -40,4 +40,19 @@ public class PairToValueMap<K1, K2, V>
     {
         return this.map.containsKey(key1);
     }
+
+    public Map<K1, Map<K2, V>> getMap()
+    {
+        return this.map;
+    }
+
+    public boolean equals(Object other)
+    {
+        if (!(other instanceof PairToValueMap))
+        {
+            return false;
+        }
+
+        return this.map.equals(((PairToValueMap)other).getMap());
+    }
 }
