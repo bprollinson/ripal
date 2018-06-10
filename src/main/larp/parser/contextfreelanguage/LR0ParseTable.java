@@ -75,14 +75,14 @@ public class LR0ParseTable
         return otherTable.rowsEqual(this.rows);
     }
 
-    public boolean cellsEqual(Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherCells)
+    public boolean cellsEqual(PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> otherCells)
     {
         return this.cells.equals(otherCells);
     }
 
     public boolean cellsEqualOtherTable(LR0ParseTable otherTable)
     {
-        return false;
+        return otherTable.cellsEqual(this.cells);
     }
 
     public boolean equals(Object other)

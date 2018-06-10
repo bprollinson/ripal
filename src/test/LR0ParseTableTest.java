@@ -13,6 +13,7 @@ import larp.parser.regularlanguage.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
+import larp.util.PairToValueMap;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -369,10 +370,8 @@ public class LR0ParseTableTest
         LR0ParseTable parseTable = new LR0ParseTable(cfg);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
 
-        Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherCells = new HashMap<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>>();
-        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> innerMap = new HashMap<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
-        innerMap.put(new TerminalNode("a"), new LR0ShiftAction(0));
-        otherCells.put(state, innerMap);
+        PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> otherCells = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+        otherCells.put(state, new TerminalNode("a"), new LR0ShiftAction(0));
 
         assertTrue(parseTable.cellsEqual(otherCells));
     }
@@ -390,10 +389,8 @@ public class LR0ParseTableTest
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
         parseTable.addCell(otherState, new TerminalNode("b"), new LR0ReduceAction(0));
 
-        Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherCells = new HashMap<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>>();
-        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> innerMap = new HashMap<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
-        innerMap.put(new TerminalNode("a"), new LR0ShiftAction(0));
-        otherCells.put(state, innerMap);
+        PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> otherCells = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+        otherCells.put(state, new TerminalNode("a"), new LR0ShiftAction(0));
 
         assertTrue(parseTable.cellsEqual(otherCells));
     }
@@ -409,10 +406,8 @@ public class LR0ParseTableTest
         LR0ParseTable parseTable = new LR0ParseTable(cfg);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
 
-        Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherCells = new HashMap<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>>();
-        Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> innerMap = new HashMap<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
-        innerMap.put(new TerminalNode("a"), new LR0ShiftAction(1));
-        otherCells.put(state, innerMap);
+        PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> otherCells = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+        otherCells.put(state, new TerminalNode("a"), new LR0ShiftAction(1));
 
         assertFalse(parseTable.cellsEqual(otherCells));
     }
