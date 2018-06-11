@@ -6,4 +6,9 @@ public class LR0AcceptAction implements LR0ParseTableAction
     {
         return false;
     }
+
+    public boolean equals(Object other)
+    {
+        return other instanceof LR0AcceptAction;
+    }
 }
