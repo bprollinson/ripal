@@ -137,4 +137,40 @@ public class LR0ParseTableCellAvailableAssertionTest
         LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, otherState, new TerminalNode("a"), new LR0ReduceAction(0));
         assertion.validate();
     }
+
+    @Test
+    public void testValidateThrowsExceptionForGotoActionWhenTableContainsGotoForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsGotoForTheSameStateAndDifferentSymbol() throws AmbiguousLR0ParseTableException
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsGotoForDifferentStateAndTheSameSymbol() throws AmbiguousLR0ParseTableException
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateThrowsExceptionForAcceptActionWhenTableContainsAcceptForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForAcceptActionWhenTableContainsAcceptForTheSameStateAndDifferentSymbol() throws AmbiguousLR0ParseTableException
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForAcceptActionWhenTableContainsAcceptForDifferentStateAndTheSameSymbol() throws AmbiguousLR0ParseTableException
+    {
+        throw new RuntimeException();
+    }
 }
