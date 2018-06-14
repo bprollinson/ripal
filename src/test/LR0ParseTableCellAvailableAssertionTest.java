@@ -201,7 +201,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsReduceActionForTheSameState()
+    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsReduceActionForDifferentState()
     {
         throw new RuntimeException();
     }
