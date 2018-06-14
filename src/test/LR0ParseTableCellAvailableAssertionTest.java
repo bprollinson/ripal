@@ -164,6 +164,18 @@ public class LR0ParseTableCellAvailableAssertionTest
         throw new RuntimeException();
     }
 
+    @Test
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsGotoActionForTheSameState()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsGotoActionForDifferentState()
+    {
+        throw new RuntimeException();
+    }
+
     @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testValidateThrowsExceptionForGotoActionWhenTableContainsGotoForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
     {
@@ -208,18 +220,6 @@ public class LR0ParseTableCellAvailableAssertionTest
 
         LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, otherState, new TerminalNode("a"), new LR0GotoAction(0));
         assertion.validate();
-    }
-
-    @Test
-    public void testValidateThrowsExceptionForReduceActionWhenTableContainsGotoActionForTheSameState()
-    {
-        throw new RuntimeException();
-    }
-
-    @Test
-    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsGotoActionForDifferentState()
-    {
-        throw new RuntimeException();
     }
 
     @Test
