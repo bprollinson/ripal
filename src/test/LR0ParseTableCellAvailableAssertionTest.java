@@ -195,6 +195,18 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsAcceptActionForTheSameState()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsAcceptActionForDifferentState()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testValidateThrowsExceptionForGotoActionWhenTableContainsShiftActionForTheSameStateAndSymbol()
     {
         throw new RuntimeException();
