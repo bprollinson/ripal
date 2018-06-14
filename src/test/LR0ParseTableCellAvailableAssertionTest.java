@@ -176,6 +176,36 @@ public class LR0ParseTableCellAvailableAssertionTest
         throw new RuntimeException();
     }
 
+    @Test
+    public void testValidateThrowsExceptionForGotoActionWhenTableContainsShiftActionForTheSameStateAndSymbol()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForGotActionWhenTableContainsShiftActionForTheSameStateAndDifferentSymbol()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsShiftActionForDifferentStateAndTheSameSymbol()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateThrowsExceptionForGotoActionWhenTableContainsReduceActionForTheSameState()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsReduceActionForTheSameState()
+    {
+        throw new RuntimeException();
+    }
+
     @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testValidateThrowsExceptionForGotoActionWhenTableContainsGotoForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
     {
@@ -220,36 +250,6 @@ public class LR0ParseTableCellAvailableAssertionTest
 
         LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, otherState, new TerminalNode("a"), new LR0GotoAction(0));
         assertion.validate();
-    }
-
-    @Test
-    public void testValidateThrowsExceptionForGotoActionWhenTableContainsShiftActionForTheSameStateAndSymbol()
-    {
-        throw new RuntimeException();
-    }
-
-    @Test
-    public void testValidateDoesNotThrowExceptionForGotActionWhenTableContainsShiftActionForTheSameStateAndDifferentSymbol()
-    {
-        throw new RuntimeException();
-    }
-
-    @Test
-    public void testValidateDoesNotThrowExceptionForGotActionWhenTableContainsShiftActionForDifferentStateAndTheSameSymbol()
-    {
-        throw new RuntimeException();
-    }
-
-    @Test
-    public void testValidateThrowsExceptionForGotoActionWhenTableContainsReduceActionForTheSameState()
-    {
-        throw new RuntimeException();
-    }
-
-    @Test
-    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsReduceActionForTheSameState()
-    {
-        throw new RuntimeException();
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
