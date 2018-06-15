@@ -228,38 +228,86 @@ public class LR0ParseTableCellAvailableAssertionTest
         LR0ParseTable parseTable = new LR0ParseTable(cfg);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
 
-        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("b"), new LR0ReduceAction(1));
+        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("b"), new LR0ReduceAction(0));
         assertion.validate();
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsReduceActionForDifferentState()
+    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsReduceActionForDifferentState() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, otherState, new TerminalNode("a"), new LR0ReduceAction(0));
+        assertion.validate();
+    }
+
+    @Test(expected = AmbiguousLR0ParseTableException.class)
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsGotoActionForTheSameState() throws AmbiguousLR0ParseTableException
+    {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0GotoAction(0));
+
+        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("b"), new LR0ReduceAction(0));
+        assertion.validate();
     }
 
     @Test
-    public void testValidateThrowsExceptionForReduceActionWhenTableContainsGotoActionForTheSameState()
+    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsGotoActionForDifferentState() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0GotoAction(0));
+
+        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, otherState, new TerminalNode("a"), new LR0ReduceAction(0));
+        assertion.validate();
+    }
+
+    @Test(expected = AmbiguousLR0ParseTableException.class)
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsAcceptActionForTheSameState() throws AmbiguousLR0ParseTableException
+    {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0AcceptAction());
+
+        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("b"), new LR0ReduceAction(0));
+        assertion.validate();
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsGotoActionForDifferentState()
+    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsAcceptActionForDifferentState() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
-    }
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-    @Test
-    public void testValidateThrowsExceptionForReduceActionWhenTableContainsAcceptActionForTheSameState()
-    {
-        throw new RuntimeException();
-    }
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
-    @Test
-    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsAcceptActionForDifferentState()
-    {
-        throw new RuntimeException();
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0AcceptAction());
+
+        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, otherState, new TerminalNode("a"), new LR0ReduceAction(0));
+        assertion.validate();
     }
 
     @Test
