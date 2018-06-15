@@ -269,7 +269,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForGotActionWhenTableContainsShiftActionForTheSameStateAndDifferentSymbol()
+    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsShiftActionForTheSameStateAndDifferentSymbol()
     {
         throw new RuntimeException();
     }
