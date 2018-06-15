@@ -64,7 +64,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForShiftActionWhenTableContainsReduceActionForTheSameState() throws AmbiguousLR0ParseTableException
+    public void testValidateThrowsExceptionForShiftActionWhenTableContainsReduceForTheSameState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -79,7 +79,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsReduceActionForDifferentState() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsReduceForDifferentState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -95,7 +95,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForShiftActionWhenTableContainsGotoActionForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
+    public void testValidateThrowsExceptionForShiftActionWhenTableContainsGotoForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -110,7 +110,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsGotoActionForTheSameStateAndDifferentSymbol() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsGotoForTheSameStateAndDifferentSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -125,7 +125,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsGotoActionForDifferentStateAndTheSameSymbol() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsGotoForDifferentStateAndTheSameSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -141,7 +141,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForShiftActionWhenTableContainsAcceptActionForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
+    public void testValidateThrowsExceptionForShiftActionWhenTableContainsAcceptForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -156,7 +156,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsAcceptActionForTheSameStateAndDifferentSymbol() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsAcceptForTheSameStateAndDifferentSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -171,7 +171,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsAcceptActionForDifferentStateAndTheSameSymbol() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForShiftActionWhenTableContainsAcceptForDifferentStateAndTheSameSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -187,7 +187,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForReduceActionWhenTableContainsShiftActionForTheSameState() throws AmbiguousLR0ParseTableException
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsShiftForTheSameState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -202,7 +202,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsShiftActionForDifferentState() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsShiftForDifferentState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -233,7 +233,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsReduceActionForDifferentState() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsReduceForDifferentState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -249,7 +249,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForReduceActionWhenTableContainsGotoActionForTheSameState() throws AmbiguousLR0ParseTableException
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsGotoForTheSameState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -264,7 +264,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsGotoActionForDifferentState() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsGotoForDifferentState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -280,7 +280,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForReduceActionWhenTableContainsAcceptActionForTheSameState() throws AmbiguousLR0ParseTableException
+    public void testValidateThrowsExceptionForReduceActionWhenTableContainsAcceptForTheSameState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -295,7 +295,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsAcceptActionForDifferentState() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForReduceActionWhenTableContainsAcceptForDifferentState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -311,7 +311,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForGotoActionWhenTableContainsShiftActionForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
+    public void testValidateThrowsExceptionForGotoActionWhenTableContainsShiftForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -326,7 +326,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsShiftActionForTheSameStateAndDifferentSymbol() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsShiftForTheSameStateAndDifferentSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -341,7 +341,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsShiftActionForDifferentStateAndTheSameSymbol() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsShiftForDifferentStateAndTheSameSymbol() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -357,7 +357,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForGotoActionWhenTableContainsReduceActionForTheSameState() throws AmbiguousLR0ParseTableException
+    public void testValidateThrowsExceptionForGotoActionWhenTableContainsReduceForTheSameState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -372,7 +372,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsReduceActionForDifferentState() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForGotoActionWhenTableContainsReduceForDifferentState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -526,7 +526,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testValidateThrowsExceptionForAcceptActionWhenTableContainsReduceActionForTheSameState() throws AmbiguousLR0ParseTableException
+    public void testValidateThrowsExceptionForAcceptActionWhenTableContainsReduceForTheSameState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -541,7 +541,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForAcceptActionWhenTableContainsReduceActionForDifferentState() throws AmbiguousLR0ParseTableException
+    public void testValidateDoesNotThrowExceptionForAcceptActionWhenTableContainsReduceForDifferentState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
