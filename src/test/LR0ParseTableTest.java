@@ -22,7 +22,7 @@ import java.util.Map;
 public class LR0ParseTableTest
 {
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testAddCellThrowsExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
+    public void testAddCellThrowsExceptionForCellThatAlreadyExists() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -35,7 +35,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testAddCellDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForTheSameStateAndDifferentSymbol() throws AmbiguousLR0ParseTableException
+    public void testAddCellDoesNotThrowExceptionForCellThatDoesNotAlreadyExist() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -45,87 +45,6 @@ public class LR0ParseTableTest
         LR0ParseTable parseTable = new LR0ParseTable(cfg);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
         parseTable.addCell(state, new TerminalNode("b"), new LR0ShiftAction(0));
-    }
-
-    @Test
-    public void testAddCellDoesNotThrowExceptionForShiftActionWhenTableContainsShiftForDifferentStateAndTheSameSymbol() throws AmbiguousLR0ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
-        parseTable.addCell(otherState, new TerminalNode("a"), new LR0ShiftAction(0));
-    }
-
-    @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testAddCellThrowsExceptionForReduceActionWhenTableContainsReduceForTheSameState() throws AmbiguousLR0ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-        parseTable.addCell(state, new TerminalNode("b"), new LR0ReduceAction(1));
-    }
-
-    @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testAddCellThrowsExceptionForShiftActionWhenTableContainsReduceActionWithTheSameState() throws AmbiguousLR0ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-        parseTable.addCell(state, new TerminalNode("b"), new LR0ShiftAction(0));
-    }
-
-    @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testAddCellThrowsExceptionForReduceActionWhenTableContainsShiftActionWithTheSameState() throws AmbiguousLR0ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
-        parseTable.addCell(state, new TerminalNode("b"), new LR0ReduceAction(0));
-    }
-
-    @Test
-    public void testAddDoesNotThrowExceptionForShiftActionWhenTableContainsReduceActionWithDifferentState() throws AmbiguousLR0ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-        parseTable.addCell(otherState, new TerminalNode("a"), new LR0ShiftAction(0));
-    }
-
-    @Test
-    public void testAddCellDoesNotThrowExceptionForReduceActionWhenTableContainsShiftActionWithDifferentState() throws AmbiguousLR0ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(0));
-        parseTable.addCell(otherState, new TerminalNode("a"), new LR0ReduceAction(0));
     }
 
     @Test
