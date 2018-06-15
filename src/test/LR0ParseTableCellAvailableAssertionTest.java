@@ -525,16 +525,35 @@ public class LR0ParseTableCellAvailableAssertionTest
         assertion.validate();
     }
 
-    @Test
-    public void testValidateThrowsExceptionForAcceptActionWhenTableContainsReduceActionForTheSameState()
+    @Test(expected = AmbiguousLR0ParseTableException.class)
+    public void testValidateThrowsExceptionForAcceptActionWhenTableContainsReduceActionForTheSameState() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("b"), new LR0AcceptAction());
+        assertion.validate();
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForAcceptActionWhenTableContainsReduceActionForDifferentState()
+    public void testValidateDoesNotThrowExceptionForAcceptActionWhenTableContainsReduceActionForDifferentState() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, otherState, new TerminalNode("a"), new LR0AcceptAction());
+        assertion.validate();
     }
 
     @Test
