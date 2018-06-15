@@ -11,7 +11,7 @@ import larp.parsetree.contextfreelanguage.TerminalNode;
 public class LL1ParseTableTest
 {
     @Test(expected = AmbiguousLL1ParseTableException.class)
-    public void testAddCellThrowsExceptionForTwoCellsWithTheSameNonTerminalAndTerminal() throws AmbiguousLL1ParseTableException
+    public void testAddCellThrowsExceptionForCellThatAlreadyExists() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -22,7 +22,7 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testAddCellDoesNotThrowExceptionForTwoCellsWithTheSameNonTerminalAndDifferentTerminals() throws AmbiguousLL1ParseTableException
+    public void testAddCellDoesNotThrowExceptionForCellThatDoesNotAlreadyExist() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -30,17 +30,6 @@ public class LL1ParseTableTest
         LL1ParseTable parseTable = new LL1ParseTable(cfg);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
-    }
-
-    @Test
-    public void testAddCellDoesNotThrowExceptionForTwoCellsWithDifferentNonTerminalsAndTheSameTerminal() throws AmbiguousLL1ParseTableException
-    {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-
-        LL1ParseTable parseTable = new LL1ParseTable(cfg);
-        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
-        parseTable.addCell(new NonTerminalNode("T"), new TerminalNode("a"), 0);
     }
 
     @Test
