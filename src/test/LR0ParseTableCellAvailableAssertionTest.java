@@ -330,6 +330,24 @@ public class LR0ParseTableCellAvailableAssertionTest
         throw new RuntimeException();
     }
 
+    @Test
+    public void testValidateThrowsExceptionForAcceptActionWhenTableContainsGotoForTheSameStateAndSymbol()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForAcceptActionWhenTableContainsGotoForTheSameStateAndDifferentSymbol()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateDoesNotThrowExceptionForAcceptActionWhenTableContainsGotoForDifferentStateAndTheSameSymbol()
+    {
+        throw new RuntimeException();
+    }
+
     @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testValidateThrowsExceptionForAcceptActionWhenTableContainsAcceptForTheSameStateAndSymbol() throws AmbiguousLR0ParseTableException
     {
