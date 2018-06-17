@@ -21,16 +21,6 @@ public class LR0ParseTableCellAvailableAssertion implements Assertion
 
     public void validate() throws AmbiguousLR0ParseTableException
     {
-        if (this.parseTable.getRow(this.state) != null)
-        {
-            throw new AmbiguousLR0ParseTableException();
-        }
-
-        if (action.isRowLevelAction() && this.parseTable.hasCellWithinRow(this.state))
-        {
-            throw new AmbiguousLR0ParseTableException();
-        }
-
         if (this.parseTable.getCell(this.state, this.syntaxNode) != null)
         {
             throw new AmbiguousLR0ParseTableException();
