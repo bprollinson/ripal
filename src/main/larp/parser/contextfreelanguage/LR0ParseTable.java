@@ -8,24 +8,24 @@ import larp.util.PairToValueMap;
 public class LR0ParseTable
 {
     private ContextFreeGrammar contextFreeGrammar;
-    private PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> table;
+    private PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> cells;
 
     public LR0ParseTable(ContextFreeGrammar contextFreeGrammar)
     {
         this.contextFreeGrammar = contextFreeGrammar;
-        this.table = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+        this.cells = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
     }
 
     public void addCell(State state, ContextFreeGrammarSyntaxNode syntaxNode, LR0ParseTableAction action) throws AmbiguousLR0ParseTableException
     {
         new LR0ParseTableCellAvailableAssertion(this, state, syntaxNode, action).validate();
 
-        this.table.put(state, syntaxNode, action);
+        this.cells.put(state, syntaxNode, action);
     }
 
     public LR0ParseTableAction getCell(State state, ContextFreeGrammarSyntaxNode syntaxNode)
     {
-        return this.table.get(state, syntaxNode);
+        return this.cells.get(state, syntaxNode);
     }
 
     public ContextFreeGrammar getContextFreeGrammar()
@@ -33,9 +33,9 @@ public class LR0ParseTable
         return this.contextFreeGrammar;
     }
 
-    public PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> getTable()
+    public PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> getCells()
     {
-        return this.table;
+        return this.cells;
     }
 
     public boolean equals(Object other)
@@ -50,6 +50,6 @@ public class LR0ParseTable
             return false;
         }
 
-        return this.table.equals(((LR0ParseTable)other).getTable());
+        return this.cells.equals(((LR0ParseTable)other).getCells());
     }
 }

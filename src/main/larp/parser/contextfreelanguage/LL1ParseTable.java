@@ -3,45 +3,29 @@ package larp.parser.contextfreelanguage;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
-
-import java.util.HashMap;
-import java.util.Map;
+import larp.util.PairToValueMap;
 
 public class LL1ParseTable
 {
     private ContextFreeGrammar contextFreeGrammar;
-    private Map<NonTerminalNode, Map<ContextFreeGrammarSyntaxNode, Integer>> table;
+    private PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> cells;
 
     public LL1ParseTable(ContextFreeGrammar contextFreeGrammar)
     {
         this.contextFreeGrammar = contextFreeGrammar;
-        this.table = new HashMap<NonTerminalNode, Map<ContextFreeGrammarSyntaxNode, Integer>>();
+        this.cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer>();
     }
 
     public void addCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode, int contextFreeGrammarRuleIndex) throws AmbiguousLL1ParseTableException
     {
         new LL1ParseTableCellAvailableAssertion(this, nonTerminalNode, terminalNode).validate();
 
-        Map<ContextFreeGrammarSyntaxNode, Integer> entry = this.table.get(nonTerminalNode);
-        if (entry == null)
-        {
-            entry = new HashMap<ContextFreeGrammarSyntaxNode, Integer>();
-        }
-
-        entry.put(terminalNode, contextFreeGrammarRuleIndex);
-        this.table.put(nonTerminalNode, entry);
+        this.cells.put(nonTerminalNode, terminalNode, contextFreeGrammarRuleIndex);
     }
 
     public Integer getCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode)
     {
-        Integer position = null;
-        Map<ContextFreeGrammarSyntaxNode, Integer> entry = this.table.get(nonTerminalNode);
-        if (entry != null)
-        {
-            position = entry.get(terminalNode);
-        }
-
-        return position;
+        return this.cells.get(nonTerminalNode, terminalNode);
     }
 
     public ContextFreeGrammar getContextFreeGrammar()
@@ -49,9 +33,9 @@ public class LL1ParseTable
         return this.contextFreeGrammar;
     }
 
-    public Map<NonTerminalNode, Map<ContextFreeGrammarSyntaxNode, Integer>> getTable()
+    public PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> getCells()
     {
-        return this.table;
+        return this.cells;
     }
 
     public boolean equals(Object other)
@@ -66,6 +50,6 @@ public class LL1ParseTable
             return false;
         }
 
-        return this.table.equals(((LL1ParseTable)other).getTable());
+        return this.cells.equals(((LL1ParseTable)other).getCells());
     }
 }
