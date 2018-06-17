@@ -20,4 +20,28 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testCompileReturnsParseTableForSingleNonTerminalAndSingleTerminalProductionCFG()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCompileHandlesMultipleNonTrivialProductionsWithinTheSameState()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCompileReturnsParseTableWithNonTerminalChain()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCompileReturnsParseTableWithTerminalChain()
+    {
+        assertEquals(0, 1);
+    }
 }
