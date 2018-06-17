@@ -38,6 +38,12 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test
+    public void testCompilerReturnsEmptyParseTableForSingleNonTerminalProductionCFG()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
     public void testCompileReturnsParseTableForSingleNonTerminalAndSingleTerminalProductionCFG() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
