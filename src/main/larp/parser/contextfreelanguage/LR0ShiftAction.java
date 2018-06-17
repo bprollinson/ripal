@@ -11,11 +11,6 @@ public class LR0ShiftAction implements LR0ParseTableAction
         this.state = state;
     }
 
-    public boolean isRowLevelAction()
-    {
-        return false;
-    }
-
     public State getState()
     {
         return this.state;
