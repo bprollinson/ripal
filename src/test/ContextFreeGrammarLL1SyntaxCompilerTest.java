@@ -38,9 +38,16 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test
-    public void testCompilerReturnsEmptyParseTableForSingleNonTerminalProductionCFG()
+    public void testCompilerReturnsEmptyParseTableForSingleNonTerminalProductionCFG() throws AmbiguousLL1ParseTableException
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+
+        LL1ParseTable expectedTable = new LL1ParseTable(grammar);
+
+        assertEquals(expectedTable, compiler.compile(grammar));
     }
 
     @Test
