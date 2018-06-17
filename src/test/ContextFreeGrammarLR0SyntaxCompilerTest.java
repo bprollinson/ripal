@@ -50,4 +50,16 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testCompileThrowsExceptionForShiftReduceConflict()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCompileThrowsExceptionForReduceReduceConflict()
+    {
+        assertEquals(0, 1);
+    }
 }
