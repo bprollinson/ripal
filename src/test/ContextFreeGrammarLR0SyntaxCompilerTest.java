@@ -44,4 +44,10 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     {
         assertEquals(0, 1);
     }
+
+    @Test
+    public void testCompileReturnsTableForCFGWithDFAContainingCycle()
+    {
+        assertEquals(0, 1);
+    }
 }
