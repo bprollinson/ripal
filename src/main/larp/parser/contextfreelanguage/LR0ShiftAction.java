@@ -1,12 +1,14 @@
 package larp.parser.contextfreelanguage;
 
+import larp.parser.regularlanguage.State;
+
 public class LR0ShiftAction implements LR0ParseTableAction
 {
-    private int stateIndex;
+    private State state;
 
-    public LR0ShiftAction(int stateIndex)
+    public LR0ShiftAction(State state)
     {
-        this.stateIndex = stateIndex;
+        this.state = state;
     }
 
     public boolean isRowLevelAction()
@@ -14,9 +16,9 @@ public class LR0ShiftAction implements LR0ParseTableAction
         return false;
     }
 
-    public int getStateIndex()
+    public State getState()
     {
-        return this.stateIndex;
+        return this.state;
     }
 
     public boolean equals(Object other)
@@ -26,6 +28,6 @@ public class LR0ShiftAction implements LR0ParseTableAction
             return false;
         }
 
-        return this.stateIndex == ((LR0ShiftAction)other).getStateIndex();
+        return this.state.equals(((LR0ShiftAction)other).getState());
     }
 }

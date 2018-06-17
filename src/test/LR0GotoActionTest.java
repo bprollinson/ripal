@@ -12,7 +12,7 @@ import java.util.HashSet;
 public class LR0GotoActionTest
 {
     @Test
-    public void testEqualsReturnsTrueForGotoActionWithSameStateIndex()
+    public void testEqualsReturnsTrueForGotoActionWithSameState()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0GotoAction action = new LR0GotoAction(state);
@@ -22,7 +22,7 @@ public class LR0GotoActionTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForGotoActionWithDifferentStateIndex()
+    public void testEqualsReturnsFalseForGotoActionWithDifferentState()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0GotoAction action = new LR0GotoAction(state);
@@ -36,8 +36,9 @@ public class LR0GotoActionTest
     public void testEqualsReturnsFalseForActionOfOtherType()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0GotoAction action = new LR0GotoAction(state);
-        LR0ShiftAction otherAction = new LR0ShiftAction(1);
+        LR0ShiftAction otherAction = new LR0ShiftAction(otherState);
 
         assertFalse(action.equals(otherAction));
     }
