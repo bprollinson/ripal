@@ -1,12 +1,14 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarLR0SyntaxCompiler;
+
 public class ContextFreeGrammarLR0SyntaxCompilerTest
 {
     @Test
     public void testCompileReturnsEmptyParseTableForEmptyCFG()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
     }
 
     @Test
