@@ -101,7 +101,13 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileHandlesMultipleNonTrivialProductionsWithinTheSameState()
+    public void testCompileHandlesMultipleTerminalProductionsWithinTheSameState()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCompileHandlesMultipleNonTerminalProductionsWithinTheSameState()
     {
         assertEquals(0, 1);
     }
