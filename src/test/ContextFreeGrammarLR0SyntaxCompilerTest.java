@@ -161,14 +161,9 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         expectedTable.addCell(state4, new EndOfStringNode(), new LR0ReduceAction(4));
         expectedTable.addCell(state5, new TerminalNode("c"), new LR0ReduceAction(5));
         expectedTable.addCell(state5, new EndOfStringNode(), new LR0ReduceAction(5));
+        expectedTable.addCell(state6, new EndOfStringNode(), new LR0AcceptAction());
 
         assertEquals(expectedTable, compiler.compile(grammar));
-    }
-
-    @Test
-    public void testCompileReturnsParseTableWithNonTerminalChain()
-    {
-        assertEquals(0, 1);
     }
 
     @Test
