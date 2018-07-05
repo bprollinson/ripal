@@ -130,9 +130,39 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileHandlesMultipleNonTerminalProductionsWithinTheSameState()
+    public void testCompileHandlesMultipleNonTerminalProductionsWithinTheSameState() throws AmbiguousLR0ParseTableException
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
+        grammar.addProduction(new NonTerminalNode("C"), new NonTerminalNode("D"));
+        grammar.addProduction(new NonTerminalNode("D"), new TerminalNode("d"));
+
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state6 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        expectedTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state2));
+        expectedTable.addCell(state1, new NonTerminalNode("B"), new LR0GotoAction(state3));
+        expectedTable.addCell(state1, new NonTerminalNode("C"), new LR0GotoAction(state4));
+        expectedTable.addCell(state1, new TerminalNode("c"), new LR0ShiftAction(state5));
+        expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state6));
+        expectedTable.addCell(state2, new TerminalNode("c"), new LR0ReduceAction(2));
+        expectedTable.addCell(state2, new EndOfStringNode(), new LR0ReduceAction(2));
+        expectedTable.addCell(state3, new TerminalNode("c"), new LR0ReduceAction(3));
+        expectedTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(3));
+        expectedTable.addCell(state4, new TerminalNode("c"), new LR0ReduceAction(4));
+        expectedTable.addCell(state4, new EndOfStringNode(), new LR0ReduceAction(4));
+        expectedTable.addCell(state5, new TerminalNode("c"), new LR0ReduceAction(5));
+        expectedTable.addCell(state5, new EndOfStringNode(), new LR0ReduceAction(5));
+
+        assertEquals(expectedTable, compiler.compile(grammar));
     }
 
     @Test
