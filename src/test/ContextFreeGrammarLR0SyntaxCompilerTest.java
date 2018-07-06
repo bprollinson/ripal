@@ -135,10 +135,10 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
-        grammar.addProduction(new NonTerminalNode("C"), new NonTerminalNode("D"));
-        grammar.addProduction(new NonTerminalNode("D"), new TerminalNode("d"));
+        grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
 
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
