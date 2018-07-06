@@ -167,9 +167,31 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileReturnsParseTableWithTerminalChain()
+    public void testCompileReturnsParseTableWithTerminalChain() throws AmbiguousLR0ParseTableException
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"), new TerminalNode("c"));
+
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        expectedTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
+        expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state5));
+        expectedTable.addCell(state2, new TerminalNode("b"), new LR0ShiftAction(state3));
+        expectedTable.addCell(state3, new TerminalNode("c"), new LR0ShiftAction(state4));
+        expectedTable.addCell(state4, new TerminalNode("a"), new LR0ReduceAction(2));
+        expectedTable.addCell(state4, new TerminalNode("b"), new LR0ReduceAction(2));
+        expectedTable.addCell(state4, new TerminalNode("c"), new LR0ReduceAction(2));
+        expectedTable.addCell(state4, new EndOfStringNode(), new LR0ReduceAction(2));
+        expectedTable.addCell(state5, new EndOfStringNode(), new LR0AcceptAction());
+
+        assertEquals(expectedTable, compiler.compile(grammar));
     }
 
     @Test
