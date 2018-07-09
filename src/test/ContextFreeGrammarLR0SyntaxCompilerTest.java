@@ -195,9 +195,27 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileReturnsTableForCFGWithDFAContainingCycle()
+    public void testCompileReturnsTableForCFGWithDFAContainingCycle() throws AmbiguousLR0ParseTableException
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
+
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        expectedTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state2));
+        expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state4));
+        expectedTable.addCell(state2, new NonTerminalNode("A"), new LR0GotoAction(state2));
+        expectedTable.addCell(state2, new NonTerminalNode("S"), new LR0GotoAction(state3));
+        expectedTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(2));
+        expectedTable.addCell(state4, new EndOfStringNode(), new LR0AcceptAction());
+
+        assertEquals(expectedTable, compiler.compile(grammar));
     }
 
     @Test
