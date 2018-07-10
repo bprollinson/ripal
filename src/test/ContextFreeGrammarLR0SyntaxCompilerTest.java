@@ -224,9 +224,15 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         assertEquals(0, 1);
     }
 
-    @Test
+    @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testCompileThrowsExceptionForReduceReduceConflict()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        compiler.compile(grammar);
     }
 }
