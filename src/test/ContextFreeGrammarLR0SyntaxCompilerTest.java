@@ -218,10 +218,16 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         assertEquals(expectedTable, compiler.compile(grammar));
     }
 
-    @Test
+    @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testCompileThrowsExceptionForShiftReduceConflict()
     {
-        assertEquals(0, 1);
+        ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
+
+        compiler.compile(grammar);
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
