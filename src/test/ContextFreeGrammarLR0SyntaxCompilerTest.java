@@ -101,7 +101,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileHandlesMultipleTerminalProductionsWithinTheSameState() throws AmbiguousLR0ParseTableException
+    public void testCompileHandlesMultipleTerminalProductionsWithinTheSameInitialState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
 
@@ -130,7 +130,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileHandlesMultipleNonTerminalProductionsWithinTheSameState() throws AmbiguousLR0ParseTableException
+    public void testCompileHandlesMultipleNonTerminalProductionsWithinTheSameInitialState() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
 
@@ -164,6 +164,18 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         expectedTable.addCell(state6, new EndOfStringNode(), new LR0AcceptAction());
 
         assertEquals(expectedTable, compiler.compile(grammar));
+    }
+
+    @Test
+    public void testCompileHandlesMultipleTerminalProductionsWithinTheSameSubsequentState()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCompileHandlesMultipleNonTerminalProductionsWithinTheSameSubsequentState()
+    {
+        assertEquals(0, 1);
     }
 
     @Test
