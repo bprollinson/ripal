@@ -127,4 +127,16 @@ public class LR0ParseTableTest
 
         assertTrue(parseTable.equals(otherParseTable));
     }
+
+    @Test
+    public void testStructureEqualsReturnsTrue()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testStructureEqualsReturnsFalse()
+    {
+        throw new RuntimeException();
+    }
 }
