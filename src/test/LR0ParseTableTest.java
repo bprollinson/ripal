@@ -129,13 +129,36 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrue()
+    public void testStructureEqualsReturnsTrueForEmptyTableAndCFG()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
 
         LR0ParseTable parseTable = new LR0ParseTable(cfg);
-        parseTable.structureEquals(new LR0ParseTable(cfg));
 
+        assertTrue(parseTable.structureEquals(new LR0ParseTable(cfg)));
+    }
+
+    @Test
+    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGContainingTerminalWithSameStates()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGContainingNonTerminalWithSameStates()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGContainingTerminalAndNonTerminalWithSameStates()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGWithAnalogousStates()
+    {
         throw new RuntimeException();
     }
 
