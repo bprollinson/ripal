@@ -1,11 +1,12 @@
 package larp.parser.contextfreelanguage;
 
+import larp.ComparableStructure;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.regularlanguage.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.util.PairToValueMap;
 
-public class LR0ParseTable
+public class LR0ParseTable implements ComparableStructure
 {
     private ContextFreeGrammar contextFreeGrammar;
     private PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> cells;
@@ -51,5 +52,10 @@ public class LR0ParseTable
         }
 
         return this.cells.equals(((LR0ParseTable)other).getCells());
+    }
+
+    public boolean structureEquals(Object other)
+    {
+        return false;
     }
 }

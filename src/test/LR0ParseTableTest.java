@@ -131,6 +131,11 @@ public class LR0ParseTableTest
     @Test
     public void testStructureEqualsReturnsTrue()
     {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.structureEquals(new LR0ParseTable(cfg));
+
         throw new RuntimeException();
     }
 
