@@ -163,7 +163,19 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalse()
+    public void testStructureEqualsReturnsTrueForTablesContainingCycle()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testStructureEqualsReturnsFalseForActionPresentInOnlyOneTable()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testStructureEqualsReturnsFalseForDifferentActionBetweenTables()
     {
         throw new RuntimeException();
     }
