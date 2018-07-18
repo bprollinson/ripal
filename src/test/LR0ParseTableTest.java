@@ -193,15 +193,23 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGWithAnalogousStates()
+    public void testStructureEqualsReturnsFalseForDifferentCFGs() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
-    }
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-    @Test
-    public void testStructureEqualsReturnsTrueForTablesContainingCycle()
-    {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
+
+        ContextFreeGrammar otherCfg = new ContextFreeGrammar();
+        otherCfg.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
+
+        LR0ParseTable otherParseTable = new LR0ParseTable(otherCfg);
+        otherParseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
+
+        assertFalse(parseTable.structureEquals(otherParseTable));
     }
 
     @Test
@@ -268,5 +276,17 @@ public class LR0ParseTableTest
         otherParseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state1));
 
         assertFalse(parseTable.structureEquals(otherParseTable));
+    }
+
+    @Test
+    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGWithAnalogousStates()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testStructureEqualsReturnsTrueForTablesContainingCycle()
+    {
+        throw new RuntimeException();
     }
 }
