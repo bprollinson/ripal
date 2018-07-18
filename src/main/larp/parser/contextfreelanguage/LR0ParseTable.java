@@ -56,6 +56,6 @@ public class LR0ParseTable implements ComparableStructure
 
     public boolean structureEquals(Object other)
     {
-        return false;
+        return this.equals(other);
     }
 }
