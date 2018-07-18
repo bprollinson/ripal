@@ -198,7 +198,13 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForDifferentActionBetweenTables()
+    public void testStructureEqualsReturnsFalseForDifferentActionTypeBetweenTables()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testStructureEqualsReturnsFalseForDifferentActionInstanceBetweenTables()
     {
         throw new RuntimeException();
     }
