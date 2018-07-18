@@ -192,7 +192,13 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForActionPresentInOnlyOneTable()
+    public void testStructureEqualsReturnsFalseForActionPresentInOnlyFirstTable()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testStructureEqualsReturnsFalseForActionPresentInOnlySecondTable()
     {
         throw new RuntimeException();
     }
