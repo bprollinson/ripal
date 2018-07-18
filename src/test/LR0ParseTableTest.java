@@ -140,7 +140,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGContainingTerminalWithSameStates() throws AmbiguousLR0ParseTableException
+    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGContainingTerminalInSameSpot() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
 
@@ -157,7 +157,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGContainingNonTerminalWithSameStates() throws AmbiguousLR0ParseTableException
+    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGContainingNonTerminalInSameSpot() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
 
@@ -174,9 +174,22 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGContainingTerminalAndNonTerminalWithSameStates()
+    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGContainingTerminalAndNonTerminalInSameSpots() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
+        parseTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state2));
+
+        LR0ParseTable otherParseTable = new LR0ParseTable(cfg);
+        otherParseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
+        otherParseTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state2));
+
+        assertTrue(parseTable.structureEquals(otherParseTable));
     }
 
     @Test
