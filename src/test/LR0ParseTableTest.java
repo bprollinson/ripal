@@ -293,6 +293,9 @@ public class LR0ParseTableTest
     @Test
     public void testStructureEqualsReturnsFalseForObjectOfOtherType()
     {
-        throw new RuntimeException();
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+
+        assertFalse(parseTable.structureEquals(new Object()));
     }
 }
