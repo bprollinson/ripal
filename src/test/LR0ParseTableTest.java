@@ -298,6 +298,12 @@ public class LR0ParseTableTest
     }
 
     @Test
+    public void testStructureEqualsReturnsTrueForAnalogousShiftAction()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrueForAnalogousReduceAction() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
@@ -312,6 +318,12 @@ public class LR0ParseTableTest
         otherParseTable.addCell(otherState1, new TerminalNode("a"), new LR0ReduceAction(0));
 
         assertTrue(parseTable.structureEquals(otherParseTable));
+    }
+
+    @Test
+    public void testStructureEqualsReturnsTrueForAnalogousGotoAction()
+    {
+        throw new RuntimeException();
     }
 
     @Test
