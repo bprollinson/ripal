@@ -36,6 +36,11 @@ public class LR0ParseTable implements ComparableStructure
         return this.contextFreeGrammar;
     }
 
+    public int size()
+    {
+        return 0;
+    }
+
     public PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> getCells()
     {
         return this.cells;
