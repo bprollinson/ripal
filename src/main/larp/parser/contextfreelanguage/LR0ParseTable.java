@@ -56,6 +56,11 @@ public class LR0ParseTable implements ComparableStructure
 
     public boolean structureEquals(Object other)
     {
+        if (!(other instanceof LR0ParseTable))
+        {
+            return false;
+        }
+
         if (!this.contextFreeGrammar.equals(((LR0ParseTable)other).getContextFreeGrammar()))
         {
             return false;
