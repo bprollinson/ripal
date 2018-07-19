@@ -6,8 +6,6 @@ import larp.parser.regularlanguage.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.util.PairToValueMap;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class LR0ParseTable implements ComparableStructure
@@ -71,15 +69,12 @@ public class LR0ParseTable implements ComparableStructure
             return false;
         }
 
-        List<Map.Entry<State, ContextFreeGrammarSyntaxNode>> ourCoveredInputs = new ArrayList<Map.Entry<State, ContextFreeGrammarSyntaxNode>>();
-        List<Map.Entry<State, ContextFreeGrammarSyntaxNode>> otherCoveredInputs = new ArrayList<Map.Entry<State, ContextFreeGrammarSyntaxNode>>();
-
-        return new LR0ParseTableComparator().equalsTable(this, otherTable, ourCoveredInputs, otherCoveredInputs);
+        return new LR0ParseTableComparator().equalsTable(this, otherTable);
     }
 
     protected class LR0ParseTableComparator
     {
-        public boolean equalsTable(LR0ParseTable table, LR0ParseTable otherTable, List<Map.Entry<State, ContextFreeGrammarSyntaxNode>> ourCoveredInputs, List<Map.Entry<State, ContextFreeGrammarSyntaxNode>> otherCoveredInputs)
+        public boolean equalsTable(LR0ParseTable table, LR0ParseTable otherTable)
         {
             PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourCells = table.getCells();
             Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> ourMap = ourCells.getMap();
