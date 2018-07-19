@@ -290,7 +290,7 @@ public class LR0ParseTableTest
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
 
         LR0ParseTable otherParseTable = new LR0ParseTable(cfg);
-        parseTable.addCell(otherState1, new TerminalNode("a"), new LR0ReduceAction(0));
+        otherParseTable.addCell(otherState1, new TerminalNode("a"), new LR0ReduceAction(0));
 
         assertTrue(parseTable.structureEquals(otherParseTable));
     }

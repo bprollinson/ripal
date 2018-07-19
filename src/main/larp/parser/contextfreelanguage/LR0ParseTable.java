@@ -81,7 +81,35 @@ public class LR0ParseTable implements ComparableStructure
     {
         public boolean equalsTable(LR0ParseTable table, LR0ParseTable otherTable, List<Map.Entry<State, ContextFreeGrammarSyntaxNode>> ourCoveredInputs, List<Map.Entry<State, ContextFreeGrammarSyntaxNode>> otherCoveredInputs)
         {
-            return table.getCells().equals(otherTable.getCells());
+            PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourCells = table.getCells();
+            Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> ourMap = ourCells.getMap();
+
+            PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> otherCells = otherTable.getCells();
+            Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherMap = otherCells.getMap();
+
+            for (Map.Entry<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> ourEntry: ourMap.entrySet())
+            {
+                boolean found = false;
+                Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourValue = ourEntry.getValue();
+
+                for (Map.Entry<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherEntry: otherMap.entrySet())
+                {
+                    Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> otherValue = otherEntry.getValue();
+
+                    if (ourValue.equals(otherValue))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
