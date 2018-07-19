@@ -289,4 +289,10 @@ public class LR0ParseTableTest
     {
         throw new RuntimeException();
     }
+
+    @Test
+    public void testStructureEqualsReturnsFalseForObjectOfOtherType()
+    {
+        throw new RuntimeException();
+    }
 }
