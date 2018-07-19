@@ -84,6 +84,11 @@ public class LR0ParseTable implements ComparableStructure
     {
         public boolean equalsTable(LR0ParseTable table, LR0ParseTable otherTable)
         {
+            if (table.size() != otherTable.size())
+            {
+                return false;
+            }
+
             PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourCells = table.getCells();
             Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> ourMap = ourCells.getMap();
 
