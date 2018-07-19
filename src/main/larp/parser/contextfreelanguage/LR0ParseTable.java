@@ -66,6 +66,14 @@ public class LR0ParseTable implements ComparableStructure
             return false;
         }
 
-        return this.cells.equals(((LR0ParseTable)other).getCells());
+        return new LR0ParseTableComparator().equalsTable(this, (LR0ParseTable)other);
+    }
+
+    protected class LR0ParseTableComparator
+    {
+        public boolean equalsTable(LR0ParseTable table, LR0ParseTable otherTable)
+        {
+            return table.getCells().equals(otherTable.getCells());
+        }
     }
 }
