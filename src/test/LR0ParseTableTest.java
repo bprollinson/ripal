@@ -338,6 +338,12 @@ public class LR0ParseTableTest
     }
 
     @Test
+    public void testStructureEqualsReturnsTrueForAnalogousAcceptAction()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGWithAnalogousStates()
     {
         throw new RuntimeException();
