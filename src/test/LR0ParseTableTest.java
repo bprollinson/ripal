@@ -90,6 +90,12 @@ public class LR0ParseTableTest
     }
 
     @Test
+    public void testEqualsReturnsFalseForDifferentStartStates()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testEqualsReturnsFalseForDifferentCFGs() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
@@ -389,6 +395,12 @@ public class LR0ParseTableTest
         otherParseTable.addCell(otherState2, new TerminalNode("a"), new LR0GotoAction(otherState1));
 
         assertTrue(parseTable.structureEquals(otherParseTable));
+    }
+
+    @Test
+    public void testStructureEqualsReturnsFalseWhenStartStatesOutOfSync()
+    {
+        throw new RuntimeException();
     }
 
     @Test
