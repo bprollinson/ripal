@@ -11,12 +11,14 @@ import java.util.Map;
 public class LR0ParseTable implements ComparableStructure
 {
     private ContextFreeGrammar contextFreeGrammar;
+    private State startState;
     private int size;
     private PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> cells;
 
-    public LR0ParseTable(ContextFreeGrammar contextFreeGrammar)
+    public LR0ParseTable(ContextFreeGrammar contextFreeGrammar, State startState)
     {
         this.contextFreeGrammar = contextFreeGrammar;
+        this.startState = startState;
         this.size = 0;
         this.cells = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
     }

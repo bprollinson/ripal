@@ -25,7 +25,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar, null);
 
         assertEquals(expectedTable, compiler.compile(grammar));
     }
@@ -42,7 +42,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
-        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar, state1);
         expectedTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
         expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state3));
         expectedTable.addCell(state2, new TerminalNode("a"), new LR0ReduceAction(2));
@@ -64,7 +64,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
-        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar, state1);
         expectedTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state2));
         expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state3));
         expectedTable.addCell(state2, new EndOfStringNode(), new LR0ReduceAction(2));
@@ -87,7 +87,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
-        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar, state1);
         expectedTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
         expectedTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state3));
         expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state4));
@@ -114,7 +114,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
-        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar, state1);
         expectedTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
         expectedTable.addCell(state1, new TerminalNode("b"), new LR0ShiftAction(state3));
         expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state4));
@@ -147,7 +147,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state6 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
-        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar, state1);
         expectedTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state2));
         expectedTable.addCell(state1, new NonTerminalNode("B"), new LR0GotoAction(state3));
         expectedTable.addCell(state1, new NonTerminalNode("C"), new LR0GotoAction(state4));
@@ -182,7 +182,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
-        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar, state1);
         expectedTable.addCell(state1, new TerminalNode("x"), new LR0ShiftAction(state2));
         expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state5));
         expectedTable.addCell(state2, new TerminalNode("a"), new LR0ShiftAction(state3));
@@ -220,7 +220,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         LR0ProductionSetDFAState state6 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state7 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
-        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar, state1);
         expectedTable.addCell(state1, new TerminalNode("x"), new LR0ShiftAction(state2));
         expectedTable.addCell(state2, new NonTerminalNode("X"), new LR0GotoAction(state3));
         expectedTable.addCell(state2, new NonTerminalNode("A"), new LR0GotoAction(state4));
@@ -257,7 +257,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
-        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar, state1);
         expectedTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
         expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state5));
         expectedTable.addCell(state2, new TerminalNode("b"), new LR0ShiftAction(state3));
@@ -284,7 +284,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
-        LR0ParseTable expectedTable = new LR0ParseTable(grammar);
+        LR0ParseTable expectedTable = new LR0ParseTable(grammar, state1);
         expectedTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state2));
         expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state4));
         expectedTable.addCell(state2, new NonTerminalNode("A"), new LR0GotoAction(state2));

@@ -18,7 +18,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        LR0ParseTable parseTable = new LR0ParseTable(cfg, null);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
         LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("a"), new LR0ShiftAction(state));
 
@@ -30,7 +30,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ParseTable parseTable = new LR0ParseTable(cfg);
+        LR0ParseTable parseTable = new LR0ParseTable(cfg, null);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
         LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("b"), new LR0ShiftAction(state));
 
