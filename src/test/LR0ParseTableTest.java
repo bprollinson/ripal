@@ -92,7 +92,16 @@ public class LR0ParseTableTest
     @Test
     public void testEqualsReturnsFalseForDifferentStartStates()
     {
-        throw new RuntimeException();
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg, state);
+        LR0ParseTable otherParseTable = new LR0ParseTable(cfg, otherState);
+
+        assertFalse(parseTable.equals(otherParseTable));
     }
 
     @Test
