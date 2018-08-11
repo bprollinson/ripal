@@ -165,6 +165,12 @@ public class LR0ParseTableTest
     }
 
     @Test
+    public void testEqualsReturnsFalseWhenOrphanedEntriesNotEqual()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrueForEmptyTableAndCFG()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
@@ -424,6 +430,12 @@ public class LR0ParseTableTest
         otherParseTable.addCell(otherState1, new TerminalNode("a"), new LR0GotoAction(otherState2));
 
         assertFalse(parseTable.structureEquals(otherParseTable));
+    }
+
+    @Test
+    public void testStructureEqualsReturnsTrueWhenOrphanedEntriesNotEqual()
+    {
+        throw new RuntimeException();
     }
 
     @Test
