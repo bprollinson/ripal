@@ -439,6 +439,18 @@ public class LR0ParseTableTest
     }
 
     @Test
+    public void testStructureEqualsReturnsFalseForDifferentActionInstanceAfterShiftAction()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testStructureEqualsReturnsFalseForDifferentActionInstanceAfterGotoAction()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testStructureEqualsReturnsFalseForObjectOfOtherType()
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
