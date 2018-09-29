@@ -23,6 +23,11 @@ public class LR0ParseTable implements ComparableStructure
         this.cells = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
     }
 
+    public State getStartState()
+    {
+        return this.startState;
+    }
+
     public void addCell(State state, ContextFreeGrammarSyntaxNode syntaxNode, LR0ParseTableAction action) throws AmbiguousLR0ParseTableException
     {
         new LR0ParseTableCellAvailableAssertion(this, state, syntaxNode, action).validate();

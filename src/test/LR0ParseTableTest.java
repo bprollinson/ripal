@@ -37,6 +37,17 @@ public class LR0ParseTableTest
         assertEquals(3, parseTable.size());
     }
 
+    @Test
+    public void testGetStartState()
+    {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg, state);
+
+        assertEquals(state, parseTable.getStartState());
+    }
+
     @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testAddCellThrowsExceptionForCellThatAlreadyExists() throws AmbiguousLR0ParseTableException
     {
