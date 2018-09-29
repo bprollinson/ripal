@@ -490,9 +490,25 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForDifferentActionInstanceAfterGotoAction()
+    public void testStructureEqualsReturnsFalseForDifferentActionInstanceAfterGotoAction() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg, state1);
+        parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
+        parseTable.addCell(state2, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        LR0ParseTable otherParseTable = new LR0ParseTable(cfg, otherState1);
+        otherParseTable.addCell(otherState1, new TerminalNode("a"), new LR0GotoAction(otherState2));
+        otherParseTable.addCell(otherState2, new TerminalNode("a"), new LR0ReduceAction(1));
+
+        assertFalse(parseTable.structureEquals(otherParseTable));
     }
 
     @Test
