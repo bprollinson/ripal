@@ -112,7 +112,7 @@ public class LR0ParseTable implements ComparableStructure
                     LR0ParseTableAction ourAction = ourColumn.getValue();
 
                     LR0ParseTableAction otherAction = otherTable.getCell(ourState, ourNode);
-                    if (!objectClassesEqual(ourAction, otherAction))
+                    if (!this.objectClassesEqual(ourAction, otherAction))
                     {
                         return false;
                     }
