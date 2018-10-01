@@ -96,6 +96,11 @@ public class LR0ParseTable implements ComparableStructure
     {
         public boolean equalsCell(LR0ParseTable table, State startState, LR0ParseTable otherTable, State otherStartState)
         {
+            if (startState == null && otherStartState == null)
+            {
+                return true;
+            }
+
             PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourCells = table.getCells();
             Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> ourMap = ourCells.getMap();
             Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourRow = ourMap.get(startState);
