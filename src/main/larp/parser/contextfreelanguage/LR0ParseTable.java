@@ -123,6 +123,11 @@ public class LR0ParseTable implements ComparableStructure
                 {
                     return false;
                 }
+
+                if (ourAction instanceof LR0ReduceAction && !ourAction.equals(otherAction))
+                {
+                    return false;
+                }
             }
 
             return true;
