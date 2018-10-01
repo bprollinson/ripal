@@ -98,24 +98,21 @@ public class LR0ParseTable implements ComparableStructure
         {
             PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourCells = table.getCells();
             Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> ourMap = ourCells.getMap();
+            Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourRow = ourMap.get(startState);
 
             PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> otherCells = otherTable.getCells();
             Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherMap = otherCells.getMap();
+            Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> otherRow = otherMap.get(otherStartState);
 
-            for (Map.Entry<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> ourRow: ourMap.entrySet())
+            for (Map.Entry<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourCell: ourRow.entrySet())
             {
-                State ourState = ourRow.getKey();
+                ContextFreeGrammarSyntaxNode node = ourCell.getKey();
+                LR0ParseTableAction ourAction = ourCell.getValue();
+                LR0ParseTableAction otherAction = otherRow.get(node);
 
-                for (Map.Entry<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourColumn: ourRow.getValue().entrySet())
+                if (!this.objectClassesEqual(ourAction, otherAction))
                 {
-                    ContextFreeGrammarSyntaxNode ourNode = ourColumn.getKey();
-                    LR0ParseTableAction ourAction = ourColumn.getValue();
-
-                    LR0ParseTableAction otherAction = otherTable.getCell(ourState, ourNode);
-                    if (!this.objectClassesEqual(ourAction, otherAction))
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
 
