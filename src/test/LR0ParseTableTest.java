@@ -383,13 +383,16 @@ public class LR0ParseTableTest
         ContextFreeGrammar cfg = new ContextFreeGrammar();
 
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
         LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(cfg, state1);
-        parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state1));
+        parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
 
         LR0ParseTable otherParseTable = new LR0ParseTable(cfg, otherState1);
-        otherParseTable.addCell(otherState1, new TerminalNode("a"), new LR0ShiftAction(otherState1));
+        otherParseTable.addCell(otherState1, new TerminalNode("a"), new LR0ShiftAction(otherState2));
 
         assertTrue(parseTable.structureEquals(otherParseTable));
     }
