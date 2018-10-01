@@ -108,7 +108,11 @@ public class LR0ParseTable implements ComparableStructure
             {
                 ContextFreeGrammarSyntaxNode node = ourCell.getKey();
                 LR0ParseTableAction ourAction = ourCell.getValue();
-                LR0ParseTableAction otherAction = otherRow.get(node);
+                LR0ParseTableAction otherAction = null;
+                if (otherRow != null)
+                {
+                    otherAction = otherRow.get(node);
+                }
 
                 if (!this.objectClassesEqual(ourAction, otherAction))
                 {
