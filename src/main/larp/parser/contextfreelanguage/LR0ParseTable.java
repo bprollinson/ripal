@@ -71,6 +71,11 @@ public class LR0ParseTable implements ComparableStructure
             return false;
         }
 
+        if (this.startState != ((LR0ParseTable)other).getStartState())
+        {
+            return false;
+        }
+
         return this.cells.equals(((LR0ParseTable)other).getCells());
     }
 
