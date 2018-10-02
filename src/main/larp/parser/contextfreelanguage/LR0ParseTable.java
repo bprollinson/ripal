@@ -121,9 +121,9 @@ public class LR0ParseTable implements ComparableStructure
             Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> otherMap = otherCells.getMap();
             Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> otherRow = otherMap.get(otherStartState);
 
-            if (ourRow == null && otherRow != null)
+            if (ourRow == null)
             {
-                return false;
+                return otherRow == null;
             }
 
             for (Map.Entry<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourCell: ourRow.entrySet())
