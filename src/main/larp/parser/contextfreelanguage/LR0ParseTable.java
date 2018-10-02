@@ -2,10 +2,13 @@ package larp.parser.contextfreelanguage;
 
 import larp.ComparableStructure;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.regularlanguage.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.util.PairToValueMap;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class LR0ParseTable implements ComparableStructure
@@ -84,7 +87,10 @@ public class LR0ParseTable implements ComparableStructure
             return false;
         }
 
-        return this.buildCellComparator().equalsCell(this, this.getStartState(), otherTable, otherTable.getStartState());
+        List<State> ourCoveredStates = new ArrayList<State>();
+        List<State> otherCoveredStates = new ArrayList<State>();
+
+        return this.buildCellComparator().equalsCell(this, this.getStartState(), otherTable, otherTable.getStartState(), ourCoveredStates, otherCoveredStates);
     }
 
     protected LR0ParseTableCellComparator buildCellComparator()
@@ -94,12 +100,18 @@ public class LR0ParseTable implements ComparableStructure
 
     protected class LR0ParseTableCellComparator
     {
-        public boolean equalsCell(LR0ParseTable table, State startState, LR0ParseTable otherTable, State otherStartState)
+        public boolean equalsCell(LR0ParseTable table, State startState, LR0ParseTable otherTable, State otherStartState, List<State> ourCoveredStates, List<State> otherCoveredStates)
         {
             if (startState == null && otherStartState == null)
             {
                 return true;
             }
+
+            int ourStatePosition = ourCoveredStates.indexOf(startState);
+            int otherStatePosition = otherCoveredStates.indexOf(otherStartState);
+
+            ourCoveredStates.add(startState);
+            otherCoveredStates.add(otherStartState);
 
             PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourCells = table.getCells();
             Map<State, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction>> ourMap = ourCells.getMap();
@@ -132,6 +144,22 @@ public class LR0ParseTable implements ComparableStructure
                 if (ourAction instanceof LR0ReduceAction && !ourAction.equals(otherAction))
                 {
                     return false;
+                }
+
+                if (ourAction instanceof LR0ShiftAction)
+                {
+                    if (!this.equalsCell(table, ((LR0ShiftAction)ourAction).getState(), otherTable, ((LR0ShiftAction)otherAction).getState(), ourCoveredStates, otherCoveredStates))
+                    {
+                        return false;
+                    }
+                }
+
+                if (ourAction instanceof LR0GotoAction)
+                {
+                    if (!this.equalsCell(table, ((LR0GotoAction)ourAction).getState(), otherTable, ((LR0GotoAction)otherAction).getState(), ourCoveredStates, otherCoveredStates))
+                    {
+                        return false;
+                    }
                 }
             }
 
