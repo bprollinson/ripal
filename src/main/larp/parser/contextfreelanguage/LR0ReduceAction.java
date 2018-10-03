@@ -1,5 +1,7 @@
 package larp.parser.contextfreelanguage;
 
+import larp.parser.regularlanguage.State;
+
 public class LR0ReduceAction implements LR0ParseTableAction
 {
     private int productionIndex;
@@ -7,6 +9,16 @@ public class LR0ReduceAction implements LR0ParseTableAction
     public LR0ReduceAction(int productionIndex)
     {
         this.productionIndex = productionIndex;
+    }
+
+    public boolean supportsTransition()
+    {
+        return false;
+    }
+
+    public State getNextState()
+    {
+        return null;
     }
 
     public int getProductionIndex()

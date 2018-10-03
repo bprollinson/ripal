@@ -4,16 +4,21 @@ import larp.parser.regularlanguage.State;
 
 public class LR0GotoAction implements LR0ParseTableAction
 {
-    private State state;
+    private State nextState;
 
-    public LR0GotoAction(State state)
+    public LR0GotoAction(State nextState)
     {
-        this.state = state;
+        this.nextState = nextState;
     }
 
-    public State getState()
+    public boolean supportsTransition()
     {
-        return this.state;
+        return true;
+    }
+
+    public State getNextState()
+    {
+        return this.nextState;
     }
 
     public boolean equals(Object other)
@@ -23,6 +28,6 @@ public class LR0GotoAction implements LR0ParseTableAction
             return false;
         }
 
-        return this.state.equals(((LR0GotoAction)other).getState());
+        return this.nextState.equals(((LR0GotoAction)other).getNextState());
     }
 }

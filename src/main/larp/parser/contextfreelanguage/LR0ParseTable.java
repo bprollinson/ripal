@@ -2,7 +2,6 @@ package larp.parser.contextfreelanguage;
 
 import larp.ComparableStructure;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.regularlanguage.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.util.PairToValueMap;
@@ -149,25 +148,16 @@ public class LR0ParseTable implements ComparableStructure
                     return false;
                 }
 
-                if (ourAction instanceof LR0ReduceAction && !ourAction.equals(otherAction))
+                if (ourAction.supportsTransition())
+                {
+                    if (!this.equalsCell(table, ourAction.getNextState(), otherTable, otherAction.getNextState(), ourCoveredStates, otherCoveredStates))
+                    {
+                        return false;
+                    }
+                }
+                else if (!ourAction.equals(otherAction))
                 {
                     return false;
-                }
-
-                if (ourAction instanceof LR0ShiftAction)
-                {
-                    if (!this.equalsCell(table, ((LR0ShiftAction)ourAction).getState(), otherTable, ((LR0ShiftAction)otherAction).getState(), ourCoveredStates, otherCoveredStates))
-                    {
-                        return false;
-                    }
-                }
-
-                if (ourAction instanceof LR0GotoAction)
-                {
-                    if (!this.equalsCell(table, ((LR0GotoAction)ourAction).getState(), otherTable, ((LR0GotoAction)otherAction).getState(), ourCoveredStates, otherCoveredStates))
-                    {
-                        return false;
-                    }
                 }
             }
 
