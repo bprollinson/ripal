@@ -106,11 +106,6 @@ public class LR0ParseTable implements ComparableStructure
     {
         public boolean equalsCell(LR0ParseTable table, State startState, LR0ParseTable otherTable, State otherStartState, List<State> ourCoveredStates, List<State> otherCoveredStates)
         {
-            if (startState == null && otherStartState == null)
-            {
-                return true;
-            }
-
             int ourStatePosition = ourCoveredStates.indexOf(startState);
             if (ourStatePosition != -1)
             {
