@@ -143,19 +143,11 @@ public class LR0ParseTable implements ComparableStructure
                     otherAction = otherRow.get(node);
                 }
 
-                if (!this.objectClassesEqual(ourAction, otherAction))
+                if (!this.actionClassesEqual(ourAction, otherAction))
                 {
                     return false;
                 }
-
-                if (ourAction.supportsTransition())
-                {
-                    if (!this.equalsCell(table, ourAction.getNextState(), otherTable, otherAction.getNextState(), ourCoveredStates, otherCoveredStates))
-                    {
-                        return false;
-                    }
-                }
-                else if (!ourAction.equals(otherAction))
+                if (!this.actionInstancesEqual(table, ourAction, otherTable, otherAction, ourCoveredStates, otherCoveredStates))
                 {
                     return false;
                 }
@@ -164,7 +156,7 @@ public class LR0ParseTable implements ComparableStructure
             return true;
         }
 
-        private boolean objectClassesEqual(Object object1, Object object2)
+        private boolean actionClassesEqual(Object object1, Object object2)
         {
             if (object1 == null && object2 != null)
             {
@@ -176,6 +168,16 @@ public class LR0ParseTable implements ComparableStructure
             }
 
             return object1.getClass().equals(object2.getClass());
+        }
+
+        private boolean actionInstancesEqual(LR0ParseTable table, LR0ParseTableAction ourAction, LR0ParseTable otherTable, LR0ParseTableAction otherAction, List<State> ourCoveredStates, List<State> otherCoveredStates)
+        {
+            if (ourAction.supportsTransition())
+            {
+                return this.equalsCell(table, ourAction.getNextState(), otherTable, otherAction.getNextState(), ourCoveredStates, otherCoveredStates);
+            }
+
+            return ourAction.equals(otherAction);
         }
     }
 }
