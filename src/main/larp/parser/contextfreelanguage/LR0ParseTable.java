@@ -114,7 +114,9 @@ public class LR0ParseTable implements ComparableStructure
             int ourStatePosition = ourCoveredStates.indexOf(startState);
             if (ourStatePosition != -1)
             {
-                return true;
+                int otherStatePosition = otherCoveredStates.indexOf(otherStartState);
+
+                return ourStatePosition == otherStatePosition;
             }
 
             ourCoveredStates.add(startState);
