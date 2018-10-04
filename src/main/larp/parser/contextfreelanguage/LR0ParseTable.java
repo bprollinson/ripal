@@ -155,11 +155,7 @@ public class LR0ParseTable implements ComparableStructure
 
         private boolean actionClassesEqual(Object object1, Object object2)
         {
-            if (object1 == null && object2 != null)
-            {
-                return false;
-            }
-            if (object1 != null && object2 == null)
+            if (object2 == null)
             {
                 return false;
             }
