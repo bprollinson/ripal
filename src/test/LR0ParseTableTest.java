@@ -342,6 +342,42 @@ public class LR0ParseTableTest
     }
 
     @Test
+    public void testStructureEqualsReturnsFalseForActionInSameRowPresentinOnlyFirstTable() throws AmbiguousLR0ParseTableException
+    {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg, state1);
+        parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
+        parseTable.addCell(state1, new TerminalNode("b"), new LR0ReduceAction(0));
+
+        LR0ParseTable otherParseTable = new LR0ParseTable(cfg, state1);
+        otherParseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        assertFalse(parseTable.structureEquals(otherParseTable));
+    }
+
+    @Test
+    public void testStructureEqualsReturnsFalseForActionInSameRowPresentinOnlySecondTable() throws AmbiguousLR0ParseTableException
+    {
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(cfg, state1);
+        parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        LR0ParseTable otherParseTable = new LR0ParseTable(cfg, state1);
+        otherParseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
+        otherParseTable.addCell(state1, new TerminalNode("b"), new LR0ReduceAction(0));
+
+        assertFalse(parseTable.structureEquals(otherParseTable));
+    }
+
+    @Test
     public void testStructureEqualsReturnsFalseForActionWithDifferentInputBetweenTables() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
