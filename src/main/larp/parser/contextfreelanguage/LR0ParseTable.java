@@ -129,6 +129,10 @@ public class LR0ParseTable implements ComparableStructure
             {
                 return otherRow == null;
             }
+            if (!this.rowsHaveSameSize(ourRow, otherRow))
+            {
+                return false;
+            }
 
             for (Map.Entry<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourCell: ourRow.entrySet())
             {
@@ -151,6 +155,16 @@ public class LR0ParseTable implements ComparableStructure
             }
 
             return true;
+        }
+
+        private boolean rowsHaveSameSize(Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> ourRow, Map<ContextFreeGrammarSyntaxNode, LR0ParseTableAction> otherRow)
+        {
+            if (otherRow == null)
+            {
+                return false;
+            }
+
+            return ourRow.size() == otherRow.size();
         }
 
         private boolean actionClassesEqual(Object object1, Object object2)
