@@ -1,4 +1,4 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
@@ -27,7 +27,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         LR0ParseTable expectedTable = new LR0ParseTable(grammar, null);
 
-        assertEquals(expectedTable, compiler.compile(grammar));
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         expectedTable.addCell(state2, new EndOfStringNode(), new LR0ReduceAction(2));
         expectedTable.addCell(state3, new EndOfStringNode(), new LR0AcceptAction());
 
-        assertEquals(expectedTable, compiler.compile(grammar));
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         expectedTable.addCell(state2, new EndOfStringNode(), new LR0ReduceAction(2));
         expectedTable.addCell(state3, new EndOfStringNode(), new LR0AcceptAction());
 
-        assertEquals(expectedTable, compiler.compile(grammar));
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test
@@ -97,7 +97,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         expectedTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(3));
         expectedTable.addCell(state4, new EndOfStringNode(), new LR0AcceptAction());
 
-        assertEquals(expectedTable, compiler.compile(grammar));
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test
@@ -126,7 +126,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         expectedTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(3));
         expectedTable.addCell(state4, new EndOfStringNode(), new LR0AcceptAction());
 
-        assertEquals(expectedTable, compiler.compile(grammar));
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test
@@ -163,7 +163,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         expectedTable.addCell(state5, new EndOfStringNode(), new LR0ReduceAction(5));
         expectedTable.addCell(state6, new EndOfStringNode(), new LR0AcceptAction());
 
-        assertEquals(expectedTable, compiler.compile(grammar));
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test
@@ -197,7 +197,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         expectedTable.addCell(state4, new EndOfStringNode(), new LR0ReduceAction(4));
         expectedTable.addCell(state5, new EndOfStringNode(), new LR0AcceptAction());
 
-        assertEquals(expectedTable, compiler.compile(grammar));
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test
@@ -240,7 +240,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         expectedTable.addCell(state6, new EndOfStringNode(), new LR0ReduceAction(5));
         expectedTable.addCell(state7, new EndOfStringNode(), new LR0AcceptAction());
 
-        assertEquals(expectedTable, compiler.compile(grammar));
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test
@@ -268,7 +268,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         expectedTable.addCell(state4, new EndOfStringNode(), new LR0ReduceAction(2));
         expectedTable.addCell(state5, new EndOfStringNode(), new LR0AcceptAction());
 
-        assertEquals(expectedTable, compiler.compile(grammar));
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test
@@ -292,7 +292,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         expectedTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(2));
         expectedTable.addCell(state4, new EndOfStringNode(), new LR0AcceptAction());
 
-        assertEquals(expectedTable, compiler.compile(grammar));
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
