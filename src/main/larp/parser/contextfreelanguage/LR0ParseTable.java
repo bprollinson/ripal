@@ -94,17 +94,17 @@ public class LR0ParseTable implements ComparableStructure
         List<State> ourCoveredStates = new ArrayList<State>();
         List<State> otherCoveredStates = new ArrayList<State>();
 
-        return this.buildCellComparator().equalsCell(this, this.getStartState(), otherTable, otherTable.getStartState(), ourCoveredStates, otherCoveredStates);
+        return this.buildStateComparator().equalsState(this, this.getStartState(), otherTable, otherTable.getStartState(), ourCoveredStates, otherCoveredStates);
     }
 
-    protected LR0ParseTableCellComparator buildCellComparator()
+    protected LR0ParseTableStateComparator buildStateComparator()
     {
-        return new LR0ParseTableCellComparator();
+        return new LR0ParseTableStateComparator();
     }
 
-    protected class LR0ParseTableCellComparator
+    protected class LR0ParseTableStateComparator
     {
-        public boolean equalsCell(LR0ParseTable table, State startState, LR0ParseTable otherTable, State otherStartState, List<State> ourCoveredStates, List<State> otherCoveredStates)
+        public boolean equalsState(LR0ParseTable table, State startState, LR0ParseTable otherTable, State otherStartState, List<State> ourCoveredStates, List<State> otherCoveredStates)
         {
             int ourStatePosition = ourCoveredStates.indexOf(startState);
             int otherStatePosition = otherCoveredStates.indexOf(otherStartState);
@@ -185,7 +185,7 @@ public class LR0ParseTable implements ComparableStructure
         {
             if (ourAction.supportsTransition())
             {
-                return this.equalsCell(table, ourAction.getNextState(), otherTable, otherAction.getNextState(), ourCoveredStates, otherCoveredStates);
+                return this.equalsState(table, ourAction.getNextState(), otherTable, otherAction.getNextState(), ourCoveredStates, otherCoveredStates);
             }
 
             return ourAction.equals(otherAction);
