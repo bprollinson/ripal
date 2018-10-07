@@ -7,6 +7,6 @@ public class ContextFreeGrammarLR0SyntaxCompiler
 {
     public LR0ParseTable compile(ContextFreeGrammar grammar)
     {
-        return null;
+        return new LR0ParseTable(grammar, null);
     }
 }
