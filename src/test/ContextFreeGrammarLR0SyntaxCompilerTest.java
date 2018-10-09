@@ -20,7 +20,7 @@ import java.util.HashSet;
 public class ContextFreeGrammarLR0SyntaxCompilerTest
 {
     @Test
-    public void testCompileReturnsEmptyParseTableForEmptyCFG()
+    public void testCompileReturnsEmptyParseTableForEmptyCFG() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
 
@@ -296,7 +296,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testCompileThrowsExceptionForShiftReduceConflict()
+    public void testCompileThrowsExceptionForShiftReduceConflict() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
 
@@ -308,7 +308,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testCompileThrowsExceptionForReduceReduceConflict()
+    public void testCompileThrowsExceptionForReduceReduceConflict() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
 
