@@ -7,9 +7,11 @@ import larp.parser.contextfreelanguage.LR0GotoAction;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
+import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.regularlanguage.StateTransition;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
@@ -60,8 +62,27 @@ public class ContextFreeGrammarLR0SyntaxCompiler
             {
                 parseTable.addCell(state, input, new LR0AcceptAction());
             }
+            this.processReduceActions(parseTable, state);
 
             this.processState(parseTable, nextState);
+        }
+    }
+
+    private void processReduceActions(LR0ParseTable parseTable, LR0ProductionSetDFAState state) throws AmbiguousLR0ParseTableException
+    {
+        ContextFreeGrammar cfg = parseTable.getContextFreeGrammar();
+        List<ContextFreeGrammarSyntaxNode> productions = cfg.getProductions();
+
+        for (ContextFreeGrammarSyntaxNode production: productions)
+        {
+            ContextFreeGrammarSyntaxNode concatenationNode = production.getChildNodes().get(1);
+            List<ContextFreeGrammarSyntaxNode> childNodes = concatenationNode.getChildNodes();
+            int numChildNodes = childNodes.size();
+
+            if (childNodes.get(numChildNodes - 1) instanceof DotNode)
+            {
+                parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+            }
         }
     }
 }
