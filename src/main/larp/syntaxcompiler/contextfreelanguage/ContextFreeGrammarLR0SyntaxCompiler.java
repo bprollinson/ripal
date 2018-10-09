@@ -10,9 +10,11 @@ import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.regularlanguage.StateTransition;
+import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
+import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
 import java.util.List;
@@ -81,8 +83,35 @@ public class ContextFreeGrammarLR0SyntaxCompiler
 
             if (childNodes.get(numChildNodes - 1) instanceof DotNode)
             {
-                parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+                int productionPosition = this.findProductionPosition(production, productions);
+                if (productionPosition != -1)
+                {
+                    parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(productionPosition));
+                }
             }
         }
+    }
+
+    private int findProductionPosition(ContextFreeGrammarSyntaxNode production, List<ContextFreeGrammarSyntaxNode> productions)
+    {
+        ContextFreeGrammarSyntaxNode originalProduction = this.removeDotFromProduction(production);
+
+        return productions.indexOf(originalProduction);
+    }
+
+    private ContextFreeGrammarSyntaxNode removeDotFromProduction(ContextFreeGrammarSyntaxNode production)
+    {
+        ProductionNode newProduction = new ProductionNode();
+        newProduction.addChild(production.getChildNodes().get(0));
+
+        ConcatenationNode newConcatenationNode = new ConcatenationNode();
+        ContextFreeGrammarSyntaxNode concatenationNode = production.getChildNodes().get(1);
+        for (int i = 0; i < concatenationNode.getChildNodes().size() - 1; i++)
+        {
+            newConcatenationNode.addChild(concatenationNode.getChildNodes().get(i));
+        }
+        newProduction.addChild(newConcatenationNode);
+
+        return newProduction;
     }
 }
