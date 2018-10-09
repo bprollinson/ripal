@@ -48,6 +48,8 @@ public class ContextFreeGrammarLR0SyntaxCompiler
             {
                 parseTable.addCell(state, input, new LR0AcceptAction());
             }
+
+            this.processState(parseTable, nextState);
         }
     }
 }
