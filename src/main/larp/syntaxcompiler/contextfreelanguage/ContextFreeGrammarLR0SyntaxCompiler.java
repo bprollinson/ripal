@@ -3,11 +3,13 @@ package larp.syntaxcompiler.contextfreelanguage;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
 import larp.parser.contextfreelanguage.LR0AcceptAction;
+import larp.parser.contextfreelanguage.LR0GotoAction;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.regularlanguage.StateTransition;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.NonTerminalNode;
 
 import java.util.List;
 
@@ -44,6 +46,10 @@ public class ContextFreeGrammarLR0SyntaxCompiler
             ContextFreeGrammarSyntaxNode input = stateTransition.getInput();
             LR0ProductionSetDFAState nextState = stateTransition.getNextState();
 
+            if (input instanceof NonTerminalNode)
+            {
+                parseTable.addCell(state, input, new LR0GotoAction(nextState));
+            }
             if (nextState.isAccepting())
             {
                 parseTable.addCell(state, input, new LR0AcceptAction());
