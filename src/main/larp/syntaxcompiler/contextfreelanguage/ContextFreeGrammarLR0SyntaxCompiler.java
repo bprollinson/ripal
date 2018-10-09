@@ -7,9 +7,11 @@ import larp.parser.contextfreelanguage.LR0GotoAction;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
+import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.regularlanguage.StateTransition;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
+import larp.parsetree.contextfreelanguage.TerminalNode;
 
 import java.util.List;
 
@@ -46,6 +48,10 @@ public class ContextFreeGrammarLR0SyntaxCompiler
             ContextFreeGrammarSyntaxNode input = stateTransition.getInput();
             LR0ProductionSetDFAState nextState = stateTransition.getNextState();
 
+            if (input instanceof TerminalNode)
+            {
+                parseTable.addCell(state, input, new LR0ShiftAction(nextState));
+            }
             if (input instanceof NonTerminalNode)
             {
                 parseTable.addCell(state, input, new LR0GotoAction(nextState));
