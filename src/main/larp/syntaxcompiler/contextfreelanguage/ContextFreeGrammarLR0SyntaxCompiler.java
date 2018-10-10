@@ -17,7 +17,9 @@ import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContextFreeGrammarLR0SyntaxCompiler
 {
@@ -39,12 +41,19 @@ public class ContextFreeGrammarLR0SyntaxCompiler
         LR0ProductionSetDFAState startState = DFA.getStartState();
         LR0ParseTable parseTable = new LR0ParseTable(grammar, startState);
 
-        this.processState(parseTable, startState);
+        this.processState(parseTable, startState, this.calculateTerminalNodeList(grammar));
 
         return parseTable;
     }
 
-    private void processState(LR0ParseTable parseTable, LR0ProductionSetDFAState state) throws AmbiguousLR0ParseTableException
+    private Set<ContextFreeGrammarSyntaxNode> calculateTerminalNodeList(ContextFreeGrammar grammar)
+    {
+        Set<ContextFreeGrammarSyntaxNode> terminalNodes = new HashSet<ContextFreeGrammarSyntaxNode>();
+
+        return terminalNodes;
+    }
+
+    private void processState(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<ContextFreeGrammarSyntaxNode> terminalNodes) throws AmbiguousLR0ParseTableException
     {
         List<StateTransition<ContextFreeGrammarSyntaxNode,LR0ProductionSetDFAState>> stateTransitions = state.getTransitions();
         for (StateTransition<ContextFreeGrammarSyntaxNode,LR0ProductionSetDFAState> stateTransition: stateTransitions)
@@ -64,13 +73,13 @@ public class ContextFreeGrammarLR0SyntaxCompiler
             {
                 parseTable.addCell(state, input, new LR0AcceptAction());
             }
-            this.processReduceActions(parseTable, state);
+            this.processReduceActions(parseTable, state, terminalNodes);
 
-            this.processState(parseTable, nextState);
+            this.processState(parseTable, nextState, terminalNodes);
         }
     }
 
-    private void processReduceActions(LR0ParseTable parseTable, LR0ProductionSetDFAState state) throws AmbiguousLR0ParseTableException
+    private void processReduceActions(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<ContextFreeGrammarSyntaxNode> terminalNodes) throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = parseTable.getContextFreeGrammar();
         List<ContextFreeGrammarSyntaxNode> productions = cfg.getProductions();
@@ -86,7 +95,10 @@ public class ContextFreeGrammarLR0SyntaxCompiler
                 int productionPosition = this.findProductionPosition(production, productions);
                 if (productionPosition != -1)
                 {
-                    parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(productionPosition));
+                    for (ContextFreeGrammarSyntaxNode terminalNode: terminalNodes)
+                    {
+                        parseTable.addCell(state, terminalNode, new LR0ReduceAction(productionPosition));
+                    }
                 }
             }
         }
