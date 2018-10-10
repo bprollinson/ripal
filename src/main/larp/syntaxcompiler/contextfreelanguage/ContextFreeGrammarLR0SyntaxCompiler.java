@@ -13,6 +13,7 @@ import larp.parser.regularlanguage.StateTransition;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.DotNode;
+import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
@@ -49,6 +50,19 @@ public class ContextFreeGrammarLR0SyntaxCompiler
     private Set<ContextFreeGrammarSyntaxNode> calculateTerminalNodeList(ContextFreeGrammar grammar)
     {
         Set<ContextFreeGrammarSyntaxNode> terminalNodes = new HashSet<ContextFreeGrammarSyntaxNode>();
+
+        List<ContextFreeGrammarSyntaxNode> productions = grammar.getProductions();
+        for (ContextFreeGrammarSyntaxNode production: productions)
+        {
+            ContextFreeGrammarSyntaxNode concatenationNode = production.getChildNodes().get(1);
+            for (ContextFreeGrammarSyntaxNode childNode: concatenationNode.getChildNodes())
+            {
+                if (childNode instanceof TerminalNode || childNode instanceof EndOfStringNode)
+                {
+                    terminalNodes.add(childNode);
+                }
+            }
+        }
 
         return terminalNodes;
     }
