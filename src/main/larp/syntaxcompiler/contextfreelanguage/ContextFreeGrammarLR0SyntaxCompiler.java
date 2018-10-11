@@ -69,6 +69,8 @@ public class ContextFreeGrammarLR0SyntaxCompiler
 
     private void processState(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<ContextFreeGrammarSyntaxNode> terminalNodes) throws AmbiguousLR0ParseTableException
     {
+        this.processReduceActions(parseTable, state, terminalNodes);
+
         List<StateTransition<ContextFreeGrammarSyntaxNode,LR0ProductionSetDFAState>> stateTransitions = state.getTransitions();
         for (StateTransition<ContextFreeGrammarSyntaxNode,LR0ProductionSetDFAState> stateTransition: stateTransitions)
         {
@@ -87,7 +89,6 @@ public class ContextFreeGrammarLR0SyntaxCompiler
             {
                 parseTable.addCell(state, input, new LR0AcceptAction());
             }
-            this.processReduceActions(parseTable, state, terminalNodes);
 
             this.processState(parseTable, nextState, terminalNodes);
         }
@@ -95,18 +96,17 @@ public class ContextFreeGrammarLR0SyntaxCompiler
 
     private void processReduceActions(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<ContextFreeGrammarSyntaxNode> terminalNodes) throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammar cfg = parseTable.getContextFreeGrammar();
-        List<ContextFreeGrammarSyntaxNode> productions = cfg.getProductions();
+        Set<ContextFreeGrammarSyntaxNode> productions = state.getProductionSet();
 
         for (ContextFreeGrammarSyntaxNode production: productions)
         {
             ContextFreeGrammarSyntaxNode concatenationNode = production.getChildNodes().get(1);
-            List<ContextFreeGrammarSyntaxNode> childNodes = concatenationNode.getChildNodes();
+            List<ContextFreeGrammarSyntaxNode> childNodes = concatenationNode.getChildNodes();System.out.println(childNodes);
             int numChildNodes = childNodes.size();
 
             if (childNodes.get(numChildNodes - 1) instanceof DotNode)
             {
-                int productionPosition = this.findProductionPosition(production, productions);
+                int productionPosition = this.findProductionPosition(production, parseTable.getContextFreeGrammar().getProductions());
                 if (productionPosition != -1)
                 {
                     for (ContextFreeGrammarSyntaxNode terminalNode: terminalNodes)
