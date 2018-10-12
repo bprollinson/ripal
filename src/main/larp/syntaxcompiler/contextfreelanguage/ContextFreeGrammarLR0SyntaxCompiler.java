@@ -105,7 +105,7 @@ public class ContextFreeGrammarLR0SyntaxCompiler
         for (ContextFreeGrammarSyntaxNode production: productions)
         {
             ContextFreeGrammarSyntaxNode concatenationNode = production.getChildNodes().get(1);
-            List<ContextFreeGrammarSyntaxNode> childNodes = concatenationNode.getChildNodes();System.out.println(childNodes);
+            List<ContextFreeGrammarSyntaxNode> childNodes = concatenationNode.getChildNodes();
             int numChildNodes = childNodes.size();
 
             if (childNodes.get(numChildNodes - 1) instanceof DotNode)
