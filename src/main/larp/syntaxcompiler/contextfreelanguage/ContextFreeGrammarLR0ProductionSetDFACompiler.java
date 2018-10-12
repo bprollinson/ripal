@@ -19,6 +19,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
     private ContextFreeGrammarClosureCalculator closureCalculator;
     private ProductionNodeDotRepository productionNodeDotRepository;
     private Map<Set<ContextFreeGrammarSyntaxNode>, LR0ProductionSetDFAState> productionSetToStateMap;
+    private ContextFreeGrammar augmentedGrammar;
 
     public ContextFreeGrammarLR0ProductionSetDFACompiler()
     {
@@ -30,15 +31,20 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
     public LR0ProductionSetDFA compile(ContextFreeGrammar cfg)
     {
         this.productionSetToStateMap = new HashMap<Set<ContextFreeGrammarSyntaxNode>, LR0ProductionSetDFAState>();
-        ContextFreeGrammar augmentedCfg = this.grammarAugmentor.augment(cfg);
+        this.augmentedGrammar = this.grammarAugmentor.augment(cfg);
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
-        ContextFreeGrammarSyntaxNode firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(augmentedCfg.getProduction(0));
+        ContextFreeGrammarSyntaxNode firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(this.augmentedGrammar.getProduction(0));
         productionSet.add(firstProductionWithDot);
 
         LR0ProductionSetDFAState startState = this.compileState(cfg, productionSet, false);
 
         return new LR0ProductionSetDFA(startState);
+    }
+
+    public ContextFreeGrammar getAugmentedGrammar()
+    {
+        return this.augmentedGrammar;
     }
 
     private LR0ProductionSetDFAState compileState(ContextFreeGrammar cfg, Set<ContextFreeGrammarSyntaxNode> productionSet, boolean accepting)

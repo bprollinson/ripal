@@ -39,6 +39,7 @@ public class ContextFreeGrammarLR0SyntaxCompiler
         }
 
         LR0ProductionSetDFA DFA = this.DFACompiler.compile(grammar);
+        grammar = this.DFACompiler.getAugmentedGrammar();
         LR0ProductionSetDFAState startState = DFA.getStartState();
         LR0ParseTable parseTable = new LR0ParseTable(grammar, startState);
 
@@ -69,7 +70,10 @@ public class ContextFreeGrammarLR0SyntaxCompiler
 
     private void processState(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<ContextFreeGrammarSyntaxNode> terminalNodes) throws AmbiguousLR0ParseTableException
     {
-        this.processReduceActions(parseTable, state, terminalNodes);
+        if (!state.isAccepting())
+        {
+            this.processReduceActions(parseTable, state, terminalNodes);
+        }
 
         List<StateTransition<ContextFreeGrammarSyntaxNode,LR0ProductionSetDFAState>> stateTransitions = state.getTransitions();
         for (StateTransition<ContextFreeGrammarSyntaxNode,LR0ProductionSetDFAState> stateTransition: stateTransitions)
