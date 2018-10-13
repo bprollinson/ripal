@@ -18,6 +18,7 @@ import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,7 +44,7 @@ public class ContextFreeGrammarLR0SyntaxCompiler
         LR0ProductionSetDFAState startState = DFA.getStartState();
         LR0ParseTable parseTable = new LR0ParseTable(grammar, startState);
 
-        this.processState(parseTable, startState, this.calculateTerminalNodeList(grammar));
+        this.processState(parseTable, startState, this.calculateTerminalNodeList(grammar), new ArrayList<LR0ProductionSetDFAState>());
 
         return parseTable;
     }
@@ -68,8 +69,10 @@ public class ContextFreeGrammarLR0SyntaxCompiler
         return terminalNodes;
     }
 
-    private void processState(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<ContextFreeGrammarSyntaxNode> terminalNodes) throws AmbiguousLR0ParseTableException
+    private void processState(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<ContextFreeGrammarSyntaxNode> terminalNodes, List<LR0ProductionSetDFAState> coveredStates) throws AmbiguousLR0ParseTableException
     {
+        coveredStates.add(state);
+
         if (!state.isAccepting())
         {
             this.processReduceActions(parseTable, state, terminalNodes);
@@ -94,7 +97,10 @@ public class ContextFreeGrammarLR0SyntaxCompiler
                 parseTable.addCell(state, input, new LR0AcceptAction());
             }
 
-            this.processState(parseTable, nextState, terminalNodes);
+            if (!coveredStates.contains(nextState))
+            {
+                this.processState(parseTable, nextState, terminalNodes, coveredStates);
+            }
         }
     }
 
