@@ -256,26 +256,40 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state6 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state7 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state8 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
-        LR0ParseTable expectedTable = new LR0ParseTable(grammar, state1);
+        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("x"), new NonTerminalNode("X"));
+        augmentedGrammar.addProduction(new NonTerminalNode("X"), new NonTerminalNode("A"));
+        augmentedGrammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        augmentedGrammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
+        augmentedGrammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
+
+        LR0ParseTable expectedTable = new LR0ParseTable(augmentedGrammar, state1);
         expectedTable.addCell(state1, new TerminalNode("x"), new LR0ShiftAction(state2));
+        expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state8));
         expectedTable.addCell(state2, new NonTerminalNode("X"), new LR0GotoAction(state3));
         expectedTable.addCell(state2, new NonTerminalNode("A"), new LR0GotoAction(state4));
         expectedTable.addCell(state2, new NonTerminalNode("B"), new LR0GotoAction(state5));
         expectedTable.addCell(state2, new NonTerminalNode("C"), new LR0GotoAction(state6));
-        expectedTable.addCell(state3, new TerminalNode("x"), new LR0ReduceAction(2));
-        expectedTable.addCell(state3, new TerminalNode("c"), new LR0ReduceAction(2));
-        expectedTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(2));
-        expectedTable.addCell(state4, new TerminalNode("x"), new LR0ReduceAction(3));
-        expectedTable.addCell(state4, new TerminalNode("c"), new LR0ReduceAction(3));
-        expectedTable.addCell(state4, new EndOfStringNode(), new LR0ReduceAction(3));
-        expectedTable.addCell(state5, new TerminalNode("x"), new LR0ReduceAction(4));
-        expectedTable.addCell(state5, new TerminalNode("c"), new LR0ReduceAction(4));
-        expectedTable.addCell(state5, new EndOfStringNode(), new LR0ReduceAction(4));
-        expectedTable.addCell(state6, new TerminalNode("x"), new LR0ReduceAction(5));
-        expectedTable.addCell(state6, new TerminalNode("c"), new LR0ReduceAction(5));
-        expectedTable.addCell(state6, new EndOfStringNode(), new LR0ReduceAction(5));
-        expectedTable.addCell(state7, new EndOfStringNode(), new LR0AcceptAction());
+        expectedTable.addCell(state2, new TerminalNode("c"), new LR0ShiftAction(state7));
+        expectedTable.addCell(state3, new TerminalNode("x"), new LR0ReduceAction(1));
+        expectedTable.addCell(state3, new TerminalNode("c"), new LR0ReduceAction(1));
+        expectedTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(1));
+        expectedTable.addCell(state4, new TerminalNode("x"), new LR0ReduceAction(2));
+        expectedTable.addCell(state4, new TerminalNode("c"), new LR0ReduceAction(2));
+        expectedTable.addCell(state4, new EndOfStringNode(), new LR0ReduceAction(2));
+        expectedTable.addCell(state5, new TerminalNode("x"), new LR0ReduceAction(3));
+        expectedTable.addCell(state5, new TerminalNode("c"), new LR0ReduceAction(3));
+        expectedTable.addCell(state5, new EndOfStringNode(), new LR0ReduceAction(3));
+        expectedTable.addCell(state6, new TerminalNode("x"), new LR0ReduceAction(4));
+        expectedTable.addCell(state6, new TerminalNode("c"), new LR0ReduceAction(4));
+        expectedTable.addCell(state6, new EndOfStringNode(), new LR0ReduceAction(4));
+        expectedTable.addCell(state7, new TerminalNode("x"), new LR0ReduceAction(5));
+        expectedTable.addCell(state7, new TerminalNode("c"), new LR0ReduceAction(5));
+        expectedTable.addCell(state7, new EndOfStringNode(), new LR0ReduceAction(5));
+        expectedTable.addCell(state8, new EndOfStringNode(), new LR0AcceptAction());
 
         assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
