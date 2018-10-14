@@ -116,8 +116,9 @@ public class ContextFreeGrammarLR0SyntaxCompiler
 
             if (childNodes.get(numChildNodes - 1) instanceof DotNode)
             {
-                int productionPosition = this.findProductionPosition(production, parseTable.getContextFreeGrammar().getProductions());
-                if (productionPosition != -1)
+                List<Integer> productionPositions = this.findProductionPositions(production, parseTable.getContextFreeGrammar().getProductions());
+
+                for (int productionPosition: productionPositions)
                 {
                     for (ContextFreeGrammarSyntaxNode terminalNode: terminalNodes)
                     {
@@ -128,11 +129,21 @@ public class ContextFreeGrammarLR0SyntaxCompiler
         }
     }
 
-    private int findProductionPosition(ContextFreeGrammarSyntaxNode production, List<ContextFreeGrammarSyntaxNode> productions)
+    private List<Integer> findProductionPositions(ContextFreeGrammarSyntaxNode needle, List<ContextFreeGrammarSyntaxNode> haystack)
     {
-        ContextFreeGrammarSyntaxNode originalProduction = this.removeDotFromProduction(production);
+        ContextFreeGrammarSyntaxNode originalNeedle = this.removeDotFromProduction(needle);
 
-        return productions.indexOf(originalProduction);
+        List<Integer> productionPositions = new ArrayList<Integer>();
+        for (int i = 0; i < haystack.size(); i++)
+        {
+            ContextFreeGrammarSyntaxNode haystackProduction = haystack.get(i);
+            if (haystackProduction.equals(originalNeedle))
+            {
+                productionPositions.add(i);
+            }
+        }
+
+        return productionPositions;
     }
 
     private ContextFreeGrammarSyntaxNode removeDotFromProduction(ContextFreeGrammarSyntaxNode production)
