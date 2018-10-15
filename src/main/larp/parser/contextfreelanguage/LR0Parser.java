@@ -1,8 +1,15 @@
 package larp.parser.contextfreelanguage;
 
-public class LR0Parser
+import larp.ComparableStructure;
+
+public class LR0Parser implements ComparableStructure
 {
     public LR0Parser(LR0ParseTable parseTable)
     {
+    }
+
+    public boolean structureEquals(Object other)
+    {
+        return false;
     }
 }
