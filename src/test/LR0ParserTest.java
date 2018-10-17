@@ -17,6 +17,24 @@ import java.util.HashSet;
 public class LR0ParserTest
 {
     @Test
+    public void testAcceptsReturnsTrueForCorrectCharacterInSingleCharacterCFG()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testAcceptsReturnsFalseForIncorrectCharacterInSingleCharacterCFG()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testAcceptsReturnsTrueForMultiCharacterCFG()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrueWhenParseTablesHaveSameStructure() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
