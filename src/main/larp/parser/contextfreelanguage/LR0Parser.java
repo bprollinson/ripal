@@ -16,6 +16,11 @@ public class LR0Parser implements ComparableStructure
         return this.parseTable;
     }
 
+    public boolean accepts(String inputString)
+    {
+        return false;
+    }
+
     public boolean structureEquals(Object other)
     {
         if (!(other instanceof LR0Parser))
