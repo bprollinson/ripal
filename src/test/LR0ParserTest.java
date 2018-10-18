@@ -73,6 +73,18 @@ public class LR0ParserTest
     }
 
     @Test
+    public void testAcceptsReturnsTrueForMultiCharacterCFGUsingMultipleTerminalNodes()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testAcceptsReturnsFalseForCharacterMismatchInMultiCharacterCFG()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrueWhenParseTablesHaveSameStructure() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
