@@ -1,6 +1,7 @@
 package larp.parser.contextfreelanguage;
 
 import larp.ComparableStructure;
+import larp.parsetree.contextfreelanguage.TerminalNode;
 
 public class LR0Parser implements ComparableStructure
 {
@@ -18,7 +19,10 @@ public class LR0Parser implements ComparableStructure
 
     public boolean accepts(String inputString)
     {
-        return false;
+        String nextCharacter = inputString.substring(0, 1);
+        LR0ParseTableAction action = this.parseTable.getCell(this.parseTable.getStartState(), new TerminalNode(nextCharacter));
+
+        return action != null;
     }
 
     public boolean structureEquals(Object other)
