@@ -154,6 +154,18 @@ public class LR0ParserTest
     }
 
     @Test
+    public void testAcceptsReturnsFalseForEmptyStringWhenCFGIsEmpty()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testAcceptsReturnsFalseForNonEmptyStringWhenCFGIsEmpty()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrueWhenParseTablesHaveSameStructure() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
