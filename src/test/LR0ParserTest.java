@@ -156,13 +156,25 @@ public class LR0ParserTest
     @Test
     public void testAcceptsReturnsFalseForEmptyStringWhenCFGIsEmpty()
     {
-        throw new RuntimeException();
+        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+
+        LR0ParseTable parseTable = new LR0ParseTable(augmentedGrammar, null);
+
+        LR0Parser parser = new LR0Parser(parseTable);
+
+        assertFalse(parser.accepts(""));
     }
 
     @Test
     public void testAcceptsReturnsFalseForNonEmptyStringWhenCFGIsEmpty()
     {
-        throw new RuntimeException();
+        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+
+        LR0ParseTable parseTable = new LR0ParseTable(augmentedGrammar, null);
+
+        LR0Parser parser = new LR0Parser(parseTable);
+
+        assertFalse(parser.accepts("a"));
     }
 
     @Test
