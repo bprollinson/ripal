@@ -67,15 +67,55 @@ public class LR0ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsTrueForMultiCharacterCFG()
+    public void testAcceptsReturnsTrueForMultiCharacterCFG() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
+
+        LR0ParseTable parseTable = new LR0ParseTable(augmentedGrammar, state1);
+        parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
+        parseTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state4));
+        parseTable.addCell(state2, new TerminalNode("b"), new LR0ShiftAction(state3));
+        parseTable.addCell(state3, new TerminalNode("a"), new LR0ReduceAction(1));
+        parseTable.addCell(state3, new TerminalNode("b"), new LR0ReduceAction(1));
+        parseTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(1));
+        parseTable.addCell(state4, new EndOfStringNode(), new LR0AcceptAction());
+
+        LR0Parser parser = new LR0Parser(parseTable);
+
+        assertTrue(parser.accepts("ab"));
     }
 
     @Test
-    public void testAcceptsReturnsTrueForMultiCharacterCFGUsingMultipleTerminalNodes()
+    public void testAcceptsReturnsTrueForMultiCharacterCFGUsingMultipleTerminalNodes() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
+
+        LR0ParseTable parseTable = new LR0ParseTable(augmentedGrammar, state1);
+        parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
+        parseTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state4));
+        parseTable.addCell(state2, new TerminalNode("b"), new LR0ShiftAction(state3));
+        parseTable.addCell(state3, new TerminalNode("a"), new LR0ReduceAction(1));
+        parseTable.addCell(state3, new TerminalNode("b"), new LR0ReduceAction(1));
+        parseTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(1));
+        parseTable.addCell(state4, new EndOfStringNode(), new LR0AcceptAction());
+
+        LR0Parser parser = new LR0Parser(parseTable);
+
+        assertFalse(parser.accepts("ac"));
     }
 
     @Test
