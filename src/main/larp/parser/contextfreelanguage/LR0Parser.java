@@ -2,6 +2,7 @@ package larp.parser.contextfreelanguage;
 
 import larp.ComparableStructure;
 import larp.parser.regularlanguage.State;
+import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
 public class LR0Parser implements ComparableStructure
@@ -36,7 +37,9 @@ public class LR0Parser implements ComparableStructure
             currentState = action.getNextState();
         }
 
-        return true;
+        LR0ParseTableAction action = this.parseTable.getCell(currentState, new EndOfStringNode());
+
+        return action instanceof LR0AcceptAction;
     }
 
     public boolean structureEquals(Object other)
