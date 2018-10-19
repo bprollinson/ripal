@@ -125,6 +125,18 @@ public class LR0ParserTest
     }
 
     @Test
+    public void testAcceptsReturnsFalseForUnmatchedInputCharacter()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testAcceptsReturnsFalseForUnmatchedCFGCharacter()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrueWhenParseTablesHaveSameStructure() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
