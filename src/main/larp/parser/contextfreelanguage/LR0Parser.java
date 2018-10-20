@@ -6,6 +6,7 @@ import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
+import java.util.List;
 import java.util.Vector;
 
 public class LR0Parser implements ComparableStructure
@@ -49,10 +50,16 @@ public class LR0Parser implements ComparableStructure
             }
             if (action instanceof LR0ReduceAction)
             {
-                stack.remove(stack.size() - 1);
-                stack.remove(stack.size() - 1);
+                int productionIndex = ((LR0ReduceAction)action).getProductionIndex();
+                ContextFreeGrammarSyntaxNode rootNode = this.parseTable.getContextFreeGrammar().getProduction(productionIndex);
+                ContextFreeGrammarSyntaxNode leftHandNode = rootNode.getChildNodes().get(0);
+                List<ContextFreeGrammarSyntaxNode> rightHandNodes = rootNode.getChildNodes().get(1).getChildNodes();
 
-                ContextFreeGrammarSyntaxNode leftHandNode = this.parseTable.getContextFreeGrammar().getProduction(((LR0ReduceAction)action).getProductionIndex()).getChildNodes().get(0);
+                for (int i = 0; i < 2 * rightHandNodes.size(); i++)
+                {
+                    stack.remove(stack.size() - 1);
+                }
+
                 stack.add(leftHandNode);
             }
 
