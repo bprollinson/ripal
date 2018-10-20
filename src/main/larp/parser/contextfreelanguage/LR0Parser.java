@@ -2,8 +2,11 @@ package larp.parser.contextfreelanguage;
 
 import larp.ComparableStructure;
 import larp.parser.regularlanguage.State;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
+
+import java.util.Vector;
 
 public class LR0Parser implements ComparableStructure
 {
@@ -23,23 +26,68 @@ public class LR0Parser implements ComparableStructure
     {
         State currentState = this.parseTable.getStartState();
 
-        while (inputString.length() > 0)
-        {
-            String nextCharacter = inputString.substring(0, 1);
-            inputString = inputString.substring(1);
+        Vector<Object> stack = new Vector<Object>();
+        stack.add(currentState);
 
-            LR0ParseTableAction action = this.parseTable.getCell(currentState, new TerminalNode(nextCharacter));
+        while (true)
+        {
+            ContextFreeGrammarSyntaxNode characterNode;
+            if (stack.elementAt(stack.size() - 1) instanceof ContextFreeGrammarSyntaxNode)
+            {
+                characterNode = (ContextFreeGrammarSyntaxNode)stack.elementAt(stack.size() - 1);
+            }
+            else if (inputString.length() > 0)
+            {
+                String nextCharacter = inputString.substring(0, 1);
+                characterNode = new TerminalNode(nextCharacter);
+            }
+            else
+            {
+                characterNode = new EndOfStringNode();
+            }
+
+            LR0ParseTableAction action = this.parseTable.getCell(currentState, characterNode);
             if (action == null)
             {
                 return false;
             }
+            if (action instanceof LR0AcceptAction)
+            {
+                return true;
+            }
+            if (action instanceof LR0ShiftAction)
+            {
+                inputString = inputString.substring(1);
+                stack.add(characterNode);
+            }
+            if (action instanceof LR0ReduceAction)
+            {
+                stack.remove(stack.size() - 1);
+                stack.remove(stack.size() - 1);
 
-            currentState = action.getNextState();
+                ContextFreeGrammarSyntaxNode leftHandNode = this.parseTable.getContextFreeGrammar().getProduction(((LR0ReduceAction)action).getProductionIndex()).getChildNodes().get(0);
+                stack.add(leftHandNode);
+            }
+
+            State nextState = action.getNextState();
+            if (nextState != null)
+            {
+                currentState = nextState;
+                stack.add(nextState);
+            }
+            else
+            {
+                for (int i = stack.size() - 1; i >= 0; i--)
+                {
+                    Object stackEntry = stack.get(i);
+                    if (stackEntry instanceof State)
+                    {
+                        currentState = (State)stackEntry;
+                        break;
+                    }
+                }
+            }
         }
-
-        LR0ParseTableAction action = this.parseTable.getCell(currentState, new EndOfStringNode());
-
-        return action instanceof LR0AcceptAction;
     }
 
     public boolean structureEquals(Object other)
