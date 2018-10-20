@@ -50,17 +50,7 @@ public class LR0Parser implements ComparableStructure
             }
             if (action instanceof LR0ReduceAction)
             {
-                int productionIndex = ((LR0ReduceAction)action).getProductionIndex();
-                ContextFreeGrammarSyntaxNode rootNode = this.parseTable.getContextFreeGrammar().getProduction(productionIndex);
-                ContextFreeGrammarSyntaxNode leftHandNode = rootNode.getChildNodes().get(0);
-                List<ContextFreeGrammarSyntaxNode> rightHandNodes = rootNode.getChildNodes().get(1).getChildNodes();
-
-                for (int i = 0; i < 2 * rightHandNodes.size(); i++)
-                {
-                    stack.remove(stack.size() - 1);
-                }
-
-                stack.add(leftHandNode);
+                this.applyReduction((LR0ReduceAction)action, stack);
             }
 
             State nextState = action.getNextState();
@@ -89,6 +79,21 @@ public class LR0Parser implements ComparableStructure
         }
 
         return new EndOfStringNode();
+    }
+
+    private void applyReduction(LR0ReduceAction action, Vector<Object> stack)
+    {
+        int productionIndex = ((LR0ReduceAction)action).getProductionIndex();
+        ContextFreeGrammarSyntaxNode rootNode = this.parseTable.getContextFreeGrammar().getProduction(productionIndex);
+        ContextFreeGrammarSyntaxNode leftHandNode = rootNode.getChildNodes().get(0);
+        List<ContextFreeGrammarSyntaxNode> rightHandNodes = rootNode.getChildNodes().get(1).getChildNodes();
+
+        for (int i = 0; i < 2 * rightHandNodes.size(); i++)
+        {
+            stack.remove(stack.size() - 1);
+        }
+
+        stack.add(leftHandNode);
     }
 
     private State findTopStackState(Vector<Object> stack)
