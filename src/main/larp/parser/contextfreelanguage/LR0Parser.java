@@ -31,22 +31,9 @@ public class LR0Parser implements ComparableStructure
 
         while (true)
         {
-            ContextFreeGrammarSyntaxNode characterNode;
-            if (stack.elementAt(stack.size() - 1) instanceof ContextFreeGrammarSyntaxNode)
-            {
-                characterNode = (ContextFreeGrammarSyntaxNode)stack.elementAt(stack.size() - 1);
-            }
-            else if (inputString.length() > 0)
-            {
-                String nextCharacter = inputString.substring(0, 1);
-                characterNode = new TerminalNode(nextCharacter);
-            }
-            else
-            {
-                characterNode = new EndOfStringNode();
-            }
-
+            ContextFreeGrammarSyntaxNode characterNode = this.calculateCharacterNode(inputString, stack);
             LR0ParseTableAction action = this.parseTable.getCell(currentState, characterNode);
+
             if (action == null)
             {
                 return false;
@@ -88,6 +75,21 @@ public class LR0Parser implements ComparableStructure
                 }
             }
         }
+    }
+
+    private ContextFreeGrammarSyntaxNode calculateCharacterNode(String inputString, Vector<Object> stack)
+    {
+        if (stack.elementAt(stack.size() - 1) instanceof ContextFreeGrammarSyntaxNode)
+        {
+            return (ContextFreeGrammarSyntaxNode)stack.elementAt(stack.size() - 1);
+        }
+        if (inputString.length() > 0)
+        {
+            String nextCharacter = inputString.substring(0, 1);
+            return new TerminalNode(nextCharacter);
+        }
+
+        return new EndOfStringNode();
     }
 
     public boolean structureEquals(Object other)
