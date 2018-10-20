@@ -221,7 +221,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileOnlyConsidersFirstCharacterFromMultiCharacterTerminal() throws AmbiguousLL1ParseTableException
+    public void testCompileOnlyConsidersFirstCharacterFromMultiCharacterTerminalInFirstSet() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
 
@@ -232,6 +232,12 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         assertEquals(expectedTable, compiler.compile(grammar));
+    }
+
+    @Test
+    public void testCompileOnlyConsidersFirstCharacterFromMultiCharacterTerminalInFollowSet()
+    {
+        throw new RuntimeException();
     }
 
     @Test
