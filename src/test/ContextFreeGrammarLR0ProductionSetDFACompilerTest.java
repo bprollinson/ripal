@@ -515,6 +515,12 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     }
 
     @Test
+    public void testCompileHandleMultiCharacterTerminalNode()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testCompileRemovesDuplicateProduction()
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
