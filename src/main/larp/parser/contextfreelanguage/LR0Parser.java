@@ -64,15 +64,7 @@ public class LR0Parser implements ComparableStructure
             }
             else
             {
-                for (int i = stack.size() - 1; i >= 0; i--)
-                {
-                    Object stackEntry = stack.get(i);
-                    if (stackEntry instanceof State)
-                    {
-                        currentState = (State)stackEntry;
-                        break;
-                    }
-                }
+                currentState = this.findTopStackState(stack);
             }
         }
     }
@@ -90,6 +82,20 @@ public class LR0Parser implements ComparableStructure
         }
 
         return new EndOfStringNode();
+    }
+
+    private State findTopStackState(Vector<Object> stack)
+    {
+        for (int i = stack.size() - 1; i >= 0; i--)
+        {
+            Object stackEntry = stack.get(i);
+            if (stackEntry instanceof State)
+            {
+                return (State)stackEntry;
+            }
+        }
+
+        return null;
     }
 
     public boolean structureEquals(Object other)
