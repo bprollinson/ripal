@@ -109,7 +109,8 @@ public class FirstSetCalculator
 
             if (concatenationNode.getChildNodes().get(index) instanceof TerminalNode)
             {
-                results.add(concatenationNode.getChildNodes().get(index));
+                TerminalNode childNode = (TerminalNode)concatenationNode.getChildNodes().get(index);
+                results.add(new TerminalNode(childNode.getValue().substring(0, 1)));
                 break;
             }
 
