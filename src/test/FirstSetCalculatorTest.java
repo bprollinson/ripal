@@ -50,6 +50,19 @@ public class FirstSetCalculatorTest
     }
 
     @Test
+    public void testGetFirstReturnsForCharacterFromMultipleCharacterTerminalTokenAfterEpsilon()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("ab"));
+        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+
+        FirstSetCalculator calculator = new FirstSetCalculator(grammar);
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        expectedFirsts.add(new TerminalNode("a"));
+        assertEquals(expectedFirsts, calculator.getFirst(0));
+    }
+
+    @Test
     public void testGetFirstReturnsSingleTerminalWithIntermediateNonTerminalProduction()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
