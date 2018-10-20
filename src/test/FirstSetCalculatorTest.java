@@ -38,7 +38,7 @@ public class FirstSetCalculatorTest
     }
 
     @Test
-    public void testGetFirstIgnoresSubsequentCharacterInSameTerminal()
+    public void testGetFirstReturnsFirstCharacterFromMultipleCharacterTerminalToken()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
