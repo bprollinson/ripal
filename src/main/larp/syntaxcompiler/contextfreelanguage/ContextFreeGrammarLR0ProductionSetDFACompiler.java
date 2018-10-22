@@ -37,7 +37,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         ContextFreeGrammarSyntaxNode firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(this.augmentedGrammar.getProduction(0));
         productionSet.add(firstProductionWithDot);
 
-        LR0ProductionSetDFAState startState = this.compileState(cfg, productionSet, false);
+        LR0ProductionSetDFAState startState = this.compileState(productionSet, false);
 
         return new LR0ProductionSetDFA(startState);
     }
@@ -47,9 +47,9 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         return this.augmentedGrammar;
     }
 
-    private LR0ProductionSetDFAState compileState(ContextFreeGrammar cfg, Set<ContextFreeGrammarSyntaxNode> productionSet, boolean accepting)
+    private LR0ProductionSetDFAState compileState(Set<ContextFreeGrammarSyntaxNode> productionSet, boolean accepting)
     {
-        productionSet = this.closureCalculator.calculate(cfg, productionSet);
+        productionSet = this.closureCalculator.calculate(this.augmentedGrammar, productionSet);
         LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", accepting, productionSet);
 
         LR0ProductionSetDFAState cachedStartState = this.productionSetToStateMap.get(productionSet);
@@ -59,12 +59,12 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         }
 
         this.productionSetToStateMap.put(productionSet, startState);
-        this.compileAndAttachAdjacentStates(cfg, startState);
+        this.compileAndAttachAdjacentStates(startState);
 
         return startState;
     }
 
-    private void compileAndAttachAdjacentStates(ContextFreeGrammar cfg, LR0ProductionSetDFAState state)
+    private void compileAndAttachAdjacentStates(LR0ProductionSetDFAState state)
     {
         ValueToSetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode> symbolToNextClosureMap = new ValueToSetMap<ContextFreeGrammarSyntaxNode, ContextFreeGrammarSyntaxNode>();
 
@@ -85,7 +85,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
             Set<ContextFreeGrammarSyntaxNode> nextStateProductionSet = mapEntry.getValue();
 
             boolean nextStateAccepting = input instanceof EndOfStringNode;
-            LR0ProductionSetDFAState nextState = this.compileState(cfg, nextStateProductionSet, nextStateAccepting);
+            LR0ProductionSetDFAState nextState = this.compileState(nextStateProductionSet, nextStateAccepting);
             state.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(input, nextState));
         }
     }
