@@ -56,4 +56,20 @@ public class ContextFreeGrammarAugmentorTest
         expectedCfg.addProduction(new NonTerminalNode("S''"), new NonTerminalNode("S'''"));
         assertEquals(expectedCfg, augmentor.augment(cfg));
     }
+
+    @Test
+    public void testAugmentSplitsMultiCharacterTerminalNodeIntoMultipleNodes()
+    {
+        ContextFreeGrammarAugmentor augmentor = new ContextFreeGrammarAugmentor();
+
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        cfg.addProduction(new NonTerminalNode("A"), new TerminalNode("abc"));
+
+        ContextFreeGrammar expectedCfg = new ContextFreeGrammar();
+        expectedCfg.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        expectedCfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        expectedCfg.addProduction(new NonTerminalNode("A"), new TerminalNode("a"), new TerminalNode("b"), new TerminalNode("c"));
+        assertEquals(expectedCfg, augmentor.augment(cfg));
+    }
 }
