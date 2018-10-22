@@ -44,7 +44,7 @@ public class LL1ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsTrueForMultiCharacterCFG() throws AmbiguousLL1ParseTableException
+    public void testAcceptsReturnsTrueForMultiCharacterCFGUnsingMultiCharacterTerminalNode() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
         contextFreeGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
@@ -70,7 +70,7 @@ public class LL1ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsFalseForCharacterMismatchInMultiCharacterCFG() throws AmbiguousLL1ParseTableException
+    public void testAcceptsReturnsFalseForCharacterMismatchInMultiCharacterCFGUsingMultiCharacterTerminalNode() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
         contextFreeGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
