@@ -1,9 +1,12 @@
 package larp.syntaxcompiler.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
+import larp.parsetree.contextfreelanguage.ProductionNode;
+import larp.parsetree.contextfreelanguage.TerminalNode;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +24,7 @@ public class ContextFreeGrammarAugmentor
             newCfg.addProduction(production);
         }
 
-        return newCfg;
+        return this.splitTerminalNodes(newCfg);
     }
 
     private NonTerminalNode calculateNewStartSymbol(ContextFreeGrammar cfg)
@@ -56,5 +59,37 @@ public class ContextFreeGrammarAugmentor
         }
 
         return existingNames;
+    }
+
+    private ContextFreeGrammar splitTerminalNodes(ContextFreeGrammar cfg)
+    {
+        ContextFreeGrammar newCfg = new ContextFreeGrammar();
+        for (ContextFreeGrammarSyntaxNode production: cfg.getProductions())
+        {
+            ContextFreeGrammarSyntaxNode concatenationNode = production.getChildNodes().get(1);
+            ConcatenationNode newConcatenationNode = new ConcatenationNode();
+            for (ContextFreeGrammarSyntaxNode childNode: concatenationNode.getChildNodes())
+            {
+                if (childNode instanceof TerminalNode)
+                {
+                    String terminalValue = ((TerminalNode)childNode).getValue();
+                    for (int i = 0; i < terminalValue.length(); i++)
+                    {
+                        newConcatenationNode.addChild(new TerminalNode(terminalValue.substring(i, i + 1)));
+                    }
+                }
+                else
+                {
+                    newConcatenationNode.addChild(childNode);
+                }
+            }
+
+            ProductionNode newProduction = new ProductionNode();
+            newProduction.addChild(production.getChildNodes().get(0));
+            newProduction.addChild(newConcatenationNode);
+            newCfg.addProduction(newProduction);
+        }
+
+        return newCfg;
     }
 }
