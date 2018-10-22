@@ -154,12 +154,6 @@ public class LR0ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsTrueForTerminalAndNonterminalProductionChainDependingOnCollectionPrefixing()
-    {
-        throw new RuntimeException();
-    }
-
-    @Test
     public void testAcceptsReturnsFalseForEmptyStringWhenCFGIsEmpty()
     {
         ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
