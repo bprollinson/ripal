@@ -5,6 +5,7 @@ import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.DotNode;
+import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
@@ -346,6 +347,24 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("B")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("B"), new DotNode(), new NonTerminalNode("C")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("C"), new DotNode(), new TerminalNode("d")));
+
+        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+    }
+
+    @Test
+    public void testCalculateAddsDotAfterEpsilon()
+    {
+        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+
+        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        cfg.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+
+        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new EpsilonNode()));
+
+        Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new EpsilonNode()));
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new EpsilonNode(), new DotNode()));
 
         assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
     }
