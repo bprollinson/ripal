@@ -6,6 +6,7 @@ import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.regularlanguage.StateTransition;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
+import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.util.ValueToSetMap;
 
 import java.util.HashMap;
@@ -72,7 +73,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         for (ContextFreeGrammarSyntaxNode productionNode: productionSet)
         {
             ContextFreeGrammarSyntaxNode nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode);
-            if (nextSymbol != null)
+            if (nextSymbol != null && !(nextSymbol instanceof EpsilonNode))
             {
                 ContextFreeGrammarSyntaxNode productionWithDotShifted = this.productionNodeDotRepository.shiftDotInProduction(productionNode);
                 symbolToNextClosureMap.put(nextSymbol, productionWithDotShifted);
