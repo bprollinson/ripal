@@ -553,6 +553,18 @@ ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarL
     }
 
     @Test
+    public void testCompilerHandlesEpsilon()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testCompilerHandlesEpsilonWithinStateWithOtherProductions()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testCompileRemovesDuplicateProduction()
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
