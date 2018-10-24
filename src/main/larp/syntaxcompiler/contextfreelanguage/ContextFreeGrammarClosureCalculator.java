@@ -2,6 +2,10 @@ package larp.syntaxcompiler.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ConcatenationNode;
+import larp.parsetree.contextfreelanguage.DotNode;
+import larp.parsetree.contextfreelanguage.EpsilonNode;
+import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.util.ValueToSetMap;
 
 import java.util.HashSet;
@@ -53,6 +57,10 @@ public class ContextFreeGrammarClosureCalculator
             {
                 this.addProductionsForNonTerminal(cfg, startingNonTerminalProductionsMap.get(nextSymbol), productionsToAdd);
             }
+            if (nextSymbol instanceof EpsilonNode)
+            {
+                productionsToAdd.add(this.buildEpsilonProduction(productionNode.getChildNodes().get(0)));
+            }
         }
 
         return productionsClosure.addAll(productionsToAdd);
@@ -67,5 +75,18 @@ public class ContextFreeGrammarClosureCalculator
             ContextFreeGrammarSyntaxNode productionNode = this.productionNodeDotRepository.addDotToProductionRightHandSide(production);
             productionsToAdd.add(productionNode);
         }
+    }
+
+    private ProductionNode buildEpsilonProduction(ContextFreeGrammarSyntaxNode leftHandNonTerminal)
+    {
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(leftHandNonTerminal);
+
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new EpsilonNode());
+        concatenationNode.addChild(new DotNode());
+        productionNode.addChild(concatenationNode);
+
+        return productionNode;
     }
 }
