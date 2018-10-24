@@ -21,7 +21,6 @@ import java.util.Set;
 
 public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
 {
-    /*
     @Test
     public void testCompileCreatesDFAForTerminalRuleFromStartState()
     {
@@ -553,7 +552,6 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
 
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(cfg)));
     }
-    */
 
     @Test
     public void testCompilerHandlesEpsilon()
@@ -590,7 +588,6 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         throw new RuntimeException();
     }
 
-    /*
     @Test
     public void testCompileRemovesDuplicateProduction()
     {
@@ -624,7 +621,6 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
 
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(cfg)));
     }
-    */
 
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
     {
