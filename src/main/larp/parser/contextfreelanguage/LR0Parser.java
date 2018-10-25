@@ -4,6 +4,7 @@ import larp.ComparableStructure;
 import larp.parser.regularlanguage.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
+import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
 import java.util.List;
@@ -87,8 +88,9 @@ public class LR0Parser implements ComparableStructure
         ContextFreeGrammarSyntaxNode rootNode = this.parseTable.getContextFreeGrammar().getProduction(productionIndex);
         ContextFreeGrammarSyntaxNode leftHandNode = rootNode.getChildNodes().get(0);
         List<ContextFreeGrammarSyntaxNode> rightHandNodes = rootNode.getChildNodes().get(1).getChildNodes();
+        int reduceSize = this.calculateReduceSize(rightHandNodes);
 
-        for (int i = 0; i < 2 * rightHandNodes.size(); i++)
+        for (int i = 0; i < reduceSize; i++)
         {
             stack.remove(stack.size() - 1);
         }
@@ -108,6 +110,16 @@ public class LR0Parser implements ComparableStructure
         }
 
         return null;
+    }
+
+    private int calculateReduceSize(List<ContextFreeGrammarSyntaxNode> rightHandNodes)
+    {
+        if (rightHandNodes.get(0) instanceof EpsilonNode)
+        {
+            return 0;
+        }
+
+        return 2 * rightHandNodes.size();
     }
 
     public boolean structureEquals(Object other)
