@@ -13,6 +13,7 @@ import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
+import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
@@ -165,9 +166,23 @@ public class LR0ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsTrueForEmptyString()
+    public void testAcceptsReturnsTrueForEmptyString() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        augmentedGrammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+
+        LR0ParseTable parseTable = new LR0ParseTable(augmentedGrammar, state1);
+        parseTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state2));
+        parseTable.addCell(state1, new EndOfStringNode(), new LR0ReduceAction(1));
+        parseTable.addCell(state2, new EndOfStringNode(), new LR0AcceptAction());
+
+        LR0Parser parser = new LR0Parser(parseTable);
+
+        assertTrue(parser.accepts(""));
     }
 
     @Test
