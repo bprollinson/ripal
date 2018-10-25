@@ -165,6 +165,12 @@ public class LR0ParserTest
     }
 
     @Test
+    public void testAcceptsReturnsTrueForEmptyString()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testAcceptsReturnsFalseForEmptyStringWhenCFGIsEmpty()
     {
         ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
