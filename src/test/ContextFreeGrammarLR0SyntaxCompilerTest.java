@@ -11,6 +11,7 @@ import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
+import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarLR0SyntaxCompiler;
@@ -384,9 +385,25 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     }
 
     @Test
-    public void testCompileAddsReduceActionForEpsilonProduction()
+    public void testCompileAddsReduceActionForEpsilonProduction() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        augmentedGrammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+
+        LR0ParseTable expectedTable = new LR0ParseTable(augmentedGrammar, state1);
+        expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state2));
+        expectedTable.addCell(state1, new EndOfStringNode(), new LR0ReduceAction(1));
+        expectedTable.addCell(state2, new EndOfStringNode(), new LR0AcceptAction());
+
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
