@@ -429,4 +429,14 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
 
         compiler.compile(grammar);
     }
+
+    @Test(expected = AmbiguousLR0ParseTableException.class)
+    public void testCompilerThrowsExceptionForShiftReduceConflictInvolvingEpsilon()
+    {
+    }
+
+    @Test(expected = AmbiguousLR0ParseTableException.class)
+    public void testCompilerThrowsExceptionForReduceReduceConflictInvolvingEpsilon()
+    {
+    }
 }
