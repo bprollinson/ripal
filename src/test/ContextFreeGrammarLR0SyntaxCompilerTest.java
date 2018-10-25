@@ -431,8 +431,16 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
-    public void testCompilerThrowsExceptionForShiftReduceConflictInvolvingEpsilon()
+    public void testCompilerThrowsExceptionForShiftReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
     {
+        ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
+
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+
+        compiler.compile(grammar);
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
