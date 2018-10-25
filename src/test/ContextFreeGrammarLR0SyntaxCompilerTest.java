@@ -383,6 +383,12 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
+    @Test
+    public void testCompileAddsReduceActionForEpsilonProduction()
+    {
+        throw new RuntimeException();
+    }
+
     @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testCompileThrowsExceptionForShiftReduceConflict() throws AmbiguousLR0ParseTableException
     {
