@@ -2,7 +2,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
+import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
+import larp.parser.contextfreelanguage.AmbiguousParseTableException;
 import larp.parser.contextfreelanguage.LL1Parser;
 import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parserfactory.contextfreelanguage.ContextFreeLanguageParserFactory;
@@ -17,7 +18,7 @@ import java.util.List;
 public class ContextFreeLanguageParserFactoryTest
 {
     @Test
-    public void testFactoryCreatesParseTableForContextFreeGrammar() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousLL1ParseTableException
+    public void testFactoryCreatesLL1ParserForLL1AndLR0ContextFreeGrammar() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousParseTableException
     {
         ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
         List<String> input = new ArrayList<String>();
@@ -38,22 +39,34 @@ public class ContextFreeLanguageParserFactoryTest
         assertEquals(expectedParser, parser);
     }
 
-    @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
-    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectContextFreeGrammar() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousLL1ParseTableException
+    @Test
+    public void testFactoryCreatesLL1ParserForLL1AndNotLR0ContextFreeGrammar()
     {
-        ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
-        List<String> input = new ArrayList<String>();
-        input.add("");
-        factory.factory(input);
+        throw new RuntimeException();
     }
 
-    @Test(expected = AmbiguousLL1ParseTableException.class)
-    public void testFactoryThrowsAmbiguousLL1ParseTableExceptionForNonLL1ContextFreeGrammar() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousLL1ParseTableException
+    @Test
+    public void testFactoryCreatesLR0ParserForLR0AndNotLL1ContextFreeGrammar()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test(expected = AmbiguousLR0ParseTableException.class)
+    public void testFactoryThrowsAmbiguousLR0ParseTableExceptionForNonLL1NonLR0ContextFreeGrammar() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousParseTableException
     {
         ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
         List<String> input = new ArrayList<String>();
         input.add("S: \"s\"");
         input.add("S: \"s\"");
         LL1Parser parser = factory.factory(input);
+    }
+
+    @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
+    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectContextFreeGrammar() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousParseTableException
+    {
+        ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
+        List<String> input = new ArrayList<String>();
+        input.add("");
+        factory.factory(input);
     }
 }
