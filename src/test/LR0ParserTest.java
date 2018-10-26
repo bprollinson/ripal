@@ -210,6 +210,30 @@ public class LR0ParserTest
     }
 
     @Test
+    public void testGetAppliedRulesReturnsEmptyListBeforeParseIsRun()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testGetAppliedRulesReturnsRuleIndexesOnSuccessfulParse()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testGetAppliedRulesReturnsRuleIndexesUntilTableLookupFailure()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testGetAppliedRulesReturnsRuleIndexesUntilEndStateFailure()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrueWhenParseTablesHaveSameStructure() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar cfg = new ContextFreeGrammar();
