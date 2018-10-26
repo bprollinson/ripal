@@ -1,6 +1,7 @@
 package larp.parser.contextfreelanguage;
 
 import larp.ComparableStructure;
+import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.regularlanguage.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
@@ -8,16 +9,21 @@ import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
 public class LR0Parser implements ComparableStructure
 {
     private LR0ParseTable parseTable;
+    private ContextFreeGrammar contextFreeGrammar;
+    private List<Integer> appliedRules;
 
     public LR0Parser(LR0ParseTable parseTable)
     {
         this.parseTable = parseTable;
+        this.contextFreeGrammar = parseTable.getContextFreeGrammar();
+        this.appliedRules = new ArrayList<Integer>();
     }
 
     public LR0ParseTable getParseTable()
@@ -27,6 +33,8 @@ public class LR0Parser implements ComparableStructure
 
     public boolean accepts(String inputString)
     {
+        this.appliedRules = new ArrayList<Integer>();
+
         State currentState = this.parseTable.getStartState();
 
         Vector<Object> stack = new Vector<Object>();
@@ -86,7 +94,10 @@ public class LR0Parser implements ComparableStructure
     private void applyReduction(LR0ReduceAction action, Vector<Object> stack)
     {
         int productionIndex = ((LR0ReduceAction)action).getProductionIndex();
-        ContextFreeGrammarSyntaxNode rootNode = this.parseTable.getContextFreeGrammar().getProduction(productionIndex);
+
+        this.appliedRules.add(productionIndex - 1);
+
+        ContextFreeGrammarSyntaxNode rootNode = this.contextFreeGrammar.getProduction(productionIndex);
         ContextFreeGrammarSyntaxNode leftHandNode = rootNode.getChildNodes().get(0);
         List<ContextFreeGrammarSyntaxNode> rightHandNodes = rootNode.getChildNodes().get(1).getChildNodes();
         int reduceSize = this.calculateReduceSize(rightHandNodes);
@@ -125,7 +136,10 @@ public class LR0Parser implements ComparableStructure
 
     public List<Integer> getAppliedRules()
     {
-        return new ArrayList<Integer>();
+        List<Integer> appliedRulesReversed = new ArrayList<Integer>(this.appliedRules);
+        Collections.reverse(appliedRulesReversed);
+
+        return appliedRulesReversed;
     }
 
     public boolean structureEquals(Object other)
