@@ -282,39 +282,6 @@ public class LR0ParserTest
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
-        augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
-        augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        augmentedGrammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("a"));
-
-        LR0ParseTable parseTable = new LR0ParseTable(augmentedGrammar, state1);
-        parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
-        parseTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state4));
-        parseTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state3));
-        parseTable.addCell(state2, new TerminalNode("a"), new LR0ReduceAction(2));
-        parseTable.addCell(state2, new EndOfStringNode(), new LR0ReduceAction(2));
-        parseTable.addCell(state3, new TerminalNode("a"), new LR0ReduceAction(1));
-        parseTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(1));
-        parseTable.addCell(state4, new EndOfStringNode(), new LR0AcceptAction());
-
-        LR0Parser parser = new LR0Parser(parseTable);
-        parser.accepts("ab");
-
-        List<Integer> expectedRuleIndexes = new ArrayList<Integer>();
-        expectedRuleIndexes.add(0);
-        expectedRuleIndexes.add(1);
-
-        assertEquals(expectedRuleIndexes, parser.getAppliedRules());
-    }
-
-    @Test
-    public void testGetAppliedRulesReturnsRuleIndexesUntilEndStateFailure() throws AmbiguousLR0ParseTableException
-    {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state6 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
@@ -345,7 +312,6 @@ public class LR0ParserTest
         parser.accepts("a");
 
         List<Integer> expectedRuleIndexes = new ArrayList<Integer>();
-        expectedRuleIndexes.add(0);
         expectedRuleIndexes.add(1);
 
         assertEquals(expectedRuleIndexes, parser.getAppliedRules());
