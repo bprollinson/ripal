@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -17,7 +18,9 @@ import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class LR0ParserTest
 {
@@ -210,9 +213,33 @@ public class LR0ParserTest
     }
 
     @Test
-    public void testGetAppliedRulesReturnsEmptyListBeforeParseIsRun()
+    public void testGetAppliedRulesReturnsEmptyListBeforeParseIsRun() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        augmentedGrammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("a"));
+
+        LR0ParseTable parseTable = new LR0ParseTable(augmentedGrammar, state1);
+        parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
+        parseTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state4));
+        parseTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state3));
+        parseTable.addCell(state2, new TerminalNode("a"), new LR0ReduceAction(2));
+        parseTable.addCell(state2, new EndOfStringNode(), new LR0ReduceAction(2));
+        parseTable.addCell(state3, new TerminalNode("a"), new LR0ReduceAction(1));
+        parseTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(1));
+        parseTable.addCell(state4, new EndOfStringNode(), new LR0AcceptAction());
+
+        LR0Parser parser = new LR0Parser(parseTable);
+
+        List<Integer> expectedRuleIndexes = new ArrayList<Integer>();
+
+        assertEquals(expectedRuleIndexes, parser.getAppliedRules());
     }
 
     @Test

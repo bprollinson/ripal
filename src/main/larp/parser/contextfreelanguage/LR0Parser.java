@@ -7,6 +7,7 @@ import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -120,6 +121,11 @@ public class LR0Parser implements ComparableStructure
         }
 
         return 2 * rightHandNodes.size();
+    }
+
+    public List<Integer> getAppliedRules()
+    {
+        return new ArrayList<Integer>();
     }
 
     public boolean structureEquals(Object other)
