@@ -436,9 +436,8 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
-        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
         compiler.compile(grammar);
     }

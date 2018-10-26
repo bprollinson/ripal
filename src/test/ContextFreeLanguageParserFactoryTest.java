@@ -7,6 +7,8 @@ import larp.parser.contextfreelanguage.AmbiguousParseTableException;
 import larp.parser.contextfreelanguage.LL1Parser;
 import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parserfactory.contextfreelanguage.ContextFreeLanguageParserFactory;
+import larp.parsetree.contextfreelanguage.EndOfStringNode;
+import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
@@ -22,27 +24,34 @@ public class ContextFreeLanguageParserFactoryTest
     {
         ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
         List<String> input = new ArrayList<String>();
-        input.add("S: A B");
-        input.add("A: \"a\"");
-        input.add("B: \"b\"");
-        LL1Parser parser = factory.factory(input);
+        input.add("S: \"a\"");
 
         ContextFreeGrammar expectedCFG = new ContextFreeGrammar();
-        expectedCFG.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
-        expectedCFG.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
-        expectedCFG.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
+        expectedCFG.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         LL1ParseTable expectedTable = new LL1ParseTable(expectedCFG);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
-        expectedTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 1);
-        expectedTable.addCell(new NonTerminalNode("B"), new TerminalNode("b"), 2);
         LL1Parser expectedParser = new LL1Parser(expectedTable);
-        assertEquals(expectedParser, parser);
+
+        assertEquals(expectedParser, factory.factory(input));
     }
 
     @Test
-    public void testFactoryCreatesLL1ParserForLL1AndNotLR0ContextFreeGrammar()
+    public void testFactoryCreatesLL1ParserForLL1AndNotLR0ContextFreeGrammar() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
+        List<String> input = new ArrayList<String>();
+        input.add("S: \"a\"");
+        input.add("S: \"\"");
+
+        ContextFreeGrammar expectedCFG = new ContextFreeGrammar();
+        expectedCFG.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+        expectedCFG.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+        LL1ParseTable expectedTable = new LL1ParseTable(expectedCFG);
+        expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        expectedTable.addCell(new NonTerminalNode("S"), new EndOfStringNode(), 1);
+        LL1Parser expectedParser = new LL1Parser(expectedTable);
+
+        assertEquals(expectedParser, factory.factory(input));
     }
 
     @Test
@@ -58,7 +67,8 @@ public class ContextFreeLanguageParserFactoryTest
         List<String> input = new ArrayList<String>();
         input.add("S: \"s\"");
         input.add("S: \"s\"");
-        LL1Parser parser = factory.factory(input);
+
+        factory.factory(input);
     }
 
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
@@ -67,6 +77,7 @@ public class ContextFreeLanguageParserFactoryTest
         ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
         List<String> input = new ArrayList<String>();
         input.add("");
+
         factory.factory(input);
     }
 }
