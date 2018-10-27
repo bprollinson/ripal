@@ -199,6 +199,17 @@ To expand the DFA containing the context-free grammar production sets:
   * Create a transition from the current state to the subsequent state with transition symbol equal to this symbol 
 * Return the current state
 
+To construct the parse table:
+* Initialize a parse table
+* Initialize the current state to the production set DFA's start state
+* For each production in the current state's set in the form A -> prefix.
+  * Map the combination of each terminal node in the context-free grammar plus the end of string node and the current state to a reduce action corresponding to the production index
+* For each transition from the current state with a non-terminal transition symbol
+  * Map the combination of the transition symbol and the current state to a shift action corresponding to the next state in the transition
+* For each transition from the current state with a terminal transition symbol
+  * Map the combination of the transition symbol and the current state to a goto action corresponding to the next state in the transition
+* Return the parse table
+
 ### Step 4: Attempt to Match String using Parse Table (LL1)
 
 * If the provided context-free-grammar has no rules, reject
