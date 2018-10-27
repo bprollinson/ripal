@@ -228,10 +228,10 @@ To construct the parse table:
 
 * Initialize the parse stack with the parse table's start state
 * Initialize the current state to the parse table's start state
-* Initialize the input queue to the set of input characters as terminal nodes, plus an end of string node
+* Initialize the input queue with the set of input characters as terminal nodes, plus an end of string node
 * While not done
   * Set the character node to the first terminal in the input queue
-  * If the top of the parse stack is a context-free grammar node, set the character nod to that grammar node
+  * If the top of the parse stack is a context-free grammar node, set the character node to that grammar node
   * Look up the parse table entry corresponding the the current state combined with the character node
   * If the entry is not found, reject
   * If the entry is the accept action, accept
