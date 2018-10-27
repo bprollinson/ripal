@@ -187,10 +187,17 @@ To create the augmented context-free grammar:
 To expand the DFA containing the context-free grammar production sets:
 * Obtain the set of context-free-grammar productions stored in the start state
 * Calculate the closure of the production set as follows:
-  * For each production in the set in the form A -> prefix .B, where A and B are non-terminals and prefix is any empty or non-empty set of symbols, add all productions from the context-free grammar in the form B -> symbols, prefixing the right-hand side with a dot
+  * For each production in the set in the form A -> prefix .B, where A and B are non-terminals and prefix is any empty or non-empty set of symbols, add all productions from the context-free grammar in the form B -> symbols to the set, prefixing the right-hand side with a dot
   * Repeat the above process until no productions are added
+  * For each production in the set in the form A -> .epsilon, add A -> epsilon. to the set
+* If a DFA state already exists with this production set, return that state
+* Construct the current state with this set of productions
 * For each symbol appearing directly after the dot on the right-hand side of one of the productions
-  * ... 
+  * Collect the set context-free grammar productions where a dot appears directly before that symbol
+  * For each such production, shift the dot to the right of that symbol
+  * Apply this expanding algorithm to a subsequent state starting with this set of productions with the dot shifted
+  * Create a transition from the current state to the subsequent state with transition symbol equal to this symbol 
+* Return the current state
 
 ### Step 4: Attempt to Match String using Parse Table (LL1)
 
