@@ -171,7 +171,7 @@ To calculate the follow set for a non-terminal node:
 * Create an augmented version of the provided context-free grammar
 * Create a new DFA start state containing the starting production of the augmented grammar with a dot symbol added to the right-hand side
   * N -> .S
-* Expand the DFA using the algorithm stated below
+* Expand the DFA using the algorithm stated below, starting with the constructed start state
 * Construct the parse table using the algorithm stated below
 * Return the parse table
 
@@ -185,7 +185,12 @@ To create the augmented context-free grammar:
 * Return the augmented context-free grammar
 
 To expand the DFA containing the context-free grammar production sets:
-...
+* Obtain the set of context-free-grammar productions stored in the start state
+* Calculate the closure of the production set as follows:
+  * For each production in the set in the form A -> prefix .B, where A and B are non-terminals and prefix is any empty or non-empty set of symbols, add all productions from the context-free grammar in the form B -> symbols, prefixing the right-hand side with a dot
+  * Repeat the above process until no productions are added
+* For each symbol appearing directly after the dot on the right-hand side of one of the productions
+  * ... 
 
 ### Step 4: Attempt to Match String using Parse Table (LL1)
 
