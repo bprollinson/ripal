@@ -73,6 +73,7 @@ public class ContextFreeLanguageParserFactoryTest
         input.add("S: \"a\"\"b\"");
 
         ContextFreeGrammar expectedCFG = new ContextFreeGrammar();
+        expectedCFG.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         expectedCFG.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("a"));
         expectedCFG.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
