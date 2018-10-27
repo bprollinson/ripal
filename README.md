@@ -169,9 +169,23 @@ To calculate the follow set for a non-terminal node:
 
 * Initialize a DFA with the potential to store sets of context-free grammar productions in its states
 * Create an augmented version of the provided context-free grammar
+* Create a new DFA start state containing the starting production of the augmented grammar with a dot symbol added to the right-hand side
+  * N -> .S
+* Expand the DFA using the algorithm stated below
+* Construct the parse table using the algorithm stated below
+* Return the parse table
 
 To create the augmented context-free grammar:
-* Scan through the context-free grammar and collect the set of names used within non-terminal nodes
+* Create a new start non-terminal as follows:
+  * Scan through the context-free grammar and collect the set of names used within non-terminal nodes
+  * Initialize the new start symbol name to the same name as the current start symbol, S
+  * While the new start symbol name is within the collected set, append a ' to the end of the name
+* Create a new start symbol, N, with the above name, and add a new initial production in the form N -> S
+* For each multi-character terminal node in the new grammar, replace it with the corresponding set of terminal nodes with one character each
+* Return the augmented context-free grammar
+
+To expand the DFA containing the context-free grammar production sets:
+...
 
 ### Step 4: Attempt to Match String using Parse Table (LL1)
 
