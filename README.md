@@ -5,6 +5,9 @@
 ### 1.0.0
 1. Initial Beta release with support for regular language parsing and LL1 parsing
 
+### 2.0.0
+1. LR0 parsing
+
 ## Regular Languages
 
 ### Step 1: Tokenize Regular Expression
@@ -200,7 +203,7 @@ To expand the DFA containing the context-free grammar production sets:
 * Return the current state
 
 To construct the parse table:
-* Initialize a parse table
+* Initialize a parse table, setting the start state as the production set DFA's start state
 * Initialize the current state to the production set DFA's start state
 * For each production in the current state's set in the form A -> prefix.
   * Map the combination of each terminal node in the context-free grammar plus the end of string node and the current state to a reduce action corresponding to the production index
@@ -222,3 +225,17 @@ To construct the parse table:
 * If the stack and remaining input string are empty, accept, otherwise reject
 
 ### Step 4: Attempt to Match String using Parse Table (LR0)
+
+* Initialize the parse stack with the parse table's start state
+* Initialize the current state to the parse table's start state
+* Initialize the input queue to the set of input characters as terminal nodes, plus an end of string node
+* While not done
+  * Set the character node to the first terminal in the input queue
+  * If the top of the parse stack is a context-free grammar node, set the character nod to that grammar node
+  * Look up the parse table entry corresponding the the current state combined with the character node
+  * If the entry is not found, reject
+  * If the entry is the accept action, accept
+  * If the entry is a shift action, shift the first character from the input queue onto the top of the parse stack, then append the shift action's state to the top of the parse stack
+  * If the entry is a reduce action, remove two entries from the top of the parse stack for each syntax node in the right-hand side of the reduce action's corresponding production, then add the left-hand size node from that production to the top of the parse stack
+  * If the entry is a goto action, add the goto action's state to the top of the parse stack
+  * Set the current state to the top state from the parse stack
