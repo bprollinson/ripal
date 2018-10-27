@@ -165,6 +165,14 @@ To calculate the follow set for a non-terminal node:
   * For each production ending in a sequence of non-terminals that go to epsilon proceeded by another non-terminal, store the follow set of the left-hand non-terminal node in the mapping as belonging to that non-terminal
 * Return the mapping
 
+### Step 3: Convert Parse Tree into Parse Table (LR0)
+
+* Initialize a DFA with the potential to store sets of context-free grammar productions in its states
+* Create an augmented version of the provided context-free grammar
+
+To create the augmented context-free grammar:
+* Scan through the context-free grammar and collect the set of names used within non-terminal nodes
+
 ### Step 4: Attempt to Match String using Parse Table (LL1)
 
 * If the provided context-free-grammar has no rules, reject
@@ -175,3 +183,5 @@ To calculate the follow set for a non-terminal node:
   * If the top symbol of the stack is a terminal node, remove the first character of that terminal node and remaining input if they match (rejecting otherwise), adding back the remaining content of the terminal node to the stack if the remaining content is not empty
 * While the remaining input is empty and the top symbol of the stack is a non-terminal node corresponding to a parse table entry mapping to the end-of-string node, remove the top symbol, then add the right-hand side of the context-free-grammar rule corresponding to that context-free-grammar rule
 * If the stack and remaining input string are empty, accept, otherwise reject
+
+### Step 4: Attempt to Match String using Parse Table (LR0)
