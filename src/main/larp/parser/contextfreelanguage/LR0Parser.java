@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-public class LR0Parser implements ComparableStructure
+public class LR0Parser implements ContextFreeGrammarParser, ComparableStructure
 {
     private LR0ParseTable parseTable;
     private ContextFreeGrammar contextFreeGrammar;

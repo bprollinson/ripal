@@ -10,7 +10,7 @@ import larp.parsetree.contextfreelanguage.TerminalNode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LL1Parser
+public class LL1Parser implements ContextFreeGrammarParser
 {
     private LL1ParseTable parseTable;
     private ContextFreeGrammar contextFreeGrammar;
