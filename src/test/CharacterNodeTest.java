@@ -1,5 +1,5 @@
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import larp.parsetree.regularlanguage.CharacterNode;
@@ -12,7 +12,7 @@ public class CharacterNodeTest
     {
         CharacterNode node = new CharacterNode('a');
 
-        assertTrue(node.equals(new CharacterNode('a')));
+        assertEquals(new CharacterNode('a'), node);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class CharacterNodeTest
     {
         CharacterNode node = new CharacterNode('a');
 
-        assertFalse(node.equals(new CharacterNode('b')));
+        assertNotEquals(new CharacterNode('b'), node);
     }
 
     @Test
@@ -28,6 +28,6 @@ public class CharacterNodeTest
     {
         CharacterNode node = new CharacterNode('a');
 
-        assertFalse(node.equals(new ConcatenationNode()));
+        assertNotEquals(new ConcatenationNode(), node);
     }
 }

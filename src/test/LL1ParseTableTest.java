@@ -1,5 +1,5 @@
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
@@ -38,7 +38,7 @@ public class LL1ParseTableTest
         LL1ParseTable parseTable = new LL1ParseTable(new ContextFreeGrammar());
         LL1ParseTable otherParseTable = new LL1ParseTable(new ContextFreeGrammar());
 
-        assertTrue(parseTable.equals(otherParseTable));
+        assertEquals(otherParseTable, parseTable);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class LL1ParseTableTest
         LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
-        assertTrue(parseTable.equals(otherParseTable));
+        assertEquals(otherParseTable, parseTable);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class LL1ParseTableTest
         LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
-        assertFalse(parseTable.equals(otherParseTable));
+        assertNotEquals(otherParseTable, parseTable);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class LL1ParseTableTest
         LL1ParseTable otherParseTable = new LL1ParseTable(otherCfg);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
 
-        assertFalse(parseTable.equals(otherParseTable));
+        assertNotEquals(otherParseTable, parseTable);
     }
 
     @Test
@@ -112,6 +112,6 @@ public class LL1ParseTableTest
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
-        assertTrue(parseTable.equals(otherParseTable));
+        assertEquals(otherParseTable, parseTable);
     }
 }

@@ -1,5 +1,5 @@
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import larp.token.contextfreelanguage.NonTerminalToken;
@@ -12,7 +12,7 @@ public class NonTerminalTokenTest
     {
         NonTerminalToken token = new NonTerminalToken("S");
 
-        assertTrue(token.equals(new NonTerminalToken("S")));
+        assertEquals(new NonTerminalToken("S"), token);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class NonTerminalTokenTest
     {
         NonTerminalToken token = new NonTerminalToken("S");
 
-        assertFalse(token.equals(new NonTerminalToken("T")));
+        assertNotEquals(new NonTerminalToken("T"), token);
     }
 
     @Test
@@ -28,6 +28,6 @@ public class NonTerminalTokenTest
     {
         NonTerminalToken token = new NonTerminalToken("S");
 
-        assertFalse(token.equals(new SeparatorToken()));
+        assertNotEquals(new SeparatorToken(), token);
     }
 }
