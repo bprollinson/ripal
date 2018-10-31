@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -337,7 +338,7 @@ public class LL1ParserTest
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         LL1Parser otherParser = new LL1Parser(otherParseTable);
 
-        assertTrue(parser.equals(otherParser));
+        assertEquals(otherParser, parser);
     }
 
     @Test
@@ -357,6 +358,6 @@ public class LL1ParserTest
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
         LL1Parser otherParser = new LL1Parser(otherParseTable);
 
-        assertFalse(parser.equals(otherParser));
+        assertNotEquals(otherParser, parser);
     }
 }

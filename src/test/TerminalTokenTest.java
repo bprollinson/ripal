@@ -1,5 +1,5 @@
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.token.contextfreelanguage.SeparatorToken;
@@ -12,7 +12,7 @@ public class TerminalTokenTest
     {
         TerminalToken token = new TerminalToken("a");
 
-        assertTrue(token.equals(new TerminalToken("a")));
+        assertEquals(new TerminalToken("a"), token);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class TerminalTokenTest
     {
         TerminalToken token = new TerminalToken("a");
 
-        assertFalse(token.equals(new TerminalToken("b")));
+        assertNotEquals(new TerminalToken("b"), token);
     }
 
     @Test
@@ -28,6 +28,6 @@ public class TerminalTokenTest
     {
         TerminalToken token = new TerminalToken("a");
 
-        assertFalse(token.equals(new SeparatorToken()));
+        assertNotEquals(new SeparatorToken(), token);
     }
 }

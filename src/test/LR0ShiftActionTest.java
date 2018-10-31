@@ -1,5 +1,5 @@
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
@@ -18,7 +18,7 @@ public class LR0ShiftActionTest
         LR0ShiftAction action = new LR0ShiftAction(state);
         LR0ShiftAction otherAction = new LR0ShiftAction(state);
 
-        assertTrue(action.equals(otherAction));
+        assertEquals(otherAction, action);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class LR0ShiftActionTest
         LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ShiftAction otherAction = new LR0ShiftAction(otherState);
 
-        assertFalse(action.equals(otherAction));
+        assertNotEquals(otherAction, action);
     }
 
     @Test
@@ -39,6 +39,6 @@ public class LR0ShiftActionTest
         LR0ShiftAction action = new LR0ShiftAction(state);
         LR0ReduceAction otherAction = new LR0ReduceAction(0);
 
-        assertFalse(action.equals(otherAction));
+        assertNotEquals(otherAction, action);
     }
 }

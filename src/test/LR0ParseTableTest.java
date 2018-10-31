@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -80,7 +81,7 @@ public class LR0ParseTableTest
         LR0ParseTable parseTable = new LR0ParseTable(new ContextFreeGrammar(), null);
         LR0ParseTable otherParseTable = new LR0ParseTable(new ContextFreeGrammar(), null);
 
-        assertTrue(parseTable.equals(otherParseTable));
+        assertEquals(otherParseTable, parseTable);
     }
 
     @Test
@@ -97,7 +98,7 @@ public class LR0ParseTableTest
         LR0ParseTable otherParseTable = new LR0ParseTable(cfg, state);
         otherParseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
 
-        assertTrue(parseTable.equals(otherParseTable));
+        assertEquals(otherParseTable, parseTable);
     }
 
     @Test
@@ -112,7 +113,7 @@ public class LR0ParseTableTest
         LR0ParseTable parseTable = new LR0ParseTable(cfg, state);
         LR0ParseTable otherParseTable = new LR0ParseTable(cfg, otherState);
 
-        assertFalse(parseTable.equals(otherParseTable));
+        assertNotEquals(otherParseTable, parseTable);
     }
 
     @Test
@@ -132,7 +133,7 @@ public class LR0ParseTableTest
         LR0ParseTable otherParseTable = new LR0ParseTable(otherCfg, state);
         otherParseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
 
-        assertFalse(parseTable.equals(otherParseTable));
+        assertNotEquals(otherParseTable, parseTable);
     }
 
     @Test
@@ -150,7 +151,7 @@ public class LR0ParseTableTest
         LR0ParseTable otherParseTable = new LR0ParseTable(cfg, state);
         otherParseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(otherState));
 
-        assertFalse(parseTable.equals(otherParseTable));
+        assertNotEquals(otherParseTable, parseTable);
     }
 
     @Test
@@ -172,7 +173,7 @@ public class LR0ParseTableTest
         otherParseTable.addCell(state, new TerminalNode("b"), new LR0ShiftAction(otherState));
         otherParseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
 
-        assertTrue(parseTable.equals(otherParseTable));
+        assertEquals(otherParseTable, parseTable);
     }
 
     @Test
@@ -191,7 +192,7 @@ public class LR0ParseTableTest
         otherParseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
         otherParseTable.addCell(state2, new TerminalNode("a"), new LR0ReduceAction(1));
 
-        assertFalse(parseTable.equals(otherParseTable));
+        assertNotEquals(otherParseTable, parseTable);
     }
 
     @Test
