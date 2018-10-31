@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -106,7 +107,7 @@ public class PairToValueMapTest
         PairToValueMap<String, String, Integer> otherPairToValueMap = new PairToValueMap<String, String, Integer>();
         otherPairToValueMap.put("a", "b", 1);
 
-        assertTrue(pairToValueMap.equals(otherPairToValueMap));
+        assertEquals(otherPairToValueMap, pairToValueMap);
     }
 
     @Test
@@ -117,7 +118,7 @@ public class PairToValueMapTest
         PairToValueMap<String, String, Integer> otherPairToValueMap = new PairToValueMap<String, String, Integer>();
         otherPairToValueMap.put("c", "b", 1);
 
-        assertFalse(pairToValueMap.equals(otherPairToValueMap));
+        assertNotEquals(otherPairToValueMap, pairToValueMap);
     }
 
     @Test
@@ -128,6 +129,6 @@ public class PairToValueMapTest
         PairToValueMap<String, String, Integer> otherPairToValueMap = new PairToValueMap<String, String, Integer>();
         otherPairToValueMap.put("a", "c", 1);
 
-        assertFalse(pairToValueMap.equals(otherPairToValueMap));
+        assertNotEquals(otherPairToValueMap, pairToValueMap);
     }
 }

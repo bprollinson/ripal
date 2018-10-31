@@ -1,7 +1,6 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
@@ -42,7 +41,7 @@ public class ContextFreeGrammarTest
 
         ContextFreeGrammar expectedCfg = new ContextFreeGrammar();
 
-        assertTrue(cfg.equals(expectedCfg));
+        assertEquals(expectedCfg, cfg);
     }
 
     @Test
@@ -60,7 +59,7 @@ public class ContextFreeGrammarTest
         expectedNode.addChild(new TerminalNode("a"));
         expectedCfg.addProduction(expectedNode);
 
-        assertTrue(cfg.equals(expectedCfg));
+        assertEquals(expectedCfg, cfg);
     }
 
     @Test
@@ -86,6 +85,6 @@ public class ContextFreeGrammarTest
         expectedNode.addChild(new TerminalNode("c"));
         expectedCfg.addProduction(expectedNode);
 
-        assertFalse(cfg.equals(expectedCfg));
+        assertNotEquals(expectedCfg, cfg);
     }
 }

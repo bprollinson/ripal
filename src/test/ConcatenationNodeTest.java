@@ -1,5 +1,5 @@
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
@@ -12,7 +12,7 @@ public class ConcatenationNodeTest
     {
         ConcatenationNode node = new ConcatenationNode();
 
-        assertTrue(node.equals(new ConcatenationNode()));
+        assertEquals(new ConcatenationNode(), node);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class ConcatenationNodeTest
         expectedNode.addChild(new ConcatenationNode());
         expectedNode.addChild(new ConcatenationNode());
 
-        assertTrue(node.equals(expectedNode));
+        assertEquals(expectedNode, node);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class ConcatenationNodeTest
         expectedNode.addChild(new ConcatenationNode());
         expectedNode.addChild(new ProductionNode());
 
-        assertFalse(node.equals(expectedNode));
+        assertNotEquals(expectedNode, node);
     }
 
     @Test
@@ -48,6 +48,6 @@ public class ConcatenationNodeTest
     {
         ConcatenationNode node = new ConcatenationNode();
 
-        assertFalse(node.equals(new ProductionNode()));
+        assertNotEquals(new ProductionNode(), node);
     }
 }

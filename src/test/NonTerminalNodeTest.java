@@ -1,5 +1,5 @@
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
@@ -12,15 +12,15 @@ public class NonTerminalNodeTest
     {
         NonTerminalNode node = new NonTerminalNode("S");
 
-        assertTrue(node.equals(new NonTerminalNode("S")));
+        assertEquals(new NonTerminalNode("S"), node);
     }
 
     @Test
-    public void testEqualsReturnsFalseForNonTerminalNodeWithDifferentCharacter()
+    public void testEqualsReturnsFalseForNonTerminalNodeWithDifferentName()
     {
         NonTerminalNode node = new NonTerminalNode("S");
 
-        assertFalse(node.equals(new NonTerminalNode("T")));
+        assertNotEquals(new NonTerminalNode("T"), node);
     }
 
     @Test
@@ -28,6 +28,6 @@ public class NonTerminalNodeTest
     {
         NonTerminalNode node = new NonTerminalNode("S");
 
-        assertFalse(node.equals(new ConcatenationNode()));
+        assertNotEquals(new ConcatenationNode(), node);
     }
 }

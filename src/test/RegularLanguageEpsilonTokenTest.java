@@ -1,6 +1,6 @@
 import org.junit.Test;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.EpsilonToken;
@@ -12,7 +12,7 @@ public class RegularLanguageEpsilonTokenTest
     {
         EpsilonToken token = new EpsilonToken();
 
-        assertTrue(token.equals(new EpsilonToken()));
+        assertEquals(new EpsilonToken(), token);
     }
 
     @Test
@@ -20,6 +20,6 @@ public class RegularLanguageEpsilonTokenTest
     {
         EpsilonToken token = new EpsilonToken();
 
-        assertFalse(token.equals(new CharacterToken('a')));
+        assertNotEquals(new CharacterToken('a'), token);
     }
 }

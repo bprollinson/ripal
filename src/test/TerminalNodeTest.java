@@ -1,5 +1,5 @@
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
@@ -12,7 +12,7 @@ public class TerminalNodeTest
     {
         TerminalNode node = new TerminalNode("a");
 
-        assertTrue(node.equals(new TerminalNode("a")));
+        assertEquals(new TerminalNode("a"), node);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class TerminalNodeTest
     {
         TerminalNode node = new TerminalNode("a");
 
-        assertFalse(node.equals(new TerminalNode("b")));
+        assertNotEquals(new TerminalNode("b"), node);
     }
 
     @Test
@@ -28,6 +28,6 @@ public class TerminalNodeTest
     {
         TerminalNode node = new TerminalNode("a");
 
-        assertFalse(node.equals(new ConcatenationNode()));
+        assertNotEquals(new ConcatenationNode(), node);
     }
 }
