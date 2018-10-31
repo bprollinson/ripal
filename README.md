@@ -2,11 +2,11 @@
 
 ## Version History
 
-### 1.0.0
-1. Initial Beta release with support for regular language parsing and LL1 parsing
-
 ### 2.0.0
 1. LR0 parsing
+
+### 1.0.0
+1. Initial Beta release with support for regular language parsing and LL1 parsing
 
 ## Regular Languages
 
