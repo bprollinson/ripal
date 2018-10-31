@@ -36,9 +36,9 @@ public class ContextFreeLanguageParserFactoryTest
         List<String> input = new ArrayList<String>();
         input.add("S: \"a\"");
 
-        ContextFreeGrammar expectedCFG = new ContextFreeGrammar();
-        expectedCFG.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-        LL1ParseTable expectedTable = new LL1ParseTable(expectedCFG);
+        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+        LL1ParseTable expectedTable = new LL1ParseTable(expectedGrammar);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         LL1Parser expectedParser = new LL1Parser(expectedTable);
 
@@ -53,10 +53,10 @@ public class ContextFreeLanguageParserFactoryTest
         input.add("S: \"a\"");
         input.add("S: \"\"");
 
-        ContextFreeGrammar expectedCFG = new ContextFreeGrammar();
-        expectedCFG.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-        expectedCFG.addProduction(new NonTerminalNode("S"), new EpsilonNode());
-        LL1ParseTable expectedTable = new LL1ParseTable(expectedCFG);
+        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+        expectedGrammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+        LL1ParseTable expectedTable = new LL1ParseTable(expectedGrammar);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         expectedTable.addCell(new NonTerminalNode("S"), new EndOfStringNode(), 1);
         LL1Parser expectedParser = new LL1Parser(expectedTable);
@@ -72,10 +72,10 @@ public class ContextFreeLanguageParserFactoryTest
         input.add("S: \"a\"\"a\"");
         input.add("S: \"a\"\"b\"");
 
-        ContextFreeGrammar expectedCFG = new ContextFreeGrammar();
-        expectedCFG.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
-        expectedCFG.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("a"));
-        expectedCFG.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
+        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        expectedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("a"));
+        expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
@@ -83,7 +83,7 @@ public class ContextFreeLanguageParserFactoryTest
         LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
-        LR0ParseTable expectedTable = new LR0ParseTable(expectedCFG, state1);
+        LR0ParseTable expectedTable = new LR0ParseTable(expectedGrammar, state1);
         expectedTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
         expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state5));
         expectedTable.addCell(state2, new TerminalNode("a"), new LR0ShiftAction(state3));

@@ -37,54 +37,54 @@ public class ContextFreeGrammarTest
     @Test
     public void testEqualsReturnsTrueForTwoEmptyCFGs()
     {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        ContextFreeGrammar expectedCfg = new ContextFreeGrammar();
+        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
 
-        assertEquals(expectedCfg, cfg);
+        assertEquals(expectedGrammar, grammar);
     }
 
     @Test
     public void testEqualsReturnsTrueForTwoCFGsWithTheSameProductions()
     {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
         ProductionNode node = new ProductionNode();
         node.addChild(new NonTerminalNode("S"));
         node.addChild(new TerminalNode("a"));
-        cfg.addProduction(node);
+        grammar.addProduction(node);
 
-        ContextFreeGrammar expectedCfg = new ContextFreeGrammar();
+        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
         ProductionNode expectedNode = new ProductionNode();
         expectedNode.addChild(new NonTerminalNode("S"));
         expectedNode.addChild(new TerminalNode("a"));
-        expectedCfg.addProduction(expectedNode);
+        expectedGrammar.addProduction(expectedNode);
 
-        assertEquals(expectedCfg, cfg);
+        assertEquals(expectedGrammar, grammar);
     }
 
     @Test
     public void testEqualsReturnsFalseForTwoCFGSWithDifferentProductions()
     {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
         ProductionNode node = new ProductionNode();
         node.addChild(new NonTerminalNode("S"));
         node.addChild(new TerminalNode("a"));
-        cfg.addProduction(node);
+        grammar.addProduction(node);
         node = new ProductionNode();
         node.addChild(new NonTerminalNode("S"));
         node.addChild(new TerminalNode("b"));
-        cfg.addProduction(node);
+        grammar.addProduction(node);
 
-        ContextFreeGrammar expectedCfg = new ContextFreeGrammar();
+        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
         ProductionNode expectedNode = new ProductionNode();
         expectedNode.addChild(new NonTerminalNode("S"));
         expectedNode.addChild(new TerminalNode("a"));
-        expectedCfg.addProduction(expectedNode);
+        expectedGrammar.addProduction(expectedNode);
         expectedNode = new ProductionNode();
         expectedNode.addChild(new NonTerminalNode("S"));
         expectedNode.addChild(new TerminalNode("c"));
-        expectedCfg.addProduction(expectedNode);
+        expectedGrammar.addProduction(expectedNode);
 
-        assertNotEquals(expectedCfg, cfg);
+        assertNotEquals(expectedGrammar, grammar);
     }
 }

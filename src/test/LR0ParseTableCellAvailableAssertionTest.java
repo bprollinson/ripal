@@ -16,9 +16,9 @@ public class LR0ParseTableCellAvailableAssertionTest
     @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testValidateThrowsExceptionForCellThatAlreadyExists() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ParseTable parseTable = new LR0ParseTable(cfg, null);
+        LR0ParseTable parseTable = new LR0ParseTable(grammar, null);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
         LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("a"), new LR0ShiftAction(state));
 
@@ -28,9 +28,9 @@ public class LR0ParseTableCellAvailableAssertionTest
     @Test
     public void testValidateDoesNotThrowExceptionForCellThatDoesNotAlreadyExist() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ParseTable parseTable = new LR0ParseTable(cfg, null);
+        LR0ParseTable parseTable = new LR0ParseTable(grammar, null);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
         LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("b"), new LR0ShiftAction(state));
 

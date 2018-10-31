@@ -21,14 +21,14 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
 
         Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -44,7 +44,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -52,9 +52,9 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -63,7 +63,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -71,9 +71,9 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -82,7 +82,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("B")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -90,8 +90,8 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -99,7 +99,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -107,9 +107,9 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -117,7 +117,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -125,11 +125,11 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
-        cfg.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
-        cfg.addProduction(new NonTerminalNode("C"), new TerminalNode("d"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
+        grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("d"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -140,7 +140,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("B"), new DotNode(), new NonTerminalNode("C")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("C"), new DotNode(), new TerminalNode("d")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -148,9 +148,9 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
-        cfg.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new TerminalNode("a"), new DotNode(), new NonTerminalNode("B")));
@@ -159,7 +159,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new TerminalNode("a"), new DotNode(), new NonTerminalNode("B")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("B"), new DotNode(), new TerminalNode("b")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -167,9 +167,9 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
-        cfg.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a"), new NonTerminalNode("B")));
@@ -177,7 +177,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a"), new NonTerminalNode("B")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -185,9 +185,9 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
-        cfg.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new NonTerminalNode("B")));
@@ -195,7 +195,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new NonTerminalNode("B")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -203,9 +203,9 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S"));
-        cfg.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S"));
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("S")));
@@ -214,7 +214,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("S")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -222,11 +222,11 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
-        cfg.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
-        cfg.addProduction(new NonTerminalNode("B"), new NonTerminalNode("S"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
+        grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("S"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -237,7 +237,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("B"), new DotNode(), new TerminalNode("b")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("B"), new DotNode(), new NonTerminalNode("S")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -245,10 +245,10 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
-        cfg.addProduction(new NonTerminalNode("A"), new TerminalNode("b"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("b"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -258,7 +258,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new TerminalNode("b")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -266,11 +266,11 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
-        cfg.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
-        cfg.addProduction(new NonTerminalNode("B"), new TerminalNode("c"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
+        grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("c"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -281,7 +281,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("B"), new DotNode(), new TerminalNode("b")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("B"), new DotNode(), new TerminalNode("c")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -289,10 +289,10 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
-        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("C"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("C"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -302,7 +302,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("B")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("C")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -310,11 +310,11 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
-        cfg.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
-        cfg.addProduction(new NonTerminalNode("B"), new NonTerminalNode("D"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
+        grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("D"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -325,7 +325,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("B"), new DotNode(), new NonTerminalNode("C")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("B"), new DotNode(), new NonTerminalNode("D")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -333,11 +333,11 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("C"), new TerminalNode("d"));
-        cfg.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
-        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("d"));
+        grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
@@ -348,7 +348,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("B"), new DotNode(), new NonTerminalNode("C")));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("C"), new DotNode(), new TerminalNode("d")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -356,8 +356,8 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new EpsilonNode()));
@@ -366,7 +366,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new EpsilonNode()));
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new EpsilonNode(), new DotNode()));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -374,9 +374,9 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A")));
@@ -384,7 +384,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A")));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     @Test
@@ -392,9 +392,9 @@ public class ContextFreeGrammarClosureCalculatorTest
     {
         ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
 
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
-        cfg.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        cfg.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode()));
@@ -402,7 +402,7 @@ public class ContextFreeGrammarClosureCalculatorTest
         Set<ContextFreeGrammarSyntaxNode> expectedProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode()));
 
-        assertEquals(expectedProductionSet, calculator.calculate(cfg, productionSet));
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
     }
 
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
