@@ -116,7 +116,7 @@ public class ContextFreeGrammarLR0SyntaxCompiler
 
             if (childNodes.get(numChildNodes - 1) instanceof DotNode)
             {
-                List<Integer> productionPositions = this.findProductionPositions(production, parseTable.getContextFreeGrammar().getProductions());
+                List<Integer> productionPositions = this.findProductionPositions(production, parseTable.getGrammar().getProductions());
 
                 for (int productionPosition: productionPositions)
                 {

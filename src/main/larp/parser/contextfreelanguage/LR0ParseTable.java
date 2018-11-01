@@ -43,7 +43,7 @@ public class LR0ParseTable implements ComparableStructure
         return this.cells.get(state, syntaxNode);
     }
 
-    public ContextFreeGrammar getContextFreeGrammar()
+    public ContextFreeGrammar getGrammar()
     {
         return this.grammar;
     }
@@ -65,7 +65,7 @@ public class LR0ParseTable implements ComparableStructure
             return false;
         }
 
-        if (!this.grammar.equals(((LR0ParseTable)other).getContextFreeGrammar()))
+        if (!this.grammar.equals(((LR0ParseTable)other).getGrammar()))
         {
             return false;
         }
@@ -86,7 +86,7 @@ public class LR0ParseTable implements ComparableStructure
         }
 
         LR0ParseTable otherTable = (LR0ParseTable)other;
-        if (!this.grammar.equals(otherTable.getContextFreeGrammar()))
+        if (!this.grammar.equals(otherTable.getGrammar()))
         {
             return false;
         }

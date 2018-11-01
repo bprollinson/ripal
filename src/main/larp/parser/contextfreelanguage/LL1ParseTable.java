@@ -28,7 +28,7 @@ public class LL1ParseTable
         return this.cells.get(nonTerminalNode, terminalNode);
     }
 
-    public ContextFreeGrammar getContextFreeGrammar()
+    public ContextFreeGrammar getGrammar()
     {
         return this.grammar;
     }
@@ -45,7 +45,7 @@ public class LL1ParseTable
             return false;
         }
 
-        if (!this.grammar.equals(((LL1ParseTable)other).getContextFreeGrammar()))
+        if (!this.grammar.equals(((LL1ParseTable)other).getGrammar()))
         {
             return false;
         }

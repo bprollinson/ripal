@@ -19,7 +19,7 @@ public class LL1Parser implements ContextFreeGrammarParser
     public LL1Parser(LL1ParseTable parseTable)
     {
         this.parseTable = parseTable;
-        this.grammar = parseTable.getContextFreeGrammar();
+        this.grammar = parseTable.getGrammar();
         this.appliedRules = new ArrayList<Integer>();
     }
 

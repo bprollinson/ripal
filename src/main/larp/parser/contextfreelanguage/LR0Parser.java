@@ -22,7 +22,7 @@ public class LR0Parser implements ContextFreeGrammarParser, ComparableStructure
     public LR0Parser(LR0ParseTable parseTable)
     {
         this.parseTable = parseTable;
-        this.grammar = parseTable.getContextFreeGrammar();
+        this.grammar = parseTable.getGrammar();
         this.appliedRules = new ArrayList<Integer>();
     }
 
