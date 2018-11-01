@@ -16,11 +16,11 @@ public class LL1ParseTable
         this.cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer>();
     }
 
-    public void addCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode, int contextFreeGrammarRuleIndex) throws AmbiguousLL1ParseTableException
+    public void addCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode, int ruleIndex) throws AmbiguousLL1ParseTableException
     {
         new LL1ParseTableCellAvailableAssertion(this, nonTerminalNode, terminalNode).validate();
 
-        this.cells.put(nonTerminalNode, terminalNode, contextFreeGrammarRuleIndex);
+        this.cells.put(nonTerminalNode, terminalNode, ruleIndex);
     }
 
     public Integer getCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode terminalNode)
