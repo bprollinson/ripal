@@ -20,33 +20,33 @@ public class ContextFreeGrammarClosureCalculator
         this.productionNodeDotRepository = new ProductionNodeDotRepository();
     }
 
-    public Set<ContextFreeGrammarSyntaxNode> calculate(ContextFreeGrammar cfg, Set<ContextFreeGrammarSyntaxNode> productionSet)
+    public Set<ContextFreeGrammarSyntaxNode> calculate(ContextFreeGrammar grammar, Set<ContextFreeGrammarSyntaxNode> productionSet)
     {
         Set<ContextFreeGrammarSyntaxNode> productionsClosure = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionsClosure.addAll(productionSet);
-        ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap = this.calculateStartingNonTerminalProductionsMap(cfg);
+        ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap = this.calculateStartingNonTerminalProductionsMap(grammar);
 
         boolean continueExpansion = true;
         while (continueExpansion)
         {
-            continueExpansion = this.expandClosure(cfg, startingNonTerminalProductionsMap, productionsClosure);
+            continueExpansion = this.expandClosure(grammar, startingNonTerminalProductionsMap, productionsClosure);
         }
 
         return productionsClosure;
     }
 
-    private ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> calculateStartingNonTerminalProductionsMap(ContextFreeGrammar cfg)
+    private ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> calculateStartingNonTerminalProductionsMap(ContextFreeGrammar grammar)
     {
         ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductions = new ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer>();
-        for (int i = 0; i < cfg.getProductions().size(); i++)
+        for (int i = 0; i < grammar.getProductions().size(); i++)
         {
-            startingNonTerminalProductions.put(cfg.getProduction(i).getChildNodes().get(0), i);
+            startingNonTerminalProductions.put(grammar.getProduction(i).getChildNodes().get(0), i);
         }
 
         return startingNonTerminalProductions;
     }
 
-    private boolean expandClosure(ContextFreeGrammar cfg, ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
+    private boolean expandClosure(ContextFreeGrammar grammar, ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
     {
         Set<ContextFreeGrammarSyntaxNode> productionsToAdd = new HashSet<ContextFreeGrammarSyntaxNode>();
 
@@ -55,7 +55,7 @@ public class ContextFreeGrammarClosureCalculator
             ContextFreeGrammarSyntaxNode nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode);
             if (nextSymbol != null)
             {
-                this.addProductionsForNonTerminal(cfg, startingNonTerminalProductionsMap.get(nextSymbol), productionsToAdd);
+                this.addProductionsForNonTerminal(grammar, startingNonTerminalProductionsMap.get(nextSymbol), productionsToAdd);
             }
             if (nextSymbol instanceof EpsilonNode)
             {
@@ -66,11 +66,11 @@ public class ContextFreeGrammarClosureCalculator
         return productionsClosure.addAll(productionsToAdd);
     }
 
-    private void addProductionsForNonTerminal(ContextFreeGrammar cfg, Set<Integer> productionIndices, Set<ContextFreeGrammarSyntaxNode> productionsToAdd)
+    private void addProductionsForNonTerminal(ContextFreeGrammar grammar, Set<Integer> productionIndices, Set<ContextFreeGrammarSyntaxNode> productionsToAdd)
     {
         for (int productionIndex: productionIndices)
         {
-            ContextFreeGrammarSyntaxNode production = cfg.getProductions().get(productionIndex);
+            ContextFreeGrammarSyntaxNode production = grammar.getProductions().get(productionIndex);
 
             ContextFreeGrammarSyntaxNode productionNode = this.productionNodeDotRepository.addDotToProductionRightHandSide(production);
             productionsToAdd.add(productionNode);

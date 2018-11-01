@@ -29,10 +29,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         this.productionNodeDotRepository = new ProductionNodeDotRepository();
     }
 
-    public LR0ProductionSetDFA compile(ContextFreeGrammar cfg)
+    public LR0ProductionSetDFA compile(ContextFreeGrammar grammar)
     {
         this.productionSetToStateMap = new HashMap<Set<ContextFreeGrammarSyntaxNode>, LR0ProductionSetDFAState>();
-        this.augmentedGrammar = this.grammarAugmentor.augment(cfg);
+        this.augmentedGrammar = this.grammarAugmentor.augment(grammar);
 
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         ContextFreeGrammarSyntaxNode firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(this.augmentedGrammar.getProduction(0));

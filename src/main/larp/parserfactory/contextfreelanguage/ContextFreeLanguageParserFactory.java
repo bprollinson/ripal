@@ -35,23 +35,23 @@ public class ContextFreeLanguageParserFactory
 
     public ContextFreeGrammarParser factory(List<String> input) throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousParseTableException
     {
-        ContextFreeGrammar cfg = new ContextFreeGrammar();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
         for (String inputString: input)
         {
             List<ContextFreeGrammarSyntaxToken> tokenList = this.tokenizer.tokenize(inputString);
             ContextFreeGrammarSyntaxNode rootNode = this.parser.parse(tokenList);
-            cfg.addProduction(rootNode);
+            grammar.addProduction(rootNode);
         }
 
         try
         {
-            LL1ParseTable parseTable = this.ll1compiler.compile(cfg);
+            LL1ParseTable parseTable = this.ll1compiler.compile(grammar);
 
             return new LL1Parser(parseTable);
         }
         catch (AmbiguousLL1ParseTableException apte)
         {
-            LR0ParseTable parseTable = this.lr0compiler.compile(cfg);
+            LR0ParseTable parseTable = this.lr0compiler.compile(grammar);
 
             return new LR0Parser(parseTable);
         }

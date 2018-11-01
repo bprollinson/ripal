@@ -14,24 +14,24 @@ import java.util.Set;
 
 public class ContextFreeGrammarAugmentor
 {
-    public ContextFreeGrammar augment(ContextFreeGrammar cfg)
+    public ContextFreeGrammar augment(ContextFreeGrammar grammar)
     {
-        ContextFreeGrammar newCfg = new ContextFreeGrammar();
-        newCfg.addProduction(this.calculateNewStartSymbol(cfg), cfg.getStartSymbol(), new EndOfStringNode());
+        ContextFreeGrammar newGrammar = new ContextFreeGrammar();
+        newGrammar.addProduction(this.calculateNewStartSymbol(grammar), grammar.getStartSymbol(), new EndOfStringNode());
 
-        for (ContextFreeGrammarSyntaxNode production: cfg.getProductions())
+        for (ContextFreeGrammarSyntaxNode production: grammar.getProductions())
         {
-            newCfg.addProduction(production);
+            newGrammar.addProduction(production);
         }
 
-        return this.splitTerminalNodes(newCfg);
+        return this.splitTerminalNodes(newGrammar);
     }
 
-    private NonTerminalNode calculateNewStartSymbol(ContextFreeGrammar cfg)
+    private NonTerminalNode calculateNewStartSymbol(ContextFreeGrammar grammar)
     {
-        Set<String> existingNames = this.calculateExistingNonTerminalNames(cfg);
+        Set<String> existingNames = this.calculateExistingNonTerminalNames(grammar);
 
-        String newStartSymbolName = cfg.getStartSymbol().getName() + "'";
+        String newStartSymbolName = grammar.getStartSymbol().getName() + "'";
         while (existingNames.contains(newStartSymbolName))
         {
             newStartSymbolName += "'";
@@ -40,10 +40,10 @@ public class ContextFreeGrammarAugmentor
         return new NonTerminalNode(newStartSymbolName);
     }
 
-    private Set<String> calculateExistingNonTerminalNames(ContextFreeGrammar cfg)
+    private Set<String> calculateExistingNonTerminalNames(ContextFreeGrammar grammar)
     {
         Set<String> existingNames = new HashSet<String>();
-        for (ContextFreeGrammarSyntaxNode production: cfg.getProductions())
+        for (ContextFreeGrammarSyntaxNode production: grammar.getProductions())
         {
             NonTerminalNode leftHandSide = (NonTerminalNode)production.getChildNodes().get(0);
             existingNames.add(leftHandSide.getName());
@@ -61,10 +61,10 @@ public class ContextFreeGrammarAugmentor
         return existingNames;
     }
 
-    private ContextFreeGrammar splitTerminalNodes(ContextFreeGrammar cfg)
+    private ContextFreeGrammar splitTerminalNodes(ContextFreeGrammar grammar)
     {
-        ContextFreeGrammar newCfg = new ContextFreeGrammar();
-        for (ContextFreeGrammarSyntaxNode production: cfg.getProductions())
+        ContextFreeGrammar newGrammar = new ContextFreeGrammar();
+        for (ContextFreeGrammarSyntaxNode production: grammar.getProductions())
         {
             ContextFreeGrammarSyntaxNode concatenationNode = production.getChildNodes().get(1);
             ConcatenationNode newConcatenationNode = new ConcatenationNode();
@@ -87,9 +87,9 @@ public class ContextFreeGrammarAugmentor
             ProductionNode newProduction = new ProductionNode();
             newProduction.addChild(production.getChildNodes().get(0));
             newProduction.addChild(newConcatenationNode);
-            newCfg.addProduction(newProduction);
+            newGrammar.addProduction(newProduction);
         }
 
-        return newCfg;
+        return newGrammar;
     }
 }
