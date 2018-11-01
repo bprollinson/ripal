@@ -13,13 +13,13 @@ import java.util.List;
 public class LL1Parser implements ContextFreeGrammarParser
 {
     private LL1ParseTable parseTable;
-    private ContextFreeGrammar contextFreeGrammar;
+    private ContextFreeGrammar grammar;
     private List<Integer> appliedRules;
 
     public LL1Parser(LL1ParseTable parseTable)
     {
         this.parseTable = parseTable;
-        this.contextFreeGrammar = parseTable.getContextFreeGrammar();
+        this.grammar = parseTable.getContextFreeGrammar();
         this.appliedRules = new ArrayList<Integer>();
     }
 
@@ -33,7 +33,7 @@ public class LL1Parser implements ContextFreeGrammarParser
         this.appliedRules = new ArrayList<Integer>();
 
         List<ContextFreeGrammarSyntaxNode> stack = new ArrayList<ContextFreeGrammarSyntaxNode>();
-        NonTerminalNode startSymbol = contextFreeGrammar.getStartSymbol();
+        NonTerminalNode startSymbol = this.grammar.getStartSymbol();
         if (startSymbol == null)
         {
             return false;
@@ -94,7 +94,7 @@ public class LL1Parser implements ContextFreeGrammarParser
 
         this.appliedRules.add(position);
 
-        List<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
+        List<ContextFreeGrammarSyntaxNode> childNodes = this.grammar.getProduction(position).getChildNodes().get(1).getChildNodes();
         for (int i = childNodes.size() - 1; i >= 0; i--)
         {
             stack.add(0, childNodes.get(i));
@@ -142,7 +142,7 @@ public class LL1Parser implements ContextFreeGrammarParser
             this.appliedRules.add(position);
 
             stack.remove(0);
-            List<ContextFreeGrammarSyntaxNode> childNodes = this.contextFreeGrammar.getProduction(position).getChildNodes().get(1).getChildNodes();
+            List<ContextFreeGrammarSyntaxNode> childNodes = this.grammar.getProduction(position).getChildNodes().get(1).getChildNodes();
             for (int i = childNodes.size() - 1; i >= 0; i--)
             {
                 if (!(childNodes.get(i) instanceof EpsilonNode))

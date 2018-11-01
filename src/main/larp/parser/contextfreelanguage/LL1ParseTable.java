@@ -7,12 +7,12 @@ import larp.util.PairToValueMap;
 
 public class LL1ParseTable
 {
-    private ContextFreeGrammar contextFreeGrammar;
+    private ContextFreeGrammar grammar;
     private PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> cells;
 
-    public LL1ParseTable(ContextFreeGrammar contextFreeGrammar)
+    public LL1ParseTable(ContextFreeGrammar grammar)
     {
-        this.contextFreeGrammar = contextFreeGrammar;
+        this.grammar = grammar;
         this.cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer>();
     }
 
@@ -30,7 +30,7 @@ public class LL1ParseTable
 
     public ContextFreeGrammar getContextFreeGrammar()
     {
-        return this.contextFreeGrammar;
+        return this.grammar;
     }
 
     public PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> getCells()
@@ -45,7 +45,7 @@ public class LL1ParseTable
             return false;
         }
 
-        if (!this.contextFreeGrammar.equals(((LL1ParseTable)other).getContextFreeGrammar()))
+        if (!this.grammar.equals(((LL1ParseTable)other).getContextFreeGrammar()))
         {
             return false;
         }

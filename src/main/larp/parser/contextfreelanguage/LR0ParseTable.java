@@ -12,14 +12,14 @@ import java.util.Map;
 
 public class LR0ParseTable implements ComparableStructure
 {
-    private ContextFreeGrammar contextFreeGrammar;
+    private ContextFreeGrammar grammar;
     private State startState;
     private int size;
     private PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> cells;
 
-    public LR0ParseTable(ContextFreeGrammar contextFreeGrammar, State startState)
+    public LR0ParseTable(ContextFreeGrammar grammar, State startState)
     {
-        this.contextFreeGrammar = contextFreeGrammar;
+        this.grammar = grammar;
         this.startState = startState;
         this.size = 0;
         this.cells = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
@@ -45,7 +45,7 @@ public class LR0ParseTable implements ComparableStructure
 
     public ContextFreeGrammar getContextFreeGrammar()
     {
-        return this.contextFreeGrammar;
+        return this.grammar;
     }
 
     public int size()
@@ -65,7 +65,7 @@ public class LR0ParseTable implements ComparableStructure
             return false;
         }
 
-        if (!this.contextFreeGrammar.equals(((LR0ParseTable)other).getContextFreeGrammar()))
+        if (!this.grammar.equals(((LR0ParseTable)other).getContextFreeGrammar()))
         {
             return false;
         }
@@ -86,7 +86,7 @@ public class LR0ParseTable implements ComparableStructure
         }
 
         LR0ParseTable otherTable = (LR0ParseTable)other;
-        if (!this.contextFreeGrammar.equals(otherTable.getContextFreeGrammar()))
+        if (!this.grammar.equals(otherTable.getContextFreeGrammar()))
         {
             return false;
         }

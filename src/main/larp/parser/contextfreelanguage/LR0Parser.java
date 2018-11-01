@@ -16,13 +16,13 @@ import java.util.Vector;
 public class LR0Parser implements ContextFreeGrammarParser, ComparableStructure
 {
     private LR0ParseTable parseTable;
-    private ContextFreeGrammar contextFreeGrammar;
+    private ContextFreeGrammar grammar;
     private List<Integer> appliedRules;
 
     public LR0Parser(LR0ParseTable parseTable)
     {
         this.parseTable = parseTable;
-        this.contextFreeGrammar = parseTable.getContextFreeGrammar();
+        this.grammar = parseTable.getContextFreeGrammar();
         this.appliedRules = new ArrayList<Integer>();
     }
 
@@ -97,7 +97,7 @@ public class LR0Parser implements ContextFreeGrammarParser, ComparableStructure
 
         this.appliedRules.add(productionIndex - 1);
 
-        ContextFreeGrammarSyntaxNode rootNode = this.contextFreeGrammar.getProduction(productionIndex);
+        ContextFreeGrammarSyntaxNode rootNode = this.grammar.getProduction(productionIndex);
         ContextFreeGrammarSyntaxNode leftHandNode = rootNode.getChildNodes().get(0);
         List<ContextFreeGrammarSyntaxNode> rightHandNodes = rootNode.getChildNodes().get(1).getChildNodes();
         int reduceSize = this.calculateReduceSize(rightHandNodes);
