@@ -13,25 +13,25 @@ public class ContextFreeGrammarTest
     @Test
     public void testGetStartSymbolReturnsStartSymbol()
     {
-        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(new NonTerminalNode("S"));
         productionNode.addChild(new TerminalNode("a"));
-        contextFreeGrammar.addProduction(productionNode);
+        grammar.addProduction(productionNode);
         productionNode = new ProductionNode();
         productionNode.addChild(new NonTerminalNode("T"));
         productionNode.addChild(new TerminalNode("b"));
-        contextFreeGrammar.addProduction(productionNode);
+        grammar.addProduction(productionNode);
 
-        assertEquals(new NonTerminalNode("S"), contextFreeGrammar.getStartSymbol());
+        assertEquals(new NonTerminalNode("S"), grammar.getStartSymbol());
     }
 
     @Test
     public void testGetStartSymbolReturnsNullForEmptyCFG()
     {
-        ContextFreeGrammar contextFreeGrammar = new ContextFreeGrammar();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        assertNull(contextFreeGrammar.getStartSymbol());
+        assertNull(grammar.getStartSymbol());
     }
 
     @Test
