@@ -1,4 +1,13 @@
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
+
+import larp.parser.contextfreelanguage.LR0ParseStack;
+import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.TerminalNode;
+
+import java.util.HashSet;
 
 public class LR0ParseStackTest
 {
@@ -47,12 +56,32 @@ public class LR0ParseStackTest
     @Test
     public void testEqualsReturnsTrueForStacksContainingSameObjects()
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseStack stack = new LR0ParseStack();
+        stack.push(state);
+        stack.push(new TerminalNode("a"));
+
+        LR0ParseStack otherStack = new LR0ParseStack();
+        otherStack.push(state);
+        otherStack.push(new TerminalNode("a"));
+
+        assertEquals(otherStack, stack);
     }
 
     @Test
     public void testEqualsReturnsFalseForStacksContainingDifferentObjects()
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseStack stack = new LR0ParseStack();
+        stack.push(state);
+        stack.push(new TerminalNode("a"));
+
+        LR0ParseStack otherStack = new LR0ParseStack();
+        otherStack.push(state);
+        otherStack.push(new TerminalNode("b"));
+
+        assertNotEquals(otherStack, stack);
     }
 }
