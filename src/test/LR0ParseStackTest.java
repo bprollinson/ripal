@@ -3,6 +3,7 @@ import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import larp.parser.contextfreelanguage.LR0ParseStack;
+import larp.parser.contextfreelanguage.LR0ParseStackEmptyException;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
@@ -23,10 +24,11 @@ public class LR0ParseStackTest
         assertEquals(new NonTerminalNode("A"), stack.peek());
     }
 
-    @Test
+    @Test(expected = LR0ParseStackEmptyException.class)
     public void testPeekThrowsExceptionWhenStackIsEmpty()
     {
-        throw new RuntimeException();
+        LR0ParseStack stack = new LR0ParseStack();
+        stack.peek();
     }
 
     @Test
@@ -45,10 +47,11 @@ public class LR0ParseStackTest
         assertEquals(expectedStack, stack);
     }
 
-    @Test
+    @Test(expected = LR0ParseStackEmptyException.class)
     public void testPopThrowsExceptionWhenStackIsEmpty()
     {
-        throw new RuntimeException();
+        LR0ParseStack stack = new LR0ParseStack();
+        stack.pop();
     }
 
     @Test
@@ -78,10 +81,11 @@ public class LR0ParseStackTest
         assertEquals(state, stack.getTopState());
     }
 
-    @Test
+    @Test(expected = LR0ParseStackEmptyException.class)
     public void testGetTopStateThrowsExceptionWhenStateNotFound()
     {
-        throw new RuntimeException();
+        LR0ParseStack stack = new LR0ParseStack();
+        stack.getTopState();
     }
 
     @Test
