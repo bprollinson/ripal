@@ -11,7 +11,6 @@ import larp.parsetree.contextfreelanguage.TerminalNode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 
 public class LR0Parser implements ContextFreeGrammarParser, ComparableStructure
 {
@@ -33,54 +32,61 @@ public class LR0Parser implements ContextFreeGrammarParser, ComparableStructure
 
     public boolean accepts(String inputString)
     {
-        this.appliedRules = new ArrayList<Integer>();
-
-        State currentState = this.parseTable.getStartState();
-
-        Vector<Object> stack = new Vector<Object>();
-        stack.add(currentState);
-
-        while (true)
+        try
         {
-            ContextFreeGrammarSyntaxNode characterNode = this.calculateCharacterNode(inputString, stack);
-            LR0ParseTableAction action = this.parseTable.getCell(currentState, characterNode);
+            this.appliedRules = new ArrayList<Integer>();
 
-            if (action == null)
-            {
-                return false;
-            }
-            if (action instanceof LR0AcceptAction)
-            {
-                return true;
-            }
-            if (action instanceof LR0ShiftAction)
-            {
-                inputString = inputString.substring(1);
-                stack.add(characterNode);
-            }
-            if (action instanceof LR0ReduceAction)
-            {
-                this.applyReduction((LR0ReduceAction)action, stack);
-            }
+            State currentState = this.parseTable.getStartState();
 
-            State nextState = action.getNextState();
-            if (nextState != null)
+            LR0ParseStack stack = new LR0ParseStack();
+            stack.push(currentState);
+
+            while (true)
             {
-                currentState = nextState;
-                stack.add(nextState);
+                ContextFreeGrammarSyntaxNode characterNode = this.calculateCharacterNode(inputString, stack);
+                LR0ParseTableAction action = this.parseTable.getCell(currentState, characterNode);
+
+                if (action == null)
+                {
+                    return false;
+                }
+                if (action instanceof LR0AcceptAction)
+                {
+                    return true;
+                }
+                if (action instanceof LR0ShiftAction)
+                {
+                    inputString = inputString.substring(1);
+                    stack.push(characterNode);
+                }
+                if (action instanceof LR0ReduceAction)
+                {
+                    this.applyReduction((LR0ReduceAction)action, stack);
+                }
+
+                State nextState = action.getNextState();
+                if (nextState != null)
+                {
+                    currentState = nextState;
+                    stack.push(nextState);
+                }
+                else
+                {
+                    currentState = stack.getTopState();
+                }
             }
-            else
-            {
-                currentState = this.findTopStackState(stack);
-            }
+        }
+        catch (LR0ParseStackEmptyException psee)
+        {
+            return false;
         }
     }
 
-    private ContextFreeGrammarSyntaxNode calculateCharacterNode(String inputString, Vector<Object> stack)
+    private ContextFreeGrammarSyntaxNode calculateCharacterNode(String inputString, LR0ParseStack stack) throws LR0ParseStackEmptyException
     {
-        if (stack.elementAt(stack.size() - 1) instanceof ContextFreeGrammarSyntaxNode)
+        if (stack.peek() instanceof ContextFreeGrammarSyntaxNode)
         {
-            return (ContextFreeGrammarSyntaxNode)stack.elementAt(stack.size() - 1);
+            return (ContextFreeGrammarSyntaxNode)stack.peek();
         }
         if (inputString.length() > 0)
         {
@@ -91,7 +97,7 @@ public class LR0Parser implements ContextFreeGrammarParser, ComparableStructure
         return new EndOfStringNode();
     }
 
-    private void applyReduction(LR0ReduceAction action, Vector<Object> stack)
+    private void applyReduction(LR0ReduceAction action, LR0ParseStack stack) throws LR0ParseStackEmptyException
     {
         int productionIndex = ((LR0ReduceAction)action).getProductionIndex();
 
@@ -104,24 +110,10 @@ public class LR0Parser implements ContextFreeGrammarParser, ComparableStructure
 
         for (int i = 0; i < reduceSize; i++)
         {
-            stack.remove(stack.size() - 1);
+            stack.pop();
         }
 
-        stack.add(leftHandNode);
-    }
-
-    private State findTopStackState(Vector<Object> stack)
-    {
-        for (int i = stack.size() - 1; i >= 0; i--)
-        {
-            Object stackEntry = stack.get(i);
-            if (stackEntry instanceof State)
-            {
-                return (State)stackEntry;
-            }
-        }
-
-        return null;
+        stack.push(leftHandNode);
     }
 
     private int calculateReduceSize(List<ContextFreeGrammarSyntaxNode> rightHandNodes)
