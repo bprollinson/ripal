@@ -43,9 +43,18 @@ public class LR0ParseStack
         }
     }
 
-    public State getTopState()
+    public State getTopState() throws LR0ParseStackEmptyException
     {
-        return null;
+        for (int i = this.stack.size() - 1; i >= 0; i--)
+        {
+            Object stackEntry = this.stack.get(i);
+            if (stackEntry instanceof State)
+            {
+                return (State)stackEntry;
+            }
+        }
+
+        throw new LR0ParseStackEmptyException();
     }
 
     public Stack<Object> getStack()

@@ -55,7 +55,7 @@ public class LR0ParseStackTest
     }
 
     @Test
-    public void testGetTopStateReturnsTopElement()
+    public void testGetTopStateReturnsTopElement() throws LR0ParseStackEmptyException
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
@@ -68,7 +68,7 @@ public class LR0ParseStackTest
     }
 
     @Test
-    public void testGetTopStateReturnsLowerElement()
+    public void testGetTopStateReturnsLowerElement() throws LR0ParseStackEmptyException
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
@@ -82,7 +82,7 @@ public class LR0ParseStackTest
     }
 
     @Test(expected = LR0ParseStackEmptyException.class)
-    public void testGetTopStateThrowsExceptionWhenStateNotFound()
+    public void testGetTopStateThrowsExceptionWhenStateNotFound() throws LR0ParseStackEmptyException
     {
         LR0ParseStack stack = new LR0ParseStack();
         stack.getTopState();
