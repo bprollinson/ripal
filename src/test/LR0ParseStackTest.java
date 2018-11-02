@@ -13,7 +13,7 @@ import java.util.HashSet;
 public class LR0ParseStackTest
 {
     @Test
-    public void testPeekReturnsTopObject()
+    public void testPeekReturnsTopObject() throws LR0ParseStackEmptyException
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
@@ -25,14 +25,14 @@ public class LR0ParseStackTest
     }
 
     @Test(expected = LR0ParseStackEmptyException.class)
-    public void testPeekThrowsExceptionWhenStackIsEmpty()
+    public void testPeekThrowsExceptionWhenStackIsEmpty() throws LR0ParseStackEmptyException
     {
         LR0ParseStack stack = new LR0ParseStack();
         stack.peek();
     }
 
     @Test
-    public void testPopReturnsAndRemovesTopObject()
+    public void testPopReturnsAndRemovesTopObject() throws LR0ParseStackEmptyException
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
@@ -48,7 +48,7 @@ public class LR0ParseStackTest
     }
 
     @Test(expected = LR0ParseStackEmptyException.class)
-    public void testPopThrowsExceptionWhenStackIsEmpty()
+    public void testPopThrowsExceptionWhenStackIsEmpty() throws LR0ParseStackEmptyException
     {
         LR0ParseStack stack = new LR0ParseStack();
         stack.pop();

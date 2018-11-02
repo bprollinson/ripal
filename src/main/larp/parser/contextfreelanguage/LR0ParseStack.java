@@ -2,6 +2,7 @@ package larp.parser.contextfreelanguage;
 
 import larp.parser.regularlanguage.State;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class LR0ParseStack
@@ -18,14 +19,28 @@ public class LR0ParseStack
         this.stack.push(stackEntry);
     }
 
-    public Object peek()
+    public Object peek() throws LR0ParseStackEmptyException
     {
-        return this.stack.peek();
+        try
+        {
+            return this.stack.peek();
+        }
+        catch (EmptyStackException ese)
+        {
+            throw new LR0ParseStackEmptyException();
+        }
     }
 
-    public Object pop()
+    public Object pop() throws LR0ParseStackEmptyException
     {
-        return this.stack.pop();
+        try
+        {
+            return this.stack.pop();
+        }
+        catch (EmptyStackException ese)
+        {
+            throw new LR0ParseStackEmptyException();
+        }
     }
 
     public State getTopState()
