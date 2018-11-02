@@ -32,7 +32,17 @@ public class LR0ParseStackTest
     @Test
     public void testPopReturnsAndRemovesTopObject()
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseStack stack = new LR0ParseStack();
+        stack.push(state);
+        stack.push(new NonTerminalNode("A"));
+
+        LR0ParseStack expectedStack = new LR0ParseStack();
+        expectedStack.push(state);
+
+        assertEquals(new NonTerminalNode("A"), stack.pop());
+        assertEquals(expectedStack, stack);
     }
 
     @Test

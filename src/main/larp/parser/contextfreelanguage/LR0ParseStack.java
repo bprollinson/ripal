@@ -10,4 +10,9 @@ public class LR0ParseStack
     {
         return null;
     }
+
+    public Object pop()
+    {
+        return null;
+    }
 }
