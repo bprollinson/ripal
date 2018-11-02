@@ -14,7 +14,13 @@ public class LR0ParseStackTest
     @Test
     public void testPeekReturnsTopObject()
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseStack stack = new LR0ParseStack();
+        stack.push(state);
+        stack.push(new TerminalNode("a"));
+
+        assertEquals(new TerminalNode("a"), stack.peek());
     }
 
     @Test
