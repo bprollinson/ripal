@@ -62,6 +62,12 @@ public class LR0ProductionSetDFATest
         assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet))));
     }
 
+    @Test
+    public void testStructureEqualsReturnsFalseWhenAugmentedGrammarsNotEquals()
+    {
+        throw new RuntimeException();
+    }
+
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
     {
         ProductionNode productionNode = new ProductionNode();
