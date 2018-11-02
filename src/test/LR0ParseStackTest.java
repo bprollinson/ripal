@@ -5,7 +5,7 @@ import org.junit.Test;
 import larp.parser.contextfreelanguage.LR0ParseStack;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
-import larp.parsetree.contextfreelanguage.TerminalNode;
+import larp.parsetree.contextfreelanguage.NonTerminalNode;
 
 import java.util.HashSet;
 
@@ -18,9 +18,9 @@ public class LR0ParseStackTest
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
-        stack.push(new TerminalNode("a"));
+        stack.push(new NonTerminalNode("A"));
 
-        assertEquals(new TerminalNode("a"), stack.peek());
+        assertEquals(new NonTerminalNode("A"), stack.peek());
     }
 
     @Test
@@ -66,11 +66,11 @@ public class LR0ParseStackTest
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
-        stack.push(new TerminalNode("a"));
+        stack.push(new NonTerminalNode("A"));
 
         LR0ParseStack otherStack = new LR0ParseStack();
         otherStack.push(state);
-        otherStack.push(new TerminalNode("a"));
+        otherStack.push(new NonTerminalNode("A"));
 
         assertEquals(otherStack, stack);
     }
@@ -82,11 +82,11 @@ public class LR0ParseStackTest
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
-        stack.push(new TerminalNode("a"));
+        stack.push(new NonTerminalNode("A"));
 
         LR0ParseStack otherStack = new LR0ParseStack();
         otherStack.push(state);
-        otherStack.push(new TerminalNode("b"));
+        otherStack.push(new NonTerminalNode("B"));
 
         assertNotEquals(otherStack, stack);
     }
