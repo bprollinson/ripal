@@ -54,13 +54,28 @@ public class LR0ParseStackTest
     @Test
     public void testGetTopStateReturnsTopElement()
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseStack stack = new LR0ParseStack();
+        stack.push(new LR0ProductionSetDFAState("", true, new HashSet<ContextFreeGrammarSyntaxNode>()));
+        stack.push(new NonTerminalNode("A"));
+        stack.push(state);
+
+        assertEquals(state, stack.getTopState());
     }
 
     @Test
     public void testGetTopStateReturnsLowerElement()
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseStack stack = new LR0ParseStack();
+        stack.push(new LR0ProductionSetDFAState("", true, new HashSet<ContextFreeGrammarSyntaxNode>()));
+        stack.push(new NonTerminalNode("A"));
+        stack.push(state);
+        stack.push(new NonTerminalNode("B"));
+
+        assertEquals(state, stack.getTopState());
     }
 
     @Test
