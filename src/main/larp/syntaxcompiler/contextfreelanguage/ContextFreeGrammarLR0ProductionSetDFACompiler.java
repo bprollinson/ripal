@@ -40,7 +40,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
 
         LR0ProductionSetDFAState startState = this.compileState(productionSet, false);
 
-        return new LR0ProductionSetDFA(startState);
+        return new LR0ProductionSetDFA(startState, null);
     }
 
     public ContextFreeGrammar getAugmentedGrammar()

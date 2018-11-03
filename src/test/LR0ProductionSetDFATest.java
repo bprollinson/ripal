@@ -3,6 +3,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
@@ -19,8 +20,11 @@ public class LR0ProductionSetDFATest
     @Test
     public void testGetStartStateReturnsLR0ProductionSetDFAState()
     {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+
         LR0ProductionSetDFAState expectedStartState = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(expectedStartState);
+        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(expectedStartState, grammar);
 
         LR0ProductionSetDFAState startState = dfa.getStartState();
         assertEquals(expectedStartState, startState);
@@ -29,43 +33,62 @@ public class LR0ProductionSetDFATest
     @Test
     public void testStructureEqualsReturnsTrue()
     {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet));
+        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
 
         Set<ContextFreeGrammarSyntaxNode> otherProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        assertTrue(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet))));
+        assertTrue(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet), grammar)));
     }
 
     @Test
     public void testStructureEqualsReturnsFalseWhenStatesNotEqual()
     {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet));
+        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
 
         Set<ContextFreeGrammarSyntaxNode> otherProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", false, otherProductionSet))));
+        assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", false, otherProductionSet), grammar)));
     }
 
     @Test
     public void testStructureEqualsReturnsFalseWhenProductionSetsNotEqual()
     {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet));
+        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
 
         Set<ContextFreeGrammarSyntaxNode> otherProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
         otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("B")));
-        assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet))));
+        assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet), grammar)));
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseWhenAugmentedGrammarsNotEquals()
+    public void testStructureEqualsReturnsFalseWhenGrammarsNotEqual()
     {
-        throw new RuntimeException();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
+
+        ContextFreeGrammar otherGrammar = new ContextFreeGrammar();
+        otherGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("B"));
+        Set<ContextFreeGrammarSyntaxNode> otherProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet), otherGrammar)));
     }
 
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)

@@ -46,7 +46,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s2));
         s2.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s3));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -79,7 +79,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("A"), s1));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s2));
         s2.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s3));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -118,7 +118,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("A"), s2));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s3));
         s3.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s4));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -157,7 +157,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s1.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("b"), s2));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s3));
         s3.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s4));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
@@ -195,7 +195,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s1.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("B"), s2));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s3));
         s3.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s4));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
@@ -239,7 +239,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s1.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("b"), s3));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s4));
         s4.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s5));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
@@ -291,7 +291,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("c"), s4));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s5));
         s5.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s6));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -350,7 +350,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s1.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("d"), s5));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s6));
         s6.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s7));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
@@ -409,7 +409,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s3.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s4));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s5));
         s5.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s6));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("S"));
@@ -454,7 +454,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s2.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("c"), s3));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s4));
         s4.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s5));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"), new TerminalNode("c"));
@@ -505,7 +505,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s2.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("b"), s4));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s5));
         s5.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s6));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("a"));
@@ -545,7 +545,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s1.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("b"), s2));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s3));
         s3.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s4));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
@@ -574,7 +574,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
 
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s1));
         s1.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s2));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
@@ -615,7 +615,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("A"), s2));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s3));
         s3.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s4));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -650,7 +650,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s0.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s2));
         s2.addTransition(new StateTransition<ContextFreeGrammarSyntaxNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s3));
-        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0);
+        LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, null);
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
