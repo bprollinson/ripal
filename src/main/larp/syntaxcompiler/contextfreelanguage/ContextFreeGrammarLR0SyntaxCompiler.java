@@ -40,11 +40,11 @@ public class ContextFreeGrammarLR0SyntaxCompiler
         }
 
         LR0ProductionSetDFA DFA = this.DFACompiler.compile(grammar);
-        grammar = this.DFACompiler.getAugmentedGrammar();
+        ContextFreeGrammar augmentedGrammar = DFA.getGrammar();
         LR0ProductionSetDFAState startState = DFA.getStartState();
-        LR0ParseTable parseTable = new LR0ParseTable(grammar, startState);
+        LR0ParseTable parseTable = new LR0ParseTable(augmentedGrammar, startState);
 
-        this.processState(parseTable, startState, this.calculateTerminalNodeList(grammar), new ArrayList<LR0ProductionSetDFAState>());
+        this.processState(parseTable, startState, this.calculateTerminalNodeList(augmentedGrammar), new ArrayList<LR0ProductionSetDFAState>());
 
         return parseTable;
     }
