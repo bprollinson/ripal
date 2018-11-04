@@ -13,6 +13,8 @@ You should have received a copy of the GNU Lesser General Public License along w
 
 LARP: Language Analysis and Responsive Parsing is explicitly licensed under version 2.1 of the the GNU Lesser General Public License (LGPL), and explicitly excludes later versions.
 
+This specific version of the LGPL can be found [here](http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html).
+
 # Contact Information
 
 Mail:  
