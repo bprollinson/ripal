@@ -19,6 +19,8 @@ Mail:
 Brendan Rollinson-Lorimer  
 103 The Queensway  
 &#35;917  
-Toronto, Ontario
+Toronto, Ontario  
+Canada  
+M6S 5B3
 
 Email: brendan.rollinson@gmail.com
