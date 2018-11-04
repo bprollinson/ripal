@@ -11,13 +11,14 @@ import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
+import larp.parser.contextfreelanguage.LL1ApplyApplyConflictException;
 import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
 public class LL1ParseTableTest
 {
-    @Test(expected = AmbiguousLL1ParseTableException.class)
+    @Test(expected = LL1ApplyApplyConflictException.class)
     public void testAddCellThrowsExceptionForCellThatAlreadyExists() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();

@@ -28,7 +28,7 @@ public class LL1ParseTableCellAvailableAssertion implements Assertion
     {
         if (this.parseTable.getCell(this.nonTerminalNode, this.terminalNode) != null)
         {
-            throw new AmbiguousLL1ParseTableException();
+            throw new LL1ApplyApplyConflictException();
         }
     }
 }

@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
+import larp.parser.contextfreelanguage.LL1ApplyApplyConflictException;
 import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
@@ -146,7 +147,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         assertEquals(expectedTable, compiler.compile(grammar));
     }
 
-    @Test(expected = AmbiguousLL1ParseTableException.class)
+    @Test(expected = LL1ApplyApplyConflictException.class)
     public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoTerminals() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
@@ -158,7 +159,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         compiler.compile(grammar);
     }
 
-    @Test(expected = AmbiguousLL1ParseTableException.class)
+    @Test(expected = LL1ApplyApplyConflictException.class)
     public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoNonTerminals() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
@@ -172,7 +173,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         compiler.compile(grammar);
     }
 
-    @Test(expected = AmbiguousLL1ParseTableException.class)
+    @Test(expected = LL1ApplyApplyConflictException.class)
     public void testCompileThrowsExceptionForFirstAmbiguityBetweenTerminalAndNonTerminal() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
@@ -185,7 +186,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         compiler.compile(grammar);
     }
 
-    @Test(expected = AmbiguousLL1ParseTableException.class)
+    @Test(expected = LL1ApplyApplyConflictException.class)
     public void testCompileThrowsExceptionForAmbiguousGrammarContainingCycle() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
@@ -297,7 +298,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         assertEquals(expectedTable, compiler.compile(grammar));
     }
 
-    @Test(expected = AmbiguousLL1ParseTableException.class)
+    @Test(expected = LL1ApplyApplyConflictException.class)
     public void testCompileThrowsExceptionForFirstFollowAmbiguity() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
@@ -311,7 +312,7 @@ public class ContextFreeGrammarLL1SyntaxCompilerTest
         compiler.compile(grammar);
     }
 
-    @Test(expected = AmbiguousLL1ParseTableException.class)
+    @Test(expected = LL1ApplyApplyConflictException.class)
     public void testCompileThrowsExceptionForFollowFollowAmbiguity() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammarLL1SyntaxCompiler compiler = new ContextFreeGrammarLL1SyntaxCompiler();
