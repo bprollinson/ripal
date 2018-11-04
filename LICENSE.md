@@ -15,7 +15,7 @@ LARP: Language Analysis and Responsive Parsing is explicitly licensed under vers
 
 # Contact Information
 
-Mail:
+Mail:  
 Brendan Rollinson-Lorimer  
 103 The Queensway  
 &#35;917  
