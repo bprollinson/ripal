@@ -3,6 +3,7 @@
 ## Licensing
 
 LARP: Language Analysis and Responsive Parsing is licensed under LGPL v. 2.1.
+
 For more information, see [LICENSE.md](LICENSE.md).
 
 ## Version History
