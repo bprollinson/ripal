@@ -7,6 +7,6 @@
 
 package larp.parser.contextfreelanguage;
 
-public abstract class AmbiguousLR0ParseTableException extends AmbiguousParseTableException
+public class LR0ShiftReduceConflictException extends AmbiguousLR0ParseTableException
 {
 }

@@ -30,7 +30,7 @@ public class LR0ParseTableCellAvailableAssertion implements Assertion
     {
         if (this.parseTable.getCell(this.state, this.syntaxNode) != null)
         {
-            throw new AmbiguousLR0ParseTableException();
+            throw new LR0ShiftReduceConflictException();
         }
     }
 }
