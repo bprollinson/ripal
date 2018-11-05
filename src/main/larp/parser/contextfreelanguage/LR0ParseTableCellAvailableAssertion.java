@@ -28,9 +28,25 @@ public class LR0ParseTableCellAvailableAssertion implements Assertion
 
     public void validate() throws AmbiguousLR0ParseTableException
     {
-        if (this.parseTable.getCell(this.state, this.syntaxNode) != null)
+        LR0ParseTableAction existingAction = this.parseTable.getCell(this.state, this.syntaxNode);
+        if (existingAction == null)
+        {
+            return;
+        }
+
+        if (this.action instanceof LR0ShiftAction && existingAction instanceof LR0ReduceAction)
         {
             throw new LR0ShiftReduceConflictException();
         }
+        if (this.action instanceof LR0ReduceAction && existingAction instanceof LR0ShiftAction)
+        {
+            throw new LR0ShiftReduceConflictException();
+        }
+        if (this.action instanceof LR0ReduceAction && existingAction instanceof LR0ReduceAction)
+        {
+            throw new LR0ReduceReduceConflictException();
+        }
+
+        throw new LR0OtherConflictException();
     }
 }
