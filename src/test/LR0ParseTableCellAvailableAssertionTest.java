@@ -20,6 +20,30 @@ import java.util.HashSet;
 
 public class LR0ParseTableCellAvailableAssertionTest
 {
+    @Test
+    public void testValidateThrowsExceptionForShiftActionWhenCellContainsReduceAction()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateThrowsExceptionForReduceActionWhenCellContainsShiftAction()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateThrowsExceptionForReduceActionWhenCellContainsReduceAction()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testValidateThrowsExceptionForOtherTypeOfConflict()
+    {
+        throw new RuntimeException();
+    }
+
     @Test(expected = AmbiguousLR0ParseTableException.class)
     public void testValidateThrowsExceptionForCellThatAlreadyExists() throws AmbiguousLR0ParseTableException
     {
