@@ -9,10 +9,13 @@ import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
+import larp.parser.contextfreelanguage.LR0OtherConflictException;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ParseTableCellAvailableAssertion;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
+import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
+import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
@@ -20,28 +23,24 @@ import java.util.HashSet;
 
 public class LR0ParseTableCellAvailableAssertionTest
 {
-    @Test
+    @Test(expected = LR0ShiftReduceConflictException.class)
     public void testValidateThrowsExceptionForShiftActionWhenCellContainsReduceAction()
     {
-        throw new RuntimeException();
     }
 
-    @Test
+    @Test(expected = LR0ShiftReduceConflictException.class)
     public void testValidateThrowsExceptionForReduceActionWhenCellContainsShiftAction()
     {
-        throw new RuntimeException();
     }
 
-    @Test
+    @Test(expected = LR0ReduceReduceConflictException.class)
     public void testValidateThrowsExceptionForReduceActionWhenCellContainsReduceAction()
     {
-        throw new RuntimeException();
     }
 
-    @Test
+    @Test(expected = LR0OtherConflictException.class)
     public void testValidateThrowsExceptionForOtherTypeOfConflict()
     {
-        throw new RuntimeException();
     }
 
     @Test(expected = AmbiguousLR0ParseTableException.class)
