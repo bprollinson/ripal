@@ -451,7 +451,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         compiler.compile(grammar);
     }
 
-    @Test(expected = AmbiguousLR0ParseTableException.class)
+    @Test(expected = LR0ReduceReduceConflictException.class)
     public void testCompilerThrowsExceptionForReduceReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
