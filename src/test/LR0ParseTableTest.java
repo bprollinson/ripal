@@ -15,10 +15,13 @@ import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
 import larp.parser.contextfreelanguage.LR0AcceptAction;
 import larp.parser.contextfreelanguage.LR0GotoAction;
+import larp.parser.contextfreelanguage.LR0OtherConflictException;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
+import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
+import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
@@ -56,7 +59,7 @@ public class LR0ParseTableTest
         assertEquals(state, parseTable.getStartState());
     }
 
-    @Test(expected = AmbiguousLR0ParseTableException.class)
+    @Test(expected = LR0ShiftReduceConflictException.class)
     public void testAddCellThrowsExceptionForShiftActionWhenCellContainsReduceAction() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
@@ -70,7 +73,7 @@ public class LR0ParseTableTest
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state2));
     }
 
-    @Test(expected = AmbiguousLR0ParseTableException.class)
+    @Test(expected = LR0ShiftReduceConflictException.class)
     public void testAddCellThrowsExceptionForReduceActionWhenCellContainsShiftAction() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
@@ -84,7 +87,7 @@ public class LR0ParseTableTest
         parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
     }
 
-    @Test(expected = AmbiguousLR0ParseTableException.class)
+    @Test(expected = LR0ReduceReduceConflictException.class)
     public void testAddCellThrowsExceptionForReduceActionWhenCellContainsReduceAction() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
@@ -98,7 +101,7 @@ public class LR0ParseTableTest
         parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
     }
 
-    @Test(expected = AmbiguousLR0ParseTableException.class)
+    @Test(expected = LR0OtherConflictException.class)
     public void testAddCellThrowsExceptionForOtherTypeOfConflict() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();

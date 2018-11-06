@@ -15,7 +15,9 @@ import larp.parser.contextfreelanguage.LR0GotoAction;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
+import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
+import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
@@ -413,7 +415,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
-    @Test(expected = AmbiguousLR0ParseTableException.class)
+    @Test(expected = LR0ShiftReduceConflictException.class)
     public void testCompileThrowsExceptionForShiftReduceConflict() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
@@ -425,7 +427,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         compiler.compile(grammar);
     }
 
-    @Test(expected = AmbiguousLR0ParseTableException.class)
+    @Test(expected = LR0ReduceReduceConflictException.class)
     public void testCompileThrowsExceptionForReduceReduceConflict() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();
@@ -437,7 +439,7 @@ public class ContextFreeGrammarLR0SyntaxCompilerTest
         compiler.compile(grammar);
     }
 
-    @Test(expected = AmbiguousLR0ParseTableException.class)
+    @Test(expected = LR0ShiftReduceConflictException.class)
     public void testCompilerThrowsExceptionForShiftReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
     {
         ContextFreeGrammarLR0SyntaxCompiler compiler = new ContextFreeGrammarLR0SyntaxCompiler();

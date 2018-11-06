@@ -20,6 +20,7 @@ import larp.parser.contextfreelanguage.LR0Parser;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
+import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parserfactory.contextfreelanguage.ContextFreeLanguageParserFactory;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
@@ -108,7 +109,7 @@ public class ContextFreeLanguageParserFactoryTest
         assertTrue(expectedParser.structureEquals(factory.factory(input)));
     }
 
-    @Test(expected = AmbiguousLR0ParseTableException.class)
+    @Test(expected = LR0ReduceReduceConflictException.class)
     public void testFactoryThrowsAmbiguousLR0ParseTableExceptionForNonLL1NonLR0ContextFreeGrammar() throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousParseTableException
     {
         ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
