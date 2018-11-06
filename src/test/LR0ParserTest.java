@@ -220,6 +220,18 @@ public class LR0ParserTest
     }
 
     @Test
+    public void testAcceptsReturnsFalseWhenParseStackRunsOutOfSymbols()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testAcceptsReturnsFalseWhenReduceActionRunsOutOfSymbols()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testGetAppliedRulesReturnsEmptyListBeforeParseIsRun() throws AmbiguousLR0ParseTableException
     {
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
