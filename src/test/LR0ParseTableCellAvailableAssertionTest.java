@@ -34,7 +34,7 @@ public class LR0ParseTableCellAvailableAssertionTest
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, null);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(1));
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
 
         LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("a"), new LR0ShiftAction(state));
         assertion.validate();
@@ -50,7 +50,7 @@ public class LR0ParseTableCellAvailableAssertionTest
         LR0ParseTable parseTable = new LR0ParseTable(grammar, null);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
 
-        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("a"), new LR0ReduceAction(1));
+        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("a"), new LR0ReduceAction(0));
         assertion.validate();
     }
 
@@ -62,9 +62,9 @@ public class LR0ParseTableCellAvailableAssertionTest
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, null);
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(1));
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
 
-        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("a"), new LR0ReduceAction(1));
+        LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("a"), new LR0ReduceAction(0));
         assertion.validate();
     }
 
