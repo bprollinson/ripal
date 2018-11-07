@@ -220,15 +220,43 @@ public class LR0ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsFalseWhenParseStackRunsOutOfSymbols()
+    public void testAcceptsReturnsFalseWhenReduceActionRunsOutOfSymbols() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
+
+        LR0ParseTable parseTable = new LR0ParseTable(augmentedGrammar, state1);
+        parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
+        parseTable.addCell(state2, new TerminalNode("b"), new LR0ReduceAction(1));
+
+        LR0Parser parser = new LR0Parser(parseTable);
+
+        assertFalse(parser.accepts("ab"));
     }
 
     @Test
-    public void testAcceptsReturnsFalseWhenReduceActionRunsOutOfSymbols()
+    public void testAcceptsReturnsFalseWhenNextStateNotFoundInStack() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        augmentedGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+
+        LR0ParseTable parseTable = new LR0ParseTable(augmentedGrammar, state1);
+        parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
+        parseTable.addCell(state1, new NonTerminalNode("A"), new LR0ReduceAction(1));
+        parseTable.addCell(state2, new EndOfStringNode(), new LR0ReduceAction(2));
+
+        LR0Parser parser = new LR0Parser(parseTable);
+
+        assertFalse(parser.accepts("a"));
     }
 
     @Test
