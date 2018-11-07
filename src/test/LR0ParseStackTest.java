@@ -96,6 +96,18 @@ public class LR0ParseStackTest
     }
 
     @Test
+    public void testStackEqualsReturnsTrue()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testStackEqualsReturnsFalse()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testEqualsReturnsTrueForStacksContainingSameObjects()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());

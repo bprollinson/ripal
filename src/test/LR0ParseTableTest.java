@@ -128,6 +128,18 @@ public class LR0ParseTableTest
     }
 
     @Test
+    public void testCellsEqualReturnsTrue()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testCellsEqualReturnsFalse()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries() throws AmbiguousLR0ParseTableException
     {
         LR0ParseTable parseTable = new LR0ParseTable(new ContextFreeGrammar(), null);

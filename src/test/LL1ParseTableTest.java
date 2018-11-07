@@ -41,6 +41,18 @@ public class LL1ParseTableTest
     }
 
     @Test
+    public void testCellsEqualReturnsTrue()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testCellsEqualReturnsFalse()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
     {
         LL1ParseTable parseTable = new LL1ParseTable(new ContextFreeGrammar());

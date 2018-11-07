@@ -327,6 +327,18 @@ public class LL1ParserTest
     }
 
     @Test
+    public void testParseTableEqualsReturnsTrue()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testParseTableEqualsReturnsFalse()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
     public void testEqualsReturnsTrueWhenParseTablesEqual() throws AmbiguousLL1ParseTableException
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
