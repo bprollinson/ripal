@@ -67,7 +67,7 @@ public class LR0ParseTable implements ComparableStructure
 
     public boolean cellsEqual(PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> otherCells)
     {
-        return otherCells.equals(this.cells);
+        return this.cells.equals(otherCells);
     }
 
     public boolean equals(Object other)

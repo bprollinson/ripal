@@ -42,7 +42,7 @@ public class LL1ParseTable
 
     public boolean cellsEqual(PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> otherCells)
     {
-        return otherCells.equals(this.cells);
+        return this.cells.equals(otherCells);
     }
 
     public boolean equals(Object other)

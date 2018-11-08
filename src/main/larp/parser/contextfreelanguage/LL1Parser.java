@@ -162,7 +162,7 @@ public class LL1Parser implements ContextFreeGrammarParser
 
     public boolean parseTableEquals(LL1ParseTable otherParseTable)
     {
-        return otherParseTable.equals(this.parseTable);
+        return this.parseTable.equals(otherParseTable);
     }
 
     public boolean equals(Object other)
