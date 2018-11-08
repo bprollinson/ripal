@@ -40,11 +40,6 @@ public class LL1ParseTable
         return this.grammar;
     }
 
-    public PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> getCells()
-    {
-        return this.cells;
-    }
-
     public boolean cellsEqual(PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> otherCells)
     {
         return otherCells.equals(this.cells);
