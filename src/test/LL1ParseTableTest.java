@@ -6,15 +6,19 @@
  */
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.parser.contextfreelanguage.LL1ApplyApplyConflictException;
 import larp.parser.contextfreelanguage.LL1ParseTable;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
+import larp.util.PairToValueMap;
 
 public class LL1ParseTableTest
 {
@@ -41,15 +45,33 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testCellsEqualReturnsTrue()
+    public void testCellsEqualReturnsTrue() throws AmbiguousLL1ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer>();
+        cells.put(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+
+        LL1ParseTable parseTable = new LL1ParseTable(grammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+
+        assertTrue(parseTable.cellsEqual(cells));
     }
 
     @Test
-    public void testCellsEqualReturnsFalse()
+    public void testCellsEqualReturnsFalse() throws AmbiguousLL1ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer>();
+        cells.put(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+
+        LL1ParseTable parseTable = new LL1ParseTable(grammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 1);
+
+        assertFalse(parseTable.cellsEqual(cells));
     }
 
     @Test

@@ -45,6 +45,11 @@ public class LL1ParseTable
         return this.cells;
     }
 
+    public boolean cellsEqual(PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> otherCells)
+    {
+        return otherCells.equals(this.cells);
+    }
+
     public boolean equals(Object other)
     {
         if (!(other instanceof LL1ParseTable))
@@ -57,6 +62,6 @@ public class LL1ParseTable
             return false;
         }
 
-        return this.cells.equals(((LL1ParseTable)other).getCells());
+        return ((LL1ParseTable)other).cellsEqual(this.cells);
     }
 }
