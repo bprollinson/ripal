@@ -30,11 +30,6 @@ public class LL1Parser implements ContextFreeGrammarParser
         this.appliedRules = new ArrayList<Integer>();
     }
 
-    public LL1ParseTable getParseTable()
-    {
-        return this.parseTable;
-    }
-
     public boolean accepts(String inputString)
     {
         this.appliedRules = new ArrayList<Integer>();
@@ -165,6 +160,11 @@ public class LL1Parser implements ContextFreeGrammarParser
         return this.appliedRules;
     }
 
+    public boolean parseTableEquals(LL1ParseTable otherParseTable)
+    {
+        return otherParseTable.equals(this.parseTable);
+    }
+
     public boolean equals(Object other)
     {
         if (!(other instanceof LL1Parser))
@@ -172,6 +172,6 @@ public class LL1Parser implements ContextFreeGrammarParser
             return false;
         }
 
-        return this.parseTable.equals(((LL1Parser)other).getParseTable());
+        return ((LL1Parser)other).parseTableEquals(this.parseTable);
     }
 }

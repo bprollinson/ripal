@@ -327,15 +327,37 @@ public class LL1ParserTest
     }
 
     @Test
-    public void testParseTableEqualsReturnsTrue()
+    public void testParseTableEqualsReturnsTrue() throws AmbiguousLL1ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LL1ParseTable parseTable = new LL1ParseTable(grammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
+        LL1Parser parser = new LL1Parser(parseTable);
+
+        LL1ParseTable otherParseTable = new LL1ParseTable(grammar);
+        otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
+        otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+
+        assertTrue(parser.parseTableEquals(otherParseTable));
     }
 
     @Test
-    public void testParseTableEqualsReturnsFalse()
+    public void testParseTableEqualsReturnsFalse() throws AmbiguousLL1ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LL1ParseTable parseTable = new LL1ParseTable(grammar);
+        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+        LL1Parser parser = new LL1Parser(parseTable);
+
+        LL1ParseTable otherParseTable = new LL1ParseTable(grammar);
+        otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
+
+        assertFalse(parser.parseTableEquals(otherParseTable));
     }
 
     @Test
