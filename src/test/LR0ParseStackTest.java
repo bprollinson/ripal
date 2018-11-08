@@ -6,7 +6,9 @@
  */
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.parser.contextfreelanguage.LR0ParseStack;
@@ -16,6 +18,7 @@ import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 
 import java.util.HashSet;
+import java.util.Stack;
 
 public class LR0ParseStackTest
 {
@@ -98,13 +101,33 @@ public class LR0ParseStackTest
     @Test
     public void testStackEqualsReturnsTrue()
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseStack stack = new LR0ParseStack();
+        stack.push(state);
+        stack.push(new NonTerminalNode("A"));
+
+        Stack<Object> rawStack = new Stack<Object>();
+        rawStack.push(state);
+        rawStack.push(new NonTerminalNode("A"));
+
+        assertTrue(stack.stackEquals(rawStack));
     }
 
     @Test
     public void testStackEqualsReturnsFalse()
     {
-        throw new RuntimeException();
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseStack stack = new LR0ParseStack();
+        stack.push(state);
+        stack.push(new NonTerminalNode("A"));
+
+        Stack<Object> rawStack = new Stack<Object>();
+        rawStack.push(state);
+        rawStack.push(new NonTerminalNode("B"));
+
+        assertFalse(stack.stackEquals(rawStack));
     }
 
     @Test

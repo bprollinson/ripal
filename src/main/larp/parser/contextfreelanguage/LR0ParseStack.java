@@ -64,9 +64,9 @@ public class LR0ParseStack
         throw new LR0ParseStackEmptyException();
     }
 
-    public Stack<Object> getStack()
+    public boolean stackEquals(Stack<Object> otherStack)
     {
-        return this.stack;
+        return this.stack.equals(otherStack);
     }
 
     public boolean equals(Object other)
@@ -76,6 +76,6 @@ public class LR0ParseStack
             return false;
         }
 
-        return this.stack.equals(((LR0ParseStack)other).getStack());
+        return ((LR0ParseStack)other).stackEquals(this.stack);
     }
 }
