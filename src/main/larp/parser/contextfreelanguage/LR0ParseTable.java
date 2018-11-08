@@ -65,6 +65,11 @@ public class LR0ParseTable implements ComparableStructure
         return this.cells;
     }
 
+    public boolean cellsEqual(PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> otherCells)
+    {
+        return otherCells.equals(this.cells);
+    }
+
     public boolean equals(Object other)
     {
         if (!(other instanceof LR0ParseTable))
@@ -82,7 +87,7 @@ public class LR0ParseTable implements ComparableStructure
             return false;
         }
 
-        return this.cells.equals(((LR0ParseTable)other).getCells());
+        return ((LR0ParseTable)other).cellsEqual(this.cells);
     }
 
     public boolean structureEquals(Object other)

@@ -17,14 +17,17 @@ import larp.parser.contextfreelanguage.LR0AcceptAction;
 import larp.parser.contextfreelanguage.LR0GotoAction;
 import larp.parser.contextfreelanguage.LR0OtherConflictException;
 import larp.parser.contextfreelanguage.LR0ParseTable;
+import larp.parser.contextfreelanguage.LR0ParseTableAction;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
+import larp.parser.regularlanguage.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
+import larp.util.PairToValueMap;
 
 import java.util.HashSet;
 
@@ -128,15 +131,38 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testCellsEqualReturnsTrue()
+    public void testCellsEqualReturnsTrue() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> cells = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+        cells.put(state, new TerminalNode("a"), new LR0ShiftAction(state));
+
+        LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
+
+        assertTrue(parseTable.cellsEqual(cells));
     }
 
     @Test
-    public void testCellsEqualReturnsFalse()
+    public void testCellsEqualReturnsFalse() throws AmbiguousLR0ParseTableException
     {
-        throw new RuntimeException();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> cells = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+        cells.put(state, new TerminalNode("a"), new LR0ShiftAction(state));
+
+        LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
+        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(otherState));
+
+        assertFalse(parseTable.cellsEqual(cells));
     }
 
     @Test
