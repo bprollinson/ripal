@@ -37,7 +37,7 @@ public class LR0ReduceActionTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForActionOfOtherType()
+    public void testEqualsReturnsFalseForActionWithDifferentClass()
     {
         LR0ReduceAction action = new LR0ReduceAction(0);
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());

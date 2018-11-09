@@ -51,7 +51,7 @@ public class ConcatenationNodeTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForNodeOfOtherType()
+    public void testEqualsReturnsFalseForNodeWithDifferentClass()
     {
         ConcatenationNode node = new ConcatenationNode();
 

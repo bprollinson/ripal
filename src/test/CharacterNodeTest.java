@@ -31,7 +31,7 @@ public class CharacterNodeTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForNodeOfOtherType()
+    public void testEqualsReturnsFalseForNodeWithDifferentClass()
     {
         CharacterNode node = new CharacterNode('a');
 

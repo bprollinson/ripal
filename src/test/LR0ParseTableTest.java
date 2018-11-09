@@ -816,7 +816,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForObjectOfOtherType()
+    public void testStructureEqualsReturnsFalseForObjectWithDifferentClass()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         LR0ParseTable parseTable = new LR0ParseTable(grammar, null);

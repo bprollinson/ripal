@@ -40,7 +40,7 @@ public class LR0ShiftActionTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForActionOfOtherType()
+    public void testEqualsReturnsFalseForActionWithDifferentClass()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ShiftAction action = new LR0ShiftAction(state);

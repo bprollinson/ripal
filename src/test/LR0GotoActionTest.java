@@ -40,7 +40,7 @@ public class LR0GotoActionTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForActionOfOtherType()
+    public void testEqualsReturnsFalseForActionWithDifferentClass()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
         LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());

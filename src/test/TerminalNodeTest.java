@@ -31,7 +31,7 @@ public class TerminalNodeTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForNodeOfOtherType()
+    public void testEqualsReturnsFalseForNodeWithDifferentClass()
     {
         TerminalNode node = new TerminalNode("a");
 

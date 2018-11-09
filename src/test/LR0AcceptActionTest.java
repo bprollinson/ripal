@@ -19,7 +19,7 @@ import java.util.HashSet;
 public class LR0AcceptActionTest
 {
     @Test
-    public void testEqualsReturnsTrueForActionOfSameType()
+    public void testEqualsReturnsTrueForActionWithSameClass()
     {
         LR0AcceptAction action = new LR0AcceptAction();
         LR0AcceptAction otherAction = new LR0AcceptAction();
@@ -28,7 +28,7 @@ public class LR0AcceptActionTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForActionOfOtherType()
+    public void testEqualsReturnsFalseForActionWithDifferentClass()
     {
         LR0AcceptAction action = new LR0AcceptAction();
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());

@@ -31,7 +31,7 @@ public class NonTerminalNodeTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForNodeOfOtherType()
+    public void testEqualsReturnsFalseForNodeWithDifferentClass()
     {
         NonTerminalNode node = new NonTerminalNode("S");
 

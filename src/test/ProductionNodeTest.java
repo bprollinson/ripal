@@ -51,7 +51,7 @@ public class ProductionNodeTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForNodeOfOtherType()
+    public void testEqualsReturnsFalseForNodeWithDifferentClass()
     {
         ProductionNode node = new ProductionNode();
 
