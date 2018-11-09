@@ -827,6 +827,12 @@ public class LR0ParseTableTest
     @Test
     public void testEqualsReturnsFalseForTableWithDifferentClass()
     {
-        throw new RuntimeException();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
+
+        assertNotEquals(new Object(), parseTable);
     }
 }

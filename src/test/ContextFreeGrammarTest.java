@@ -98,6 +98,8 @@ public class ContextFreeGrammarTest
     @Test
     public void testEqualsReturnsFalseForObjectWithDifferentClass()
     {
-        throw new RuntimeException();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+
+        assertNotEquals(new Object(), grammar);
     }
 }

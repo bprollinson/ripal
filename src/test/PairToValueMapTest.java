@@ -142,6 +142,9 @@ public class PairToValueMapTest
     @Test
     public void testEqualsReturnsFalseForObjectWithDifferentClass()
     {
-        throw new RuntimeException();
+        PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
+        pairToValueMap.put("a", "b", 1);
+
+        assertNotEquals(new Object(), pairToValueMap);
     }
 }

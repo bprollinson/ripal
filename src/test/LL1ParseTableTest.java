@@ -160,6 +160,10 @@ public class LL1ParseTableTest
     @Test
     public void testEqualsReturnsFalseForTableWithDifferentClass()
     {
-        throw new RuntimeException();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+
+        LL1ParseTable parseTable = new LL1ParseTable(grammar);
+
+        assertNotEquals(new Object(), parseTable);
     }
 }
