@@ -823,4 +823,10 @@ public class LR0ParseTableTest
 
         assertFalse(parseTable.structureEquals(new Object()));
     }
+
+    @Test
+    public void testEqualsReturnsFalseForTableWithDifferentClass()
+    {
+        throw new RuntimeException();
+    }
 }

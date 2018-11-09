@@ -156,4 +156,10 @@ public class LL1ParseTableTest
 
         assertEquals(otherParseTable, parseTable);
     }
+
+    @Test
+    public void testEqualsReturnsFalseForTableWithDifferentClass()
+    {
+        throw new RuntimeException();
+    }
 }

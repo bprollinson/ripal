@@ -138,4 +138,10 @@ public class PairToValueMapTest
 
         assertNotEquals(otherPairToValueMap, pairToValueMap);
     }
+
+    @Test
+    public void testEqualsReturnsFalseForObjectWithDifferentClass()
+    {
+        throw new RuntimeException();
+    }
 }

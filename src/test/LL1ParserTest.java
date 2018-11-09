@@ -401,4 +401,10 @@ public class LL1ParserTest
 
         assertNotEquals(otherParser, parser);
     }
+
+    @Test
+    public void testEqualsReturnsFalseForTableWithDifferentClass()
+    {
+        throw new RuntimeException();
+    }
 }

@@ -94,4 +94,10 @@ public class ContextFreeGrammarTest
 
         assertNotEquals(expectedGrammar, grammar);
     }
+
+    @Test
+    public void testEqualsReturnsFalseForObjectWithDifferentClass()
+    {
+        throw new RuntimeException();
+    }
 }

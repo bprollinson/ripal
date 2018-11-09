@@ -161,4 +161,10 @@ public class LR0ParseStackTest
 
         assertNotEquals(otherStack, stack);
     }
+
+    @Test
+    public void testEqualsReturnsFalseForObjectWithDifferentClass()
+    {
+        throw new RuntimeException();
+    }
 }
