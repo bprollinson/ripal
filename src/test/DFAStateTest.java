@@ -32,7 +32,7 @@ public class DFAStateTest
     }
 
     @Test
-    public void testGetNextSTateReturnsNextStateFromSubsequentMatchingTransition()
+    public void testGetNextStateReturnsNextStateFromSubsequentMatchingTransition()
     {
         DFAState state0 = new DFAState("S0", true);
         DFAState state1 = new DFAState("S1", true);
