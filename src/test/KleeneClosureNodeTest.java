@@ -45,4 +45,12 @@ public class KleeneClosureNodeTest
 
         assertNotEquals(otherNode, node);
     }
+
+    @Test
+    public void testEqualsReturnsFalseForNodeWithDifferentClass()
+    {
+        KleeneClosureNode node = new KleeneClosureNode();
+
+        assertNotEquals(new CharacterNode('a'), node);
+    }
 }
