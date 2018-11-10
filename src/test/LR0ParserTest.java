@@ -407,4 +407,10 @@ public class LR0ParserTest
 
         assertFalse(parser.structureEquals(otherParser));
     }
+
+    @Test
+    public void testStructureEqualsReturnsFalseForParserWithDifferentClass()
+    {
+        throw new RuntimeException();
+    }
 }

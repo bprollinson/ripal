@@ -15,10 +15,14 @@ import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.parser.contextfreelanguage.LL1ApplyApplyConflictException;
 import larp.parser.contextfreelanguage.LL1ParseTable;
+import larp.parser.contextfreelanguage.LR0ParseTable;
+import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 import larp.util.PairToValueMap;
+
+import java.util.HashSet;
 
 public class LL1ParseTableTest
 {
@@ -158,12 +162,16 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForTableWithDifferentClass()
+    public void testEqualsReturnsFalseForParseTableWithDifferentClass()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
 
-        assertNotEquals(new Object(), parseTable);
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable otherParseTable = new LR0ParseTable(grammar, state);
+
+        assertNotEquals(otherParseTable, parseTable);
     }
 }

@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
+import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parser.contextfreelanguage.LR0AcceptAction;
 import larp.parser.contextfreelanguage.LR0GotoAction;
 import larp.parser.contextfreelanguage.LR0OtherConflictException;
@@ -828,11 +829,11 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForObjectWithDifferentClass()
+    public void testStructureEqualsReturnsFalseForParseTableWithDifferentClass()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         LR0ParseTable parseTable = new LR0ParseTable(grammar, null);
 
-        assertFalse(parseTable.structureEquals(new Object()));
+        assertFalse(parseTable.structureEquals(new LL1ParseTable(grammar)));
     }
 }

@@ -142,7 +142,7 @@ public class StateTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForDifferentStateClass()
+    public void testStructureEqualsReturnsFalseForStateWithDifferentClass()
     {
         TestState state = new TestState("S0", true);
         OtherTestState otherState = new OtherTestState("S1", true);

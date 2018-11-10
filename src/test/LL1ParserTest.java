@@ -15,12 +15,17 @@ import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.parser.contextfreelanguage.LL1Parser;
 import larp.parser.contextfreelanguage.LL1ParseTable;
+import larp.parser.contextfreelanguage.LR0Parser;
+import larp.parser.contextfreelanguage.LR0ParseTable;
+import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class LL1ParserTest
@@ -403,13 +408,18 @@ public class LL1ParserTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForTableWithDifferentClass()
+    public void testEqualsReturnsFalseForParserWithDifferentClass()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         LL1Parser parser = new LL1Parser(parseTable);
 
-        assertNotEquals(new Object(), parser);
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable otherParseTable = new LR0ParseTable(grammar, state);
+        LR0Parser otherParser = new LR0Parser(otherParseTable);
+
+        assertNotEquals(otherParser, parser);
     }
 }
