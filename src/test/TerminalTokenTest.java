@@ -15,7 +15,7 @@ import larp.token.contextfreelanguage.TerminalToken;
 public class TerminalTokenTest
 {
     @Test
-    public void testEqualsReturnsTrueForNodeWithSameClassAndValue()
+    public void testEqualsReturnsTrueForTokenWithSameClassAndValue()
     {
         TerminalToken token = new TerminalToken("a");
 
@@ -23,7 +23,7 @@ public class TerminalTokenTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForNodeWithSameClassAndDifferentValue()
+    public void testEqualsReturnsFalseForTokenWithSameClassAndDifferentValue()
     {
         TerminalToken token = new TerminalToken("a");
 
@@ -31,7 +31,7 @@ public class TerminalTokenTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForNodeWithDifferentClass()
+    public void testEqualsReturnsFalseForTokenWithDifferentClass()
     {
         TerminalToken token = new TerminalToken("a");
 

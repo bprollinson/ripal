@@ -15,7 +15,7 @@ import larp.parsetree.contextfreelanguage.NonTerminalNode;
 public class NonTerminalNodeTest
 {
     @Test
-    public void testEqualsReturnsTrueForNonTerminalNodeWithSameName()
+    public void testEqualsReturnsTrueForNodeWithSameClassAndName()
     {
         NonTerminalNode node = new NonTerminalNode("S");
 
@@ -23,7 +23,7 @@ public class NonTerminalNodeTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForNonTerminalNodeWithDifferentName()
+    public void testEqualsReturnsFalseForNodeWithSameClassAndDifferentName()
     {
         NonTerminalNode node = new NonTerminalNode("S");
 

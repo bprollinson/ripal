@@ -15,7 +15,7 @@ import larp.parsetree.contextfreelanguage.TerminalNode;
 public class TerminalNodeTest
 {
     @Test
-    public void testEqualsReturnsTrueForTerminalNodeWithSameValue()
+    public void testEqualsReturnsTrueForNodeWithSameClassAndValue()
     {
         TerminalNode node = new TerminalNode("a");
 
@@ -23,7 +23,7 @@ public class TerminalNodeTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForTerminalNodeWithDifferentValue()
+    public void testEqualsReturnsFalseForNodeWithSameClassAndDifferentValue()
     {
         TerminalNode node = new TerminalNode("a");
 

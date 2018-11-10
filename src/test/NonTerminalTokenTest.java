@@ -15,7 +15,7 @@ import larp.token.contextfreelanguage.SeparatorToken;
 public class NonTerminalTokenTest
 {
     @Test
-    public void testEqualsReturnsTrueForNodeWithSameClassAndName()
+    public void testEqualsReturnsTrueForTokenWithSameClassAndName()
     {
         NonTerminalToken token = new NonTerminalToken("S");
 
@@ -23,7 +23,7 @@ public class NonTerminalTokenTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForNodeWithSameClassAndDifferentName()
+    public void testEqualsReturnsFalseForTokenWithSameClassAndDifferentName()
     {
         NonTerminalToken token = new NonTerminalToken("S");
 
@@ -31,7 +31,7 @@ public class NonTerminalTokenTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForNodeWithDifferentClass()
+    public void testEqualsReturnsFalseForTokenWithDifferentClass()
     {
         NonTerminalToken token = new NonTerminalToken("S");
 

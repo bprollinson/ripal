@@ -15,7 +15,7 @@ import larp.token.regularlanguage.OrToken;
 public class CharacterTokenTest
 {
     @Test
-    public void testEqualsReturnsTrueForCharacterTokenWithSameCharacter()
+    public void testEqualsReturnsTrueForTokenWithSameClassAndCharacter()
     {
         CharacterToken token = new CharacterToken('a');
 
@@ -23,7 +23,7 @@ public class CharacterTokenTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForCharacterNodeWithDifferentCharacter()
+    public void testEqualsReturnsFalseForNodeWithSameClassAndDifferentCharacter()
     {
         CharacterToken token = new CharacterToken('a');
 
