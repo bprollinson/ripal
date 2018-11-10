@@ -286,6 +286,18 @@ public class LR0ParseTableTest
     }
 
     @Test
+    public void testEqualsReturnsFalseForTableWithDifferentClass()
+    {
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
+
+        assertNotEquals(new Object(), parseTable);
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrueForEmptyTableAndCFG()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
@@ -822,17 +834,5 @@ public class LR0ParseTableTest
         LR0ParseTable parseTable = new LR0ParseTable(grammar, null);
 
         assertFalse(parseTable.structureEquals(new Object()));
-    }
-
-    @Test
-    public void testEqualsReturnsFalseForTableWithDifferentClass()
-    {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
-
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-
-        LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
-
-        assertNotEquals(new Object(), parseTable);
     }
 }
