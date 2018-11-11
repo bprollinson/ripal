@@ -30,6 +30,12 @@ public class FiniteAutomataTest
         assertFalse(automata.structureEquals(new TestFiniteAutomata(new TestState("S1", false))));
     }
 
+    @Test
+    public void testStructureEqualsReturnsFalseForAutomataWithDifferentClass()
+    {
+        throw new RuntimeException();
+    }
+
     private class TestState extends State<Character, TestState>
     {
         public TestState(String name, boolean accepting)
