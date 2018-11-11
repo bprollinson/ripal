@@ -26,6 +26,14 @@ import java.util.Set;
 public class LR0ProductionSetDFAStateTest
 {
     @Test
+    public void testStructureEqualsReturnsTrueForSameAcceptsValueOnSingleState()
+    {
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+
+        assertTrue(state.structureEquals(new LR0ProductionSetDFAState("S1", true, new HashSet<ContextFreeGrammarSyntaxNode>())));
+    }
+
+    @Test
     public void testStructureEqualsReturnsTrueForSameProductionSet()
     {
         Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
