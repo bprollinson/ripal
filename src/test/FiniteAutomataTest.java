@@ -9,6 +9,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+import larp.parser.regularlanguage.DFA;
+import larp.parser.regularlanguage.DFAState;
 import larp.parser.regularlanguage.FiniteAutomata;
 import larp.parser.regularlanguage.State;
 
@@ -33,7 +35,9 @@ public class FiniteAutomataTest
     @Test
     public void testStructureEqualsReturnsFalseForAutomataWithDifferentClass()
     {
-        throw new RuntimeException();
+        TestFiniteAutomata automata = new TestFiniteAutomata(new TestState("S0", true));
+
+        assertFalse(automata.structureEquals(new DFA(new DFAState("S1", true))));
     }
 
     private class TestState extends State<Character, TestState>
