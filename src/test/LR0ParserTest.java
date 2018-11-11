@@ -12,6 +12,8 @@ import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
+import larp.parser.contextfreelanguage.LL1Parser;
+import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parser.contextfreelanguage.LR0AcceptAction;
 import larp.parser.contextfreelanguage.LR0GotoAction;
 import larp.parser.contextfreelanguage.LR0Parser;
@@ -411,6 +413,15 @@ public class LR0ParserTest
     @Test
     public void testStructureEqualsReturnsFalseForParserWithDifferentClass()
     {
-        throw new RuntimeException();
+        ContextFreeGrammar grammar = new ContextFreeGrammar();
+
+        LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ParseTable parseTable = new LR0ParseTable(grammar, startState);
+        LR0Parser parser = new LR0Parser(parseTable);
+
+        LL1ParseTable otherParseTable = new LL1ParseTable(grammar);
+        LL1Parser otherParser = new LL1Parser(otherParseTable);
+
+        assertFalse(parser.structureEquals(otherParser));
     }
 }
