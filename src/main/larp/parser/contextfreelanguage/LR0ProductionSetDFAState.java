@@ -7,7 +7,7 @@
 
 package larp.parser.contextfreelanguage;
 
-import larp.parser.regularlanguage.State;
+import larp.automaton.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 
 import java.util.List;

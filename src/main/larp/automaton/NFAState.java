@@ -5,11 +5,11 @@
  * See LICENSE.md for details.
  */
 
-package larp.parser.regularlanguage;
+package larp.automaton;
 
-public class EpsilonNFAState extends State<Character, EpsilonNFAState>
+public class NFAState extends State<Character, NFAState>
 {
-    public EpsilonNFAState(String name, boolean accepting)
+    public NFAState(String name, boolean accepting)
     {
         super(name, accepting);
     }

@@ -8,8 +8,8 @@
 package larp.parser.contextfreelanguage;
 
 import larp.ComparableStructure;
+import larp.automaton.State;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.parser.regularlanguage.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;

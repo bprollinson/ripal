@@ -8,8 +8,8 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.parser.regularlanguage.DFAState;
-import larp.parser.regularlanguage.StateTransition;
+import larp.automaton.DFAState;
+import larp.automaton.StateTransition;
 
 public class DFAStateTest
 {

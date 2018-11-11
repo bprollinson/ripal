@@ -5,7 +5,7 @@
  * See LICENSE.md for details.
  */
 
-package larp.parser.regularlanguage;
+package larp.automaton;
 
 public class StateTransition<I, S extends State>
 {

@@ -8,8 +8,8 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.parser.regularlanguage.NFA;
-import larp.parser.regularlanguage.NFAState;
+import larp.automaton.NFA;
+import larp.automaton.NFAState;
 
 public class NFATest
 {

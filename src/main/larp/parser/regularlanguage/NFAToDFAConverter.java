@@ -7,6 +7,12 @@
 
 package larp.parser.regularlanguage;
 
+import larp.automaton.DFA;
+import larp.automaton.DFAState;
+import larp.automaton.NFA;
+import larp.automaton.NFAState;
+import larp.automaton.StateTransition;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;

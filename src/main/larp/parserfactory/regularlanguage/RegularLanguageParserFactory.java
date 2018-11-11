@@ -7,10 +7,10 @@
 
 package larp.parserfactory.regularlanguage;
 
-import larp.parser.regularlanguage.DFA;
-import larp.parser.regularlanguage.EpsilonNFA;
+import larp.automaton.DFA;
+import larp.automaton.EpsilonNFA;
+import larp.automaton.NFA;
 import larp.parser.regularlanguage.EpsilonNFAToNFAConverter;
-import larp.parser.regularlanguage.NFA;
 import larp.parser.regularlanguage.NFAToDFAConverter;
 import larp.parsetree.regularlanguage.RegularExpressionSyntaxNode;
 import larp.syntaxcompiler.regularlanguage.RegularExpressionSyntaxCompiler;

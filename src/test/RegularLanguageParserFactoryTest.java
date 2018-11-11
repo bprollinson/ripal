@@ -8,9 +8,9 @@
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.parser.regularlanguage.DFA;
-import larp.parser.regularlanguage.DFAState;
-import larp.parser.regularlanguage.StateTransition;
+import larp.automaton.DFA;
+import larp.automaton.DFAState;
+import larp.automaton.StateTransition;
 import larp.parserfactory.regularlanguage.RegularLanguageParserFactory;
 import larp.syntaxtokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
 import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;

@@ -8,7 +8,7 @@
 package larp.parser.contextfreelanguage;
 
 import larp.assertion.Assertion;
-import larp.parser.regularlanguage.State;
+import larp.automaton.State;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 
 public class LR0ParseTableCellAvailableAssertion implements Assertion

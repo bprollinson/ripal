@@ -7,6 +7,13 @@
 
 package larp.parser.regularlanguage;
 
+import larp.automaton.EpsilonNFA;
+import larp.automaton.EpsilonNFAState;
+import larp.automaton.NFA;
+import larp.automaton.NFAState;
+import larp.automaton.State;
+import larp.automaton.StateTransition;
+
 import java.util.ArrayList;
 import java.util.List;
 

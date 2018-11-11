@@ -7,6 +7,8 @@
 
 package larp.parser.regularlanguage;
 
+import larp.automaton.State;
+
 public class StateGroup<S extends State>
 {
     private S startState;

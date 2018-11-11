@@ -7,7 +7,7 @@
 
 package larp.parser.contextfreelanguage;
 
-import larp.parser.regularlanguage.State;
+import larp.automaton.State;
 
 public class LR0AcceptAction implements LR0ParseTableAction
 {

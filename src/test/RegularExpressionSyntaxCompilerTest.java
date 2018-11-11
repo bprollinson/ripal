@@ -8,9 +8,9 @@
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.parser.regularlanguage.EpsilonNFA;
-import larp.parser.regularlanguage.EpsilonNFAState;
-import larp.parser.regularlanguage.StateTransition;
+import larp.automaton.EpsilonNFA;
+import larp.automaton.EpsilonNFAState;
+import larp.automaton.StateTransition;
 import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;

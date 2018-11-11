@@ -5,11 +5,11 @@
  * See LICENSE.md for details.
  */
 
-package larp.parser.regularlanguage;
+package larp.automaton;
 
-public class EpsilonNFA extends FiniteAutomata<EpsilonNFAState>
+public class NFA extends FiniteAutomata<NFAState>
 {
-    public EpsilonNFA(EpsilonNFAState startState)
+    public NFA(NFAState startState)
     {
         super(startState);
     }

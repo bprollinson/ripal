@@ -10,9 +10,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+import larp.automaton.State;
+import larp.automaton.StateTransition;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
-import larp.parser.regularlanguage.State;
-import larp.parser.regularlanguage.StateTransition;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.DotNode;

@@ -7,7 +7,7 @@
 
 package larp.parser.contextfreelanguage;
 
-import larp.parser.regularlanguage.State;
+import larp.automaton.State;
 
 import java.util.EmptyStackException;
 import java.util.Stack;
