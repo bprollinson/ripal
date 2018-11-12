@@ -10,6 +10,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
+import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
 import larp.parser.contextfreelanguage.AmbiguousParseTableException;
 import larp.parser.contextfreelanguage.LL1Parser;
@@ -28,8 +30,6 @@ import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
-import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
-import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -7,8 +7,8 @@
 
 import org.junit.Test;
 
-import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarFinalQuoteNestingCorrectAssertion;
-import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarQuoteNestingException;
+import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarFinalQuoteNestingCorrectAssertion;
+import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarQuoteNestingException;
 
 public class ContextFreeGrammarFinalQuoteNestingCorrectAssertionTest
 {

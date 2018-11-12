@@ -5,7 +5,7 @@
  * See LICENSE.md for details.
  */
 
-package larp.syntaxtokenizer.regularlanguage;
+package larp.grammartokenizer.regularlanguage;
 
 public class DanglingRegularExpressionEscapeCharacterException extends RegularExpressionSyntaxTokenizerException
 {

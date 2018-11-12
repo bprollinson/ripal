@@ -7,8 +7,8 @@
 
 import org.junit.Test;
 
-import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarCorrectNumberOfSeparatorsAssertion;
-import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarSeparatorException;
+import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarCorrectNumberOfSeparatorsAssertion;
+import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarSeparatorException;
 
 public class ContextFreeGrammarCorrectNumberOfSeparatorsAssertionTest
 {

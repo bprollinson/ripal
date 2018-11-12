@@ -11,9 +11,9 @@ import org.junit.Test;
 import larp.automaton.DFA;
 import larp.automaton.DFAState;
 import larp.automaton.StateTransition;
+import larp.grammartokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
+import larp.grammartokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
 import larp.parserfactory.regularlanguage.RegularLanguageParserFactory;
-import larp.syntaxtokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
-import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
 
 public class RegularLanguageParserFactoryTest
 {

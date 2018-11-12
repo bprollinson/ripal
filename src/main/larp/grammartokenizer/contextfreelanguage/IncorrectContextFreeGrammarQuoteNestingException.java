@@ -5,7 +5,7 @@
  * See LICENSE.md for details.
  */
 
-package larp.syntaxtokenizer.contextfreelanguage;
+package larp.grammartokenizer.contextfreelanguage;
 
 public class IncorrectContextFreeGrammarQuoteNestingException extends ContextFreeGrammarSyntaxTokenizerException
 {

@@ -7,8 +7,8 @@
 
 import org.junit.Test;
 
-import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarEscapeCharacterPositionCorrectAssertion;
-import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarEscapeCharacterPositionException;
+import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarEscapeCharacterPositionCorrectAssertion;
+import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarEscapeCharacterPositionException;
 
 public class ContextFreeGrammarEscapeCharacterPositionCorrectAssertionTest
 {

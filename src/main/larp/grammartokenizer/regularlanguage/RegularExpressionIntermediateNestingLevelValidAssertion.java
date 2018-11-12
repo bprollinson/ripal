@@ -5,22 +5,22 @@
  * See LICENSE.md for details.
  */
 
-package larp.syntaxtokenizer.regularlanguage;
+package larp.grammartokenizer.regularlanguage;
 
 import larp.assertion.Assertion;
 
-public class RegularExpressionFinalNestingLevelValidAssertion implements Assertion
+public class RegularExpressionIntermediateNestingLevelValidAssertion implements Assertion
 {
     private int nestingLevel;
 
-    public RegularExpressionFinalNestingLevelValidAssertion(int nestingLevel)
+    public RegularExpressionIntermediateNestingLevelValidAssertion(int nestingLevel)
     {
         this.nestingLevel = nestingLevel;
     }
 
     public void validate() throws IncorrectRegularExpressionNestingException
     {
-        if (this.nestingLevel != 0)
+        if (this.nestingLevel < 0)
         {
             throw new IncorrectRegularExpressionNestingException();
         }

@@ -8,10 +8,10 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.syntaxtokenizer.regularlanguage.DanglingRegularExpressionEscapeCharacterException;
-import larp.syntaxtokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
-import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
-import larp.syntaxtokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
+import larp.grammartokenizer.regularlanguage.DanglingRegularExpressionEscapeCharacterException;
+import larp.grammartokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
+import larp.grammartokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
+import larp.grammartokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseParenthesisToken;
 import larp.token.regularlanguage.EpsilonToken;

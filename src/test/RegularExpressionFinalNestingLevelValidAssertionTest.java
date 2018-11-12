@@ -7,8 +7,8 @@
 
 import org.junit.Test;
 
-import larp.syntaxtokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
-import larp.syntaxtokenizer.regularlanguage.RegularExpressionFinalNestingLevelValidAssertion;
+import larp.grammartokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
+import larp.grammartokenizer.regularlanguage.RegularExpressionFinalNestingLevelValidAssertion;
 
 public class RegularExpressionFinalNestingLevelValidAssertionTest
 {

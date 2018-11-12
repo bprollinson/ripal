@@ -7,9 +7,9 @@
 
 import org.junit.Test;
 
-import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarStartingTokensValidAssertion;
-import larp.syntaxtokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
-import larp.syntaxtokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
+import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarStartingTokensValidAssertion;
+import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
+import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 import larp.token.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 import larp.token.contextfreelanguage.NonTerminalToken;
 import larp.token.contextfreelanguage.SeparatorToken;

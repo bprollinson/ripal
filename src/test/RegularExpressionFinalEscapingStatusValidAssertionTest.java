@@ -7,8 +7,8 @@
 
 import org.junit.Test;
 
-import larp.syntaxtokenizer.regularlanguage.DanglingRegularExpressionEscapeCharacterException;
-import larp.syntaxtokenizer.regularlanguage.RegularExpressionFinalEscapingStatusValidAssertion;
+import larp.grammartokenizer.regularlanguage.DanglingRegularExpressionEscapeCharacterException;
+import larp.grammartokenizer.regularlanguage.RegularExpressionFinalEscapingStatusValidAssertion;
 
 public class RegularExpressionFinalEscapingStatusValidAssertionTest
 {

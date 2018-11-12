@@ -5,7 +5,7 @@
  * See LICENSE.md for details.
  */
 
-package larp.syntaxtokenizer.contextfreelanguage;
+package larp.grammartokenizer.contextfreelanguage;
 
 import larp.token.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 import larp.token.contextfreelanguage.EpsilonToken;
