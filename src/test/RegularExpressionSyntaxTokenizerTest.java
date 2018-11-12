@@ -10,8 +10,8 @@ import org.junit.Test;
 
 import larp.grammartokenizer.regularlanguage.DanglingRegularExpressionEscapeCharacterException;
 import larp.grammartokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
+import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizerException;
 import larp.grammartokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
-import larp.grammartokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseParenthesisToken;
 import larp.token.regularlanguage.EpsilonToken;
@@ -26,7 +26,7 @@ import java.util.List;
 public class RegularExpressionSyntaxTokenizerTest
 {
     @Test
-    public void testTokenizeTokenizesString() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesString() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -44,7 +44,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesEpsilonExpression() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesEpsilonExpression() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -56,7 +56,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesExpressionContainingCharacterBeforeSpace() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesExpressionContainingCharacterBeforeSpace() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -69,7 +69,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesExpressionContainingCharacterAfterSpace() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesExpressionContainingCharacterAfterSpace() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -82,7 +82,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesExpressionContainingTwoConsecutiveSpaces() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesExpressionContainingTwoConsecutiveSpaces() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -95,7 +95,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesKleeneClosureAppliedToLeadingEpsilon() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesKleeneClosureAppliedToLeadingEpsilon() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -108,7 +108,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesOrAppliedToLeadingEpsilon() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesOrAppliedToLeadingEpsilon() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -122,7 +122,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesOrAppliedToTrailingEpsilon() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesOrAppliedToTrailingEpsilon() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -136,7 +136,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesCloseParenthesisAfterOpenParenthesis() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesCloseParenthesisAfterOpenParenthesis() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -150,7 +150,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesOrAfterOpenParenthesis() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesOrAfterOpenParenthesis() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -166,7 +166,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesKleeneClosureAfterOpenParenthesis() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesKleeneClosureAfterOpenParenthesis() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -181,7 +181,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesCloseParenthesisAfterOr() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesCloseParenthesisAfterOr() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -197,7 +197,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesOrAfterOr() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesOrAfterOr() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -213,7 +213,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesKleeneClosureAfterOr() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesKleeneClosureAfterOr() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -228,7 +228,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesKleeneClosureAppliedtoSpace() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesKleeneClosureAppliedtoSpace() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -241,7 +241,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test(expected = IncorrectRegularExpressionNestingException.class)
-    public void testTokenizeThrowsExceptionForNegativeParenthesisNesting() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeThrowsExceptionForNegativeParenthesisNesting() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -249,7 +249,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test(expected = IncorrectRegularExpressionNestingException.class)
-    public void testTokenizeThrowsExceptionForUnclosedParenthesisAtEndOfString() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeThrowsExceptionForUnclosedParenthesisAtEndOfString() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -257,7 +257,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesEscapedSpecialCharacters() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeTokenizesEscapedSpecialCharacters() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -273,7 +273,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test(expected = DanglingRegularExpressionEscapeCharacterException.class)
-    public void testTokenizeThrowsExceptionForDanglingEscapeCharacter() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeThrowsExceptionForDanglingEscapeCharacter() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -281,7 +281,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeDoesNotAdjustParenthesisNestingLevelOnEscapedOpenParenthesis() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeDoesNotAdjustParenthesisNestingLevelOnEscapedOpenParenthesis() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -293,7 +293,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeDoesNotAdjustParenthesisNestingLevelOnEscapedCloseParenthesis() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeDoesNotAdjustParenthesisNestingLevelOnEscapedCloseParenthesis() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 
@@ -305,7 +305,7 @@ public class RegularExpressionSyntaxTokenizerTest
     }
 
     @Test
-    public void testTokenizeGeneratesStandardCharacterTokenFromCharacterAfterEscapeCharacter() throws RegularExpressionSyntaxTokenizerException
+    public void testTokenizeGeneratesStandardCharacterTokenFromCharacterAfterEscapeCharacter() throws RegularExpressionGrammarTokenizerException
     {
         RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
 

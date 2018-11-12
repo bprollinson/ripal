@@ -29,7 +29,7 @@ public class RegularExpressionSyntaxTokenizer
     private int nestingLevel;
     private boolean escaping;
 
-    public List<RegularExpressionSyntaxToken> tokenize(String expression) throws RegularExpressionSyntaxTokenizerException
+    public List<RegularExpressionSyntaxToken> tokenize(String expression) throws RegularExpressionGrammarTokenizerException
     {
         List<RegularExpressionSyntaxToken> tokens = new ArrayList<RegularExpressionSyntaxToken>();
 
@@ -54,7 +54,7 @@ public class RegularExpressionSyntaxTokenizer
         return tokens;
     }
 
-    private void processCharacter(List<RegularExpressionSyntaxToken> tokens, char currentCharacter, Character lastCharacter) throws RegularExpressionSyntaxTokenizerException
+    private void processCharacter(List<RegularExpressionSyntaxToken> tokens, char currentCharacter, Character lastCharacter) throws RegularExpressionGrammarTokenizerException
     {
         if (this.escaping)
         {

@@ -10,8 +10,8 @@ package larp.parserfactory.regularlanguage;
 import larp.automaton.DFA;
 import larp.automaton.EpsilonNFA;
 import larp.automaton.NFA;
+import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizerException;
 import larp.grammartokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
-import larp.grammartokenizer.regularlanguage.RegularExpressionSyntaxTokenizerException;
 import larp.parser.regularlanguage.EpsilonNFAToNFAConverter;
 import larp.parser.regularlanguage.NFAToDFAConverter;
 import larp.parsetree.regularlanguage.RegularExpressionSyntaxNode;
@@ -38,7 +38,7 @@ public class RegularLanguageParserFactory
         this.NFAToDFAConverter = new NFAToDFAConverter();
     }
 
-    public DFA factory(String regularExpression) throws RegularExpressionSyntaxTokenizerException
+    public DFA factory(String regularExpression) throws RegularExpressionGrammarTokenizerException
     {
         List<RegularExpressionSyntaxToken> tokenList = this.tokenizer.tokenize(regularExpression);
         RegularExpressionSyntaxNode rootNode = this.parser.parse(tokenList);
