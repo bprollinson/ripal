@@ -10,8 +10,8 @@ import org.junit.Test;
 
 import larp.grammartokenizer.regularlanguage.DanglingRegularExpressionEscapeCharacterException;
 import larp.grammartokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
+import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizer;
 import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizerException;
-import larp.grammartokenizer.regularlanguage.RegularExpressionSyntaxTokenizer;
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseParenthesisToken;
 import larp.token.regularlanguage.EpsilonToken;
@@ -23,12 +23,12 @@ import larp.token.regularlanguage.RegularExpressionSyntaxToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegularExpressionSyntaxTokenizerTest
+public class RegularExpressionGrammarTokenizerTest
 {
     @Test
     public void testTokenizeTokenizesString() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(ab|c)*");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -46,7 +46,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesEpsilonExpression() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -58,7 +58,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesExpressionContainingCharacterBeforeSpace() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("a ");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -71,7 +71,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesExpressionContainingCharacterAfterSpace() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize(" a");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -84,7 +84,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesExpressionContainingTwoConsecutiveSpaces() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("  ");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -97,7 +97,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesKleeneClosureAppliedToLeadingEpsilon() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("*");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -110,7 +110,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesOrAppliedToLeadingEpsilon() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("|a");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -124,7 +124,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesOrAppliedToTrailingEpsilon() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("a|");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -138,7 +138,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesCloseParenthesisAfterOpenParenthesis() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("()");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -152,7 +152,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesOrAfterOpenParenthesis() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(|a)");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -168,7 +168,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesKleeneClosureAfterOpenParenthesis() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(*)");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -183,7 +183,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesCloseParenthesisAfterOr() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("(a|)");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -199,7 +199,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesOrAfterOr() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("a||b");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -215,7 +215,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesKleeneClosureAfterOr() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("a|*");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -230,7 +230,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesKleeneClosureAppliedtoSpace() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize(" *");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -243,7 +243,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test(expected = IncorrectRegularExpressionNestingException.class)
     public void testTokenizeThrowsExceptionForNegativeParenthesisNesting() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         tokenizer.tokenize(")(");
     }
@@ -251,7 +251,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test(expected = IncorrectRegularExpressionNestingException.class)
     public void testTokenizeThrowsExceptionForUnclosedParenthesisAtEndOfString() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         tokenizer.tokenize("(");
     }
@@ -259,7 +259,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesEscapedSpecialCharacters() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("\\(\\)\\*\\|\\\\");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -275,7 +275,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test(expected = DanglingRegularExpressionEscapeCharacterException.class)
     public void testTokenizeThrowsExceptionForDanglingEscapeCharacter() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("\\");
     }
@@ -283,7 +283,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeDoesNotAdjustParenthesisNestingLevelOnEscapedOpenParenthesis() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("\\(");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -295,7 +295,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeDoesNotAdjustParenthesisNestingLevelOnEscapedCloseParenthesis() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("\\)");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();
@@ -307,7 +307,7 @@ public class RegularExpressionSyntaxTokenizerTest
     @Test
     public void testTokenizeGeneratesStandardCharacterTokenFromCharacterAfterEscapeCharacter() throws RegularExpressionGrammarTokenizerException
     {
-        RegularExpressionSyntaxTokenizer tokenizer = new RegularExpressionSyntaxTokenizer();
+        RegularExpressionGrammarTokenizer tokenizer = new RegularExpressionGrammarTokenizer();
 
         List<RegularExpressionSyntaxToken> result = tokenizer.tokenize("\\a");
         List<RegularExpressionSyntaxToken> expectedResult = new ArrayList<RegularExpressionSyntaxToken>();

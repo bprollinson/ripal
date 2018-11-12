@@ -18,7 +18,7 @@ import larp.token.regularlanguage.RegularExpressionSyntaxToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegularExpressionSyntaxTokenizer
+public class RegularExpressionGrammarTokenizer
 {
     private char openParenthesis = '(';
     private char closeParenthesis = ')';
