@@ -8,6 +8,7 @@
 package larp.parserfactory.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammarparser.contextfreelanguage.ContextFreeGrammarSyntaxParser;
 import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarTokenizer;
 import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarTokenizerException;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
@@ -20,7 +21,6 @@ import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
 import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarLR0SyntaxCompiler;
-import larp.syntaxparser.contextfreelanguage.ContextFreeGrammarSyntaxParser;
 import larp.token.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 
 import java.util.List;

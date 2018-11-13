@@ -5,7 +5,7 @@
  * See LICENSE.md for details.
  */
 
-package larp.syntaxparser.regularlanguage;
+package larp.grammarparser.regularlanguage;
 
 import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;

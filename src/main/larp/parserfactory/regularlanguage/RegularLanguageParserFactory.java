@@ -10,13 +10,13 @@ package larp.parserfactory.regularlanguage;
 import larp.automaton.DFA;
 import larp.automaton.EpsilonNFA;
 import larp.automaton.NFA;
+import larp.grammarparser.regularlanguage.RegularExpressionSyntaxParser;
 import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizer;
 import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizerException;
 import larp.parser.regularlanguage.EpsilonNFAToNFAConverter;
 import larp.parser.regularlanguage.NFAToDFAConverter;
 import larp.parsetree.regularlanguage.RegularExpressionSyntaxNode;
 import larp.syntaxcompiler.regularlanguage.RegularExpressionSyntaxCompiler;
-import larp.syntaxparser.regularlanguage.RegularExpressionSyntaxParser;
 import larp.token.regularlanguage.RegularExpressionSyntaxToken;
 
 import java.util.List;
