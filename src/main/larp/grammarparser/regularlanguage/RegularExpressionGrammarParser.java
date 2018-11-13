@@ -22,7 +22,7 @@ import larp.token.regularlanguage.RegularExpressionSyntaxToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegularExpressionSyntaxParser
+public class RegularExpressionGrammarParser
 {
     public RegularExpressionSyntaxNode parse(List<RegularExpressionSyntaxToken> tokens)
     {

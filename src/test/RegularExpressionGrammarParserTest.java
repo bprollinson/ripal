@@ -8,7 +8,7 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.grammarparser.regularlanguage.RegularExpressionSyntaxParser;
+import larp.grammarparser.regularlanguage.RegularExpressionGrammarParser;
 import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;
@@ -25,12 +25,12 @@ import larp.token.regularlanguage.RegularExpressionSyntaxToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegularExpressionSyntaxParserTest
+public class RegularExpressionGrammarParserTest
 {
     @Test
     public void testParseReturnsEmptyConcatenationNodeForEmptyString()
     {
-        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         RegularExpressionSyntaxNode rootNode = parser.parse(input);
@@ -43,7 +43,7 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseReturnsEmptyConcatenationNodeForEpsilonToken()
     {
-        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new EpsilonToken());
@@ -57,7 +57,7 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseReturnsConcatenationNodeForSingleCharacter()
     {
-        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
@@ -72,7 +72,7 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseReturnsConcatenationNodeForMultipleCharacters()
     {
-        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
@@ -89,7 +89,7 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseAddsKleeneClosureNode()
     {
-        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
@@ -109,7 +109,7 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseHandlesParentheses()
     {
-        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
@@ -132,7 +132,7 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseHandlesNestedParentheses()
     {
-        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
@@ -159,7 +159,7 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseHandlesOr()
     {
-        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
@@ -188,7 +188,7 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseHandlesCharacterBelowParentheses()
     {
-        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new OpenParenthesisToken());
@@ -207,7 +207,7 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseHandlesKleeneClosureBelowParentheses()
     {
-        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new OpenParenthesisToken());
@@ -229,7 +229,7 @@ public class RegularExpressionSyntaxParserTest
     @Test
     public void testParseHandlesOrBelowParentheses()
     {
-        RegularExpressionSyntaxParser parser = new RegularExpressionSyntaxParser();
+        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new OpenParenthesisToken());
