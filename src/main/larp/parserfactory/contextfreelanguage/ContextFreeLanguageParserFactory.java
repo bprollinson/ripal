@@ -9,7 +9,7 @@ package larp.parserfactory.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizer;
-import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizerException;
+import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarTokenizerException;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.parser.contextfreelanguage.AmbiguousParseTableException;
 import larp.parser.contextfreelanguage.ContextFreeGrammarParser;
@@ -40,7 +40,7 @@ public class ContextFreeLanguageParserFactory
         this.lr0compiler = new ContextFreeGrammarLR0SyntaxCompiler();
     }
 
-    public ContextFreeGrammarParser factory(List<String> input) throws ContextFreeGrammarSyntaxTokenizerException, AmbiguousParseTableException
+    public ContextFreeGrammarParser factory(List<String> input) throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         for (String inputString: input)

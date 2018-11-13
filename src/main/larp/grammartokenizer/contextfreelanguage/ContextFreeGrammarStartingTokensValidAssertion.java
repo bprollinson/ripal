@@ -23,7 +23,7 @@ public class ContextFreeGrammarStartingTokensValidAssertion implements Assertion
         this.tokens = tokens;
     }
 
-    public void validate() throws ContextFreeGrammarSyntaxTokenizerException
+    public void validate() throws ContextFreeGrammarTokenizerException
     {
         if (tokens.size() < 3)
         {

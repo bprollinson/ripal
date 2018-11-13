@@ -29,7 +29,7 @@ public class ContextFreeGrammarSyntaxTokenizer
     private int numTerminals;
     private int numNonTerminals;
 
-    public List<ContextFreeGrammarSyntaxToken> tokenize(String expression) throws ContextFreeGrammarSyntaxTokenizerException
+    public List<ContextFreeGrammarSyntaxToken> tokenize(String expression) throws ContextFreeGrammarTokenizerException
     {
         this.inTerminal = false;
         this.escaping = false;
@@ -46,7 +46,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         return this.correctEpsilonSetupInTokens(tokens);
     }
 
-    private List<ContextFreeGrammarSyntaxToken> convertCharactersToTokens(String expression) throws ContextFreeGrammarSyntaxTokenizerException
+    private List<ContextFreeGrammarSyntaxToken> convertCharactersToTokens(String expression) throws ContextFreeGrammarTokenizerException
     {
         List<ContextFreeGrammarSyntaxToken> tokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
 
@@ -66,7 +66,7 @@ public class ContextFreeGrammarSyntaxTokenizer
         return tokens;
     }
 
-    private String processCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer, char currentCharacter) throws ContextFreeGrammarSyntaxTokenizerException
+    private String processCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer, char currentCharacter) throws ContextFreeGrammarTokenizerException
     {
         if (this.escaping)
         {
