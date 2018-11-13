@@ -8,7 +8,7 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.grammarparser.contextfreelanguage.ContextFreeGrammarSyntaxParser;
+import larp.grammarparser.contextfreelanguage.ContextFreeGrammarParser;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
@@ -24,12 +24,12 @@ import larp.token.contextfreelanguage.TerminalToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContextFreeGrammarSyntaxParserTest
+public class ContextFreeGrammarParserTest
 {
     @Test
     public void testParseReturnsTreeForEmptyRightHandSize()
     {
-        ContextFreeGrammarSyntaxParser parser = new ContextFreeGrammarSyntaxParser();
+        ContextFreeGrammarParser parser = new ContextFreeGrammarParser();
 
         List<ContextFreeGrammarSyntaxToken> input = new ArrayList<ContextFreeGrammarSyntaxToken>();
         input.add(new NonTerminalToken("S"));
@@ -49,7 +49,7 @@ public class ContextFreeGrammarSyntaxParserTest
     @Test
     public void testParseReturnsTreeForSingleTerminalRightHandSize()
     {
-        ContextFreeGrammarSyntaxParser parser = new ContextFreeGrammarSyntaxParser();
+        ContextFreeGrammarParser parser = new ContextFreeGrammarParser();
 
         List<ContextFreeGrammarSyntaxToken> input = new ArrayList<ContextFreeGrammarSyntaxToken>();
         input.add(new NonTerminalToken("S"));
@@ -69,7 +69,7 @@ public class ContextFreeGrammarSyntaxParserTest
     @Test
     public void testParseReturnsTreeForSingleNonTerminalRightHandSize()
     {
-        ContextFreeGrammarSyntaxParser parser = new ContextFreeGrammarSyntaxParser();
+        ContextFreeGrammarParser parser = new ContextFreeGrammarParser();
 
         List<ContextFreeGrammarSyntaxToken> input = new ArrayList<ContextFreeGrammarSyntaxToken>();
         input.add(new NonTerminalToken("S"));
@@ -89,7 +89,7 @@ public class ContextFreeGrammarSyntaxParserTest
     @Test
     public void testParseReturnsTreeForMultipleTokenRightHandSize()
     {
-        ContextFreeGrammarSyntaxParser parser = new ContextFreeGrammarSyntaxParser();
+        ContextFreeGrammarParser parser = new ContextFreeGrammarParser();
 
         List<ContextFreeGrammarSyntaxToken> input = new ArrayList<ContextFreeGrammarSyntaxToken>();
         input.add(new NonTerminalToken("S"));

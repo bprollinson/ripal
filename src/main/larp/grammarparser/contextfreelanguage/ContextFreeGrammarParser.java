@@ -20,7 +20,7 @@ import larp.token.contextfreelanguage.TerminalToken;
 
 import java.util.List;
 
-public class ContextFreeGrammarSyntaxParser
+public class ContextFreeGrammarParser
 {
     public ContextFreeGrammarSyntaxNode parse(List<ContextFreeGrammarSyntaxToken> tokens)
     {
