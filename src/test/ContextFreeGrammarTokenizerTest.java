@@ -8,7 +8,7 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarSyntaxTokenizer;
+import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarTokenizer;
 import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarTokenizerException;
 import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarEscapeCharacterPositionException;
 import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarQuoteNestingException;
@@ -23,12 +23,12 @@ import larp.token.contextfreelanguage.TerminalToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContextFreeGrammarSyntaxTokenizerTest
+public class ContextFreeGrammarTokenizerTest
 {
     @Test
     public void testTokenizeTokenizesSimpleSingleCharacterNonTerminalProduction() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:S");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -42,7 +42,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeHandlesMultiCharacterNonTerminalOnLeftSideOfProduction() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("Start:S");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -56,7 +56,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeHandlesMultiCharacterNonTerminalOnRightSideOfProduction() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:Start");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -70,7 +70,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesEpsilonProduction() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -84,7 +84,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesSimpleSingleCharacterTerminalProduction() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"a\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -98,7 +98,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeHandlesMultiCharacterTerminalOnRightSideOfProduction() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -112,7 +112,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeHandlesMultipleTerminalsOnRightSideWithoutSpaceBetweenThem() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal1\"\"terminal2\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -127,7 +127,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeIgnoresSpaceBetweenTerminalTokens() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal1\" \"terminal2\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -142,7 +142,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeHandlesSpaceWithinTerminalToken() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal 1\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -156,7 +156,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeIgnoresSpaceBetweenNonTerminalTokens() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:nonterminal1 nonterminal2");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -171,7 +171,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeHandlesTerminalFollowedDirectlyByNonterminal() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal\"S");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -186,7 +186,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeRemovesEpsilonFromTokensFromRightHandSideContainingTerminalTokenBeforeEpsilon() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal 1\"\"\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -200,7 +200,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeRemovesEpsilonFromTokensFromRightHandSideContainingNonTerminalTokenBeforeEpsilon() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:S\"\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -214,7 +214,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeRemovesEpsilonFromTokensFromRightHandSideContainingTerminalTokenAfterEpsilon() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"\"terminal 1\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -228,7 +228,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeRemovesEpsilonFromTokensFromRightHandSideContainingNonTerminalTokenAfterEpsilon() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"S");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -242,7 +242,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeRemovesExtraEpsilonFromRightHandSideContainingMultipleEpsilonTokens() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\"\"\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -256,7 +256,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeRemovesExtraEpsilonFromRightHandSideContainingTerminalAndMultipleEpsilonTokens() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"terminal 1\"\"\"\"\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -270,7 +270,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeRemovesExtraEpsilonFromRightHandSideContainingNonTerminalAndMultipleEpsilonTokens() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:S\"\"\"\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -284,7 +284,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
     public void testTokenizeThrowsExceptionForIncorrecTokenSequence() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         tokenizer.tokenize("");
     }
@@ -292,7 +292,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test(expected = IncorrectContextFreeGrammarQuoteNestingException.class)
     public void testTokenizeThrowsExceptionForUnclosedQuoteAtEndOfString() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         tokenizer.tokenize("S:\"a");
     }
@@ -300,7 +300,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test(expected = IncorrectContextFreeGrammarSeparatorException.class)
     public void testTokenizeThrowsExceptionForIncorrectNumberofSeparators() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         tokenizer.tokenize("S::");
     }
@@ -308,7 +308,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesColonWithinTerminalString() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\":\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -322,7 +322,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeTokenizesEscapedSpecialCharactersWithinTerminalString() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\\\"\\\\\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -336,7 +336,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test
     public void testTokenizeGeneratesStandardCharacterTokenFromCharacterAfterEscapeCharacter() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         List<ContextFreeGrammarSyntaxToken> result = tokenizer.tokenize("S:\"\\a\"");
         List<ContextFreeGrammarSyntaxToken> expectedResult = new ArrayList<ContextFreeGrammarSyntaxToken>();
@@ -350,7 +350,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test(expected = IncorrectContextFreeGrammarQuoteNestingException.class)
     public void testTokenizeThrowsExceptionForUnclosedQuoteAtEndOfStringContainingEscapedQuote() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         tokenizer.tokenize("S:\"\\\"");
     }
@@ -358,7 +358,7 @@ public class ContextFreeGrammarSyntaxTokenizerTest
     @Test(expected = IncorrectContextFreeGrammarEscapeCharacterPositionException.class)
     public void testTokenizeThrowsExceptionForEscapeCharacterOutsideTerminalString() throws ContextFreeGrammarTokenizerException
     {
-        ContextFreeGrammarSyntaxTokenizer tokenizer = new ContextFreeGrammarSyntaxTokenizer();
+        ContextFreeGrammarTokenizer tokenizer = new ContextFreeGrammarTokenizer();
 
         tokenizer.tokenize("S:\\\\");
     }
