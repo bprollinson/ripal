@@ -18,12 +18,12 @@ import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
+import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLR0SyntaxCompiler;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
-import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarLR0SyntaxCompiler;
 
 import java.util.HashSet;
 

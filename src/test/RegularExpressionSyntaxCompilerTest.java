@@ -11,11 +11,11 @@ import org.junit.Test;
 import larp.automaton.EpsilonNFA;
 import larp.automaton.EpsilonNFAState;
 import larp.automaton.StateTransition;
+import larp.parsercompiler.regularlanguage.RegularExpressionSyntaxCompiler;
 import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;
 import larp.parsetree.regularlanguage.OrNode;
-import larp.syntaxcompiler.regularlanguage.RegularExpressionSyntaxCompiler;
 
 public class RegularExpressionSyntaxCompilerTest
 {

@@ -18,9 +18,9 @@ import larp.parser.contextfreelanguage.LL1Parser;
 import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parser.contextfreelanguage.LR0Parser;
 import larp.parser.contextfreelanguage.LR0ParseTable;
+import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
+import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLR0SyntaxCompiler;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
-import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
-import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarLR0SyntaxCompiler;
 import larp.token.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 
 import java.util.List;

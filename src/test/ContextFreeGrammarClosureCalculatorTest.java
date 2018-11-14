@@ -9,6 +9,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarClosureCalculator;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.DotNode;
@@ -16,7 +17,6 @@ import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
-import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarClosureCalculator;
 
 import java.util.HashSet;
 import java.util.Set;

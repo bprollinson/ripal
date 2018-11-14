@@ -13,6 +13,7 @@ import larp.automaton.StateTransition;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
+import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLR0ProductionSetDFACompiler;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.DotNode;
@@ -21,7 +22,6 @@ import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
-import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarLR0ProductionSetDFACompiler;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -9,10 +9,10 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarAugmentor;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
-import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarAugmentor;
 
 public class ContextFreeGrammarAugmentorTest
 {

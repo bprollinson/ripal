@@ -9,11 +9,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.parsercompiler.contextfreelanguage.FirstSetCalculator;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
-import larp.syntaxcompiler.contextfreelanguage.FirstSetCalculator;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -5,7 +5,7 @@
  * See LICENSE.md for details.
  */
 
-package larp.syntaxcompiler.contextfreelanguage;
+package larp.parsercompiler.contextfreelanguage;
 
 import larp.automaton.StateTransition;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;

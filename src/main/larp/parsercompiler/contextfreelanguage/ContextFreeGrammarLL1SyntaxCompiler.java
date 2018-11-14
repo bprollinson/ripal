@@ -5,7 +5,7 @@
  * See LICENSE.md for details.
  */
 
-package larp.syntaxcompiler.contextfreelanguage;
+package larp.parsercompiler.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;

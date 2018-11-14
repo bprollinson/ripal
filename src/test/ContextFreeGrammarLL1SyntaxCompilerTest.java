@@ -12,11 +12,11 @@ import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.parser.contextfreelanguage.LL1ApplyApplyConflictException;
 import larp.parser.contextfreelanguage.LL1ParseTable;
+import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
-import larp.syntaxcompiler.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
 
 public class ContextFreeGrammarLL1SyntaxCompilerTest
 {
