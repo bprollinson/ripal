@@ -18,8 +18,8 @@ import larp.parser.contextfreelanguage.LL1Parser;
 import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parser.contextfreelanguage.LR0Parser;
 import larp.parser.contextfreelanguage.LR0ParseTable;
-import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLL1SyntaxCompiler;
-import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLR0SyntaxCompiler;
+import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLL1ParserCompiler;
+import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLR0ParserCompiler;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
 import larp.token.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 
@@ -29,15 +29,15 @@ public class ContextFreeLanguageParserFactory
 {
     private ContextFreeGrammarTokenizer tokenizer;
     private ContextFreeGrammarParser parser;
-    private ContextFreeGrammarLL1SyntaxCompiler ll1compiler;
-    private ContextFreeGrammarLR0SyntaxCompiler lr0compiler;
+    private ContextFreeGrammarLL1ParserCompiler ll1compiler;
+    private ContextFreeGrammarLR0ParserCompiler lr0compiler;
 
     public ContextFreeLanguageParserFactory()
     {
         this.tokenizer = new ContextFreeGrammarTokenizer();
         this.parser = new ContextFreeGrammarParser();
-        this.ll1compiler = new ContextFreeGrammarLL1SyntaxCompiler();
-        this.lr0compiler = new ContextFreeGrammarLR0SyntaxCompiler();
+        this.ll1compiler = new ContextFreeGrammarLL1ParserCompiler();
+        this.lr0compiler = new ContextFreeGrammarLR0ParserCompiler();
     }
 
     public ContextFreeLanguageParser factory(List<String> input) throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException

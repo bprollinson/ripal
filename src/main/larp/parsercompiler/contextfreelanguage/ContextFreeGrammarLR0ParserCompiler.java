@@ -30,11 +30,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ContextFreeGrammarLR0SyntaxCompiler
+public class ContextFreeGrammarLR0ParserCompiler
 {
     private ContextFreeGrammarLR0ProductionSetDFACompiler DFACompiler;
 
-    public ContextFreeGrammarLR0SyntaxCompiler()
+    public ContextFreeGrammarLR0ParserCompiler()
     {
         this.DFACompiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
     }

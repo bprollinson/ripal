@@ -21,7 +21,7 @@ import larp.parsetree.regularlanguage.RegularExpressionSyntaxNode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegularExpressionSyntaxCompiler
+public class RegularExpressionParserCompiler
 {
     public EpsilonNFA compile(RegularExpressionSyntaxNode rootNode)
     {
