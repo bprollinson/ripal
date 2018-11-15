@@ -7,6 +7,6 @@
 
 package larp.token.regularlanguage;
 
-public class OrToken extends RegularExpressionSyntaxToken
+public class OrToken extends RegularExpressionGrammarToken
 {
 }

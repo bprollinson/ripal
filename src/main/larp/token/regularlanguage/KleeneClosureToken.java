@@ -7,6 +7,6 @@
 
 package larp.token.regularlanguage;
 
-public class KleeneClosureToken extends RegularExpressionSyntaxToken
+public class KleeneClosureToken extends RegularExpressionGrammarToken
 {
 }

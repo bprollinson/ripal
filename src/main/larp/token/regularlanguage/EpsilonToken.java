@@ -7,6 +7,6 @@
 
 package larp.token.regularlanguage;
 
-public class EpsilonToken extends RegularExpressionSyntaxToken
+public class EpsilonToken extends RegularExpressionGrammarToken
 {
 }

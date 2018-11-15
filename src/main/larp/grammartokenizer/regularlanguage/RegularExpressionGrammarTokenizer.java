@@ -13,7 +13,7 @@ import larp.token.regularlanguage.EpsilonToken;
 import larp.token.regularlanguage.KleeneClosureToken;
 import larp.token.regularlanguage.OpenParenthesisToken;
 import larp.token.regularlanguage.OrToken;
-import larp.token.regularlanguage.RegularExpressionSyntaxToken;
+import larp.token.regularlanguage.RegularExpressionGrammarToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +29,9 @@ public class RegularExpressionGrammarTokenizer
     private int nestingLevel;
     private boolean escaping;
 
-    public List<RegularExpressionSyntaxToken> tokenize(String expression) throws RegularExpressionGrammarTokenizerException
+    public List<RegularExpressionGrammarToken> tokenize(String expression) throws RegularExpressionGrammarTokenizerException
     {
-        List<RegularExpressionSyntaxToken> tokens = new ArrayList<RegularExpressionSyntaxToken>();
+        List<RegularExpressionGrammarToken> tokens = new ArrayList<RegularExpressionGrammarToken>();
 
         this.nestingLevel = 0;
         this.escaping = false;
@@ -54,7 +54,7 @@ public class RegularExpressionGrammarTokenizer
         return tokens;
     }
 
-    private void processCharacter(List<RegularExpressionSyntaxToken> tokens, char currentCharacter, Character lastCharacter) throws RegularExpressionGrammarTokenizerException
+    private void processCharacter(List<RegularExpressionGrammarToken> tokens, char currentCharacter, Character lastCharacter) throws RegularExpressionGrammarTokenizerException
     {
         if (this.escaping)
         {
@@ -111,7 +111,7 @@ public class RegularExpressionGrammarTokenizer
         }
     }
 
-    private void addEpsilonBasedOnTokenSequence(List<RegularExpressionSyntaxToken> tokens, Character lastCharacter)
+    private void addEpsilonBasedOnTokenSequence(List<RegularExpressionGrammarToken> tokens, Character lastCharacter)
     {
         if (lastCharacter != null && lastCharacter == this.openParenthesis)
         {
@@ -123,7 +123,7 @@ public class RegularExpressionGrammarTokenizer
         }
     }
 
-    private void addPrefixEpsilon(List<RegularExpressionSyntaxToken> tokens)
+    private void addPrefixEpsilon(List<RegularExpressionGrammarToken> tokens)
     {
         if (tokens.size() == 0)
         {
@@ -131,7 +131,7 @@ public class RegularExpressionGrammarTokenizer
         }
     }
 
-    private void addPostfixEpsilon(List<RegularExpressionSyntaxToken> tokens, Character lastCharacter)
+    private void addPostfixEpsilon(List<RegularExpressionGrammarToken> tokens, Character lastCharacter)
     {
         if (tokens.size() == 0)
         {

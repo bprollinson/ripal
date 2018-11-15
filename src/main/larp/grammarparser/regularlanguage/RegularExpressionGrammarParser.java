@@ -17,14 +17,14 @@ import larp.token.regularlanguage.CloseParenthesisToken;
 import larp.token.regularlanguage.KleeneClosureToken;
 import larp.token.regularlanguage.OpenParenthesisToken;
 import larp.token.regularlanguage.OrToken;
-import larp.token.regularlanguage.RegularExpressionSyntaxToken;
+import larp.token.regularlanguage.RegularExpressionGrammarToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RegularExpressionGrammarParser
 {
-    public RegularExpressionParseTreeNode parse(List<RegularExpressionSyntaxToken> tokens)
+    public RegularExpressionParseTreeNode parse(List<RegularExpressionGrammarToken> tokens)
     {
         RegularExpressionParseTreeNode orNode = this.parseOrExpression(tokens);
         if (orNode != null)
@@ -38,7 +38,7 @@ public class RegularExpressionGrammarParser
 
         for (int i = 0; i < tokens.size(); i++)
         {
-            RegularExpressionSyntaxToken token = tokens.get(i);
+            RegularExpressionGrammarToken token = tokens.get(i);
 
             if (token instanceof CharacterToken && parenthesisBalance == 0)
             {
@@ -66,7 +66,7 @@ public class RegularExpressionGrammarParser
 
                 if (parenthesisBalance == 0)
                 {
-                    node.addChild(this.parse(new ArrayList<RegularExpressionSyntaxToken>(tokens.subList(openParenthesisPosition + 1, i))));
+                    node.addChild(this.parse(new ArrayList<RegularExpressionGrammarToken>(tokens.subList(openParenthesisPosition + 1, i))));
                     openParenthesisPosition = -1;
                 }
             }
@@ -75,7 +75,7 @@ public class RegularExpressionGrammarParser
         return node;
     }
 
-    private RegularExpressionParseTreeNode parseOrExpression(List<RegularExpressionSyntaxToken> tokens)
+    private RegularExpressionParseTreeNode parseOrExpression(List<RegularExpressionGrammarToken> tokens)
     {
         ConcatenationNode node = new ConcatenationNode();
         int parenthesisBalance = 0;
@@ -84,7 +84,7 @@ public class RegularExpressionGrammarParser
         List<Integer> orPositions = new ArrayList<Integer>();
         for (int i = 0; i < tokens.size(); i++)
         {
-            RegularExpressionSyntaxToken token = tokens.get(i);
+            RegularExpressionGrammarToken token = tokens.get(i);
 
             if (token instanceof OrToken && parenthesisBalance == 0)
             {
@@ -108,11 +108,11 @@ public class RegularExpressionGrammarParser
             for (int i = 0; i < orPositions.size(); i++)
             {
                 int endPosition = orPositions.get(i);
-                orNode.addChild(this.parse(new ArrayList<RegularExpressionSyntaxToken>(tokens.subList(startPosition, endPosition))));
+                orNode.addChild(this.parse(new ArrayList<RegularExpressionGrammarToken>(tokens.subList(startPosition, endPosition))));
 
                 startPosition = endPosition + 1;
             }
-            orNode.addChild(this.parse(new ArrayList<RegularExpressionSyntaxToken>(tokens.subList(startPosition, tokens.size()))));
+            orNode.addChild(this.parse(new ArrayList<RegularExpressionGrammarToken>(tokens.subList(startPosition, tokens.size()))));
 
             node.addChild(orNode);
 
