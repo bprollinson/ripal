@@ -11,7 +11,7 @@ import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;
 import larp.parsetree.regularlanguage.OrNode;
-import larp.parsetree.regularlanguage.RegularExpressionSyntaxNode;
+import larp.parsetree.regularlanguage.RegularExpressionParseTreeNode;
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseParenthesisToken;
 import larp.token.regularlanguage.KleeneClosureToken;
@@ -24,9 +24,9 @@ import java.util.List;
 
 public class RegularExpressionGrammarParser
 {
-    public RegularExpressionSyntaxNode parse(List<RegularExpressionSyntaxToken> tokens)
+    public RegularExpressionParseTreeNode parse(List<RegularExpressionSyntaxToken> tokens)
     {
-        RegularExpressionSyntaxNode orNode = this.parseOrExpression(tokens);
+        RegularExpressionParseTreeNode orNode = this.parseOrExpression(tokens);
         if (orNode != null)
         {
             return orNode;
@@ -46,8 +46,8 @@ public class RegularExpressionGrammarParser
             }
             else if (token instanceof KleeneClosureToken && parenthesisBalance == 0)
             {
-                List<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
-                RegularExpressionSyntaxNode lastNode = childNodes.get(childNodes.size() - 1);
+                List<RegularExpressionParseTreeNode> childNodes = node.getChildNodes();
+                RegularExpressionParseTreeNode lastNode = childNodes.get(childNodes.size() - 1);
                 KleeneClosureNode kleeneClosureNode = new KleeneClosureNode();
                 kleeneClosureNode.addChild(lastNode);
                 childNodes.set(childNodes.size() - 1, kleeneClosureNode);
@@ -75,7 +75,7 @@ public class RegularExpressionGrammarParser
         return node;
     }
 
-    private RegularExpressionSyntaxNode parseOrExpression(List<RegularExpressionSyntaxToken> tokens)
+    private RegularExpressionParseTreeNode parseOrExpression(List<RegularExpressionSyntaxToken> tokens)
     {
         ConcatenationNode node = new ConcatenationNode();
         int parenthesisBalance = 0;

@@ -16,14 +16,14 @@ import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;
 import larp.parsetree.regularlanguage.OrNode;
-import larp.parsetree.regularlanguage.RegularExpressionSyntaxNode;
+import larp.parsetree.regularlanguage.RegularExpressionParseTreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RegularExpressionParserCompiler
 {
-    public EpsilonNFA compile(RegularExpressionSyntaxNode rootNode)
+    public EpsilonNFA compile(RegularExpressionParseTreeNode rootNode)
     {
         StateGroup<EpsilonNFAState> stateGroup = this.compileStateGroup(rootNode);
         stateGroup.getEndState().setAccepting(true);
@@ -31,7 +31,7 @@ public class RegularExpressionParserCompiler
         return new EpsilonNFA(stateGroup.getStartState());
     }
 
-    private StateGroup<EpsilonNFAState> compileStateGroup(RegularExpressionSyntaxNode node)
+    private StateGroup<EpsilonNFAState> compileStateGroup(RegularExpressionParseTreeNode node)
     {
         if (node instanceof CharacterNode)
         {
@@ -53,7 +53,7 @@ public class RegularExpressionParserCompiler
         return null;
     }
 
-    private StateGroup<EpsilonNFAState> buildCharacterStateGroup(RegularExpressionSyntaxNode node)
+    private StateGroup<EpsilonNFAState> buildCharacterStateGroup(RegularExpressionParseTreeNode node)
     {
         EpsilonNFAState startState = new EpsilonNFAState("", false);
         EpsilonNFAState endState = new EpsilonNFAState("", false);
@@ -62,7 +62,7 @@ public class RegularExpressionParserCompiler
         return new StateGroup<EpsilonNFAState>(startState, endState);
     }
 
-    private StateGroup<EpsilonNFAState> buildKleeneClosureStateGroup(RegularExpressionSyntaxNode node)
+    private StateGroup<EpsilonNFAState> buildKleeneClosureStateGroup(RegularExpressionParseTreeNode node)
     {
         StateGroup<EpsilonNFAState> childGroup = this.compileStateGroup(node.getChildNodes().get(0));
         EpsilonNFAState startState = childGroup.getStartState();
@@ -73,9 +73,9 @@ public class RegularExpressionParserCompiler
         return new StateGroup<EpsilonNFAState>(startState, endState);
     }
 
-    private StateGroup<EpsilonNFAState> buildConcatenationStateGroup(RegularExpressionSyntaxNode node)
+    private StateGroup<EpsilonNFAState> buildConcatenationStateGroup(RegularExpressionParseTreeNode node)
     {
-        List<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
+        List<RegularExpressionParseTreeNode> childNodes = node.getChildNodes();
 
         if (childNodes.size() == 0)
         {
@@ -101,12 +101,12 @@ public class RegularExpressionParserCompiler
         return new StateGroup<EpsilonNFAState>((EpsilonNFAState)childGroups.get(0).getStartState(), (EpsilonNFAState)childGroups.get(childGroups.size() - 1).getEndState());
     }
 
-    private StateGroup<EpsilonNFAState> buildOrStateGroup(RegularExpressionSyntaxNode node)
+    private StateGroup<EpsilonNFAState> buildOrStateGroup(RegularExpressionParseTreeNode node)
     {
         EpsilonNFAState startState = new EpsilonNFAState("", false);
         EpsilonNFAState endState = new EpsilonNFAState("", false);
 
-        List<RegularExpressionSyntaxNode> childNodes = node.getChildNodes();
+        List<RegularExpressionParseTreeNode> childNodes = node.getChildNodes();
         for (int i = 0; i < childNodes.size(); i++)
         {
             StateGroup<EpsilonNFAState> currentGroup = this.compileStateGroup(childNodes.get(i));

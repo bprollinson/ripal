@@ -13,7 +13,7 @@ import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;
 import larp.parsetree.regularlanguage.OrNode;
-import larp.parsetree.regularlanguage.RegularExpressionSyntaxNode;
+import larp.parsetree.regularlanguage.RegularExpressionParseTreeNode;
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseParenthesisToken;
 import larp.token.regularlanguage.EpsilonToken;
@@ -33,7 +33,7 @@ public class RegularExpressionGrammarParserTest
         RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
-        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+        RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
 
@@ -47,7 +47,7 @@ public class RegularExpressionGrammarParserTest
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new EpsilonToken());
-        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+        RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
 
@@ -61,7 +61,7 @@ public class RegularExpressionGrammarParserTest
 
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
-        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+        RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
         expectedRootNode.addChild(new CharacterNode('a'));
@@ -77,7 +77,7 @@ public class RegularExpressionGrammarParserTest
         List<RegularExpressionSyntaxToken> input = new ArrayList<RegularExpressionSyntaxToken>();
         input.add(new CharacterToken('a'));
         input.add(new CharacterToken('b'));
-        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+        RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
         expectedRootNode.addChild(new CharacterNode('a'));
@@ -95,7 +95,7 @@ public class RegularExpressionGrammarParserTest
         input.add(new CharacterToken('a'));
         input.add(new CharacterToken('b'));
         input.add(new KleeneClosureToken());
-        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+        RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
         expectedRootNode.addChild(new CharacterNode('a'));
@@ -117,7 +117,7 @@ public class RegularExpressionGrammarParserTest
         input.add(new CharacterToken('b'));
         input.add(new CloseParenthesisToken());
         input.add(new CharacterToken('c'));
-        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+        RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
         expectedRootNode.addChild(new CharacterNode('a'));
@@ -142,7 +142,7 @@ public class RegularExpressionGrammarParserTest
         input.add(new CloseParenthesisToken());
         input.add(new CloseParenthesisToken());
         input.add(new CharacterToken('c'));
-        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+        RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
         expectedRootNode.addChild(new CharacterNode('a'));
@@ -167,7 +167,7 @@ public class RegularExpressionGrammarParserTest
         input.add(new CharacterToken('b'));
         input.add(new OrToken());
         input.add(new CharacterToken('c'));
-        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+        RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
         OrNode orNode = new OrNode();
@@ -194,7 +194,7 @@ public class RegularExpressionGrammarParserTest
         input.add(new OpenParenthesisToken());
         input.add(new CharacterToken('a'));
         input.add(new CloseParenthesisToken());
-        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+        RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
         ConcatenationNode concatenationNode = new ConcatenationNode();
@@ -214,7 +214,7 @@ public class RegularExpressionGrammarParserTest
         input.add(new CharacterToken('a'));
         input.add(new KleeneClosureToken());
         input.add(new CloseParenthesisToken());
-        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+        RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
         ConcatenationNode concatenationNode = new ConcatenationNode();
@@ -237,7 +237,7 @@ public class RegularExpressionGrammarParserTest
         input.add(new OrToken());
         input.add(new CharacterToken('b'));
         input.add(new CloseParenthesisToken());
-        RegularExpressionSyntaxNode rootNode = parser.parse(input);
+        RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
         OrNode orNode = new OrNode();

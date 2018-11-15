@@ -7,9 +7,9 @@
 
 package larp.parsetree.regularlanguage;
 
-public class OrNode extends RegularExpressionSyntaxNode
+public class OrNode extends RegularExpressionParseTreeNode
 {
-    public void addChild(RegularExpressionSyntaxNode childNode)
+    public void addChild(RegularExpressionParseTreeNode childNode)
     {
         this.childNodes.add(childNode);
     }

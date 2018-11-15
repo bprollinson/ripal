@@ -10,16 +10,16 @@ package larp.parsetree.regularlanguage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegularExpressionSyntaxNode
+public class RegularExpressionParseTreeNode
 {
-    protected List<RegularExpressionSyntaxNode> childNodes;
+    protected List<RegularExpressionParseTreeNode> childNodes;
 
-    public RegularExpressionSyntaxNode()
+    public RegularExpressionParseTreeNode()
     {
-        this.childNodes = new ArrayList<RegularExpressionSyntaxNode>();
+        this.childNodes = new ArrayList<RegularExpressionParseTreeNode>();
     }
 
-    public List<RegularExpressionSyntaxNode> getChildNodes()
+    public List<RegularExpressionParseTreeNode> getChildNodes()
     {
         return this.childNodes;
     }
@@ -31,6 +31,6 @@ public class RegularExpressionSyntaxNode
             return false;
         }
 
-        return this.childNodes.equals(((RegularExpressionSyntaxNode)other).getChildNodes());
+        return this.childNodes.equals(((RegularExpressionParseTreeNode)other).getChildNodes());
     }
 }

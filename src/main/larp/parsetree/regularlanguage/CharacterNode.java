@@ -7,7 +7,7 @@
 
 package larp.parsetree.regularlanguage;
 
-public class CharacterNode extends RegularExpressionSyntaxNode
+public class CharacterNode extends RegularExpressionParseTreeNode
 {
     private char character;
 

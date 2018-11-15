@@ -7,9 +7,9 @@
 
 package larp.parsetree.regularlanguage;
 
-public class ConcatenationNode extends RegularExpressionSyntaxNode
+public class ConcatenationNode extends RegularExpressionParseTreeNode
 {
-    public void addChild(RegularExpressionSyntaxNode childNode)
+    public void addChild(RegularExpressionParseTreeNode childNode)
     {
         this.childNodes.add(childNode);
     }
