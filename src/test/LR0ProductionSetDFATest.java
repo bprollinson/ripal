@@ -16,7 +16,7 @@ import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
@@ -32,7 +32,7 @@ public class LR0ProductionSetDFATest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
-        LR0ProductionSetDFAState expectedStartState = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState expectedStartState = new LR0ProductionSetDFAState("S0", true, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(expectedStartState, grammar);
 
         LR0ProductionSetDFAState startState = dfa.getStartState();
@@ -45,11 +45,11 @@ public class LR0ProductionSetDFATest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
-        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarParseTreeNode> productionSet = new HashSet<ContextFreeGrammarParseTreeNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
 
-        Set<ContextFreeGrammarSyntaxNode> otherProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarParseTreeNode> otherProductionSet = new HashSet<ContextFreeGrammarParseTreeNode>();
         otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         assertTrue(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet), grammar)));
     }
@@ -60,11 +60,11 @@ public class LR0ProductionSetDFATest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
-        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarParseTreeNode> productionSet = new HashSet<ContextFreeGrammarParseTreeNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
 
-        Set<ContextFreeGrammarSyntaxNode> otherProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarParseTreeNode> otherProductionSet = new HashSet<ContextFreeGrammarParseTreeNode>();
         otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", false, otherProductionSet), grammar)));
     }
@@ -75,11 +75,11 @@ public class LR0ProductionSetDFATest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
-        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarParseTreeNode> productionSet = new HashSet<ContextFreeGrammarParseTreeNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
 
-        Set<ContextFreeGrammarSyntaxNode> otherProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarParseTreeNode> otherProductionSet = new HashSet<ContextFreeGrammarParseTreeNode>();
         otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("B")));
         assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet), grammar)));
     }
@@ -89,13 +89,13 @@ public class LR0ProductionSetDFATest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarParseTreeNode> productionSet = new HashSet<ContextFreeGrammarParseTreeNode>();
         productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
 
         ContextFreeGrammar otherGrammar = new ContextFreeGrammar();
         otherGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("B"));
-        Set<ContextFreeGrammarSyntaxNode> otherProductionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarParseTreeNode> otherProductionSet = new HashSet<ContextFreeGrammarParseTreeNode>();
         otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet), otherGrammar)));
     }
@@ -104,19 +104,19 @@ public class LR0ProductionSetDFATest
     public void testStructureEqualsReturnsFalseForAutomataWithDifferentClass()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        Set<ContextFreeGrammarSyntaxNode> productionSet = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarParseTreeNode> productionSet = new HashSet<ContextFreeGrammarParseTreeNode>();
         LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
 
         assertFalse(dfa.structureEquals(new DFA(new DFAState("S1", true))));
     }
 
-    private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
+    private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarParseTreeNode... rightHandNodes)
     {
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(nonTerminalNode);
 
         ConcatenationNode concatenationNode = new ConcatenationNode();
-        for (ContextFreeGrammarSyntaxNode rightHandNode: rightHandNodes)
+        for (ContextFreeGrammarParseTreeNode rightHandNode: rightHandNodes)
         {
             concatenationNode.addChild(rightHandNode);
         }

@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import larp.grammarparser.contextfreelanguage.ContextFreeGrammarParser;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
@@ -35,7 +35,7 @@ public class ContextFreeGrammarParserTest
         input.add(new NonTerminalToken("S"));
         input.add(new SeparatorToken());
         input.add(new EpsilonToken());
-        ContextFreeGrammarSyntaxNode rootNode = parser.parse(input);
+        ContextFreeGrammarParseTreeNode rootNode = parser.parse(input);
 
         ProductionNode expectedRootNode = new ProductionNode();
         expectedRootNode.addChild(new NonTerminalNode("S"));
@@ -55,7 +55,7 @@ public class ContextFreeGrammarParserTest
         input.add(new NonTerminalToken("S"));
         input.add(new SeparatorToken());
         input.add(new TerminalToken("a"));
-        ContextFreeGrammarSyntaxNode rootNode = parser.parse(input);
+        ContextFreeGrammarParseTreeNode rootNode = parser.parse(input);
 
         ProductionNode expectedRootNode = new ProductionNode();
         expectedRootNode.addChild(new NonTerminalNode("S"));
@@ -75,7 +75,7 @@ public class ContextFreeGrammarParserTest
         input.add(new NonTerminalToken("S"));
         input.add(new SeparatorToken());
         input.add(new NonTerminalToken("S"));
-        ContextFreeGrammarSyntaxNode rootNode = parser.parse(input);
+        ContextFreeGrammarParseTreeNode rootNode = parser.parse(input);
 
         ProductionNode expectedRootNode = new ProductionNode();
         expectedRootNode.addChild(new NonTerminalNode("S"));
@@ -96,7 +96,7 @@ public class ContextFreeGrammarParserTest
         input.add(new SeparatorToken());
         input.add(new NonTerminalToken("S"));
         input.add(new TerminalToken("a"));
-        ContextFreeGrammarSyntaxNode rootNode = parser.parse(input);
+        ContextFreeGrammarParseTreeNode rootNode = parser.parse(input);
 
         ProductionNode expectedRootNode = new ProductionNode();
         expectedRootNode.addChild(new NonTerminalNode("S"));

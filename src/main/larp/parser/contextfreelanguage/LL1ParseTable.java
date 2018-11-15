@@ -8,29 +8,29 @@
 package larp.parser.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.util.PairToValueMap;
 
 public class LL1ParseTable
 {
     private ContextFreeGrammar grammar;
-    private PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> cells;
+    private PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer> cells;
 
     public LL1ParseTable(ContextFreeGrammar grammar)
     {
         this.grammar = grammar;
-        this.cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer>();
+        this.cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer>();
     }
 
-    public void addCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode syntaxNode, int ruleIndex) throws AmbiguousLL1ParseTableException
+    public void addCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarParseTreeNode syntaxNode, int ruleIndex) throws AmbiguousLL1ParseTableException
     {
         new LL1ParseTableCellAvailableAssertion(this, nonTerminalNode, syntaxNode).validate();
 
         this.cells.put(nonTerminalNode, syntaxNode, ruleIndex);
     }
 
-    public Integer getCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode syntaxNode)
+    public Integer getCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarParseTreeNode syntaxNode)
     {
         return this.cells.get(nonTerminalNode, syntaxNode);
     }
@@ -40,7 +40,7 @@ public class LL1ParseTable
         return this.grammar;
     }
 
-    public boolean cellsEqual(PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> otherCells)
+    public boolean cellsEqual(PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer> otherCells)
     {
         return this.cells.equals(otherCells);
     }

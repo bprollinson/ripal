@@ -17,7 +17,7 @@ import larp.parser.contextfreelanguage.LL1ApplyApplyConflictException;
 import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 import larp.util.PairToValueMap;
@@ -54,7 +54,7 @@ public class LL1ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer>();
+        PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer> cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer>();
         cells.put(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -69,7 +69,7 @@ public class LL1ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer> cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarSyntaxNode, Integer>();
+        PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer> cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer>();
         cells.put(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -168,7 +168,7 @@ public class LL1ParseTableTest
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable otherParseTable = new LR0ParseTable(grammar, state);
 

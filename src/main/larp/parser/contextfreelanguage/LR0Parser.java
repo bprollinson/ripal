@@ -10,7 +10,7 @@ package larp.parser.contextfreelanguage;
 import larp.ComparableStructure;
 import larp.automaton.State;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
@@ -50,7 +50,7 @@ public class LR0Parser implements ContextFreeLanguageParser, ComparableStructure
 
             while (true)
             {
-                ContextFreeGrammarSyntaxNode characterNode = this.calculateCharacterNode(inputString, stack);
+                ContextFreeGrammarParseTreeNode characterNode = this.calculateCharacterNode(inputString, stack);
                 LR0ParseTableAction action = this.parseTable.getCell(currentState, characterNode);
 
                 if (action == null)
@@ -89,11 +89,11 @@ public class LR0Parser implements ContextFreeLanguageParser, ComparableStructure
         }
     }
 
-    private ContextFreeGrammarSyntaxNode calculateCharacterNode(String inputString, LR0ParseStack stack) throws LR0ParseStackEmptyException
+    private ContextFreeGrammarParseTreeNode calculateCharacterNode(String inputString, LR0ParseStack stack) throws LR0ParseStackEmptyException
     {
-        if (stack.peek() instanceof ContextFreeGrammarSyntaxNode)
+        if (stack.peek() instanceof ContextFreeGrammarParseTreeNode)
         {
-            return (ContextFreeGrammarSyntaxNode)stack.peek();
+            return (ContextFreeGrammarParseTreeNode)stack.peek();
         }
         if (inputString.length() > 0)
         {
@@ -110,9 +110,9 @@ public class LR0Parser implements ContextFreeLanguageParser, ComparableStructure
 
         this.appliedRules.add(productionIndex - 1);
 
-        ContextFreeGrammarSyntaxNode rootNode = this.grammar.getProduction(productionIndex);
-        ContextFreeGrammarSyntaxNode leftHandNode = rootNode.getChildNodes().get(0);
-        List<ContextFreeGrammarSyntaxNode> rightHandNodes = rootNode.getChildNodes().get(1).getChildNodes();
+        ContextFreeGrammarParseTreeNode rootNode = this.grammar.getProduction(productionIndex);
+        ContextFreeGrammarParseTreeNode leftHandNode = rootNode.getChildNodes().get(0);
+        List<ContextFreeGrammarParseTreeNode> rightHandNodes = rootNode.getChildNodes().get(1).getChildNodes();
         int reduceSize = this.calculateReduceSize(rightHandNodes);
 
         for (int i = 0; i < reduceSize; i++)
@@ -123,7 +123,7 @@ public class LR0Parser implements ContextFreeLanguageParser, ComparableStructure
         stack.push(leftHandNode);
     }
 
-    private int calculateReduceSize(List<ContextFreeGrammarSyntaxNode> rightHandNodes)
+    private int calculateReduceSize(List<ContextFreeGrammarParseTreeNode> rightHandNodes)
     {
         if (rightHandNodes.get(0) instanceof EpsilonNode)
         {

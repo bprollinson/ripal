@@ -9,16 +9,16 @@ package larp.parser.contextfreelanguage;
 
 import larp.assertion.Assertion;
 import larp.automaton.State;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 
 public class LR0ParseTableCellAvailableAssertion implements Assertion
 {
     private LR0ParseTable parseTable;
     private State state;
-    private ContextFreeGrammarSyntaxNode syntaxNode;
+    private ContextFreeGrammarParseTreeNode syntaxNode;
     private LR0ParseTableAction action;
 
-    public LR0ParseTableCellAvailableAssertion(LR0ParseTable parseTable, State state, ContextFreeGrammarSyntaxNode syntaxNode, LR0ParseTableAction action)
+    public LR0ParseTableCellAvailableAssertion(LR0ParseTable parseTable, State state, ContextFreeGrammarParseTreeNode syntaxNode, LR0ParseTableAction action)
     {
         this.parseTable = parseTable;
         this.state = state;

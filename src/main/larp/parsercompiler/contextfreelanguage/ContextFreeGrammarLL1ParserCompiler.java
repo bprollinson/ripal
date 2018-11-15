@@ -10,7 +10,7 @@ package larp.parsercompiler.contextfreelanguage;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.parser.contextfreelanguage.LL1ParseTable;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 
@@ -22,22 +22,22 @@ public class ContextFreeGrammarLL1ParserCompiler
     public LL1ParseTable compile(ContextFreeGrammar grammar) throws AmbiguousLL1ParseTableException
     {
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
-        List<ContextFreeGrammarSyntaxNode> productions = grammar.getProductions();
+        List<ContextFreeGrammarParseTreeNode> productions = grammar.getProductions();
 
         FirstSetCalculator firstCalculator = new FirstSetCalculator(grammar);
         FollowSetCalculator followSetCalculator = new FollowSetCalculator(grammar);
 
         for (int firstRuleIndex = 0; firstRuleIndex < productions.size(); firstRuleIndex++)
         {
-            Set<ContextFreeGrammarSyntaxNode> firsts = firstCalculator.getFirst(firstRuleIndex);
+            Set<ContextFreeGrammarParseTreeNode> firsts = firstCalculator.getFirst(firstRuleIndex);
             NonTerminalNode nonTerminalNode = (NonTerminalNode)productions.get(firstRuleIndex).getChildNodes().get(0);
 
-            for (ContextFreeGrammarSyntaxNode first: firsts)
+            for (ContextFreeGrammarParseTreeNode first: firsts)
             {
                 if (first instanceof EpsilonNode)
                 {
-                    Set<ContextFreeGrammarSyntaxNode> follows = followSetCalculator.getFollow(nonTerminalNode);
-                    for (ContextFreeGrammarSyntaxNode follow: follows)
+                    Set<ContextFreeGrammarParseTreeNode> follows = followSetCalculator.getFollow(nonTerminalNode);
+                    for (ContextFreeGrammarParseTreeNode follow: follows)
                     {
                         parseTable.addCell(nonTerminalNode, follow, firstRuleIndex);
                     }

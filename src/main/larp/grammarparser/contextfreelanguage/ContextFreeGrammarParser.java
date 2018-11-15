@@ -8,7 +8,7 @@
 package larp.grammarparser.contextfreelanguage;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ContextFreeGrammarParser
 {
-    public ContextFreeGrammarSyntaxNode parse(List<ContextFreeGrammarSyntaxToken> tokens)
+    public ContextFreeGrammarParseTreeNode parse(List<ContextFreeGrammarSyntaxToken> tokens)
     {
         ProductionNode productionNode = new ProductionNode();
         NonTerminalToken nonTerminalToken = (NonTerminalToken)tokens.get(0);

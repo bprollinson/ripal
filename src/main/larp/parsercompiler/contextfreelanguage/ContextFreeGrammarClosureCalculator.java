@@ -8,7 +8,7 @@
 package larp.parsercompiler.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
@@ -27,11 +27,11 @@ public class ContextFreeGrammarClosureCalculator
         this.productionNodeDotRepository = new ProductionNodeDotRepository();
     }
 
-    public Set<ContextFreeGrammarSyntaxNode> calculate(ContextFreeGrammar grammar, Set<ContextFreeGrammarSyntaxNode> productionSet)
+    public Set<ContextFreeGrammarParseTreeNode> calculate(ContextFreeGrammar grammar, Set<ContextFreeGrammarParseTreeNode> productionSet)
     {
-        Set<ContextFreeGrammarSyntaxNode> productionsClosure = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarParseTreeNode> productionsClosure = new HashSet<ContextFreeGrammarParseTreeNode>();
         productionsClosure.addAll(productionSet);
-        ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap = this.calculateStartingNonTerminalProductionsMap(grammar);
+        ValueToSetMap<ContextFreeGrammarParseTreeNode, Integer> startingNonTerminalProductionsMap = this.calculateStartingNonTerminalProductionsMap(grammar);
 
         boolean continueExpansion = true;
         while (continueExpansion)
@@ -42,9 +42,9 @@ public class ContextFreeGrammarClosureCalculator
         return productionsClosure;
     }
 
-    private ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> calculateStartingNonTerminalProductionsMap(ContextFreeGrammar grammar)
+    private ValueToSetMap<ContextFreeGrammarParseTreeNode, Integer> calculateStartingNonTerminalProductionsMap(ContextFreeGrammar grammar)
     {
-        ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductions = new ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer>();
+        ValueToSetMap<ContextFreeGrammarParseTreeNode, Integer> startingNonTerminalProductions = new ValueToSetMap<ContextFreeGrammarParseTreeNode, Integer>();
         for (int i = 0; i < grammar.getProductions().size(); i++)
         {
             startingNonTerminalProductions.put(grammar.getProduction(i).getChildNodes().get(0), i);
@@ -53,13 +53,13 @@ public class ContextFreeGrammarClosureCalculator
         return startingNonTerminalProductions;
     }
 
-    private boolean expandClosure(ContextFreeGrammar grammar, ValueToSetMap<ContextFreeGrammarSyntaxNode, Integer> startingNonTerminalProductionsMap, Set<ContextFreeGrammarSyntaxNode> productionsClosure)
+    private boolean expandClosure(ContextFreeGrammar grammar, ValueToSetMap<ContextFreeGrammarParseTreeNode, Integer> startingNonTerminalProductionsMap, Set<ContextFreeGrammarParseTreeNode> productionsClosure)
     {
-        Set<ContextFreeGrammarSyntaxNode> productionsToAdd = new HashSet<ContextFreeGrammarSyntaxNode>();
+        Set<ContextFreeGrammarParseTreeNode> productionsToAdd = new HashSet<ContextFreeGrammarParseTreeNode>();
 
-        for (ContextFreeGrammarSyntaxNode productionNode: productionsClosure)
+        for (ContextFreeGrammarParseTreeNode productionNode: productionsClosure)
         {
-            ContextFreeGrammarSyntaxNode nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode);
+            ContextFreeGrammarParseTreeNode nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode);
             if (nextSymbol != null)
             {
                 this.addProductionsForNonTerminal(grammar, startingNonTerminalProductionsMap.get(nextSymbol), productionsToAdd);
@@ -73,18 +73,18 @@ public class ContextFreeGrammarClosureCalculator
         return productionsClosure.addAll(productionsToAdd);
     }
 
-    private void addProductionsForNonTerminal(ContextFreeGrammar grammar, Set<Integer> productionIndices, Set<ContextFreeGrammarSyntaxNode> productionsToAdd)
+    private void addProductionsForNonTerminal(ContextFreeGrammar grammar, Set<Integer> productionIndices, Set<ContextFreeGrammarParseTreeNode> productionsToAdd)
     {
         for (int productionIndex: productionIndices)
         {
-            ContextFreeGrammarSyntaxNode production = grammar.getProductions().get(productionIndex);
+            ContextFreeGrammarParseTreeNode production = grammar.getProductions().get(productionIndex);
 
-            ContextFreeGrammarSyntaxNode productionNode = this.productionNodeDotRepository.addDotToProductionRightHandSide(production);
+            ContextFreeGrammarParseTreeNode productionNode = this.productionNodeDotRepository.addDotToProductionRightHandSide(production);
             productionsToAdd.add(productionNode);
         }
     }
 
-    private ProductionNode buildEpsilonProduction(ContextFreeGrammarSyntaxNode leftHandNonTerminal)
+    private ProductionNode buildEpsilonProduction(ContextFreeGrammarParseTreeNode leftHandNonTerminal)
     {
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(leftHandNonTerminal);

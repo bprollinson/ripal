@@ -14,7 +14,7 @@ import org.junit.Test;
 import larp.parser.contextfreelanguage.LR0ParseStack;
 import larp.parser.contextfreelanguage.LR0ParseStackEmptyException;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 
 import java.util.HashSet;
@@ -25,7 +25,7 @@ public class LR0ParseStackTest
     @Test
     public void testPeekReturnsTopObject() throws LR0ParseStackEmptyException
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -44,7 +44,7 @@ public class LR0ParseStackTest
     @Test
     public void testPopReturnsAndRemovesTopObject() throws LR0ParseStackEmptyException
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -67,10 +67,10 @@ public class LR0ParseStackTest
     @Test
     public void testGetTopStateReturnsTopElement() throws LR0ParseStackEmptyException
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseStack stack = new LR0ParseStack();
-        stack.push(new LR0ProductionSetDFAState("", true, new HashSet<ContextFreeGrammarSyntaxNode>()));
+        stack.push(new LR0ProductionSetDFAState("", true, new HashSet<ContextFreeGrammarParseTreeNode>()));
         stack.push(new NonTerminalNode("A"));
         stack.push(state);
 
@@ -80,10 +80,10 @@ public class LR0ParseStackTest
     @Test
     public void testGetTopStateReturnsLowerElement() throws LR0ParseStackEmptyException
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseStack stack = new LR0ParseStack();
-        stack.push(new LR0ProductionSetDFAState("", true, new HashSet<ContextFreeGrammarSyntaxNode>()));
+        stack.push(new LR0ProductionSetDFAState("", true, new HashSet<ContextFreeGrammarParseTreeNode>()));
         stack.push(new NonTerminalNode("A"));
         stack.push(state);
         stack.push(new NonTerminalNode("B"));
@@ -101,7 +101,7 @@ public class LR0ParseStackTest
     @Test
     public void testStackEqualsReturnsTrue()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -117,7 +117,7 @@ public class LR0ParseStackTest
     @Test
     public void testStackEqualsReturnsFalse()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -133,7 +133,7 @@ public class LR0ParseStackTest
     @Test
     public void testEqualsReturnsTrueForStacksContainingSameObjects()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -149,7 +149,7 @@ public class LR0ParseStackTest
     @Test
     public void testEqualsReturnsFalseForStacksContainingDifferentObjects()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);

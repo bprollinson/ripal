@@ -20,7 +20,7 @@ import larp.parser.contextfreelanguage.LR0Parser;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLL1ParserCompiler;
 import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLR0ParserCompiler;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.token.contextfreelanguage.ContextFreeGrammarSyntaxToken;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public class ContextFreeLanguageParserFactory
         for (String inputString: input)
         {
             List<ContextFreeGrammarSyntaxToken> tokenList = this.tokenizer.tokenize(inputString);
-            ContextFreeGrammarSyntaxNode rootNode = this.parser.parse(tokenList);
+            ContextFreeGrammarParseTreeNode rootNode = this.parser.parse(tokenList);
             grammar.addProduction(rootNode);
         }
 

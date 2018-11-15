@@ -7,6 +7,6 @@
 
 package larp.parsetree.contextfreelanguage;
 
-public class EndOfStringNode extends ContextFreeGrammarSyntaxNode
+public class EndOfStringNode extends ContextFreeGrammarParseTreeNode
 {
 }

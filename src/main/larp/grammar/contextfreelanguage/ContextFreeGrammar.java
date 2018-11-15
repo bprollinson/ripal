@@ -8,7 +8,7 @@
 package larp.grammar.contextfreelanguage;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 
@@ -17,25 +17,25 @@ import java.util.List;
 
 public class ContextFreeGrammar
 {
-    private List<ContextFreeGrammarSyntaxNode> productions;
+    private List<ContextFreeGrammarParseTreeNode> productions;
 
     public ContextFreeGrammar()
     {
-        this.productions = new ArrayList<ContextFreeGrammarSyntaxNode>();
+        this.productions = new ArrayList<ContextFreeGrammarParseTreeNode>();
     }
 
-    public void addProduction(ContextFreeGrammarSyntaxNode productionNode)
+    public void addProduction(ContextFreeGrammarParseTreeNode productionNode)
     {
         this.productions.add(productionNode);
     }
 
-    public void addProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarSyntaxNode... rightHandNodes)
+    public void addProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarParseTreeNode... rightHandNodes)
     {
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(nonTerminalNode);
 
         ConcatenationNode concatenationNode = new ConcatenationNode();
-        for (ContextFreeGrammarSyntaxNode rightHandNode: rightHandNodes)
+        for (ContextFreeGrammarParseTreeNode rightHandNode: rightHandNodes)
         {
             concatenationNode.addChild(rightHandNode);
         }
@@ -44,12 +44,12 @@ public class ContextFreeGrammar
         this.addProduction(productionNode);
     }
 
-    public ContextFreeGrammarSyntaxNode getProduction(int index)
+    public ContextFreeGrammarParseTreeNode getProduction(int index)
     {
         return this.productions.get(index);
     }
 
-    public List<ContextFreeGrammarSyntaxNode> getProductions()
+    public List<ContextFreeGrammarParseTreeNode> getProductions()
     {
         return this.productions;
     }

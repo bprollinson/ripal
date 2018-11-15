@@ -7,9 +7,9 @@
 
 package larp.parsetree.contextfreelanguage;
 
-public class ConcatenationNode extends ContextFreeGrammarSyntaxNode
+public class ConcatenationNode extends ContextFreeGrammarParseTreeNode
 {
-    public void addChild(ContextFreeGrammarSyntaxNode childNode)
+    public void addChild(ContextFreeGrammarParseTreeNode childNode)
     {
         this.childNodes.add(childNode);
     }

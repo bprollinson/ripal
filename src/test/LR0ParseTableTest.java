@@ -25,7 +25,7 @@ import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 import larp.util.PairToValueMap;
@@ -41,8 +41,8 @@ public class LR0ParseTableTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -56,7 +56,7 @@ public class LR0ParseTableTest
     public void testGetStartState()
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
 
@@ -69,8 +69,8 @@ public class LR0ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -83,8 +83,8 @@ public class LR0ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -98,7 +98,7 @@ public class LR0ParseTableTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -111,7 +111,7 @@ public class LR0ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0AcceptAction());
@@ -124,7 +124,7 @@ public class LR0ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -137,9 +137,9 @@ public class LR0ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> cells = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+        PairToValueMap<State, ContextFreeGrammarParseTreeNode, LR0ParseTableAction> cells = new PairToValueMap<State, ContextFreeGrammarParseTreeNode, LR0ParseTableAction>();
         cells.put(state, new TerminalNode("a"), new LR0ShiftAction(state));
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
@@ -154,10 +154,10 @@ public class LR0ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction> cells = new PairToValueMap<State, ContextFreeGrammarSyntaxNode, LR0ParseTableAction>();
+        PairToValueMap<State, ContextFreeGrammarParseTreeNode, LR0ParseTableAction> cells = new PairToValueMap<State, ContextFreeGrammarParseTreeNode, LR0ParseTableAction>();
         cells.put(state, new TerminalNode("a"), new LR0ShiftAction(state));
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
@@ -181,7 +181,7 @@ public class LR0ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -198,8 +198,8 @@ public class LR0ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         LR0ParseTable otherParseTable = new LR0ParseTable(grammar, otherState);
@@ -213,7 +213,7 @@ public class LR0ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -233,8 +233,8 @@ public class LR0ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -251,8 +251,8 @@ public class LR0ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -272,8 +272,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -291,7 +291,7 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
 
@@ -313,8 +313,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -330,8 +330,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state2));
@@ -347,8 +347,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -367,7 +367,7 @@ public class LR0ParseTableTest
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -386,8 +386,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -402,8 +402,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
 
@@ -418,8 +418,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -434,8 +434,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
 
@@ -450,7 +450,7 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -467,7 +467,7 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -484,8 +484,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -502,8 +502,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state1));
@@ -520,8 +520,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -537,8 +537,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -554,8 +554,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -571,8 +571,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -588,8 +588,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -605,11 +605,11 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -625,8 +625,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -642,11 +642,11 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -662,8 +662,8 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0AcceptAction());
@@ -679,11 +679,11 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -701,12 +701,12 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -724,12 +724,12 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -747,11 +747,11 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -767,11 +767,11 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -789,11 +789,11 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -811,11 +811,11 @@ public class LR0ParseTableTest
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));

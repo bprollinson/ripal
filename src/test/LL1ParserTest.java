@@ -18,7 +18,7 @@ import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parser.contextfreelanguage.LR0Parser;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarSyntaxNode;
+import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
@@ -415,7 +415,7 @@ public class LL1ParserTest
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         LL1Parser parser = new LL1Parser(parseTable);
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarSyntaxNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
         LR0ParseTable otherParseTable = new LR0ParseTable(grammar, state);
         LR0Parser otherParser = new LR0Parser(otherParseTable);
