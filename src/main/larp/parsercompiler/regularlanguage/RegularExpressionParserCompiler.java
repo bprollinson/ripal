@@ -11,7 +11,6 @@ import larp.automaton.EpsilonNFA;
 import larp.automaton.EpsilonNFAState;
 import larp.automaton.State;
 import larp.automaton.StateTransition;
-import larp.parser.regularlanguage.StateGroup;
 import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;
