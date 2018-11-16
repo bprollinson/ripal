@@ -7,7 +7,7 @@
 
 package larp.token.contextfreelanguage;
 
-public class TerminalToken extends ContextFreeGrammarSyntaxToken
+public class TerminalToken extends ContextFreeGrammarToken
 {
     private String value;
 

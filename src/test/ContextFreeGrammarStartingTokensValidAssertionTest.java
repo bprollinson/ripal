@@ -10,7 +10,7 @@ import org.junit.Test;
 import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarStartingTokensValidAssertion;
 import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarTokenizerException;
 import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
-import larp.token.contextfreelanguage.ContextFreeGrammarSyntaxToken;
+import larp.token.contextfreelanguage.ContextFreeGrammarToken;
 import larp.token.contextfreelanguage.NonTerminalToken;
 import larp.token.contextfreelanguage.SeparatorToken;
 
@@ -22,7 +22,7 @@ public class ContextFreeGrammarStartingTokensValidAssertionTest
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
     public void testValidateThrowsExceptionForFewerThanThreeTokens() throws ContextFreeGrammarTokenizerException
     {
-        List<ContextFreeGrammarSyntaxToken> tokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarToken> tokens = new ArrayList<ContextFreeGrammarToken>();
         tokens.add(new NonTerminalToken("S"));
         tokens.add(new SeparatorToken());
         ContextFreeGrammarStartingTokensValidAssertion assertion = new ContextFreeGrammarStartingTokensValidAssertion(tokens);
@@ -33,7 +33,7 @@ public class ContextFreeGrammarStartingTokensValidAssertionTest
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
     public void testValidateThrowsExceptionWhenFirstTokenIsNotANonterminal() throws ContextFreeGrammarTokenizerException
     {
-        List<ContextFreeGrammarSyntaxToken> tokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarToken> tokens = new ArrayList<ContextFreeGrammarToken>();
         tokens.add(new SeparatorToken());
         tokens.add(new SeparatorToken());
         tokens.add(new NonTerminalToken("S"));
@@ -45,7 +45,7 @@ public class ContextFreeGrammarStartingTokensValidAssertionTest
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
     public void testValidateThrowsExceptionWhenSecondTokenIsNotASeparator() throws ContextFreeGrammarTokenizerException
     {
-        List<ContextFreeGrammarSyntaxToken> tokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarToken> tokens = new ArrayList<ContextFreeGrammarToken>();
         tokens.add(new NonTerminalToken("S"));
         tokens.add(new NonTerminalToken("S"));
         tokens.add(new NonTerminalToken("S"));
@@ -57,7 +57,7 @@ public class ContextFreeGrammarStartingTokensValidAssertionTest
     @Test
     public void TestValidateDoesNotThrowExceptionForValidTokenSequence() throws ContextFreeGrammarTokenizerException
     {
-        List<ContextFreeGrammarSyntaxToken> tokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarToken> tokens = new ArrayList<ContextFreeGrammarToken>();
         tokens.add(new NonTerminalToken("S"));
         tokens.add(new SeparatorToken());
         tokens.add(new NonTerminalToken("S"));

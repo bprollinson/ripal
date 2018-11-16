@@ -7,6 +7,6 @@
 
 package larp.token.contextfreelanguage;
 
-public class SeparatorToken extends ContextFreeGrammarSyntaxToken
+public class SeparatorToken extends ContextFreeGrammarToken
 {
 }

@@ -7,7 +7,7 @@
 
 package larp.grammartokenizer.contextfreelanguage;
 
-import larp.token.contextfreelanguage.ContextFreeGrammarSyntaxToken;
+import larp.token.contextfreelanguage.ContextFreeGrammarToken;
 import larp.token.contextfreelanguage.EpsilonToken;
 import larp.token.contextfreelanguage.NonTerminalToken;
 import larp.token.contextfreelanguage.SeparatorToken;
@@ -29,7 +29,7 @@ public class ContextFreeGrammarTokenizer
     private int numTerminals;
     private int numNonTerminals;
 
-    public List<ContextFreeGrammarSyntaxToken> tokenize(String expression) throws ContextFreeGrammarTokenizerException
+    public List<ContextFreeGrammarToken> tokenize(String expression) throws ContextFreeGrammarTokenizerException
     {
         this.inTerminal = false;
         this.escaping = false;
@@ -37,7 +37,7 @@ public class ContextFreeGrammarTokenizer
         this.numTerminals = 0;
         this.numNonTerminals = 0;
 
-        List<ContextFreeGrammarSyntaxToken> tokens = this.convertCharactersToTokens(expression);
+        List<ContextFreeGrammarToken> tokens = this.convertCharactersToTokens(expression);
 
         new ContextFreeGrammarFinalQuoteNestingCorrectAssertion(this.inTerminal).validate();
         new ContextFreeGrammarStartingTokensValidAssertion(tokens).validate();
@@ -46,9 +46,9 @@ public class ContextFreeGrammarTokenizer
         return this.correctEpsilonSetupInTokens(tokens);
     }
 
-    private List<ContextFreeGrammarSyntaxToken> convertCharactersToTokens(String expression) throws ContextFreeGrammarTokenizerException
+    private List<ContextFreeGrammarToken> convertCharactersToTokens(String expression) throws ContextFreeGrammarTokenizerException
     {
-        List<ContextFreeGrammarSyntaxToken> tokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarToken> tokens = new ArrayList<ContextFreeGrammarToken>();
 
         String buffer = "";
 
@@ -66,7 +66,7 @@ public class ContextFreeGrammarTokenizer
         return tokens;
     }
 
-    private String processCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer, char currentCharacter) throws ContextFreeGrammarTokenizerException
+    private String processCharacter(List<ContextFreeGrammarToken> tokens, String buffer, char currentCharacter) throws ContextFreeGrammarTokenizerException
     {
         if (this.escaping)
         {
@@ -108,7 +108,7 @@ public class ContextFreeGrammarTokenizer
         return buffer;
     }
 
-    private String processSeparatorCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer)
+    private String processSeparatorCharacter(List<ContextFreeGrammarToken> tokens, String buffer)
     {
         if (buffer.length() > 0)
         {
@@ -122,7 +122,7 @@ public class ContextFreeGrammarTokenizer
         return buffer;
     }
 
-    private String processTerminalStartQuoteCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer)
+    private String processTerminalStartQuoteCharacter(List<ContextFreeGrammarToken> tokens, String buffer)
     {
         if (buffer.length() > 0)
         {
@@ -135,7 +135,7 @@ public class ContextFreeGrammarTokenizer
         return buffer;
     }
 
-    private String processTerminalEndQuoteCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer)
+    private String processTerminalEndQuoteCharacter(List<ContextFreeGrammarToken> tokens, String buffer)
     {
         if (buffer.length() == 0)
         {
@@ -152,7 +152,7 @@ public class ContextFreeGrammarTokenizer
         return buffer;
     }
 
-    private String processSpaceCharacter(List<ContextFreeGrammarSyntaxToken> tokens, String buffer)
+    private String processSpaceCharacter(List<ContextFreeGrammarToken> tokens, String buffer)
     {
         if (buffer.length() > 0)
         {
@@ -164,9 +164,9 @@ public class ContextFreeGrammarTokenizer
         return buffer;
     }
 
-    private List<ContextFreeGrammarSyntaxToken> correctEpsilonSetupInTokens(List<ContextFreeGrammarSyntaxToken> tokens)
+    private List<ContextFreeGrammarToken> correctEpsilonSetupInTokens(List<ContextFreeGrammarToken> tokens)
     {
-        List<ContextFreeGrammarSyntaxToken> correctedTokens = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarToken> correctedTokens = new ArrayList<ContextFreeGrammarToken>();
 
         boolean epsilonAdded = false;
 

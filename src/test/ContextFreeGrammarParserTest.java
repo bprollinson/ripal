@@ -15,7 +15,7 @@ import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
-import larp.token.contextfreelanguage.ContextFreeGrammarSyntaxToken;
+import larp.token.contextfreelanguage.ContextFreeGrammarToken;
 import larp.token.contextfreelanguage.EpsilonToken;
 import larp.token.contextfreelanguage.NonTerminalToken;
 import larp.token.contextfreelanguage.SeparatorToken;
@@ -31,7 +31,7 @@ public class ContextFreeGrammarParserTest
     {
         ContextFreeGrammarParser parser = new ContextFreeGrammarParser();
 
-        List<ContextFreeGrammarSyntaxToken> input = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarToken> input = new ArrayList<ContextFreeGrammarToken>();
         input.add(new NonTerminalToken("S"));
         input.add(new SeparatorToken());
         input.add(new EpsilonToken());
@@ -51,7 +51,7 @@ public class ContextFreeGrammarParserTest
     {
         ContextFreeGrammarParser parser = new ContextFreeGrammarParser();
 
-        List<ContextFreeGrammarSyntaxToken> input = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarToken> input = new ArrayList<ContextFreeGrammarToken>();
         input.add(new NonTerminalToken("S"));
         input.add(new SeparatorToken());
         input.add(new TerminalToken("a"));
@@ -71,7 +71,7 @@ public class ContextFreeGrammarParserTest
     {
         ContextFreeGrammarParser parser = new ContextFreeGrammarParser();
 
-        List<ContextFreeGrammarSyntaxToken> input = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarToken> input = new ArrayList<ContextFreeGrammarToken>();
         input.add(new NonTerminalToken("S"));
         input.add(new SeparatorToken());
         input.add(new NonTerminalToken("S"));
@@ -91,7 +91,7 @@ public class ContextFreeGrammarParserTest
     {
         ContextFreeGrammarParser parser = new ContextFreeGrammarParser();
 
-        List<ContextFreeGrammarSyntaxToken> input = new ArrayList<ContextFreeGrammarSyntaxToken>();
+        List<ContextFreeGrammarToken> input = new ArrayList<ContextFreeGrammarToken>();
         input.add(new NonTerminalToken("S"));
         input.add(new SeparatorToken());
         input.add(new NonTerminalToken("S"));
