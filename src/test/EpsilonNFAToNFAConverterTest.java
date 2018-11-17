@@ -13,7 +13,7 @@ import larp.automaton.EpsilonNFAState;
 import larp.automaton.NFA;
 import larp.automaton.NFAState;
 import larp.automaton.StateTransition;
-import larp.parser.regularlanguage.EpsilonNFAToNFAConverter;
+import larp.parsercompiler.regularlanguage.EpsilonNFAToNFAConverter;
 
 public class EpsilonNFAToNFAConverterTest
 {
