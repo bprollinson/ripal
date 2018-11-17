@@ -8,74 +8,7 @@ program:
 test:
 	make clean
 	javac -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar -Xlint:unchecked ./src/test/*Test.java
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore FiniteAutomataTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore DFATest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore RegularExpressionIntermediateNestingLevelValidAssertionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore RegularExpressionFinalNestingLevelValidAssertionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore RegularExpressionFinalEscapingStatusValidAssertionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore RegularExpressionGrammarTokenizerTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore RegularLanguageEpsilonTokenTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore OrTokenTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore CloseParenthesisTokenTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore OpenParenthesisTokenTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore KleeneClosureTokenTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore CharacterTokenTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore RegularExpressionGrammarParserTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore CharacterNodeTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore KleeneClosureNodeTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore OrNodeTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore RegularLanguageConcatenationNodeTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore NFATest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore EpsilonNFATest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore StateTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore StateTransitionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore DFAStateTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore RegularExpressionParserCompilerTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore EpsilonNFAToNFAConverterTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore NFAToDFAConverterTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore SeparatorTokenTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore NonTerminalTokenTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore TerminalTokenTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeLanguageEpsilonTokenTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarTokenizerTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarFinalQuoteNestingCorrectAssertionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarStartingTokensValidAssertionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarCorrectNumberOfSeparatorsAssertionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarEscapeCharacterPositionCorrectAssertionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ProductionNodeTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore EpsilonNodeTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore NonTerminalNodeTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore TerminalNodeTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeLanguageConcatenationNodeTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore EndOfStringNodeTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore DotNodeTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarParserTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LL1ParseTableCellAvailableAssertionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LL1ParseTableTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore PairToValueMapTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LR0ShiftActionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LR0ReduceActionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LR0GotoActionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LR0AcceptActionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LR0ParseTableCellAvailableAssertionTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LR0ParseTableTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LL1ParserTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LR0ParseStackTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LR0ParserTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ValueToSetMapTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore FirstSetCalculatorTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore FollowSetCalculatorTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarLL1ParserCompilerTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LR0ProductionSetDFATest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore LR0ProductionSetDFAStateTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarLR0ParserCompilerTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarAugmentorTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ProductionNodeDotRepositoryTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarClosureCalculatorTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeGrammarLR0ProductionSetDFACompilerTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore RegularLanguageParserFactoryTest
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ContextFreeLanguageParserFactoryTest
+	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore FiniteAutomataTest DFATest RegularExpressionIntermediateNestingLevelValidAssertionTest RegularExpressionFinalNestingLevelValidAssertionTest RegularExpressionFinalEscapingStatusValidAssertionTest RegularExpressionGrammarTokenizerTest RegularLanguageEpsilonTokenTest OrTokenTest CloseParenthesisTokenTest OpenParenthesisTokenTest KleeneClosureTokenTest CharacterTokenTest RegularExpressionGrammarParserTest CharacterNodeTest KleeneClosureNodeTest OrNodeTest RegularLanguageConcatenationNodeTest NFATest EpsilonNFATest StateTest StateTransitionTest DFAStateTest RegularExpressionParserCompilerTest EpsilonNFAToNFAConverterTest NFAToDFAConverterTest SeparatorTokenTest NonTerminalTokenTest TerminalTokenTest ContextFreeLanguageEpsilonTokenTest ContextFreeGrammarTokenizerTest ContextFreeGrammarFinalQuoteNestingCorrectAssertionTest ContextFreeGrammarStartingTokensValidAssertionTest ContextFreeGrammarCorrectNumberOfSeparatorsAssertionTest ContextFreeGrammarEscapeCharacterPositionCorrectAssertionTest ProductionNodeTest EpsilonNodeTest NonTerminalNodeTest TerminalNodeTest ContextFreeLanguageConcatenationNodeTest EndOfStringNodeTest DotNodeTest ContextFreeGrammarParserTest ContextFreeGrammarTest LL1ParseTableCellAvailableAssertionTest LL1ParseTableTest PairToValueMapTest LR0ShiftActionTest LR0ReduceActionTest LR0GotoActionTest LR0AcceptActionTest LR0ParseTableCellAvailableAssertionTest LR0ParseTableTest LL1ParserTest LR0ParseStackTest LR0ParserTest ValueToSetMapTest FirstSetCalculatorTest FollowSetCalculatorTest ContextFreeGrammarLL1ParserCompilerTest LR0ProductionSetDFATest LR0ProductionSetDFAStateTest ContextFreeGrammarLR0ParserCompilerTest ContextFreeGrammarAugmentorTest ProductionNodeDotRepositoryTest ContextFreeGrammarClosureCalculatorTest ContextFreeGrammarLR0ProductionSetDFACompilerTest RegularLanguageParserFactoryTest ContextFreeLanguageParserFactoryTest
 	make clean
 clean:
 	find . -name "*.class" -exec rm {} \;
