@@ -14,7 +14,7 @@ import larp.grammarparser.regularlanguage.RegularExpressionGrammarParser;
 import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizer;
 import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizerException;
 import larp.parser.regularlanguage.EpsilonNFAToNFAConverter;
-import larp.parser.regularlanguage.NFAToDFAConverter;
+import larp.parsercompiler.regularlanguage.NFAToDFAConverter;
 import larp.parsercompiler.regularlanguage.RegularExpressionParserCompiler;
 import larp.parsetree.regularlanguage.RegularExpressionParseTreeNode;
 import larp.token.regularlanguage.RegularExpressionGrammarToken;

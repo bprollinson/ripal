@@ -5,7 +5,7 @@
  * See LICENSE.md for details.
  */
 
-package larp.parser.regularlanguage;
+package larp.parsercompiler.regularlanguage;
 
 import larp.automaton.DFA;
 import larp.automaton.DFAState;

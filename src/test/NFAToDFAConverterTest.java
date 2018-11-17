@@ -13,7 +13,7 @@ import larp.automaton.DFAState;
 import larp.automaton.NFA;
 import larp.automaton.NFAState;
 import larp.automaton.StateTransition;
-import larp.parser.regularlanguage.NFAToDFAConverter;
+import larp.parsercompiler.regularlanguage.NFAToDFAConverter;
 
 public class NFAToDFAConverterTest
 {
