@@ -5,11 +5,10 @@
  * See LICENSE.md for details.
  */
 
+package larp.grammartokenizer.contextfreelanguage;
+
 import org.junit.Test;
 
-import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarStartingTokensValidAssertion;
-import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarTokenizerException;
-import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 import larp.token.contextfreelanguage.ContextFreeGrammarToken;
 import larp.token.contextfreelanguage.NonTerminalToken;
 import larp.token.contextfreelanguage.SeparatorToken;

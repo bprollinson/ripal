@@ -5,10 +5,9 @@
  * See LICENSE.md for details.
  */
 
-import org.junit.Test;
+package larp.grammartokenizer.contextfreelanguage;
 
-import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarCorrectNumberOfSeparatorsAssertion;
-import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarSeparatorException;
+import org.junit.Test;
 
 public class ContextFreeGrammarCorrectNumberOfSeparatorsAssertionTest
 {

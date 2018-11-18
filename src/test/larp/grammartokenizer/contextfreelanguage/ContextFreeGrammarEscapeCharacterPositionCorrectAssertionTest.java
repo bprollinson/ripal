@@ -5,10 +5,9 @@
  * See LICENSE.md for details.
  */
 
-import org.junit.Test;
+package larp.grammartokenizer.contextfreelanguage;
 
-import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarEscapeCharacterPositionCorrectAssertion;
-import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarEscapeCharacterPositionException;
+import org.junit.Test;
 
 public class ContextFreeGrammarEscapeCharacterPositionCorrectAssertionTest
 {

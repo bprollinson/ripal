@@ -5,10 +5,9 @@
  * See LICENSE.md for details.
  */
 
-import org.junit.Test;
+package larp.grammartokenizer.contextfreelanguage;
 
-import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarFinalQuoteNestingCorrectAssertion;
-import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarQuoteNestingException;
+import org.junit.Test;
 
 public class ContextFreeGrammarFinalQuoteNestingCorrectAssertionTest
 {
