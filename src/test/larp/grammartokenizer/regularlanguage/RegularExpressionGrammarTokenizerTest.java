@@ -5,13 +5,11 @@
  * See LICENSE.md for details.
  */
 
+package larp.grammartokenizer.regularlanguage;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.grammartokenizer.regularlanguage.DanglingRegularExpressionEscapeCharacterException;
-import larp.grammartokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
-import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizer;
-import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizerException;
 import larp.token.regularlanguage.CharacterToken;
 import larp.token.regularlanguage.CloseParenthesisToken;
 import larp.token.regularlanguage.EpsilonToken;

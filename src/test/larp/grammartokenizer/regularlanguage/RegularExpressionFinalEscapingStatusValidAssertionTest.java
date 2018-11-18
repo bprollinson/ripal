@@ -5,10 +5,9 @@
  * See LICENSE.md for details.
  */
 
-import org.junit.Test;
+package larp.grammartokenizer.regularlanguage;
 
-import larp.grammartokenizer.regularlanguage.DanglingRegularExpressionEscapeCharacterException;
-import larp.grammartokenizer.regularlanguage.RegularExpressionFinalEscapingStatusValidAssertion;
+import org.junit.Test;
 
 public class RegularExpressionFinalEscapingStatusValidAssertionTest
 {

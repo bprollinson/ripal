@@ -5,10 +5,9 @@
  * See LICENSE.md for details.
  */
 
-import org.junit.Test;
+package larp.grammartokenizer.regularlanguage;
 
-import larp.grammartokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
-import larp.grammartokenizer.regularlanguage.RegularExpressionIntermediateNestingLevelValidAssertion;
+import org.junit.Test;
 
 public class RegularExpressionIntermediateNestingLevelValidAssertionTest
 {
