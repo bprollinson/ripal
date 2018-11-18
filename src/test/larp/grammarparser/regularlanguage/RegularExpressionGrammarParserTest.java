@@ -5,10 +5,11 @@
  * See LICENSE.md for details.
  */
 
+package larp.grammarparser.regularlanguage;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.grammarparser.regularlanguage.RegularExpressionGrammarParser;
 import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;
