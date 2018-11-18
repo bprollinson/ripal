@@ -5,15 +5,14 @@
  * See LICENSE.md for details.
  */
 
+package larp.parser.contextfreelanguage;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.parser.contextfreelanguage.LR0ParseStack;
-import larp.parser.contextfreelanguage.LR0ParseStackEmptyException;
-import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 

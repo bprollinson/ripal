@@ -5,6 +5,8 @@
  * See LICENSE.md for details.
  */
 
+package larp.parser.contextfreelanguage;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
@@ -13,18 +15,6 @@ import org.junit.Test;
 
 import larp.automaton.State;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
-import larp.parser.contextfreelanguage.LL1ParseTable;
-import larp.parser.contextfreelanguage.LR0AcceptAction;
-import larp.parser.contextfreelanguage.LR0GotoAction;
-import larp.parser.contextfreelanguage.LR0OtherConflictException;
-import larp.parser.contextfreelanguage.LR0ParseTable;
-import larp.parser.contextfreelanguage.LR0ParseTableAction;
-import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
-import larp.parser.contextfreelanguage.LR0ReduceAction;
-import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
-import larp.parser.contextfreelanguage.LR0ShiftAction;
-import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;

@@ -5,19 +5,11 @@
  * See LICENSE.md for details.
  */
 
+package larp.parser.contextfreelanguage;
+
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
-import larp.parser.contextfreelanguage.LR0GotoAction;
-import larp.parser.contextfreelanguage.LR0OtherConflictException;
-import larp.parser.contextfreelanguage.LR0ParseTable;
-import larp.parser.contextfreelanguage.LR0ParseTableCellAvailableAssertion;
-import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
-import larp.parser.contextfreelanguage.LR0ReduceAction;
-import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
-import larp.parser.contextfreelanguage.LR0ShiftAction;
-import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;

@@ -5,22 +5,14 @@
  * See LICENSE.md for details.
  */
 
+package larp.parser.contextfreelanguage;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
-import larp.parser.contextfreelanguage.LL1Parser;
-import larp.parser.contextfreelanguage.LL1ParseTable;
-import larp.parser.contextfreelanguage.LR0AcceptAction;
-import larp.parser.contextfreelanguage.LR0GotoAction;
-import larp.parser.contextfreelanguage.LR0Parser;
-import larp.parser.contextfreelanguage.LR0ParseTable;
-import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
-import larp.parser.contextfreelanguage.LR0ReduceAction;
-import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
