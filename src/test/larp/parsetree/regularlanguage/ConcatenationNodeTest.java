@@ -5,14 +5,13 @@
  * See LICENSE.md for details.
  */
 
+package larp.parsetree.regularlanguage;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
-import larp.parsetree.regularlanguage.CharacterNode;
-import larp.parsetree.regularlanguage.ConcatenationNode;
-
-public class RegularLanguageConcatenationNodeTest
+public class ConcatenationNodeTest
 {
     @Test
     public void testEqualsReturnsTrueForConcatenationNodeWithNoChildren()
