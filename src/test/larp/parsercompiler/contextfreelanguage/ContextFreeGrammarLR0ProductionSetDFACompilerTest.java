@@ -5,6 +5,8 @@
  * See LICENSE.md for details.
  */
 
+package larp.parsercompiler.contextfreelanguage;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -13,7 +15,6 @@ import larp.automaton.StateTransition;
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
-import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLR0ProductionSetDFACompiler;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.DotNode;

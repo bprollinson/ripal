@@ -5,6 +5,8 @@
  * See LICENSE.md for details.
  */
 
+package larp.parsercompiler.contextfreelanguage;
+
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -18,7 +20,6 @@ import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
-import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLR0ParserCompiler;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;

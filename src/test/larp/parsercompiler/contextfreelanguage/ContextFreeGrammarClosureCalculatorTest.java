@@ -5,11 +5,12 @@
  * See LICENSE.md for details.
  */
 
+package larp.parsercompiler.contextfreelanguage;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarClosureCalculator;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.DotNode;
