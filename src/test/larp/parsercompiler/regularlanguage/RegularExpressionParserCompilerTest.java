@@ -5,13 +5,14 @@
  * See LICENSE.md for details.
  */
 
+package larp.parsercompiler.regularlanguage;
+
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.automaton.EpsilonNFA;
 import larp.automaton.EpsilonNFAState;
 import larp.automaton.StateTransition;
-import larp.parsercompiler.regularlanguage.RegularExpressionParserCompiler;
 import larp.parsetree.regularlanguage.CharacterNode;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;

@@ -5,6 +5,8 @@
  * See LICENSE.md for details.
  */
 
+package larp.parsercompiler.regularlanguage;
+
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -13,7 +15,6 @@ import larp.automaton.EpsilonNFAState;
 import larp.automaton.NFA;
 import larp.automaton.NFAState;
 import larp.automaton.StateTransition;
-import larp.parsercompiler.regularlanguage.EpsilonNFAToNFAConverter;
 
 public class EpsilonNFAToNFAConverterTest
 {
