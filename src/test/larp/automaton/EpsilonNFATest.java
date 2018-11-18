@@ -5,11 +5,10 @@
  * See LICENSE.md for details.
  */
 
+package larp.automaton;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-
-import larp.automaton.EpsilonNFA;
-import larp.automaton.EpsilonNFAState;
 
 public class EpsilonNFATest
 {

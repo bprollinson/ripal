@@ -5,14 +5,11 @@
  * See LICENSE.md for details.
  */
 
+package larp.automaton;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-
-import larp.automaton.DFA;
-import larp.automaton.DFAState;
-import larp.automaton.FiniteAutomata;
-import larp.automaton.State;
 
 public class FiniteAutomataTest
 {
