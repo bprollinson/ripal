@@ -5,27 +5,26 @@
  * See LICENSE.md for details.
  */
 
+package larp.parsetree.contextfreelanguage;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
-import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.DotNode;
-
-public class DotNodeTest
+public class EndOfStringNodeTest
 {
     @Test
     public void testEqualsReturnsTrueForNodeWithSameClass()
     {
-        DotNode node = new DotNode();
+        EndOfStringNode node = new EndOfStringNode();
 
-        assertEquals(new DotNode(), node);
+        assertEquals(new EndOfStringNode(), node);
     }
 
     @Test
     public void testEqualsReturnsFalseForNodeWithDifferentClass()
     {
-        DotNode node = new DotNode();
+        EndOfStringNode node = new EndOfStringNode();
 
         assertNotEquals(new ConcatenationNode(), node);
     }

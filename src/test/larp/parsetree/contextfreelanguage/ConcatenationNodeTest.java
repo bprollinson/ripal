@@ -5,14 +5,13 @@
  * See LICENSE.md for details.
  */
 
+package larp.parsetree.contextfreelanguage;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
-import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.ProductionNode;
-
-public class ContextFreeLanguageConcatenationNodeTest
+public class ConcatenationNodeTest
 {
     @Test
     public void testEqualsReturnsTrueForConcatenationNodeWithNoChildren()
