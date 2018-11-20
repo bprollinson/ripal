@@ -13,11 +13,11 @@ import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarTokenizer;
 import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarTokenizerException;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.parser.contextfreelanguage.AmbiguousParseTableException;
-import larp.parser.contextfreelanguage.ContextFreeLanguageParser;
 import larp.parser.contextfreelanguage.LL1Parser;
 import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parser.contextfreelanguage.LR0Parser;
 import larp.parser.contextfreelanguage.LR0ParseTable;
+import larp.parser.contextfreelanguage.Parser;
 import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLL1ParserCompiler;
 import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLR0ParserCompiler;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
@@ -40,7 +40,7 @@ public class ContextFreeLanguageParserFactory
         this.lr0compiler = new ContextFreeGrammarLR0ParserCompiler();
     }
 
-    public ContextFreeLanguageParser factory(List<String> input) throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
+    public Parser factory(List<String> input) throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
     {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         for (String inputString: input)

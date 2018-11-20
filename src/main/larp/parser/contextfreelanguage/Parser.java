@@ -9,7 +9,7 @@ package larp.parser.contextfreelanguage;
 
 import java.util.List;
 
-public interface ContextFreeLanguageParser
+public interface Parser
 {
     public boolean accepts(String inputString);
     public List<Integer> getAppliedRules();

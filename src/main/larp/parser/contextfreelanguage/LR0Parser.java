@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LR0Parser implements ContextFreeLanguageParser, ComparableStructure
+public class LR0Parser implements Parser, ComparableStructure
 {
     private LR0ParseTable parseTable;
     private ContextFreeGrammar grammar;
