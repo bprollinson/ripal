@@ -5,27 +5,26 @@
  * See LICENSE.md for details.
  */
 
+package larp.token.regularlanguage;
+
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import larp.token.regularlanguage.CharacterToken;
-import larp.token.regularlanguage.EpsilonToken;
-
-public class RegularLanguageEpsilonTokenTest
+public class OrTokenTest
 {
     @Test
     public void testEqualsReturnsTrueForNodeWithSameClass()
     {
-        EpsilonToken token = new EpsilonToken();
+        OrToken token = new OrToken();
 
-        assertEquals(new EpsilonToken(), token);
+        assertEquals(new OrToken(), token);
     }
 
     @Test
     public void testEqualsReturnsFalseForNodeWithDifferentClass()
     {
-        EpsilonToken token = new EpsilonToken();
+        OrToken token = new OrToken();
 
         assertNotEquals(new CharacterToken('a'), token);
     }

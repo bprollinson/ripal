@@ -5,27 +5,26 @@
  * See LICENSE.md for details.
  */
 
+package larp.token.regularlanguage;
+
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import larp.token.regularlanguage.CharacterToken;
-import larp.token.regularlanguage.CloseParenthesisToken;
-
-public class CloseParenthesisTokenTest
+public class EpsilonTokenTest
 {
     @Test
     public void testEqualsReturnsTrueForNodeWithSameClass()
     {
-        CloseParenthesisToken token = new CloseParenthesisToken();
+        EpsilonToken token = new EpsilonToken();
 
-        assertEquals(new CloseParenthesisToken(), token);
+        assertEquals(new EpsilonToken(), token);
     }
 
     @Test
     public void testEqualsReturnsFalseForNodeWithDifferentClass()
     {
-        CloseParenthesisToken token = new CloseParenthesisToken();
+        EpsilonToken token = new EpsilonToken();
 
         assertNotEquals(new CharacterToken('a'), token);
     }

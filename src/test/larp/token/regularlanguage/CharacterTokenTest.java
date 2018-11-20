@@ -5,12 +5,11 @@
  * See LICENSE.md for details.
  */
 
+package larp.token.regularlanguage;
+
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-
-import larp.token.regularlanguage.CharacterToken;
-import larp.token.regularlanguage.OrToken;
 
 public class CharacterTokenTest
 {
