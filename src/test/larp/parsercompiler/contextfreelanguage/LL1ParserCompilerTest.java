@@ -19,12 +19,12 @@ import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
-public class ContextFreeGrammarLL1ParserCompilerTest
+public class LL1ParserCompilerTest
 {
     @Test
     public void testCompileReturnsEmptyParseTableForEmptyCFG() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
@@ -35,7 +35,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileReturnsParseTableForSingleCharacterProductionCFG() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -49,7 +49,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompilerReturnsEmptyParseTableForSingleNonTerminalProductionCFG() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -62,7 +62,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileReturnsParseTableForSingleNonTerminalAndSingleTerminalProductionCFG() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -78,7 +78,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileReturnsParseTableWithNonTerminalConcatenation() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
@@ -96,7 +96,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileReturnsParseTableForProductionWithMultipleCharactersInFirstSetViaDirectProductions() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -112,7 +112,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileReturnsParseTableForProductionWithMultipleCharactersInFirstSetViaIndirectProductions() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -131,7 +131,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileReturnsParseTableWithNonTerminalChain() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("C"));
@@ -151,7 +151,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test(expected = LL1ApplyApplyConflictException.class)
     public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoTerminals() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -163,7 +163,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test(expected = LL1ApplyApplyConflictException.class)
     public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoNonTerminals() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -177,7 +177,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test(expected = LL1ApplyApplyConflictException.class)
     public void testCompileThrowsExceptionForFirstAmbiguityBetweenTerminalAndNonTerminal() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -190,7 +190,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test(expected = LL1ApplyApplyConflictException.class)
     public void testCompileThrowsExceptionForAmbiguousGrammarContainingCycle() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -203,7 +203,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileReturnsEmptyTableForDeadEndNonTerminalProduction() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -216,7 +216,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileReturnsParseTableForGrammarContainingCycle() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("S"));
@@ -232,7 +232,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileOnlyConsidersFirstCharacterFromMultiCharacterTerminalInFirstSet() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
@@ -246,7 +246,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileHandlesTerminalFollowSets() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"), new TerminalNode("b"), new NonTerminalNode("C"), new TerminalNode("c"), new NonTerminalNode("C"), new TerminalNode("d"));
@@ -265,7 +265,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileHandlesEndOfStringFollowSets() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
@@ -286,7 +286,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileOnlyConsidersFirstCharacterFromMultiCharacterTerminalInFollowSet() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("ab"));
@@ -302,7 +302,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test(expected = LL1ApplyApplyConflictException.class)
     public void testCompileThrowsExceptionForFirstFollowAmbiguity() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
@@ -316,7 +316,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test(expected = LL1ApplyApplyConflictException.class)
     public void testCompileThrowsExceptionForFollowFollowAmbiguity() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"));
@@ -329,7 +329,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileHandlesDanglingNonTerminalAfterNonTerminalThatGoesToEpsilon() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
@@ -342,7 +342,7 @@ public class ContextFreeGrammarLL1ParserCompilerTest
     @Test
     public void testCompileReturnsParseTableForNonDanglingProductionPath() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammarLL1ParserCompiler compiler = new ContextFreeGrammarLL1ParserCompiler();
+        LL1ParserCompiler compiler = new LL1ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));

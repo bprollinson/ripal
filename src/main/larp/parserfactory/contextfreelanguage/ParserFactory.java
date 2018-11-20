@@ -18,7 +18,7 @@ import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parser.contextfreelanguage.LR0Parser;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.Parser;
-import larp.parsercompiler.contextfreelanguage.ContextFreeGrammarLL1ParserCompiler;
+import larp.parsercompiler.contextfreelanguage.LL1ParserCompiler;
 import larp.parsercompiler.contextfreelanguage.LR0ParserCompiler;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.token.contextfreelanguage.ContextFreeGrammarToken;
@@ -29,14 +29,14 @@ public class ParserFactory
 {
     private ContextFreeGrammarTokenizer tokenizer;
     private ContextFreeGrammarParser parser;
-    private ContextFreeGrammarLL1ParserCompiler ll1compiler;
+    private LL1ParserCompiler ll1compiler;
     private LR0ParserCompiler lr0compiler;
 
     public ParserFactory()
     {
         this.tokenizer = new ContextFreeGrammarTokenizer();
         this.parser = new ContextFreeGrammarParser();
-        this.ll1compiler = new ContextFreeGrammarLL1ParserCompiler();
+        this.ll1compiler = new LL1ParserCompiler();
         this.lr0compiler = new LR0ParserCompiler();
     }
 

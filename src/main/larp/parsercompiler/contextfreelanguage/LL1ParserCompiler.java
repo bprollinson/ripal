@@ -17,7 +17,7 @@ import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import java.util.List;
 import java.util.Set;
 
-public class ContextFreeGrammarLL1ParserCompiler
+public class LL1ParserCompiler
 {
     public LL1ParseTable compile(ContextFreeGrammar grammar) throws AmbiguousLL1ParseTableException
     {
