@@ -21,7 +21,7 @@ import larp.token.regularlanguage.RegularExpressionGrammarToken;
 
 import java.util.List;
 
-public class RegularLanguageParserFactory
+public class ParserFactory
 {
     private RegularExpressionGrammarTokenizer tokenizer;
     private RegularExpressionGrammarParser parser;
@@ -29,7 +29,7 @@ public class RegularLanguageParserFactory
     private EpsilonNFAToNFAConverter epsilonNFAToNFAConverter;
     private NFAToDFAConverter NFAToDFAConverter;
 
-    public RegularLanguageParserFactory()
+    public ParserFactory()
     {
         this.tokenizer = new RegularExpressionGrammarTokenizer();
         this.parser = new RegularExpressionGrammarParser();
