@@ -5,10 +5,10 @@
  * See LICENSE.md for details.
  */
 
+package larp.util;
+
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-
-import larp.util.ValueToSetMap;
 
 import java.util.AbstractMap;
 import java.util.HashSet;
