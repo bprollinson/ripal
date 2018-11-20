@@ -5,12 +5,11 @@
  * See LICENSE.md for details.
  */
 
+package larp.token.contextfreelanguage;
+
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-
-import larp.token.contextfreelanguage.SeparatorToken;
-import larp.token.contextfreelanguage.TerminalToken;
 
 public class TerminalTokenTest
 {

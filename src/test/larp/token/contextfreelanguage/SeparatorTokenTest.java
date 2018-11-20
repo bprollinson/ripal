@@ -5,28 +5,27 @@
  * See LICENSE.md for details.
  */
 
-import org.junit.Test;
+package larp.token.contextfreelanguage;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import org.junit.Test;
 
-import larp.token.contextfreelanguage.EpsilonToken;
-import larp.token.contextfreelanguage.TerminalToken;
-
-public class ContextFreeLanguageEpsilonTokenTest
+public class SeparatorTokenTest
 {
     @Test
     public void testEqualsReturnsTrueForNodeWithSameClass()
     {
-        EpsilonToken token = new EpsilonToken();
+        SeparatorToken token = new SeparatorToken();
 
-        assertEquals(new EpsilonToken(), token);
+        assertEquals(new SeparatorToken(), token);
     }
 
     @Test
     public void testEqualsReturnsFalseForNodeWithDifferentClass()
     {
-        EpsilonToken token = new EpsilonToken();
+        SeparatorToken token = new SeparatorToken();
 
-        assertNotEquals(new TerminalToken("a"), token);
+        assertNotEquals(new NonTerminalToken("S"), token);
     }
 }
