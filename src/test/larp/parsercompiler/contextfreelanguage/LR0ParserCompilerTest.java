@@ -28,12 +28,12 @@ import larp.parsetree.contextfreelanguage.TerminalNode;
 
 import java.util.HashSet;
 
-public class ContextFreeGrammarLR0ParserCompilerTest
+public class LR0ParserCompilerTest
 {
     @Test
     public void testCompileReturnsEmptyParseTableForEmptyCFG() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         LR0ParseTable expectedTable = new LR0ParseTable(grammar, null);
@@ -44,7 +44,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test
     public void testCompileReturnsParseTableForSingleCharacterProductionCFG() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -70,7 +70,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test
     public void testCompileReturnsParseTableForSingleNonTerminalProductionCFG() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -95,7 +95,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test
     public void testCompileReturnsParseTableForSingleNonTerminalAndSingleTerminalProductionCFG() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -127,7 +127,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test
     public void testCompileHandlesMultipleTerminalProductionsWithinTheSameInitialState() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -161,7 +161,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test
     public void testCompileHandlesMultipleNonTerminalProductionsWithinTheSameInitialState() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -205,7 +205,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test
     public void testCompileHandlesMultipleTerminalProductionsWithinTheSameSubsequentState() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("x"), new NonTerminalNode("A"));
@@ -251,7 +251,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test
     public void testCompileHandlesMultipleNonTerminalProductionsWithinTheSameSubsequentState() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("x"), new NonTerminalNode("X"));
@@ -308,7 +308,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test
     public void testCompileReturnsParseTableWithTerminalChain() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"), new TerminalNode("c"));
@@ -340,7 +340,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test
     public void testCompileReturnsTableForCFGWithDFAContainingCycle() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("S"));
@@ -368,7 +368,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test
     public void testCompileSplitsMultiCharacterTerminalIntoMultipleTerminals() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
@@ -397,7 +397,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test
     public void testCompileAddsReduceActionForEpsilonProduction() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
@@ -419,7 +419,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test(expected = LR0ShiftReduceConflictException.class)
     public void testCompileThrowsExceptionForShiftReduceConflict() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -431,7 +431,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test(expected = LR0ReduceReduceConflictException.class)
     public void testCompileThrowsExceptionForReduceReduceConflict() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -443,7 +443,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test(expected = LR0ShiftReduceConflictException.class)
     public void testCompilerThrowsExceptionForShiftReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("A"));
@@ -455,7 +455,7 @@ public class ContextFreeGrammarLR0ParserCompilerTest
     @Test(expected = LR0ReduceReduceConflictException.class)
     public void testCompilerThrowsExceptionForReduceReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
     {
-        ContextFreeGrammarLR0ParserCompiler compiler = new ContextFreeGrammarLR0ParserCompiler();
+        LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
