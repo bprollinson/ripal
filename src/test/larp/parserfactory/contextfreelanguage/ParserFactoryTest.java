@@ -36,12 +36,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class ContextFreeLanguageParserFactoryTest
+public class ParserFactoryTest
 {
     @Test
     public void testFactoryCreatesLL1ParserForLL1AndLR0ContextFreeGrammar() throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
     {
-        ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
+        ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
         input.add("S: \"a\"");
 
@@ -57,7 +57,7 @@ public class ContextFreeLanguageParserFactoryTest
     @Test
     public void testFactoryCreatesLL1ParserForLL1AndNotLR0ContextFreeGrammar() throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
     {
-        ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
+        ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
         input.add("S: \"a\"");
         input.add("S: \"\"");
@@ -76,7 +76,7 @@ public class ContextFreeLanguageParserFactoryTest
     @Test
     public void testFactoryCreatesLR0ParserForLR0AndNotLL1ContextFreeGrammar() throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
     {
-        ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
+        ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
         input.add("S: \"a\"\"a\"");
         input.add("S: \"a\"\"b\"");
@@ -113,7 +113,7 @@ public class ContextFreeLanguageParserFactoryTest
     @Test(expected = LR0ReduceReduceConflictException.class)
     public void testFactoryThrowsAmbiguousLR0ParseTableExceptionForNonLL1NonLR0ContextFreeGrammar() throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
     {
-        ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
+        ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
         input.add("S: \"s\"");
         input.add("S: \"s\"");
@@ -124,7 +124,7 @@ public class ContextFreeLanguageParserFactoryTest
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
     public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectContextFreeGrammar() throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
     {
-        ContextFreeLanguageParserFactory factory = new ContextFreeLanguageParserFactory();
+        ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
         input.add("");
 

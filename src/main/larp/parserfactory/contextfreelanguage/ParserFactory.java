@@ -25,14 +25,14 @@ import larp.token.contextfreelanguage.ContextFreeGrammarToken;
 
 import java.util.List;
 
-public class ContextFreeLanguageParserFactory
+public class ParserFactory
 {
     private ContextFreeGrammarTokenizer tokenizer;
     private ContextFreeGrammarParser parser;
     private ContextFreeGrammarLL1ParserCompiler ll1compiler;
     private ContextFreeGrammarLR0ParserCompiler lr0compiler;
 
-    public ContextFreeLanguageParserFactory()
+    public ParserFactory()
     {
         this.tokenizer = new ContextFreeGrammarTokenizer();
         this.parser = new ContextFreeGrammarParser();
