@@ -20,7 +20,7 @@ import larp.parsetree.regularlanguage.RegularExpressionParseTreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegularExpressionParserCompiler
+public class ParserCompiler
 {
     public EpsilonNFA compile(RegularExpressionParseTreeNode rootNode)
     {

@@ -5,7 +5,7 @@
  * See LICENSE.md for details.
  */
 
-import larp.parsercompiler.regularlanguage.RegularExpressionParserCompiler;
+import larp.parsercompiler.regularlanguage.ParserCompiler;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 
 public class LARP

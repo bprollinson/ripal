@@ -18,12 +18,12 @@ import larp.parsetree.regularlanguage.ConcatenationNode;
 import larp.parsetree.regularlanguage.KleeneClosureNode;
 import larp.parsetree.regularlanguage.OrNode;
 
-public class RegularExpressionParserCompilerTest
+public class ParserCompilerTest
 {
     @Test
     public void testCompileReturnsEpsilonNFAForCharacterNode()
     {
-        RegularExpressionParserCompiler compiler = new RegularExpressionParserCompiler();
+        ParserCompiler compiler = new ParserCompiler();
         CharacterNode rootNode = new CharacterNode('a');
 
         EpsilonNFAState state = new EpsilonNFAState("S0", false);
@@ -36,7 +36,7 @@ public class RegularExpressionParserCompilerTest
     @Test
     public void testCompilerReturnsEpsilonNFAForKleeneClosureNode()
     {
-        RegularExpressionParserCompiler compiler = new RegularExpressionParserCompiler();
+        ParserCompiler compiler = new ParserCompiler();
         KleeneClosureNode rootNode = new KleeneClosureNode();
         rootNode.addChild(new CharacterNode('a'));
 
@@ -53,7 +53,7 @@ public class RegularExpressionParserCompilerTest
     @Test
     public void testCompilerReturnsEpsilonNFAForEmptyConcatenationNode()
     {
-        RegularExpressionParserCompiler compiler = new RegularExpressionParserCompiler();
+        ParserCompiler compiler = new ParserCompiler();
         ConcatenationNode rootNode = new ConcatenationNode();
 
         EpsilonNFAState state1 = new EpsilonNFAState("0", false);
@@ -67,7 +67,7 @@ public class RegularExpressionParserCompilerTest
     @Test
     public void testCompilerReturnsEpsilonNFAForConcatenationNodeWithSingleChild()
     {
-        RegularExpressionParserCompiler compiler = new RegularExpressionParserCompiler();
+        ParserCompiler compiler = new ParserCompiler();
         ConcatenationNode rootNode = new ConcatenationNode();
         rootNode.addChild(new CharacterNode('a'));
 
@@ -82,7 +82,7 @@ public class RegularExpressionParserCompilerTest
     @Test
     public void testCompilerReturnsEpsilonNFAForConcatenationNodeWithMultipleChildren()
     {
-        RegularExpressionParserCompiler compiler = new RegularExpressionParserCompiler();
+        ParserCompiler compiler = new ParserCompiler();
         ConcatenationNode rootNode = new ConcatenationNode();
         rootNode.addChild(new CharacterNode('a'));
         rootNode.addChild(new CharacterNode('b'));
@@ -107,7 +107,7 @@ public class RegularExpressionParserCompilerTest
     @Test
     public void testCompilerReturnsEpsilonNFAForOrNode()
     {
-        RegularExpressionParserCompiler compiler = new RegularExpressionParserCompiler();
+        ParserCompiler compiler = new ParserCompiler();
         OrNode rootNode = new OrNode();
         rootNode.addChild(new CharacterNode('a'));
         rootNode.addChild(new CharacterNode('b'));

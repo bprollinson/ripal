@@ -15,7 +15,7 @@ import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizer;
 import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizerException;
 import larp.parsercompiler.regularlanguage.EpsilonNFAToNFAConverter;
 import larp.parsercompiler.regularlanguage.NFAToDFAConverter;
-import larp.parsercompiler.regularlanguage.RegularExpressionParserCompiler;
+import larp.parsercompiler.regularlanguage.ParserCompiler;
 import larp.parsetree.regularlanguage.RegularExpressionParseTreeNode;
 import larp.token.regularlanguage.RegularExpressionGrammarToken;
 
@@ -25,7 +25,7 @@ public class ParserFactory
 {
     private RegularExpressionGrammarTokenizer tokenizer;
     private RegularExpressionGrammarParser parser;
-    private RegularExpressionParserCompiler compiler;
+    private ParserCompiler compiler;
     private EpsilonNFAToNFAConverter epsilonNFAToNFAConverter;
     private NFAToDFAConverter NFAToDFAConverter;
 
@@ -33,7 +33,7 @@ public class ParserFactory
     {
         this.tokenizer = new RegularExpressionGrammarTokenizer();
         this.parser = new RegularExpressionGrammarParser();
-        this.compiler = new RegularExpressionParserCompiler();
+        this.compiler = new ParserCompiler();
         this.epsilonNFAToNFAConverter = new EpsilonNFAToNFAConverter();
         this.NFAToDFAConverter = new NFAToDFAConverter();
     }
