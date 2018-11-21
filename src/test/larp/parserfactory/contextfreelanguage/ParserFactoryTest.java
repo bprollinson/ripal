@@ -12,8 +12,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.ContextFreeGrammar;
-import larp.grammartokenizer.contextfreelanguage.ContextFreeGrammarTokenizerException;
 import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
+import larp.grammartokenizer.contextfreelanguage.TokenizerException;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
 import larp.parser.contextfreelanguage.AmbiguousParseTableException;
 import larp.parser.contextfreelanguage.LL1Parser;
@@ -39,7 +39,7 @@ import java.util.List;
 public class ParserFactoryTest
 {
     @Test
-    public void testFactoryCreatesLL1ParserForLL1AndLR0ContextFreeGrammar() throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesLL1ParserForLL1AndLR0ContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
@@ -55,7 +55,7 @@ public class ParserFactoryTest
     }
 
     @Test
-    public void testFactoryCreatesLL1ParserForLL1AndNotLR0ContextFreeGrammar() throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesLL1ParserForLL1AndNotLR0ContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
@@ -74,7 +74,7 @@ public class ParserFactoryTest
     }
 
     @Test
-    public void testFactoryCreatesLR0ParserForLR0AndNotLL1ContextFreeGrammar() throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesLR0ParserForLR0AndNotLL1ContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
@@ -111,7 +111,7 @@ public class ParserFactoryTest
     }
 
     @Test(expected = LR0ReduceReduceConflictException.class)
-    public void testFactoryThrowsAmbiguousLR0ParseTableExceptionForNonLL1NonLR0ContextFreeGrammar() throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
+    public void testFactoryThrowsAmbiguousLR0ParseTableExceptionForNonLL1NonLR0ContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
@@ -122,7 +122,7 @@ public class ParserFactoryTest
     }
 
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
-    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectContextFreeGrammar() throws ContextFreeGrammarTokenizerException, AmbiguousParseTableException
+    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();

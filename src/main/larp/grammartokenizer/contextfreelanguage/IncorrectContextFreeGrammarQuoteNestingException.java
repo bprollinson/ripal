@@ -7,6 +7,6 @@
 
 package larp.grammartokenizer.contextfreelanguage;
 
-public class IncorrectContextFreeGrammarQuoteNestingException extends ContextFreeGrammarTokenizerException
+public class IncorrectContextFreeGrammarQuoteNestingException extends TokenizerException
 {
 }

@@ -22,7 +22,7 @@ import java.util.List;
 public class TokenizerTest
 {
     @Test
-    public void testTokenizeTokenizesSimpleSingleCharacterNonTerminalProduction() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeTokenizesSimpleSingleCharacterNonTerminalProduction() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -36,7 +36,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeHandlesMultiCharacterNonTerminalOnLeftSideOfProduction() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeHandlesMultiCharacterNonTerminalOnLeftSideOfProduction() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -50,7 +50,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeHandlesMultiCharacterNonTerminalOnRightSideOfProduction() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeHandlesMultiCharacterNonTerminalOnRightSideOfProduction() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -64,7 +64,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesEpsilonProduction() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeTokenizesEpsilonProduction() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -78,7 +78,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesSimpleSingleCharacterTerminalProduction() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeTokenizesSimpleSingleCharacterTerminalProduction() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -92,7 +92,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeHandlesMultiCharacterTerminalOnRightSideOfProduction() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeHandlesMultiCharacterTerminalOnRightSideOfProduction() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -106,7 +106,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeHandlesMultipleTerminalsOnRightSideWithoutSpaceBetweenThem() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeHandlesMultipleTerminalsOnRightSideWithoutSpaceBetweenThem() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -121,7 +121,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeIgnoresSpaceBetweenTerminalTokens() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeIgnoresSpaceBetweenTerminalTokens() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -136,7 +136,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeHandlesSpaceWithinTerminalToken() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeHandlesSpaceWithinTerminalToken() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -150,7 +150,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeIgnoresSpaceBetweenNonTerminalTokens() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeIgnoresSpaceBetweenNonTerminalTokens() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -165,7 +165,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeHandlesTerminalFollowedDirectlyByNonterminal() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeHandlesTerminalFollowedDirectlyByNonterminal() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -180,7 +180,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeRemovesEpsilonFromTokensFromRightHandSideContainingTerminalTokenBeforeEpsilon() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeRemovesEpsilonFromTokensFromRightHandSideContainingTerminalTokenBeforeEpsilon() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -194,7 +194,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeRemovesEpsilonFromTokensFromRightHandSideContainingNonTerminalTokenBeforeEpsilon() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeRemovesEpsilonFromTokensFromRightHandSideContainingNonTerminalTokenBeforeEpsilon() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -208,7 +208,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeRemovesEpsilonFromTokensFromRightHandSideContainingTerminalTokenAfterEpsilon() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeRemovesEpsilonFromTokensFromRightHandSideContainingTerminalTokenAfterEpsilon() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -222,7 +222,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeRemovesEpsilonFromTokensFromRightHandSideContainingNonTerminalTokenAfterEpsilon() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeRemovesEpsilonFromTokensFromRightHandSideContainingNonTerminalTokenAfterEpsilon() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -236,7 +236,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeRemovesExtraEpsilonFromRightHandSideContainingMultipleEpsilonTokens() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeRemovesExtraEpsilonFromRightHandSideContainingMultipleEpsilonTokens() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -250,7 +250,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeRemovesExtraEpsilonFromRightHandSideContainingTerminalAndMultipleEpsilonTokens() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeRemovesExtraEpsilonFromRightHandSideContainingTerminalAndMultipleEpsilonTokens() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -264,7 +264,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeRemovesExtraEpsilonFromRightHandSideContainingNonTerminalAndMultipleEpsilonTokens() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeRemovesExtraEpsilonFromRightHandSideContainingNonTerminalAndMultipleEpsilonTokens() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -278,7 +278,7 @@ public class TokenizerTest
     }
 
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
-    public void testTokenizeThrowsExceptionForIncorrecTokenSequence() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeThrowsExceptionForIncorrecTokenSequence() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -286,7 +286,7 @@ public class TokenizerTest
     }
 
     @Test(expected = IncorrectContextFreeGrammarQuoteNestingException.class)
-    public void testTokenizeThrowsExceptionForUnclosedQuoteAtEndOfString() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeThrowsExceptionForUnclosedQuoteAtEndOfString() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -294,7 +294,7 @@ public class TokenizerTest
     }
 
     @Test(expected = IncorrectContextFreeGrammarSeparatorException.class)
-    public void testTokenizeThrowsExceptionForIncorrectNumberofSeparators() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeThrowsExceptionForIncorrectNumberofSeparators() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -302,7 +302,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesColonWithinTerminalString() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeTokenizesColonWithinTerminalString() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -316,7 +316,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeTokenizesEscapedSpecialCharactersWithinTerminalString() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeTokenizesEscapedSpecialCharactersWithinTerminalString() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -330,7 +330,7 @@ public class TokenizerTest
     }
 
     @Test
-    public void testTokenizeGeneratesStandardCharacterTokenFromCharacterAfterEscapeCharacter() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeGeneratesStandardCharacterTokenFromCharacterAfterEscapeCharacter() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -344,7 +344,7 @@ public class TokenizerTest
     }
 
     @Test(expected = IncorrectContextFreeGrammarQuoteNestingException.class)
-    public void testTokenizeThrowsExceptionForUnclosedQuoteAtEndOfStringContainingEscapedQuote() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeThrowsExceptionForUnclosedQuoteAtEndOfStringContainingEscapedQuote() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -352,7 +352,7 @@ public class TokenizerTest
     }
 
     @Test(expected = IncorrectContextFreeGrammarEscapeCharacterPositionException.class)
-    public void testTokenizeThrowsExceptionForEscapeCharacterOutsideTerminalString() throws ContextFreeGrammarTokenizerException
+    public void testTokenizeThrowsExceptionForEscapeCharacterOutsideTerminalString() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 

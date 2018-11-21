@@ -19,7 +19,7 @@ import java.util.List;
 public class ContextFreeGrammarStartingTokensValidAssertionTest
 {
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
-    public void testValidateThrowsExceptionForFewerThanThreeTokens() throws ContextFreeGrammarTokenizerException
+    public void testValidateThrowsExceptionForFewerThanThreeTokens() throws TokenizerException
     {
         List<ContextFreeGrammarToken> tokens = new ArrayList<ContextFreeGrammarToken>();
         tokens.add(new NonTerminalToken("S"));
@@ -30,7 +30,7 @@ public class ContextFreeGrammarStartingTokensValidAssertionTest
     }
 
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
-    public void testValidateThrowsExceptionWhenFirstTokenIsNotANonterminal() throws ContextFreeGrammarTokenizerException
+    public void testValidateThrowsExceptionWhenFirstTokenIsNotANonterminal() throws TokenizerException
     {
         List<ContextFreeGrammarToken> tokens = new ArrayList<ContextFreeGrammarToken>();
         tokens.add(new SeparatorToken());
@@ -42,7 +42,7 @@ public class ContextFreeGrammarStartingTokensValidAssertionTest
     }
 
     @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
-    public void testValidateThrowsExceptionWhenSecondTokenIsNotASeparator() throws ContextFreeGrammarTokenizerException
+    public void testValidateThrowsExceptionWhenSecondTokenIsNotASeparator() throws TokenizerException
     {
         List<ContextFreeGrammarToken> tokens = new ArrayList<ContextFreeGrammarToken>();
         tokens.add(new NonTerminalToken("S"));
@@ -54,7 +54,7 @@ public class ContextFreeGrammarStartingTokensValidAssertionTest
     }
 
     @Test
-    public void TestValidateDoesNotThrowExceptionForValidTokenSequence() throws ContextFreeGrammarTokenizerException
+    public void TestValidateDoesNotThrowExceptionForValidTokenSequence() throws TokenizerException
     {
         List<ContextFreeGrammarToken> tokens = new ArrayList<ContextFreeGrammarToken>();
         tokens.add(new NonTerminalToken("S"));

@@ -9,6 +9,6 @@ package larp.grammartokenizer.contextfreelanguage;
 
 import larp.assertion.AssertException;
 
-public class ContextFreeGrammarTokenizerException extends AssertException
+public class TokenizerException extends AssertException
 {
 }
