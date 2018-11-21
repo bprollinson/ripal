@@ -16,7 +16,7 @@ import larp.token.contextfreelanguage.TerminalToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContextFreeGrammarTokenizer
+public class Tokenizer
 {
     private char separator = ':';
     private char doubleQuote = '"';
