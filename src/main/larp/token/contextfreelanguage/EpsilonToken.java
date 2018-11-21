@@ -7,6 +7,6 @@
 
 package larp.token.contextfreelanguage;
 
-public class EpsilonToken extends ContextFreeGrammarToken
+public class EpsilonToken extends Token
 {
 }

@@ -7,7 +7,7 @@
 
 package larp.token.contextfreelanguage;
 
-public class NonTerminalToken extends ContextFreeGrammarToken
+public class NonTerminalToken extends Token
 {
     private String name;
 

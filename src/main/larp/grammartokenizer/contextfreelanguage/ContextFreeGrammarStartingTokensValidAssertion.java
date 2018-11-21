@@ -8,17 +8,17 @@
 package larp.grammartokenizer.contextfreelanguage;
 
 import larp.assertion.Assertion;
-import larp.token.contextfreelanguage.ContextFreeGrammarToken;
 import larp.token.contextfreelanguage.NonTerminalToken;
 import larp.token.contextfreelanguage.SeparatorToken;
+import larp.token.contextfreelanguage.Token;
 
 import java.util.List;
 
 public class ContextFreeGrammarStartingTokensValidAssertion implements Assertion
 {
-    private List<ContextFreeGrammarToken> tokens;
+    private List<Token> tokens;
 
-    public ContextFreeGrammarStartingTokensValidAssertion(List<ContextFreeGrammarToken> tokens)
+    public ContextFreeGrammarStartingTokensValidAssertion(List<Token> tokens)
     {
         this.tokens = tokens;
     }

@@ -7,11 +7,11 @@
 
 package larp.grammartokenizer.contextfreelanguage;
 
-import larp.token.contextfreelanguage.ContextFreeGrammarToken;
 import larp.token.contextfreelanguage.EpsilonToken;
 import larp.token.contextfreelanguage.NonTerminalToken;
 import larp.token.contextfreelanguage.SeparatorToken;
 import larp.token.contextfreelanguage.TerminalToken;
+import larp.token.contextfreelanguage.Token;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class Tokenizer
     private int numTerminals;
     private int numNonTerminals;
 
-    public List<ContextFreeGrammarToken> tokenize(String expression) throws TokenizerException
+    public List<Token> tokenize(String expression) throws TokenizerException
     {
         this.inTerminal = false;
         this.escaping = false;
@@ -37,7 +37,7 @@ public class Tokenizer
         this.numTerminals = 0;
         this.numNonTerminals = 0;
 
-        List<ContextFreeGrammarToken> tokens = this.convertCharactersToTokens(expression);
+        List<Token> tokens = this.convertCharactersToTokens(expression);
 
         new ContextFreeGrammarFinalQuoteNestingCorrectAssertion(this.inTerminal).validate();
         new ContextFreeGrammarStartingTokensValidAssertion(tokens).validate();
@@ -46,9 +46,9 @@ public class Tokenizer
         return this.correctEpsilonSetupInTokens(tokens);
     }
 
-    private List<ContextFreeGrammarToken> convertCharactersToTokens(String expression) throws TokenizerException
+    private List<Token> convertCharactersToTokens(String expression) throws TokenizerException
     {
-        List<ContextFreeGrammarToken> tokens = new ArrayList<ContextFreeGrammarToken>();
+        List<Token> tokens = new ArrayList<Token>();
 
         String buffer = "";
 
@@ -66,7 +66,7 @@ public class Tokenizer
         return tokens;
     }
 
-    private String processCharacter(List<ContextFreeGrammarToken> tokens, String buffer, char currentCharacter) throws TokenizerException
+    private String processCharacter(List<Token> tokens, String buffer, char currentCharacter) throws TokenizerException
     {
         if (this.escaping)
         {
@@ -108,7 +108,7 @@ public class Tokenizer
         return buffer;
     }
 
-    private String processSeparatorCharacter(List<ContextFreeGrammarToken> tokens, String buffer)
+    private String processSeparatorCharacter(List<Token> tokens, String buffer)
     {
         if (buffer.length() > 0)
         {
@@ -122,7 +122,7 @@ public class Tokenizer
         return buffer;
     }
 
-    private String processTerminalStartQuoteCharacter(List<ContextFreeGrammarToken> tokens, String buffer)
+    private String processTerminalStartQuoteCharacter(List<Token> tokens, String buffer)
     {
         if (buffer.length() > 0)
         {
@@ -135,7 +135,7 @@ public class Tokenizer
         return buffer;
     }
 
-    private String processTerminalEndQuoteCharacter(List<ContextFreeGrammarToken> tokens, String buffer)
+    private String processTerminalEndQuoteCharacter(List<Token> tokens, String buffer)
     {
         if (buffer.length() == 0)
         {
@@ -152,7 +152,7 @@ public class Tokenizer
         return buffer;
     }
 
-    private String processSpaceCharacter(List<ContextFreeGrammarToken> tokens, String buffer)
+    private String processSpaceCharacter(List<Token> tokens, String buffer)
     {
         if (buffer.length() > 0)
         {
@@ -164,9 +164,9 @@ public class Tokenizer
         return buffer;
     }
 
-    private List<ContextFreeGrammarToken> correctEpsilonSetupInTokens(List<ContextFreeGrammarToken> tokens)
+    private List<Token> correctEpsilonSetupInTokens(List<Token> tokens)
     {
-        List<ContextFreeGrammarToken> correctedTokens = new ArrayList<ContextFreeGrammarToken>();
+        List<Token> correctedTokens = new ArrayList<Token>();
 
         boolean epsilonAdded = false;
 

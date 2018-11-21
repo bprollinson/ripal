@@ -21,7 +21,7 @@ import larp.parser.contextfreelanguage.Parser;
 import larp.parsercompiler.contextfreelanguage.LL1ParserCompiler;
 import larp.parsercompiler.contextfreelanguage.LR0ParserCompiler;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
-import larp.token.contextfreelanguage.ContextFreeGrammarToken;
+import larp.token.contextfreelanguage.Token;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class ParserFactory
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         for (String inputString: input)
         {
-            List<ContextFreeGrammarToken> tokenList = this.tokenizer.tokenize(inputString);
+            List<Token> tokenList = this.tokenizer.tokenize(inputString);
             ContextFreeGrammarParseTreeNode rootNode = this.parser.parse(tokenList);
             grammar.addProduction(rootNode);
         }

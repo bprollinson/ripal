@@ -7,7 +7,7 @@
 
 package larp.token.contextfreelanguage;
 
-public class ContextFreeGrammarToken
+public class Token
 {
     public boolean equals(Object other)
     {

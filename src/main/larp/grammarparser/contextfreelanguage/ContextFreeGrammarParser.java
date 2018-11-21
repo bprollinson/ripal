@@ -13,16 +13,16 @@ import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
-import larp.token.contextfreelanguage.ContextFreeGrammarToken;
 import larp.token.contextfreelanguage.EpsilonToken;
 import larp.token.contextfreelanguage.NonTerminalToken;
 import larp.token.contextfreelanguage.TerminalToken;
+import larp.token.contextfreelanguage.Token;
 
 import java.util.List;
 
 public class ContextFreeGrammarParser
 {
-    public ContextFreeGrammarParseTreeNode parse(List<ContextFreeGrammarToken> tokens)
+    public ContextFreeGrammarParseTreeNode parse(List<Token> tokens)
     {
         ProductionNode productionNode = new ProductionNode();
         NonTerminalToken nonTerminalToken = (NonTerminalToken)tokens.get(0);
@@ -33,7 +33,7 @@ public class ContextFreeGrammarParser
 
         for (int i = 2; i < tokens.size(); i++)
         {
-            ContextFreeGrammarToken token = tokens.get(i);
+            Token token = tokens.get(i);
 
             if (token instanceof NonTerminalToken)
             {
