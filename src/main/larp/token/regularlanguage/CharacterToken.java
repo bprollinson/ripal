@@ -7,7 +7,7 @@
 
 package larp.token.regularlanguage;
 
-public class CharacterToken extends RegularExpressionGrammarToken
+public class CharacterToken extends Token
 {
     private char character;
 

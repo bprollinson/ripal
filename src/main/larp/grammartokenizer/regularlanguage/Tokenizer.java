@@ -13,7 +13,7 @@ import larp.token.regularlanguage.EpsilonToken;
 import larp.token.regularlanguage.KleeneClosureToken;
 import larp.token.regularlanguage.OpenParenthesisToken;
 import larp.token.regularlanguage.OrToken;
-import larp.token.regularlanguage.RegularExpressionGrammarToken;
+import larp.token.regularlanguage.Token;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +29,9 @@ public class Tokenizer
     private int nestingLevel;
     private boolean escaping;
 
-    public List<RegularExpressionGrammarToken> tokenize(String expression) throws TokenizerException
+    public List<Token> tokenize(String expression) throws TokenizerException
     {
-        List<RegularExpressionGrammarToken> tokens = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> tokens = new ArrayList<Token>();
 
         this.nestingLevel = 0;
         this.escaping = false;
@@ -54,7 +54,7 @@ public class Tokenizer
         return tokens;
     }
 
-    private void processCharacter(List<RegularExpressionGrammarToken> tokens, char currentCharacter, Character lastCharacter) throws TokenizerException
+    private void processCharacter(List<Token> tokens, char currentCharacter, Character lastCharacter) throws TokenizerException
     {
         if (this.escaping)
         {
@@ -111,7 +111,7 @@ public class Tokenizer
         }
     }
 
-    private void addEpsilonBasedOnTokenSequence(List<RegularExpressionGrammarToken> tokens, Character lastCharacter)
+    private void addEpsilonBasedOnTokenSequence(List<Token> tokens, Character lastCharacter)
     {
         if (lastCharacter != null && lastCharacter == this.openParenthesis)
         {
@@ -123,7 +123,7 @@ public class Tokenizer
         }
     }
 
-    private void addPrefixEpsilon(List<RegularExpressionGrammarToken> tokens)
+    private void addPrefixEpsilon(List<Token> tokens)
     {
         if (tokens.size() == 0)
         {
@@ -131,7 +131,7 @@ public class Tokenizer
         }
     }
 
-    private void addPostfixEpsilon(List<RegularExpressionGrammarToken> tokens, Character lastCharacter)
+    private void addPostfixEpsilon(List<Token> tokens, Character lastCharacter)
     {
         if (tokens.size() == 0)
         {

@@ -7,7 +7,7 @@
 
 package larp.token.regularlanguage;
 
-public class RegularExpressionGrammarToken
+public class Token
 {
     public boolean equals(Object other)
     {

@@ -7,6 +7,6 @@
 
 package larp.token.regularlanguage;
 
-public class OpenParenthesisToken extends RegularExpressionGrammarToken
+public class OpenParenthesisToken extends Token
 {
 }

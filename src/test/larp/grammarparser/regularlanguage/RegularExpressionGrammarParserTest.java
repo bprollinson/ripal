@@ -21,7 +21,7 @@ import larp.token.regularlanguage.EpsilonToken;
 import larp.token.regularlanguage.KleeneClosureToken;
 import larp.token.regularlanguage.OpenParenthesisToken;
 import larp.token.regularlanguage.OrToken;
-import larp.token.regularlanguage.RegularExpressionGrammarToken;
+import larp.token.regularlanguage.Token;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class RegularExpressionGrammarParserTest
     {
         RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
-        List<RegularExpressionGrammarToken> input = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> input = new ArrayList<Token>();
         RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
         ConcatenationNode expectedRootNode = new ConcatenationNode();
@@ -46,7 +46,7 @@ public class RegularExpressionGrammarParserTest
     {
         RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
-        List<RegularExpressionGrammarToken> input = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> input = new ArrayList<Token>();
         input.add(new EpsilonToken());
         RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
@@ -60,7 +60,7 @@ public class RegularExpressionGrammarParserTest
     {
         RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
-        List<RegularExpressionGrammarToken> input = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> input = new ArrayList<Token>();
         input.add(new CharacterToken('a'));
         RegularExpressionParseTreeNode rootNode = parser.parse(input);
 
@@ -75,7 +75,7 @@ public class RegularExpressionGrammarParserTest
     {
         RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
-        List<RegularExpressionGrammarToken> input = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> input = new ArrayList<Token>();
         input.add(new CharacterToken('a'));
         input.add(new CharacterToken('b'));
         RegularExpressionParseTreeNode rootNode = parser.parse(input);
@@ -92,7 +92,7 @@ public class RegularExpressionGrammarParserTest
     {
         RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
-        List<RegularExpressionGrammarToken> input = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> input = new ArrayList<Token>();
         input.add(new CharacterToken('a'));
         input.add(new CharacterToken('b'));
         input.add(new KleeneClosureToken());
@@ -112,7 +112,7 @@ public class RegularExpressionGrammarParserTest
     {
         RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
-        List<RegularExpressionGrammarToken> input = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> input = new ArrayList<Token>();
         input.add(new CharacterToken('a'));
         input.add(new OpenParenthesisToken());
         input.add(new CharacterToken('b'));
@@ -135,7 +135,7 @@ public class RegularExpressionGrammarParserTest
     {
         RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
-        List<RegularExpressionGrammarToken> input = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> input = new ArrayList<Token>();
         input.add(new CharacterToken('a'));
         input.add(new OpenParenthesisToken());
         input.add(new OpenParenthesisToken());
@@ -162,7 +162,7 @@ public class RegularExpressionGrammarParserTest
     {
         RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
-        List<RegularExpressionGrammarToken> input = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> input = new ArrayList<Token>();
         input.add(new CharacterToken('a'));
         input.add(new OrToken());
         input.add(new CharacterToken('b'));
@@ -191,7 +191,7 @@ public class RegularExpressionGrammarParserTest
     {
         RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
-        List<RegularExpressionGrammarToken> input = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> input = new ArrayList<Token>();
         input.add(new OpenParenthesisToken());
         input.add(new CharacterToken('a'));
         input.add(new CloseParenthesisToken());
@@ -210,7 +210,7 @@ public class RegularExpressionGrammarParserTest
     {
         RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
-        List<RegularExpressionGrammarToken> input = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> input = new ArrayList<Token>();
         input.add(new OpenParenthesisToken());
         input.add(new CharacterToken('a'));
         input.add(new KleeneClosureToken());
@@ -232,7 +232,7 @@ public class RegularExpressionGrammarParserTest
     {
         RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
 
-        List<RegularExpressionGrammarToken> input = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> input = new ArrayList<Token>();
         input.add(new OpenParenthesisToken());
         input.add(new CharacterToken('a'));
         input.add(new OrToken());

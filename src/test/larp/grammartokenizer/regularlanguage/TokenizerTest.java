@@ -16,7 +16,7 @@ import larp.token.regularlanguage.EpsilonToken;
 import larp.token.regularlanguage.KleeneClosureToken;
 import larp.token.regularlanguage.OpenParenthesisToken;
 import larp.token.regularlanguage.OrToken;
-import larp.token.regularlanguage.RegularExpressionGrammarToken;
+import larp.token.regularlanguage.Token;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +28,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("(ab|c)*");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("(ab|c)*");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new OpenParenthesisToken());
         expectedResult.add(new CharacterToken('a'));
         expectedResult.add(new CharacterToken('b'));
@@ -46,8 +46,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new EpsilonToken());
 
         assertEquals(expectedResult, result);
@@ -58,8 +58,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("a ");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("a ");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new CharacterToken('a'));
         expectedResult.add(new CharacterToken(' '));
 
@@ -71,8 +71,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize(" a");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize(" a");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new CharacterToken(' '));
         expectedResult.add(new CharacterToken('a'));
 
@@ -84,8 +84,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("  ");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("  ");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new CharacterToken(' '));
         expectedResult.add(new CharacterToken(' '));
 
@@ -97,8 +97,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("*");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("*");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new EpsilonToken());
         expectedResult.add(new KleeneClosureToken());
 
@@ -110,8 +110,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("|a");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("|a");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new EpsilonToken());
         expectedResult.add(new OrToken());
         expectedResult.add(new CharacterToken('a'));
@@ -124,8 +124,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("a|");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("a|");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new CharacterToken('a'));
         expectedResult.add(new OrToken());
         expectedResult.add(new EpsilonToken());
@@ -138,8 +138,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("()");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("()");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new OpenParenthesisToken());
         expectedResult.add(new EpsilonToken());
         expectedResult.add(new CloseParenthesisToken());
@@ -152,8 +152,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("(|a)");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("(|a)");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new OpenParenthesisToken());
         expectedResult.add(new EpsilonToken());
         expectedResult.add(new OrToken());
@@ -168,8 +168,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("(*)");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("(*)");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new OpenParenthesisToken());
         expectedResult.add(new EpsilonToken());
         expectedResult.add(new KleeneClosureToken());
@@ -183,8 +183,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("(a|)");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("(a|)");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new OpenParenthesisToken());
         expectedResult.add(new CharacterToken('a'));
         expectedResult.add(new OrToken());
@@ -199,8 +199,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("a||b");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("a||b");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new CharacterToken('a'));
         expectedResult.add(new OrToken());
         expectedResult.add(new EpsilonToken());
@@ -215,8 +215,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("a|*");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("a|*");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new CharacterToken('a'));
         expectedResult.add(new OrToken());
         expectedResult.add(new EpsilonToken());
@@ -230,8 +230,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize(" *");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize(" *");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new CharacterToken(' '));
         expectedResult.add(new KleeneClosureToken());
 
@@ -259,8 +259,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("\\(\\)\\*\\|\\\\");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("\\(\\)\\*\\|\\\\");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new CharacterToken('('));
         expectedResult.add(new CharacterToken(')'));
         expectedResult.add(new CharacterToken('*'));
@@ -275,7 +275,7 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("\\");
+        List<Token> result = tokenizer.tokenize("\\");
     }
 
     @Test
@@ -283,8 +283,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("\\(");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("\\(");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new CharacterToken('('));
 
         assertEquals(expectedResult, result);
@@ -295,8 +295,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("\\)");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("\\)");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new CharacterToken(')'));
 
         assertEquals(expectedResult, result);
@@ -307,8 +307,8 @@ public class TokenizerTest
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<RegularExpressionGrammarToken> result = tokenizer.tokenize("\\a");
-        List<RegularExpressionGrammarToken> expectedResult = new ArrayList<RegularExpressionGrammarToken>();
+        List<Token> result = tokenizer.tokenize("\\a");
+        List<Token> expectedResult = new ArrayList<Token>();
         expectedResult.add(new CharacterToken('a'));
 
         assertEquals(expectedResult, result);
