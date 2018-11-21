@@ -29,7 +29,7 @@ public class Tokenizer
     private int nestingLevel;
     private boolean escaping;
 
-    public List<RegularExpressionGrammarToken> tokenize(String expression) throws RegularExpressionGrammarTokenizerException
+    public List<RegularExpressionGrammarToken> tokenize(String expression) throws TokenizerException
     {
         List<RegularExpressionGrammarToken> tokens = new ArrayList<RegularExpressionGrammarToken>();
 
@@ -54,7 +54,7 @@ public class Tokenizer
         return tokens;
     }
 
-    private void processCharacter(List<RegularExpressionGrammarToken> tokens, char currentCharacter, Character lastCharacter) throws RegularExpressionGrammarTokenizerException
+    private void processCharacter(List<RegularExpressionGrammarToken> tokens, char currentCharacter, Character lastCharacter) throws TokenizerException
     {
         if (this.escaping)
         {

@@ -9,6 +9,6 @@ package larp.grammartokenizer.regularlanguage;
 
 import larp.assertion.AssertException;
 
-public class RegularExpressionGrammarTokenizerException extends AssertException
+public class TokenizerException extends AssertException
 {
 }

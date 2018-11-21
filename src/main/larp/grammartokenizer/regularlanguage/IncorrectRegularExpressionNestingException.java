@@ -7,6 +7,6 @@
 
 package larp.grammartokenizer.regularlanguage;
 
-public class IncorrectRegularExpressionNestingException extends RegularExpressionGrammarTokenizerException
+public class IncorrectRegularExpressionNestingException extends TokenizerException
 {
 }

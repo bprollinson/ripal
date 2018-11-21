@@ -14,12 +14,12 @@ import larp.automaton.DFA;
 import larp.automaton.DFAState;
 import larp.automaton.StateTransition;
 import larp.grammartokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
-import larp.grammartokenizer.regularlanguage.RegularExpressionGrammarTokenizerException;
+import larp.grammartokenizer.regularlanguage.TokenizerException;
 
 public class ParserFactoryTest
 {
     @Test
-    public void testFactoryCreatesDFAForRegularExpression() throws RegularExpressionGrammarTokenizerException
+    public void testFactoryCreatesDFAForRegularExpression() throws TokenizerException
     {
         ParserFactory factory = new ParserFactory();
         DFA dfa = factory.factory("ab*");
@@ -36,7 +36,7 @@ public class ParserFactoryTest
     }
 
     @Test(expected = IncorrectRegularExpressionNestingException.class)
-    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectRegularExpression() throws RegularExpressionGrammarTokenizerException
+    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectRegularExpression() throws TokenizerException
     {
         ParserFactory factory = new ParserFactory();
         DFA dfa = factory.factory(")(");

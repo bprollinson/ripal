@@ -7,6 +7,6 @@
 
 package larp.grammartokenizer.regularlanguage;
 
-public class DanglingRegularExpressionEscapeCharacterException extends RegularExpressionGrammarTokenizerException
+public class DanglingRegularExpressionEscapeCharacterException extends TokenizerException
 {
 }
