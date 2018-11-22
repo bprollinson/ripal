@@ -7,7 +7,7 @@
 
 package larp.parsetree.contextfreelanguage;
 
-public class TerminalNode extends ContextFreeGrammarParseTreeNode
+public class TerminalNode extends Node
 {
     private String value;
 

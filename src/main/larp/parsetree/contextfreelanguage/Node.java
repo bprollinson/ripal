@@ -10,16 +10,16 @@ package larp.parsetree.contextfreelanguage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContextFreeGrammarParseTreeNode
+public class Node
 {
-    protected List<ContextFreeGrammarParseTreeNode> childNodes;
+    protected List<Node> childNodes;
 
-    public ContextFreeGrammarParseTreeNode()
+    public Node()
     {
-        this.childNodes = new ArrayList<ContextFreeGrammarParseTreeNode>();
+        this.childNodes = new ArrayList<Node>();
     }
 
-    public List<ContextFreeGrammarParseTreeNode> getChildNodes()
+    public List<Node> getChildNodes()
     {
         return this.childNodes;
     }
@@ -31,7 +31,7 @@ public class ContextFreeGrammarParseTreeNode
             return false;
         }
 
-        return this.childNodes.equals(((ContextFreeGrammarParseTreeNode)other).getChildNodes());
+        return this.childNodes.equals(((Node)other).getChildNodes());
     }
 
     public int hashCode()

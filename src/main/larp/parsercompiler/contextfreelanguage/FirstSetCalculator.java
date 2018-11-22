@@ -8,8 +8,8 @@
 package larp.parsercompiler.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.Grammar;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 import larp.util.ValueToSetMap;
@@ -22,16 +22,16 @@ public class FirstSetCalculator
 {
     private boolean initialized;
     private Grammar grammar;
-    private ValueToSetMap<ContextFreeGrammarParseTreeNode, Integer> nonTerminalRules;
+    private ValueToSetMap<Node, Integer> nonTerminalRules;
 
     public FirstSetCalculator(Grammar grammar)
     {
         this.initialized = false;
         this.grammar = grammar;
-        this.nonTerminalRules = new ValueToSetMap<ContextFreeGrammarParseTreeNode, Integer>();
+        this.nonTerminalRules = new ValueToSetMap<Node, Integer>();
     }
 
-    public Set<ContextFreeGrammarParseTreeNode> getFirst(int ruleIndex)
+    public Set<Node> getFirst(int ruleIndex)
     {
         this.initialize();
 
@@ -40,11 +40,11 @@ public class FirstSetCalculator
         return this.getFirstRecursive(ruleIndex, rulesUsed);
     }
 
-    public Set<ContextFreeGrammarParseTreeNode> getFirst(NonTerminalNode node)
+    public Set<Node> getFirst(NonTerminalNode node)
     {
         this.initialize();
 
-        Set<ContextFreeGrammarParseTreeNode> results = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> results = new HashSet<Node>();
         Set<Integer> existingSet = this.nonTerminalRules.get(node);
         if (existingSet != null)
         {
@@ -64,21 +64,21 @@ public class FirstSetCalculator
             return;
         }
 
-        List<ContextFreeGrammarParseTreeNode> productions = this.grammar.getProductions();
+        List<Node> productions = this.grammar.getProductions();
         for (int i = 0; i < productions.size(); i++)
         {
-            ContextFreeGrammarParseTreeNode productionNode = productions.get(i);
+            Node productionNode = productions.get(i);
             this.nonTerminalRules.put(productionNode.getChildNodes().get(0), i);
         }
 
         this.initialized = true;
     }
 
-    private Set<ContextFreeGrammarParseTreeNode> getFirstRecursive(int ruleIndex, Set<Integer> rulesUsed)
+    private Set<Node> getFirstRecursive(int ruleIndex, Set<Integer> rulesUsed)
     {
         rulesUsed.add(ruleIndex);
 
-        ContextFreeGrammarParseTreeNode concatenationNode = grammar.getProduction(ruleIndex).getChildNodes().get(1);
+        Node concatenationNode = grammar.getProduction(ruleIndex).getChildNodes().get(1);
         if (concatenationNode.getChildNodes().get(0) instanceof TerminalNode)
         {
             return this.getFirstFromTerminalNode(concatenationNode.getChildNodes().get(0));
@@ -95,18 +95,18 @@ public class FirstSetCalculator
         return null;
     }
 
-    private Set<ContextFreeGrammarParseTreeNode> getFirstFromTerminalNode(ContextFreeGrammarParseTreeNode terminalNode)
+    private Set<Node> getFirstFromTerminalNode(Node terminalNode)
     {
-        Set<ContextFreeGrammarParseTreeNode> results = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> results = new HashSet<Node>();
         String value = ((TerminalNode)terminalNode).getValue();
         results.add(new TerminalNode(value.substring(0, 1)));
 
         return results;
     }
 
-    private Set<ContextFreeGrammarParseTreeNode> getFirstFromNonterminalNode(ContextFreeGrammarParseTreeNode concatenationNode, Set<Integer> rulesUsed)
+    private Set<Node> getFirstFromNonterminalNode(Node concatenationNode, Set<Integer> rulesUsed)
     {
-        Set<ContextFreeGrammarParseTreeNode> results = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> results = new HashSet<Node>();
 
         int index = 0;
         boolean epsilonFound = true;
@@ -128,7 +128,7 @@ public class FirstSetCalculator
                 {
                     if (childRuleIndex != null && !rulesUsed.contains(childRuleIndex))
                     {
-                        Set<ContextFreeGrammarParseTreeNode> childSet = this.getFirstRecursive(childRuleIndex, rulesUsed);
+                        Set<Node> childSet = this.getFirstRecursive(childRuleIndex, rulesUsed);
                         epsilonFound = childSet.contains(new EpsilonNode());
                         childSet.remove(new EpsilonNode());
                         results.addAll(childSet);
@@ -149,9 +149,9 @@ public class FirstSetCalculator
         return results;
     }
 
-    private Set<ContextFreeGrammarParseTreeNode> getFirstFromEpsilon()
+    private Set<Node> getFirstFromEpsilon()
     {
-        Set<ContextFreeGrammarParseTreeNode> results = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> results = new HashSet<Node>();
         results.add(new EpsilonNode());
 
         return results;

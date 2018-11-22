@@ -10,7 +10,7 @@ package larp.parser.contextfreelanguage;
 import larp.ComparableStructure;
 import larp.automaton.State;
 import larp.grammar.contextfreelanguage.Grammar;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.util.PairToValueMap;
 
 import java.util.ArrayList;
@@ -22,14 +22,14 @@ public class LR0ParseTable implements ComparableStructure
     private Grammar grammar;
     private State startState;
     private int size;
-    private PairToValueMap<State, ContextFreeGrammarParseTreeNode, LR0ParseTableAction> cells;
+    private PairToValueMap<State, Node, LR0ParseTableAction> cells;
 
     public LR0ParseTable(Grammar grammar, State startState)
     {
         this.grammar = grammar;
         this.startState = startState;
         this.size = 0;
-        this.cells = new PairToValueMap<State, ContextFreeGrammarParseTreeNode, LR0ParseTableAction>();
+        this.cells = new PairToValueMap<State, Node, LR0ParseTableAction>();
     }
 
     public State getStartState()
@@ -37,7 +37,7 @@ public class LR0ParseTable implements ComparableStructure
         return this.startState;
     }
 
-    public void addCell(State state, ContextFreeGrammarParseTreeNode syntaxNode, LR0ParseTableAction action) throws AmbiguousLR0ParseTableException
+    public void addCell(State state, Node syntaxNode, LR0ParseTableAction action) throws AmbiguousLR0ParseTableException
     {
         new LR0ParseTableCellAvailableAssertion(this, state, syntaxNode, action).validate();
 
@@ -45,7 +45,7 @@ public class LR0ParseTable implements ComparableStructure
         this.cells.put(state, syntaxNode, action);
     }
 
-    public LR0ParseTableAction getCell(State state, ContextFreeGrammarParseTreeNode syntaxNode)
+    public LR0ParseTableAction getCell(State state, Node syntaxNode)
     {
         return this.cells.get(state, syntaxNode);
     }
@@ -60,12 +60,12 @@ public class LR0ParseTable implements ComparableStructure
         return this.size;
     }
 
-    public PairToValueMap<State, ContextFreeGrammarParseTreeNode, LR0ParseTableAction> getCells()
+    public PairToValueMap<State, Node, LR0ParseTableAction> getCells()
     {
         return this.cells;
     }
 
-    public boolean cellsEqual(PairToValueMap<State, ContextFreeGrammarParseTreeNode, LR0ParseTableAction> otherCells)
+    public boolean cellsEqual(PairToValueMap<State, Node, LR0ParseTableAction> otherCells)
     {
         return this.cells.equals(otherCells);
     }
@@ -133,13 +133,13 @@ public class LR0ParseTable implements ComparableStructure
             ourCoveredStates.add(startState);
             otherCoveredStates.add(otherStartState);
 
-            PairToValueMap<State, ContextFreeGrammarParseTreeNode, LR0ParseTableAction> ourCells = table.getCells();
-            Map<State, Map<ContextFreeGrammarParseTreeNode, LR0ParseTableAction>> ourMap = ourCells.getMap();
-            Map<ContextFreeGrammarParseTreeNode, LR0ParseTableAction> ourRow = ourMap.get(startState);
+            PairToValueMap<State, Node, LR0ParseTableAction> ourCells = table.getCells();
+            Map<State, Map<Node, LR0ParseTableAction>> ourMap = ourCells.getMap();
+            Map<Node, LR0ParseTableAction> ourRow = ourMap.get(startState);
 
-            PairToValueMap<State, ContextFreeGrammarParseTreeNode, LR0ParseTableAction> otherCells = otherTable.getCells();
-            Map<State, Map<ContextFreeGrammarParseTreeNode, LR0ParseTableAction>> otherMap = otherCells.getMap();
-            Map<ContextFreeGrammarParseTreeNode, LR0ParseTableAction> otherRow = otherMap.get(otherStartState);
+            PairToValueMap<State, Node, LR0ParseTableAction> otherCells = otherTable.getCells();
+            Map<State, Map<Node, LR0ParseTableAction>> otherMap = otherCells.getMap();
+            Map<Node, LR0ParseTableAction> otherRow = otherMap.get(otherStartState);
 
             if (ourRow == null)
             {
@@ -150,9 +150,9 @@ public class LR0ParseTable implements ComparableStructure
                 return false;
             }
 
-            for (Map.Entry<ContextFreeGrammarParseTreeNode, LR0ParseTableAction> ourCell: ourRow.entrySet())
+            for (Map.Entry<Node, LR0ParseTableAction> ourCell: ourRow.entrySet())
             {
-                ContextFreeGrammarParseTreeNode node = ourCell.getKey();
+                Node node = ourCell.getKey();
                 LR0ParseTableAction ourAction = ourCell.getValue();
                 LR0ParseTableAction otherAction = null;
                 if (otherRow != null)
@@ -173,7 +173,7 @@ public class LR0ParseTable implements ComparableStructure
             return true;
         }
 
-        private boolean rowsHaveSameSize(Map<ContextFreeGrammarParseTreeNode, LR0ParseTableAction> ourRow, Map<ContextFreeGrammarParseTreeNode, LR0ParseTableAction> otherRow)
+        private boolean rowsHaveSameSize(Map<Node, LR0ParseTableAction> ourRow, Map<Node, LR0ParseTableAction> otherRow)
         {
             if (otherRow == null)
             {

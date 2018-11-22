@@ -8,20 +8,20 @@
 package larp.parsercompiler.contextfreelanguage;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.DotNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 
 import java.util.List;
 
 public class ProductionNodeDotRepository
 {
-    public ContextFreeGrammarParseTreeNode findProductionSymbolAfterDot(ContextFreeGrammarParseTreeNode productionNode)
+    public Node findProductionSymbolAfterDot(Node productionNode)
     {
-        List<ContextFreeGrammarParseTreeNode> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
+        List<Node> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
 
         boolean lastNodeWasDot = false;
-        for (ContextFreeGrammarParseTreeNode childNode: childNodes)
+        for (Node childNode: childNodes)
         {
             if (lastNodeWasDot)
             {
@@ -34,15 +34,15 @@ public class ProductionNodeDotRepository
         return null;
     }
 
-    public ProductionNode addDotToProductionRightHandSide(ContextFreeGrammarParseTreeNode productionNode)
+    public ProductionNode addDotToProductionRightHandSide(Node productionNode)
     {
         ProductionNode newProductionNode = new ProductionNode();
         newProductionNode.addChild(productionNode.getChildNodes().get(0));
 
-        List<ContextFreeGrammarParseTreeNode> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
+        List<Node> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
         ConcatenationNode newConcatenationNode = new ConcatenationNode();
         newConcatenationNode.addChild(new DotNode());
-        for (ContextFreeGrammarParseTreeNode childNode: childNodes)
+        for (Node childNode: childNodes)
         {
             newConcatenationNode.addChild(childNode);
         }
@@ -51,15 +51,15 @@ public class ProductionNodeDotRepository
         return newProductionNode;
     }
 
-    public ContextFreeGrammarParseTreeNode shiftDotInProduction(ContextFreeGrammarParseTreeNode productionNode)
+    public Node shiftDotInProduction(Node productionNode)
     {
         ProductionNode newProductionNode = new ProductionNode();
         newProductionNode.addChild(productionNode.getChildNodes().get(0));
 
-        List<ContextFreeGrammarParseTreeNode> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
+        List<Node> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
         ConcatenationNode newConcatenationNode = new ConcatenationNode();
         boolean lastNodeWasDot = false;
-        for (ContextFreeGrammarParseTreeNode childNode: childNodes)
+        for (Node childNode: childNodes)
         {
             boolean currentNodeIsDot = childNode instanceof DotNode;
             if (currentNodeIsDot)

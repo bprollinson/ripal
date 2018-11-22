@@ -8,23 +8,23 @@
 package larp.parser.contextfreelanguage;
 
 import larp.automaton.State;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
+import larp.parsetree.contextfreelanguage.Node;
 
 import java.util.List;
 import java.util.Set;
 
-public class LR0ProductionSetDFAState extends State<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>
+public class LR0ProductionSetDFAState extends State<Node, LR0ProductionSetDFAState>
 {
-    private Set<ContextFreeGrammarParseTreeNode> productionSet;
+    private Set<Node> productionSet;
 
-    public LR0ProductionSetDFAState(String name, boolean accepting, Set<ContextFreeGrammarParseTreeNode> productionSet)
+    public LR0ProductionSetDFAState(String name, boolean accepting, Set<Node> productionSet)
     {
         super(name, accepting);
 
         this.productionSet = productionSet;
     }
 
-    public Set<ContextFreeGrammarParseTreeNode> getProductionSet()
+    public Set<Node> getProductionSet()
     {
         return this.productionSet;
     }

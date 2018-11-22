@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.Grammar;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 import larp.util.PairToValueMap;
@@ -51,7 +51,7 @@ public class LL1ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer> cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer>();
+        PairToValueMap<NonTerminalNode, Node, Integer> cells = new PairToValueMap<NonTerminalNode, Node, Integer>();
         cells.put(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -66,7 +66,7 @@ public class LL1ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer> cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer>();
+        PairToValueMap<NonTerminalNode, Node, Integer> cells = new PairToValueMap<NonTerminalNode, Node, Integer>();
         cells.put(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -165,7 +165,7 @@ public class LL1ParseTableTest
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
 
         LR0ParseTable otherParseTable = new LR0ParseTable(grammar, state);
 

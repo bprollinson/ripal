@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
+import larp.parsetree.contextfreelanguage.Node;
 
 import java.util.HashSet;
 
@@ -39,7 +39,7 @@ public class LR0ReduceActionTest
     public void testEqualsReturnsFalseForActionWithDifferentClass()
     {
         LR0ReduceAction action = new LR0ReduceAction(0);
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
         LR0ShiftAction otherAction = new LR0ShiftAction(state);
 
         assertNotEquals(otherAction, action);

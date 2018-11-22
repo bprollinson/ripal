@@ -11,8 +11,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.Grammar;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
@@ -140,7 +140,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFirsts = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFirsts = new HashSet<Node>();
         expectedFirsts.add(new EpsilonNode());
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -182,7 +182,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFirsts = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFirsts = new HashSet<Node>();
         expectedFirsts.add(new EpsilonNode());
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -196,7 +196,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFirsts = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFirsts = new HashSet<Node>();
         expectedFirsts.add(new TerminalNode("c"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
@@ -211,7 +211,7 @@ public class FirstSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFirsts = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFirsts = new HashSet<Node>();
         expectedFirsts.add(new TerminalNode("c"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }

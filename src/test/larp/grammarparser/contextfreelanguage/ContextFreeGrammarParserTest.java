@@ -11,8 +11,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
@@ -36,7 +36,7 @@ public class ContextFreeGrammarParserTest
         input.add(new NonTerminalToken("S"));
         input.add(new SeparatorToken());
         input.add(new EpsilonToken());
-        ContextFreeGrammarParseTreeNode rootNode = parser.parse(input);
+        Node rootNode = parser.parse(input);
 
         ProductionNode expectedRootNode = new ProductionNode();
         expectedRootNode.addChild(new NonTerminalNode("S"));
@@ -56,7 +56,7 @@ public class ContextFreeGrammarParserTest
         input.add(new NonTerminalToken("S"));
         input.add(new SeparatorToken());
         input.add(new TerminalToken("a"));
-        ContextFreeGrammarParseTreeNode rootNode = parser.parse(input);
+        Node rootNode = parser.parse(input);
 
         ProductionNode expectedRootNode = new ProductionNode();
         expectedRootNode.addChild(new NonTerminalNode("S"));
@@ -76,7 +76,7 @@ public class ContextFreeGrammarParserTest
         input.add(new NonTerminalToken("S"));
         input.add(new SeparatorToken());
         input.add(new NonTerminalToken("S"));
-        ContextFreeGrammarParseTreeNode rootNode = parser.parse(input);
+        Node rootNode = parser.parse(input);
 
         ProductionNode expectedRootNode = new ProductionNode();
         expectedRootNode.addChild(new NonTerminalNode("S"));
@@ -97,7 +97,7 @@ public class ContextFreeGrammarParserTest
         input.add(new SeparatorToken());
         input.add(new NonTerminalToken("S"));
         input.add(new TerminalToken("a"));
-        ContextFreeGrammarParseTreeNode rootNode = parser.parse(input);
+        Node rootNode = parser.parse(input);
 
         ProductionNode expectedRootNode = new ProductionNode();
         expectedRootNode.addChild(new NonTerminalNode("S"));

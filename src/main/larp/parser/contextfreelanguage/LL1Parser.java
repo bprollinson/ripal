@@ -8,9 +8,9 @@
 package larp.parser.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.Grammar;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
@@ -34,7 +34,7 @@ public class LL1Parser implements Parser
     {
         this.appliedRules = new ArrayList<Integer>();
 
-        List<ContextFreeGrammarParseTreeNode> stack = new ArrayList<ContextFreeGrammarParseTreeNode>();
+        List<Node> stack = new ArrayList<Node>();
         NonTerminalNode startSymbol = this.grammar.getStartSymbol();
         if (startSymbol == null)
         {
@@ -58,9 +58,9 @@ public class LL1Parser implements Parser
         return remainingInput.length() == 0 && stack.size() == 0;
     }
 
-    private boolean processInputCharacter(List<ContextFreeGrammarParseTreeNode> stack, StringBuffer remainingInput)
+    private boolean processInputCharacter(List<Node> stack, StringBuffer remainingInput)
     {
-        ContextFreeGrammarParseTreeNode topNode = stack.get(0);
+        Node topNode = stack.get(0);
         String nextCharacter = remainingInput.substring(0, 1);
 
         if (topNode instanceof NonTerminalNode)
@@ -83,7 +83,7 @@ public class LL1Parser implements Parser
         return true;
     }
 
-    private boolean processInputCharacterForNonTerminalNode(List<ContextFreeGrammarParseTreeNode> stack, NonTerminalNode topNode, String nextCharacter)
+    private boolean processInputCharacterForNonTerminalNode(List<Node> stack, NonTerminalNode topNode, String nextCharacter)
     {
         Integer position = this.parseTable.getCell(topNode, new TerminalNode(nextCharacter));
 
@@ -96,7 +96,7 @@ public class LL1Parser implements Parser
 
         this.appliedRules.add(position);
 
-        List<ContextFreeGrammarParseTreeNode> childNodes = this.grammar.getProduction(position).getChildNodes().get(1).getChildNodes();
+        List<Node> childNodes = this.grammar.getProduction(position).getChildNodes().get(1).getChildNodes();
         for (int i = childNodes.size() - 1; i >= 0; i--)
         {
             stack.add(0, childNodes.get(i));
@@ -105,7 +105,7 @@ public class LL1Parser implements Parser
         return true;
     }
 
-    private boolean processInputCharacterForTerminalNode(List<ContextFreeGrammarParseTreeNode> stack, TerminalNode topNode, String nextCharacter, StringBuffer remainingInput)
+    private boolean processInputCharacterForTerminalNode(List<Node> stack, TerminalNode topNode, String nextCharacter, StringBuffer remainingInput)
     {
         if (!topNode.getValue().substring(0, 1).equals(nextCharacter))
         {
@@ -125,11 +125,11 @@ public class LL1Parser implements Parser
         return true;
     }
 
-    private void processNonTerminalsAtEndOfString(List<ContextFreeGrammarParseTreeNode> stack, StringBuffer remainingInput)
+    private void processNonTerminalsAtEndOfString(List<Node> stack, StringBuffer remainingInput)
     {
         while (remainingInput.length() == 0 && stack.size() > 0)
         {
-            ContextFreeGrammarParseTreeNode topNode = stack.get(0);
+            Node topNode = stack.get(0);
             if (!(topNode instanceof NonTerminalNode))
             {
                 break;
@@ -144,7 +144,7 @@ public class LL1Parser implements Parser
             this.appliedRules.add(position);
 
             stack.remove(0);
-            List<ContextFreeGrammarParseTreeNode> childNodes = this.grammar.getProduction(position).getChildNodes().get(1).getChildNodes();
+            List<Node> childNodes = this.grammar.getProduction(position).getChildNodes().get(1).getChildNodes();
             for (int i = childNodes.size() - 1; i >= 0; i--)
             {
                 if (!(childNodes.get(i) instanceof EpsilonNode))

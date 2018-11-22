@@ -11,9 +11,9 @@ import larp.automaton.StateTransition;
 import larp.grammar.contextfreelanguage.Grammar;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.util.ValueToSetMap;
 
 import java.util.HashMap;
@@ -26,7 +26,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
     private ContextFreeGrammarAugmentor grammarAugmentor;
     private ContextFreeGrammarClosureCalculator closureCalculator;
     private ProductionNodeDotRepository productionNodeDotRepository;
-    private Map<Set<ContextFreeGrammarParseTreeNode>, LR0ProductionSetDFAState> productionSetToStateMap;
+    private Map<Set<Node>, LR0ProductionSetDFAState> productionSetToStateMap;
 
     public ContextFreeGrammarLR0ProductionSetDFACompiler()
     {
@@ -37,11 +37,11 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
 
     public LR0ProductionSetDFA compile(Grammar grammar)
     {
-        this.productionSetToStateMap = new HashMap<Set<ContextFreeGrammarParseTreeNode>, LR0ProductionSetDFAState>();
+        this.productionSetToStateMap = new HashMap<Set<Node>, LR0ProductionSetDFAState>();
         Grammar augmentedGrammar = this.grammarAugmentor.augment(grammar);
 
-        Set<ContextFreeGrammarParseTreeNode> productionSet = new HashSet<ContextFreeGrammarParseTreeNode>();
-        ContextFreeGrammarParseTreeNode firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(augmentedGrammar.getProduction(0));
+        Set<Node> productionSet = new HashSet<Node>();
+        Node firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(augmentedGrammar.getProduction(0));
         productionSet.add(firstProductionWithDot);
 
         LR0ProductionSetDFAState startState = this.compileState(augmentedGrammar, productionSet, false);
@@ -49,7 +49,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         return new LR0ProductionSetDFA(startState, augmentedGrammar);
     }
 
-    private LR0ProductionSetDFAState compileState(Grammar augmentedGrammar, Set<ContextFreeGrammarParseTreeNode> productionSet, boolean accepting)
+    private LR0ProductionSetDFAState compileState(Grammar augmentedGrammar, Set<Node> productionSet, boolean accepting)
     {
         productionSet = this.closureCalculator.calculate(augmentedGrammar, productionSet);
         LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", accepting, productionSet);
@@ -68,27 +68,27 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
 
     private void compileAndAttachAdjacentStates(Grammar augmentedGrammar, LR0ProductionSetDFAState state)
     {
-        ValueToSetMap<ContextFreeGrammarParseTreeNode, ContextFreeGrammarParseTreeNode> symbolToNextClosureMap = new ValueToSetMap<ContextFreeGrammarParseTreeNode, ContextFreeGrammarParseTreeNode>();
+        ValueToSetMap<Node, Node> symbolToNextClosureMap = new ValueToSetMap<Node, Node>();
 
-        Set<ContextFreeGrammarParseTreeNode> productionSet = state.getProductionSet();
-        for (ContextFreeGrammarParseTreeNode productionNode: productionSet)
+        Set<Node> productionSet = state.getProductionSet();
+        for (Node productionNode: productionSet)
         {
-            ContextFreeGrammarParseTreeNode nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode);
+            Node nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode);
             if (nextSymbol != null && !(nextSymbol instanceof EpsilonNode))
             {
-                ContextFreeGrammarParseTreeNode productionWithDotShifted = this.productionNodeDotRepository.shiftDotInProduction(productionNode);
+                Node productionWithDotShifted = this.productionNodeDotRepository.shiftDotInProduction(productionNode);
                 symbolToNextClosureMap.put(nextSymbol, productionWithDotShifted);
             }
         }
 
-        for (Map.Entry<ContextFreeGrammarParseTreeNode, Set<ContextFreeGrammarParseTreeNode>> mapEntry: symbolToNextClosureMap.entrySet())
+        for (Map.Entry<Node, Set<Node>> mapEntry: symbolToNextClosureMap.entrySet())
         {
-            ContextFreeGrammarParseTreeNode input = mapEntry.getKey();
-            Set<ContextFreeGrammarParseTreeNode> nextStateProductionSet = mapEntry.getValue();
+            Node input = mapEntry.getKey();
+            Set<Node> nextStateProductionSet = mapEntry.getValue();
 
             boolean nextStateAccepting = input instanceof EndOfStringNode;
             LR0ProductionSetDFAState nextState = this.compileState(augmentedGrammar, nextStateProductionSet, nextStateAccepting);
-            state.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(input, nextState));
+            state.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(input, nextState));
         }
     }
 }

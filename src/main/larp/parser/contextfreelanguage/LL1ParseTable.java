@@ -8,29 +8,29 @@
 package larp.parser.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.Grammar;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.util.PairToValueMap;
 
 public class LL1ParseTable
 {
     private Grammar grammar;
-    private PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer> cells;
+    private PairToValueMap<NonTerminalNode, Node, Integer> cells;
 
     public LL1ParseTable(Grammar grammar)
     {
         this.grammar = grammar;
-        this.cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer>();
+        this.cells = new PairToValueMap<NonTerminalNode, Node, Integer>();
     }
 
-    public void addCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarParseTreeNode syntaxNode, int ruleIndex) throws AmbiguousLL1ParseTableException
+    public void addCell(NonTerminalNode nonTerminalNode, Node syntaxNode, int ruleIndex) throws AmbiguousLL1ParseTableException
     {
         new LL1ParseTableCellAvailableAssertion(this, nonTerminalNode, syntaxNode).validate();
 
         this.cells.put(nonTerminalNode, syntaxNode, ruleIndex);
     }
 
-    public Integer getCell(NonTerminalNode nonTerminalNode, ContextFreeGrammarParseTreeNode syntaxNode)
+    public Integer getCell(NonTerminalNode nonTerminalNode, Node syntaxNode)
     {
         return this.cells.get(nonTerminalNode, syntaxNode);
     }
@@ -40,7 +40,7 @@ public class LL1ParseTable
         return this.grammar;
     }
 
-    public boolean cellsEqual(PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer> otherCells)
+    public boolean cellsEqual(PairToValueMap<NonTerminalNode, Node, Integer> otherCells)
     {
         return this.cells.equals(otherCells);
     }

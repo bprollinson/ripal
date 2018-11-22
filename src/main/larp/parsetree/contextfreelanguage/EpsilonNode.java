@@ -7,6 +7,6 @@
 
 package larp.parsetree.contextfreelanguage;
 
-public class EpsilonNode extends ContextFreeGrammarParseTreeNode
+public class EpsilonNode extends Node
 {
 }

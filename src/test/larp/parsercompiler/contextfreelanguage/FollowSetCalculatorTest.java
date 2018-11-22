@@ -11,9 +11,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.Grammar;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
@@ -28,7 +28,7 @@ public class FollowSetCalculatorTest
         Grammar grammar = new Grammar();
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("S")));
     }
 
@@ -39,7 +39,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
 
@@ -50,7 +50,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
 
@@ -61,7 +61,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new EndOfStringNode());
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("S")));
     }
@@ -74,7 +74,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new EndOfStringNode());
         expectedFollows.add(new TerminalNode("b"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("S")));
@@ -88,7 +88,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new TerminalNode("b"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
@@ -101,7 +101,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new EndOfStringNode());
         expectedFollows.add(new TerminalNode("a"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("S")));
@@ -116,7 +116,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new TerminalNode("b"));
         expectedFollows.add(new TerminalNode("c"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
@@ -131,7 +131,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new EndOfStringNode());
         expectedFollows.add(new TerminalNode("b"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("S")));
@@ -146,7 +146,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new TerminalNode("b"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
@@ -161,7 +161,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("d"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new TerminalNode("d"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
@@ -174,7 +174,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new EndOfStringNode());
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
@@ -188,7 +188,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new TerminalNode("b"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("C")));
     }
@@ -202,7 +202,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new TerminalNode("a"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("C")));
     }
@@ -217,7 +217,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new TerminalNode("a"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("D")));
     }
@@ -231,7 +231,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new EndOfStringNode());
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
@@ -246,7 +246,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new TerminalNode("b"));
         expectedFollows.add(new EndOfStringNode());
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
@@ -261,7 +261,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new TerminalNode("c"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
@@ -276,7 +276,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         expectedFollows.add(new TerminalNode("c"));
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
@@ -289,7 +289,7 @@ public class FollowSetCalculatorTest
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
-        Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> expectedFollows = new HashSet<Node>();
         assertEquals(expectedFollows, calculator.getFollow(new NonTerminalNode("A")));
     }
 }

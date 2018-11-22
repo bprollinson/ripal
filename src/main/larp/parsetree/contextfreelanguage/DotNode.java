@@ -7,6 +7,6 @@
 
 package larp.parsetree.contextfreelanguage;
 
-public class DotNode extends ContextFreeGrammarParseTreeNode
+public class DotNode extends Node
 {
 }

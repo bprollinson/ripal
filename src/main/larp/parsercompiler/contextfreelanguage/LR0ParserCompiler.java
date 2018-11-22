@@ -18,9 +18,9 @@ import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
@@ -56,15 +56,15 @@ public class LR0ParserCompiler
         return parseTable;
     }
 
-    private Set<ContextFreeGrammarParseTreeNode> calculateTerminalNodeList(Grammar grammar)
+    private Set<Node> calculateTerminalNodeList(Grammar grammar)
     {
-        Set<ContextFreeGrammarParseTreeNode> terminalNodes = new HashSet<ContextFreeGrammarParseTreeNode>();
+        Set<Node> terminalNodes = new HashSet<Node>();
 
-        List<ContextFreeGrammarParseTreeNode> productions = grammar.getProductions();
-        for (ContextFreeGrammarParseTreeNode production: productions)
+        List<Node> productions = grammar.getProductions();
+        for (Node production: productions)
         {
-            ContextFreeGrammarParseTreeNode concatenationNode = production.getChildNodes().get(1);
-            for (ContextFreeGrammarParseTreeNode childNode: concatenationNode.getChildNodes())
+            Node concatenationNode = production.getChildNodes().get(1);
+            for (Node childNode: concatenationNode.getChildNodes())
             {
                 if (childNode instanceof TerminalNode || childNode instanceof EndOfStringNode)
                 {
@@ -76,7 +76,7 @@ public class LR0ParserCompiler
         return terminalNodes;
     }
 
-    private void processState(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<ContextFreeGrammarParseTreeNode> terminalNodes, List<LR0ProductionSetDFAState> coveredStates) throws AmbiguousLR0ParseTableException
+    private void processState(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<Node> terminalNodes, List<LR0ProductionSetDFAState> coveredStates) throws AmbiguousLR0ParseTableException
     {
         coveredStates.add(state);
 
@@ -85,10 +85,10 @@ public class LR0ParserCompiler
             this.processReduceActions(parseTable, state, terminalNodes);
         }
 
-        List<StateTransition<ContextFreeGrammarParseTreeNode,LR0ProductionSetDFAState>> stateTransitions = state.getTransitions();
-        for (StateTransition<ContextFreeGrammarParseTreeNode,LR0ProductionSetDFAState> stateTransition: stateTransitions)
+        List<StateTransition<Node,LR0ProductionSetDFAState>> stateTransitions = state.getTransitions();
+        for (StateTransition<Node,LR0ProductionSetDFAState> stateTransition: stateTransitions)
         {
-            ContextFreeGrammarParseTreeNode input = stateTransition.getInput();
+            Node input = stateTransition.getInput();
             LR0ProductionSetDFAState nextState = stateTransition.getNextState();
 
             if (input instanceof TerminalNode)
@@ -111,14 +111,14 @@ public class LR0ParserCompiler
         }
     }
 
-    private void processReduceActions(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<ContextFreeGrammarParseTreeNode> terminalNodes) throws AmbiguousLR0ParseTableException
+    private void processReduceActions(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<Node> terminalNodes) throws AmbiguousLR0ParseTableException
     {
-        Set<ContextFreeGrammarParseTreeNode> productions = state.getProductionSet();
+        Set<Node> productions = state.getProductionSet();
 
-        for (ContextFreeGrammarParseTreeNode production: productions)
+        for (Node production: productions)
         {
-            ContextFreeGrammarParseTreeNode concatenationNode = production.getChildNodes().get(1);
-            List<ContextFreeGrammarParseTreeNode> childNodes = concatenationNode.getChildNodes();
+            Node concatenationNode = production.getChildNodes().get(1);
+            List<Node> childNodes = concatenationNode.getChildNodes();
             int numChildNodes = childNodes.size();
 
             if (childNodes.get(numChildNodes - 1) instanceof DotNode)
@@ -127,7 +127,7 @@ public class LR0ParserCompiler
 
                 for (int productionPosition: productionPositions)
                 {
-                    for (ContextFreeGrammarParseTreeNode terminalNode: terminalNodes)
+                    for (Node terminalNode: terminalNodes)
                     {
                         parseTable.addCell(state, terminalNode, new LR0ReduceAction(productionPosition));
                     }
@@ -136,14 +136,14 @@ public class LR0ParserCompiler
         }
     }
 
-    private List<Integer> findProductionPositions(ContextFreeGrammarParseTreeNode needle, List<ContextFreeGrammarParseTreeNode> haystack)
+    private List<Integer> findProductionPositions(Node needle, List<Node> haystack)
     {
-        ContextFreeGrammarParseTreeNode originalNeedle = this.removeDotFromProduction(needle);
+        Node originalNeedle = this.removeDotFromProduction(needle);
 
         List<Integer> productionPositions = new ArrayList<Integer>();
         for (int i = 0; i < haystack.size(); i++)
         {
-            ContextFreeGrammarParseTreeNode haystackProduction = haystack.get(i);
+            Node haystackProduction = haystack.get(i);
             if (haystackProduction.equals(originalNeedle))
             {
                 productionPositions.add(i);
@@ -153,13 +153,13 @@ public class LR0ParserCompiler
         return productionPositions;
     }
 
-    private ContextFreeGrammarParseTreeNode removeDotFromProduction(ContextFreeGrammarParseTreeNode production)
+    private Node removeDotFromProduction(Node production)
     {
         ProductionNode newProduction = new ProductionNode();
         newProduction.addChild(production.getChildNodes().get(0));
 
         ConcatenationNode newConcatenationNode = new ConcatenationNode();
-        ContextFreeGrammarParseTreeNode concatenationNode = production.getChildNodes().get(1);
+        Node concatenationNode = production.getChildNodes().get(1);
         for (int i = 0; i < concatenationNode.getChildNodes().size() - 1; i++)
         {
             newConcatenationNode.addChild(concatenationNode.getChildNodes().get(i));

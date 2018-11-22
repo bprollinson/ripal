@@ -9,9 +9,9 @@ package larp.parsercompiler.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 import larp.util.ValueToSetMap;
@@ -24,18 +24,18 @@ public class FollowSetCalculator
 {
     private boolean initialized;
     private Grammar grammar;
-    private ValueToSetMap<ContextFreeGrammarParseTreeNode, ContextFreeGrammarParseTreeNode> follows;
+    private ValueToSetMap<Node, Node> follows;
     private FirstSetCalculator firstSetCalculator;
 
     public FollowSetCalculator(Grammar grammar)
     {
         this.initialized = false;
         this.grammar = grammar;
-        this.follows = new ValueToSetMap<ContextFreeGrammarParseTreeNode, ContextFreeGrammarParseTreeNode>();
+        this.follows = new ValueToSetMap<Node, Node>();
         this.firstSetCalculator = new FirstSetCalculator(this.grammar);
     }
 
-    public Set<ContextFreeGrammarParseTreeNode> getFollow(NonTerminalNode nonTerminal)
+    public Set<Node> getFollow(NonTerminalNode nonTerminal)
     {
         this.initialize();
 
@@ -64,11 +64,11 @@ public class FollowSetCalculator
     private void addFollowNodes()
     {
         Set<NonTerminalNode> nullableNonTerminals = new HashSet<NonTerminalNode>();
-        List<ContextFreeGrammarParseTreeNode> productions = this.grammar.getProductions();
+        List<Node> productions = this.grammar.getProductions();
         for (int i = 0; i < productions.size(); i++)
         {
-            ContextFreeGrammarParseTreeNode production = productions.get(i);
-            ContextFreeGrammarParseTreeNode rightHandSide = production.getChildNodes().get(1);
+            Node production = productions.get(i);
+            Node rightHandSide = production.getChildNodes().get(1);
             if (rightHandSide.getChildNodes().size() == 1 && rightHandSide.getChildNodes().get(0) instanceof EpsilonNode)
             {
                 nullableNonTerminals.add((NonTerminalNode)production.getChildNodes().get(0));
@@ -77,31 +77,31 @@ public class FollowSetCalculator
 
         for (int i = 0; i < productions.size(); i++)
         {
-            ContextFreeGrammarParseTreeNode production = productions.get(i);
+            Node production = productions.get(i);
             this.addFollowNodesForProduction(production);
         }
     }
 
-    private void addFollowNodesForProduction(ContextFreeGrammarParseTreeNode production)
+    private void addFollowNodesForProduction(Node production)
     {
-        ContextFreeGrammarParseTreeNode rightHandSide = production.getChildNodes().get(1);
+        Node rightHandSide = production.getChildNodes().get(1);
 
         for (int i = 0; i < rightHandSide.getChildNodes().size() - 1; i++)
         {
-            ContextFreeGrammarParseTreeNode previousNode = rightHandSide.getChildNodes().get(i);
+            Node previousNode = rightHandSide.getChildNodes().get(i);
 
             boolean done = false;
             int j = i + 1;
             while (j < rightHandSide.getChildNodes().size() && !done)
             {
-                ContextFreeGrammarParseTreeNode node = rightHandSide.getChildNodes().get(j);
+                Node node = rightHandSide.getChildNodes().get(j);
                 done = this.addFollowNodesForProductionNode(previousNode, node);
                 j++;
             }
         }
     }
 
-    private boolean addFollowNodesForProductionNode(ContextFreeGrammarParseTreeNode previousNode, ContextFreeGrammarParseTreeNode node)
+    private boolean addFollowNodesForProductionNode(Node previousNode, Node node)
     {
         boolean done = true;
 
@@ -111,13 +111,13 @@ public class FollowSetCalculator
         }
         if (previousNode instanceof NonTerminalNode && node instanceof NonTerminalNode)
         {
-            Set<ContextFreeGrammarParseTreeNode> firstNodes = this.firstSetCalculator.getFirst((NonTerminalNode)node);
+            Set<Node> firstNodes = this.firstSetCalculator.getFirst((NonTerminalNode)node);
             if (firstNodes.contains(new EpsilonNode()))
             {
                 done = false;
                 firstNodes.remove(new EpsilonNode());
             }
-            for (ContextFreeGrammarParseTreeNode firstNode: firstNodes)
+            for (Node firstNode: firstNodes)
             {
                 this.follows.put(previousNode, firstNode);
             }
@@ -128,7 +128,7 @@ public class FollowSetCalculator
 
     private void propagateFollowNodes()
     {
-        List<ContextFreeGrammarParseTreeNode> productions = this.grammar.getProductions();
+        List<Node> productions = this.grammar.getProductions();
         boolean done = false;
 
         while (!done)
@@ -137,22 +137,22 @@ public class FollowSetCalculator
 
             for (int i = 0; i < productions.size(); i++)
             {
-                ContextFreeGrammarParseTreeNode production = productions.get(i);
+                Node production = productions.get(i);
                 done = done & this.propagateFollowNodesForProduction(production);
             }
         }
     }
 
-    private boolean propagateFollowNodesForProduction(ContextFreeGrammarParseTreeNode production)
+    private boolean propagateFollowNodesForProduction(Node production)
     {
         boolean done = true;
 
         NonTerminalNode leftHandSide = (NonTerminalNode)production.getChildNodes().get(0);
-        Set<ContextFreeGrammarParseTreeNode> leftHandFollow = this.follows.get(leftHandSide);
+        Set<Node> leftHandFollow = this.follows.get(leftHandSide);
 
         if (leftHandFollow != null)
         {
-            ContextFreeGrammarParseTreeNode rightHandSide = production.getChildNodes().get(1);
+            Node rightHandSide = production.getChildNodes().get(1);
 
             boolean innerDone = false;
             int i = rightHandSide.getChildNodes().size() - 1;
@@ -161,13 +161,13 @@ public class FollowSetCalculator
             {
                 innerDone = true;
 
-                ContextFreeGrammarParseTreeNode lastNode = rightHandSide.getChildNodes().get(i);
+                Node lastNode = rightHandSide.getChildNodes().get(i);
                 if (lastNode instanceof NonTerminalNode)
                 {
                     boolean followAdded = this.propagateAllParentFollows(lastNode, leftHandFollow);
                     done = done && !followAdded;
 
-                    Set<ContextFreeGrammarParseTreeNode> firsts = this.firstSetCalculator.getFirst((NonTerminalNode)lastNode);
+                    Set<Node> firsts = this.firstSetCalculator.getFirst((NonTerminalNode)lastNode);
                     innerDone = innerDone && !firsts.contains(new EpsilonNode());
                 }
 
@@ -178,11 +178,11 @@ public class FollowSetCalculator
         return done;
     }
 
-    private boolean propagateAllParentFollows(ContextFreeGrammarParseTreeNode lastNode, Set<ContextFreeGrammarParseTreeNode> leftHandFollow)
+    private boolean propagateAllParentFollows(Node lastNode, Set<Node> leftHandFollow)
     {
         boolean followAdded = false;
 
-        for (ContextFreeGrammarParseTreeNode parentFollow : leftHandFollow)
+        for (Node parentFollow : leftHandFollow)
         {
             followAdded = followAdded | this.addParentFollow(lastNode, parentFollow);
         }
@@ -190,10 +190,10 @@ public class FollowSetCalculator
         return followAdded;
     }
 
-    private boolean addParentFollow(ContextFreeGrammarParseTreeNode lastNode, ContextFreeGrammarParseTreeNode parentFollow)
+    private boolean addParentFollow(Node lastNode, Node parentFollow)
     {
         int sizeBefore = 0;
-        Set<ContextFreeGrammarParseTreeNode> currentFollows = this.follows.get(lastNode);
+        Set<Node> currentFollows = this.follows.get(lastNode);
         if (currentFollows != null)
         {
              sizeBefore = currentFollows.size();

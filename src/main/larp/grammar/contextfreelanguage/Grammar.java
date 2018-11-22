@@ -8,7 +8,7 @@
 package larp.grammar.contextfreelanguage;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 
@@ -17,25 +17,25 @@ import java.util.List;
 
 public class Grammar
 {
-    private List<ContextFreeGrammarParseTreeNode> productions;
+    private List<Node> productions;
 
     public Grammar()
     {
-        this.productions = new ArrayList<ContextFreeGrammarParseTreeNode>();
+        this.productions = new ArrayList<Node>();
     }
 
-    public void addProduction(ContextFreeGrammarParseTreeNode productionNode)
+    public void addProduction(Node productionNode)
     {
         this.productions.add(productionNode);
     }
 
-    public void addProduction(NonTerminalNode nonTerminalNode, ContextFreeGrammarParseTreeNode... rightHandNodes)
+    public void addProduction(NonTerminalNode nonTerminalNode, Node... rightHandNodes)
     {
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(nonTerminalNode);
 
         ConcatenationNode concatenationNode = new ConcatenationNode();
-        for (ContextFreeGrammarParseTreeNode rightHandNode: rightHandNodes)
+        for (Node rightHandNode: rightHandNodes)
         {
             concatenationNode.addChild(rightHandNode);
         }
@@ -44,12 +44,12 @@ public class Grammar
         this.addProduction(productionNode);
     }
 
-    public ContextFreeGrammarParseTreeNode getProduction(int index)
+    public Node getProduction(int index)
     {
         return this.productions.get(index);
     }
 
-    public List<ContextFreeGrammarParseTreeNode> getProductions()
+    public List<Node> getProductions()
     {
         return this.productions;
     }

@@ -7,7 +7,7 @@
 
 package larp.parsetree.contextfreelanguage;
 
-public class NonTerminalNode extends ContextFreeGrammarParseTreeNode
+public class NonTerminalNode extends Node
 {
     private String name;
 

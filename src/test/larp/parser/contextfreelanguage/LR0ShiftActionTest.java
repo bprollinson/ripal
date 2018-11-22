@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
-import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
+import larp.parsetree.contextfreelanguage.Node;
 
 import java.util.HashSet;
 
@@ -20,7 +20,7 @@ public class LR0ShiftActionTest
     @Test
     public void testEqualsReturnsTrueForShiftActionWithSameState()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
         LR0ShiftAction action = new LR0ShiftAction(state);
         LR0ShiftAction otherAction = new LR0ShiftAction(state);
 
@@ -30,9 +30,9 @@ public class LR0ShiftActionTest
     @Test
     public void testEqualsReturnsFalseForShiftActionWithDifferentState()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
         LR0ShiftAction action = new LR0ShiftAction(state);
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
         LR0ShiftAction otherAction = new LR0ShiftAction(otherState);
 
         assertNotEquals(otherAction, action);
@@ -41,7 +41,7 @@ public class LR0ShiftActionTest
     @Test
     public void testEqualsReturnsFalseForActionWithDifferentClass()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
         LR0ShiftAction action = new LR0ShiftAction(state);
         LR0ReduceAction otherAction = new LR0ReduceAction(0);
 
