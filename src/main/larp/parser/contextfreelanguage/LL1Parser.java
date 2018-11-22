@@ -7,7 +7,7 @@
 
 package larp.parser.contextfreelanguage;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
@@ -20,7 +20,7 @@ import java.util.List;
 public class LL1Parser implements Parser
 {
     private LL1ParseTable parseTable;
-    private ContextFreeGrammar grammar;
+    private Grammar grammar;
     private List<Integer> appliedRules;
 
     public LL1Parser(LL1ParseTable parseTable)

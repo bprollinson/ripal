@@ -13,7 +13,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
@@ -29,7 +29,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsTrueForCorrectCharacterInSingleCharacterCFG() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -42,7 +42,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsFalseForIncorrectCharacterInSingleCharacterCFG() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -55,7 +55,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsTrueForMultiCharacterCFGUnsingMultiCharacterTerminalNode() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -68,7 +68,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsTrueForMultiCharacterCFGUsingMultipleTerminalNodes() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -81,7 +81,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsFalseForCharacterMismatchInMultiCharacterCFGUsingMultiCharacterTerminalNode() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -94,7 +94,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsFalseForUnmatchedInputCharacter() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -107,7 +107,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsFalseForUnmatchedCFGCharacter() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -120,7 +120,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsTrueForTerminalAndNonterminalProductionChainDependingOnCollectionPrefixing() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("C"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("ab"));
         grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
@@ -138,7 +138,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsTrueWhenEndOfStringNodeMatchesNonTerminal() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
@@ -155,7 +155,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsFalseWhenEndOfStringNonTerminalExistsWithoutEndOfStringInInput() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
@@ -172,7 +172,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsTrueForEmptyStringMatchingSequenceOfEndOfStringProductions() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
@@ -189,7 +189,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsFalseForNonEmptyStringWithOnlyEndOfStringProduction() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
@@ -206,7 +206,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsFalseForEmptyStringWhenCFGIsEmpty()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         LL1Parser parser = new LL1Parser(parseTable);
@@ -217,7 +217,7 @@ public class LL1ParserTest
     @Test
     public void testAcceptsReturnsFalseForNonEmptyStringWhenCFGIsEmpty()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         LL1Parser parser = new LL1Parser(parseTable);
@@ -228,7 +228,7 @@ public class LL1ParserTest
     @Test
     public void testGetAppliedRulesReturnsEmptyListBeforeParseIsRun() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
@@ -245,7 +245,7 @@ public class LL1ParserTest
     @Test
     public void testGetAppliedRulesReturnsRuleIndexesOnSuccessfulParse() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
@@ -265,7 +265,7 @@ public class LL1ParserTest
     @Test
     public void testGetAppliedRulesReturnsRuleIndexesUntilTableLookupFailure() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
@@ -285,7 +285,7 @@ public class LL1ParserTest
     @Test
     public void testGetAppliedRulesReturnsRuleIndexesUntilEndStateFailure() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
@@ -307,7 +307,7 @@ public class LL1ParserTest
     @Test
     public void testGetAppliedRulesReturnsRuleIndexesForSequenceOfEndOfStringProductions() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
@@ -330,7 +330,7 @@ public class LL1ParserTest
     @Test
     public void testParseTableEqualsReturnsTrue() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -348,7 +348,7 @@ public class LL1ParserTest
     @Test
     public void testParseTableEqualsReturnsFalse() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -364,7 +364,7 @@ public class LL1ParserTest
     @Test
     public void testEqualsReturnsTrueWhenParseTablesEqual() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -372,7 +372,7 @@ public class LL1ParserTest
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
         LL1Parser parser = new LL1Parser(parseTable);
 
-        ContextFreeGrammar otherGrammar = new ContextFreeGrammar();
+        Grammar otherGrammar = new Grammar();
         otherGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable otherParseTable = new LL1ParseTable(otherGrammar);
@@ -386,14 +386,14 @@ public class LL1ParserTest
     @Test
     public void testEqualsReturnsFalseWhenParseTablesNotEqual() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         LL1Parser parser = new LL1Parser(parseTable);
 
-        ContextFreeGrammar otherGrammar = new ContextFreeGrammar();
+        Grammar otherGrammar = new Grammar();
         otherGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable otherParseTable = new LL1ParseTable(otherGrammar);
@@ -406,7 +406,7 @@ public class LL1ParserTest
     @Test
     public void testEqualsReturnsFalseForParserWithDifferentClass()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         LL1Parser parser = new LL1Parser(parseTable);

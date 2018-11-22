@@ -10,7 +10,7 @@ package larp.parsercompiler.contextfreelanguage;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
@@ -22,11 +22,11 @@ public class ContextFreeGrammarAugmentorTest
     {
         ContextFreeGrammarAugmentor augmentor = new ContextFreeGrammarAugmentor();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
-        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        Grammar expectedGrammar = new Grammar();
         expectedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         expectedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         expectedGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
@@ -38,10 +38,10 @@ public class ContextFreeGrammarAugmentorTest
     {
         ContextFreeGrammarAugmentor augmentor = new ContextFreeGrammarAugmentor();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("Q"), new NonTerminalNode("R"));
 
-        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        Grammar expectedGrammar = new Grammar();
         expectedGrammar.addProduction(new NonTerminalNode("Q'"), new NonTerminalNode("Q"), new EndOfStringNode());
         expectedGrammar.addProduction(new NonTerminalNode("Q"), new NonTerminalNode("R"));
         assertEquals(expectedGrammar, augmentor.augment(grammar));
@@ -52,12 +52,12 @@ public class ContextFreeGrammarAugmentorTest
     {
         ContextFreeGrammarAugmentor augmentor = new ContextFreeGrammarAugmentor();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S'"));
         grammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S''"));
         grammar.addProduction(new NonTerminalNode("S''"), new NonTerminalNode("S'''"));
 
-        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        Grammar expectedGrammar = new Grammar();
         expectedGrammar.addProduction(new NonTerminalNode("S''''"), new NonTerminalNode("S"), new EndOfStringNode());
         expectedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S'"));
         expectedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S''"));
@@ -70,11 +70,11 @@ public class ContextFreeGrammarAugmentorTest
     {
         ContextFreeGrammarAugmentor augmentor = new ContextFreeGrammarAugmentor();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("abc"));
 
-        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        Grammar expectedGrammar = new Grammar();
         expectedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         expectedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         expectedGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"), new TerminalNode("b"), new TerminalNode("c"));

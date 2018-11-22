@@ -8,7 +8,7 @@
 package larp.parsercompiler.contextfreelanguage;
 
 import larp.automaton.StateTransition;
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
 import larp.parser.contextfreelanguage.LR0AcceptAction;
 import larp.parser.contextfreelanguage.LR0GotoAction;
@@ -39,7 +39,7 @@ public class LR0ParserCompiler
         this.DFACompiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
     }
 
-    public LR0ParseTable compile(ContextFreeGrammar grammar) throws AmbiguousLR0ParseTableException
+    public LR0ParseTable compile(Grammar grammar) throws AmbiguousLR0ParseTableException
     {
         if (grammar.getStartSymbol() == null)
         {
@@ -47,7 +47,7 @@ public class LR0ParserCompiler
         }
 
         LR0ProductionSetDFA DFA = this.DFACompiler.compile(grammar);
-        ContextFreeGrammar augmentedGrammar = DFA.getGrammar();
+        Grammar augmentedGrammar = DFA.getGrammar();
         LR0ProductionSetDFAState startState = DFA.getStartState();
         LR0ParseTable parseTable = new LR0ParseTable(augmentedGrammar, startState);
 
@@ -56,7 +56,7 @@ public class LR0ParserCompiler
         return parseTable;
     }
 
-    private Set<ContextFreeGrammarParseTreeNode> calculateTerminalNodeList(ContextFreeGrammar grammar)
+    private Set<ContextFreeGrammarParseTreeNode> calculateTerminalNodeList(Grammar grammar)
     {
         Set<ContextFreeGrammarParseTreeNode> terminalNodes = new HashSet<ContextFreeGrammarParseTreeNode>();
 

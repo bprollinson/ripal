@@ -7,7 +7,7 @@
 
 package larp.parsercompiler.contextfreelanguage;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
@@ -23,11 +23,11 @@ import java.util.Set;
 public class FollowSetCalculator
 {
     private boolean initialized;
-    private ContextFreeGrammar grammar;
+    private Grammar grammar;
     private ValueToSetMap<ContextFreeGrammarParseTreeNode, ContextFreeGrammarParseTreeNode> follows;
     private FirstSetCalculator firstSetCalculator;
 
-    public FollowSetCalculator(ContextFreeGrammar grammar)
+    public FollowSetCalculator(Grammar grammar)
     {
         this.initialized = false;
         this.grammar = grammar;

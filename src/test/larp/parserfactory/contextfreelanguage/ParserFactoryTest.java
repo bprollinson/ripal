@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
 import larp.grammartokenizer.contextfreelanguage.TokenizerException;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
@@ -45,7 +45,7 @@ public class ParserFactoryTest
         List<String> input = new ArrayList<String>();
         input.add("S: \"a\"");
 
-        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        Grammar expectedGrammar = new Grammar();
         expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         LL1ParseTable expectedTable = new LL1ParseTable(expectedGrammar);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
@@ -62,7 +62,7 @@ public class ParserFactoryTest
         input.add("S: \"a\"");
         input.add("S: \"\"");
 
-        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        Grammar expectedGrammar = new Grammar();
         expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         expectedGrammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
         LL1ParseTable expectedTable = new LL1ParseTable(expectedGrammar);
@@ -81,7 +81,7 @@ public class ParserFactoryTest
         input.add("S: \"a\"\"a\"");
         input.add("S: \"a\"\"b\"");
 
-        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        Grammar expectedGrammar = new Grammar();
         expectedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("a"));
         expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));

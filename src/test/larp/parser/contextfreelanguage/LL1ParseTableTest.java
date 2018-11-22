@@ -13,7 +13,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
@@ -26,7 +26,7 @@ public class LL1ParseTableTest
     @Test(expected = LL1ApplyApplyConflictException.class)
     public void testAddCellThrowsExceptionForCellThatAlreadyExists() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -37,7 +37,7 @@ public class LL1ParseTableTest
     @Test
     public void testAddCellDoesNotThrowExceptionForCellThatDoesNotAlreadyExist() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
@@ -48,7 +48,7 @@ public class LL1ParseTableTest
     @Test
     public void testCellsEqualReturnsTrue() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer> cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer>();
@@ -63,7 +63,7 @@ public class LL1ParseTableTest
     @Test
     public void testCellsEqualReturnsFalse() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer> cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer>();
@@ -78,8 +78,8 @@ public class LL1ParseTableTest
     @Test
     public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
     {
-        LL1ParseTable parseTable = new LL1ParseTable(new ContextFreeGrammar());
-        LL1ParseTable otherParseTable = new LL1ParseTable(new ContextFreeGrammar());
+        LL1ParseTable parseTable = new LL1ParseTable(new Grammar());
+        LL1ParseTable otherParseTable = new LL1ParseTable(new Grammar());
 
         assertEquals(otherParseTable, parseTable);
     }
@@ -87,13 +87,13 @@ public class LL1ParseTableTest
     @Test
     public void testEqualsReturnsTrueForNonEmptyCFGAndTableEntries() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
-        ContextFreeGrammar otherGrammar = new ContextFreeGrammar();
+        Grammar otherGrammar = new Grammar();
         otherGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable otherParseTable = new LL1ParseTable(otherGrammar);
@@ -105,13 +105,13 @@ public class LL1ParseTableTest
     @Test
     public void testEqualsReturnsFalseForDifferentCFGs() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
-        ContextFreeGrammar otherGrammar = new ContextFreeGrammar();
+        Grammar otherGrammar = new Grammar();
         otherGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
         LL1ParseTable otherParseTable = new LL1ParseTable(otherGrammar);
@@ -123,13 +123,13 @@ public class LL1ParseTableTest
     @Test
     public void testEqualsReturnsFalseForDifferentTableEntries() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
 
-        ContextFreeGrammar otherGrammar = new ContextFreeGrammar();
+        Grammar otherGrammar = new Grammar();
         otherGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable otherParseTable = new LL1ParseTable(otherGrammar);
@@ -141,14 +141,14 @@ public class LL1ParseTableTest
     @Test
     public void testEqualsReturnsTrueForSameTableEntriesInDifferentOrder() throws AmbiguousLL1ParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
 
-        ContextFreeGrammar otherGrammar = new ContextFreeGrammar();
+        Grammar otherGrammar = new Grammar();
         otherGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable otherParseTable = new LL1ParseTable(otherGrammar);
@@ -161,7 +161,7 @@ public class LL1ParseTableTest
     @Test
     public void testEqualsReturnsFalseForParseTableWithDifferentClass()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
 

@@ -7,7 +7,7 @@
 
 package larp.parsercompiler.contextfreelanguage;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
@@ -21,10 +21,10 @@ import java.util.Set;
 public class FirstSetCalculator
 {
     private boolean initialized;
-    private ContextFreeGrammar grammar;
+    private Grammar grammar;
     private ValueToSetMap<ContextFreeGrammarParseTreeNode, Integer> nonTerminalRules;
 
-    public FirstSetCalculator(ContextFreeGrammar grammar)
+    public FirstSetCalculator(Grammar grammar)
     {
         this.initialized = false;
         this.grammar = grammar;

@@ -7,17 +7,17 @@
 
 package larp.parser.contextfreelanguage;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.util.PairToValueMap;
 
 public class LL1ParseTable
 {
-    private ContextFreeGrammar grammar;
+    private Grammar grammar;
     private PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer> cells;
 
-    public LL1ParseTable(ContextFreeGrammar grammar)
+    public LL1ParseTable(Grammar grammar)
     {
         this.grammar = grammar;
         this.cells = new PairToValueMap<NonTerminalNode, ContextFreeGrammarParseTreeNode, Integer>();
@@ -35,7 +35,7 @@ public class LL1ParseTable
         return this.cells.get(nonTerminalNode, syntaxNode);
     }
 
-    public ContextFreeGrammar getGrammar()
+    public Grammar getGrammar()
     {
         return this.grammar;
     }

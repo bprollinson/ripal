@@ -16,12 +16,12 @@ import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
-public class ContextFreeGrammarTest
+public class GrammarTest
 {
     @Test
     public void testGetStartSymbolReturnsStartSymbol()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(new NonTerminalNode("S"));
         productionNode.addChild(new TerminalNode("a"));
@@ -37,7 +37,7 @@ public class ContextFreeGrammarTest
     @Test
     public void testGetStartSymbolReturnsNullForEmptyCFG()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
 
         assertNull(grammar.getStartSymbol());
     }
@@ -45,9 +45,9 @@ public class ContextFreeGrammarTest
     @Test
     public void testEqualsReturnsTrueForTwoEmptyCFGs()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
 
-        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        Grammar expectedGrammar = new Grammar();
 
         assertEquals(expectedGrammar, grammar);
     }
@@ -55,13 +55,13 @@ public class ContextFreeGrammarTest
     @Test
     public void testEqualsReturnsTrueForTwoCFGsWithTheSameProductions()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         ProductionNode node = new ProductionNode();
         node.addChild(new NonTerminalNode("S"));
         node.addChild(new TerminalNode("a"));
         grammar.addProduction(node);
 
-        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        Grammar expectedGrammar = new Grammar();
         ProductionNode expectedNode = new ProductionNode();
         expectedNode.addChild(new NonTerminalNode("S"));
         expectedNode.addChild(new TerminalNode("a"));
@@ -73,7 +73,7 @@ public class ContextFreeGrammarTest
     @Test
     public void testEqualsReturnsFalseForTwoCFGSWithDifferentProductions()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         ProductionNode node = new ProductionNode();
         node.addChild(new NonTerminalNode("S"));
         node.addChild(new TerminalNode("a"));
@@ -83,7 +83,7 @@ public class ContextFreeGrammarTest
         node.addChild(new TerminalNode("b"));
         grammar.addProduction(node);
 
-        ContextFreeGrammar expectedGrammar = new ContextFreeGrammar();
+        Grammar expectedGrammar = new Grammar();
         ProductionNode expectedNode = new ProductionNode();
         expectedNode.addChild(new NonTerminalNode("S"));
         expectedNode.addChild(new TerminalNode("a"));
@@ -99,7 +99,7 @@ public class ContextFreeGrammarTest
     @Test
     public void testEqualsReturnsFalseForObjectWithDifferentClass()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
 
         assertNotEquals(new Object(), grammar);
     }

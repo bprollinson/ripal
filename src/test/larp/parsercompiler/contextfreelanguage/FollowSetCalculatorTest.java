@@ -10,7 +10,7 @@ package larp.parsercompiler.contextfreelanguage;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
@@ -25,7 +25,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsEmptySetForEmptyCFG()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
         Set<ContextFreeGrammarParseTreeNode> expectedFollows = new HashSet<ContextFreeGrammarParseTreeNode>();
@@ -35,7 +35,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsEmptySetForNonTerminalNodeNotAppearingInCFG()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
@@ -46,7 +46,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsEmptySetForDanglingNonTerminal()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
@@ -57,7 +57,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsEndOfStringSymbolForStartNonTerminal()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         FollowSetCalculator calculator = new FollowSetCalculator(grammar);
@@ -69,7 +69,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsTerminalNodeAndEndOfStringSymbolForStartNonTerminalFollowedByTerminal()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S"), new TerminalNode("b"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
@@ -83,7 +83,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsTerminalNodeForNonStartNonTerminalFollowedByTerminal()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
@@ -96,7 +96,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsFirstCharacterFromMultipleCharacterTerminalToken()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S"), new TerminalNode("aa"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
@@ -110,7 +110,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsFollowFromMultipleProductions()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"));
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("A"), new TerminalNode("c"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
@@ -125,7 +125,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsTerminalNodeAndEndOfStringSymbolForStartNonTerminalFollowedByNonTerminal()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
@@ -140,7 +140,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsTerminalNodeForNonStartNonTerminalFollowedByNonTerminal()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
@@ -154,7 +154,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsTerminalNodeFromASeriesOfProductions()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
@@ -169,7 +169,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsEndOfStringSymbolForNonTerminalProducedFromStartNonTerminal()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
@@ -182,7 +182,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsParentFollowForNonTerminalProducedFromNonStartNonTerminal()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("B"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"), new TerminalNode("b"));
         grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
@@ -196,7 +196,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsAncestorFollowForNonTerminalProducedFromNonStartNonTerminal()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("B"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
         grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
@@ -210,7 +210,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowChainsParentFollowInArbitraryOrder()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("B"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("D"), new TerminalNode("d"));
         grammar.addProduction(new NonTerminalNode("C"), new NonTerminalNode("D"));
@@ -225,7 +225,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsEndOfStringSymbolWhenNextNonTerminalGoesToEpsilon()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
@@ -239,7 +239,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsEndOfStringSymbolWhenNextNonTerminalSometimesGoesToEpsilon()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
@@ -255,7 +255,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsSubsequentTerminalNodeWhenNextNonTerminalNodeGoesToEpsilon()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"), new TerminalNode("c"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
@@ -269,7 +269,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsTerminalNodeFromSubsequentNonTerminalNodeWhenNextNonTerminalNodeGoesToEpsilon()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"), new NonTerminalNode("C"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
@@ -284,7 +284,7 @@ public class FollowSetCalculatorTest
     @Test
     public void testGetFollowReturnsFollowForNonDanglingProductionPath()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 

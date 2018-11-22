@@ -7,7 +7,7 @@
 
 package larp.parserfactory.contextfreelanguage;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.grammarparser.contextfreelanguage.ContextFreeGrammarParser;
 import larp.grammartokenizer.contextfreelanguage.Tokenizer;
 import larp.grammartokenizer.contextfreelanguage.TokenizerException;
@@ -42,7 +42,7 @@ public class ParserFactory
 
     public Parser factory(List<String> input) throws TokenizerException, AmbiguousParseTableException
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         for (String inputString: input)
         {
             List<Token> tokenList = this.tokenizer.tokenize(inputString);

@@ -9,20 +9,20 @@ package larp.parser.contextfreelanguage;
 
 import larp.automaton.FiniteAutomata;
 import larp.automaton.State;
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 
 public class LR0ProductionSetDFA extends FiniteAutomata<LR0ProductionSetDFAState>
 {
-    private ContextFreeGrammar grammar;
+    private Grammar grammar;
 
-    public LR0ProductionSetDFA(LR0ProductionSetDFAState startState, ContextFreeGrammar grammar)
+    public LR0ProductionSetDFA(LR0ProductionSetDFAState startState, Grammar grammar)
     {
         super(startState);
 
         this.grammar = grammar;
     }
 
-    public ContextFreeGrammar getGrammar()
+    public Grammar getGrammar()
     {
         return this.grammar;
     }

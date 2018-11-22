@@ -9,7 +9,7 @@ package larp.parser.contextfreelanguage;
 
 import larp.ComparableStructure;
 import larp.automaton.State;
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.util.PairToValueMap;
 
@@ -19,12 +19,12 @@ import java.util.Map;
 
 public class LR0ParseTable implements ComparableStructure
 {
-    private ContextFreeGrammar grammar;
+    private Grammar grammar;
     private State startState;
     private int size;
     private PairToValueMap<State, ContextFreeGrammarParseTreeNode, LR0ParseTableAction> cells;
 
-    public LR0ParseTable(ContextFreeGrammar grammar, State startState)
+    public LR0ParseTable(Grammar grammar, State startState)
     {
         this.grammar = grammar;
         this.startState = startState;
@@ -50,7 +50,7 @@ public class LR0ParseTable implements ComparableStructure
         return this.cells.get(state, syntaxNode);
     }
 
-    public ContextFreeGrammar getGrammar()
+    public Grammar getGrammar()
     {
         return this.grammar;
     }

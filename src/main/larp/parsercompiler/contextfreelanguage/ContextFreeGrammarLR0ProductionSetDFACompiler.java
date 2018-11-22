@@ -8,7 +8,7 @@
 package larp.parsercompiler.contextfreelanguage;
 
 import larp.automaton.StateTransition;
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
@@ -35,10 +35,10 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         this.productionNodeDotRepository = new ProductionNodeDotRepository();
     }
 
-    public LR0ProductionSetDFA compile(ContextFreeGrammar grammar)
+    public LR0ProductionSetDFA compile(Grammar grammar)
     {
         this.productionSetToStateMap = new HashMap<Set<ContextFreeGrammarParseTreeNode>, LR0ProductionSetDFAState>();
-        ContextFreeGrammar augmentedGrammar = this.grammarAugmentor.augment(grammar);
+        Grammar augmentedGrammar = this.grammarAugmentor.augment(grammar);
 
         Set<ContextFreeGrammarParseTreeNode> productionSet = new HashSet<ContextFreeGrammarParseTreeNode>();
         ContextFreeGrammarParseTreeNode firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(augmentedGrammar.getProduction(0));
@@ -49,7 +49,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         return new LR0ProductionSetDFA(startState, augmentedGrammar);
     }
 
-    private LR0ProductionSetDFAState compileState(ContextFreeGrammar augmentedGrammar, Set<ContextFreeGrammarParseTreeNode> productionSet, boolean accepting)
+    private LR0ProductionSetDFAState compileState(Grammar augmentedGrammar, Set<ContextFreeGrammarParseTreeNode> productionSet, boolean accepting)
     {
         productionSet = this.closureCalculator.calculate(augmentedGrammar, productionSet);
         LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", accepting, productionSet);
@@ -66,7 +66,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompiler
         return startState;
     }
 
-    private void compileAndAttachAdjacentStates(ContextFreeGrammar augmentedGrammar, LR0ProductionSetDFAState state)
+    private void compileAndAttachAdjacentStates(Grammar augmentedGrammar, LR0ProductionSetDFAState state)
     {
         ValueToSetMap<ContextFreeGrammarParseTreeNode, ContextFreeGrammarParseTreeNode> symbolToNextClosureMap = new ValueToSetMap<ContextFreeGrammarParseTreeNode, ContextFreeGrammarParseTreeNode>();
 

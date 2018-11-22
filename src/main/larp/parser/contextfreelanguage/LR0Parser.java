@@ -9,7 +9,7 @@ package larp.parser.contextfreelanguage;
 
 import larp.ComparableStructure;
 import larp.automaton.State;
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
@@ -22,7 +22,7 @@ import java.util.List;
 public class LR0Parser implements Parser, ComparableStructure
 {
     private LR0ParseTable parseTable;
-    private ContextFreeGrammar grammar;
+    private Grammar grammar;
     private List<Integer> appliedRules;
 
     public LR0Parser(LR0ParseTable parseTable)

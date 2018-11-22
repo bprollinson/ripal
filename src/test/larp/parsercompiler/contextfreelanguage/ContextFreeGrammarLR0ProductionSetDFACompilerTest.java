@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.automaton.StateTransition;
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
@@ -34,7 +34,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
@@ -60,7 +60,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s2.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s3));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(grammar)));
@@ -71,7 +71,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
@@ -97,7 +97,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s2.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s3));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(grammar)));
@@ -108,7 +108,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         augmentedGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
@@ -141,7 +141,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s3.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s4));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
@@ -153,7 +153,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
@@ -184,7 +184,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s3.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s4));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(grammar)));
@@ -195,7 +195,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
 
@@ -226,7 +226,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s3.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s4));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
 
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(grammar)));
@@ -237,7 +237,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
         augmentedGrammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
@@ -275,7 +275,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s4.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s5));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
 
@@ -287,7 +287,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         augmentedGrammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
@@ -334,7 +334,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s5.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s6));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
@@ -348,7 +348,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
         augmentedGrammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
@@ -400,7 +400,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s6.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s7));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
         grammar.addProduction(new NonTerminalNode("C"), new NonTerminalNode("D"));
@@ -414,7 +414,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("S"));
         augmentedGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
@@ -465,7 +465,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s5.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s6));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("S"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
@@ -478,7 +478,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"), new TerminalNode("c"));
 
@@ -514,7 +514,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s4.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s5));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"), new TerminalNode("c"));
 
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(grammar)));
@@ -525,7 +525,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("a"));
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"));
@@ -571,7 +571,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s5.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s6));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
@@ -584,7 +584,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
@@ -615,7 +615,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s3.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s4));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
 
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(grammar)));
@@ -626,7 +626,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
@@ -648,7 +648,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s1.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s2));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(grammar)));
@@ -659,7 +659,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         augmentedGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
@@ -695,7 +695,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s3.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s4));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
@@ -708,7 +708,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     {
         ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -735,7 +735,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
         s2.addTransition(new StateTransition<ContextFreeGrammarParseTreeNode, LR0ProductionSetDFAState>(new EndOfStringNode(), s3));
         LR0ProductionSetDFA expectedProductionSetDFA = new LR0ProductionSetDFA(s0, augmentedGrammar);
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 

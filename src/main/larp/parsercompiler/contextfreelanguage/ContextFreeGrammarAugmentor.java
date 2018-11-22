@@ -7,7 +7,7 @@
 
 package larp.parsercompiler.contextfreelanguage;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
@@ -21,9 +21,9 @@ import java.util.Set;
 
 public class ContextFreeGrammarAugmentor
 {
-    public ContextFreeGrammar augment(ContextFreeGrammar grammar)
+    public Grammar augment(Grammar grammar)
     {
-        ContextFreeGrammar newGrammar = new ContextFreeGrammar();
+        Grammar newGrammar = new Grammar();
         newGrammar.addProduction(this.calculateNewStartSymbol(grammar), grammar.getStartSymbol(), new EndOfStringNode());
 
         for (ContextFreeGrammarParseTreeNode production: grammar.getProductions())
@@ -34,7 +34,7 @@ public class ContextFreeGrammarAugmentor
         return this.splitTerminalNodes(newGrammar);
     }
 
-    private NonTerminalNode calculateNewStartSymbol(ContextFreeGrammar grammar)
+    private NonTerminalNode calculateNewStartSymbol(Grammar grammar)
     {
         Set<String> existingNames = this.calculateExistingNonTerminalNames(grammar);
 
@@ -47,7 +47,7 @@ public class ContextFreeGrammarAugmentor
         return new NonTerminalNode(newStartSymbolName);
     }
 
-    private Set<String> calculateExistingNonTerminalNames(ContextFreeGrammar grammar)
+    private Set<String> calculateExistingNonTerminalNames(Grammar grammar)
     {
         Set<String> existingNames = new HashSet<String>();
         for (ContextFreeGrammarParseTreeNode production: grammar.getProductions())
@@ -68,9 +68,9 @@ public class ContextFreeGrammarAugmentor
         return existingNames;
     }
 
-    private ContextFreeGrammar splitTerminalNodes(ContextFreeGrammar grammar)
+    private Grammar splitTerminalNodes(Grammar grammar)
     {
-        ContextFreeGrammar newGrammar = new ContextFreeGrammar();
+        Grammar newGrammar = new Grammar();
         for (ContextFreeGrammarParseTreeNode production: grammar.getProductions())
         {
             ContextFreeGrammarParseTreeNode concatenationNode = production.getChildNodes().get(1);

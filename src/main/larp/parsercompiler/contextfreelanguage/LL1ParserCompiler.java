@@ -7,7 +7,7 @@
 
 package larp.parsercompiler.contextfreelanguage;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
@@ -19,7 +19,7 @@ import java.util.Set;
 
 public class LL1ParserCompiler
 {
-    public LL1ParseTable compile(ContextFreeGrammar grammar) throws AmbiguousLL1ParseTableException
+    public LL1ParseTable compile(Grammar grammar) throws AmbiguousLL1ParseTableException
     {
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         List<ContextFreeGrammarParseTreeNode> productions = grammar.getProductions();

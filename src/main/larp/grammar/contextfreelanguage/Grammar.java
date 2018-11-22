@@ -15,11 +15,11 @@ import larp.parsetree.contextfreelanguage.ProductionNode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContextFreeGrammar
+public class Grammar
 {
     private List<ContextFreeGrammarParseTreeNode> productions;
 
-    public ContextFreeGrammar()
+    public Grammar()
     {
         this.productions = new ArrayList<ContextFreeGrammarParseTreeNode>();
     }
@@ -66,11 +66,11 @@ public class ContextFreeGrammar
 
     public boolean equals(Object other)
     {
-        if (!(other instanceof ContextFreeGrammar))
+        if (!(other instanceof Grammar))
         {
             return false;
         }
 
-        return this.productions.equals(((ContextFreeGrammar)other).getProductions());
+        return this.productions.equals(((Grammar)other).getProductions());
     }
 }

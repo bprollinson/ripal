@@ -10,7 +10,7 @@ package larp.parsercompiler.contextfreelanguage;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.parser.contextfreelanguage.LL1ApplyApplyConflictException;
 import larp.parser.contextfreelanguage.LL1ParseTable;
@@ -26,7 +26,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
 
         assertEquals(expectedTable, compiler.compile(grammar));
@@ -37,7 +37,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
@@ -51,7 +51,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
@@ -64,7 +64,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
@@ -80,7 +80,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
@@ -98,7 +98,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
@@ -114,7 +114,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("b"));
@@ -133,7 +133,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("C"));
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
@@ -153,7 +153,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
@@ -165,7 +165,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
@@ -179,7 +179,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
@@ -192,7 +192,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("S"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
@@ -205,7 +205,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
@@ -218,7 +218,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("S"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
@@ -234,7 +234,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
 
         LL1ParseTable expectedTable = new LL1ParseTable(grammar);
@@ -248,7 +248,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"), new TerminalNode("b"), new NonTerminalNode("C"), new TerminalNode("c"), new NonTerminalNode("C"), new TerminalNode("d"));
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
         grammar.addProduction(new NonTerminalNode("C"), new EpsilonNode());
@@ -267,7 +267,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
@@ -288,7 +288,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("ab"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
@@ -304,7 +304,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("b"));
@@ -318,7 +318,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
@@ -331,7 +331,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
@@ -344,7 +344,7 @@ public class LL1ParserCompilerTest
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("D"));
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"), new NonTerminalNode("C"));

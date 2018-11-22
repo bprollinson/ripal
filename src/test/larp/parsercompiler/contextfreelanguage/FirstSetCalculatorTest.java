@@ -10,7 +10,7 @@ package larp.parsercompiler.contextfreelanguage;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ContextFreeGrammarParseTreeNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
@@ -24,7 +24,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsSingleTerminalDirectlyFromProduction()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
@@ -36,7 +36,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstIgnoresSubsequentCharacter()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
@@ -48,7 +48,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsFirstCharacterFromMultipleCharacterTerminalToken()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
@@ -60,7 +60,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsForCharacterFromMultipleCharacterTerminalTokenAfterEpsilon()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("ab"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
@@ -73,7 +73,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsSingleTerminalWithIntermediateNonTerminalProduction()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
@@ -86,7 +86,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsMultipleTerminalsWithIntermediateNonTerminalProductions()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("b"));
@@ -101,7 +101,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsEmptySetForDeadEndNonTerminalProduction()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
@@ -112,7 +112,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstDetectsCycle()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
@@ -125,7 +125,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstIgnoresNonTerminalWithoutProductions()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
@@ -136,7 +136,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsEpsilonForEpsilonTransition()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
@@ -148,7 +148,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsSubsequentTerminalFromAfterEpsilonNonTerminal()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
@@ -161,7 +161,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsMultipleTerminalsWhenFirstNonTerminalGoesToTerminalOrEpsilon()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
@@ -176,7 +176,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsEpsilonWhenAllNonTerminalsGoToEpsilon()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
@@ -190,7 +190,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsTerminalAfterSeriesOfEpsilonNonTerminals()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"), new TerminalNode("c"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
@@ -204,7 +204,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsNonterminalFirstAfterSeriesOfEpsilonNonTerminals()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"), new NonTerminalNode("C"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
         grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
@@ -219,7 +219,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstIgnoresSubsequentCharacterAfterFirstTerminalAfterEpsilon()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"), new TerminalNode("c"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
@@ -232,7 +232,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstIgnoresSubsequentCharacterAfterFirstNonEpsilonNoTerminalAfterEpsilon()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"), new NonTerminalNode("C"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
         grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
@@ -247,7 +247,7 @@ public class FirstSetCalculatorTest
     @Test
     public void testGetFirstReturnsMultipleTerminalNodesForNonTerminalNode()
     {
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 

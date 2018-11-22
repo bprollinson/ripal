@@ -10,7 +10,7 @@ package larp.parsercompiler.contextfreelanguage;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.grammar.contextfreelanguage.ContextFreeGrammar;
+import larp.grammar.contextfreelanguage.Grammar;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
 import larp.parser.contextfreelanguage.LR0AcceptAction;
 import larp.parser.contextfreelanguage.LR0GotoAction;
@@ -35,7 +35,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         LR0ParseTable expectedTable = new LR0ParseTable(grammar, null);
 
         assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
@@ -46,14 +46,14 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
@@ -72,14 +72,14 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
@@ -97,7 +97,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
@@ -106,7 +106,7 @@ public class LR0ParserCompilerTest
         LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -129,7 +129,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
@@ -138,7 +138,7 @@ public class LR0ParserCompilerTest
         LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
@@ -163,7 +163,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
         grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
@@ -176,7 +176,7 @@ public class LR0ParserCompilerTest
         LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state6 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         augmentedGrammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
@@ -207,7 +207,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("x"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("b"));
@@ -219,7 +219,7 @@ public class LR0ParserCompilerTest
         LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state6 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("x"), new NonTerminalNode("A"));
         augmentedGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
@@ -253,7 +253,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("x"), new NonTerminalNode("X"));
         grammar.addProduction(new NonTerminalNode("X"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
@@ -269,7 +269,7 @@ public class LR0ParserCompilerTest
         LR0ProductionSetDFAState state7 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state8 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("x"), new NonTerminalNode("X"));
         augmentedGrammar.addProduction(new NonTerminalNode("X"), new NonTerminalNode("A"));
@@ -310,7 +310,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"), new TerminalNode("c"));
 
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
@@ -319,7 +319,7 @@ public class LR0ParserCompilerTest
         LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"), new TerminalNode("c"));
 
@@ -342,7 +342,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("S"));
 
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
@@ -350,7 +350,7 @@ public class LR0ParserCompilerTest
         LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("S"));
 
@@ -370,7 +370,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
 
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
@@ -378,7 +378,7 @@ public class LR0ParserCompilerTest
         LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
 
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
@@ -399,12 +399,12 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<ContextFreeGrammarParseTreeNode>());
-        ContextFreeGrammar augmentedGrammar = new ContextFreeGrammar();
+        Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
@@ -421,7 +421,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
@@ -433,7 +433,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
@@ -445,7 +445,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
@@ -457,7 +457,7 @@ public class LR0ParserCompilerTest
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
-        ContextFreeGrammar grammar = new ContextFreeGrammar();
+        Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
