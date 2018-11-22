@@ -26,12 +26,12 @@ import larp.token.regularlanguage.Token;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegularExpressionGrammarParserTest
+public class GrammarParserTest
 {
     @Test
     public void testParseReturnsEmptyConcatenationNodeForEmptyString()
     {
-        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         Node rootNode = parser.parse(input);
@@ -44,7 +44,7 @@ public class RegularExpressionGrammarParserTest
     @Test
     public void testParseReturnsEmptyConcatenationNodeForEpsilonToken()
     {
-        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new EpsilonToken());
@@ -58,7 +58,7 @@ public class RegularExpressionGrammarParserTest
     @Test
     public void testParseReturnsConcatenationNodeForSingleCharacter()
     {
-        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new CharacterToken('a'));
@@ -73,7 +73,7 @@ public class RegularExpressionGrammarParserTest
     @Test
     public void testParseReturnsConcatenationNodeForMultipleCharacters()
     {
-        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new CharacterToken('a'));
@@ -90,7 +90,7 @@ public class RegularExpressionGrammarParserTest
     @Test
     public void testParseAddsKleeneClosureNode()
     {
-        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new CharacterToken('a'));
@@ -110,7 +110,7 @@ public class RegularExpressionGrammarParserTest
     @Test
     public void testParseHandlesParentheses()
     {
-        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new CharacterToken('a'));
@@ -133,7 +133,7 @@ public class RegularExpressionGrammarParserTest
     @Test
     public void testParseHandlesNestedParentheses()
     {
-        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new CharacterToken('a'));
@@ -160,7 +160,7 @@ public class RegularExpressionGrammarParserTest
     @Test
     public void testParseHandlesOr()
     {
-        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new CharacterToken('a'));
@@ -189,7 +189,7 @@ public class RegularExpressionGrammarParserTest
     @Test
     public void testParseHandlesCharacterBelowParentheses()
     {
-        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new OpenParenthesisToken());
@@ -208,7 +208,7 @@ public class RegularExpressionGrammarParserTest
     @Test
     public void testParseHandlesKleeneClosureBelowParentheses()
     {
-        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new OpenParenthesisToken());
@@ -230,7 +230,7 @@ public class RegularExpressionGrammarParserTest
     @Test
     public void testParseHandlesOrBelowParentheses()
     {
-        RegularExpressionGrammarParser parser = new RegularExpressionGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new OpenParenthesisToken());
