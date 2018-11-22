@@ -20,7 +20,7 @@ import larp.token.contextfreelanguage.Token;
 
 import java.util.List;
 
-public class ContextFreeGrammarParser
+public class GrammarParser
 {
     public Node parse(List<Token> tokens)
     {

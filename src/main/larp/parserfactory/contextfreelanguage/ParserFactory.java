@@ -8,7 +8,7 @@
 package larp.parserfactory.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.Grammar;
-import larp.grammarparser.contextfreelanguage.ContextFreeGrammarParser;
+import larp.grammarparser.contextfreelanguage.GrammarParser;
 import larp.grammartokenizer.contextfreelanguage.Tokenizer;
 import larp.grammartokenizer.contextfreelanguage.TokenizerException;
 import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
@@ -28,14 +28,14 @@ import java.util.List;
 public class ParserFactory
 {
     private Tokenizer tokenizer;
-    private ContextFreeGrammarParser parser;
+    private GrammarParser grammarParser;
     private LL1ParserCompiler ll1compiler;
     private LR0ParserCompiler lr0compiler;
 
     public ParserFactory()
     {
         this.tokenizer = new Tokenizer();
-        this.parser = new ContextFreeGrammarParser();
+        this.grammarParser = new GrammarParser();
         this.ll1compiler = new LL1ParserCompiler();
         this.lr0compiler = new LR0ParserCompiler();
     }
@@ -46,7 +46,7 @@ public class ParserFactory
         for (String inputString: input)
         {
             List<Token> tokenList = this.tokenizer.tokenize(inputString);
-            Node rootNode = this.parser.parse(tokenList);
+            Node rootNode = this.grammarParser.parse(tokenList);
             grammar.addProduction(rootNode);
         }
 

@@ -25,12 +25,12 @@ import larp.token.contextfreelanguage.Token;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContextFreeGrammarParserTest
+public class GrammarParserTest
 {
     @Test
     public void testParseReturnsTreeForEmptyRightHandSize()
     {
-        ContextFreeGrammarParser parser = new ContextFreeGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new NonTerminalToken("S"));
@@ -50,7 +50,7 @@ public class ContextFreeGrammarParserTest
     @Test
     public void testParseReturnsTreeForSingleTerminalRightHandSize()
     {
-        ContextFreeGrammarParser parser = new ContextFreeGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new NonTerminalToken("S"));
@@ -70,7 +70,7 @@ public class ContextFreeGrammarParserTest
     @Test
     public void testParseReturnsTreeForSingleNonTerminalRightHandSize()
     {
-        ContextFreeGrammarParser parser = new ContextFreeGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new NonTerminalToken("S"));
@@ -90,7 +90,7 @@ public class ContextFreeGrammarParserTest
     @Test
     public void testParseReturnsTreeForMultipleTokenRightHandSize()
     {
-        ContextFreeGrammarParser parser = new ContextFreeGrammarParser();
+        GrammarParser parser = new GrammarParser();
 
         List<Token> input = new ArrayList<Token>();
         input.add(new NonTerminalToken("S"));
