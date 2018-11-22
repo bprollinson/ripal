@@ -7,9 +7,9 @@
 
 package larp.parsetree.regularlanguage;
 
-public class KleeneClosureNode extends RegularExpressionParseTreeNode
+public class KleeneClosureNode extends Node
 {
-    public void addChild(RegularExpressionParseTreeNode childNode)
+    public void addChild(Node childNode)
     {
         this.childNodes.add(childNode);
     }

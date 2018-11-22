@@ -16,7 +16,7 @@ import larp.grammartokenizer.regularlanguage.TokenizerException;
 import larp.parsercompiler.regularlanguage.EpsilonNFAToNFAConverter;
 import larp.parsercompiler.regularlanguage.NFAToDFAConverter;
 import larp.parsercompiler.regularlanguage.ParserCompiler;
-import larp.parsetree.regularlanguage.RegularExpressionParseTreeNode;
+import larp.parsetree.regularlanguage.Node;
 import larp.token.regularlanguage.Token;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class ParserFactory
     public DFA factory(String regularExpression) throws TokenizerException
     {
         List<Token> tokenList = this.tokenizer.tokenize(regularExpression);
-        RegularExpressionParseTreeNode rootNode = this.parser.parse(tokenList);
+        Node rootNode = this.parser.parse(tokenList);
         EpsilonNFA enfa = this.compiler.compile(rootNode);
         NFA nfa = this.epsilonNFAToNFAConverter.convert(enfa);
 
