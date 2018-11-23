@@ -9,12 +9,12 @@ package larp.grammartokenizer.contextfreelanguage;
 
 import org.junit.Test;
 
-public class ContextFreeGrammarEscapeCharacterPositionCorrectAssertionTest
+public class GrammarEscapeCharacterPositionCorrectAssertionTest
 {
     @Test(expected = IncorrectGrammarEscapeCharacterPositionException.class)
     public void testValidateThrowsExceptionWhenNotInTerminal() throws IncorrectGrammarEscapeCharacterPositionException
     {
-        ContextFreeGrammarEscapeCharacterPositionCorrectAssertion assertion = new ContextFreeGrammarEscapeCharacterPositionCorrectAssertion(false);
+        GrammarEscapeCharacterPositionCorrectAssertion assertion = new GrammarEscapeCharacterPositionCorrectAssertion(false);
 
         assertion.validate();
     }
@@ -22,7 +22,7 @@ public class ContextFreeGrammarEscapeCharacterPositionCorrectAssertionTest
     @Test
     public void testValidateDoesNotThrowExceptionWhenInTerminal() throws IncorrectGrammarEscapeCharacterPositionException
     {
-        ContextFreeGrammarEscapeCharacterPositionCorrectAssertion assertion = new ContextFreeGrammarEscapeCharacterPositionCorrectAssertion(true);
+        GrammarEscapeCharacterPositionCorrectAssertion assertion = new GrammarEscapeCharacterPositionCorrectAssertion(true);
 
         assertion.validate();
     }

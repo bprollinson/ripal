@@ -9,11 +9,11 @@ package larp.grammartokenizer.contextfreelanguage;
 
 import larp.assertion.Assertion;
 
-public class ContextFreeGrammarCorrectNumberOfSeparatorsAssertion implements Assertion
+public class GrammarCorrectNumberOfSeparatorsAssertion implements Assertion
 {
     private int numSeparators;
 
-    public ContextFreeGrammarCorrectNumberOfSeparatorsAssertion(int numSeparators)
+    public GrammarCorrectNumberOfSeparatorsAssertion(int numSeparators)
     {
         this.numSeparators = numSeparators;
     }

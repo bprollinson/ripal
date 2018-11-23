@@ -9,11 +9,11 @@ package larp.grammartokenizer.contextfreelanguage;
 
 import larp.assertion.Assertion;
 
-public class ContextFreeGrammarFinalQuoteNestingCorrectAssertion implements Assertion
+public class GrammarFinalQuoteNestingCorrectAssertion implements Assertion
 {
     private boolean inTerminal;
 
-    public ContextFreeGrammarFinalQuoteNestingCorrectAssertion(boolean inTerminal)
+    public GrammarFinalQuoteNestingCorrectAssertion(boolean inTerminal)
     {
         this.inTerminal = inTerminal;
     }

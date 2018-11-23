@@ -14,11 +14,11 @@ import larp.token.contextfreelanguage.Token;
 
 import java.util.List;
 
-public class ContextFreeGrammarStartingTokensValidAssertion implements Assertion
+public class GrammarStartingTokensValidAssertion implements Assertion
 {
     private List<Token> tokens;
 
-    public ContextFreeGrammarStartingTokensValidAssertion(List<Token> tokens)
+    public GrammarStartingTokensValidAssertion(List<Token> tokens)
     {
         this.tokens = tokens;
     }

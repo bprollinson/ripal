@@ -9,12 +9,12 @@ package larp.grammartokenizer.contextfreelanguage;
 
 import org.junit.Test;
 
-public class ContextFreeGrammarCorrectNumberOfSeparatorsAssertionTest
+public class GrammarCorrectNumberOfSeparatorsAssertionTest
 {
     @Test(expected = IncorrectGrammarSeparatorException.class)
     public void testValidateThrowsExceptionForLessThanOneSeparatorToken() throws IncorrectGrammarSeparatorException
     {
-        ContextFreeGrammarCorrectNumberOfSeparatorsAssertion assertion = new ContextFreeGrammarCorrectNumberOfSeparatorsAssertion(0);
+        GrammarCorrectNumberOfSeparatorsAssertion assertion = new GrammarCorrectNumberOfSeparatorsAssertion(0);
 
         assertion.validate();
     }
@@ -22,7 +22,7 @@ public class ContextFreeGrammarCorrectNumberOfSeparatorsAssertionTest
     @Test(expected = IncorrectGrammarSeparatorException.class)
     public void testValidateThrowsExceptionForMoreThanOneSeparatorToken() throws IncorrectGrammarSeparatorException
     {
-        ContextFreeGrammarCorrectNumberOfSeparatorsAssertion assertion = new ContextFreeGrammarCorrectNumberOfSeparatorsAssertion(2);
+        GrammarCorrectNumberOfSeparatorsAssertion assertion = new GrammarCorrectNumberOfSeparatorsAssertion(2);
 
         assertion.validate();
     }
@@ -30,7 +30,7 @@ public class ContextFreeGrammarCorrectNumberOfSeparatorsAssertionTest
     @Test
     public void testValidateDoesNotThrowExceptionForOneSeparatorToken() throws IncorrectGrammarSeparatorException
     {
-        ContextFreeGrammarCorrectNumberOfSeparatorsAssertion assertion = new ContextFreeGrammarCorrectNumberOfSeparatorsAssertion(1);
+        GrammarCorrectNumberOfSeparatorsAssertion assertion = new GrammarCorrectNumberOfSeparatorsAssertion(1);
 
         assertion.validate();
     }

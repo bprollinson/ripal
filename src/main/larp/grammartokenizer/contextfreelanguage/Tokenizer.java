@@ -39,9 +39,9 @@ public class Tokenizer
 
         List<Token> tokens = this.convertCharactersToTokens(expression);
 
-        new ContextFreeGrammarFinalQuoteNestingCorrectAssertion(this.inTerminal).validate();
-        new ContextFreeGrammarStartingTokensValidAssertion(tokens).validate();
-        new ContextFreeGrammarCorrectNumberOfSeparatorsAssertion(this.numSeparators).validate();
+        new GrammarFinalQuoteNestingCorrectAssertion(this.inTerminal).validate();
+        new GrammarStartingTokensValidAssertion(tokens).validate();
+        new GrammarCorrectNumberOfSeparatorsAssertion(this.numSeparators).validate();
 
         return this.correctEpsilonSetupInTokens(tokens);
     }
@@ -78,7 +78,7 @@ public class Tokenizer
 
         if (currentCharacter == this.escape)
         {
-            new ContextFreeGrammarEscapeCharacterPositionCorrectAssertion(this.inTerminal).validate();
+            new GrammarEscapeCharacterPositionCorrectAssertion(this.inTerminal).validate();
             this.escaping = true;
 
             return buffer;

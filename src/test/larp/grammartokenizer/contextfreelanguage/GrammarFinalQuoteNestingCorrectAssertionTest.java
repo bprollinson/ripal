@@ -9,12 +9,12 @@ package larp.grammartokenizer.contextfreelanguage;
 
 import org.junit.Test;
 
-public class ContextFreeGrammarFinalQuoteNestingCorrectAssertionTest
+public class GrammarFinalQuoteNestingCorrectAssertionTest
 {
     @Test(expected = IncorrectGrammarQuoteNestingException.class)
     public void testValidateThrowsExceptionWhenInTerminal() throws IncorrectGrammarQuoteNestingException
     {
-        ContextFreeGrammarFinalQuoteNestingCorrectAssertion assertion = new ContextFreeGrammarFinalQuoteNestingCorrectAssertion(true);
+        GrammarFinalQuoteNestingCorrectAssertion assertion = new GrammarFinalQuoteNestingCorrectAssertion(true);
 
         assertion.validate();
     }
@@ -22,7 +22,7 @@ public class ContextFreeGrammarFinalQuoteNestingCorrectAssertionTest
     @Test
     public void testValidateDoesNotThrowExceptionWhenNotInTerminal() throws IncorrectGrammarQuoteNestingException
     {
-        ContextFreeGrammarFinalQuoteNestingCorrectAssertion assertion = new ContextFreeGrammarFinalQuoteNestingCorrectAssertion(false);
+        GrammarFinalQuoteNestingCorrectAssertion assertion = new GrammarFinalQuoteNestingCorrectAssertion(false);
 
         assertion.validate();
     }
