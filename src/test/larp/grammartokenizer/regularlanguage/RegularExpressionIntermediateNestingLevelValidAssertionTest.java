@@ -11,8 +11,8 @@ import org.junit.Test;
 
 public class RegularExpressionIntermediateNestingLevelValidAssertionTest
 {
-    @Test(expected = IncorrectRegularExpressionNestingException.class)
-    public void testValidateThrowsExceptionForNegativeNestingLevel() throws IncorrectRegularExpressionNestingException
+    @Test(expected = IncorrectExpressionNestingException.class)
+    public void testValidateThrowsExceptionForNegativeNestingLevel() throws IncorrectExpressionNestingException
     {
         RegularExpressionIntermediateNestingLevelValidAssertion assertion = new RegularExpressionIntermediateNestingLevelValidAssertion(-1);
 
@@ -20,7 +20,7 @@ public class RegularExpressionIntermediateNestingLevelValidAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForZeroNestingLevel() throws IncorrectRegularExpressionNestingException
+    public void testValidateDoesNotThrowExceptionForZeroNestingLevel() throws IncorrectExpressionNestingException
     {
         RegularExpressionIntermediateNestingLevelValidAssertion assertion = new RegularExpressionIntermediateNestingLevelValidAssertion(0);
 
@@ -28,7 +28,7 @@ public class RegularExpressionIntermediateNestingLevelValidAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForPositiveNestingLevel() throws IncorrectRegularExpressionNestingException
+    public void testValidateDoesNotThrowExceptionForPositiveNestingLevel() throws IncorrectExpressionNestingException
     {
         RegularExpressionIntermediateNestingLevelValidAssertion assertion = new RegularExpressionIntermediateNestingLevelValidAssertion(1);
 

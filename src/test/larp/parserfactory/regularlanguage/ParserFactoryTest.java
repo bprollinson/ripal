@@ -13,7 +13,7 @@ import org.junit.Test;
 import larp.automaton.DFA;
 import larp.automaton.DFAState;
 import larp.automaton.StateTransition;
-import larp.grammartokenizer.regularlanguage.IncorrectRegularExpressionNestingException;
+import larp.grammartokenizer.regularlanguage.IncorrectExpressionNestingException;
 import larp.grammartokenizer.regularlanguage.TokenizerException;
 
 public class ParserFactoryTest
@@ -35,8 +35,8 @@ public class ParserFactoryTest
         assertTrue(expectedDFA.structureEquals(dfa));
     }
 
-    @Test(expected = IncorrectRegularExpressionNestingException.class)
-    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectRegularExpression() throws TokenizerException
+    @Test(expected = IncorrectExpressionNestingException.class)
+    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectExpression() throws TokenizerException
     {
         ParserFactory factory = new ParserFactory();
         DFA dfa = factory.factory(")(");

@@ -238,7 +238,7 @@ public class TokenizerTest
         assertEquals(expectedResult, result);
     }
 
-    @Test(expected = IncorrectRegularExpressionNestingException.class)
+    @Test(expected = IncorrectExpressionNestingException.class)
     public void testTokenizeThrowsExceptionForNegativeParenthesisNesting() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
@@ -246,7 +246,7 @@ public class TokenizerTest
         tokenizer.tokenize(")(");
     }
 
-    @Test(expected = IncorrectRegularExpressionNestingException.class)
+    @Test(expected = IncorrectExpressionNestingException.class)
     public void testTokenizeThrowsExceptionForUnclosedParenthesisAtEndOfString() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
@@ -270,7 +270,7 @@ public class TokenizerTest
         assertEquals(expectedResult, result);
     }
 
-    @Test(expected = DanglingRegularExpressionEscapeCharacterException.class)
+    @Test(expected = DanglingExpressionEscapeCharacterException.class)
     public void testTokenizeThrowsExceptionForDanglingEscapeCharacter() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();

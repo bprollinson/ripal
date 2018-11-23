@@ -18,11 +18,11 @@ public class RegularExpressionFinalEscapingStatusValidAssertion implements Asser
         this.escaping = escaping;
     }
 
-    public void validate() throws DanglingRegularExpressionEscapeCharacterException
+    public void validate() throws DanglingExpressionEscapeCharacterException
     {
         if (this.escaping)
         {
-            throw new DanglingRegularExpressionEscapeCharacterException();
+            throw new DanglingExpressionEscapeCharacterException();
         }
     }
 }

@@ -11,16 +11,16 @@ import org.junit.Test;
 
 public class RegularExpressionFinalNestingLevelValidAssertionTest
 {
-    @Test(expected = IncorrectRegularExpressionNestingException.class)
-    public void testValidateThrowsExceptionForPositiveNestingLevel() throws IncorrectRegularExpressionNestingException
+    @Test(expected = IncorrectExpressionNestingException.class)
+    public void testValidateThrowsExceptionForPositiveNestingLevel() throws IncorrectExpressionNestingException
     {
         RegularExpressionFinalNestingLevelValidAssertion assertion = new RegularExpressionFinalNestingLevelValidAssertion(1);
 
         assertion.validate();
     }
 
-    @Test(expected = IncorrectRegularExpressionNestingException.class)
-    public void testValidateThrowsExceptionForNegativeNestingLevel() throws IncorrectRegularExpressionNestingException
+    @Test(expected = IncorrectExpressionNestingException.class)
+    public void testValidateThrowsExceptionForNegativeNestingLevel() throws IncorrectExpressionNestingException
     {
         RegularExpressionFinalNestingLevelValidAssertion assertion = new RegularExpressionFinalNestingLevelValidAssertion(-1);
 
@@ -28,7 +28,7 @@ public class RegularExpressionFinalNestingLevelValidAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForZeroNestingLevel() throws IncorrectRegularExpressionNestingException
+    public void testValidateDoesNotThrowExceptionForZeroNestingLevel() throws IncorrectExpressionNestingException
     {
         RegularExpressionFinalNestingLevelValidAssertion assertion = new RegularExpressionFinalNestingLevelValidAssertion(0);
 

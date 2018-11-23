@@ -11,8 +11,8 @@ import org.junit.Test;
 
 public class RegularExpressionFinalEscapingStatusValidAssertionTest
 {
-    @Test(expected = DanglingRegularExpressionEscapeCharacterException.class)
-    public void testValidateThrowsExceptionWhenEscaping() throws DanglingRegularExpressionEscapeCharacterException
+    @Test(expected = DanglingExpressionEscapeCharacterException.class)
+    public void testValidateThrowsExceptionWhenEscaping() throws DanglingExpressionEscapeCharacterException
     {
         RegularExpressionFinalEscapingStatusValidAssertion assertion = new RegularExpressionFinalEscapingStatusValidAssertion(true);
 
@@ -20,7 +20,7 @@ public class RegularExpressionFinalEscapingStatusValidAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionWhenNotEscaping() throws DanglingRegularExpressionEscapeCharacterException
+    public void testValidateDoesNotThrowExceptionWhenNotEscaping() throws DanglingExpressionEscapeCharacterException
     {
         RegularExpressionFinalEscapingStatusValidAssertion assertion = new RegularExpressionFinalEscapingStatusValidAssertion(false);
 

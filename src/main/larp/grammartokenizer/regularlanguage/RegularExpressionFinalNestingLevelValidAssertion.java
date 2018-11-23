@@ -18,11 +18,11 @@ public class RegularExpressionFinalNestingLevelValidAssertion implements Asserti
         this.nestingLevel = nestingLevel;
     }
 
-    public void validate() throws IncorrectRegularExpressionNestingException
+    public void validate() throws IncorrectExpressionNestingException
     {
         if (this.nestingLevel != 0)
         {
-            throw new IncorrectRegularExpressionNestingException();
+            throw new IncorrectExpressionNestingException();
         }
     }
 }
