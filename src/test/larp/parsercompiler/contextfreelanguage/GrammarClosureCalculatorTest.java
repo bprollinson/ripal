@@ -22,12 +22,12 @@ import larp.parsetree.contextfreelanguage.TerminalNode;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ContextFreeGrammarClosureCalculatorTest
+public class GrammarClosureCalculatorTest
 {
     @Test
     public void testCalculatDoesNotAddProductionWhenInitialProductionSetIsEmpty()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -42,7 +42,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateDoesNotAddProductionWhenContextFreeGrammarIsEmpty()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
 
@@ -58,7 +58,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateAddsSimpleTerminalProduction()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -77,7 +77,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateAddsSimpleNonTerminalProduction()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -96,7 +96,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateDoesNotAddProductionWhenNoneAvailable()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -113,7 +113,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateDoesNotAddProductionWhenNonReachable()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -131,7 +131,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateAddsNonTerminalChain()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -154,7 +154,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateAddsClosureFromNonFirstNonTerminalInProduction()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
@@ -173,7 +173,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateDoesNotAddProductionsForTerminal()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"));
@@ -191,7 +191,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateDoesNotAddProductionsForSubsequentNonTerminal()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("B"));
@@ -209,7 +209,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateCalculatesClosureIgnoringImmediateInfiniteLoop()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S"));
@@ -228,7 +228,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateCalculatesClosureIgnoringEventualInfiniteLoop()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -251,7 +251,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateExpandsImmediateNonTerminalIntoParallelTerminals()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -272,7 +272,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateExpandsEventualNonTerminalIntoParallelTerminals()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -295,7 +295,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateExpandsImmediateNonTerminalIntoParallelNonTerminals()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -316,7 +316,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateExpandsEventualNonTerminalIntoParallelNonTerminals()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -339,7 +339,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateAddsNonTerminalChainInReverseOrder()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -362,7 +362,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateAddsDotAfterEpsilon()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
@@ -380,7 +380,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateDoesNotExpandProductionSetWhenDotMissing()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -398,7 +398,7 @@ public class ContextFreeGrammarClosureCalculatorTest
     @Test
     public void testCalculateClosureDoesNotAddProductionWhenDotAtEndOfProduction()
     {
-        ContextFreeGrammarClosureCalculator calculator = new ContextFreeGrammarClosureCalculator();
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));

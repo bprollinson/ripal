@@ -18,11 +18,11 @@ import larp.util.ValueToSetMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ContextFreeGrammarClosureCalculator
+public class GrammarClosureCalculator
 {
     private ProductionNodeDotRepository productionNodeDotRepository;
 
-    public ContextFreeGrammarClosureCalculator()
+    public GrammarClosureCalculator()
     {
         this.productionNodeDotRepository = new ProductionNodeDotRepository();
     }

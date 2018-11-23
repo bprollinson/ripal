@@ -24,14 +24,14 @@ import java.util.Set;
 public class ContextFreeGrammarLR0ProductionSetDFACompiler
 {
     private ContextFreeGrammarAugmentor grammarAugmentor;
-    private ContextFreeGrammarClosureCalculator closureCalculator;
+    private GrammarClosureCalculator closureCalculator;
     private ProductionNodeDotRepository productionNodeDotRepository;
     private Map<Set<Node>, LR0ProductionSetDFAState> productionSetToStateMap;
 
     public ContextFreeGrammarLR0ProductionSetDFACompiler()
     {
         this.grammarAugmentor = new ContextFreeGrammarAugmentor();
-        this.closureCalculator = new ContextFreeGrammarClosureCalculator();
+        this.closureCalculator = new GrammarClosureCalculator();
         this.productionNodeDotRepository = new ProductionNodeDotRepository();
     }
 
