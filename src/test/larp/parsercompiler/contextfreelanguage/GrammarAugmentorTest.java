@@ -15,12 +15,12 @@ import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
-public class ContextFreeGrammarAugmentorTest
+public class GrammarAugmentorTest
 {
     @Test
     public void testAugmentAddsNewStartStateToValidGrammar()
     {
-        ContextFreeGrammarAugmentor augmentor = new ContextFreeGrammarAugmentor();
+        GrammarAugmentor augmentor = new GrammarAugmentor();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
@@ -36,7 +36,7 @@ public class ContextFreeGrammarAugmentorTest
     @Test
     public void testAugmentCalculatesNewStartSymbolNameFromExistingStartSymbol()
     {
-        ContextFreeGrammarAugmentor augmentor = new ContextFreeGrammarAugmentor();
+        GrammarAugmentor augmentor = new GrammarAugmentor();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("Q"), new NonTerminalNode("R"));
@@ -50,7 +50,7 @@ public class ContextFreeGrammarAugmentorTest
     @Test
     public void testAugmentResolvesNamingConflictRelatedtoNewStartSymbolName()
     {
-        ContextFreeGrammarAugmentor augmentor = new ContextFreeGrammarAugmentor();
+        GrammarAugmentor augmentor = new GrammarAugmentor();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("S'"));
@@ -68,7 +68,7 @@ public class ContextFreeGrammarAugmentorTest
     @Test
     public void testAugmentSplitsMultiCharacterTerminalNodeIntoMultipleNodes()
     {
-        ContextFreeGrammarAugmentor augmentor = new ContextFreeGrammarAugmentor();
+        GrammarAugmentor augmentor = new GrammarAugmentor();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));

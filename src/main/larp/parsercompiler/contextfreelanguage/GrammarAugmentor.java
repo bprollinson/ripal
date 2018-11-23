@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ContextFreeGrammarAugmentor
+public class GrammarAugmentor
 {
     public Grammar augment(Grammar grammar)
     {
