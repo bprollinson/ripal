@@ -11,16 +11,16 @@ import org.junit.Test;
 
 public class ContextFreeGrammarCorrectNumberOfSeparatorsAssertionTest
 {
-    @Test(expected = IncorrectContextFreeGrammarSeparatorException.class)
-    public void testValidateThrowsExceptionForLessThanOneSeparatorToken() throws IncorrectContextFreeGrammarSeparatorException
+    @Test(expected = IncorrectGrammarSeparatorException.class)
+    public void testValidateThrowsExceptionForLessThanOneSeparatorToken() throws IncorrectGrammarSeparatorException
     {
         ContextFreeGrammarCorrectNumberOfSeparatorsAssertion assertion = new ContextFreeGrammarCorrectNumberOfSeparatorsAssertion(0);
 
         assertion.validate();
     }
 
-    @Test(expected = IncorrectContextFreeGrammarSeparatorException.class)
-    public void testValidateThrowsExceptionForMoreThanOneSeparatorToken() throws IncorrectContextFreeGrammarSeparatorException
+    @Test(expected = IncorrectGrammarSeparatorException.class)
+    public void testValidateThrowsExceptionForMoreThanOneSeparatorToken() throws IncorrectGrammarSeparatorException
     {
         ContextFreeGrammarCorrectNumberOfSeparatorsAssertion assertion = new ContextFreeGrammarCorrectNumberOfSeparatorsAssertion(2);
 
@@ -28,7 +28,7 @@ public class ContextFreeGrammarCorrectNumberOfSeparatorsAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionForOneSeparatorToken() throws IncorrectContextFreeGrammarSeparatorException
+    public void testValidateDoesNotThrowExceptionForOneSeparatorToken() throws IncorrectGrammarSeparatorException
     {
         ContextFreeGrammarCorrectNumberOfSeparatorsAssertion assertion = new ContextFreeGrammarCorrectNumberOfSeparatorsAssertion(1);
 

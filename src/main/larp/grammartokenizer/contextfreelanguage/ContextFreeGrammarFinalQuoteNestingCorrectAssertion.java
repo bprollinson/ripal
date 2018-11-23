@@ -18,11 +18,11 @@ public class ContextFreeGrammarFinalQuoteNestingCorrectAssertion implements Asse
         this.inTerminal = inTerminal;
     }
 
-    public void validate() throws IncorrectContextFreeGrammarQuoteNestingException
+    public void validate() throws IncorrectGrammarQuoteNestingException
     {
         if (this.inTerminal)
         {
-            throw new IncorrectContextFreeGrammarQuoteNestingException();
+            throw new IncorrectGrammarQuoteNestingException();
         }
     }
 }

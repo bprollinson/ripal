@@ -18,11 +18,11 @@ public class ContextFreeGrammarEscapeCharacterPositionCorrectAssertion implement
         this.inTerminal = inTerminal;
     }
 
-    public void validate() throws IncorrectContextFreeGrammarEscapeCharacterPositionException
+    public void validate() throws IncorrectGrammarEscapeCharacterPositionException
     {
         if (!this.inTerminal)
         {
-            throw new IncorrectContextFreeGrammarEscapeCharacterPositionException();
+            throw new IncorrectGrammarEscapeCharacterPositionException();
         }
     }
 }

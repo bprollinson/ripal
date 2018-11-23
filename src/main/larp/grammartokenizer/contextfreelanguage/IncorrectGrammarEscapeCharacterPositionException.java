@@ -7,6 +7,6 @@
 
 package larp.grammartokenizer.contextfreelanguage;
 
-public class IncorrectContextFreeGrammarEscapeCharacterPositionException extends TokenizerException
+public class IncorrectGrammarEscapeCharacterPositionException extends TokenizerException
 {
 }

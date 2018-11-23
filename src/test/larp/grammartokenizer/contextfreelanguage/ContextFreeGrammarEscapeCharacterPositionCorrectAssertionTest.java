@@ -11,8 +11,8 @@ import org.junit.Test;
 
 public class ContextFreeGrammarEscapeCharacterPositionCorrectAssertionTest
 {
-    @Test(expected = IncorrectContextFreeGrammarEscapeCharacterPositionException.class)
-    public void testValidateThrowsExceptionWhenNotInTerminal() throws IncorrectContextFreeGrammarEscapeCharacterPositionException
+    @Test(expected = IncorrectGrammarEscapeCharacterPositionException.class)
+    public void testValidateThrowsExceptionWhenNotInTerminal() throws IncorrectGrammarEscapeCharacterPositionException
     {
         ContextFreeGrammarEscapeCharacterPositionCorrectAssertion assertion = new ContextFreeGrammarEscapeCharacterPositionCorrectAssertion(false);
 
@@ -20,7 +20,7 @@ public class ContextFreeGrammarEscapeCharacterPositionCorrectAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionWhenInTerminal() throws IncorrectContextFreeGrammarEscapeCharacterPositionException
+    public void testValidateDoesNotThrowExceptionWhenInTerminal() throws IncorrectGrammarEscapeCharacterPositionException
     {
         ContextFreeGrammarEscapeCharacterPositionCorrectAssertion assertion = new ContextFreeGrammarEscapeCharacterPositionCorrectAssertion(true);
 

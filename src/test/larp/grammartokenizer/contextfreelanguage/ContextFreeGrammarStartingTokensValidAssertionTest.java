@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ContextFreeGrammarStartingTokensValidAssertionTest
 {
-    @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
+    @Test(expected = IncorrectGrammarStatementPrefixException.class)
     public void testValidateThrowsExceptionForFewerThanThreeTokens() throws TokenizerException
     {
         List<Token> tokens = new ArrayList<Token>();
@@ -29,7 +29,7 @@ public class ContextFreeGrammarStartingTokensValidAssertionTest
         assertion.validate();
     }
 
-    @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
+    @Test(expected = IncorrectGrammarStatementPrefixException.class)
     public void testValidateThrowsExceptionWhenFirstTokenIsNotANonterminal() throws TokenizerException
     {
         List<Token> tokens = new ArrayList<Token>();
@@ -41,7 +41,7 @@ public class ContextFreeGrammarStartingTokensValidAssertionTest
         assertion.validate();
     }
 
-    @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
+    @Test(expected = IncorrectGrammarStatementPrefixException.class)
     public void testValidateThrowsExceptionWhenSecondTokenIsNotASeparator() throws TokenizerException
     {
         List<Token> tokens = new ArrayList<Token>();

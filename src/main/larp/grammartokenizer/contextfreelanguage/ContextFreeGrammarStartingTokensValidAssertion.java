@@ -27,15 +27,15 @@ public class ContextFreeGrammarStartingTokensValidAssertion implements Assertion
     {
         if (tokens.size() < 3)
         {
-            throw new IncorrectContextFreeGrammarStatementPrefixException();
+            throw new IncorrectGrammarStatementPrefixException();
         }
         if (!(tokens.get(0) instanceof NonTerminalToken))
         {
-            throw new IncorrectContextFreeGrammarStatementPrefixException();
+            throw new IncorrectGrammarStatementPrefixException();
         }
         if (!(tokens.get(1) instanceof SeparatorToken))
         {
-            throw new IncorrectContextFreeGrammarStatementPrefixException();
+            throw new IncorrectGrammarStatementPrefixException();
         }
     }
 }

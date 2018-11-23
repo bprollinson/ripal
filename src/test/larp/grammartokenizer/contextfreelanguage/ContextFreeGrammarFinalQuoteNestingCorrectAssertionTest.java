@@ -11,8 +11,8 @@ import org.junit.Test;
 
 public class ContextFreeGrammarFinalQuoteNestingCorrectAssertionTest
 {
-    @Test(expected = IncorrectContextFreeGrammarQuoteNestingException.class)
-    public void testValidateThrowsExceptionWhenInTerminal() throws IncorrectContextFreeGrammarQuoteNestingException
+    @Test(expected = IncorrectGrammarQuoteNestingException.class)
+    public void testValidateThrowsExceptionWhenInTerminal() throws IncorrectGrammarQuoteNestingException
     {
         ContextFreeGrammarFinalQuoteNestingCorrectAssertion assertion = new ContextFreeGrammarFinalQuoteNestingCorrectAssertion(true);
 
@@ -20,7 +20,7 @@ public class ContextFreeGrammarFinalQuoteNestingCorrectAssertionTest
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionWhenNotInTerminal() throws IncorrectContextFreeGrammarQuoteNestingException
+    public void testValidateDoesNotThrowExceptionWhenNotInTerminal() throws IncorrectGrammarQuoteNestingException
     {
         ContextFreeGrammarFinalQuoteNestingCorrectAssertion assertion = new ContextFreeGrammarFinalQuoteNestingCorrectAssertion(false);
 

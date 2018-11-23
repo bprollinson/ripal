@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.Grammar;
-import larp.grammartokenizer.contextfreelanguage.IncorrectContextFreeGrammarStatementPrefixException;
+import larp.grammartokenizer.contextfreelanguage.IncorrectGrammarStatementPrefixException;
 import larp.grammartokenizer.contextfreelanguage.TokenizerException;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
 import larp.parser.contextfreelanguage.AmbiguousParseTableException;
@@ -121,8 +121,8 @@ public class ParserFactoryTest
         factory.factory(input);
     }
 
-    @Test(expected = IncorrectContextFreeGrammarStatementPrefixException.class)
-    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
+    @Test(expected = IncorrectGrammarStatementPrefixException.class)
+    public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectGrammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();

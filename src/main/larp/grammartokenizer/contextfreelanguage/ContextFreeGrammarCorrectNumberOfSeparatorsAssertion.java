@@ -18,11 +18,11 @@ public class ContextFreeGrammarCorrectNumberOfSeparatorsAssertion implements Ass
         this.numSeparators = numSeparators;
     }
 
-    public void validate() throws IncorrectContextFreeGrammarSeparatorException
+    public void validate() throws IncorrectGrammarSeparatorException
     {
         if (this.numSeparators != 1)
         {
-            throw new IncorrectContextFreeGrammarSeparatorException();
+            throw new IncorrectGrammarSeparatorException();
         }
     }
 }
