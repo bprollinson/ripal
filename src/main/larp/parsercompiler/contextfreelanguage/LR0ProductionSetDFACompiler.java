@@ -21,14 +21,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class ContextFreeGrammarLR0ProductionSetDFACompiler
+public class LR0ProductionSetDFACompiler
 {
     private GrammarAugmentor grammarAugmentor;
     private GrammarClosureCalculator closureCalculator;
     private ProductionNodeDotRepository productionNodeDotRepository;
     private Map<Set<Node>, LR0ProductionSetDFAState> productionSetToStateMap;
 
-    public ContextFreeGrammarLR0ProductionSetDFACompiler()
+    public LR0ProductionSetDFACompiler()
     {
         this.grammarAugmentor = new GrammarAugmentor();
         this.closureCalculator = new GrammarClosureCalculator();

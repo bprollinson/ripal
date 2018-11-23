@@ -27,12 +27,12 @@ import larp.parsetree.contextfreelanguage.TerminalNode;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
+public class LR0ProductionSetDFACompilerTest
 {
     @Test
     public void testCompileCreatesDFAForTerminalRuleFromStartState()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -69,7 +69,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompileCreatesDFAForNonTerminalRuleFromStartState()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -106,7 +106,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompileCreatesDFAForTerminalAndNonTerminalRuleFromStartState()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -151,7 +151,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompileCreatesDFAForTerminalRuleFromSubsequentState()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -193,7 +193,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompileCreatesDFAForNonTerminalRuleFromSubsequentState()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -235,7 +235,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompileCreatesDFAForTerminalAndNonTerminalRuleFromSubsequentState()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -285,7 +285,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompileAddsDeepClosureToStartState()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -346,7 +346,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompileAddsDeepClosureToSubsequentState()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -412,7 +412,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompileLoopsTransitionToExistingState()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -476,7 +476,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompileCreatesStateChain()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -523,7 +523,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompileAddsMultipleProductionsToNextStateBasedOnSameSymbol()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -582,7 +582,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompileHandlesMultiCharacterTerminalNode()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -624,7 +624,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompilerHandlesEpsilon()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -657,7 +657,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompilerHandlesEpsilonWithinStateWithOtherProductions()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -706,7 +706,7 @@ public class ContextFreeGrammarLR0ProductionSetDFACompilerTest
     @Test
     public void testCompileRemovesDuplicateProduction()
     {
-        ContextFreeGrammarLR0ProductionSetDFACompiler compiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());

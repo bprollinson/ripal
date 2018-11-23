@@ -32,11 +32,11 @@ import java.util.Set;
 
 public class LR0ParserCompiler
 {
-    private ContextFreeGrammarLR0ProductionSetDFACompiler DFACompiler;
+    private LR0ProductionSetDFACompiler DFACompiler;
 
     public LR0ParserCompiler()
     {
-        this.DFACompiler = new ContextFreeGrammarLR0ProductionSetDFACompiler();
+        this.DFACompiler = new LR0ProductionSetDFACompiler();
     }
 
     public LR0ParseTable compile(Grammar grammar) throws AmbiguousLR0ParseTableException
