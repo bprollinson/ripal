@@ -9,12 +9,12 @@ package larp.grammartokenizer.regularlanguage;
 
 import org.junit.Test;
 
-public class RegularExpressionIntermediateNestingLevelValidAssertionTest
+public class ExpressionIntermediateNestingLevelValidAssertionTest
 {
     @Test(expected = IncorrectExpressionNestingException.class)
     public void testValidateThrowsExceptionForNegativeNestingLevel() throws IncorrectExpressionNestingException
     {
-        RegularExpressionIntermediateNestingLevelValidAssertion assertion = new RegularExpressionIntermediateNestingLevelValidAssertion(-1);
+        ExpressionIntermediateNestingLevelValidAssertion assertion = new ExpressionIntermediateNestingLevelValidAssertion(-1);
 
         assertion.validate();
     }
@@ -22,7 +22,7 @@ public class RegularExpressionIntermediateNestingLevelValidAssertionTest
     @Test
     public void testValidateDoesNotThrowExceptionForZeroNestingLevel() throws IncorrectExpressionNestingException
     {
-        RegularExpressionIntermediateNestingLevelValidAssertion assertion = new RegularExpressionIntermediateNestingLevelValidAssertion(0);
+        ExpressionIntermediateNestingLevelValidAssertion assertion = new ExpressionIntermediateNestingLevelValidAssertion(0);
 
         assertion.validate();
     }
@@ -30,7 +30,7 @@ public class RegularExpressionIntermediateNestingLevelValidAssertionTest
     @Test
     public void testValidateDoesNotThrowExceptionForPositiveNestingLevel() throws IncorrectExpressionNestingException
     {
-        RegularExpressionIntermediateNestingLevelValidAssertion assertion = new RegularExpressionIntermediateNestingLevelValidAssertion(1);
+        ExpressionIntermediateNestingLevelValidAssertion assertion = new ExpressionIntermediateNestingLevelValidAssertion(1);
 
         assertion.validate();
     }

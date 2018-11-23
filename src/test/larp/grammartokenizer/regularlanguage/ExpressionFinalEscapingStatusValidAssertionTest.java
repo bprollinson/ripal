@@ -9,12 +9,12 @@ package larp.grammartokenizer.regularlanguage;
 
 import org.junit.Test;
 
-public class RegularExpressionFinalEscapingStatusValidAssertionTest
+public class ExpressionFinalEscapingStatusValidAssertionTest
 {
     @Test(expected = DanglingExpressionEscapeCharacterException.class)
     public void testValidateThrowsExceptionWhenEscaping() throws DanglingExpressionEscapeCharacterException
     {
-        RegularExpressionFinalEscapingStatusValidAssertion assertion = new RegularExpressionFinalEscapingStatusValidAssertion(true);
+        ExpressionFinalEscapingStatusValidAssertion assertion = new ExpressionFinalEscapingStatusValidAssertion(true);
 
         assertion.validate();
     }
@@ -22,7 +22,7 @@ public class RegularExpressionFinalEscapingStatusValidAssertionTest
     @Test
     public void testValidateDoesNotThrowExceptionWhenNotEscaping() throws DanglingExpressionEscapeCharacterException
     {
-        RegularExpressionFinalEscapingStatusValidAssertion assertion = new RegularExpressionFinalEscapingStatusValidAssertion(false);
+        ExpressionFinalEscapingStatusValidAssertion assertion = new ExpressionFinalEscapingStatusValidAssertion(false);
 
         assertion.validate();
     }

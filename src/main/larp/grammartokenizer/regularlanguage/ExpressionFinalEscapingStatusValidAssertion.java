@@ -9,11 +9,11 @@ package larp.grammartokenizer.regularlanguage;
 
 import larp.assertion.Assertion;
 
-public class RegularExpressionFinalEscapingStatusValidAssertion implements Assertion
+public class ExpressionFinalEscapingStatusValidAssertion implements Assertion
 {
     private boolean escaping;
 
-    public RegularExpressionFinalEscapingStatusValidAssertion(boolean escaping)
+    public ExpressionFinalEscapingStatusValidAssertion(boolean escaping)
     {
         this.escaping = escaping;
     }

@@ -46,8 +46,8 @@ public class Tokenizer
             lastCharacter = currentCharacter;
         }
 
-        new RegularExpressionFinalNestingLevelValidAssertion(this.nestingLevel).validate();
-        new RegularExpressionFinalEscapingStatusValidAssertion(this.escaping).validate();
+        new ExpressionFinalNestingLevelValidAssertion(this.nestingLevel).validate();
+        new ExpressionFinalEscapingStatusValidAssertion(this.escaping).validate();
 
         this.addPostfixEpsilon(tokens, lastCharacter);
 
@@ -79,7 +79,7 @@ public class Tokenizer
             return;
         }
 
-        new RegularExpressionIntermediateNestingLevelValidAssertion(this.nestingLevel).validate();
+        new ExpressionIntermediateNestingLevelValidAssertion(this.nestingLevel).validate();
 
         if (currentCharacter == this.openParenthesis)
         {

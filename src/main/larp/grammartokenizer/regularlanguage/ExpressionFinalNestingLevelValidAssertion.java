@@ -9,18 +9,18 @@ package larp.grammartokenizer.regularlanguage;
 
 import larp.assertion.Assertion;
 
-public class RegularExpressionIntermediateNestingLevelValidAssertion implements Assertion
+public class ExpressionFinalNestingLevelValidAssertion implements Assertion
 {
     private int nestingLevel;
 
-    public RegularExpressionIntermediateNestingLevelValidAssertion(int nestingLevel)
+    public ExpressionFinalNestingLevelValidAssertion(int nestingLevel)
     {
         this.nestingLevel = nestingLevel;
     }
 
     public void validate() throws IncorrectExpressionNestingException
     {
-        if (this.nestingLevel < 0)
+        if (this.nestingLevel != 0)
         {
             throw new IncorrectExpressionNestingException();
         }
