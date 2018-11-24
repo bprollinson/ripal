@@ -278,11 +278,11 @@ public class TokenizerTest
     }
 
     @Test(expected = IncorrectGrammarStatementPrefixException.class)
-    public void testTokenizeThrowsExceptionForIncorrecStartingTokenSequence() throws TokenizerException
+    public void testTokenizeThrowsExceptionForIncorrectStartingTokenSequence() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        tokenizer.tokenize("");
+        tokenizer.tokenize(":");
     }
 
     @Test(expected = IncorrectGrammarQuoteNestingException.class)
@@ -359,21 +359,27 @@ public class TokenizerTest
         tokenizer.tokenize("S:\\\\");
     }
 
-    @Test
-    public void testExceptionForIncorrectStartingTokenSequencePrioritizedOverExceptionForIncorrectNumberOfSeparators()
+    @Test(expected = IncorrectGrammarQuoteNestingException.class)
+    public void testExceptionForUncosedQuoteAtEndOfStringPrioritizedOverExceptionForIncorrectStartingTokenSequence() throws TokenizerException
     {
-        throw new RuntimeException();
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize(": \"");
     }
 
-    @Test
-    public void testExceptionForIncorrectStartingTokenSequencePrioritizedOverExceptionForUncosedQuoteAtEndOfString()
+    @Test(expected = IncorrectGrammarQuoteNestingException.class)
+    public void testExceptionForUnclosedQuoteAtEndOfStringPrioritizedOverExceptionForIncorrectNumberOfSeparators() throws TokenizerException
     {
-        throw new RuntimeException();
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize("S::\"");
     }
 
-    @Test
-    public void testExceptionForIncorrectNumberOfSeparatorsPrioritizedOverExceptionForUnclosedQuoteAtEndOfString()
+    @Test(expected = IncorrectGrammarStatementPrefixException.class)
+    public void testExceptionForIncorrectStartingTokenSequencePrioritizedOverExceptionForIncorrectNumberOfSeparators() throws TokenizerException
     {
-        throw new RuntimeException();
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize("");
     }
 }
