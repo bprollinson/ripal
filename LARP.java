@@ -5,12 +5,11 @@
  * See LICENSE.md for details.
  */
 
-import larp.parsercompiler.regularlanguage.ParserCompiler;
 import larp.parsetree.regularlanguage.ConcatenationNode;
 
 public class LARP
 {
-    public static void main(String args[])
+    public static void main(String[] args)
     {
         ConcatenationNode node = new ConcatenationNode();
         System.out.println(node);
