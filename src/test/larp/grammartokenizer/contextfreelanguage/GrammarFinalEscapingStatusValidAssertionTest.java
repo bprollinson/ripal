@@ -11,15 +11,19 @@ import org.junit.Test;
 
 public class GrammarFinalEscapingStatusValidAssertionTest
 {
-    @Test
-    public void testValidateThrowsExceptionWhenEscaping()
+    @Test(expected = DanglingGrammarEscapeCharacterException.class)
+    public void testValidateThrowsExceptionWhenEscaping() throws DanglingGrammarEscapeCharacterException
     {
-        throw new RuntimeException();
+        GrammarFinalEscapingStatusValidAssertion assertion = new GrammarFinalEscapingStatusValidAssertion(true);
+
+        assertion.validate();
     }
 
     @Test
-    public void testValidateDoesNotThrowExceptionWhenNotEscaping()
+    public void testValidateDoesNotThrowExceptionWhenNotEscaping() throws DanglingGrammarEscapeCharacterException
     {
-        throw new RuntimeException();
+        GrammarFinalEscapingStatusValidAssertion assertion = new GrammarFinalEscapingStatusValidAssertion(false);
+
+        assertion.validate();
     }
 }
