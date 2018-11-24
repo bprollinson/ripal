@@ -359,6 +359,30 @@ public class TokenizerTest
         tokenizer.tokenize("S:\\\\");
     }
 
+    @Test
+    public void testTokenizeThrowsExceptionForDanglingEscapeCharacter()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForUncosedQuoteAtEndOfString()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForIncorrectStartingTokenSequence()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForIncorrectNumberOfSeparators()
+    {
+        throw new RuntimeException();
+    }
+
     @Test(expected = IncorrectGrammarQuoteNestingException.class)
     public void testExceptionForUncosedQuoteAtEndOfStringPrioritizedOverExceptionForIncorrectStartingTokenSequence() throws TokenizerException
     {
