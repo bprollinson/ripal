@@ -314,9 +314,11 @@ public class TokenizerTest
         assertEquals(expectedResult, result);
     }
 
-    @Test
-    public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForUnclosedParenthesisAtEndOfString()
+    @Test(expected = DanglingExpressionEscapeCharacterException.class)
+    public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForUnclosedParenthesisAtEndOfString() throws TokenizerException
     {
-        throw new RuntimeException();
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize("(\\");
     }
 }

@@ -46,8 +46,8 @@ public class Tokenizer
             lastCharacter = currentCharacter;
         }
 
-        new ExpressionFinalNestingLevelValidAssertion(this.nestingLevel).validate();
         new ExpressionFinalEscapingStatusValidAssertion(this.escaping).validate();
+        new ExpressionFinalNestingLevelValidAssertion(this.nestingLevel).validate();
 
         this.addPostfixEpsilon(tokens, lastCharacter);
 
