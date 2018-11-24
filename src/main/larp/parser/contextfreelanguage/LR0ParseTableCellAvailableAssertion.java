@@ -34,15 +34,15 @@ public class LR0ParseTableCellAvailableAssertion implements Assertion
             return;
         }
 
-        if (this.action instanceof LR0ShiftAction && existingAction instanceof LR0ReduceAction)
+        if (this.action.isShiftAction() && existingAction.isReduceAction())
         {
             throw new LR0ShiftReduceConflictException();
         }
-        if (this.action instanceof LR0ReduceAction && existingAction instanceof LR0ShiftAction)
+        if (this.action.isReduceAction() && existingAction.isShiftAction())
         {
             throw new LR0ShiftReduceConflictException();
         }
-        if (this.action instanceof LR0ReduceAction && existingAction instanceof LR0ReduceAction)
+        if (this.action.isReduceAction() && existingAction.isReduceAction())
         {
             throw new LR0ReduceReduceConflictException();
         }

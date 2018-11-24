@@ -21,6 +21,26 @@ public class LR0AcceptAction implements LR0ParseTableAction
         return null;
     }
 
+    public boolean isShiftAction()
+    {
+        return false;
+    }
+
+    public boolean isReduceAction()
+    {
+        return false;
+    }
+
+    public boolean isGotoAction()
+    {
+        return false;
+    }
+
+    public boolean isAcceptAction()
+    {
+        return true;
+    }
+
     public boolean equals(Object other)
     {
         return other instanceof LR0AcceptAction;

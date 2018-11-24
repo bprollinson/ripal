@@ -13,4 +13,8 @@ public interface LR0ParseTableAction
 {
     public boolean supportsTransition();
     public State getNextState();
+    public boolean isShiftAction();
+    public boolean isReduceAction();
+    public boolean isGotoAction();
+    public boolean isAcceptAction();
 }

@@ -28,6 +28,26 @@ public class LR0GotoAction implements LR0ParseTableAction
         return this.nextState;
     }
 
+    public boolean isShiftAction()
+    {
+        return false;
+    }
+
+    public boolean isReduceAction()
+    {
+        return false;
+    }
+
+    public boolean isGotoAction()
+    {
+        return true;
+    }
+
+    public boolean isAcceptAction()
+    {
+        return false;
+    }
+
     public boolean equals(Object other)
     {
         if (!(other instanceof LR0GotoAction))

@@ -57,16 +57,16 @@ public class LR0Parser implements Parser, ComparableStructure
                 {
                     return false;
                 }
-                if (action instanceof LR0AcceptAction)
+                if (action.isAcceptAction())
                 {
                     return true;
                 }
-                if (action instanceof LR0ShiftAction)
+                if (action.isShiftAction())
                 {
                     inputString = inputString.substring(1);
                     stack.push(characterNode);
                 }
-                if (action instanceof LR0ReduceAction)
+                if (action.isReduceAction())
                 {
                     this.applyReduction((LR0ReduceAction)action, stack);
                 }

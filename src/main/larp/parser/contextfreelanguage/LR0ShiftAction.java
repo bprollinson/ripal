@@ -28,6 +28,26 @@ public class LR0ShiftAction implements LR0ParseTableAction
         return this.nextState;
     }
 
+    public boolean isShiftAction()
+    {
+        return true;
+    }
+
+    public boolean isReduceAction()
+    {
+        return false;
+    }
+
+    public boolean isGotoAction()
+    {
+        return false;
+    }
+
+    public boolean isAcceptAction()
+    {
+        return false;
+    }
+
     public boolean equals(Object other)
     {
         if (!(other instanceof LR0ShiftAction))

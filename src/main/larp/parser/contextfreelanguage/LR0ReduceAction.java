@@ -33,6 +33,26 @@ public class LR0ReduceAction implements LR0ParseTableAction
         return this.productionIndex;
     }
 
+    public boolean isShiftAction()
+    {
+        return false;
+    }
+
+    public boolean isReduceAction()
+    {
+        return true;
+    }
+
+    public boolean isGotoAction()
+    {
+        return false;
+    }
+
+    public boolean isAcceptAction()
+    {
+        return false;
+    }
+
     public boolean equals(Object other)
     {
         if (!(other instanceof LR0ReduceAction))
