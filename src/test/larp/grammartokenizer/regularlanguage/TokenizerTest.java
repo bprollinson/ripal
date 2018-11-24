@@ -313,4 +313,10 @@ public class TokenizerTest
 
         assertEquals(expectedResult, result);
     }
+
+    @Test
+    public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForUnclosedParenthesisAtEndOfString()
+    {
+        throw new RuntimeException();
+    }
 }

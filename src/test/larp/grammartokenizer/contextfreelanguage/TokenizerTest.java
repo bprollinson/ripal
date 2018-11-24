@@ -278,7 +278,7 @@ public class TokenizerTest
     }
 
     @Test(expected = IncorrectGrammarStatementPrefixException.class)
-    public void testTokenizeThrowsExceptionForIncorrecTokenSequence() throws TokenizerException
+    public void testTokenizeThrowsExceptionForIncorrecStartingTokenSequence() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
@@ -357,5 +357,23 @@ public class TokenizerTest
         Tokenizer tokenizer = new Tokenizer();
 
         tokenizer.tokenize("S:\\\\");
+    }
+
+    @Test
+    public void testExceptionForIncorrectStartingTokenSequencePrioritizedOverExceptionForIncorrectNumberOfSeparators()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testExceptionForIncorrectStartingTokenSequencePrioritizedOverExceptionForUncosedQuoteAtEndOfString()
+    {
+        throw new RuntimeException();
+    }
+
+    @Test
+    public void testExceptionForIncorrectNumberOfSeparatorsPrioritizedOverExceptionForUnclosedQuoteAtEndOfString()
+    {
+        throw new RuntimeException();
     }
 }
