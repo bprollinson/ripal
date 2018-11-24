@@ -359,28 +359,36 @@ public class TokenizerTest
         tokenizer.tokenize("S:\\\\");
     }
 
-    @Test
-    public void testTokenizeThrowsExceptionForDanglingEscapeCharacter()
+    @Test(expected = DanglingGrammarEscapeCharacterException.class)
+    public void testTokenizeThrowsExceptionForDanglingEscapeCharacter() throws TokenizerException
     {
-        throw new RuntimeException();
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize("S:\"\\");
     }
 
-    @Test
-    public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForUncosedQuoteAtEndOfString()
+    @Test(expected = DanglingGrammarEscapeCharacterException.class)
+    public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForUncosedQuoteAtEndOfString() throws TokenizerException
     {
-        throw new RuntimeException();
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize("S:\"\\");
     }
 
-    @Test
-    public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForIncorrectStartingTokenSequence()
+    @Test(expected = DanglingGrammarEscapeCharacterException.class)
+    public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForIncorrectStartingTokenSequence() throws TokenizerException
     {
-        throw new RuntimeException();
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize(": \"\\");
     }
 
-    @Test
-    public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForIncorrectNumberOfSeparators()
+    @Test(expected = DanglingGrammarEscapeCharacterException.class)
+    public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForIncorrectNumberOfSeparators() throws TokenizerException
     {
-        throw new RuntimeException();
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize("S::\"\\");
     }
 
     @Test(expected = IncorrectGrammarQuoteNestingException.class)

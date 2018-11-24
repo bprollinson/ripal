@@ -39,6 +39,7 @@ public class Tokenizer
 
         List<Token> tokens = this.convertCharactersToTokens(expression);
 
+        new GrammarFinalEscapingStatusValidAssertion(this.escaping).validate();
         new GrammarFinalQuoteNestingCorrectAssertion(this.inTerminal).validate();
         new GrammarStartingTokensValidAssertion(tokens).validate();
         new GrammarCorrectNumberOfSeparatorsAssertion(this.numSeparators).validate();
