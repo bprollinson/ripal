@@ -314,6 +314,14 @@ public class TokenizerTest
         assertEquals(expectedResult, result);
     }
 
+    @Test(expected = IncorrectExpressionNestingException.class)
+    public void testExceptionForNegativeParenthesisNestingPrioritizedOverExceptionForDanglingEscapeCharacter() throws TokenizerException
+    {
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize(")(\\");
+    }
+
     @Test(expected = DanglingExpressionEscapeCharacterException.class)
     public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForUnclosedParenthesisAtEndOfString() throws TokenizerException
     {

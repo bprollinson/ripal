@@ -367,6 +367,14 @@ public class TokenizerTest
         tokenizer.tokenize("S::");
     }
 
+    @Test(expected = IncorrectGrammarEscapeCharacterPositionException.class)
+    public void testExceptionForEscapeCharacterOutsideTerminalStringPrioritizedOverExceptionForDangingEscapeCharacter() throws TokenizerException
+    {
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize("S:\\\\\"\\");
+    }
+
     @Test(expected = DanglingGrammarEscapeCharacterException.class)
     public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForUncosedQuoteAtEndOfString() throws TokenizerException
     {
