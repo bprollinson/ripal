@@ -277,30 +277,6 @@ public class TokenizerTest
         assertEquals(expectedResult, result);
     }
 
-    @Test(expected = IncorrectGrammarStatementPrefixException.class)
-    public void testTokenizeThrowsExceptionForIncorrectStartingTokenSequence() throws TokenizerException
-    {
-        Tokenizer tokenizer = new Tokenizer();
-
-        tokenizer.tokenize(":");
-    }
-
-    @Test(expected = IncorrectGrammarQuoteNestingException.class)
-    public void testTokenizeThrowsExceptionForUnclosedQuoteAtEndOfString() throws TokenizerException
-    {
-        Tokenizer tokenizer = new Tokenizer();
-
-        tokenizer.tokenize("S:\"a");
-    }
-
-    @Test(expected = IncorrectGrammarSeparatorException.class)
-    public void testTokenizeThrowsExceptionForIncorrectNumberofSeparators() throws TokenizerException
-    {
-        Tokenizer tokenizer = new Tokenizer();
-
-        tokenizer.tokenize("S::");
-    }
-
     @Test
     public void testTokenizeTokenizesColonWithinTerminalString() throws TokenizerException
     {
@@ -343,14 +319,6 @@ public class TokenizerTest
         assertEquals(expectedResult, result);
     }
 
-    @Test(expected = IncorrectGrammarQuoteNestingException.class)
-    public void testTokenizeThrowsExceptionForUnclosedQuoteAtEndOfStringContainingEscapedQuote() throws TokenizerException
-    {
-        Tokenizer tokenizer = new Tokenizer();
-
-        tokenizer.tokenize("S:\"\\\"");
-    }
-
     @Test(expected = IncorrectGrammarEscapeCharacterPositionException.class)
     public void testTokenizeThrowsExceptionForEscapeCharacterOutsideTerminalString() throws TokenizerException
     {
@@ -365,6 +333,38 @@ public class TokenizerTest
         Tokenizer tokenizer = new Tokenizer();
 
         tokenizer.tokenize("S:\"\\");
+    }
+
+    @Test(expected = IncorrectGrammarQuoteNestingException.class)
+    public void testTokenizeThrowsExceptionForUnclosedQuoteAtEndOfString() throws TokenizerException
+    {
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize("S:\"a");
+    }
+
+    @Test(expected = IncorrectGrammarQuoteNestingException.class)
+    public void testTokenizeThrowsExceptionForUnclosedQuoteAtEndOfStringContainingEscapedQuote() throws TokenizerException
+    {
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize("S:\"\\\"");
+    }
+
+    @Test(expected = IncorrectGrammarStatementPrefixException.class)
+    public void testTokenizeThrowsExceptionForIncorrectStartingTokenSequence() throws TokenizerException
+    {
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize(":");
+    }
+
+    @Test(expected = IncorrectGrammarSeparatorException.class)
+    public void testTokenizeThrowsExceptionForIncorrectNumberofSeparators() throws TokenizerException
+    {
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize("S::");
     }
 
     @Test(expected = DanglingGrammarEscapeCharacterException.class)

@@ -246,14 +246,6 @@ public class TokenizerTest
         tokenizer.tokenize(")(");
     }
 
-    @Test(expected = IncorrectExpressionNestingException.class)
-    public void testTokenizeThrowsExceptionForUnclosedParenthesisAtEndOfString() throws TokenizerException
-    {
-        Tokenizer tokenizer = new Tokenizer();
-
-        tokenizer.tokenize("(");
-    }
-
     @Test
     public void testTokenizeTokenizesEscapedSpecialCharacters() throws TokenizerException
     {
@@ -276,6 +268,14 @@ public class TokenizerTest
         Tokenizer tokenizer = new Tokenizer();
 
         List<Token> result = tokenizer.tokenize("\\");
+    }
+
+    @Test(expected = IncorrectExpressionNestingException.class)
+    public void testTokenizeThrowsExceptionForUnclosedParenthesisAtEndOfString() throws TokenizerException
+    {
+        Tokenizer tokenizer = new Tokenizer();
+
+        tokenizer.tokenize("(");
     }
 
     @Test
