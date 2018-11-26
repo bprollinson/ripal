@@ -8,6 +8,7 @@
 package larp.parsercompiler.contextfreelanguage;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -29,6 +30,16 @@ import java.util.Set;
 
 public class LR0ProductionSetDFACompilerTest
 {
+    @Test
+    public void testA()
+    {
+        LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
+
+        Grammar grammar = new Grammar();
+
+        assertNull(compiler.compile(grammar));
+    }
+
     @Test
     public void testCompileCreatesDFAForTerminalRuleFromStartState()
     {

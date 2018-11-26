@@ -41,6 +41,10 @@ public class LR0ProductionSetDFACompiler
         Grammar augmentedGrammar = this.grammarAugmentor.augment(grammar);
 
         Set<Node> productionSet = new HashSet<Node>();
+        if (augmentedGrammar.getStartSymbol() == null)
+        {
+            return null;
+        }
         Node firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(augmentedGrammar.getProduction(0));
         productionSet.add(firstProductionWithDot);
 
