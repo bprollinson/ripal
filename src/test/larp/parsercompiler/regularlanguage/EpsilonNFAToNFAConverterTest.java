@@ -19,6 +19,20 @@ import larp.automaton.StateTransition;
 public class EpsilonNFAToNFAConverterTest
 {
     @Test
+    public void testSingleStateNFARemainsUnchanged()
+    {
+        EpsilonNFAToNFAConverter converter = new EpsilonNFAToNFAConverter();
+
+        NFAState expectedState1 = new NFAState("S0", false);
+        NFA expectedNFA = new NFA(expectedState1);
+
+        EpsilonNFAState state1 = new EpsilonNFAState("S0", false);
+        EpsilonNFA epsilonNFA = new EpsilonNFA(state1);
+
+        assertTrue(expectedNFA.structureEquals(converter.convert(epsilonNFA)));
+    }
+
+    @Test
     public void testNonEpsilonNFARemainsUnchanged()
     {
         EpsilonNFAToNFAConverter converter = new EpsilonNFAToNFAConverter();

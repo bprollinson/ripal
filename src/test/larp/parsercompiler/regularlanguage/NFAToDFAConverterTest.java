@@ -19,6 +19,20 @@ import larp.automaton.StateTransition;
 public class NFAToDFAConverterTest
 {
     @Test
+    public void testSingleStateDFARemainsUnchanged()
+    {
+        NFAToDFAConverter converter = new NFAToDFAConverter();
+
+        DFAState expectedState1 = new DFAState("S0", false);
+        DFA expectedDFA = new DFA(expectedState1);
+
+        NFAState state1 = new NFAState("S0", false);
+        NFA NFA = new NFA(state1);
+
+        assertTrue(expectedDFA.structureEquals(converter.convert(NFA)));
+    }
+
+    @Test
     public void testDFARemainsUnchanged()
     {
         NFAToDFAConverter converter = new NFAToDFAConverter();
