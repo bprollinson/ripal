@@ -35,6 +35,18 @@ public class ParserFactoryTest
         assertTrue(expectedDFA.structureEquals(dfa));
     }
 
+    @Test
+    public void testFactoryCreatesDFAForEmptyRegularExpression() throws TokenizerException
+    {
+        ParserFactory factory = new ParserFactory();
+        DFA dfa = factory.factory("");
+
+        DFAState state1 = new DFAState("0", true);
+        DFA expectedDFA = new DFA(state1);
+
+        assertTrue(expectedDFA.structureEquals(dfa));
+    }
+
     @Test(expected = IncorrectExpressionNestingException.class)
     public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectExpression() throws TokenizerException
     {

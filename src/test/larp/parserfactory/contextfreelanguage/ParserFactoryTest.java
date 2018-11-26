@@ -110,6 +110,19 @@ public class ParserFactoryTest
         assertTrue(expectedParser.structureEquals(factory.factory(input)));
     }
 
+    @Test
+    public void testFactoryCreatesLL1ParserForEmptyContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
+    {
+        ParserFactory factory = new ParserFactory();
+        List<String> input = new ArrayList<String>();
+
+        Grammar expectedGrammar = new Grammar();
+        LL1ParseTable expectedTable = new LL1ParseTable(expectedGrammar);
+        LL1Parser expectedParser = new LL1Parser(expectedTable);
+
+        assertEquals(expectedParser, factory.factory(input));
+    }
+
     @Test(expected = LR0ReduceReduceConflictException.class)
     public void testFactoryThrowsAmbiguousLR0ParseTableExceptionForNonLL1NonLR0ContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
     {
