@@ -33,6 +33,11 @@ public class FirstSetCalculator
 
     public Set<Node> getFirst(int ruleIndex)
     {
+        if (ruleIndex >= this.grammar.getProductions().size())
+        {
+            return new HashSet<Node>();
+        }
+
         this.initialize();
 
         Set<Integer> rulesUsed = new HashSet<Integer>();

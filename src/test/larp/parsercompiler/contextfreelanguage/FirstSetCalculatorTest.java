@@ -22,6 +22,16 @@ import java.util.Set;
 public class FirstSetCalculatorTest
 {
     @Test
+    public void testGetFirstReturnsEmptySetForNonExistentProduction()
+    {
+        Grammar grammar = new Grammar();
+
+        FirstSetCalculator calculator = new FirstSetCalculator(grammar);
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        assertEquals(expectedFirsts, calculator.getFirst(0));
+    }
+
+    @Test
     public void testGetFirstReturnsSingleTerminalDirectlyFromProduction()
     {
         Grammar grammar = new Grammar();
@@ -242,6 +252,16 @@ public class FirstSetCalculatorTest
         Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("b"));
         assertEquals(expectedFirsts, calculator.getFirst(0));
+    }
+
+    @Test
+    public void testGetFirstReturnsEmptySetForNonExistentNonTerminalNode()
+    {
+        Grammar grammar = new Grammar();
+
+        FirstSetCalculator calculator = new FirstSetCalculator(grammar);
+        Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
+        assertEquals(expectedFirsts, calculator.getFirst(new NonTerminalNode("S")));
     }
 
     @Test
