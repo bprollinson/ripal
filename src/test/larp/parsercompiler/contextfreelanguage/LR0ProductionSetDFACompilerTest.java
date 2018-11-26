@@ -31,7 +31,7 @@ import java.util.Set;
 public class LR0ProductionSetDFACompilerTest
 {
     @Test
-    public void testA()
+    public void testCompileReturnsNullForEmptyGrammar()
     {
         LR0ProductionSetDFACompiler compiler = new LR0ProductionSetDFACompiler();
 
@@ -751,12 +751,6 @@ public class LR0ProductionSetDFACompilerTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(grammar)));
-    }
-
-    @Test
-    public void testCompileHandlesEmptyGrammar()
-    {
-        throw new RuntimeException();
     }
 
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, Node... rightHandNodes)
