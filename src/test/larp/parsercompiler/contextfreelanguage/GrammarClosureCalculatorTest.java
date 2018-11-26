@@ -40,7 +40,7 @@ public class GrammarClosureCalculatorTest
     }
 
     @Test
-    public void testCalculateDoesNotAddProductionWhenContextFreeGrammarIsEmpty()
+    public void testCalculateDoesNotAddProductionWhenGrammarIsEmpty()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 

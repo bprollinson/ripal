@@ -39,7 +39,7 @@ import java.util.List;
 public class ParserFactoryTest
 {
     @Test
-    public void testFactoryCreatesLL1ParserForLL1AndLR0ContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesLL1ParserForLL1AndLR0Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
@@ -55,7 +55,7 @@ public class ParserFactoryTest
     }
 
     @Test
-    public void testFactoryCreatesLL1ParserForLL1AndNotLR0ContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesLL1ParserForLL1AndNotLR0Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
@@ -74,7 +74,7 @@ public class ParserFactoryTest
     }
 
     @Test
-    public void testFactoryCreatesLR0ParserForLR0AndNotLL1ContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesLR0ParserForLR0AndNotLL1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
@@ -111,7 +111,7 @@ public class ParserFactoryTest
     }
 
     @Test
-    public void testFactoryCreatesLL1ParserForEmptyContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesLL1ParserForEmptyGrammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
@@ -124,7 +124,7 @@ public class ParserFactoryTest
     }
 
     @Test(expected = LR0ReduceReduceConflictException.class)
-    public void testFactoryThrowsAmbiguousLR0ParseTableExceptionForNonLL1NonLR0ContextFreeGrammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryThrowsAmbiguousLR0ParseTableExceptionForNonLL1NonLR0Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
