@@ -27,7 +27,7 @@ import java.util.List;
 public class LL1ParserTest
 {
     @Test
-    public void testAcceptsReturnsTrueForCorrectCharacterInSingleCharacterCFG() throws AmbiguousLL1ParseTableException
+    public void testAcceptsReturnsTrueForCorrectCharacterInSingleCharacterGrammar() throws AmbiguousLL1ParseTableException
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -40,7 +40,7 @@ public class LL1ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsFalseForIncorrectCharacterInSingleCharacterCFG() throws AmbiguousLL1ParseTableException
+    public void testAcceptsReturnsFalseForIncorrectCharacterInSingleCharacterGrammar() throws AmbiguousLL1ParseTableException
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -53,7 +53,7 @@ public class LL1ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsTrueForMultiCharacterCFGUnsingMultiCharacterTerminalNode() throws AmbiguousLL1ParseTableException
+    public void testAcceptsReturnsTrueForMultiCharacterGrammarUnsingMultiCharacterTerminalNode() throws AmbiguousLL1ParseTableException
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
@@ -66,7 +66,7 @@ public class LL1ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsTrueForMultiCharacterCFGUsingMultipleTerminalNodes() throws AmbiguousLL1ParseTableException
+    public void testAcceptsReturnsTrueForMultiCharacterGrammarUsingMultipleTerminalNodes() throws AmbiguousLL1ParseTableException
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
@@ -79,7 +79,7 @@ public class LL1ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsFalseForCharacterMismatchInMultiCharacterCFGUsingMultiCharacterTerminalNode() throws AmbiguousLL1ParseTableException
+    public void testAcceptsReturnsFalseForCharacterMismatchInMultiCharacterGrammarUsingMultiCharacterTerminalNode() throws AmbiguousLL1ParseTableException
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
@@ -105,7 +105,7 @@ public class LL1ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsFalseForUnmatchedCFGCharacter() throws AmbiguousLL1ParseTableException
+    public void testAcceptsReturnsFalseForUnmatchedGrammarCharacter() throws AmbiguousLL1ParseTableException
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("ab"));
@@ -204,7 +204,7 @@ public class LL1ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsFalseForEmptyStringWhenCFGIsEmpty()
+    public void testAcceptsReturnsFalseForEmptyStringWhenGrammarIsEmpty()
     {
         Grammar grammar = new Grammar();
 
@@ -215,7 +215,7 @@ public class LL1ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsFalseForNonEmptyStringWhenCFGIsEmpty()
+    public void testAcceptsReturnsFalseForNonEmptyStringWhenGrammarIsEmpty()
     {
         Grammar grammar = new Grammar();
 

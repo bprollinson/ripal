@@ -26,7 +26,7 @@ import java.util.List;
 public class LR0ParserTest
 {
     @Test
-    public void testAcceptsReturnsTrueForCorrectCharacterInSingleCharacterCFG() throws AmbiguousLR0ParseTableException
+    public void testAcceptsReturnsTrueForCorrectCharacterInSingleCharacterGrammar() throws AmbiguousLR0ParseTableException
     {
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
@@ -49,7 +49,7 @@ public class LR0ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsFalseForIncorrectCharacterInSingleCharacterCFG() throws AmbiguousLR0ParseTableException
+    public void testAcceptsReturnsFalseForIncorrectCharacterInSingleCharacterGrammar() throws AmbiguousLR0ParseTableException
     {
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
@@ -72,7 +72,7 @@ public class LR0ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsTrueForMultiCharacterCFGUsingMultipleTerminalNodes() throws AmbiguousLR0ParseTableException
+    public void testAcceptsReturnsTrueForMultiCharacterGrammarUsingMultipleTerminalNodes() throws AmbiguousLR0ParseTableException
     {
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
@@ -144,7 +144,7 @@ public class LR0ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsFalseForUnmatchedCFGCharacter() throws AmbiguousLR0ParseTableException
+    public void testAcceptsReturnsFalseForUnmatchedGrammarCharacter() throws AmbiguousLR0ParseTableException
     {
         LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
         LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
@@ -190,7 +190,7 @@ public class LR0ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsFalseForEmptyStringWhenCFGIsEmpty()
+    public void testAcceptsReturnsFalseForEmptyStringWhenGrammarIsEmpty()
     {
         Grammar augmentedGrammar = new Grammar();
 
@@ -202,7 +202,7 @@ public class LR0ParserTest
     }
 
     @Test
-    public void testAcceptsReturnsFalseForNonEmptyStringWhenCFGIsEmpty()
+    public void testAcceptsReturnsFalseForNonEmptyStringWhenGrammarIsEmpty()
     {
         Grammar augmentedGrammar = new Grammar();
 

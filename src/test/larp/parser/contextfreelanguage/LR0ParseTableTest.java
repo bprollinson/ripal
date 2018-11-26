@@ -157,7 +157,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries() throws AmbiguousLR0ParseTableException
+    public void testEqualsReturnsTrueForEmptyGrammarAndNoTableEntries() throws AmbiguousLR0ParseTableException
     {
         LR0ParseTable parseTable = new LR0ParseTable(new Grammar(), null);
         LR0ParseTable otherParseTable = new LR0ParseTable(new Grammar(), null);
@@ -166,7 +166,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsTrueForNonEmptyCFGAndTableEntries() throws AmbiguousLR0ParseTableException
+    public void testEqualsReturnsTrueForNonEmptyGrammarAndTableEntries() throws AmbiguousLR0ParseTableException
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -198,7 +198,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForDifferentCFGs() throws AmbiguousLR0ParseTableException
+    public void testEqualsReturnsFalseForDifferentGrammars() throws AmbiguousLR0ParseTableException
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -289,7 +289,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrueForEmptyTableAndCFG()
+    public void testStructureEqualsReturnsTrueForEmptyTableAndGrammar()
     {
         Grammar grammar = new Grammar();
 
@@ -299,7 +299,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGContainingTerminalInSameSpot() throws AmbiguousLR0ParseTableException
+    public void testStructureEqualsReturnsTrueForNonEmptyTableAndGrammarContainingTerminalInSameSpot() throws AmbiguousLR0ParseTableException
     {
         Grammar grammar = new Grammar();
 
@@ -316,7 +316,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGContainingNonTerminalInSameSpot() throws AmbiguousLR0ParseTableException
+    public void testStructureEqualsReturnsTrueForNonEmptyTableAndGrammarContainingNonTerminalInSameSpot() throws AmbiguousLR0ParseTableException
     {
         Grammar grammar = new Grammar();
 
@@ -333,7 +333,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrueForNonEmptyTableAndCFGContainingTerminalAndNonTerminalInSameSpots() throws AmbiguousLR0ParseTableException
+    public void testStructureEqualsReturnsTrueForNonEmptyTableAndGrammarContainingTerminalAndNonTerminalInSameSpots() throws AmbiguousLR0ParseTableException
     {
         Grammar grammar = new Grammar();
 
@@ -352,7 +352,7 @@ public class LR0ParseTableTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForDifferentCFGs() throws AmbiguousLR0ParseTableException
+    public void testStructureEqualsReturnsFalseForDifferentGrammars() throws AmbiguousLR0ParseTableException
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));

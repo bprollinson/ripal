@@ -22,7 +22,7 @@ import larp.parsetree.contextfreelanguage.TerminalNode;
 public class LL1ParserCompilerTest
 {
     @Test
-    public void testCompileReturnsEmptyParseTableForEmptyCFG() throws AmbiguousLL1ParseTableException
+    public void testCompileReturnsEmptyParseTableForEmptyGrammar() throws AmbiguousLL1ParseTableException
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
@@ -33,7 +33,7 @@ public class LL1ParserCompilerTest
     }
 
     @Test
-    public void testCompileReturnsParseTableForSingleCharacterProductionCFG() throws AmbiguousLL1ParseTableException
+    public void testCompileReturnsParseTableForSingleCharacterProductionGrammar() throws AmbiguousLL1ParseTableException
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
@@ -47,7 +47,7 @@ public class LL1ParserCompilerTest
     }
 
     @Test
-    public void testCompilerReturnsEmptyParseTableForSingleNonTerminalProductionCFG() throws AmbiguousLL1ParseTableException
+    public void testCompilerReturnsEmptyParseTableForSingleNonTerminalProductionGrammar() throws AmbiguousLL1ParseTableException
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 
@@ -60,7 +60,7 @@ public class LL1ParserCompilerTest
     }
 
     @Test
-    public void testCompileReturnsParseTableForSingleNonTerminalAndSingleTerminalProductionCFG() throws AmbiguousLL1ParseTableException
+    public void testCompileReturnsParseTableForSingleNonTerminalAndSingleTerminalProductionGrammar() throws AmbiguousLL1ParseTableException
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
 

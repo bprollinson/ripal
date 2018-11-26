@@ -23,7 +23,7 @@ import java.util.Set;
 public class FollowSetCalculatorTest
 {
     @Test
-    public void testGetFollowReturnsEmptySetForEmptyCFG()
+    public void testGetFollowReturnsEmptySetForEmptyGrammar()
     {
         Grammar grammar = new Grammar();
 
@@ -33,7 +33,7 @@ public class FollowSetCalculatorTest
     }
 
     @Test
-    public void testGetFollowReturnsEmptySetForNonTerminalNodeNotAppearingInCFG()
+    public void testGetFollowReturnsEmptySetForNonTerminalNodeNotAppearingInGrammar()
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));

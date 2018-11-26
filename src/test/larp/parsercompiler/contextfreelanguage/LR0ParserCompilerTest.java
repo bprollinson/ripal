@@ -31,7 +31,7 @@ import java.util.HashSet;
 public class LR0ParserCompilerTest
 {
     @Test
-    public void testCompileReturnsEmptyParseTableForEmptyCFG() throws AmbiguousLR0ParseTableException
+    public void testCompileReturnsEmptyParseTableForEmptyGrammar() throws AmbiguousLR0ParseTableException
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
@@ -42,7 +42,7 @@ public class LR0ParserCompilerTest
     }
 
     @Test
-    public void testCompileReturnsParseTableForSingleCharacterProductionCFG() throws AmbiguousLR0ParseTableException
+    public void testCompileReturnsParseTableForSingleCharacterProductionGrammar() throws AmbiguousLR0ParseTableException
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
@@ -68,7 +68,7 @@ public class LR0ParserCompilerTest
     }
 
     @Test
-    public void testCompileReturnsParseTableForSingleNonTerminalProductionCFG() throws AmbiguousLR0ParseTableException
+    public void testCompileReturnsParseTableForSingleNonTerminalProductionGrammar() throws AmbiguousLR0ParseTableException
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
@@ -93,7 +93,7 @@ public class LR0ParserCompilerTest
     }
 
     @Test
-    public void testCompileReturnsParseTableForSingleNonTerminalAndSingleTerminalProductionCFG() throws AmbiguousLR0ParseTableException
+    public void testCompileReturnsParseTableForSingleNonTerminalAndSingleTerminalProductionGrammar() throws AmbiguousLR0ParseTableException
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
@@ -338,7 +338,7 @@ public class LR0ParserCompilerTest
     }
 
     @Test
-    public void testCompileReturnsTableForCFGWithDFAContainingCycle() throws AmbiguousLR0ParseTableException
+    public void testCompileReturnsTableForGrammarWithDFAContainingCycle() throws AmbiguousLR0ParseTableException
     {
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 

@@ -35,7 +35,7 @@ public class GrammarTest
     }
 
     @Test
-    public void testGetStartSymbolReturnsNullForEmptyCFG()
+    public void testGetStartSymbolReturnsNullForEmptyGrammar()
     {
         Grammar grammar = new Grammar();
 
@@ -43,7 +43,7 @@ public class GrammarTest
     }
 
     @Test
-    public void testEqualsReturnsTrueForTwoEmptyCFGs()
+    public void testEqualsReturnsTrueForTwoEmptyGrammars()
     {
         Grammar grammar = new Grammar();
 
@@ -53,7 +53,7 @@ public class GrammarTest
     }
 
     @Test
-    public void testEqualsReturnsTrueForTwoCFGsWithTheSameProductions()
+    public void testEqualsReturnsTrueForTwoGrammarssWithTheSameProductions()
     {
         Grammar grammar = new Grammar();
         ProductionNode node = new ProductionNode();
@@ -71,7 +71,7 @@ public class GrammarTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForTwoCFGSWithDifferentProductions()
+    public void testEqualsReturnsFalseForTwoGrammarsWithDifferentProductions()
     {
         Grammar grammar = new Grammar();
         ProductionNode node = new ProductionNode();

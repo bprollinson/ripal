@@ -76,7 +76,7 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsTrueForEmptyCFGAndNoTableEntries()
+    public void testEqualsReturnsTrueForEmptyGrammarAndNoTableEntries()
     {
         LL1ParseTable parseTable = new LL1ParseTable(new Grammar());
         LL1ParseTable otherParseTable = new LL1ParseTable(new Grammar());
@@ -85,7 +85,7 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsTrueForNonEmptyCFGAndTableEntries() throws AmbiguousLL1ParseTableException
+    public void testEqualsReturnsTrueForNonEmptyGrammarAndTableEntries() throws AmbiguousLL1ParseTableException
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
@@ -103,7 +103,7 @@ public class LL1ParseTableTest
     }
 
     @Test
-    public void testEqualsReturnsFalseForDifferentCFGs() throws AmbiguousLL1ParseTableException
+    public void testEqualsReturnsFalseForDifferentGrammars() throws AmbiguousLL1ParseTableException
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
