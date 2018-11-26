@@ -18,6 +18,17 @@ import larp.parsetree.contextfreelanguage.TerminalNode;
 public class GrammarAugmentorTest
 {
     @Test
+    public void testAugmentDoesNotChangeEmptyGrammar()
+    {
+        GrammarAugmentor augmentor = new GrammarAugmentor();
+
+        Grammar grammar = new Grammar();
+        Grammar expectedGrammar = new Grammar();
+
+        assertEquals(expectedGrammar, augmentor.augment(grammar));
+    }
+
+    @Test
     public void testAugmentAddsNewStartStateToValidGrammar()
     {
         GrammarAugmentor augmentor = new GrammarAugmentor();

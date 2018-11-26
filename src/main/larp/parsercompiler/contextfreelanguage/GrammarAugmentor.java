@@ -24,6 +24,10 @@ public class GrammarAugmentor
     public Grammar augment(Grammar grammar)
     {
         Grammar newGrammar = new Grammar();
+        if (grammar.getStartSymbol() == null)
+        {
+            return newGrammar;
+        }
         newGrammar.addProduction(this.calculateNewStartSymbol(grammar), grammar.getStartSymbol(), new EndOfStringNode());
 
         for (Node production: grammar.getProductions())
