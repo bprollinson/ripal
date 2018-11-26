@@ -8,6 +8,30 @@ For more information, see [LICENSE.md](LICENSE.md).
 
 ## Version History
 
+### 3.0.0
+1. Improving methodology of unit test assertions
+2. Improving terminology of grammar-related variables in unit testing
+3. Improving terminology used to refer to context-free grammars in main code
+4. Factoring LR0 parse stack object out of LR0 parser
+5. Adding checking for context-free grammar equality when comparing LR0 production set DFAs
+6. Restructuring the handling of augmented context-free grammar when generating an LR0 parser
+7. Documenting project LGPL licensing
+8. Improving conflict tracking in LR0 parser contruction
+9. Improving unit test coverage of error cases in LR0 parsing
+10. Cleaning up and adding missing equality unit tests
+11. Restructuring code namespaces and class names to be more generic and consistent
+12. Moving unit tests into a namespace structure that mirrors the main code
+13. Improving Makefile to not require manual encoding of unit test class names
+14. Reducing the usage of the instanceof operator within the context of handling LR0 parse actions
+15. Improving the prioritizing and testing of regular expression and context-free grammar tokenization error handling
+16. Improving error handling in first set calculator
+17. Improving error handling in LR0 production set DFA compiler
+18. Improving unit test coverage related to Epsilon NFA to NFA conversion and NFA to DFA conversion
+19. Improving unit test coverage of regular and context-free parser factory handling of empty grammars
+20. Improving unit test coverage related to error handling in production node dot repository
+21. Improving terminology related to context-free grammars in unit test names
+22. Improving terminology related to regular expressions in unit test names
+
 ### 2.0.0
 1. LR0 parsing
 
