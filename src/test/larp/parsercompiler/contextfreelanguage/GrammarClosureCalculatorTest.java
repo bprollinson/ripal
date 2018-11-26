@@ -207,6 +207,24 @@ public class GrammarClosureCalculatorTest
     }
 
     @Test
+    public void testCalculateDoesNotAddProductionsWhenDotNotFound()
+    {
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+
+        Set<Node> productionSet = new HashSet<Node>();
+        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A")));
+
+        Set<Node> expectedProductionSet = new HashSet<Node>();
+        expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A")));
+
+        assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
+    }
+
+    @Test
     public void testCalculateCalculatesClosureIgnoringImmediateInfiniteLoop()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();

@@ -97,4 +97,26 @@ public class ProductionNodeDotRepositoryTest
 
         assertEquals(expectedProductionNode, repository.shiftDotInProduction(productionNode));
     }
+
+    @Test
+    public void testShiftDotInProductionDoesNothingWhenDotNotFound()
+    {
+        ProductionNodeDotRepository repository = new ProductionNodeDotRepository();
+
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        concatenationNode.addChild(new TerminalNode("b"));
+        productionNode.addChild(concatenationNode);
+
+        ProductionNode expectedProductionNode = new ProductionNode();
+        expectedProductionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode expectedConcatenationNode = new ConcatenationNode();
+        expectedConcatenationNode.addChild(new TerminalNode("a"));
+        expectedConcatenationNode.addChild(new TerminalNode("b"));
+        expectedProductionNode.addChild(expectedConcatenationNode);
+
+        assertEquals(expectedProductionNode, repository.shiftDotInProduction(productionNode));
+    }
 }

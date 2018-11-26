@@ -753,6 +753,12 @@ public class LR0ProductionSetDFACompilerTest
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(grammar)));
     }
 
+    @Test
+    public void testCompileHandlesEmptyGrammar()
+    {
+        throw new RuntimeException();
+    }
+
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, Node... rightHandNodes)
     {
         ProductionNode productionNode = new ProductionNode();
