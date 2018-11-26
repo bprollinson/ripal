@@ -19,7 +19,7 @@ import larp.grammartokenizer.regularlanguage.TokenizerException;
 public class ParserFactoryTest
 {
     @Test
-    public void testFactoryCreatesDFAForRegularExpression() throws TokenizerException
+    public void testFactoryCreatesDFAForExpression() throws TokenizerException
     {
         ParserFactory factory = new ParserFactory();
         DFA dfa = factory.factory("ab*");
@@ -36,7 +36,7 @@ public class ParserFactoryTest
     }
 
     @Test
-    public void testFactoryCreatesDFAForEmptyRegularExpression() throws TokenizerException
+    public void testFactoryCreatesDFAForEmptyExpression() throws TokenizerException
     {
         ParserFactory factory = new ParserFactory();
         DFA dfa = factory.factory("");
