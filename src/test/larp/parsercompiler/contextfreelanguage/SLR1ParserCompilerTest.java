@@ -18,6 +18,7 @@ import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
+import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
@@ -53,9 +54,28 @@ public class SLR1ParserCompilerTest
     }
 
     @Test
-    public void testCompileAppliesReduceActionOnlyToTerminalsInFollowSet()
+    public void testCompileAppliesReduceActionOnlyToTerminalsInFollowSet() throws AmbiguousLR0ParseTableException
     {
-        assertTrue(false);
+        SLR1ParserCompiler compiler = new SLR1ParserCompiler();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+
+        Grammar augmentedGrammar = new Grammar();
+        augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        LR0ParseTable expectedTable = new LR0ParseTable(augmentedGrammar, state1);
+        expectedTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
+        expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state3));
+        expectedTable.addCell(state2, new EndOfStringNode(), new LR0ReduceAction(1));
+        expectedTable.addCell(state3, new EndOfStringNode(), new LR0AcceptAction());
+
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test(expected = LR0ShiftReduceConflictException.class)
