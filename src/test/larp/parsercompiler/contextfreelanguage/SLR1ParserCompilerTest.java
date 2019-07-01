@@ -12,18 +12,44 @@ import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.Grammar;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
+import larp.parser.contextfreelanguage.LR0AcceptAction;
+import larp.parser.contextfreelanguage.LR0GotoAction;
+import larp.parser.contextfreelanguage.LR0ParseTable;
+import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
+import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
+import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
+
+import java.util.HashSet;
 
 public class SLR1ParserCompilerTest
 {
     @Test
-    public void testCompileReturnsParseTableWithSingleNonTerminal()
+    public void testCompileReturnsParseTableWithSingleNonTerminal() throws AmbiguousLR0ParseTableException
     {
-        assertTrue(false);
+        SLR1ParserCompiler compiler = new SLR1ParserCompiler();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+
+        Grammar augmentedGrammar = new Grammar();
+        augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        augmentedGrammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+
+        LR0ParseTable expectedTable = new LR0ParseTable(augmentedGrammar, state1);
+        expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state2));
+        expectedTable.addCell(state1, new EndOfStringNode(), new LR0ReduceAction(1));
+        expectedTable.addCell(state2, new EndOfStringNode(), new LR0AcceptAction());
+
+        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
     @Test
