@@ -109,8 +109,9 @@ public class SLR1ParserCompilerTest
         SLR1ParserCompiler compiler = new SLR1ParserCompiler();
 
         Grammar grammar = new Grammar();
-        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-        grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
         compiler.compile(grammar);
     }
