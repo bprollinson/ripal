@@ -10,6 +10,14 @@ package larp.parsercompiler.contextfreelanguage;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+import larp.grammar.contextfreelanguage.Grammar;
+import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
+import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
+import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
+import larp.parsetree.contextfreelanguage.EpsilonNode;
+import larp.parsetree.contextfreelanguage.NonTerminalNode;
+import larp.parsetree.contextfreelanguage.TerminalNode;
+
 public class SLR1ParserCompilerTest
 {
     @Test
@@ -24,27 +32,51 @@ public class SLR1ParserCompilerTest
         assertTrue(false);
     }
 
-    @Test
-    public void testCompileThrowsExceptionForShiftReduceConflict()
+    @Test(expected = LR0ShiftReduceConflictException.class)
+    public void testCompileThrowsExceptionForShiftReduceConflict() throws AmbiguousLR0ParseTableException
     {
-        assertTrue(false);
+        SLR1ParserCompiler compiler = new SLR1ParserCompiler();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
+
+        compiler.compile(grammar);
     }
 
-    @Test
-    public void testCompileThrowsExceptionForReduceReduceConflict()
+    @Test(expected = LR0ReduceReduceConflictException.class)
+    public void testCompileThrowsExceptionForReduceReduceConflict() throws AmbiguousLR0ParseTableException
     {
-        assertTrue(false);
+        SLR1ParserCompiler compiler = new SLR1ParserCompiler();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        compiler.compile(grammar);
     }
 
-    @Test
-    public void testCompilerThrowsExceptionForShiftReduceConflictInvolvingEpsilon()
+    @Test(expected = LR0ShiftReduceConflictException.class)
+    public void testCompilerThrowsExceptionForShiftReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
     {
-        assertTrue(false);
+        SLR1ParserCompiler compiler = new SLR1ParserCompiler();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+
+        compiler.compile(grammar);
     }
 
-    @Test
-    public void testCompilerThrowsExceptionForReduceReduceConflictInvolvingEpsilon()
+    @Test(expected = LR0ReduceReduceConflictException.class)
+    public void testCompilerThrowsExceptionForReduceReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
     {
-        assertTrue(false);
+        SLR1ParserCompiler compiler = new SLR1ParserCompiler();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+        grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+
+        compiler.compile(grammar);
     }
 }
