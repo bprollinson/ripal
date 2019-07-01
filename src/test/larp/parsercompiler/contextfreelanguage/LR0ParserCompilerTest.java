@@ -446,7 +446,7 @@ public class LR0ParserCompilerTest
         LR0ParserCompiler compiler = new LR0ParserCompiler();
 
         Grammar grammar = new Grammar();
-        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
         compiler.compile(grammar);

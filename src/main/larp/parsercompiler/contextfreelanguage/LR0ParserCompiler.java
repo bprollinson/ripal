@@ -56,6 +56,11 @@ public class LR0ParserCompiler
         return parseTable;
     }
 
+    protected boolean shouldReduceForProduction(Node nonTerminalNode, Node terminalNode)
+    {
+        return true;
+    }
+
     private Set<Node> calculateTerminalNodeList(Grammar grammar)
     {
         Set<Node> terminalNodes = new HashSet<Node>();
@@ -117,6 +122,7 @@ public class LR0ParserCompiler
 
         for (Node production: productions)
         {
+            Node nonTerminalNode = production.getChildNodes().get(0);
             Node concatenationNode = production.getChildNodes().get(1);
             List<Node> childNodes = concatenationNode.getChildNodes();
             int numChildNodes = childNodes.size();
@@ -129,7 +135,10 @@ public class LR0ParserCompiler
                 {
                     for (Node terminalNode: terminalNodes)
                     {
-                        parseTable.addCell(state, terminalNode, new LR0ReduceAction(productionPosition));
+                        if (this.shouldReduceForProduction(nonTerminalNode, terminalNode))
+                        {
+                            parseTable.addCell(state, terminalNode, new LR0ReduceAction(productionPosition));
+                        }
                     }
                 }
             }
