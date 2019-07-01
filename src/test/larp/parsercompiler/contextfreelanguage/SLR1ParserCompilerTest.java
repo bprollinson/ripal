@@ -30,7 +30,7 @@ import java.util.HashSet;
 public class SLR1ParserCompilerTest
 {
     @Test
-    public void testCompileReturnsParseTableWithSingleNonTerminal() throws AmbiguousLR0ParseTableException
+    public void testCompileReturnsParseTableWithEpsilonAsOnlyNonTerminal() throws AmbiguousLR0ParseTableException
     {
         SLR1ParserCompiler compiler = new SLR1ParserCompiler();
 
