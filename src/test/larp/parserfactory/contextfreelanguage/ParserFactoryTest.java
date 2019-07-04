@@ -39,7 +39,7 @@ import java.util.List;
 public class ParserFactoryTest
 {
     @Test
-    public void testFactoryCreatesLL1ParserForLL1AndLR0Grammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesLL1ParserForLL1AndSLR1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
@@ -55,19 +55,27 @@ public class ParserFactoryTest
     }
 
     @Test
-    public void testFactoryCreatesLL1ParserForLL1AndNotLR0Grammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesLL1ParserForLL1AndNotSLR1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
-        input.add("S: \"a\"");
-        input.add("S: \"\"");
+        input.add("S: A\"a\"A\"b\"");
+        input.add("S: B\"b\"B\"a\"");
+        input.add("A: \"\"");
+        input.add("B: \"\"");
 
         Grammar expectedGrammar = new Grammar();
-        expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
-        expectedGrammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+        expectedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("a"), new NonTerminalNode("A"), new TerminalNode("b"));
+        expectedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("B"), new TerminalNode("b"), new NonTerminalNode("B"), new TerminalNode("a"));
+        expectedGrammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+        expectedGrammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
         LL1ParseTable expectedTable = new LL1ParseTable(expectedGrammar);
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
-        expectedTable.addCell(new NonTerminalNode("S"), new EndOfStringNode(), 1);
+        expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 1);
+        expectedTable.addCell(new NonTerminalNode("A"), new TerminalNode("a"), 2);
+        expectedTable.addCell(new NonTerminalNode("A"), new TerminalNode("b"), 2);
+        expectedTable.addCell(new NonTerminalNode("B"), new TerminalNode("a"), 3);
+        expectedTable.addCell(new NonTerminalNode("B"), new TerminalNode("b"), 3);
         LL1Parser expectedParser = new LL1Parser(expectedTable);
 
         assertEquals(expectedParser, factory.factory(input));
