@@ -128,7 +128,7 @@ public class ParserFactoryTest
     }
 
     @Test(expected = LR0ReduceReduceConflictException.class)
-    public void testFactoryThrowsAmbiguousLR0ParseTableExceptionForNonLL1NonLR0Grammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryThrowsAmbiguousLR0ParseTableExceptionForNonLL1NonSLR1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
