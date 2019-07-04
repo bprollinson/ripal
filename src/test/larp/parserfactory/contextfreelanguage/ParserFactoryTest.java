@@ -82,7 +82,7 @@ public class ParserFactoryTest
     }
 
     @Test
-    public void testFactoryCreatesLR0ParserForLR0AndNotLL1Grammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesSLR1ParserForSLR1AndNotLL1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
@@ -105,11 +105,7 @@ public class ParserFactoryTest
         expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state5));
         expectedTable.addCell(state2, new TerminalNode("a"), new LR0ShiftAction(state3));
         expectedTable.addCell(state2, new TerminalNode("b"), new LR0ShiftAction(state4));
-        expectedTable.addCell(state3, new TerminalNode("a"), new LR0ReduceAction(1));
-        expectedTable.addCell(state3, new TerminalNode("b"), new LR0ReduceAction(1));
         expectedTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(1));
-        expectedTable.addCell(state4, new TerminalNode("a"), new LR0ReduceAction(2));
-        expectedTable.addCell(state4, new TerminalNode("b"), new LR0ReduceAction(2));
         expectedTable.addCell(state4, new EndOfStringNode(), new LR0ReduceAction(2));
         expectedTable.addCell(state5, new EndOfStringNode(), new LR0AcceptAction());
 
