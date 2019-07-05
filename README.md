@@ -246,6 +246,14 @@ To construct the parse table:
   * Map the combination of the transition symbol and the current state to a goto action corresponding to the next state in the transition
 * Return the parse table
 
+### Step 3: Convert Parse Tree into Parse Table (SLR1)
+
+Follow the same steps as is done for LR0, with the change noted below.
+
+When construcing the parse table:
+* For each production in the current state's set in the form A -> prefix.
+  * Map the combination of each terminal node in the context-free grammar plus the end of string node that fall within the follow set of A and the current state to a reduce action corresponding to the production index
+
 ### Step 4: Attempt to Match String using Parse Table (LL1)
 
 * If the provided context-free-grammar has no rules, reject
@@ -257,7 +265,7 @@ To construct the parse table:
 * While the remaining input is empty and the top symbol of the stack is a non-terminal node corresponding to a parse table entry mapping to the end-of-string node, remove the top symbol, then add the right-hand side of the context-free-grammar rule corresponding to that context-free-grammar rule
 * If the stack and remaining input string are empty, accept, otherwise reject
 
-### Step 4: Attempt to Match String using Parse Table (LR0)
+### Step 4: Attempt to Match String using Parse Table (LR0 / SLR1)
 
 * Initialize the parse stack with the parse table's start state
 * Initialize the current state to the parse table's start state
