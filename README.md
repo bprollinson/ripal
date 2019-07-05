@@ -8,6 +8,9 @@ For more information, see [LICENSE.md](LICENSE.md).
 
 ## Version History
 
+### 4.0.0
+1. SLR1 parsing
+
 ### 3.0.0
 1. Improving methodology of unit test assertions
 2. Improving terminology of grammar-related variables in unit testing
