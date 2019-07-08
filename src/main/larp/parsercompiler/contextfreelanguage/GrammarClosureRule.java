@@ -21,4 +21,21 @@ public class GrammarClosureRule
         this.productionNode = productionNode;
         this.lookaheadSymbols = lookaheadSymbols;
     }
+
+    public Node getProductionNode()
+    {
+        return this.productionNode;
+    }
+
+    public Set<Node> getLookaheadSymbols()
+    {
+        return this.lookaheadSymbols;
+    }
+
+    public boolean equals(Object other)
+    {
+        GrammarClosureRule otherRule = (GrammarClosureRule)other;
+
+        return this.productionNode.equals(otherRule.getProductionNode()) && this.lookaheadSymbols.equals(otherRule.getLookaheadSymbols());
+    }
 }
