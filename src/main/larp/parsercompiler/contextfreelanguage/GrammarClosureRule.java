@@ -34,6 +34,11 @@ public class GrammarClosureRule
 
     public boolean equals(Object other)
     {
+        if (!(other instanceof GrammarClosureRule))
+        {
+            return false;
+        }
+
         GrammarClosureRule otherRule = (GrammarClosureRule)other;
 
         return this.productionNode.equals(otherRule.getProductionNode()) && this.lookaheadSymbols.equals(otherRule.getLookaheadSymbols());

@@ -78,7 +78,7 @@ public class GrammarClosureRuleTest
     }
 
     @Test
-    public void testNotEqualsReturnsFalseForDIfferentLookaheads()
+    public void testEqualsReturnsFalseForDifferentLookaheads()
     {
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(new NonTerminalNode("S"));
@@ -103,5 +103,22 @@ public class GrammarClosureRuleTest
         GrammarClosureRule otherRule = new GrammarClosureRule(otherProductionNode, otherLookaheadSymbols);
 
         assertNotEquals(otherRule, rule);
+    }
+
+    @Test
+    public void testEqualsReturnsFalseForObjectWithDifferentClass()
+    {
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        productionNode.addChild(concatenationNode);
+
+        HashSet<Node> lookaheadSymbols = new HashSet<Node>();
+        lookaheadSymbols.add(new TerminalNode("b"));
+
+        GrammarClosureRule rule = new GrammarClosureRule(productionNode, lookaheadSymbols);
+
+        assertNotEquals(new ProductionNode(), rule);
     }
 }
