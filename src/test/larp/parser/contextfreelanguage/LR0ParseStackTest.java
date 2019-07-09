@@ -9,7 +9,6 @@ package larp.parser.contextfreelanguage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -142,7 +141,7 @@ public class LR0ParseStackTest
         otherStack.push(state);
         otherStack.push(new NonTerminalNode("A"));
 
-        assertEquals(otherStack, stack);
+        assertTrue(stack.equals(otherStack));
     }
 
     @Test
@@ -158,7 +157,7 @@ public class LR0ParseStackTest
         otherStack.push(state);
         otherStack.push(new NonTerminalNode("B"));
 
-        assertNotEquals(otherStack, stack);
+        assertFalse(stack.equals(otherStack));
     }
 
     @Test
@@ -166,6 +165,6 @@ public class LR0ParseStackTest
     {
         LR0ParseStack stack = new LR0ParseStack();
 
-        assertNotEquals(new Object(), stack);
+        assertFalse(stack.equals(new Object()));
     }
 }

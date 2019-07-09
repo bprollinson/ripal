@@ -9,7 +9,6 @@ package larp.parser.contextfreelanguage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -380,7 +379,7 @@ public class LL1ParserTest
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         LL1Parser otherParser = new LL1Parser(otherParseTable);
 
-        assertEquals(otherParser, parser);
+        assertTrue(parser.equals(otherParser));
     }
 
     @Test
@@ -400,7 +399,7 @@ public class LL1ParserTest
         otherParseTable.addCell(new NonTerminalNode("S"), new TerminalNode("b"), 0);
         LL1Parser otherParser = new LL1Parser(otherParseTable);
 
-        assertNotEquals(otherParser, parser);
+        assertFalse(parser.equals(otherParser));
     }
 
     @Test
@@ -416,6 +415,6 @@ public class LL1ParserTest
         LR0ParseTable otherParseTable = new LR0ParseTable(grammar, state);
         LR0Parser otherParser = new LR0Parser(otherParseTable);
 
-        assertNotEquals(otherParser, parser);
+        assertFalse(parser.equals(otherParser));
     }
 }
