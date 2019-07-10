@@ -7,8 +7,8 @@
 
 package larp.parsercompiler.contextfreelanguage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
@@ -46,7 +46,7 @@ public class GrammarClosureRuleTest
 
         GrammarClosureRule otherRule = new GrammarClosureRule(otherProductionNode, otherLookaheadSymbols);
 
-        assertEquals(otherRule, rule);
+        assertTrue(rule.equals(otherRule));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class GrammarClosureRuleTest
 
         GrammarClosureRule otherRule = new GrammarClosureRule(otherProductionNode, otherLookaheadSymbols);
 
-        assertNotEquals(otherRule, rule);
+        assertFalse(rule.equals(otherRule));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class GrammarClosureRuleTest
 
         GrammarClosureRule otherRule = new GrammarClosureRule(otherProductionNode, otherLookaheadSymbols);
 
-        assertNotEquals(otherRule, rule);
+        assertFalse(rule.equals(otherRule));
     }
 
     @Test
@@ -119,6 +119,6 @@ public class GrammarClosureRuleTest
 
         GrammarClosureRule rule = new GrammarClosureRule(productionNode, lookaheadSymbols);
 
-        assertNotEquals(new ProductionNode(), rule);
+        assertFalse(rule.equals(new ProductionNode()));
     }
 }

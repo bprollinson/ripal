@@ -7,8 +7,8 @@
 
 package larp.parsetree.regularlanguage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class OrNodeTest
@@ -24,7 +24,7 @@ public class OrNodeTest
         expectedNode.addChild(new CharacterNode('a'));
         expectedNode.addChild(new CharacterNode('b'));
 
-        assertEquals(expectedNode, node);
+        assertTrue(node.equals(expectedNode));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class OrNodeTest
         expectedNode.addChild(new CharacterNode('a'));
         expectedNode.addChild(new CharacterNode('c'));
 
-        assertNotEquals(expectedNode, node);
+        assertFalse(node.equals(expectedNode));
     }
 
     @Test
@@ -46,6 +46,6 @@ public class OrNodeTest
     {
         OrNode node = new OrNode();
 
-        assertNotEquals(new CharacterNode('a'), node);
+        assertFalse(node.equals(new CharacterNode('a')));
     }
 }

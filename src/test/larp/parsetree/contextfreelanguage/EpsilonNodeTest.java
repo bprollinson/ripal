@@ -7,8 +7,8 @@
 
 package larp.parsetree.contextfreelanguage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class EpsilonNodeTest
@@ -18,7 +18,7 @@ public class EpsilonNodeTest
     {
         EpsilonNode node = new EpsilonNode();
 
-        assertEquals(new EpsilonNode(), node);
+        assertTrue(node.equals(new EpsilonNode()));
     }
 
     @Test
@@ -26,6 +26,6 @@ public class EpsilonNodeTest
     {
         EpsilonNode node = new EpsilonNode();
 
-        assertNotEquals(new ConcatenationNode(), node);
+        assertFalse(node.equals(new ConcatenationNode()));
     }
 }

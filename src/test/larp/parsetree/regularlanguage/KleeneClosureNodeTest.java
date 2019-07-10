@@ -7,8 +7,8 @@
 
 package larp.parsetree.regularlanguage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class KleeneClosureNodeTest
@@ -18,7 +18,7 @@ public class KleeneClosureNodeTest
     {
         KleeneClosureNode node = new KleeneClosureNode();
 
-        assertEquals(new KleeneClosureNode(), node);
+        assertTrue(node.equals(new KleeneClosureNode()));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class KleeneClosureNodeTest
         KleeneClosureNode otherNode = new KleeneClosureNode();
         otherNode.addChild(new CharacterNode('a'));
 
-        assertEquals(otherNode, node);
+        assertTrue(node.equals(otherNode));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class KleeneClosureNodeTest
         KleeneClosureNode otherNode = new KleeneClosureNode();
         otherNode.addChild(new CharacterNode('b'));
 
-        assertNotEquals(otherNode, node);
+        assertFalse(node.equals(otherNode));
     }
 
     @Test
@@ -50,6 +50,6 @@ public class KleeneClosureNodeTest
     {
         KleeneClosureNode node = new KleeneClosureNode();
 
-        assertNotEquals(new CharacterNode('a'), node);
+        assertFalse(node.equals(new CharacterNode('a')));
     }
 }

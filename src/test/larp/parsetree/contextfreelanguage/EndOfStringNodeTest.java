@@ -7,8 +7,8 @@
 
 package larp.parsetree.contextfreelanguage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class EndOfStringNodeTest
@@ -18,7 +18,7 @@ public class EndOfStringNodeTest
     {
         EndOfStringNode node = new EndOfStringNode();
 
-        assertEquals(new EndOfStringNode(), node);
+        assertTrue(node.equals(new EndOfStringNode()));
     }
 
     @Test
@@ -26,6 +26,6 @@ public class EndOfStringNodeTest
     {
         EndOfStringNode node = new EndOfStringNode();
 
-        assertNotEquals(new ConcatenationNode(), node);
+        assertFalse(node.equals(new ConcatenationNode()));
     }
 }

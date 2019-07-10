@@ -7,8 +7,8 @@
 
 package larp.parsetree.contextfreelanguage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class DotNodeTest
@@ -18,7 +18,7 @@ public class DotNodeTest
     {
         DotNode node = new DotNode();
 
-        assertEquals(new DotNode(), node);
+        assertTrue(node.equals(new DotNode()));
     }
 
     @Test
@@ -26,6 +26,6 @@ public class DotNodeTest
     {
         DotNode node = new DotNode();
 
-        assertNotEquals(new ConcatenationNode(), node);
+        assertFalse(node.equals(new ConcatenationNode()));
     }
 }

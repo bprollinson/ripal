@@ -7,8 +7,8 @@
 
 package larp.parsetree.contextfreelanguage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class NonTerminalNodeTest
@@ -18,7 +18,7 @@ public class NonTerminalNodeTest
     {
         NonTerminalNode node = new NonTerminalNode("S");
 
-        assertEquals(new NonTerminalNode("S"), node);
+        assertTrue(node.equals(new NonTerminalNode("S")));
     }
 
     @Test
@@ -26,7 +26,7 @@ public class NonTerminalNodeTest
     {
         NonTerminalNode node = new NonTerminalNode("S");
 
-        assertNotEquals(new NonTerminalNode("T"), node);
+        assertFalse(node.equals(new NonTerminalNode("T")));
     }
 
     @Test
@@ -34,6 +34,6 @@ public class NonTerminalNodeTest
     {
         NonTerminalNode node = new NonTerminalNode("S");
 
-        assertNotEquals(new ConcatenationNode(), node);
+        assertFalse(node.equals(new ConcatenationNode()));
     }
 }
