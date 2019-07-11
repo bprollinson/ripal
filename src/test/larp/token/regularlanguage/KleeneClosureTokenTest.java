@@ -8,8 +8,8 @@
 package larp.token.regularlanguage;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class KleeneClosureTokenTest
 {
@@ -18,7 +18,7 @@ public class KleeneClosureTokenTest
     {
         KleeneClosureToken token = new KleeneClosureToken();
 
-        assertEquals(new KleeneClosureToken(), token);
+        assertTrue(token.equals(new KleeneClosureToken()));
     }
 
     @Test
@@ -26,6 +26,6 @@ public class KleeneClosureTokenTest
     {
         KleeneClosureToken token = new KleeneClosureToken();
 
-        assertNotEquals(new CharacterToken('a'), token);
+        assertFalse(token.equals(new CharacterToken('a')));
     }
 }

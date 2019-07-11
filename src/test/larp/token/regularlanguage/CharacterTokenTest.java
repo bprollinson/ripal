@@ -8,8 +8,8 @@
 package larp.token.regularlanguage;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CharacterTokenTest
 {
@@ -18,7 +18,7 @@ public class CharacterTokenTest
     {
         CharacterToken token = new CharacterToken('a');
 
-        assertEquals(new CharacterToken('a'), token);
+        assertTrue(token.equals(new CharacterToken('a')));
     }
 
     @Test
@@ -26,7 +26,7 @@ public class CharacterTokenTest
     {
         CharacterToken token = new CharacterToken('a');
 
-        assertNotEquals(new CharacterToken('b'), token);
+        assertFalse(token.equals(new CharacterToken('b')));
     }
 
     @Test
@@ -34,6 +34,6 @@ public class CharacterTokenTest
     {
         CharacterToken token = new CharacterToken('a');
 
-        assertNotEquals(new OrToken(), token);
+        assertFalse(token.equals(new OrToken()));
     }
 }

@@ -8,8 +8,8 @@
 package larp.token.regularlanguage;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class OrTokenTest
 {
@@ -18,7 +18,7 @@ public class OrTokenTest
     {
         OrToken token = new OrToken();
 
-        assertEquals(new OrToken(), token);
+        assertTrue(token.equals(new OrToken()));
     }
 
     @Test
@@ -26,6 +26,6 @@ public class OrTokenTest
     {
         OrToken token = new OrToken();
 
-        assertNotEquals(new CharacterToken('a'), token);
+        assertFalse(token.equals(new CharacterToken('a')));
     }
 }

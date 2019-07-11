@@ -8,8 +8,8 @@
 package larp.token.regularlanguage;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CloseParenthesisTokenTest
 {
@@ -18,7 +18,7 @@ public class CloseParenthesisTokenTest
     {
         CloseParenthesisToken token = new CloseParenthesisToken();
 
-        assertEquals(new CloseParenthesisToken(), token);
+        assertTrue(token.equals(new CloseParenthesisToken()));
     }
 
     @Test
@@ -26,6 +26,6 @@ public class CloseParenthesisTokenTest
     {
         CloseParenthesisToken token = new CloseParenthesisToken();
 
-        assertNotEquals(new CharacterToken('a'), token);
+        assertFalse(token.equals(new CharacterToken('a')));
     }
 }

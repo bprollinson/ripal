@@ -8,8 +8,8 @@
 package larp.token.contextfreelanguage;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class EpsilonTokenTest
 {
@@ -18,7 +18,7 @@ public class EpsilonTokenTest
     {
         EpsilonToken token = new EpsilonToken();
 
-        assertEquals(new EpsilonToken(), token);
+        assertTrue(token.equals(new EpsilonToken()));
     }
 
     @Test
@@ -26,6 +26,6 @@ public class EpsilonTokenTest
     {
         EpsilonToken token = new EpsilonToken();
 
-        assertNotEquals(new TerminalToken("a"), token);
+        assertFalse(token.equals(new TerminalToken("a")));
     }
 }

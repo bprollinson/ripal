@@ -7,8 +7,8 @@
 
 package larp.token.contextfreelanguage;
 
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class TerminalTokenTest
@@ -18,7 +18,7 @@ public class TerminalTokenTest
     {
         TerminalToken token = new TerminalToken("a");
 
-        assertEquals(new TerminalToken("a"), token);
+        assertTrue(token.equals(new TerminalToken("a")));
     }
 
     @Test
@@ -26,7 +26,7 @@ public class TerminalTokenTest
     {
         TerminalToken token = new TerminalToken("a");
 
-        assertNotEquals(new TerminalToken("b"), token);
+        assertFalse(token.equals(new TerminalToken("b")));
     }
 
     @Test
@@ -34,6 +34,6 @@ public class TerminalTokenTest
     {
         TerminalToken token = new TerminalToken("a");
 
-        assertNotEquals(new SeparatorToken(), token);
+        assertFalse(token.equals(new SeparatorToken()));
     }
 }

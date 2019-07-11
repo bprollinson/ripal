@@ -8,7 +8,8 @@
 package larp.grammar.contextfreelanguage;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNull;
 import org.junit.Test;
 
@@ -49,7 +50,7 @@ public class GrammarTest
 
         Grammar expectedGrammar = new Grammar();
 
-        assertEquals(expectedGrammar, grammar);
+        assertTrue(grammar.equals(expectedGrammar));
     }
 
     @Test
@@ -67,7 +68,7 @@ public class GrammarTest
         expectedNode.addChild(new TerminalNode("a"));
         expectedGrammar.addProduction(expectedNode);
 
-        assertEquals(expectedGrammar, grammar);
+        assertTrue(grammar.equals(expectedGrammar));
     }
 
     @Test
@@ -93,7 +94,7 @@ public class GrammarTest
         expectedNode.addChild(new TerminalNode("c"));
         expectedGrammar.addProduction(expectedNode);
 
-        assertNotEquals(expectedGrammar, grammar);
+        assertFalse(grammar.equals(expectedGrammar));
     }
 
     @Test
@@ -101,6 +102,6 @@ public class GrammarTest
     {
         Grammar grammar = new Grammar();
 
-        assertNotEquals(new Object(), grammar);
+        assertFalse(grammar.equals(new Object()));
     }
 }
