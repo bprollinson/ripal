@@ -20,11 +20,11 @@ public class OrNodeTest
         node.addChild(new CharacterNode('a'));
         node.addChild(new CharacterNode('b'));
 
-        OrNode expectedNode = new OrNode();
-        expectedNode.addChild(new CharacterNode('a'));
-        expectedNode.addChild(new CharacterNode('b'));
+        OrNode otherNode = new OrNode();
+        otherNode.addChild(new CharacterNode('a'));
+        otherNode.addChild(new CharacterNode('b'));
 
-        assertTrue(node.equals(expectedNode));
+        assertTrue(node.equals(otherNode));
     }
 
     @Test
@@ -34,11 +34,11 @@ public class OrNodeTest
         node.addChild(new CharacterNode('a'));
         node.addChild(new CharacterNode('b'));
 
-        OrNode expectedNode = new OrNode();
-        expectedNode.addChild(new CharacterNode('a'));
-        expectedNode.addChild(new CharacterNode('c'));
+        OrNode otherNode = new OrNode();
+        otherNode.addChild(new CharacterNode('a'));
+        otherNode.addChild(new CharacterNode('c'));
 
-        assertFalse(node.equals(expectedNode));
+        assertFalse(node.equals(otherNode));
     }
 
     @Test

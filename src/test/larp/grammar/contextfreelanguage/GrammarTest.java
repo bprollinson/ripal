@@ -48,9 +48,9 @@ public class GrammarTest
     {
         Grammar grammar = new Grammar();
 
-        Grammar expectedGrammar = new Grammar();
+        Grammar otherGrammar = new Grammar();
 
-        assertTrue(grammar.equals(expectedGrammar));
+        assertTrue(grammar.equals(otherGrammar));
     }
 
     @Test
@@ -62,13 +62,13 @@ public class GrammarTest
         node.addChild(new TerminalNode("a"));
         grammar.addProduction(node);
 
-        Grammar expectedGrammar = new Grammar();
-        ProductionNode expectedNode = new ProductionNode();
-        expectedNode.addChild(new NonTerminalNode("S"));
-        expectedNode.addChild(new TerminalNode("a"));
-        expectedGrammar.addProduction(expectedNode);
+        Grammar otherGrammar = new Grammar();
+        ProductionNode otherNode = new ProductionNode();
+        otherNode.addChild(new NonTerminalNode("S"));
+        otherNode.addChild(new TerminalNode("a"));
+        otherGrammar.addProduction(otherNode);
 
-        assertTrue(grammar.equals(expectedGrammar));
+        assertTrue(grammar.equals(otherGrammar));
     }
 
     @Test
@@ -84,17 +84,17 @@ public class GrammarTest
         node.addChild(new TerminalNode("b"));
         grammar.addProduction(node);
 
-        Grammar expectedGrammar = new Grammar();
-        ProductionNode expectedNode = new ProductionNode();
-        expectedNode.addChild(new NonTerminalNode("S"));
-        expectedNode.addChild(new TerminalNode("a"));
-        expectedGrammar.addProduction(expectedNode);
-        expectedNode = new ProductionNode();
-        expectedNode.addChild(new NonTerminalNode("S"));
-        expectedNode.addChild(new TerminalNode("c"));
-        expectedGrammar.addProduction(expectedNode);
+        Grammar otherGrammar = new Grammar();
+        ProductionNode otherNode = new ProductionNode();
+        otherNode.addChild(new NonTerminalNode("S"));
+        otherNode.addChild(new TerminalNode("a"));
+        otherGrammar.addProduction(otherNode);
+        otherNode = new ProductionNode();
+        otherNode.addChild(new NonTerminalNode("S"));
+        otherNode.addChild(new TerminalNode("c"));
+        otherGrammar.addProduction(otherNode);
 
-        assertFalse(grammar.equals(expectedGrammar));
+        assertFalse(grammar.equals(otherGrammar));
     }
 
     @Test

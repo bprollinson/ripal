@@ -28,11 +28,11 @@ public class ProductionNodeTest
         node.addChild(new ProductionNode());
         node.addChild(new ProductionNode());
 
-        ProductionNode expectedNode = new ProductionNode();
-        expectedNode.addChild(new ProductionNode());
-        expectedNode.addChild(new ProductionNode());
+        ProductionNode otherNode = new ProductionNode();
+        otherNode.addChild(new ProductionNode());
+        otherNode.addChild(new ProductionNode());
 
-        assertTrue(node.equals(expectedNode));
+        assertTrue(node.equals(otherNode));
     }
 
     @Test
@@ -42,11 +42,11 @@ public class ProductionNodeTest
         node.addChild(new ProductionNode());
         node.addChild(new ProductionNode());
 
-        ProductionNode expectedNode = new ProductionNode();
-        expectedNode.addChild(new ProductionNode());
-        expectedNode.addChild(new ConcatenationNode());
+        ProductionNode otherNode = new ProductionNode();
+        otherNode.addChild(new ProductionNode());
+        otherNode.addChild(new ConcatenationNode());
 
-        assertFalse(node.equals(expectedNode));
+        assertFalse(node.equals(otherNode));
     }
 
     @Test

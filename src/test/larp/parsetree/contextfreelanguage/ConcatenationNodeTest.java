@@ -28,11 +28,11 @@ public class ConcatenationNodeTest
         node.addChild(new ConcatenationNode());
         node.addChild(new ConcatenationNode());
 
-        ConcatenationNode expectedNode = new ConcatenationNode();
-        expectedNode.addChild(new ConcatenationNode());
-        expectedNode.addChild(new ConcatenationNode());
+        ConcatenationNode otherNode = new ConcatenationNode();
+        otherNode.addChild(new ConcatenationNode());
+        otherNode.addChild(new ConcatenationNode());
 
-        assertTrue(node.equals(expectedNode));
+        assertTrue(node.equals(otherNode));
     }
 
     @Test
@@ -42,11 +42,11 @@ public class ConcatenationNodeTest
         node.addChild(new ConcatenationNode());
         node.addChild(new ConcatenationNode());
 
-        ConcatenationNode expectedNode = new ConcatenationNode();
-        expectedNode.addChild(new ConcatenationNode());
-        expectedNode.addChild(new ProductionNode());
+        ConcatenationNode otherNode = new ConcatenationNode();
+        otherNode.addChild(new ConcatenationNode());
+        otherNode.addChild(new ProductionNode());
 
-        assertFalse(node.equals(expectedNode));
+        assertFalse(node.equals(otherNode));
     }
 
     @Test
