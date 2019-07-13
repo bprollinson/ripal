@@ -40,6 +40,21 @@ public class GrammarClosureCalculatorTest
     }
 
     @Test
+    public void testCalculateRulesDoesNotAddProductionWhenInitialProductionSetIsEmpty()
+    {
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+
+        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
+
+        Set<GrammarClosureRule> expectedProductionSet = new HashSet<GrammarClosureRule>();
+
+        assertEquals(expectedProductionSet, calculator.calculateRules(grammar, productionSet));
+    }
+
+    @Test
     public void testCalculateDoesNotAddProductionWhenGrammarIsEmpty()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();

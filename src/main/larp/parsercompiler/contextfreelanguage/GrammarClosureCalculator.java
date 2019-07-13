@@ -42,6 +42,11 @@ public class GrammarClosureCalculator
         return productionsClosure;
     }
 
+    public Set<GrammarClosureRule> calculateRules(Grammar grammar, Set<GrammarClosureRule> productionSet)
+    {
+        return productionSet;
+    }
+
     private ValueToSetMap<Node, Integer> calculateStartingNonTerminalProductionsMap(Grammar grammar)
     {
         ValueToSetMap<Node, Integer> startingNonTerminalProductions = new ValueToSetMap<Node, Integer>();
