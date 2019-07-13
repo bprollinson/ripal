@@ -43,4 +43,9 @@ public class GrammarClosureRule
 
         return this.productionNode.equals(otherRule.getProductionNode()) && this.lookaheadSymbols.equals(otherRule.getLookaheadSymbols());
     }
+
+    public int hashCode()
+    {
+        return this.productionNode.hashCode() + this.lookaheadSymbols.hashCode();
+    }
 }
