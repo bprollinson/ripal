@@ -25,7 +25,7 @@ import java.util.Set;
 public class GrammarClosureCalculatorTest
 {
     @Test
-    public void testCalculatDoesNotAddProductionWhenInitialProductionSetIsEmpty()
+    public void testCalculateDoesNotAddProductionWhenInitialProductionSetIsEmpty()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
