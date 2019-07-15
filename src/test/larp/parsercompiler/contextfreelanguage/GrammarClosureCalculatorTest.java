@@ -760,6 +760,34 @@ public class GrammarClosureCalculatorTest
     }
 
     @Test
+    public void testCalculateRulesAddsNonTerminalChainInReverseOrder()
+    {
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("d"));
+        grammar.addProduction(new NonTerminalNode("B"), new NonTerminalNode("C"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+
+        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
+        Node productionNode = this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"));
+        productionSet.add(new GrammarClosureRule(productionNode, new HashSet<Node>()));
+
+        Set<GrammarClosureRule> expectedProductionSet = new HashSet<GrammarClosureRule>();
+        Node otherProductionNode = this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"));
+        expectedProductionSet.add(new GrammarClosureRule(otherProductionNode, new HashSet<Node>()));
+        otherProductionNode = this.buildProduction(new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("B"));
+        expectedProductionSet.add(new GrammarClosureRule(otherProductionNode, new HashSet<Node>()));
+        otherProductionNode = this.buildProduction(new NonTerminalNode("B"), new DotNode(), new NonTerminalNode("C"));
+        expectedProductionSet.add(new GrammarClosureRule(otherProductionNode, new HashSet<Node>()));
+        otherProductionNode = this.buildProduction(new NonTerminalNode("C"), new DotNode(), new TerminalNode("d"));
+        expectedProductionSet.add(new GrammarClosureRule(otherProductionNode, new HashSet<Node>()));
+
+        assertEquals(expectedProductionSet, calculator.calculateRules(grammar, productionSet));
+    }
+
+    @Test
     public void testCalculateAddsDotAfterEpsilon()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
@@ -775,6 +803,27 @@ public class GrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new EpsilonNode(), new DotNode()));
 
         assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
+    }
+
+    @Test
+    public void testCalculateRulesAddsDotAfterEpsilon()
+    {
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+
+        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
+        Node productionNode = this.buildProduction(new NonTerminalNode("S"), new DotNode(), new EpsilonNode()); 
+        productionSet.add(new GrammarClosureRule(productionNode, new HashSet<Node>()));
+
+        Set<GrammarClosureRule> expectedProductionSet = new HashSet<GrammarClosureRule>();
+        Node otherProductionNode = this.buildProduction(new NonTerminalNode("S"), new DotNode(), new EpsilonNode());
+        expectedProductionSet.add(new GrammarClosureRule(otherProductionNode, new HashSet<Node>()));
+        otherProductionNode = this.buildProduction(new NonTerminalNode("S"), new EpsilonNode(), new DotNode());
+        expectedProductionSet.add(new GrammarClosureRule(otherProductionNode, new HashSet<Node>()));
+
+        assertEquals(expectedProductionSet, calculator.calculateRules(grammar, productionSet));
     }
 
     @Test
@@ -796,7 +845,27 @@ public class GrammarClosureCalculatorTest
     }
 
     @Test
-    public void testCalculateClosureDoesNotAddProductionWhenDotAtEndOfProduction()
+    public void testCalculateRulesDoesNotExpandProductionSetWhenDotMissing()
+    {
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+
+        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
+        Node productionNode = this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        productionSet.add(new GrammarClosureRule(productionNode, new HashSet<Node>()));
+
+        Set<GrammarClosureRule> expectedProductionSet = new HashSet<GrammarClosureRule>();
+        Node otherProductionNode = this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A")); 
+        expectedProductionSet.add(new GrammarClosureRule(otherProductionNode, new HashSet<Node>()));
+
+        assertEquals(expectedProductionSet, calculator.calculateRules(grammar, productionSet));
+    }
+
+    @Test
+    public void testCalculateDoesNotAddProductionWhenDotAtEndOfProduction()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
@@ -811,6 +880,26 @@ public class GrammarClosureCalculatorTest
         expectedProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode()));
 
         assertEquals(expectedProductionSet, calculator.calculate(grammar, productionSet));
+    }
+
+    @Test
+    public void testCalculateRulesDoesNotAddProductionWhenDotAtEndOfProduction()
+    {
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+
+        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
+        Node productionNode = this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode());
+        productionSet.add(new GrammarClosureRule(productionNode, new HashSet<Node>()));
+
+        Set<GrammarClosureRule> expectedProductionSet = new HashSet<GrammarClosureRule>();
+        Node otherProductionNode = this.buildProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode());
+        expectedProductionSet.add(new GrammarClosureRule(productionNode, new HashSet<Node>()));
+
+        assertEquals(expectedProductionSet, calculator.calculateRules(grammar, productionSet));
     }
 
     private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, Node... rightHandNodes)
