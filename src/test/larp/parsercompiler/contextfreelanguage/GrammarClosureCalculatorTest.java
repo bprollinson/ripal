@@ -121,7 +121,7 @@ public class GrammarClosureCalculatorTest
         productionSet.add(new GrammarClosureRule(productionNode, new HashSet<Node>()));
 
         Set<GrammarClosureRule> expectedProductionSet = new HashSet<GrammarClosureRule>();
-        Node otherProductionNode = this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")); 
+        Node otherProductionNode = this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"));
         expectedProductionSet.add(new GrammarClosureRule(otherProductionNode, new HashSet<Node>()));
         otherProductionNode = this.buildProduction(new NonTerminalNode("A"), new DotNode(), new TerminalNode("a"));
         expectedProductionSet.add(new GrammarClosureRule(otherProductionNode, new HashSet<Node>()));
