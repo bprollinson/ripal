@@ -44,7 +44,21 @@ public class GrammarClosureCalculator
 
     public Set<GrammarClosureRule> calculateRules(Grammar grammar, Set<GrammarClosureRule> productionSet)
     {
-        return productionSet;
+        Set<Node> rawProductionSet = new HashSet<Node>();
+        for (GrammarClosureRule production: productionSet)
+        {
+            rawProductionSet.add(production.getProductionNode());
+        }
+
+        Set<Node> closure = this.calculate(grammar, rawProductionSet);
+
+        Set<GrammarClosureRule> productionsClosure = new HashSet<GrammarClosureRule>();
+        for (Node closureNode: closure)
+        {
+            productionsClosure.add(new GrammarClosureRule(closureNode, new HashSet<Node>()));
+        }
+
+        return productionsClosure;
     }
 
     private ValueToSetMap<Node, Integer> calculateStartingNonTerminalProductionsMap(Grammar grammar)
