@@ -8,14 +8,27 @@
 package larp.parser.contextfreelanguage;
 
 import larp.automaton.State;
+import larp.parsercompiler.contextfreelanguage.GrammarClosureRule;
 import larp.parsetree.contextfreelanguage.Node;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class LR0ProductionSetDFAState extends State<Node, LR0ProductionSetDFAState>
 {
     private Set<Node> productionSet;
+
+    public LR0ProductionSetDFAState(String name, boolean accepting, Set<GrammarClosureRule> productionSet, int bogus)
+    {
+        super(name, accepting);
+
+        this.productionSet = new HashSet<Node>();
+        for (GrammarClosureRule production: productionSet)
+        {
+            this.productionSet.add(production.getProductionNode());
+        }
+    }
 
     public LR0ProductionSetDFAState(String name, boolean accepting, Set<Node> productionSet)
     {
