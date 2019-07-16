@@ -29,26 +29,7 @@ public class GrammarClosureCalculator
 
     public Set<GrammarClosureRule> calculateRules(Grammar grammar, Set<GrammarClosureRule> productionSet)
     {
-        Set<Node> rawProductionSet = new HashSet<Node>();
-        for (GrammarClosureRule production: productionSet)
-        {
-            rawProductionSet.add(production.getProductionNode());
-        }
-
-        Set<Node> closure = this.calculate(grammar, rawProductionSet);
-
         Set<GrammarClosureRule> productionsClosure = new HashSet<GrammarClosureRule>();
-        for (Node closureNode: closure)
-        {
-            productionsClosure.add(new GrammarClosureRule(closureNode, new HashSet<Node>()));
-        }
-
-        return productionsClosure;
-    }
-
-    private Set<Node> calculate(Grammar grammar, Set<Node> productionSet)
-    {
-        Set<Node> productionsClosure = new HashSet<Node>();
         productionsClosure.addAll(productionSet);
         ValueToSetMap<Node, Integer> startingNonTerminalProductionsMap = this.calculateStartingNonTerminalProductionsMap(grammar);
 
@@ -72,38 +53,38 @@ public class GrammarClosureCalculator
         return startingNonTerminalProductions;
     }
 
-    private boolean expandClosure(Grammar grammar, ValueToSetMap<Node, Integer> startingNonTerminalProductionsMap, Set<Node> productionsClosure)
+    private boolean expandClosure(Grammar grammar, ValueToSetMap<Node, Integer> startingNonTerminalProductionsMap, Set<GrammarClosureRule> productionsClosure)
     {
-        Set<Node> productionsToAdd = new HashSet<Node>();
+        Set<GrammarClosureRule> productionsToAdd = new HashSet<GrammarClosureRule>();
 
-        for (Node productionNode: productionsClosure)
+        for (GrammarClosureRule productionNode: productionsClosure)
         {
-            Node nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode);
+            Node nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode.getProductionNode());
             if (nextSymbol != null)
             {
                 this.addProductionsForNonTerminal(grammar, startingNonTerminalProductionsMap.get(nextSymbol), productionsToAdd);
             }
             if (nextSymbol instanceof EpsilonNode)
             {
-                productionsToAdd.add(this.buildEpsilonProduction(productionNode.getChildNodes().get(0)));
+                productionsToAdd.add(this.buildEpsilonProduction(productionNode.getProductionNode().getChildNodes().get(0)));
             }
         }
 
         return productionsClosure.addAll(productionsToAdd);
     }
 
-    private void addProductionsForNonTerminal(Grammar grammar, Set<Integer> productionIndices, Set<Node> productionsToAdd)
+    private void addProductionsForNonTerminal(Grammar grammar, Set<Integer> productionIndices, Set<GrammarClosureRule> productionsToAdd)
     {
         for (int productionIndex: productionIndices)
         {
             Node production = grammar.getProductions().get(productionIndex);
 
             Node productionNode = this.productionNodeDotRepository.addDotToProductionRightHandSide(production);
-            productionsToAdd.add(productionNode);
+            productionsToAdd.add(new GrammarClosureRule(productionNode, new HashSet<Node>()));
         }
     }
 
-    private ProductionNode buildEpsilonProduction(Node leftHandNonTerminal)
+    private GrammarClosureRule buildEpsilonProduction(Node leftHandNonTerminal)
     {
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(leftHandNonTerminal);
@@ -113,6 +94,6 @@ public class GrammarClosureCalculator
         concatenationNode.addChild(new DotNode());
         productionNode.addChild(concatenationNode);
 
-        return productionNode;
+        return new GrammarClosureRule(productionNode, new HashSet<Node>());
     }
 }
