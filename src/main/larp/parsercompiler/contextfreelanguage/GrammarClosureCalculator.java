@@ -27,21 +27,6 @@ public class GrammarClosureCalculator
         this.productionNodeDotRepository = new ProductionNodeDotRepository();
     }
 
-    public Set<Node> calculate(Grammar grammar, Set<Node> productionSet)
-    {
-        Set<Node> productionsClosure = new HashSet<Node>();
-        productionsClosure.addAll(productionSet);
-        ValueToSetMap<Node, Integer> startingNonTerminalProductionsMap = this.calculateStartingNonTerminalProductionsMap(grammar);
-
-        boolean continueExpansion = true;
-        while (continueExpansion)
-        {
-            continueExpansion = this.expandClosure(grammar, startingNonTerminalProductionsMap, productionsClosure);
-        }
-
-        return productionsClosure;
-    }
-
     public Set<GrammarClosureRule> calculateRules(Grammar grammar, Set<GrammarClosureRule> productionSet)
     {
         Set<Node> rawProductionSet = new HashSet<Node>();
@@ -56,6 +41,21 @@ public class GrammarClosureCalculator
         for (Node closureNode: closure)
         {
             productionsClosure.add(new GrammarClosureRule(closureNode, new HashSet<Node>()));
+        }
+
+        return productionsClosure;
+    }
+
+    private Set<Node> calculate(Grammar grammar, Set<Node> productionSet)
+    {
+        Set<Node> productionsClosure = new HashSet<Node>();
+        productionsClosure.addAll(productionSet);
+        ValueToSetMap<Node, Integer> startingNonTerminalProductionsMap = this.calculateStartingNonTerminalProductionsMap(grammar);
+
+        boolean continueExpansion = true;
+        while (continueExpansion)
+        {
+            continueExpansion = this.expandClosure(grammar, startingNonTerminalProductionsMap, productionsClosure);
         }
 
         return productionsClosure;
