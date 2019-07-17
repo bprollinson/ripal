@@ -61,7 +61,7 @@ public class LR0ProductionSetDFACompiler
             temporaryInput.add(new GrammarClosureRule(production, new HashSet<Node>()));
         }
 
-        Set<GrammarClosureRule> temporaryOutput = this.closureCalculator.calculateRules(augmentedGrammar, temporaryInput);
+        Set<GrammarClosureRule> temporaryOutput = this.closureCalculator.calculate(augmentedGrammar, temporaryInput);
         productionSet = new HashSet<Node>();
         for (GrammarClosureRule temporaryRule: temporaryOutput)
         {

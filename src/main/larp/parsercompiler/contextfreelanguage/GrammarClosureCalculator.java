@@ -27,7 +27,7 @@ public class GrammarClosureCalculator
         this.productionNodeDotRepository = new ProductionNodeDotRepository();
     }
 
-    public Set<GrammarClosureRule> calculateRules(Grammar grammar, Set<GrammarClosureRule> productionSet)
+    public Set<GrammarClosureRule> calculate(Grammar grammar, Set<GrammarClosureRule> productionSet)
     {
         Set<GrammarClosureRule> productionsClosure = new HashSet<GrammarClosureRule>();
         productionsClosure.addAll(productionSet);
