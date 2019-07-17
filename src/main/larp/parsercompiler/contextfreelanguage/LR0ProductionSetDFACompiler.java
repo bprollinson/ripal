@@ -26,7 +26,7 @@ public class LR0ProductionSetDFACompiler
     private GrammarAugmentor grammarAugmentor;
     private GrammarClosureCalculator closureCalculator;
     private ProductionNodeDotRepository productionNodeDotRepository;
-    private Map<Set<Node>, LR0ProductionSetDFAState> productionSetToStateMap;
+    private Map<Set<GrammarClosureRule>, LR0ProductionSetDFAState> productionSetToStateMap;
 
     public LR0ProductionSetDFACompiler()
     {
@@ -37,38 +37,26 @@ public class LR0ProductionSetDFACompiler
 
     public LR0ProductionSetDFA compile(Grammar grammar)
     {
-        this.productionSetToStateMap = new HashMap<Set<Node>, LR0ProductionSetDFAState>();
+        this.productionSetToStateMap = new HashMap<Set<GrammarClosureRule>, LR0ProductionSetDFAState>();
         Grammar augmentedGrammar = this.grammarAugmentor.augment(grammar);
 
-        Set<Node> productionSet = new HashSet<Node>();
+        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
         if (augmentedGrammar.getStartSymbol() == null)
         {
             return null;
         }
         Node firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(augmentedGrammar.getProduction(0));
-        productionSet.add(firstProductionWithDot);
+        productionSet.add(new GrammarClosureRule(firstProductionWithDot, new HashSet<Node>()));
 
         LR0ProductionSetDFAState startState = this.compileState(augmentedGrammar, productionSet, false);
 
         return new LR0ProductionSetDFA(startState, augmentedGrammar);
     }
 
-    private LR0ProductionSetDFAState compileState(Grammar augmentedGrammar, Set<Node> productionSet, boolean accepting)
+    private LR0ProductionSetDFAState compileState(Grammar augmentedGrammar, Set<GrammarClosureRule> productionSet, boolean accepting)
     {
-        Set<GrammarClosureRule> temporaryInput = new HashSet<GrammarClosureRule>();
-        for (Node production: productionSet)
-        {
-            temporaryInput.add(new GrammarClosureRule(production, new HashSet<Node>()));
-        }
-
-        Set<GrammarClosureRule> temporaryOutput = this.closureCalculator.calculate(augmentedGrammar, temporaryInput);
-        productionSet = new HashSet<Node>();
-        for (GrammarClosureRule temporaryRule: temporaryOutput)
-        {
-            productionSet.add(temporaryRule.getProductionNode());
-        }
-
-        LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", accepting, productionSet);
+        productionSet = this.closureCalculator.calculate(augmentedGrammar, productionSet);
+        LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", accepting, productionSet, 0);
 
         LR0ProductionSetDFAState cachedStartState = this.productionSetToStateMap.get(productionSet);
         if (cachedStartState != null)
@@ -84,7 +72,7 @@ public class LR0ProductionSetDFACompiler
 
     private void compileAndAttachAdjacentStates(Grammar augmentedGrammar, LR0ProductionSetDFAState state)
     {
-        ValueToSetMap<Node, Node> symbolToNextClosureMap = new ValueToSetMap<Node, Node>();
+        ValueToSetMap<Node, GrammarClosureRule> symbolToNextClosureMap = new ValueToSetMap<Node, GrammarClosureRule>();
 
         Set<Node> productionSet = state.getProductionSet();
         for (Node productionNode: productionSet)
@@ -93,14 +81,14 @@ public class LR0ProductionSetDFACompiler
             if (nextSymbol != null && !(nextSymbol instanceof EpsilonNode))
             {
                 Node productionWithDotShifted = this.productionNodeDotRepository.shiftDotInProduction(productionNode);
-                symbolToNextClosureMap.put(nextSymbol, productionWithDotShifted);
+                symbolToNextClosureMap.put(nextSymbol, new GrammarClosureRule(productionWithDotShifted, new HashSet<Node>()));
             }
         }
 
-        for (Map.Entry<Node, Set<Node>> mapEntry: symbolToNextClosureMap.entrySet())
+        for (Map.Entry<Node, Set<GrammarClosureRule>> mapEntry: symbolToNextClosureMap.entrySet())
         {
             Node input = mapEntry.getKey();
-            Set<Node> nextStateProductionSet = mapEntry.getValue();
+            Set<GrammarClosureRule> nextStateProductionSet = mapEntry.getValue();
 
             boolean nextStateAccepting = input instanceof EndOfStringNode;
             LR0ProductionSetDFAState nextState = this.compileState(augmentedGrammar, nextStateProductionSet, nextStateAccepting);
