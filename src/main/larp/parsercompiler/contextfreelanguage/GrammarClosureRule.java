@@ -9,12 +9,18 @@ package larp.parsercompiler.contextfreelanguage;
 
 import larp.parsetree.contextfreelanguage.Node;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class GrammarClosureRule
 {
     private Node productionNode;
     private Set<Node> lookaheadSymbols;
+
+    public GrammarClosureRule(Node productionNode)
+    {
+        this(productionNode, new HashSet<Node>());
+    }
 
     public GrammarClosureRule(Node productionNode, Set<Node> lookaheadSymbols)
     {
