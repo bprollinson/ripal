@@ -19,11 +19,6 @@ public class LR0ProductionSetDFAState extends State<Node, LR0ProductionSetDFASta
 {
     private Set<Node> productionSet;
 
-    public LR0ProductionSetDFAState(String name, boolean accepting)
-    {
-        this(name, accepting, new HashSet<GrammarClosureRule>(), 0);
-    }
-
     public LR0ProductionSetDFAState(String name, boolean accepting, Set<GrammarClosureRule> productionSet, int bogus)
     {
         super(name, accepting);
