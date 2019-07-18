@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.Grammar;
+import larp.parsercompiler.contextfreelanguage.GrammarClosureRule;
 import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
@@ -163,8 +164,7 @@ public class LL1ParseTableTest
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
-
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
         LR0ParseTable otherParseTable = new LR0ParseTable(grammar, state);
 
         assertFalse(parseTable.equals(otherParseTable));
