@@ -46,7 +46,7 @@ public class LR0ProductionSetDFACompiler
             return null;
         }
         Node firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(augmentedGrammar.getProduction(0));
-        productionSet.add(new GrammarClosureRule(firstProductionWithDot, new HashSet<Node>()));
+        productionSet.add(new GrammarClosureRule(firstProductionWithDot));
 
         LR0ProductionSetDFAState startState = this.compileState(augmentedGrammar, productionSet, false);
 
@@ -81,7 +81,7 @@ public class LR0ProductionSetDFACompiler
             if (nextSymbol != null && !(nextSymbol instanceof EpsilonNode))
             {
                 Node productionWithDotShifted = this.productionNodeDotRepository.shiftDotInProduction(productionNode);
-                symbolToNextClosureMap.put(nextSymbol, new GrammarClosureRule(productionWithDotShifted, new HashSet<Node>()));
+                symbolToNextClosureMap.put(nextSymbol, new GrammarClosureRule(productionWithDotShifted));
             }
         }
 

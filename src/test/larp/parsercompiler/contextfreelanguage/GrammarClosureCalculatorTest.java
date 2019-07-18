@@ -443,6 +443,6 @@ public class GrammarClosureCalculatorTest
         }
         productionNode.addChild(concatenationNode);
 
-        return new GrammarClosureRule(productionNode, new HashSet<Node>());
+        return new GrammarClosureRule(productionNode);
     }
 }

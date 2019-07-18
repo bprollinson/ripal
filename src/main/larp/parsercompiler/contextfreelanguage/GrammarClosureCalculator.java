@@ -80,7 +80,7 @@ public class GrammarClosureCalculator
             Node production = grammar.getProductions().get(productionIndex);
 
             Node productionNode = this.productionNodeDotRepository.addDotToProductionRightHandSide(production);
-            productionsToAdd.add(new GrammarClosureRule(productionNode, new HashSet<Node>()));
+            productionsToAdd.add(new GrammarClosureRule(productionNode));
         }
     }
 
@@ -94,6 +94,6 @@ public class GrammarClosureCalculator
         concatenationNode.addChild(new DotNode());
         productionNode.addChild(concatenationNode);
 
-        return new GrammarClosureRule(productionNode, new HashSet<Node>());
+        return new GrammarClosureRule(productionNode);
     }
 }
