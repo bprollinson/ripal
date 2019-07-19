@@ -12,7 +12,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.parsetree.contextfreelanguage.Node;
+import larp.parsercompiler.contextfreelanguage.GrammarClosureRule;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 
 import java.util.HashSet;
@@ -23,7 +23,7 @@ public class LR0ParseStackTest
     @Test
     public void testPeekReturnsTopObject() throws LR0ParseStackEmptyException
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -42,7 +42,7 @@ public class LR0ParseStackTest
     @Test
     public void testPopReturnsAndRemovesTopObject() throws LR0ParseStackEmptyException
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -65,10 +65,10 @@ public class LR0ParseStackTest
     @Test
     public void testGetTopStateReturnsTopElement() throws LR0ParseStackEmptyException
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
 
         LR0ParseStack stack = new LR0ParseStack();
-        stack.push(new LR0ProductionSetDFAState("", true, new HashSet<Node>()));
+        stack.push(new LR0ProductionSetDFAState("", true, new HashSet<GrammarClosureRule>(), 0));
         stack.push(new NonTerminalNode("A"));
         stack.push(state);
 
@@ -78,10 +78,10 @@ public class LR0ParseStackTest
     @Test
     public void testGetTopStateReturnsLowerElement() throws LR0ParseStackEmptyException
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
 
         LR0ParseStack stack = new LR0ParseStack();
-        stack.push(new LR0ProductionSetDFAState("", true, new HashSet<Node>()));
+        stack.push(new LR0ProductionSetDFAState("", true, new HashSet<GrammarClosureRule>(), 0));
         stack.push(new NonTerminalNode("A"));
         stack.push(state);
         stack.push(new NonTerminalNode("B"));
@@ -99,7 +99,7 @@ public class LR0ParseStackTest
     @Test
     public void testStackEqualsReturnsTrue()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -115,7 +115,7 @@ public class LR0ParseStackTest
     @Test
     public void testStackEqualsReturnsFalse()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -131,7 +131,7 @@ public class LR0ParseStackTest
     @Test
     public void testEqualsReturnsTrueForStacksContainingSameObjects()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -147,7 +147,7 @@ public class LR0ParseStackTest
     @Test
     public void testEqualsReturnsFalseForStacksContainingDifferentObjects()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
