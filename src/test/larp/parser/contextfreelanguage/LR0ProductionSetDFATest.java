@@ -15,6 +15,7 @@ import org.junit.Test;
 import larp.automaton.DFA;
 import larp.automaton.DFAState;
 import larp.grammar.contextfreelanguage.Grammar;
+import larp.parsercompiler.contextfreelanguage.GrammarClosureRule;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.Node;
@@ -32,7 +33,7 @@ public class LR0ProductionSetDFATest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
-        LR0ProductionSetDFAState expectedStartState = new LR0ProductionSetDFAState("S0", true, new HashSet<Node>());
+        LR0ProductionSetDFAState expectedStartState = new LR0ProductionSetDFAState("S0", true, new HashSet<GrammarClosureRule>(), 0);
         LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(expectedStartState, grammar);
 
         LR0ProductionSetDFAState startState = dfa.getStartState();
@@ -45,13 +46,13 @@ public class LR0ProductionSetDFATest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
-        Set<Node> productionSet = new HashSet<Node>();
-        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
+        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
+        productionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet, 0), grammar);
 
-        Set<Node> otherProductionSet = new HashSet<Node>();
-        otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        assertTrue(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet), grammar)));
+        Set<GrammarClosureRule> otherProductionSet = new HashSet<GrammarClosureRule>();
+        otherProductionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        assertTrue(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet, 0), grammar)));
     }
 
     @Test
@@ -60,13 +61,13 @@ public class LR0ProductionSetDFATest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
-        Set<Node> productionSet = new HashSet<Node>();
-        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
+        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
+        productionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet, 0), grammar);
 
-        Set<Node> otherProductionSet = new HashSet<Node>();
-        otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", false, otherProductionSet), grammar)));
+        Set<GrammarClosureRule> otherProductionSet = new HashSet<GrammarClosureRule>();
+        otherProductionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", false, otherProductionSet, 0), grammar)));
     }
 
     @Test
@@ -75,13 +76,13 @@ public class LR0ProductionSetDFATest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
-        Set<Node> productionSet = new HashSet<Node>();
-        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
+        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
+        productionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet, 0), grammar);
 
-        Set<Node> otherProductionSet = new HashSet<Node>();
-        otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("B")));
-        assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet), grammar)));
+        Set<GrammarClosureRule> otherProductionSet = new HashSet<GrammarClosureRule>();
+        otherProductionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("B")));
+        assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet, 0), grammar)));
     }
 
     @Test
@@ -89,28 +90,28 @@ public class LR0ProductionSetDFATest
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
-        Set<Node> productionSet = new HashSet<Node>();
-        productionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
+        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
+        productionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet, 0), grammar);
 
         Grammar otherGrammar = new Grammar();
         otherGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("B"));
-        Set<Node> otherProductionSet = new HashSet<Node>();
-        otherProductionSet.add(this.buildProduction(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet), otherGrammar)));
+        Set<GrammarClosureRule> otherProductionSet = new HashSet<GrammarClosureRule>();
+        otherProductionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        assertFalse(dfa.structureEquals(new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S1", true, otherProductionSet, 0), otherGrammar)));
     }
 
     @Test
     public void testStructureEqualsReturnsFalseForAutomataWithDifferentClass()
     {
         Grammar grammar = new Grammar();
-        Set<Node> productionSet = new HashSet<Node>();
-        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet), grammar);
+        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
+        LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(new LR0ProductionSetDFAState("S0", true, productionSet, 0), grammar);
 
         assertFalse(dfa.structureEquals(new DFA(new DFAState("S1", true))));
     }
 
-    private ProductionNode buildProduction(NonTerminalNode nonTerminalNode, Node... rightHandNodes)
+    private GrammarClosureRule buildClosureRule(NonTerminalNode nonTerminalNode, Node... rightHandNodes)
     {
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(nonTerminalNode);
@@ -122,6 +123,6 @@ public class LR0ProductionSetDFATest
         }
         productionNode.addChild(concatenationNode);
 
-        return productionNode;
+        return new GrammarClosureRule(productionNode);
     }
 }
