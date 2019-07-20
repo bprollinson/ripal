@@ -30,13 +30,6 @@ public class LR0ProductionSetDFAState extends State<Node, LR0ProductionSetDFASta
         }
     }
 
-    public LR0ProductionSetDFAState(String name, boolean accepting, Set<Node> productionSet)
-    {
-        super(name, accepting);
-
-        this.productionSet = productionSet;
-    }
-
     public Set<Node> getProductionSet()
     {
         return this.productionSet;
