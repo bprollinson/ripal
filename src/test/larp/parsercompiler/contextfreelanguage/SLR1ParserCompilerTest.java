@@ -22,7 +22,6 @@ import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
-import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
@@ -38,8 +37,8 @@ public class SLR1ParserCompilerTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -61,9 +60,9 @@ public class SLR1ParserCompilerTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<Node>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
