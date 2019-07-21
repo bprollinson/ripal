@@ -72,6 +72,12 @@ public class LR0ProductionSetDFACompiler
 
     private void compileAndAttachAdjacentStates(Grammar augmentedGrammar, LR0ProductionSetDFAState state)
     {
+        ValueToSetMap<Node, GrammarClosureRule> symbolToNextClosureMap = this.compileAdjacentStates(state);
+        this.attachAdjacentStates(augmentedGrammar, state, symbolToNextClosureMap);
+    }
+
+    private ValueToSetMap<Node, GrammarClosureRule> compileAdjacentStates(LR0ProductionSetDFAState state)
+    {
         ValueToSetMap<Node, GrammarClosureRule> symbolToNextClosureMap = new ValueToSetMap<Node, GrammarClosureRule>();
 
         Set<GrammarClosureRule> closureRules = state.getClosureRules();
@@ -86,6 +92,11 @@ public class LR0ProductionSetDFACompiler
             }
         }
 
+        return symbolToNextClosureMap;
+    }
+
+    private void attachAdjacentStates(Grammar augmentedGrammar, LR0ProductionSetDFAState state, ValueToSetMap<Node, GrammarClosureRule> symbolToNextClosureMap)
+    {
         for (Map.Entry<Node, Set<GrammarClosureRule>> mapEntry: symbolToNextClosureMap.entrySet())
         {
             Node input = mapEntry.getKey();
