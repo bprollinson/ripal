@@ -11,10 +11,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.parsercompiler.contextfreelanguage.GrammarClosureRule;
-
-import java.util.HashSet;
-
 public class LR0ReduceActionTest
 {
     @Test
@@ -39,7 +35,7 @@ public class LR0ReduceActionTest
     public void testEqualsReturnsFalseForActionWithDifferentClass()
     {
         LR0ReduceAction action = new LR0ReduceAction(0);
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
         LR0ShiftAction otherAction = new LR0ShiftAction(state);
 
         assertFalse(action.equals(otherAction));

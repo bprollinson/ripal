@@ -14,13 +14,10 @@ import org.junit.Test;
 
 import larp.automaton.State;
 import larp.grammar.contextfreelanguage.Grammar;
-import larp.parsercompiler.contextfreelanguage.GrammarClosureRule;
 import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 import larp.util.PairToValueMap;
-
-import java.util.HashSet;
 
 public class LR0ParseTableTest
 {
@@ -31,8 +28,8 @@ public class LR0ParseTableTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -46,7 +43,7 @@ public class LR0ParseTableTest
     public void testGetStartState()
     {
         Grammar grammar = new Grammar();
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
 
@@ -59,8 +56,8 @@ public class LR0ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -73,8 +70,8 @@ public class LR0ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -88,7 +85,7 @@ public class LR0ParseTableTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -101,7 +98,7 @@ public class LR0ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0AcceptAction());
@@ -114,7 +111,7 @@ public class LR0ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -127,7 +124,7 @@ public class LR0ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
 
         PairToValueMap<State, Node, LR0ParseTableAction> cells = new PairToValueMap<State, Node, LR0ParseTableAction>();
         cells.put(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -144,8 +141,8 @@ public class LR0ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false);
 
         PairToValueMap<State, Node, LR0ParseTableAction> cells = new PairToValueMap<State, Node, LR0ParseTableAction>();
         cells.put(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -171,7 +168,7 @@ public class LR0ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -188,8 +185,8 @@ public class LR0ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         LR0ParseTable otherParseTable = new LR0ParseTable(grammar, otherState);
@@ -203,7 +200,7 @@ public class LR0ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -223,8 +220,8 @@ public class LR0ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -241,8 +238,8 @@ public class LR0ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -262,8 +259,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -281,7 +278,7 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
 
@@ -303,8 +300,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -320,8 +317,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state2));
@@ -337,8 +334,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -357,7 +354,7 @@ public class LR0ParseTableTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -376,8 +373,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -392,8 +389,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
 
@@ -408,8 +405,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -424,8 +421,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
 
@@ -440,7 +437,7 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -457,7 +454,7 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -474,8 +471,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -492,8 +489,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state1));
@@ -510,8 +507,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -527,8 +524,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -544,8 +541,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -561,8 +558,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -578,8 +575,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -595,11 +592,11 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -615,8 +612,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -632,11 +629,11 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -652,8 +649,8 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0AcceptAction());
@@ -669,11 +666,11 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -691,12 +688,12 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState3 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState3 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -714,12 +711,12 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -737,11 +734,11 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));
@@ -757,11 +754,11 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -779,11 +776,11 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
@@ -801,11 +798,11 @@ public class LR0ParseTableTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
-        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState otherState1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState2 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state1);
         parseTable.addCell(state1, new TerminalNode("a"), new LR0GotoAction(state2));

@@ -25,8 +25,6 @@ import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
-import java.util.HashSet;
-
 public class SLR1ParserCompilerTest
 {
     @Test
@@ -37,8 +35,8 @@ public class SLR1ParserCompilerTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -60,9 +58,9 @@ public class SLR1ParserCompilerTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());

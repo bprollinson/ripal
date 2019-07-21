@@ -11,16 +11,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.parsercompiler.contextfreelanguage.GrammarClosureRule;
-
-import java.util.HashSet;
-
 public class LR0GotoActionTest
 {
     @Test
     public void testEqualsReturnsTrueForGotoActionWithSameState()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
         LR0GotoAction action = new LR0GotoAction(state);
         LR0GotoAction otherAction = new LR0GotoAction(state);
 
@@ -30,9 +26,9 @@ public class LR0GotoActionTest
     @Test
     public void testEqualsReturnsFalseForGotoActionWithDifferentState()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
         LR0GotoAction action = new LR0GotoAction(state);
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false);
         LR0GotoAction otherAction = new LR0GotoAction(otherState);
 
         assertFalse(action.equals(otherAction));
@@ -41,8 +37,8 @@ public class LR0GotoActionTest
     @Test
     public void testEqualsReturnsFalseForActionWithDifferentClass()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false);
         LR0GotoAction action = new LR0GotoAction(state);
         LR0ShiftAction otherAction = new LR0ShiftAction(otherState);
 

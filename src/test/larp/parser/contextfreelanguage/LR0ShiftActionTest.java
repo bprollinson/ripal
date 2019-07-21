@@ -11,16 +11,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-import larp.parsercompiler.contextfreelanguage.GrammarClosureRule;
-
-import java.util.HashSet;
-
 public class LR0ShiftActionTest
 {
     @Test
     public void testEqualsReturnsTrueForShiftActionWithSameState()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
         LR0ShiftAction action = new LR0ShiftAction(state);
         LR0ShiftAction otherAction = new LR0ShiftAction(state);
 
@@ -30,9 +26,9 @@ public class LR0ShiftActionTest
     @Test
     public void testEqualsReturnsFalseForShiftActionWithDifferentState()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
         LR0ShiftAction action = new LR0ShiftAction(state);
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false);
         LR0ShiftAction otherAction = new LR0ShiftAction(otherState);
 
         assertFalse(action.equals(otherAction));
@@ -41,7 +37,7 @@ public class LR0ShiftActionTest
     @Test
     public void testEqualsReturnsFalseForActionWithDifferentClass()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
         LR0ShiftAction action = new LR0ShiftAction(state);
         LR0ReduceAction otherAction = new LR0ReduceAction(0);
 

@@ -33,7 +33,7 @@ public class LR0ProductionSetDFATest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
 
-        LR0ProductionSetDFAState expectedStartState = new LR0ProductionSetDFAState("S0", true, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState expectedStartState = new LR0ProductionSetDFAState("S0", true);
         LR0ProductionSetDFA dfa = new LR0ProductionSetDFA(expectedStartState, grammar);
 
         LR0ProductionSetDFAState startState = dfa.getStartState();
