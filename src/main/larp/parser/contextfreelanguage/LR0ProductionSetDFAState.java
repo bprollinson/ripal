@@ -19,6 +19,11 @@ public class LR0ProductionSetDFAState extends State<Node, LR0ProductionSetDFASta
 {
     private Set<GrammarClosureRule> closureRules;
 
+    public LR0ProductionSetDFAState(String name, boolean accepting)
+    {
+        this(name, accepting, new HashSet<GrammarClosureRule>());
+    }
+
     public LR0ProductionSetDFAState(String name, boolean accepting, Set<GrammarClosureRule> closureRules)
     {
         super(name, accepting);
