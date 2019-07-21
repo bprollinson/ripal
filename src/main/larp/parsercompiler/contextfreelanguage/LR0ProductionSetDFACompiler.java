@@ -74,9 +74,10 @@ public class LR0ProductionSetDFACompiler
     {
         ValueToSetMap<Node, GrammarClosureRule> symbolToNextClosureMap = new ValueToSetMap<Node, GrammarClosureRule>();
 
-        Set<Node> productionSet = state.getProductionSet();
-        for (Node productionNode: productionSet)
+        Set<GrammarClosureRule> closureRules = state.getClosureRules();
+        for (GrammarClosureRule closureRule: closureRules)
         {
+            Node productionNode = closureRule.getProductionNode();
             Node nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode);
             if (nextSymbol != null && !(nextSymbol instanceof EpsilonNode))
             {

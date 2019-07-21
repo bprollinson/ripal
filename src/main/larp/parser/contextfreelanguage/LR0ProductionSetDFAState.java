@@ -17,22 +17,18 @@ import java.util.Set;
 
 public class LR0ProductionSetDFAState extends State<Node, LR0ProductionSetDFAState>
 {
-    private Set<Node> productionSet;
+    private Set<GrammarClosureRule> closureRules;
 
-    public LR0ProductionSetDFAState(String name, boolean accepting, Set<GrammarClosureRule> productionSet)
+    public LR0ProductionSetDFAState(String name, boolean accepting, Set<GrammarClosureRule> closureRules)
     {
         super(name, accepting);
 
-        this.productionSet = new HashSet<Node>();
-        for (GrammarClosureRule production: productionSet)
-        {
-            this.productionSet.add(production.getProductionNode());
-        }
+        this.closureRules = closureRules;
     }
 
-    public Set<Node> getProductionSet()
+    public Set<GrammarClosureRule> getClosureRules()
     {
-        return this.productionSet;
+        return this.closureRules;
     }
 
     protected StateComparator buildStateComparator()
@@ -49,7 +45,7 @@ public class LR0ProductionSetDFAState extends State<Node, LR0ProductionSetDFASta
                 return false;
             }
 
-            return ((LR0ProductionSetDFAState)state).getProductionSet().equals(((LR0ProductionSetDFAState)otherState).getProductionSet());
+            return ((LR0ProductionSetDFAState)state).getClosureRules().equals(((LR0ProductionSetDFAState)otherState).getClosureRules());
         }
     }
 }

@@ -118,10 +118,11 @@ public class LR0ParserCompiler
 
     private void processReduceActions(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<Node> terminalNodes) throws AmbiguousLR0ParseTableException
     {
-        Set<Node> productions = state.getProductionSet();
+        Set<GrammarClosureRule> closureRules = state.getClosureRules();
 
-        for (Node production: productions)
+        for (GrammarClosureRule closureRule: closureRules)
         {
+            Node production = closureRule.getProductionNode();
             Node nonTerminalNode = production.getChildNodes().get(0);
             Node concatenationNode = production.getChildNodes().get(1);
             List<Node> childNodes = concatenationNode.getChildNodes();
