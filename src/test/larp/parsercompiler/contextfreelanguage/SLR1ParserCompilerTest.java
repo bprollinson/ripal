@@ -37,8 +37,8 @@ public class SLR1ParserCompilerTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -60,9 +60,9 @@ public class SLR1ParserCompilerTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());

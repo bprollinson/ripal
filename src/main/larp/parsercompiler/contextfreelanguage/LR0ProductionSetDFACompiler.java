@@ -56,7 +56,7 @@ public class LR0ProductionSetDFACompiler
     private LR0ProductionSetDFAState compileState(Grammar augmentedGrammar, Set<GrammarClosureRule> productionSet, boolean accepting)
     {
         productionSet = this.closureCalculator.calculate(augmentedGrammar, productionSet);
-        LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", accepting, productionSet, 0);
+        LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", accepting, productionSet);
 
         LR0ProductionSetDFAState cachedStartState = this.productionSetToStateMap.get(productionSet);
         if (cachedStartState != null)

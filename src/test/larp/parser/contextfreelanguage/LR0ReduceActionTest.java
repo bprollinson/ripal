@@ -39,7 +39,7 @@ public class LR0ReduceActionTest
     public void testEqualsReturnsFalseForActionWithDifferentClass()
     {
         LR0ReduceAction action = new LR0ReduceAction(0);
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
         LR0ShiftAction otherAction = new LR0ShiftAction(state);
 
         assertFalse(action.equals(otherAction));

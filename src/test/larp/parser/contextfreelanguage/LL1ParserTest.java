@@ -410,7 +410,7 @@ public class LL1ParserTest
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         LL1Parser parser = new LL1Parser(parseTable);
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
 
         LR0ParseTable otherParseTable = new LR0ParseTable(grammar, state);
         LR0Parser otherParser = new LR0Parser(otherParseTable);

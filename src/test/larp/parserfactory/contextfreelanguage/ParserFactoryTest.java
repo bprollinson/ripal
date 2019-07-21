@@ -94,11 +94,11 @@ public class ParserFactoryTest
         expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("a"));
         expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
-        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
-        LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>(), 0);
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
 
         LR0ParseTable expectedTable = new LR0ParseTable(expectedGrammar, state1);
         expectedTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));

@@ -52,19 +52,19 @@ public class LR0ProductionSetDFACompilerTest
         Set<GrammarClosureRule> productionSet0 = new HashSet<GrammarClosureRule>();
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new DotNode()));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", true, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", true, productionSet3);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s2));
@@ -89,19 +89,19 @@ public class LR0ProductionSetDFACompilerTest
         Set<GrammarClosureRule> productionSet0 = new HashSet<GrammarClosureRule>();
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode()));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", true, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", true, productionSet3);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("A"), s1));
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s2));
@@ -128,23 +128,23 @@ public class LR0ProductionSetDFACompilerTest
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("A"), new TerminalNode("a"), new DotNode()));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3);
 
         Set<GrammarClosureRule> productionSet4 = new HashSet<GrammarClosureRule>();
         productionSet4.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", true, productionSet4, 0);
+        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", true, productionSet4);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("A"), s2));
@@ -171,23 +171,23 @@ public class LR0ProductionSetDFACompilerTest
         Set<GrammarClosureRule> productionSet0 = new HashSet<GrammarClosureRule>();
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a"), new TerminalNode("b")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new DotNode(), new TerminalNode("b")));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"), new DotNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3);
 
         Set<GrammarClosureRule> productionSet4 = new HashSet<GrammarClosureRule>();
         productionSet4.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", true, productionSet4, 0);
+        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", true, productionSet4);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s1.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("b"), s2));
@@ -213,23 +213,23 @@ public class LR0ProductionSetDFACompilerTest
         Set<GrammarClosureRule> productionSet0 = new HashSet<GrammarClosureRule>();
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a"), new NonTerminalNode("B")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new DotNode(), new NonTerminalNode("B")));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"), new DotNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3);
 
         Set<GrammarClosureRule> productionSet4 = new HashSet<GrammarClosureRule>();
         productionSet4.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", true, productionSet4, 0);
+        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", true, productionSet4);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s1.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("B"), s2));
@@ -256,28 +256,28 @@ public class LR0ProductionSetDFACompilerTest
         Set<GrammarClosureRule> productionSet0 = new HashSet<GrammarClosureRule>();
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a"), new NonTerminalNode("B")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new DotNode(), new NonTerminalNode("B")));
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("B"), new DotNode(), new TerminalNode("b")));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"), new DotNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("B"), new TerminalNode("b"), new DotNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3);
 
         Set<GrammarClosureRule> productionSet4 = new HashSet<GrammarClosureRule>();
         productionSet4.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", false, productionSet4, 0);
+        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", false, productionSet4);
 
         Set<GrammarClosureRule> productionSet5 = new HashSet<GrammarClosureRule>();
         productionSet5.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", true, productionSet5, 0);
+        LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", true, productionSet5);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s1.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("B"), s2));
@@ -311,31 +311,31 @@ public class LR0ProductionSetDFACompilerTest
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("B")));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("B"), new DotNode(), new NonTerminalNode("C")));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("C"), new DotNode(), new TerminalNode("c")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode()));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("A"), new NonTerminalNode("B"), new DotNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("B"), new NonTerminalNode("C"), new DotNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3);
 
         Set<GrammarClosureRule> productionSet4 = new HashSet<GrammarClosureRule>();
         productionSet4.add(this.buildClosureRule(new NonTerminalNode("C"), new TerminalNode("c"), new DotNode()));
-        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", false, productionSet4, 0);
+        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", false, productionSet4);
 
         Set<GrammarClosureRule> productionSet5 = new HashSet<GrammarClosureRule>();
         productionSet5.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", false, productionSet5, 0);
+        LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", false, productionSet5);
 
         Set<GrammarClosureRule> productionSet6 = new HashSet<GrammarClosureRule>();
         productionSet6.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s6 = new LR0ProductionSetDFAState("", true, productionSet6, 0);
+        LR0ProductionSetDFAState s6 = new LR0ProductionSetDFAState("", true, productionSet6);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("A"), s1));
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("B"), s2));
@@ -369,38 +369,38 @@ public class LR0ProductionSetDFACompilerTest
         Set<GrammarClosureRule> productionSet0 = new HashSet<GrammarClosureRule>();
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a"), new NonTerminalNode("B")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new DotNode(), new NonTerminalNode("B")));
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("B"), new DotNode(), new NonTerminalNode("C")));
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("C"), new DotNode(), new NonTerminalNode("D")));
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("D"), new DotNode(), new TerminalNode("d")));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"), new DotNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("B"), new NonTerminalNode("C"), new DotNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3);
 
         Set<GrammarClosureRule> productionSet4 = new HashSet<GrammarClosureRule>();
         productionSet4.add(this.buildClosureRule(new NonTerminalNode("C"), new NonTerminalNode("D"), new DotNode()));
-        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", false, productionSet4, 0);
+        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", false, productionSet4);
 
         Set<GrammarClosureRule> productionSet5 = new HashSet<GrammarClosureRule>();
         productionSet5.add(this.buildClosureRule(new NonTerminalNode("D"), new TerminalNode("d"), new DotNode()));
-        LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", false, productionSet5, 0);
+        LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", false, productionSet5);
 
         Set<GrammarClosureRule> productionSet6 = new HashSet<GrammarClosureRule>();
         productionSet6.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s6 = new LR0ProductionSetDFAState("", false, productionSet6, 0);
+        LR0ProductionSetDFAState s6 = new LR0ProductionSetDFAState("", false, productionSet6);
 
         Set<GrammarClosureRule> productionSet7 = new HashSet<GrammarClosureRule>();
         productionSet7.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s7 = new LR0ProductionSetDFAState("", true, productionSet7, 0);
+        LR0ProductionSetDFAState s7 = new LR0ProductionSetDFAState("", true, productionSet7);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s1.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("B"), s2));
@@ -436,34 +436,34 @@ public class LR0ProductionSetDFACompilerTest
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new NonTerminalNode("S")));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new TerminalNode("b")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("A"), new TerminalNode("a"), new DotNode()));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("b"), new DotNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("S")));
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new NonTerminalNode("S")));
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new TerminalNode("b")));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3);
 
         Set<GrammarClosureRule> productionSet4 = new HashSet<GrammarClosureRule>();
         productionSet4.add(this.buildClosureRule(new NonTerminalNode("S"), new NonTerminalNode("A"), new NonTerminalNode("S"), new DotNode()));
-        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", false, productionSet4, 0);
+        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", false, productionSet4);
 
         Set<GrammarClosureRule> productionSet5 = new HashSet<GrammarClosureRule>();
         productionSet5.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", false, productionSet5, 0);
+        LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", false, productionSet5);
 
         Set<GrammarClosureRule> productionSet6 = new HashSet<GrammarClosureRule>();
         productionSet6.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s6 = new LR0ProductionSetDFAState("", true, productionSet6, 0);
+        LR0ProductionSetDFAState s6 = new LR0ProductionSetDFAState("", true, productionSet6);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("b"), s2));
@@ -496,27 +496,27 @@ public class LR0ProductionSetDFACompilerTest
         Set<GrammarClosureRule> productionSet0 = new HashSet<GrammarClosureRule>();
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a"), new TerminalNode("b"), new TerminalNode("c")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new DotNode(), new TerminalNode("b"), new TerminalNode("c")));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"), new DotNode(), new TerminalNode("c")));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"), new TerminalNode("c"), new DotNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3);
 
         Set<GrammarClosureRule> productionSet4 = new HashSet<GrammarClosureRule>();
         productionSet4.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", false, productionSet4, 0);
+        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", false, productionSet4);
 
         Set<GrammarClosureRule> productionSet5 = new HashSet<GrammarClosureRule>();
         productionSet5.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", true, productionSet5, 0);
+        LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", true, productionSet5);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s1.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("b"), s2));
@@ -547,32 +547,32 @@ public class LR0ProductionSetDFACompilerTest
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new TerminalNode("a")));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new TerminalNode("b")));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("A"), new TerminalNode("a"), new DotNode()));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode(), new TerminalNode("b")));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("a"), new DotNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3);
 
         Set<GrammarClosureRule> productionSet4 = new HashSet<GrammarClosureRule>();
         productionSet4.add(this.buildClosureRule(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"), new DotNode()));
-        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", false, productionSet4, 0);
+        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", false, productionSet4);
 
         Set<GrammarClosureRule> productionSet5 = new HashSet<GrammarClosureRule>();
         productionSet5.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", false, productionSet5, 0);
+        LR0ProductionSetDFAState s5 = new LR0ProductionSetDFAState("", false, productionSet5);
 
         Set<GrammarClosureRule> productionSet6 = new HashSet<GrammarClosureRule>();
         productionSet6.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s6 = new LR0ProductionSetDFAState("", true, productionSet6, 0);
+        LR0ProductionSetDFAState s6 = new LR0ProductionSetDFAState("", true, productionSet6);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("A"), s2));
@@ -602,23 +602,23 @@ public class LR0ProductionSetDFACompilerTest
         Set<GrammarClosureRule> productionSet0 = new HashSet<GrammarClosureRule>();
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a"), new TerminalNode("b")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new DotNode(), new TerminalNode("b")));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"), new DotNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3);
 
         Set<GrammarClosureRule> productionSet4 = new HashSet<GrammarClosureRule>();
         productionSet4.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", true, productionSet4, 0);
+        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", true, productionSet4);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s1.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("b"), s2));
@@ -645,15 +645,15 @@ public class LR0ProductionSetDFACompilerTest
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new EpsilonNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new EpsilonNode(), new DotNode()));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", true, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", true, productionSet2);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s1));
         s1.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new EndOfStringNode(), s2));
@@ -682,23 +682,23 @@ public class LR0ProductionSetDFACompilerTest
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("A"), new DotNode(), new EpsilonNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("A"), new EpsilonNode(), new DotNode()));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("A"), new TerminalNode("a"), new DotNode()));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", false, productionSet3);
 
         Set<GrammarClosureRule> productionSet4 = new HashSet<GrammarClosureRule>();
         productionSet4.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", true, productionSet4, 0);
+        LR0ProductionSetDFAState s4 = new LR0ProductionSetDFAState("", true, productionSet4);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("A"), s2));
@@ -727,19 +727,19 @@ public class LR0ProductionSetDFACompilerTest
         Set<GrammarClosureRule> productionSet0 = new HashSet<GrammarClosureRule>();
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         productionSet0.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new TerminalNode("a")));
-        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0, 0);
+        LR0ProductionSetDFAState s0 = new LR0ProductionSetDFAState("", false, productionSet0);
 
         Set<GrammarClosureRule> productionSet1 = new HashSet<GrammarClosureRule>();
         productionSet1.add(this.buildClosureRule(new NonTerminalNode("S"), new TerminalNode("a"), new DotNode()));
-        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1, 0);
+        LR0ProductionSetDFAState s1 = new LR0ProductionSetDFAState("", false, productionSet1);
 
         Set<GrammarClosureRule> productionSet2 = new HashSet<GrammarClosureRule>();
         productionSet2.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
-        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2, 0);
+        LR0ProductionSetDFAState s2 = new LR0ProductionSetDFAState("", false, productionSet2);
 
         Set<GrammarClosureRule> productionSet3 = new HashSet<GrammarClosureRule>();
         productionSet3.add(this.buildClosureRule(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
-        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", true, productionSet3, 0);
+        LR0ProductionSetDFAState s3 = new LR0ProductionSetDFAState("", true, productionSet3);
 
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), s1));
         s0.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new NonTerminalNode("S"), s2));
