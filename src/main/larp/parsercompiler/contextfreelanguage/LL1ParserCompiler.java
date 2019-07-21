@@ -24,31 +24,40 @@ public class LL1ParserCompiler
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         List<Node> productions = grammar.getProductions();
 
-        FirstSetCalculator firstCalculator = new FirstSetCalculator(grammar);
+        FirstSetCalculator firstSetCalculator = new FirstSetCalculator(grammar);
         FollowSetCalculator followSetCalculator = new FollowSetCalculator(grammar);
 
-        for (int firstRuleIndex = 0; firstRuleIndex < productions.size(); firstRuleIndex++)
+        for (int ruleIndex = 0; ruleIndex < productions.size(); ruleIndex++)
         {
-            Set<Node> firsts = firstCalculator.getFirst(firstRuleIndex);
-            NonTerminalNode nonTerminalNode = (NonTerminalNode)productions.get(firstRuleIndex).getChildNodes().get(0);
+            Set<Node> firsts = firstSetCalculator.getFirst(ruleIndex);
+            NonTerminalNode nonTerminalNode = (NonTerminalNode)productions.get(ruleIndex).getChildNodes().get(0);
 
             for (Node first: firsts)
             {
                 if (first instanceof EpsilonNode)
                 {
-                    Set<Node> follows = followSetCalculator.getFollow(nonTerminalNode);
-                    for (Node follow: follows)
-                    {
-                        parseTable.addCell(nonTerminalNode, follow, firstRuleIndex);
-                    }
-
+                    this.addCellsForEpsilonNode(parseTable, followSetCalculator, nonTerminalNode, ruleIndex);
                     continue;
                 }
 
-                parseTable.addCell(nonTerminalNode, first, firstRuleIndex);
+                this.addCellForNonEpsilonNode(parseTable, nonTerminalNode, first, ruleIndex);
             }
         }
 
         return parseTable;
+    }
+
+    private void addCellsForEpsilonNode(LL1ParseTable parseTable, FollowSetCalculator followSetCalculator, NonTerminalNode nonTerminalNode, int ruleIndex) throws AmbiguousLL1ParseTableException
+    {
+        Set<Node> follows = followSetCalculator.getFollow(nonTerminalNode);
+        for (Node follow: follows)
+        {
+            parseTable.addCell(nonTerminalNode, follow, ruleIndex);
+        }
+    }
+
+    private void addCellForNonEpsilonNode(LL1ParseTable parseTable, NonTerminalNode nonTerminalNode, Node first, int ruleIndex) throws AmbiguousLL1ParseTableException
+    {
+        parseTable.addCell(nonTerminalNode, first, ruleIndex);
     }
 }
