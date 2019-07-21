@@ -26,14 +26,12 @@ import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
-import larp.parsercompiler.contextfreelanguage.GrammarClosureRule;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class ParserFactoryTest
@@ -94,11 +92,11 @@ public class ParserFactoryTest
         expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("a"));
         expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
-        LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false, new HashSet<GrammarClosureRule>());
+        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false);
+        LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false);
 
         LR0ParseTable expectedTable = new LR0ParseTable(expectedGrammar, state1);
         expectedTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
