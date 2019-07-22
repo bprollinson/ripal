@@ -130,7 +130,7 @@ public class LR0ParserCompiler
 
             if (childNodes.get(numChildNodes - 1) instanceof DotNode)
             {
-                List<Integer> productionPositions = this.findProductionPositions(production, parseTable.getGrammar().getProductions());
+                List<Integer> productionPositions = this.findProductionPositions(production, parseTable.getGrammar());
 
                 for (int productionPosition: productionPositions)
                 {
@@ -146,21 +146,11 @@ public class LR0ParserCompiler
         }
     }
 
-    private List<Integer> findProductionPositions(Node needle, List<Node> haystack)
+    private List<Integer> findProductionPositions(Node needle, Grammar grammar)
     {
-        Node originalNeedle = this.removeDotFromProduction(needle);
+        Node originalProduction = this.removeDotFromProduction(needle);
 
-        List<Integer> productionPositions = new ArrayList<Integer>();
-        for (int i = 0; i < haystack.size(); i++)
-        {
-            Node haystackProduction = haystack.get(i);
-            if (haystackProduction.equals(originalNeedle))
-            {
-                productionPositions.add(i);
-            }
-        }
-
-        return productionPositions;
+        return grammar.findProductionPositions(originalProduction);
     }
 
     private Node removeDotFromProduction(Node production)

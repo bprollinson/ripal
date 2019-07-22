@@ -64,6 +64,22 @@ public class Grammar
         return (NonTerminalNode)this.productions.get(0).getChildNodes().get(0);
     }
 
+    public List<Integer> findProductionPositions(Node expectedProduction)
+    {
+        List<Integer> productionPositions = new ArrayList<Integer>();
+
+        for (int i = 0; i < this.productions.size(); i++)
+        {
+            Node production = this.productions.get(i);
+            if (production.equals(expectedProduction))
+            {
+                productionPositions.add(i);
+            }
+        }
+
+        return productionPositions;
+    }
+
     public boolean equals(Object other)
     {
         if (!(other instanceof Grammar))
