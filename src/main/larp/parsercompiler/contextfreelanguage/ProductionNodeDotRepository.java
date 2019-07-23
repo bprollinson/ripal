@@ -78,4 +78,20 @@ public class ProductionNodeDotRepository
 
         return newProductionNode;
     }
+
+    public Node removeDotFromProduction(Node production)
+    {
+        ProductionNode newProduction = new ProductionNode();
+        newProduction.addChild(production.getChildNodes().get(0));
+
+        ConcatenationNode newConcatenationNode = new ConcatenationNode();
+        Node concatenationNode = production.getChildNodes().get(1);
+        for (int i = 0; i < concatenationNode.getChildNodes().size() - 1; i++)
+        {
+            newConcatenationNode.addChild(concatenationNode.getChildNodes().get(i));
+        }
+        newProduction.addChild(newConcatenationNode);
+
+        return newProduction;
+    }
 }

@@ -17,12 +17,10 @@ import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
 import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
-import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
-import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
 import java.util.ArrayList;
@@ -33,10 +31,12 @@ import java.util.Set;
 public class LR0ParserCompiler
 {
     private LR0ProductionSetDFACompiler DFACompiler;
+    private ProductionNodeDotRepository productionNodeDotRepository;
 
     public LR0ParserCompiler()
     {
         this.DFACompiler = new LR0ProductionSetDFACompiler();
+        this.productionNodeDotRepository = new ProductionNodeDotRepository();
     }
 
     public LR0ParseTable compile(Grammar grammar) throws AmbiguousLR0ParseTableException
@@ -148,24 +148,8 @@ public class LR0ParserCompiler
 
     private List<Integer> findProductionPositions(Node needle, Grammar grammar)
     {
-        Node originalProduction = this.removeDotFromProduction(needle);
+        Node originalProduction = this.productionNodeDotRepository.removeDotFromProduction(needle);
 
         return grammar.findProductionPositions(originalProduction);
-    }
-
-    private Node removeDotFromProduction(Node production)
-    {
-        ProductionNode newProduction = new ProductionNode();
-        newProduction.addChild(production.getChildNodes().get(0));
-
-        ConcatenationNode newConcatenationNode = new ConcatenationNode();
-        Node concatenationNode = production.getChildNodes().get(1);
-        for (int i = 0; i < concatenationNode.getChildNodes().size() - 1; i++)
-        {
-            newConcatenationNode.addChild(concatenationNode.getChildNodes().get(i));
-        }
-        newProduction.addChild(newConcatenationNode);
-
-        return newProduction;
     }
 }
