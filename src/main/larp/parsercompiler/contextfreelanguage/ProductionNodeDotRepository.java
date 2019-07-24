@@ -86,9 +86,13 @@ public class ProductionNodeDotRepository
 
         ConcatenationNode newConcatenationNode = new ConcatenationNode();
         Node concatenationNode = production.getChildNodes().get(1);
-        for (int i = 0; i < concatenationNode.getChildNodes().size() - 1; i++)
+        for (int i = 0; i < concatenationNode.getChildNodes().size(); i++)
         {
-            newConcatenationNode.addChild(concatenationNode.getChildNodes().get(i));
+            Node childNode = concatenationNode.getChildNodes().get(i);
+            if (!(childNode instanceof DotNode))
+            {
+                newConcatenationNode.addChild(childNode);
+            }
         }
         newProduction.addChild(newConcatenationNode);
 
