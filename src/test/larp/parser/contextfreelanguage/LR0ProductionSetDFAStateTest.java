@@ -36,15 +36,15 @@ public class LR0ProductionSetDFAStateTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrueForSameProductionSet()
+    public void testStructureEqualsReturnsTrueForSameClosureRules()
     {
-        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
-        productionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, productionSet);
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        closureRules.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, closureRules);
 
-        Set<GrammarClosureRule> otherProductionSet = new HashSet<GrammarClosureRule>();
-        otherProductionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        assertTrue(state.structureEquals(new LR0ProductionSetDFAState("S1", true, otherProductionSet)));
+        Set<GrammarClosureRule> otherClosureRules = new HashSet<GrammarClosureRule>();
+        otherClosureRules.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        assertTrue(state.structureEquals(new LR0ProductionSetDFAState("S1", true, otherClosureRules)));
     }
 
     @Test
@@ -56,15 +56,15 @@ public class LR0ProductionSetDFAStateTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForDifferentProductionSet()
+    public void testStructureEqualsReturnsFalseForDifferentClosureRules()
     {
-        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
-        productionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, productionSet);
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        closureRules.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true, closureRules);
 
-        Set<GrammarClosureRule> otherProductionSet = new HashSet<GrammarClosureRule>();
-        otherProductionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("B")));
-        assertFalse(state.structureEquals(new LR0ProductionSetDFAState("S1", true, otherProductionSet)));
+        Set<GrammarClosureRule> otherClosureRules = new HashSet<GrammarClosureRule>();
+        otherClosureRules.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("B")));
+        assertFalse(state.structureEquals(new LR0ProductionSetDFAState("S1", true, otherClosureRules)));
     }
 
     @Test
@@ -121,18 +121,18 @@ public class LR0ProductionSetDFAStateTest
     }
 
     @Test
-    public void testStructureEqualsReturnsTrueForSameSubsequentProductionSet()
+    public void testStructureEqualsReturnsTrueForSameSubsequentClosureRules()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true);
-        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
-        productionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFAState nextState = new LR0ProductionSetDFAState("S0", true, productionSet);
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        closureRules.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        LR0ProductionSetDFAState nextState = new LR0ProductionSetDFAState("S0", true, closureRules);
         state.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), nextState));
 
         LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("S0", true);
-        Set<GrammarClosureRule> otherProductionSet = new HashSet<GrammarClosureRule>();
-        otherProductionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFAState otherNextState = new LR0ProductionSetDFAState("S0", true, otherProductionSet);
+        Set<GrammarClosureRule> otherClosureRules = new HashSet<GrammarClosureRule>();
+        otherClosureRules.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        LR0ProductionSetDFAState otherNextState = new LR0ProductionSetDFAState("S0", true, otherClosureRules);
         otherState.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), otherNextState));
 
         assertTrue(state.structureEquals(otherState));
@@ -163,18 +163,18 @@ public class LR0ProductionSetDFAStateTest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseForDifferentSubsequentProductionSet()
+    public void testStructureEqualsReturnsFalseForDifferentSubsequentClosureRules()
     {
         LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("S0", true);
-        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
-        productionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
-        LR0ProductionSetDFAState nextState = new LR0ProductionSetDFAState("S1", true, productionSet);
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        closureRules.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        LR0ProductionSetDFAState nextState = new LR0ProductionSetDFAState("S1", true, closureRules);
         state.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), nextState));
 
         LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("S2", true);
-        Set<GrammarClosureRule> otherProductionSet = new HashSet<GrammarClosureRule>();
-        otherProductionSet.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("B")));
-        LR0ProductionSetDFAState otherNextState = new LR0ProductionSetDFAState("S3", true, otherProductionSet);
+        Set<GrammarClosureRule> otherClosureRules = new HashSet<GrammarClosureRule>();
+        otherClosureRules.add(this.buildClosureRule(new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("B")));
+        LR0ProductionSetDFAState otherNextState = new LR0ProductionSetDFAState("S3", true, otherClosureRules);
         otherState.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(new TerminalNode("a"), otherNextState));
 
         assertFalse(state.structureEquals(otherState));
