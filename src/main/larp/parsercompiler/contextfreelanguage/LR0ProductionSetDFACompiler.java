@@ -26,7 +26,7 @@ public class LR0ProductionSetDFACompiler
     private GrammarAugmentor grammarAugmentor;
     private GrammarClosureCalculator closureCalculator;
     private ProductionNodeDotRepository productionNodeDotRepository;
-    private Map<Set<GrammarClosureRule>, LR0ProductionSetDFAState> productionSetToStateMap;
+    private Map<Set<GrammarClosureRule>, LR0ProductionSetDFAState> closureRuleSetToStateMap;
 
     public LR0ProductionSetDFACompiler()
     {
@@ -37,34 +37,34 @@ public class LR0ProductionSetDFACompiler
 
     public LR0ProductionSetDFA compile(Grammar grammar)
     {
-        this.productionSetToStateMap = new HashMap<Set<GrammarClosureRule>, LR0ProductionSetDFAState>();
+        this.closureRuleSetToStateMap = new HashMap<Set<GrammarClosureRule>, LR0ProductionSetDFAState>();
         Grammar augmentedGrammar = this.grammarAugmentor.augment(grammar);
 
-        Set<GrammarClosureRule> productionSet = new HashSet<GrammarClosureRule>();
+        Set<GrammarClosureRule> closureRuleSet = new HashSet<GrammarClosureRule>();
         if (augmentedGrammar.getStartSymbol() == null)
         {
             return null;
         }
         Node firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(augmentedGrammar.getProduction(0));
-        productionSet.add(new GrammarClosureRule(firstProductionWithDot));
+        closureRuleSet.add(new GrammarClosureRule(firstProductionWithDot));
 
-        LR0ProductionSetDFAState startState = this.compileState(augmentedGrammar, productionSet, false);
+        LR0ProductionSetDFAState startState = this.compileState(augmentedGrammar, closureRuleSet, false);
 
         return new LR0ProductionSetDFA(startState, augmentedGrammar);
     }
 
-    private LR0ProductionSetDFAState compileState(Grammar augmentedGrammar, Set<GrammarClosureRule> productionSet, boolean accepting)
+    private LR0ProductionSetDFAState compileState(Grammar augmentedGrammar, Set<GrammarClosureRule> closureRuleSet, boolean accepting)
     {
-        productionSet = this.closureCalculator.calculate(augmentedGrammar, productionSet);
-        LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", accepting, productionSet);
+        closureRuleSet = this.closureCalculator.calculate(augmentedGrammar, closureRuleSet);
+        LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", accepting, closureRuleSet);
 
-        LR0ProductionSetDFAState cachedStartState = this.productionSetToStateMap.get(productionSet);
+        LR0ProductionSetDFAState cachedStartState = this.closureRuleSetToStateMap.get(closureRuleSet);
         if (cachedStartState != null)
         {
             return cachedStartState;
         }
 
-        this.productionSetToStateMap.put(productionSet, startState);
+        this.closureRuleSetToStateMap.put(closureRuleSet, startState);
         this.compileAndAttachAdjacentStates(augmentedGrammar, startState);
 
         return startState;
@@ -100,10 +100,10 @@ public class LR0ProductionSetDFACompiler
         for (Map.Entry<Node, Set<GrammarClosureRule>> mapEntry: symbolToNextClosureMap.entrySet())
         {
             Node input = mapEntry.getKey();
-            Set<GrammarClosureRule> nextStateProductionSet = mapEntry.getValue();
+            Set<GrammarClosureRule> nextStateClosureRuleSet = mapEntry.getValue();
 
             boolean nextStateAccepting = input instanceof EndOfStringNode;
-            LR0ProductionSetDFAState nextState = this.compileState(augmentedGrammar, nextStateProductionSet, nextStateAccepting);
+            LR0ProductionSetDFAState nextState = this.compileState(augmentedGrammar, nextStateClosureRuleSet, nextStateAccepting);
             state.addTransition(new StateTransition<Node, LR0ProductionSetDFAState>(input, nextState));
         }
     }
