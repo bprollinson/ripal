@@ -53,38 +53,38 @@ public class GrammarClosureCalculator
         return startingNonTerminalProductions;
     }
 
-    private boolean expandClosure(Grammar grammar, ValueToSetMap<Node, Integer> startingNonTerminalProductionsMap, Set<GrammarClosureRule> productionsClosure)
+    private boolean expandClosure(Grammar grammar, ValueToSetMap<Node, Integer> startingNonTerminalProductionsMap, Set<GrammarClosureRule> rulesClosure)
     {
-        Set<GrammarClosureRule> productionsToAdd = new HashSet<GrammarClosureRule>();
+        Set<GrammarClosureRule> closureRulesToAdd = new HashSet<GrammarClosureRule>();
 
-        for (GrammarClosureRule productionNode: productionsClosure)
+        for (GrammarClosureRule closureRule: rulesClosure)
         {
-            Node nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(productionNode.getProductionNode());
+            Node nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(closureRule.getProductionNode());
             if (nextSymbol != null)
             {
-                this.addProductionsForNonTerminal(grammar, startingNonTerminalProductionsMap.get(nextSymbol), productionsToAdd);
+                this.addClosureRulesForNonTerminal(grammar, startingNonTerminalProductionsMap.get(nextSymbol), closureRulesToAdd);
             }
             if (nextSymbol instanceof EpsilonNode)
             {
-                productionsToAdd.add(this.buildEpsilonProduction(productionNode.getProductionNode().getChildNodes().get(0)));
+                closureRulesToAdd.add(this.buildEpsilonClosureRule(closureRule.getProductionNode().getChildNodes().get(0)));
             }
         }
 
-        return productionsClosure.addAll(productionsToAdd);
+        return rulesClosure.addAll(closureRulesToAdd);
     }
 
-    private void addProductionsForNonTerminal(Grammar grammar, Set<Integer> productionIndices, Set<GrammarClosureRule> productionsToAdd)
+    private void addClosureRulesForNonTerminal(Grammar grammar, Set<Integer> productionIndices, Set<GrammarClosureRule> closureRulesToAdd)
     {
         for (int productionIndex: productionIndices)
         {
             Node production = grammar.getProductions().get(productionIndex);
 
             Node productionNode = this.productionNodeDotRepository.addDotToProductionRightHandSide(production);
-            productionsToAdd.add(new GrammarClosureRule(productionNode));
+            closureRulesToAdd.add(new GrammarClosureRule(productionNode));
         }
     }
 
-    private GrammarClosureRule buildEpsilonProduction(Node leftHandNonTerminal)
+    private GrammarClosureRule buildEpsilonClosureRule(Node leftHandNonTerminal)
     {
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(leftHandNonTerminal);
