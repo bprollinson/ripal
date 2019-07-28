@@ -71,7 +71,7 @@ public class LR0ProductionSetDFATest
     }
 
     @Test
-    public void testStructureEqualsReturnsFalseWhenProductionSetsNotEqual()
+    public void testStructureEqualsReturnsFalseWhenClosureRulesNotEqual()
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
