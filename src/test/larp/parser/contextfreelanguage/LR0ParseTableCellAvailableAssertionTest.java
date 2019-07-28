@@ -20,7 +20,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, null);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -34,7 +34,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, null);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
@@ -48,7 +48,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, null);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
@@ -62,8 +62,8 @@ public class LR0ParseTableCellAvailableAssertionTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, null);
         parseTable.addCell(state, new NonTerminalNode("A"), new LR0GotoAction(state2));
@@ -76,7 +76,7 @@ public class LR0ParseTableCellAvailableAssertionTest
     public void testValidateDoesNotThrowExceptionForCellThatDoesNotAlreadyExist() throws AmbiguousLR0ParseTableException
     {
         Grammar grammar = new Grammar();
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
         LR0ParseTable parseTable = new LR0ParseTable(grammar, null);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state));
         LR0ParseTableCellAvailableAssertion assertion = new LR0ParseTableCellAvailableAssertion(parseTable, state, new TerminalNode("b"), new LR0ShiftAction(state));

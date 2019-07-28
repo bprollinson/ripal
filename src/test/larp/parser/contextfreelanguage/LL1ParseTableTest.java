@@ -161,7 +161,7 @@ public class LL1ParseTableTest
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
 
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
         LR0ParseTable otherParseTable = new LR0ParseTable(grammar, state);
 
         assertFalse(parseTable.equals(otherParseTable));

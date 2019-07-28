@@ -19,10 +19,10 @@ import larp.parser.contextfreelanguage.AmbiguousParseTableException;
 import larp.parser.contextfreelanguage.LL1Parser;
 import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parser.contextfreelanguage.LR0AcceptAction;
+import larp.parser.contextfreelanguage.LR0ClosureRuleSetDFAState;
 import larp.parser.contextfreelanguage.LR0GotoAction;
 import larp.parser.contextfreelanguage.LR0Parser;
 import larp.parser.contextfreelanguage.LR0ParseTable;
-import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
@@ -92,11 +92,11 @@ public class ParserFactoryTest
         expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("a"));
         expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("b"));
 
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state3 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state4 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state5 = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseTable expectedTable = new LR0ParseTable(expectedGrammar, state1);
         expectedTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));

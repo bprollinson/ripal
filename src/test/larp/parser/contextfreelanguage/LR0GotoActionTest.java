@@ -16,7 +16,7 @@ public class LR0GotoActionTest
     @Test
     public void testEqualsReturnsTrueForGotoActionWithSameState()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
         LR0GotoAction action = new LR0GotoAction(state);
         LR0GotoAction otherAction = new LR0GotoAction(state);
 
@@ -26,9 +26,9 @@ public class LR0GotoActionTest
     @Test
     public void testEqualsReturnsFalseForGotoActionWithDifferentState()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
         LR0GotoAction action = new LR0GotoAction(state);
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState otherState = new LR0ClosureRuleSetDFAState("", false);
         LR0GotoAction otherAction = new LR0GotoAction(otherState);
 
         assertFalse(action.equals(otherAction));
@@ -37,8 +37,8 @@ public class LR0GotoActionTest
     @Test
     public void testEqualsReturnsFalseForActionWithDifferentClass()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState otherState = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState otherState = new LR0ClosureRuleSetDFAState("", false);
         LR0GotoAction action = new LR0GotoAction(state);
         LR0ShiftAction otherAction = new LR0ShiftAction(otherState);
 

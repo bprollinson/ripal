@@ -15,16 +15,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LR0ProductionSetDFAState extends State<Node, LR0ProductionSetDFAState>
+public class LR0ClosureRuleSetDFAState extends State<Node, LR0ClosureRuleSetDFAState>
 {
     private Set<GrammarClosureRule> closureRules;
 
-    public LR0ProductionSetDFAState(String name, boolean accepting)
+    public LR0ClosureRuleSetDFAState(String name, boolean accepting)
     {
         this(name, accepting, new HashSet<GrammarClosureRule>());
     }
 
-    public LR0ProductionSetDFAState(String name, boolean accepting, Set<GrammarClosureRule> closureRules)
+    public LR0ClosureRuleSetDFAState(String name, boolean accepting, Set<GrammarClosureRule> closureRules)
     {
         super(name, accepting);
 
@@ -38,10 +38,10 @@ public class LR0ProductionSetDFAState extends State<Node, LR0ProductionSetDFASta
 
     protected StateComparator buildStateComparator()
     {
-        return new LR0ProductionSetDFAStateComparator();
+        return new LR0ClosureRuleSetDFAStateComparator();
     }
 
-    private class LR0ProductionSetDFAStateComparator extends StateComparator
+    private class LR0ClosureRuleSetDFAStateComparator extends StateComparator
     {
         public boolean equalsState(State state, State otherState, List<State> ourCoveredStates, List<State> otherCoveredStates)
         {
@@ -50,7 +50,7 @@ public class LR0ProductionSetDFAState extends State<Node, LR0ProductionSetDFASta
                 return false;
             }
 
-            return ((LR0ProductionSetDFAState)state).getClosureRules().equals(((LR0ProductionSetDFAState)otherState).getClosureRules());
+            return ((LR0ClosureRuleSetDFAState)state).getClosureRules().equals(((LR0ClosureRuleSetDFAState)otherState).getClosureRules());
         }
     }
 }

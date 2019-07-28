@@ -26,9 +26,9 @@ public class LR0ParserTest
     @Test
     public void testAcceptsReturnsTrueForCorrectCharacterInSingleCharacterGrammar() throws AmbiguousLR0ParseTableException
     {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state3 = new LR0ClosureRuleSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -49,9 +49,9 @@ public class LR0ParserTest
     @Test
     public void testAcceptsReturnsFalseForIncorrectCharacterInSingleCharacterGrammar() throws AmbiguousLR0ParseTableException
     {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state3 = new LR0ClosureRuleSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -72,10 +72,10 @@ public class LR0ParserTest
     @Test
     public void testAcceptsReturnsTrueForMultiCharacterGrammarUsingMultipleTerminalNodes() throws AmbiguousLR0ParseTableException
     {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state3 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state4 = new LR0ClosureRuleSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -98,9 +98,9 @@ public class LR0ParserTest
     @Test
     public void testAcceptsDoesNotEquateCharactersWithMultiCharacterTerminalNode() throws AmbiguousLR0ParseTableException
     {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state3 = new LR0ClosureRuleSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -121,9 +121,9 @@ public class LR0ParserTest
     @Test
     public void testAcceptsReturnsFalseForUnmatchedInputCharacter() throws AmbiguousLR0ParseTableException
     {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state3 = new LR0ClosureRuleSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -144,10 +144,10 @@ public class LR0ParserTest
     @Test
     public void testAcceptsReturnsFalseForUnmatchedGrammarCharacter() throws AmbiguousLR0ParseTableException
     {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state3 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state4 = new LR0ClosureRuleSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -170,8 +170,8 @@ public class LR0ParserTest
     @Test
     public void testAcceptsReturnsTrueForEmptyString() throws AmbiguousLR0ParseTableException
     {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -214,8 +214,8 @@ public class LR0ParserTest
     @Test
     public void testAcceptsReturnsFalseWhenReduceActionRunsOutOfSymbols() throws AmbiguousLR0ParseTableException
     {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -233,8 +233,8 @@ public class LR0ParserTest
     @Test
     public void testAcceptsReturnsFalseWhenNextStateNotFoundInStack() throws AmbiguousLR0ParseTableException
     {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -254,10 +254,10 @@ public class LR0ParserTest
     @Test
     public void testGetAppliedRulesReturnsEmptyListBeforeParseIsRun() throws AmbiguousLR0ParseTableException
     {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state3 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state4 = new LR0ClosureRuleSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -284,10 +284,10 @@ public class LR0ParserTest
     @Test
     public void testGetAppliedRulesReturnsRuleIndexesOnSuccessfulParse() throws AmbiguousLR0ParseTableException
     {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state3 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state4 = new LR0ClosureRuleSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -317,12 +317,12 @@ public class LR0ParserTest
     @Test
     public void testGetAppliedRulesReturnsRuleIndexesUntilTableLookupFailure() throws AmbiguousLR0ParseTableException
     {
-        LR0ProductionSetDFAState state1 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state2 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state3 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state4 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state5 = new LR0ProductionSetDFAState("", false);
-        LR0ProductionSetDFAState state6 = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state3 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state4 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state5 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state6 = new LR0ClosureRuleSetDFAState("", false);
 
         Grammar augmentedGrammar = new Grammar();
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
@@ -363,13 +363,13 @@ public class LR0ParserTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
-        LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState startState = new LR0ClosureRuleSetDFAState("", false);
         LR0ParseTable parseTable = new LR0ParseTable(grammar, startState);
         parseTable.addCell(startState, new TerminalNode("a"), new LR0ReduceAction(0));
         parseTable.addCell(startState, new TerminalNode("b"), new LR0ReduceAction(1));
         LR0Parser parser = new LR0Parser(parseTable);
 
-        LR0ProductionSetDFAState otherStartState = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState otherStartState = new LR0ClosureRuleSetDFAState("", false);
         LR0ParseTable otherParseTable = new LR0ParseTable(grammar, otherStartState);
         otherParseTable.addCell(otherStartState, new TerminalNode("a"), new LR0ReduceAction(0));
         otherParseTable.addCell(otherStartState, new TerminalNode("b"), new LR0ReduceAction(1));
@@ -385,13 +385,13 @@ public class LR0ParserTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
 
-        LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState startState = new LR0ClosureRuleSetDFAState("", false);
         LR0ParseTable parseTable = new LR0ParseTable(grammar, startState);
         parseTable.addCell(startState, new TerminalNode("a"), new LR0ReduceAction(0));
         parseTable.addCell(startState, new TerminalNode("b"), new LR0ReduceAction(1));
         LR0Parser parser = new LR0Parser(parseTable);
 
-        LR0ProductionSetDFAState otherStartState = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState otherStartState = new LR0ClosureRuleSetDFAState("", false);
         LR0ParseTable otherParseTable = new LR0ParseTable(grammar, otherStartState);
         otherParseTable.addCell(otherStartState, new TerminalNode("a"), new LR0ReduceAction(0));
         otherParseTable.addCell(otherStartState, new TerminalNode("b"), new LR0ReduceAction(0));
@@ -405,7 +405,7 @@ public class LR0ParserTest
     {
         Grammar grammar = new Grammar();
 
-        LR0ProductionSetDFAState startState = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState startState = new LR0ClosureRuleSetDFAState("", false);
         LR0ParseTable parseTable = new LR0ParseTable(grammar, startState);
         LR0Parser parser = new LR0Parser(parseTable);
 

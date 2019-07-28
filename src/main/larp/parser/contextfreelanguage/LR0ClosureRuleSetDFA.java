@@ -11,11 +11,11 @@ import larp.automaton.FiniteAutomata;
 import larp.automaton.State;
 import larp.grammar.contextfreelanguage.Grammar;
 
-public class LR0ProductionSetDFA extends FiniteAutomata<LR0ProductionSetDFAState>
+public class LR0ClosureRuleSetDFA extends FiniteAutomata<LR0ClosureRuleSetDFAState>
 {
     private Grammar grammar;
 
-    public LR0ProductionSetDFA(LR0ProductionSetDFAState startState, Grammar grammar)
+    public LR0ClosureRuleSetDFA(LR0ClosureRuleSetDFAState startState, Grammar grammar)
     {
         super(startState);
 
@@ -34,6 +34,6 @@ public class LR0ProductionSetDFA extends FiniteAutomata<LR0ProductionSetDFAState
             return false;
         }
 
-        return this.grammar.equals(((LR0ProductionSetDFA)other).getGrammar());
+        return this.grammar.equals(((LR0ClosureRuleSetDFA)other).getGrammar());
     }
 }

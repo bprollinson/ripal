@@ -26,7 +26,7 @@ public class LR0AcceptActionTest
     public void testEqualsReturnsFalseForActionWithDifferentClass()
     {
         LR0AcceptAction action = new LR0AcceptAction();
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
         LR0ShiftAction otherAction = new LR0ShiftAction(state);
 
         assertFalse(action.equals(otherAction));

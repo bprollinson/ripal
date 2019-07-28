@@ -21,7 +21,7 @@ public class LR0ParseStackTest
     @Test
     public void testPeekReturnsTopObject() throws LR0ParseStackEmptyException
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -40,7 +40,7 @@ public class LR0ParseStackTest
     @Test
     public void testPopReturnsAndRemovesTopObject() throws LR0ParseStackEmptyException
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -63,10 +63,10 @@ public class LR0ParseStackTest
     @Test
     public void testGetTopStateReturnsTopElement() throws LR0ParseStackEmptyException
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseStack stack = new LR0ParseStack();
-        stack.push(new LR0ProductionSetDFAState("", true));
+        stack.push(new LR0ClosureRuleSetDFAState("", true));
         stack.push(new NonTerminalNode("A"));
         stack.push(state);
 
@@ -76,10 +76,10 @@ public class LR0ParseStackTest
     @Test
     public void testGetTopStateReturnsLowerElement() throws LR0ParseStackEmptyException
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseStack stack = new LR0ParseStack();
-        stack.push(new LR0ProductionSetDFAState("", true));
+        stack.push(new LR0ClosureRuleSetDFAState("", true));
         stack.push(new NonTerminalNode("A"));
         stack.push(state);
         stack.push(new NonTerminalNode("B"));
@@ -97,7 +97,7 @@ public class LR0ParseStackTest
     @Test
     public void testStackEqualsReturnsTrue()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -113,7 +113,7 @@ public class LR0ParseStackTest
     @Test
     public void testStackEqualsReturnsFalse()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -129,7 +129,7 @@ public class LR0ParseStackTest
     @Test
     public void testEqualsReturnsTrueForStacksContainingSameObjects()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);
@@ -145,7 +145,7 @@ public class LR0ParseStackTest
     @Test
     public void testEqualsReturnsFalseForStacksContainingDifferentObjects()
     {
-        LR0ProductionSetDFAState state = new LR0ProductionSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state = new LR0ClosureRuleSetDFAState("", false);
 
         LR0ParseStack stack = new LR0ParseStack();
         stack.push(state);

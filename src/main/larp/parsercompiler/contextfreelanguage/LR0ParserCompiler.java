@@ -11,10 +11,10 @@ import larp.automaton.StateTransition;
 import larp.grammar.contextfreelanguage.Grammar;
 import larp.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
 import larp.parser.contextfreelanguage.LR0AcceptAction;
+import larp.parser.contextfreelanguage.LR0ClosureRuleSetDFA;
+import larp.parser.contextfreelanguage.LR0ClosureRuleSetDFAState;
 import larp.parser.contextfreelanguage.LR0GotoAction;
 import larp.parser.contextfreelanguage.LR0ParseTable;
-import larp.parser.contextfreelanguage.LR0ProductionSetDFA;
-import larp.parser.contextfreelanguage.LR0ProductionSetDFAState;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parsetree.contextfreelanguage.DotNode;
@@ -30,12 +30,12 @@ import java.util.Set;
 
 public class LR0ParserCompiler
 {
-    private LR0ProductionSetDFACompiler DFACompiler;
+    private LR0ClosureRuleSetDFACompiler DFACompiler;
     private ProductionNodeDotRepository productionNodeDotRepository;
 
     public LR0ParserCompiler()
     {
-        this.DFACompiler = new LR0ProductionSetDFACompiler();
+        this.DFACompiler = new LR0ClosureRuleSetDFACompiler();
         this.productionNodeDotRepository = new ProductionNodeDotRepository();
     }
 
@@ -46,12 +46,12 @@ public class LR0ParserCompiler
             return new LR0ParseTable(grammar, null);
         }
 
-        LR0ProductionSetDFA DFA = this.DFACompiler.compile(grammar);
+        LR0ClosureRuleSetDFA DFA = this.DFACompiler.compile(grammar);
         Grammar augmentedGrammar = DFA.getGrammar();
-        LR0ProductionSetDFAState startState = DFA.getStartState();
+        LR0ClosureRuleSetDFAState startState = DFA.getStartState();
         LR0ParseTable parseTable = new LR0ParseTable(augmentedGrammar, startState);
 
-        this.processState(parseTable, startState, this.calculateTerminalNodeList(augmentedGrammar), new ArrayList<LR0ProductionSetDFAState>());
+        this.processState(parseTable, startState, this.calculateTerminalNodeList(augmentedGrammar), new ArrayList<LR0ClosureRuleSetDFAState>());
 
         return parseTable;
     }
@@ -81,7 +81,7 @@ public class LR0ParserCompiler
         return terminalNodes;
     }
 
-    private void processState(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<Node> terminalNodes, List<LR0ProductionSetDFAState> coveredStates) throws AmbiguousLR0ParseTableException
+    private void processState(LR0ParseTable parseTable, LR0ClosureRuleSetDFAState state, Set<Node> terminalNodes, List<LR0ClosureRuleSetDFAState> coveredStates) throws AmbiguousLR0ParseTableException
     {
         coveredStates.add(state);
 
@@ -90,11 +90,11 @@ public class LR0ParserCompiler
             this.processReduceActions(parseTable, state, terminalNodes);
         }
 
-        List<StateTransition<Node,LR0ProductionSetDFAState>> stateTransitions = state.getTransitions();
-        for (StateTransition<Node,LR0ProductionSetDFAState> stateTransition: stateTransitions)
+        List<StateTransition<Node,LR0ClosureRuleSetDFAState>> stateTransitions = state.getTransitions();
+        for (StateTransition<Node,LR0ClosureRuleSetDFAState> stateTransition: stateTransitions)
         {
             Node input = stateTransition.getInput();
-            LR0ProductionSetDFAState nextState = stateTransition.getNextState();
+            LR0ClosureRuleSetDFAState nextState = stateTransition.getNextState();
 
             if (input instanceof TerminalNode)
             {
@@ -116,7 +116,7 @@ public class LR0ParserCompiler
         }
     }
 
-    private void processReduceActions(LR0ParseTable parseTable, LR0ProductionSetDFAState state, Set<Node> terminalNodes) throws AmbiguousLR0ParseTableException
+    private void processReduceActions(LR0ParseTable parseTable, LR0ClosureRuleSetDFAState state, Set<Node> terminalNodes) throws AmbiguousLR0ParseTableException
     {
         Set<GrammarClosureRule> closureRules = state.getClosureRules();
 
