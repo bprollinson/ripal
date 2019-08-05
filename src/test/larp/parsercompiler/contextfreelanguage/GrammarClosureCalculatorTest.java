@@ -13,6 +13,7 @@ import org.junit.Test;
 import larp.grammar.contextfreelanguage.Grammar;
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.DotNode;
+import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
@@ -434,7 +435,22 @@ public class GrammarClosureCalculatorTest
     @Test
     public void testCalculatePreservesInitialFollowSetWhenNoRulesAdded()
     {
-        assertEquals(0, 1);
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> lookaheadSymbols = new HashSet<Node>();
+        lookaheadSymbols.add(new EndOfStringNode());
+        closureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+
+        Set<GrammarClosureRule> expectedClosureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> expectedLookaheadSymbols = new HashSet<Node>();
+        expectedLookaheadSymbols.add(new EndOfStringNode());
+        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+
+        assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
     }
 
     @Test
@@ -457,6 +473,11 @@ public class GrammarClosureCalculatorTest
 
     private GrammarClosureRule buildClosureRule(NonTerminalNode nonTerminalNode, Node... rightHandNodes)
     {
+        return this.buildClosureRule(new HashSet<Node>(), nonTerminalNode, rightHandNodes);
+    }
+
+    private GrammarClosureRule buildClosureRule(Set<Node> lookaheadSymbols, NonTerminalNode nonTerminalNode, Node... rightHandNodes)
+    {
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(nonTerminalNode);
 
@@ -467,6 +488,6 @@ public class GrammarClosureCalculatorTest
         }
         productionNode.addChild(concatenationNode);
 
-        return new GrammarClosureRule(productionNode);
+        return new GrammarClosureRule(productionNode, lookaheadSymbols);
     }
 }
