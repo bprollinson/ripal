@@ -431,6 +431,30 @@ public class GrammarClosureCalculatorTest
         assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
     }
 
+    @Test
+    public void testCalculatePreservesInitialFollowSetWhenNoRulesAdded()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCalculateAddsSimpleClosureRuleRuleWithSingleLookaheadSymbol()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCalculateAddsSimpleClosureRuleRuleWithMultipleLookaheadSymbols()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testCalculateAddsNonTerminalChainWithLookaheadSymbols()
+    {
+        assertEquals(0, 1);
+    }
+
     private GrammarClosureRule buildClosureRule(NonTerminalNode nonTerminalNode, Node... rightHandNodes)
     {
         ProductionNode productionNode = new ProductionNode();
