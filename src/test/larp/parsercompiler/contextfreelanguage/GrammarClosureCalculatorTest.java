@@ -500,7 +500,7 @@ public class GrammarClosureCalculatorTest
         expectedLookaheadSymbols = new HashSet<Node>();
         expectedLookaheadSymbols.add(new TerminalNode("b"));
         expectedLookaheadSymbols.add(new TerminalNode("c"));
-        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new TerminalNode("a")));
+        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
 
         assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
     }
