@@ -508,7 +508,30 @@ public class GrammarClosureCalculatorTest
     @Test
     public void testCalculateAddsNonTerminalChainWithLookaheadSymbols()
     {
-        assertEquals(0, 1);
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"), new TerminalNode("b"));
+        grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
+
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> lookaheadSymbols = new HashSet<Node>();
+        lookaheadSymbols.add(new EndOfStringNode());
+        closureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new TerminalNode("a")));
+
+        Set<GrammarClosureRule> expectedClosureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> expectedLookaheadSymbols = new HashSet<Node>();
+        expectedLookaheadSymbols.add(new EndOfStringNode());
+        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new TerminalNode("a")));
+        expectedLookaheadSymbols = new HashSet<Node>();
+        expectedLookaheadSymbols.add(new TerminalNode("a"));
+        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("B"), new TerminalNode("b")));
+        expectedLookaheadSymbols = new HashSet<Node>();
+        expectedLookaheadSymbols.add(new TerminalNode("b"));
+        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("B"), new DotNode(), new TerminalNode("c")));
+
+        assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
     }
 
     private GrammarClosureRule buildClosureRule(NonTerminalNode nonTerminalNode, Node... rightHandNodes)
