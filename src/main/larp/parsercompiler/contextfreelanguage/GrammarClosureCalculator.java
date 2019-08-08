@@ -12,6 +12,7 @@ import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.Node;
+import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.util.ValueToSetMap;
 
@@ -62,7 +63,7 @@ public class GrammarClosureCalculator
             Node nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(closureRule.getProductionNode());
             if (nextSymbol != null)
             {
-                this.addClosureRulesForNonTerminal(grammar, startingNonTerminalProductionsMap.get(nextSymbol), closureRulesToAdd);
+                this.addClosureRulesForNonTerminal(grammar, startingNonTerminalProductionsMap.get(nextSymbol), closureRulesToAdd, !closureRule.getLookaheadSymbols().isEmpty());
             }
             if (nextSymbol instanceof EpsilonNode)
             {
@@ -73,14 +74,22 @@ public class GrammarClosureCalculator
         return rulesClosure.addAll(closureRulesToAdd);
     }
 
-    private void addClosureRulesForNonTerminal(Grammar grammar, Set<Integer> productionIndices, Set<GrammarClosureRule> closureRulesToAdd)
+    private void addClosureRulesForNonTerminal(Grammar grammar, Set<Integer> productionIndices, Set<GrammarClosureRule> closureRulesToAdd, boolean addFollowNodes)
     {
+        FollowSetCalculator followSetCalculator = new FollowSetCalculator(grammar);
+
         for (int productionIndex: productionIndices)
         {
             Node production = grammar.getProductions().get(productionIndex);
 
             Node productionNode = this.productionNodeDotRepository.addDotToProductionRightHandSide(production);
-            closureRulesToAdd.add(new GrammarClosureRule(productionNode));
+            Set<Node> followNodes = new HashSet<Node>();
+            if (addFollowNodes)
+            {
+                NonTerminalNode nonTerminalNode = (NonTerminalNode)productionNode.getChildNodes().get(0);
+                followNodes = followSetCalculator.getFollow(nonTerminalNode);
+            }
+            closureRulesToAdd.add(new GrammarClosureRule(productionNode, followNodes));
         }
     }
 
