@@ -513,7 +513,7 @@ public class GrammarClosureCalculatorTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"), new TerminalNode("b"));
-        grammar.addProduction(new NonTerminalNode("C"), new TerminalNode("c"));
+        grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("c"));
 
         Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
         Set<Node> lookaheadSymbols = new HashSet<Node>();
