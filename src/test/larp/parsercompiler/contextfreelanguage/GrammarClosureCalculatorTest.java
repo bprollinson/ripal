@@ -535,6 +535,29 @@ public class GrammarClosureCalculatorTest
     }
 
     @Test
+    public void testCalculateAddsEndOfStringNodeWhenFollowSetContainsOnlyEndOfStringNode()
+    {
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> lookaheadSymbols = new HashSet<Node>();
+        lookaheadSymbols.add(new EndOfStringNode());
+        closureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+
+        Set<GrammarClosureRule> expectedClosureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> expectedLookaheadSymbols = new HashSet<Node>();
+        expectedLookaheadSymbols.add(new EndOfStringNode());
+        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("a")));
+
+        assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
+    }
+
+    @Test
     public void testCalculatePreservesLookaheadSymbolsWhenAddingDotAfterEpsilon()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
