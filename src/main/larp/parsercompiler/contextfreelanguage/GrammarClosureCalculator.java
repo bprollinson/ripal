@@ -67,7 +67,7 @@ public class GrammarClosureCalculator
             }
             if (nextSymbol instanceof EpsilonNode)
             {
-                closureRulesToAdd.add(this.buildEpsilonClosureRule(closureRule.getProductionNode().getChildNodes().get(0)));
+                closureRulesToAdd.add(this.buildEpsilonClosureRule(closureRule.getProductionNode().getChildNodes().get(0), closureRule.getLookaheadSymbols()));
             }
         }
 
@@ -93,7 +93,7 @@ public class GrammarClosureCalculator
         }
     }
 
-    private GrammarClosureRule buildEpsilonClosureRule(Node leftHandNonTerminal)
+    private GrammarClosureRule buildEpsilonClosureRule(Node leftHandNonTerminal, Set<Node> lookaheadSymbols)
     {
         ProductionNode productionNode = new ProductionNode();
         productionNode.addChild(leftHandNonTerminal);
@@ -103,6 +103,6 @@ public class GrammarClosureCalculator
         concatenationNode.addChild(new DotNode());
         productionNode.addChild(concatenationNode);
 
-        return new GrammarClosureRule(productionNode);
+        return new GrammarClosureRule(productionNode, lookaheadSymbols);
     }
 }
