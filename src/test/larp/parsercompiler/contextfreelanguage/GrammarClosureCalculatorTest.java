@@ -534,6 +534,28 @@ public class GrammarClosureCalculatorTest
         assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
     }
 
+    @Test
+    public void testCalculatePreservesLookaheadSymbolsWhenAddingDotAfterEpsilon()
+    {
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> lookaheadSymbols = new HashSet<Node>();
+        lookaheadSymbols.add(new TerminalNode("a"));
+        closureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new EpsilonNode()));
+
+        Set<GrammarClosureRule> expectedClosureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> expectedLookaheadSymbols = new HashSet<Node>();
+        expectedLookaheadSymbols.add(new TerminalNode("a"));
+        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new EpsilonNode()));
+        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("S"), new EpsilonNode(), new DotNode()));
+
+        assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
+    }
+
     private GrammarClosureRule buildClosureRule(NonTerminalNode nonTerminalNode, Node... rightHandNodes)
     {
         return this.buildClosureRule(new HashSet<Node>(), nonTerminalNode, rightHandNodes);
