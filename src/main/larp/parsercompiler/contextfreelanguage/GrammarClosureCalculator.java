@@ -28,29 +28,21 @@ public class GrammarClosureCalculator
         this.productionNodeDotRepository = new ProductionNodeDotRepository();
     }
 
-    public Set<GrammarClosureRule> calculate(Grammar grammar, Set<GrammarClosureRule> productionSet)
+    public Set<GrammarClosureRule> calculate(Grammar grammar, Set<GrammarClosureRule> initialClosureRules)
     {
-        Set<GrammarClosureRule> productionsClosure = new HashSet<GrammarClosureRule>();
-        productionsClosure.addAll(productionSet);
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        closureRules.addAll(initialClosureRules);
         ValueToSetMap<Node, Integer> startingNonTerminalProductionsMap = this.calculateStartingNonTerminalProductionsMap(grammar);
 
         boolean continueExpansion = true;
         while (continueExpansion)
         {
-            continueExpansion = this.expandClosure(grammar, startingNonTerminalProductionsMap, productionsClosure);
+            continueExpansion = this.expandClosure(grammar, startingNonTerminalProductionsMap, closureRules);
         }
 
-        FollowSetCalculator followSetCalculator = new FollowSetCalculator(grammar);
-        for (GrammarClosureRule closureRule: productionsClosure)
-        {
-            if (closureRule.getLookaheadSymbols() == null)
-            {
-                Node leftHandSide = closureRule.getProductionNode().getChildNodes().get(0);
-                closureRule.setLookaheadSymbols(followSetCalculator.getFollow((NonTerminalNode)leftHandSide));
-            }
-        }
+        this.calculateLookaheadSymbols(grammar, closureRules);
 
-        return productionsClosure;
+        return closureRules;
     }
 
     private ValueToSetMap<Node, Integer> calculateStartingNonTerminalProductionsMap(Grammar grammar)
@@ -113,5 +105,18 @@ public class GrammarClosureCalculator
         productionNode.addChild(concatenationNode);
 
         return new GrammarClosureRule(productionNode, lookaheadSymbols);
+    }
+
+    private void calculateLookaheadSymbols(Grammar grammar, Set<GrammarClosureRule> closureRules)
+    {
+        FollowSetCalculator followSetCalculator = new FollowSetCalculator(grammar);
+        for (GrammarClosureRule closureRule: closureRules)
+        {
+            if (closureRule.getLookaheadSymbols() == null)
+            {
+                Node leftHandSide = closureRule.getProductionNode().getChildNodes().get(0);
+                closureRule.setLookaheadSymbols(followSetCalculator.getFollow((NonTerminalNode)leftHandSide));
+            }
+        }
     }
 }
