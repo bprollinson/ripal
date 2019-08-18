@@ -40,6 +40,16 @@ public class GrammarClosureCalculator
             continueExpansion = this.expandClosure(grammar, startingNonTerminalProductionsMap, productionsClosure);
         }
 
+        FollowSetCalculator followSetCalculator = new FollowSetCalculator(grammar);
+        for (GrammarClosureRule closureRule: productionsClosure)
+        {
+            if (closureRule.getLookaheadSymbols() == null)
+            {
+                Node leftHandSide = closureRule.getProductionNode().getChildNodes().get(0);
+                closureRule.setLookaheadSymbols(followSetCalculator.getFollow((NonTerminalNode)leftHandSide));
+            }
+        }
+
         return productionsClosure;
     }
 
@@ -48,7 +58,8 @@ public class GrammarClosureCalculator
         ValueToSetMap<Node, Integer> startingNonTerminalProductions = new ValueToSetMap<Node, Integer>();
         for (int i = 0; i < grammar.getProductions().size(); i++)
         {
-            startingNonTerminalProductions.put(grammar.getProduction(i).getChildNodes().get(0), i);
+            Node leftHandSide = grammar.getProduction(i).getChildNodes().get(0);
+            startingNonTerminalProductions.put(leftHandSide, i);
         }
 
         return startingNonTerminalProductions;
@@ -63,7 +74,8 @@ public class GrammarClosureCalculator
             Node nextSymbol = this.productionNodeDotRepository.findProductionSymbolAfterDot(closureRule.getProductionNode());
             if (nextSymbol != null)
             {
-                this.addClosureRulesForNonTerminal(grammar, startingNonTerminalProductionsMap.get(nextSymbol), closureRulesToAdd, !closureRule.getLookaheadSymbols().isEmpty());
+                boolean addFollowNodes = closureRule.getLookaheadSymbols() == null || !closureRule.getLookaheadSymbols().isEmpty();
+                this.addClosureRulesForNonTerminal(grammar, startingNonTerminalProductionsMap.get(nextSymbol), closureRulesToAdd, addFollowNodes);
             }
             if (nextSymbol instanceof EpsilonNode)
             {
@@ -76,8 +88,6 @@ public class GrammarClosureCalculator
 
     private void addClosureRulesForNonTerminal(Grammar grammar, Set<Integer> productionIndices, Set<GrammarClosureRule> closureRulesToAdd, boolean addFollowNodes)
     {
-        FollowSetCalculator followSetCalculator = new FollowSetCalculator(grammar);
-
         for (int productionIndex: productionIndices)
         {
             Node production = grammar.getProductions().get(productionIndex);
@@ -86,8 +96,7 @@ public class GrammarClosureCalculator
             Set<Node> followNodes = new HashSet<Node>();
             if (addFollowNodes)
             {
-                NonTerminalNode nonTerminalNode = (NonTerminalNode)productionNode.getChildNodes().get(0);
-                followNodes = followSetCalculator.getFollow(nonTerminalNode);
+                followNodes = null;
             }
             closureRulesToAdd.add(new GrammarClosureRule(productionNode, followNodes));
         }

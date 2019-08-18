@@ -38,6 +38,11 @@ public class GrammarClosureRule
         return this.lookaheadSymbols;
     }
 
+    public void setLookaheadSymbols(Set<Node> lookaheadSymbols)
+    {
+        this.lookaheadSymbols = lookaheadSymbols;
+    }
+
     public boolean equals(Object other)
     {
         if (!(other instanceof GrammarClosureRule))
@@ -46,12 +51,15 @@ public class GrammarClosureRule
         }
 
         GrammarClosureRule otherRule = (GrammarClosureRule)other;
+        boolean lookaheadSymbolsEqual = this.lookaheadSymbols == null && otherRule.getLookaheadSymbols() == null || this.lookaheadSymbols.equals(otherRule.getLookaheadSymbols());
 
-        return this.productionNode.equals(otherRule.getProductionNode()) && this.lookaheadSymbols.equals(otherRule.getLookaheadSymbols());
+        return this.productionNode.equals(otherRule.getProductionNode()) && lookaheadSymbolsEqual;
     }
 
     public int hashCode()
     {
-        return this.productionNode.hashCode() + this.lookaheadSymbols.hashCode();
+        int lookaheadSymbolsHashCode = this.lookaheadSymbols == null ? 0 : this.lookaheadSymbols.hashCode();
+
+        return this.productionNode.hashCode() + lookaheadSymbolsHashCode;
     }
 }
