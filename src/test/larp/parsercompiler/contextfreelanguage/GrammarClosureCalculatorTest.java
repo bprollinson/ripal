@@ -613,6 +613,34 @@ public class GrammarClosureCalculatorTest
     }
 
     @Test
+    public void testCalculateIncludesLookaheadSymbolsFromSubsequentProduction()
+    {
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("A"), new TerminalNode("c"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+
+        Set<GrammarClosureRule> expectedClosureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> expectedLookaheadSymbols = new HashSet<Node>();
+        expectedLookaheadSymbols.add(new EndOfStringNode());
+        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new TerminalNode("b")));
+        expectedLookaheadSymbols = new HashSet<Node>();
+        expectedLookaheadSymbols.add(new TerminalNode("b"));
+        expectedLookaheadSymbols.add(new TerminalNode("c"));
+        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("A"), new TerminalNode("c")));
+        expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
+
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> lookaheadSymbols = new HashSet<Node>();
+        lookaheadSymbols.add(new EndOfStringNode());
+        closureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new TerminalNode("b")));
+
+        assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
+    }
+
+    @Test
     public void testCalculatePreservesLookaheadSymbolsWhenAddingDotAfterEpsilon()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
