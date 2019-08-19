@@ -16,6 +16,7 @@ import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.util.ValueToSetMap;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -67,7 +68,7 @@ public class GrammarClosureCalculator
             if (nextSymbols.size() > 0)
             {
                 boolean addLookaheadSymbols = closureRule.getLookaheadSymbols() == null || !closureRule.getLookaheadSymbols().isEmpty();
-                this.addClosureRulesForNonTerminal(grammar, startingNonTerminalProductionsMap.get(nextSymbols.get(0)), closureRulesToAdd, addLookaheadSymbols, nextSymbols.subList(1, nextSymbols.size()));
+                this.addClosureRulesForNonTerminal(grammar, closureRule, startingNonTerminalProductionsMap.get(nextSymbols.get(0)), closureRulesToAdd, addLookaheadSymbols, nextSymbols.subList(1, nextSymbols.size()));
             }
             if (nextSymbols.size() > 0 && nextSymbols.get(0) instanceof EpsilonNode)
             {
@@ -78,19 +79,28 @@ public class GrammarClosureCalculator
         return rulesClosure.addAll(closureRulesToAdd);
     }
 
-    private void addClosureRulesForNonTerminal(Grammar grammar, Set<Integer> productionIndices, Set<GrammarClosureRule> closureRulesToAdd, boolean addLookaheadSymbols, List<Node> nextSymbols)
+    private void addClosureRulesForNonTerminal(Grammar grammar, GrammarClosureRule closureRule, Set<Integer> productionIndices, Set<GrammarClosureRule> closureRulesToAdd, boolean addLookaheadSymbols, List<Node> nextSymbols)
     {
         for (int productionIndex: productionIndices)
         {
             Node production = grammar.getProductions().get(productionIndex);
 
             Node productionNode = this.productionNodeDotRepository.addDotToProductionRightHandSide(production);
-            Set<Node> lookaheadSymbols = new HashSet<Node>();
             if (addLookaheadSymbols)
             {
-                lookaheadSymbols = this.calculateLookaheadSymbols(grammar, nextSymbols);
+                for (Node parentLookaheadSymbol: closureRule.getLookaheadSymbols())
+                {
+                    List<Node> nextSymbolsForSymbol = new ArrayList<Node>();
+                    nextSymbolsForSymbol.addAll(nextSymbols);
+                    nextSymbolsForSymbol.add(parentLookaheadSymbol);
+                    Set<Node> lookaheadSymbols = this.calculateLookaheadSymbols(grammar, nextSymbolsForSymbol);
+                    closureRulesToAdd.add(new GrammarClosureRule(productionNode, lookaheadSymbols));
+                }
             }
-            closureRulesToAdd.add(new GrammarClosureRule(productionNode, lookaheadSymbols));
+            else
+            {
+                closureRulesToAdd.add(new GrammarClosureRule(productionNode));
+            }
         }
     }
 
