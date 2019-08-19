@@ -654,7 +654,7 @@ public class GrammarClosureCalculatorTest
     }
 
     @Test
-    public void testCalculateIncludesLookaheadSymbolsFromMultipleSubsequentProductions()
+    public void testCalculateIncludesAndCombinesLookaheadSymbolsFromMultipleSubsequentProductions()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
