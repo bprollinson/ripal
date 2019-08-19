@@ -550,11 +550,15 @@ public class GrammarClosureCalculatorTest
         expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new EpsilonNode()));
         expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("A"), new EpsilonNode(), new DotNode()));
+
+        assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
     }
 
     @Test
     public void testCalculateAddsMultipleParentTerminalNodesWhenFollowingSymbolsNullable()
     {
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
@@ -572,6 +576,8 @@ public class GrammarClosureCalculatorTest
         expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
         expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new EpsilonNode()));
         expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("A"), new EpsilonNode(), new DotNode()));
+
+        assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
     }
 
     @Test
@@ -596,6 +602,8 @@ public class GrammarClosureCalculatorTest
         expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("B")));
         expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("B"), new DotNode(), new EpsilonNode()));
         expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("B"), new EpsilonNode(), new DotNode()));
+
+        assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
     }
 
     @Test
