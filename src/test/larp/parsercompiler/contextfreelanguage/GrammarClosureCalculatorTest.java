@@ -433,7 +433,7 @@ public class GrammarClosureCalculatorTest
     }
 
     @Test
-    public void testCalculatePreservesInitialFollowSetWhenNoRulesAdded()
+    public void testCalculatePreservesInitialLookaheadSymbolSetWhenNoRulesAdded()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
@@ -535,7 +535,7 @@ System.out.println("Right before");
     }
 
     @Test
-    public void testCalculateAddsEndOfStringLookaheadWhenFollowSetContainsOnlyEndOfStringNode()
+    public void testCalculateAddsParentEndOfStringLookaheadWhenNoSymbolsFollow()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
@@ -558,7 +558,7 @@ System.out.println("Right before");
     }
 
     @Test
-    public void testCalculateAddsEndOfStringNodeAndOtherLookahead()
+    public void testCalculateAddsEndOfStringNodeAndOtherLookaheadWhenFollowingSymbolsNullable()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
