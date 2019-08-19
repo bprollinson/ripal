@@ -530,7 +530,7 @@ public class GrammarClosureCalculatorTest
         expectedLookaheadSymbols = new HashSet<Node>();
         expectedLookaheadSymbols.add(new TerminalNode("b"));
         expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("B"), new DotNode(), new TerminalNode("c")));
-
+System.out.println("Right before");
         assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
     }
 
@@ -613,7 +613,7 @@ public class GrammarClosureCalculatorTest
     }
 
     @Test
-    public void testCalculateIncludesLookaheadSymbolsFromSubsequentProduction()
+    public void testCalculateIncludesLookaheadSymbolsFromMultipleSubsequentProductions()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
