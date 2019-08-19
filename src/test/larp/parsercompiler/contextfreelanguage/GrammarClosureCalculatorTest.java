@@ -503,12 +503,12 @@ public class GrammarClosureCalculatorTest
         expectedLookaheadSymbols = new HashSet<Node>();
         expectedLookaheadSymbols.add(new TerminalNode("b"));
         expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("B"), new DotNode(), new TerminalNode("c")));
-System.out.println("Right before");
+
         assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
     }
 
     @Test
-    public void testCalculateAddsParentEndOfStringLookaheadWhenNoSymbolsFollow()
+    public void testCalculateAddsParentEndOfStringLookaheadWhenFollowingSymbolsNullable()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
@@ -528,6 +528,74 @@ System.out.println("Right before");
         expectedClosureRules.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
 
         assertEquals(expectedClosureRules, calculator.calculate(grammar, closureRules));
+    }
+
+    @Test
+    public void testCalculateAddsSingleParentTerminalNodeWhenFollowingSymbolsNullable()
+    {
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> lookaheadSymbols = new HashSet<Node>();
+        lookaheadSymbols.add(new TerminalNode("a"));
+        closureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+
+        Set<GrammarClosureRule> expectedClosureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> expectedLookaheadSymbols = new HashSet<Node>();
+        expectedLookaheadSymbols.add(new TerminalNode("a"));
+        expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new EpsilonNode()));
+        expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("A"), new EpsilonNode(), new DotNode()));
+    }
+
+    @Test
+    public void testCalculateAddsMultipleParentTerminalNodesWhenFollowingSymbolsNullable()
+    {
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> lookaheadSymbols = new HashSet<Node>();
+        lookaheadSymbols.add(new TerminalNode("a"));
+        lookaheadSymbols.add(new TerminalNode("b"));
+        closureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+
+        Set<GrammarClosureRule> expectedClosureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> expectedLookaheadSymbols = new HashSet<Node>();
+        expectedLookaheadSymbols.add(new TerminalNode("a"));
+        expectedLookaheadSymbols.add(new TerminalNode("b"));
+        expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new EpsilonNode()));
+        expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("A"), new EpsilonNode(), new DotNode()));
+    }
+
+    @Test
+    public void testCalculateAddsSingleParentTerminalNodeInChainWhenFollowingSymbolsNullable()
+    {
+        GrammarClosureCalculator calculator = new GrammarClosureCalculator();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("B"));
+        grammar.addProduction(new NonTerminalNode("B"), new EpsilonNode());
+
+        Set<GrammarClosureRule> closureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> lookaheadSymbols = new HashSet<Node>();
+        lookaheadSymbols.add(new TerminalNode("a"));
+        closureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+
+        Set<GrammarClosureRule> expectedClosureRules = new HashSet<GrammarClosureRule>();
+        Set<Node> expectedLookaheadSymbols = new HashSet<Node>();
+        expectedLookaheadSymbols.add(new TerminalNode("a"));
+        expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A")));
+        expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new NonTerminalNode("B")));
+        expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("B"), new DotNode(), new EpsilonNode()));
+        expectedClosureRules.add(this.buildClosureRule(lookaheadSymbols, new NonTerminalNode("B"), new EpsilonNode(), new DotNode()));
     }
 
     @Test
