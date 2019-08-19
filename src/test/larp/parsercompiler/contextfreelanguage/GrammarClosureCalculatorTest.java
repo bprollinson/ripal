@@ -454,7 +454,7 @@ public class GrammarClosureCalculatorTest
     }
 
     @Test
-    public void testCalculateAddsSimpleClosureRuleRuleWithSingleLookaheadSymbol()
+    public void testCalculateAddsSimpleClosureRuleWithSingleLookaheadSymbol()
     {
         GrammarClosureCalculator calculator = new GrammarClosureCalculator();
 
