@@ -12,6 +12,7 @@ import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductionNodeDotRepository
@@ -32,6 +33,19 @@ public class ProductionNodeDotRepository
         }
 
         return null;
+    }
+
+    public List<Node> findProductionSymbolsAfterDot(Node productionNode)
+    {
+        List<Node> childNodes = productionNode.getChildNodes().get(1).getChildNodes();
+        int dotPosition = childNodes.indexOf(new DotNode());
+
+        if (dotPosition == -1)
+        {
+            return new ArrayList<Node>();
+        }
+
+        return childNodes.subList(dotPosition + 1, childNodes.size());
     }
 
     public ProductionNode addDotToProductionRightHandSide(Node productionNode)
