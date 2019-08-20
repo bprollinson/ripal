@@ -69,7 +69,7 @@ public class GrammarClosureCalculator
 
             if (nextSymbols.size() > 0)
             {
-                boolean addLookaheadSymbols = closureRule.getLookaheadSymbols() == null || !closureRule.getLookaheadSymbols().isEmpty();
+                boolean addLookaheadSymbols = !closureRule.getLookaheadSymbols().isEmpty();
                 this.addClosureRulesForNonTerminal(grammar, closureRule, startingNonTerminalProductionsMap.get(nextSymbols.get(0)), closureRulesToAdd, addLookaheadSymbols, nextSymbols.subList(1, nextSymbols.size()));
             }
             if (nextSymbols.size() > 0 && nextSymbols.get(0) instanceof EpsilonNode)

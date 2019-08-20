@@ -106,50 +106,6 @@ public class GrammarClosureRuleTest
     }
 
     @Test
-    public void testEqualsReturnsTrueForRuleWithSameSymbolsAndNullLookaheads()
-    {
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-
-        GrammarClosureRule rule = new GrammarClosureRule(productionNode, null);
-
-        ProductionNode otherProductionNode = new ProductionNode();
-        otherProductionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode otherConcatenationNode = new ConcatenationNode();
-        otherConcatenationNode.addChild(new TerminalNode("a"));
-        otherProductionNode.addChild(otherConcatenationNode);
-
-        GrammarClosureRule otherRule = new GrammarClosureRule(otherProductionNode, null);
-
-        assertTrue(rule.equals(otherRule));
-    }
-
-    @Test
-    public void testEqualsReturnsFalseForRuleWithDifferentSymbolsAndNullLookaheads()
-    {
-        ProductionNode productionNode = new ProductionNode();
-        productionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode concatenationNode = new ConcatenationNode();
-        concatenationNode.addChild(new TerminalNode("a"));
-        productionNode.addChild(concatenationNode);
-
-        GrammarClosureRule rule = new GrammarClosureRule(productionNode, null);
-
-        ProductionNode otherProductionNode = new ProductionNode();
-        otherProductionNode.addChild(new NonTerminalNode("S"));
-        ConcatenationNode otherConcatenationNode = new ConcatenationNode();
-        otherConcatenationNode.addChild(new TerminalNode("b"));
-        otherProductionNode.addChild(otherConcatenationNode);
-
-        GrammarClosureRule otherRule = new GrammarClosureRule(otherProductionNode, null);
-
-        assertFalse(rule.equals(otherRule));
-    }
-
-    @Test
     public void testEqualsReturnsFalseForObjectWithDifferentClass()
     {
         ProductionNode productionNode = new ProductionNode();

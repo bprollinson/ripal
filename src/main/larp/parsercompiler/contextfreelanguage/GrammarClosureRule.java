@@ -51,15 +51,12 @@ public class GrammarClosureRule
         }
 
         GrammarClosureRule otherRule = (GrammarClosureRule)other;
-        boolean lookaheadSymbolsEqual = this.lookaheadSymbols == null && otherRule.getLookaheadSymbols() == null || this.lookaheadSymbols.equals(otherRule.getLookaheadSymbols());
 
-        return this.productionNode.equals(otherRule.getProductionNode()) && lookaheadSymbolsEqual;
+        return this.productionNode.equals(otherRule.getProductionNode()) && this.lookaheadSymbols.equals(otherRule.getLookaheadSymbols());
     }
 
     public int hashCode()
     {
-        int lookaheadSymbolsHashCode = this.lookaheadSymbols == null ? 0 : this.lookaheadSymbols.hashCode();
-
-        return this.productionNode.hashCode() + lookaheadSymbolsHashCode;
+        return this.productionNode.hashCode() + this.lookaheadSymbols.hashCode();
     }
 }
