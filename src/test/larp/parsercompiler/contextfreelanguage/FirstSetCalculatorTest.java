@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import larp.grammar.contextfreelanguage.Grammar;
+import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
@@ -40,6 +41,18 @@ public class FirstSetCalculatorTest
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
         Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("a"));
+        assertEquals(expectedFirsts, calculator.getFirst(0));
+    }
+
+    @Test
+    public void testGetFirstReturnsEndOfStringDirectlyFromProduction()
+    {
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new EndOfStringNode());
+
+        FirstSetCalculator calculator = new FirstSetCalculator(grammar);
+        Set<Node> expectedFirsts = new HashSet<Node>();
+        expectedFirsts.add(new EndOfStringNode());
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
 
@@ -144,7 +157,7 @@ public class FirstSetCalculatorTest
     }
 
     @Test
-    public void testGetFirstReturnsEpsilonForEpsilonTransition()
+    public void testGetFirstReturnsEpsilonFromEpsilonTransition()
     {
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
@@ -165,6 +178,19 @@ public class FirstSetCalculatorTest
         FirstSetCalculator calculator = new FirstSetCalculator(grammar);
         Set<TerminalNode> expectedFirsts = new HashSet<TerminalNode>();
         expectedFirsts.add(new TerminalNode("b"));
+        assertEquals(expectedFirsts, calculator.getFirst(0));
+    }
+
+    @Test
+    public void testGetFirstReturnsSubsequentEndOfStringFromAfterEpsilonNonTerminal()
+    {
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new EndOfStringNode());
+        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+
+        FirstSetCalculator calculator = new FirstSetCalculator(grammar);
+        Set<Node> expectedFirsts = new HashSet<Node>();
+        expectedFirsts.add(new EndOfStringNode());
         assertEquals(expectedFirsts, calculator.getFirst(0));
     }
 

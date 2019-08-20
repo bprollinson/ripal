@@ -8,6 +8,7 @@
 package larp.parsercompiler.contextfreelanguage;
 
 import larp.grammar.contextfreelanguage.Grammar;
+import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
@@ -84,17 +85,23 @@ public class FirstSetCalculator
         rulesUsed.add(ruleIndex);
 
         Node concatenationNode = grammar.getProduction(ruleIndex).getChildNodes().get(1);
-        if (concatenationNode.getChildNodes().get(0) instanceof TerminalNode)
+        Node childNode = concatenationNode.getChildNodes().get(0);
+
+        if (childNode instanceof TerminalNode)
         {
-            return this.getFirstFromTerminalNode(concatenationNode.getChildNodes().get(0));
+            return this.getFirstFromTerminalNode(childNode);
         }
-        else if (concatenationNode.getChildNodes().get(0) instanceof NonTerminalNode)
+        else if (childNode instanceof NonTerminalNode)
         {
             return this.getFirstFromNonterminalNode(concatenationNode, rulesUsed);
         }
-        else if (concatenationNode.getChildNodes().get(0) instanceof EpsilonNode)
+        else if (childNode instanceof EpsilonNode)
         {
             return this.getFirstFromEpsilon();
+        }
+        else if (childNode instanceof EndOfStringNode)
+        {
+            return this.getFirstFromEndOfString();
         }
 
         return null;
@@ -119,10 +126,16 @@ public class FirstSetCalculator
         {
             epsilonFound = false;
 
-            if (concatenationNode.getChildNodes().get(index) instanceof TerminalNode)
+            Node childNode = concatenationNode.getChildNodes().get(index);
+            if (childNode instanceof TerminalNode)
             {
-                TerminalNode childNode = (TerminalNode)concatenationNode.getChildNodes().get(index);
-                results.add(new TerminalNode(childNode.getValue().substring(0, 1)));
+                TerminalNode terminalChildNode = (TerminalNode)childNode;
+                results.add(new TerminalNode(terminalChildNode.getValue().substring(0, 1)));
+                break;
+            }
+            if (childNode instanceof EndOfStringNode)
+            {
+                results.add(new EndOfStringNode());
                 break;
             }
 
@@ -158,6 +171,14 @@ public class FirstSetCalculator
     {
         Set<Node> results = new HashSet<Node>();
         results.add(new EpsilonNode());
+
+        return results;
+    }
+
+    private Set<Node> getFirstFromEndOfString()
+    {
+        Set<Node> results = new HashSet<Node>();
+        results.add(new EndOfStringNode());
 
         return results;
     }
