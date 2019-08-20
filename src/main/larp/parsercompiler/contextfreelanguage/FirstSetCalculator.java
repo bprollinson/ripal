@@ -152,7 +152,9 @@ public class FirstSetCalculator
                         results.addAll(childSet);
                     }
                 }
-            } else {
+            }
+            else
+            {
                 epsilonFound = false;
             }
 
