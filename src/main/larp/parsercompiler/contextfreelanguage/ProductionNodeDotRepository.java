@@ -47,7 +47,7 @@ public class ProductionNodeDotRepository
         return childNodes.subList(dotPosition + 1, childNodes.size());
     }
 
-    public ProductionNode addDotToProductionRightHandSide(Node productionNode)
+    public ProductionNode addDotToProduction(Node productionNode)
     {
         ProductionNode newProductionNode = new ProductionNode();
         newProductionNode.addChild(productionNode.getChildNodes().get(0));

@@ -90,7 +90,7 @@ public class GrammarClosureCalculator
         {
             Node production = grammar.getProductions().get(productionIndex);
 
-            Node productionNode = this.productionNodeDotRepository.addDotToProductionRightHandSide(production);
+            Node productionNode = this.productionNodeDotRepository.addDotToProduction(production);
             if (addLookaheadSymbols)
             {
                 for (Node parentLookaheadSymbol: closureRule.getLookaheadSymbols())

@@ -45,7 +45,7 @@ public class LR0ClosureRuleSetDFACompiler
         {
             return null;
         }
-        Node firstProductionWithDot = this.productionNodeDotRepository.addDotToProductionRightHandSide(augmentedGrammar.getProduction(0));
+        Node firstProductionWithDot = this.productionNodeDotRepository.addDotToProduction(augmentedGrammar.getProduction(0));
         closureRuleSet.add(new GrammarClosureRule(firstProductionWithDot));
 
         LR0ClosureRuleSetDFAState startState = this.compileState(augmentedGrammar, closureRuleSet, false);

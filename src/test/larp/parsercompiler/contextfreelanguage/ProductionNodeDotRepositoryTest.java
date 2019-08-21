@@ -124,7 +124,7 @@ public class ProductionNodeDotRepositoryTest
     }
 
     @Test
-    public void testAddDotToProductionRightHandSideAddsDot()
+    public void testAddDotToProductionAddsDot()
     {
         ProductionNodeDotRepository repository = new ProductionNodeDotRepository();
 
@@ -143,7 +143,7 @@ public class ProductionNodeDotRepositoryTest
         expectedConcatenationNode.addChild(new TerminalNode("b"));
         expectedProductionNode.addChild(expectedConcatenationNode);
 
-        assertEquals(expectedProductionNode, repository.addDotToProductionRightHandSide(productionNode));
+        assertEquals(expectedProductionNode, repository.addDotToProduction(productionNode));
     }
 
     @Test
