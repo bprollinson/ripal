@@ -12,7 +12,6 @@ import larp.parsetree.contextfreelanguage.DotNode;
 import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductionNodeDotRepository
@@ -42,7 +41,7 @@ public class ProductionNodeDotRepository
 
         if (dotPosition == -1)
         {
-            return new ArrayList<Node>();
+            return null;
         }
 
         return childNodes.subList(dotPosition + 1, childNodes.size());

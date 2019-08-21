@@ -13,14 +13,18 @@ import org.junit.Test;
 
 import larp.parsetree.contextfreelanguage.ConcatenationNode;
 import larp.parsetree.contextfreelanguage.DotNode;
+import larp.parsetree.contextfreelanguage.Node;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductionNodeDotRepositoryTest
 {
     @Test
-    public void testFindProductionSymbolAfterDotFindsProductionSymbolWhenDotPresent()
+    public void testFindProductionSymbolAfterDotReturnsProductionSymbolWhenDotPresent()
     {
         ProductionNodeDotRepository repository = new ProductionNodeDotRepository();
 
@@ -33,6 +37,7 @@ public class ProductionNodeDotRepositoryTest
         productionNode.addChild(concatenationNode);
 
         TerminalNode expectedNode = new TerminalNode("b");
+
         assertEquals(expectedNode, repository.findProductionSymbolAfterDot(productionNode));
     }
 
@@ -49,6 +54,73 @@ public class ProductionNodeDotRepositoryTest
         productionNode.addChild(concatenationNode);
 
         assertNull(repository.findProductionSymbolAfterDot(productionNode));
+    }
+
+    @Test
+    public void testFindProductionSymbolAfterDotReturnsNullWhenDotAtEnd()
+    {
+        ProductionNodeDotRepository repository = new ProductionNodeDotRepository();
+
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        concatenationNode.addChild(new TerminalNode("b"));
+        concatenationNode.addChild(new DotNode());
+        productionNode.addChild(concatenationNode);
+
+        assertNull(repository.findProductionSymbolAfterDot(productionNode));
+    }
+
+    @Test
+    public void testFindProductionSymbolsAfterDotReturnsProductionSymbolsWhenDotPresent()
+    {
+        ProductionNodeDotRepository repository = new ProductionNodeDotRepository();
+
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        concatenationNode.addChild(new DotNode());
+        concatenationNode.addChild(new TerminalNode("b"));
+        concatenationNode.addChild(new TerminalNode("c"));
+        productionNode.addChild(concatenationNode);
+
+        List<Node> expectedNodes = new ArrayList<Node>();
+        expectedNodes.add(new TerminalNode("b"));
+        expectedNodes.add(new TerminalNode("c"));
+
+        assertEquals(expectedNodes, repository.findProductionSymbolsAfterDot(productionNode));
+    }
+
+    @Test
+    public void testFindProductionSymbolsAfterDotReturnsNullWhenDotNotPresent()
+    {
+        ProductionNodeDotRepository repository = new ProductionNodeDotRepository();
+
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        concatenationNode.addChild(new TerminalNode("b"));
+        productionNode.addChild(concatenationNode);
+
+        assertNull(repository.findProductionSymbolsAfterDot(productionNode));
+    }
+
+    public void testFindProductionSymbolsAfterDotReturnsEmptyListWhenDotAtEnd()
+    {
+        ProductionNodeDotRepository repository = new ProductionNodeDotRepository();
+
+        ProductionNode productionNode = new ProductionNode();
+        productionNode.addChild(new NonTerminalNode("S"));
+        ConcatenationNode concatenationNode = new ConcatenationNode();
+        concatenationNode.addChild(new TerminalNode("a"));
+        concatenationNode.addChild(new TerminalNode("b"));
+        concatenationNode.addChild(new DotNode());
+        productionNode.addChild(concatenationNode);
+
+        assertEquals(new ArrayList<Node>(), repository.findProductionSymbolsAfterDot(productionNode));
     }
 
     @Test
@@ -99,7 +171,7 @@ public class ProductionNodeDotRepositoryTest
     }
 
     @Test
-    public void testShiftDotInProductionRemovedTrailingDot()
+    public void testShiftDotInProductionRemovesTrailingDot()
     {
         ProductionNodeDotRepository repository = new ProductionNodeDotRepository();
 

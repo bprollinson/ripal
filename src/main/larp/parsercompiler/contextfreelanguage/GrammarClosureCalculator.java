@@ -67,12 +67,15 @@ public class GrammarClosureCalculator
         {
             List<Node> nextSymbols = this.productionNodeDotRepository.findProductionSymbolsAfterDot(closureRule.getProductionNode());
 
-            if (nextSymbols.size() > 0)
+            if (nextSymbols == null || nextSymbols.size() == 0)
             {
-                boolean addLookaheadSymbols = !closureRule.getLookaheadSymbols().isEmpty();
-                this.addClosureRulesForNonTerminal(grammar, closureRule, startingNonTerminalProductionsMap.get(nextSymbols.get(0)), closureRulesToAdd, addLookaheadSymbols, nextSymbols.subList(1, nextSymbols.size()));
+                continue;
             }
-            if (nextSymbols.size() > 0 && nextSymbols.get(0) instanceof EpsilonNode)
+
+            boolean addLookaheadSymbols = !closureRule.getLookaheadSymbols().isEmpty();
+            this.addClosureRulesForNonTerminal(grammar, closureRule, startingNonTerminalProductionsMap.get(nextSymbols.get(0)), closureRulesToAdd, addLookaheadSymbols, nextSymbols.subList(1, nextSymbols.size()));
+
+            if (nextSymbols.get(0) instanceof EpsilonNode)
             {
                 closureRulesToAdd.add(this.buildEpsilonClosureRule(closureRule.getProductionNode().getChildNodes().get(0), closureRule.getLookaheadSymbols()));
             }
