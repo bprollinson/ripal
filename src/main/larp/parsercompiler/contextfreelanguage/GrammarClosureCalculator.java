@@ -72,10 +72,14 @@ public class GrammarClosureCalculator
                 continue;
             }
 
-            boolean addLookaheadSymbols = !closureRule.getLookaheadSymbols().isEmpty();
-            this.addClosureRulesForNonTerminal(grammar, closureRule, startingNonTerminalProductionsMap.get(nextSymbols.get(0)), closureRulesToAdd, addLookaheadSymbols, nextSymbols.subList(1, nextSymbols.size()));
+            Node nextSymbol = nextSymbols.get(0);
+            List<Node> followingSymbols = nextSymbols.subList(1, nextSymbols.size());
+            Set<Integer> productionIndices = startingNonTerminalProductionsMap.get(nextSymbol);
 
-            if (nextSymbols.get(0) instanceof EpsilonNode)
+            Set<GrammarClosureRule> nonTerminalClosureRules = this.addClosureRulesForNonTerminal(grammar, closureRule, productionIndices, followingSymbols);
+            closureRulesToAdd.addAll(nonTerminalClosureRules);
+
+            if (nextSymbol instanceof EpsilonNode)
             {
                 closureRulesToAdd.add(this.buildEpsilonClosureRule(closureRule.getProductionNode().getChildNodes().get(0), closureRule.getLookaheadSymbols()));
             }
@@ -84,21 +88,25 @@ public class GrammarClosureCalculator
         return rulesClosure.addAll(closureRulesToAdd);
     }
 
-    private void addClosureRulesForNonTerminal(Grammar grammar, GrammarClosureRule closureRule, Set<Integer> productionIndices, Set<GrammarClosureRule> closureRulesToAdd, boolean addLookaheadSymbols, List<Node> nextSymbols)
+    private Set<GrammarClosureRule> addClosureRulesForNonTerminal(Grammar grammar, GrammarClosureRule closureRule, Set<Integer> productionIndices, List<Node> followingSymbols)
     {
+        Set<GrammarClosureRule> closureRulesToAdd = new HashSet<GrammarClosureRule>();
+
         for (int productionIndex: productionIndices)
         {
             Node production = grammar.getProductions().get(productionIndex);
 
             Node productionNode = this.productionNodeDotRepository.addDotToProduction(production);
+            boolean addLookaheadSymbols = !closureRule.getLookaheadSymbols().isEmpty();
+
             if (addLookaheadSymbols)
             {
                 for (Node parentLookaheadSymbol: closureRule.getLookaheadSymbols())
                 {
-                    List<Node> nextSymbolsForSymbol = new ArrayList<Node>();
-                    nextSymbolsForSymbol.addAll(nextSymbols);
-                    nextSymbolsForSymbol.add(parentLookaheadSymbol);
-                    Set<Node> lookaheadSymbols = this.calculateLookaheadSymbols(grammar, nextSymbolsForSymbol);
+                    List<Node> followingSymbolsForSymbol = new ArrayList<Node>();
+                    followingSymbolsForSymbol.addAll(followingSymbols);
+                    followingSymbolsForSymbol.add(parentLookaheadSymbol);
+                    Set<Node> lookaheadSymbols = this.calculateLookaheadSymbols(grammar, followingSymbolsForSymbol);
                     closureRulesToAdd.add(new GrammarClosureRule(productionNode, lookaheadSymbols));
                 }
             }
@@ -107,18 +115,20 @@ public class GrammarClosureCalculator
                 closureRulesToAdd.add(new GrammarClosureRule(productionNode));
             }
         }
+
+        return closureRulesToAdd;
     }
 
-    private Set<Node> calculateLookaheadSymbols(Grammar grammar, List<Node> nextSymbols)
+    private Set<Node> calculateLookaheadSymbols(Grammar grammar, List<Node> followingSymbols)
     {
         Grammar lookaheadGrammar = new Grammar();
 
         Node productionNode = new ProductionNode();
         productionNode.getChildNodes().add(new NonTerminalNode("A"));
         Node concatenationNode = new ConcatenationNode();
-        for (Node nextSymbol: nextSymbols)
+        for (Node followingSymbol: followingSymbols)
         {
-            concatenationNode.getChildNodes().add(nextSymbol);
+            concatenationNode.getChildNodes().add(followingSymbol);
         }
         productionNode.getChildNodes().add(concatenationNode);
         lookaheadGrammar.addProduction(productionNode);
