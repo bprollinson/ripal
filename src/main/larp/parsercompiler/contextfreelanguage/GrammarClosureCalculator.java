@@ -17,19 +17,19 @@ import larp.parsetree.contextfreelanguage.ProductionNode;
 import larp.util.ValueToSetMap;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class GrammarClosureCalculator
 {
     private ProductionNodeDotRepository productionNodeDotRepository;
+    private ClosureLookaheadCombiner lookaheadCombiner;
 
     public GrammarClosureCalculator()
     {
         this.productionNodeDotRepository = new ProductionNodeDotRepository();
+        this.lookaheadCombiner = new ClosureLookaheadCombiner();
     }
 
     public Set<GrammarClosureRule> calculate(Grammar grammar, Set<GrammarClosureRule> initialClosureRules)
@@ -44,7 +44,7 @@ public class GrammarClosureCalculator
             continueExpansion = this.expandClosure(grammar, startingNonTerminalProductionsMap, closureRules);
         }
 
-        return this.combineClosureLookaheads(closureRules);
+        return this.lookaheadCombiner.combine(closureRules);
     }
 
     private ValueToSetMap<Node, Integer> calculateStartingNonTerminalProductionsMap(Grammar grammar)
@@ -154,28 +154,5 @@ public class GrammarClosureCalculator
         productionNode.addChild(concatenationNode);
 
         return new GrammarClosureRule(productionNode, lookaheadSymbols);
-    }
-
-    private Set<GrammarClosureRule> combineClosureLookaheads(Set<GrammarClosureRule> closureRules)
-    {
-        List<GrammarClosureRule> combinedClosureRules = new ArrayList<GrammarClosureRule>();
-        Map<Node, Integer> nodeToProductionIndexMap = new HashMap<Node, Integer>();
-
-        for (GrammarClosureRule closureRule: closureRules)
-        {
-            Integer existingRuleIndex = nodeToProductionIndexMap.get(closureRule.getProductionNode());
-            if (existingRuleIndex == null)
-            {
-                combinedClosureRules.add(closureRule);
-                nodeToProductionIndexMap.put(closureRule.getProductionNode(), combinedClosureRules.size() - 1);
-            }
-            else
-            {
-                GrammarClosureRule existingRule = combinedClosureRules.get(existingRuleIndex);
-                existingRule.getLookaheadSymbols().addAll(closureRule.getLookaheadSymbols());
-            }
-        }
-
-        return new HashSet<GrammarClosureRule>(combinedClosureRules);
     }
 }
