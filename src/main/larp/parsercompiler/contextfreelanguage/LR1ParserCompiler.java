@@ -10,10 +10,6 @@ package larp.parsercompiler.contextfreelanguage;
 import larp.grammar.contextfreelanguage.Grammar;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 
-public class LR1ParserCompiler
+public class LR1ParserCompiler extends LR0ParserCompiler
 {
-    public LR0ParseTable compile(Grammar grammar)
-    {
-        return new LR0ParseTable(grammar, null);
-    }
 }
