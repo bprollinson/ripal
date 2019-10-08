@@ -25,7 +25,7 @@ import larp.parsetree.contextfreelanguage.TerminalNode;
 public class LR1ParserCompilerTest
 {
     @Test
-    public void testCompileAppliesReduceActionOnlyToEndOfStringNodeInFollowSet() throws AmbiguousLR0ParseTableException
+    public void testCompileAppliesReduceActionOnlyToEndOfStringNodeInLookaheadSet() throws AmbiguousLR0ParseTableException
     {
         LR1ParserCompiler compiler = new LR1ParserCompiler();
 
@@ -47,5 +47,17 @@ public class LR1ParserCompilerTest
         expectedTable.addCell(state3, new EndOfStringNode(), new LR0AcceptAction());
 
         assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
+    }
+
+    @Test
+    public void testCompileAppliesReduceActionOnlyToSingleTerminalNodeInLookaheadSet()
+    {
+        assertTrue(false);
+    }
+
+    @Test
+    public void testCompileAppliesReduceActionOnlyToMultipleTerminalNodesInLookaheadSet()
+    {
+        assertTrue(false);
     }
 }
