@@ -25,18 +25,7 @@ import larp.parsetree.contextfreelanguage.TerminalNode;
 public class LR1ParserCompilerTest
 {
     @Test
-    public void testCompileReturnsEmptyParseTableForEmptyGrammar() throws AmbiguousLR0ParseTableException
-    {
-        LR1ParserCompiler compiler = new LR1ParserCompiler();
-
-        Grammar grammar = new Grammar();
-        LR0ParseTable expectedTable = new LR0ParseTable(grammar, null);
-
-        assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
-    }
-
-    @Test
-    public void testCompileReturnsParseTableForSingleCharacterProductionGrammar() throws AmbiguousLR0ParseTableException
+    public void testCompileAppliesReduceActionOnlyToEndOfStringNodeInFollowSet() throws AmbiguousLR0ParseTableException
     {
         LR1ParserCompiler compiler = new LR1ParserCompiler();
 
