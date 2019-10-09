@@ -17,7 +17,9 @@ import larp.parser.contextfreelanguage.LR0ClosureRuleSetDFAState;
 import larp.parser.contextfreelanguage.LR0GotoAction;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
+import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
+import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
@@ -117,5 +119,30 @@ public class LR1ParserCompilerTest
         expectedTable.addCell(state6, new EndOfStringNode(), new LR0AcceptAction());
 
         assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
+    }
+
+    @Test(expected = LR0ShiftReduceConflictException.class)
+    public void testCompileThrowsExceptionForShiftReduceConflict() throws AmbiguousLR0ParseTableException
+    {
+        LR1ParserCompiler compiler = new LR1ParserCompiler();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"), new TerminalNode("b"));
+
+        compiler.compile(grammar);
+    }
+
+    @Test(expected = LR0ReduceReduceConflictException.class)
+    public void testCompileThrowsExceptionForReduceReduceConflict() throws AmbiguousLR0ParseTableException
+    {
+        LR1ParserCompiler compiler = new LR1ParserCompiler();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        compiler.compile(grammar);
     }
 }
