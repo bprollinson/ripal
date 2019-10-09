@@ -21,6 +21,7 @@ import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
+import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
 import larp.parsetree.contextfreelanguage.TerminalNode;
 
@@ -142,6 +143,31 @@ public class LR1ParserCompilerTest
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
+
+        compiler.compile(grammar);
+    }
+
+    @Test(expected = LR0ShiftReduceConflictException.class)
+    public void testCompilerThrowsExceptionForShiftReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
+    {
+        SLR1ParserCompiler compiler = new SLR1ParserCompiler();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+        grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
+
+        compiler.compile(grammar);
+    }
+
+    @Test(expected = LR0ReduceReduceConflictException.class)
+    public void testCompilerThrowsExceptionForReduceReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
+    {
+        SLR1ParserCompiler compiler = new SLR1ParserCompiler();
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
+        grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
         compiler.compile(grammar);
     }
