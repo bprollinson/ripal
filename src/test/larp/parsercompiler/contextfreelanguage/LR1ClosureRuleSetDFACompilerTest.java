@@ -50,7 +50,6 @@ public class LR1ClosureRuleSetDFACompilerTest
         Set<GrammarClosureRule> closureRule0 = new HashSet<GrammarClosureRule>();
         Set<Node> expectedLookaheadSymbols = new HashSet<Node>();
         expectedLookaheadSymbols.add(new EndOfStringNode());
-        expectedLookaheadSymbols.add(new TerminalNode("a"));
         closureRule0.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         closureRule0.add(this.buildClosureRule(expectedLookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new TerminalNode("a")));
         LR0ClosureRuleSetDFAState s0 = new LR0ClosureRuleSetDFAState("", false, closureRule0);
