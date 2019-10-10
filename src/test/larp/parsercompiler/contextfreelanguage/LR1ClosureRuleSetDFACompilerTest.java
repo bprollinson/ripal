@@ -7,7 +7,6 @@
 
 package larp.parsercompiler.contextfreelanguage;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -29,17 +28,7 @@ import java.util.Set;
 public class LR1ClosureRuleSetDFACompilerTest
 {
     @Test
-    public void testCompileReturnsNullForEmptyGrammar()
-    {
-        LR1ClosureRuleSetDFACompiler compiler = new LR1ClosureRuleSetDFACompiler();
-
-        Grammar grammar = new Grammar();
-
-        assertNull(compiler.compile(grammar));
-    }
-
-    @Test
-    public void testCompileCreatesDFAForTerminalRuleFromStartState()
+    public void testCompileCreatesAndPropagatesEndOfStringLookaheadFromStartState()
     {
         LR1ClosureRuleSetDFACompiler compiler = new LR1ClosureRuleSetDFACompiler();
 
