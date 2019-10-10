@@ -86,12 +86,17 @@ public class LR1ClosureRuleSetDFACompilerTest
     @Test
     public void testCompileCreatesAndPropagatesSingleCharacterLookaheadFromSubsequentState()
     {
+        //S -> a B c
+        //B -> b
         assertTrue(false);
     }
 
     @Test
     public void testCompileCreatesAndPropagatesMultipleCharacterLookaheadFromSubsequentState()
     {
+        //S -> a B c
+        //S -> a B d
+        //B -> b
         assertTrue(false);
     }
 
