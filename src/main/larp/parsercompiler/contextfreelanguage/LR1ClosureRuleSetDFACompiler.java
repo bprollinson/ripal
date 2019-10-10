@@ -7,6 +7,6 @@
 
 package larp.parsercompiler.contextfreelanguage;
 
-class LR1ClosureRuleSetDFACompiler
+class LR1ClosureRuleSetDFACompiler extends LR0ClosureRuleSetDFACompiler
 {
 }
