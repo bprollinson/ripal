@@ -150,7 +150,7 @@ public class LR1ParserCompilerTest
     @Test(expected = LR0ShiftReduceConflictException.class)
     public void testCompilerThrowsExceptionForShiftReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
     {
-        SLR1ParserCompiler compiler = new SLR1ParserCompiler();
+        LR1ParserCompiler compiler = new LR1ParserCompiler();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("a"));
@@ -163,7 +163,7 @@ public class LR1ParserCompilerTest
     @Test(expected = LR0ReduceReduceConflictException.class)
     public void testCompilerThrowsExceptionForReduceReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
     {
-        SLR1ParserCompiler compiler = new SLR1ParserCompiler();
+        LR1ParserCompiler compiler = new LR1ParserCompiler();
 
         Grammar grammar = new Grammar();
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
