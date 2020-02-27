@@ -17,11 +17,11 @@ This specific version of the LGPL can be found [here](http://www.gnu.org/license
 
 # Contact Information
 
-Mail:
-Brendan Rollinson-Lorimer
-131 Prescott Ave.
-Toronto, Ontario
-Canada
+Mail:  
+Brendan Rollinson-Lorimer  
+131 Prescott Ave.  
+Toronto, Ontario  
+Canada  
 M6N 3G9
 
 Email: brendan.rollinson@gmail.com
