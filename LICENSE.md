@@ -1,6 +1,6 @@
 # License and Copyright
 
-LARP: Language Analysis and Responsive Parsing  
+LARP: Language Analysis and Responsive Parsing
 Copyright (C) 2017 Brendan Rollinson-Lorimer
 
 This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
@@ -17,12 +17,11 @@ This specific version of the LGPL can be found [here](http://www.gnu.org/license
 
 # Contact Information
 
-Mail:  
-Brendan Rollinson-Lorimer  
-103 The Queensway  
-&#35;917  
-Toronto, Ontario  
-Canada  
-M6S 5B3
+Mail:
+Brendan Rollinson-Lorimer
+131 Prescott Ave.
+Toronto, Ontario
+Canada
+M6N 3G9
 
 Email: brendan.rollinson@gmail.com
