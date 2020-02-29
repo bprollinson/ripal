@@ -79,13 +79,13 @@ public class LR1ClosureRuleSetDFACompilerTest
 
         Set<Node> expectedEndOfStringLookaheadSymbols = new HashSet<Node>();
         expectedEndOfStringLookaheadSymbols.add(new EndOfStringNode());
-        Set<Node> expectedNonTerminalLookaheadSymbols = new HashSet<Node>();
-        expectedNonTerminalLookaheadSymbols.add(new TerminalNode("b"));
+        Set<Node> expectedTerminalLookaheadSymbols = new HashSet<Node>();
+        expectedTerminalLookaheadSymbols.add(new TerminalNode("b"));
 
         Set<GrammarClosureRule> closureRule0 = new HashSet<GrammarClosureRule>();
         closureRule0.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         closureRule0.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new TerminalNode("b")));
-        closureRule0.add(this.buildClosureRule(expectedNonTerminalLookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
+        closureRule0.add(this.buildClosureRule(expectedTerminalLookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
         LR0ClosureRuleSetDFAState s0 = new LR0ClosureRuleSetDFAState("", false, closureRule0);
 
         Set<GrammarClosureRule> closureRule1 = new HashSet<GrammarClosureRule>();
@@ -97,7 +97,7 @@ public class LR1ClosureRuleSetDFACompilerTest
         LR0ClosureRuleSetDFAState s2 = new LR0ClosureRuleSetDFAState("", false, closureRule2);
 
         Set<GrammarClosureRule> closureRule3 = new HashSet<GrammarClosureRule>();
-        closureRule3.add(this.buildClosureRule(expectedNonTerminalLookaheadSymbols, new NonTerminalNode("A"), new TerminalNode("a"), new DotNode()));
+        closureRule3.add(this.buildClosureRule(expectedTerminalLookaheadSymbols, new NonTerminalNode("A"), new TerminalNode("a"), new DotNode()));
         LR0ClosureRuleSetDFAState s3 = new LR0ClosureRuleSetDFAState("", false, closureRule3);
 
         Set<GrammarClosureRule> closureRule4 = new HashSet<GrammarClosureRule>();
@@ -135,15 +135,15 @@ public class LR1ClosureRuleSetDFACompilerTest
 
         Set<Node> expectedEndOfStringLookaheadSymbols = new HashSet<Node>();
         expectedEndOfStringLookaheadSymbols.add(new EndOfStringNode());
-        Set<Node> expectedNonTerminalLookaheadSymbols = new HashSet<Node>();
-        expectedNonTerminalLookaheadSymbols.add(new TerminalNode("b"));
-        expectedNonTerminalLookaheadSymbols.add(new TerminalNode("c"));
+        Set<Node> expectedTerminalLookaheadSymbols = new HashSet<Node>();
+        expectedTerminalLookaheadSymbols.add(new TerminalNode("b"));
+        expectedTerminalLookaheadSymbols.add(new TerminalNode("c"));
 
         Set<GrammarClosureRule> closureRule0 = new HashSet<GrammarClosureRule>();
         closureRule0.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
         closureRule0.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new TerminalNode("b")));
         closureRule0.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new TerminalNode("c")));
-        closureRule0.add(this.buildClosureRule(expectedNonTerminalLookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
+        closureRule0.add(this.buildClosureRule(expectedTerminalLookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
         LR0ClosureRuleSetDFAState s0 = new LR0ClosureRuleSetDFAState("", false, closureRule0);
 
         Set<GrammarClosureRule> closureRule1 = new HashSet<GrammarClosureRule>();
@@ -160,7 +160,7 @@ public class LR1ClosureRuleSetDFACompilerTest
         LR0ClosureRuleSetDFAState s3 = new LR0ClosureRuleSetDFAState("", false, closureRule3);
 
         Set<GrammarClosureRule> closureRule4 = new HashSet<GrammarClosureRule>();
-        closureRule4.add(this.buildClosureRule(expectedNonTerminalLookaheadSymbols, new NonTerminalNode("S"), new TerminalNode("a"), new DotNode()));
+        closureRule4.add(this.buildClosureRule(expectedTerminalLookaheadSymbols, new NonTerminalNode("S"), new TerminalNode("a"), new DotNode()));
         LR0ClosureRuleSetDFAState s4 = new LR0ClosureRuleSetDFAState("", false, closureRule4);
 
         Set<GrammarClosureRule> closureRule5 = new HashSet<GrammarClosureRule>();
@@ -199,8 +199,8 @@ public class LR1ClosureRuleSetDFACompilerTest
 
         Set<Node> expectedEndOfStringLookaheadSymbols = new HashSet<Node>();
         expectedEndOfStringLookaheadSymbols.add(new EndOfStringNode());
-        Set<Node> expectedNonTerminalLookaheadSymbols = new HashSet<Node>();
-        expectedNonTerminalLookaheadSymbols.add(new TerminalNode("c"));
+        Set<Node> expectedTerminalLookaheadSymbols = new HashSet<Node>();
+        expectedTerminalLookaheadSymbols.add(new TerminalNode("c"));
 
         Set<GrammarClosureRule> closureRule0 = new HashSet<GrammarClosureRule>();
         closureRule0.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
@@ -209,7 +209,7 @@ public class LR1ClosureRuleSetDFACompilerTest
 
         Set<GrammarClosureRule> closureRule1 = new HashSet<GrammarClosureRule>();
         closureRule1.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S"), new TerminalNode("a"), new DotNode(), new NonTerminalNode("B"), new TerminalNode("c")));
-        closureRule1.add(this.buildClosureRule(expectedNonTerminalLookaheadSymbols, new NonTerminalNode("B"), new DotNode(), new TerminalNode("b")));
+        closureRule1.add(this.buildClosureRule(expectedTerminalLookaheadSymbols, new NonTerminalNode("B"), new DotNode(), new TerminalNode("b")));
         LR0ClosureRuleSetDFAState s1 = new LR0ClosureRuleSetDFAState("", false, closureRule1);
 
         Set<GrammarClosureRule> closureRule2 = new HashSet<GrammarClosureRule>();
@@ -221,7 +221,7 @@ public class LR1ClosureRuleSetDFACompilerTest
         LR0ClosureRuleSetDFAState s3 = new LR0ClosureRuleSetDFAState("", false, closureRule3);
 
         Set<GrammarClosureRule> closureRule4 = new HashSet<GrammarClosureRule>();
-        closureRule4.add(this.buildClosureRule(expectedNonTerminalLookaheadSymbols, new NonTerminalNode("B"), new TerminalNode("b"), new DotNode()));
+        closureRule4.add(this.buildClosureRule(expectedTerminalLookaheadSymbols, new NonTerminalNode("B"), new TerminalNode("b"), new DotNode()));
         LR0ClosureRuleSetDFAState s4 = new LR0ClosureRuleSetDFAState("", false, closureRule4);
 
         Set<GrammarClosureRule> closureRule5 = new HashSet<GrammarClosureRule>();
