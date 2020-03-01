@@ -40,17 +40,24 @@ public class LR0ClosureRuleSetDFACompiler
         this.closureRuleSetToStateMap = new HashMap<Set<GrammarClosureRule>, LR0ClosureRuleSetDFAState>();
         Grammar augmentedGrammar = this.grammarAugmentor.augment(grammar);
 
-        Set<GrammarClosureRule> closureRuleSet = new HashSet<GrammarClosureRule>();
         if (augmentedGrammar.getStartSymbol() == null)
         {
             return null;
         }
         Node firstProductionWithDot = this.productionNodeDotRepository.addDotToProduction(augmentedGrammar.getProduction(0));
-        closureRuleSet.add(new GrammarClosureRule(firstProductionWithDot));
+        Set<GrammarClosureRule> closureRuleSet = this.buildStartStateClosureRuleSet(firstProductionWithDot);
 
         LR0ClosureRuleSetDFAState startState = this.compileState(augmentedGrammar, closureRuleSet, false);
 
         return new LR0ClosureRuleSetDFA(startState, augmentedGrammar);
+    }
+
+    protected Set<GrammarClosureRule> buildStartStateClosureRuleSet(Node firstProductionWithDot)
+    {
+        Set<GrammarClosureRule> closureRuleSet = new HashSet<GrammarClosureRule>();
+        closureRuleSet.add(new GrammarClosureRule(firstProductionWithDot));
+
+        return closureRuleSet;
     }
 
     private LR0ClosureRuleSetDFAState compileState(Grammar augmentedGrammar, Set<GrammarClosureRule> closureRuleSet, boolean accepting)
