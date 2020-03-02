@@ -95,7 +95,7 @@ public class LR0ClosureRuleSetDFACompiler
             if (nextSymbol != null && !(nextSymbol instanceof EpsilonNode))
             {
                 Node productionWithDotShifted = this.productionNodeDotRepository.shiftDotInProduction(productionNode);
-                symbolToNextClosureMap.put(nextSymbol, new GrammarClosureRule(productionWithDotShifted));
+                symbolToNextClosureMap.put(nextSymbol, new GrammarClosureRule(productionWithDotShifted, closureRule.getLookaheadSymbols()));
             }
         }
 
