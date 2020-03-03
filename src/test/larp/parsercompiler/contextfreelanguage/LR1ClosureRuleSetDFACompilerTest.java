@@ -256,7 +256,7 @@ public class LR1ClosureRuleSetDFACompilerTest
         augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"), new TerminalNode("c"));
         augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new NonTerminalNode("B"), new TerminalNode("d"));
-        augmentedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"));
+        augmentedGrammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
 
         Set<Node> expectedEndOfStringLookaheadSymbols = new HashSet<Node>();
         expectedEndOfStringLookaheadSymbols.add(new EndOfStringNode());
@@ -307,7 +307,7 @@ public class LR1ClosureRuleSetDFACompilerTest
         s2.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new TerminalNode("d"), s4));
         s1.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new TerminalNode("b"), s5));
         s0.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new NonTerminalNode("S"), s6));
-        s6.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new NonTerminalNode("S'"), s7));
+        s6.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new EndOfStringNode(), s7));
         LR0ClosureRuleSetDFA expectedProductionSetDFA = new LR0ClosureRuleSetDFA(s0, augmentedGrammar);
 
         Grammar grammar = new Grammar();
