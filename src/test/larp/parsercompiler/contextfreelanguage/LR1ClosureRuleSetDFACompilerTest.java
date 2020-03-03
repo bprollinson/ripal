@@ -160,7 +160,7 @@ public class LR1ClosureRuleSetDFACompilerTest
         LR0ClosureRuleSetDFAState s3 = new LR0ClosureRuleSetDFAState("", false, closureRule3);
 
         Set<GrammarClosureRule> closureRule4 = new HashSet<GrammarClosureRule>();
-        closureRule4.add(this.buildClosureRule(expectedTerminalLookaheadSymbols, new NonTerminalNode("S"), new TerminalNode("a"), new DotNode()));
+        closureRule4.add(this.buildClosureRule(expectedTerminalLookaheadSymbols, new NonTerminalNode("A"), new TerminalNode("a"), new DotNode()));
         LR0ClosureRuleSetDFAState s4 = new LR0ClosureRuleSetDFAState("", false, closureRule4);
 
         Set<GrammarClosureRule> closureRule5 = new HashSet<GrammarClosureRule>();
