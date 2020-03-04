@@ -7,9 +7,19 @@
 
 package larp.parsercompiler.contextfreelanguage;
 
-import larp.grammar.contextfreelanguage.Grammar;
-import larp.parser.contextfreelanguage.LR0ParseTable;
+import larp.parsetree.contextfreelanguage.Node;
+
+import java.util.Set;
 
 public class LR1ParserCompiler extends LR0ParserCompiler
 {
+    public LR1ParserCompiler()
+    {
+        this.DFACompiler = new LR1ClosureRuleSetDFACompiler();
+    }
+
+    protected boolean shouldReduceForProduction(Node nonTerminalNode, Node terminalNode, Set<Node> lookaheadSymbols)
+    {
+        return lookaheadSymbols.contains(terminalNode);
+    }
 }

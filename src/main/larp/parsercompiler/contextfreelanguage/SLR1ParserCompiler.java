@@ -26,7 +26,7 @@ public class SLR1ParserCompiler extends LR0ParserCompiler
         return super.compile(grammar);
     }
 
-    protected boolean shouldReduceForProduction(Node nonTerminalNode, Node terminalNode)
+    protected boolean shouldReduceForProduction(Node nonTerminalNode, Node terminalNode, Set<Node> lookaheadSymbols)
     {
         Set<Node> follows = this.followSetCalculator.getFollow((NonTerminalNode)nonTerminalNode);
 

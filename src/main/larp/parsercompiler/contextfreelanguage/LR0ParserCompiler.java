@@ -30,7 +30,7 @@ import java.util.Set;
 
 public class LR0ParserCompiler
 {
-    private LR0ClosureRuleSetDFACompiler DFACompiler;
+    protected LR0ClosureRuleSetDFACompiler DFACompiler;
     private ProductionNodeDotRepository productionNodeDotRepository;
 
     public LR0ParserCompiler()
@@ -56,7 +56,7 @@ public class LR0ParserCompiler
         return parseTable;
     }
 
-    protected boolean shouldReduceForProduction(Node nonTerminalNode, Node terminalNode)
+    protected boolean shouldReduceForProduction(Node nonTerminalNode, Node terminalNode, Set<Node> lookaheadSymbols)
     {
         return true;
     }
@@ -136,7 +136,7 @@ public class LR0ParserCompiler
                 {
                     for (Node terminalNode: terminalNodes)
                     {
-                        if (this.shouldReduceForProduction(nonTerminalNode, terminalNode))
+                        if (this.shouldReduceForProduction(nonTerminalNode, terminalNode, closureRule.getLookaheadSymbols()))
                         {
                             parseTable.addCell(state, terminalNode, new LR0ReduceAction(productionPosition));
                         }
