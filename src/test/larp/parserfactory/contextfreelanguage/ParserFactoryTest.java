@@ -80,13 +80,7 @@ public class ParserFactoryTest
     }
 
     @Test
-    public void testFactoryCreatesLR0ParserForLR0AndNotLL1Grammar()
-    {
-        assertEquals(0, 1);
-    }
-
-    @Test
-    public void testFactoryCreatesSLR1ParserForSLR1AndNotLL1Grammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesLR0ParserForLR0AndNotLL1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
@@ -119,7 +113,13 @@ public class ParserFactoryTest
     }
 
     @Test
-    public void testFactoryCreatesLR0ParserForLR1AndNotLL1Grammar()
+    public void testFactoryCreatesSLR1ParserForSLR1AndNotLL1Grammar() throws TokenizerException, AmbiguousParseTableException
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
+    public void testFactoryCreatesLR1ParserForLR1AndNotLL1Grammar()
     {
         assertEquals(0, 1);
     }
