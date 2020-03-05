@@ -80,6 +80,12 @@ public class ParserFactoryTest
     }
 
     @Test
+    public void testFactoryCreatesLR0ParserForLR0AndNotLL1Grammar()
+    {
+        assertEquals(0, 1);
+    }
+
+    @Test
     public void testFactoryCreatesSLR1ParserForSLR1AndNotLL1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
@@ -110,6 +116,12 @@ public class ParserFactoryTest
         LR0Parser expectedParser = new LR0Parser(expectedTable);
 
         assertTrue(expectedParser.structureEquals(factory.factory(input)));
+    }
+
+    @Test
+    public void testFactoryCreatesLR0ParserForLR1AndNotLL1Grammar()
+    {
+        assertEquals(0, 1);
     }
 
     @Test
