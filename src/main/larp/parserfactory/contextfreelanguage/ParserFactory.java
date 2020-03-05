@@ -11,7 +11,6 @@ import larp.grammar.contextfreelanguage.Grammar;
 import larp.grammarparser.contextfreelanguage.GrammarParser;
 import larp.grammartokenizer.contextfreelanguage.Tokenizer;
 import larp.grammartokenizer.contextfreelanguage.TokenizerException;
-import larp.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
 import larp.parser.contextfreelanguage.AmbiguousParseTableException;
 import larp.parser.contextfreelanguage.LL1Parser;
 import larp.parser.contextfreelanguage.LL1ParseTable;
@@ -64,15 +63,26 @@ public class ParserFactory
     {
         try
         {
-            LL1ParseTable parseTable = this.ll1compiler.compile(grammar);
-
-            return new LL1Parser(parseTable);
+            return this.buildLL1Parser(grammar);
         }
-        catch (AmbiguousLL1ParseTableException apte)
+        catch (AmbiguousParseTableException apte)
         {
-            LR0ParseTable parseTable = this.slr1compiler.compile(grammar);
-
-            return new LR0Parser(parseTable);
         }
+
+        return this.buildSLR1Parser(grammar);
+    }
+
+    private Parser buildLL1Parser(Grammar grammar) throws AmbiguousParseTableException
+    {
+        LL1ParseTable parseTable = this.ll1compiler.compile(grammar);
+
+        return new LL1Parser(parseTable);
+    }
+
+    private Parser buildSLR1Parser(Grammar grammar) throws AmbiguousParseTableException
+    {
+        LR0ParseTable parseTable = this.slr1compiler.compile(grammar);
+
+        return new LR0Parser(parseTable);
     }
 }
