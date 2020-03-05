@@ -42,13 +42,7 @@ public class ParserFactory
 
     public Parser factory(List<String> input) throws TokenizerException, AmbiguousParseTableException
     {
-        Grammar grammar = new Grammar();
-        for (String inputString: input)
-        {
-            List<Token> tokenList = this.tokenizer.tokenize(inputString);
-            Node rootNode = this.grammarParser.parse(tokenList);
-            grammar.addProduction(rootNode);
-        }
+        Grammar grammar = this.buildGrammar(input);
 
         try
         {
@@ -62,5 +56,18 @@ public class ParserFactory
 
             return new LR0Parser(parseTable);
         }
+    }
+
+    private Grammar buildGrammar(List<String> input) throws TokenizerException
+    {
+        Grammar grammar = new Grammar();
+        for (String inputString: input)
+        {
+            List<Token> tokenList = this.tokenizer.tokenize(inputString);
+            Node rootNode = this.grammarParser.parse(tokenList);
+            grammar.addProduction(rootNode);
+        }
+
+        return grammar;
     }
 }
