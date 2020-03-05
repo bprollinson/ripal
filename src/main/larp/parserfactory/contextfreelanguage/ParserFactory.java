@@ -44,18 +44,7 @@ public class ParserFactory
     {
         Grammar grammar = this.buildGrammar(input);
 
-        try
-        {
-            LL1ParseTable parseTable = this.ll1compiler.compile(grammar);
-
-            return new LL1Parser(parseTable);
-        }
-        catch (AmbiguousLL1ParseTableException apte)
-        {
-            LR0ParseTable parseTable = this.slr1compiler.compile(grammar);
-
-            return new LR0Parser(parseTable);
-        }
+        return this.buildParser(grammar);
     }
 
     private Grammar buildGrammar(List<String> input) throws TokenizerException
@@ -69,5 +58,21 @@ public class ParserFactory
         }
 
         return grammar;
+    }
+
+    private Parser buildParser(Grammar grammar) throws AmbiguousParseTableException
+    {
+        try
+        {
+            LL1ParseTable parseTable = this.ll1compiler.compile(grammar);
+
+            return new LL1Parser(parseTable);
+        }
+        catch (AmbiguousLL1ParseTableException apte)
+        {
+            LR0ParseTable parseTable = this.slr1compiler.compile(grammar);
+
+            return new LR0Parser(parseTable);
+        }
     }
 }
