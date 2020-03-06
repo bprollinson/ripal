@@ -27,6 +27,7 @@ import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
 import larp.parser.contextfreelanguage.Parser;
+import larp.parser.contextfreelanguage.SLR1Parser;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
@@ -121,7 +122,14 @@ public class ParserFactoryTest
     @Test
     public void testFactoryCreatesSLR1ParserForSLR1AndNotLL1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
-        assertEquals(0, 1);
+        ParserFactory factory = new ParserFactory();
+        List<String> input = new ArrayList<String>();
+        input.add("S: \"a\"\"a\"");
+        input.add("S: \"a\"\"a\"B");
+        input.add("B: \"b\"");
+
+        Parser parser = factory.factory(input);
+        assertEquals(SLR1Parser.class, parser.getClass());
     }
 
     @Test
