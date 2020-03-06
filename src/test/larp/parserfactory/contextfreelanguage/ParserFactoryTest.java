@@ -26,6 +26,7 @@ import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
+import larp.parser.contextfreelanguage.Parser;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
 import larp.parsetree.contextfreelanguage.EpsilonNode;
 import larp.parsetree.contextfreelanguage.NonTerminalNode;
@@ -49,7 +50,9 @@ public class ParserFactoryTest
         expectedTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
         LL1Parser expectedParser = new LL1Parser(expectedTable);
 
-        assertEquals(expectedParser, factory.factory(input));
+        Parser parser = factory.factory(input);
+        assertEquals(expectedParser, parser);
+        assertEquals(LL1Parser.class, parser.getClass());
     }
 
     @Test
@@ -76,7 +79,9 @@ public class ParserFactoryTest
         expectedTable.addCell(new NonTerminalNode("B"), new TerminalNode("b"), 3);
         LL1Parser expectedParser = new LL1Parser(expectedTable);
 
-        assertEquals(expectedParser, factory.factory(input));
+        Parser parser = factory.factory(input);
+        assertEquals(expectedParser, parser);
+        assertEquals(LL1Parser.class, parser.getClass());
     }
 
     @Test
@@ -106,10 +111,11 @@ public class ParserFactoryTest
         expectedTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(1));
         expectedTable.addCell(state4, new EndOfStringNode(), new LR0ReduceAction(2));
         expectedTable.addCell(state5, new EndOfStringNode(), new LR0AcceptAction());
-
         LR0Parser expectedParser = new LR0Parser(expectedTable);
 
-        assertTrue(expectedParser.structureEquals(factory.factory(input)));
+        Parser parser = factory.factory(input);
+        assertTrue(expectedParser.structureEquals(parser));
+        assertEquals(LR0Parser.class, parser.getClass());
     }
 
     @Test
@@ -134,7 +140,9 @@ public class ParserFactoryTest
         LL1ParseTable expectedTable = new LL1ParseTable(expectedGrammar);
         LL1Parser expectedParser = new LL1Parser(expectedTable);
 
-        assertEquals(expectedParser, factory.factory(input));
+        Parser parser = factory.factory(input);
+        assertEquals(expectedParser, parser);
+        assertEquals(LL1Parser.class, parser.getClass());
     }
 
     @Test(expected = LR0ReduceReduceConflictException.class)
