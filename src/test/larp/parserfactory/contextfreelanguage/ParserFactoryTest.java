@@ -37,7 +37,7 @@ import java.util.List;
 public class ParserFactoryTest
 {
     @Test
-    public void testFactoryCreatesLL1ParserForLL1AndSLR1Grammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesLL1ParserForLR0AndSLR1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
@@ -53,7 +53,7 @@ public class ParserFactoryTest
     }
 
     @Test
-    public void testFactoryCreatesLL1ParserForLL1AndNotSLR1Grammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryCreatesLL1ParserForLR0AndNotSLR1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
