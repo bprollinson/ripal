@@ -17,7 +17,9 @@ import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parser.contextfreelanguage.LR0Parser;
 import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.Parser;
+import larp.parser.contextfreelanguage.SLR1Parser;
 import larp.parsercompiler.contextfreelanguage.LL1ParserCompiler;
+import larp.parsercompiler.contextfreelanguage.LR0ParserCompiler;
 import larp.parsercompiler.contextfreelanguage.SLR1ParserCompiler;
 import larp.parsetree.contextfreelanguage.Node;
 import larp.token.contextfreelanguage.Token;
@@ -29,6 +31,7 @@ public class ParserFactory
     private Tokenizer tokenizer;
     private GrammarParser grammarParser;
     private LL1ParserCompiler ll1compiler;
+    private LR0ParserCompiler lr0compiler;
     private SLR1ParserCompiler slr1compiler;
 
     public ParserFactory()
@@ -36,6 +39,7 @@ public class ParserFactory
         this.tokenizer = new Tokenizer();
         this.grammarParser = new GrammarParser();
         this.ll1compiler = new LL1ParserCompiler();
+        this.lr0compiler = new LR0ParserCompiler();
         this.slr1compiler = new SLR1ParserCompiler();
     }
 
@@ -69,6 +73,14 @@ public class ParserFactory
         {
         }
 
+        try
+        {
+            return this.buildLR0Parser(grammar);
+        }
+        catch (AmbiguousParseTableException apte)
+        {
+        }
+
         return this.buildSLR1Parser(grammar);
     }
 
@@ -79,10 +91,17 @@ public class ParserFactory
         return new LL1Parser(parseTable);
     }
 
+    private Parser buildLR0Parser(Grammar grammar) throws AmbiguousParseTableException
+    {
+        LR0ParseTable parseTable = this.lr0compiler.compile(grammar);
+
+        return new LR0Parser(parseTable);
+    }
+
     private Parser buildSLR1Parser(Grammar grammar) throws AmbiguousParseTableException
     {
         LR0ParseTable parseTable = this.slr1compiler.compile(grammar);
 
-        return new LR0Parser(parseTable);
+        return new SLR1Parser(parseTable);
     }
 }
