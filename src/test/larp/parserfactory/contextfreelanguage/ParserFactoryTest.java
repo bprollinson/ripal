@@ -128,7 +128,34 @@ public class ParserFactoryTest
         input.add("S: \"a\"\"a\"B");
         input.add("B: \"b\"");
 
+        Grammar expectedGrammar = new Grammar();
+        expectedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("a"));
+        expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"), new TerminalNode("a"), new NonTerminalNode("B"));
+        expectedGrammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
+
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state3 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state4 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state5 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state6 = new LR0ClosureRuleSetDFAState("", false);
+
+        LR0ParseTable expectedTable = new LR0ParseTable(expectedGrammar, state1);
+        expectedTable.addCell(state1, new TerminalNode("a"), new LR0ShiftAction(state2));
+        expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state6));
+        expectedTable.addCell(state2, new TerminalNode("a"), new LR0ShiftAction(state3));
+        expectedTable.addCell(state3, new TerminalNode("b"), new LR0ShiftAction(state5));
+        expectedTable.addCell(state3, new NonTerminalNode("B"), new LR0GotoAction(state4));
+        expectedTable.addCell(state3, new EndOfStringNode(), new LR0ReduceAction(1));
+        expectedTable.addCell(state4, new EndOfStringNode(), new LR0ReduceAction(2));
+        expectedTable.addCell(state5, new EndOfStringNode(), new LR0ReduceAction(3));
+        expectedTable.addCell(state6, new EndOfStringNode(), new LR0AcceptAction());
+
+        SLR1Parser expectedParser = new SLR1Parser(expectedTable);
+
         Parser parser = factory.factory(input);
+        assertTrue(expectedParser.structureEquals(parser));
         assertEquals(SLR1Parser.class, parser.getClass());
     }
 
