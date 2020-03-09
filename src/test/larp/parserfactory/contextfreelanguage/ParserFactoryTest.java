@@ -164,9 +164,16 @@ public class ParserFactoryTest
     }
 
     @Test
-    public void testFactoryCreatesLR1ParserForLR1AndNotLL1Grammar()
+    public void testFactoryCreatesLR1ParserForLR1AndNotLL1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
-        assertEquals(0, 1);
+        ParserFactory factory = new ParserFactory();
+        List<String> input = new ArrayList<String>();
+        input.add("S: A");
+        input.add("S: \"b\"A\"c\"");
+        input.add("S: \"d\"\"c\"");
+        input.add("A: \"d\"");
+
+        Parser parser = factory.factory(input);
     }
 
     @Test
