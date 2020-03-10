@@ -26,6 +26,7 @@ import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
+import larp.parser.contextfreelanguage.LR0ShiftReduceConflictException;
 import larp.parser.contextfreelanguage.LR1Parser;
 import larp.parser.contextfreelanguage.Parser;
 import larp.parser.contextfreelanguage.SLR1Parser;
@@ -227,8 +228,20 @@ public class ParserFactoryTest
         assertEquals(LL1Parser.class, parser.getClass());
     }
 
+    @Test(expected = LR0ShiftReduceConflictException.class)
+    public void testFactoryThrowsLR0ShiftReduceExceptionForNonLL1NonLR1Grammar() throws TokenizerException, AmbiguousParseTableException
+    {
+        ParserFactory factory = new ParserFactory();
+        List<String> input = new ArrayList<String>();
+        input.add("S: S\"+\"S");
+        input.add("S: S\"*\"S");
+        input.add("S: \"a\"");
+
+        factory.factory(input);
+    }
+
     @Test(expected = LR0ReduceReduceConflictException.class)
-    public void testFactoryThrowsAmbiguousLR0ParseTableExceptionForNonLL1NonLR1Grammar() throws TokenizerException, AmbiguousParseTableException
+    public void testFactoryThrowsLR0ReduceReduceExceptionForNonLL1NonLR1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
