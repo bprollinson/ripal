@@ -16,10 +16,12 @@ import larp.parser.contextfreelanguage.LL1Parser;
 import larp.parser.contextfreelanguage.LL1ParseTable;
 import larp.parser.contextfreelanguage.LR0Parser;
 import larp.parser.contextfreelanguage.LR0ParseTable;
+import larp.parser.contextfreelanguage.LR1Parser;
 import larp.parser.contextfreelanguage.Parser;
 import larp.parser.contextfreelanguage.SLR1Parser;
 import larp.parsercompiler.contextfreelanguage.LL1ParserCompiler;
 import larp.parsercompiler.contextfreelanguage.LR0ParserCompiler;
+import larp.parsercompiler.contextfreelanguage.LR1ParserCompiler;
 import larp.parsercompiler.contextfreelanguage.SLR1ParserCompiler;
 import larp.parsetree.contextfreelanguage.Node;
 import larp.token.contextfreelanguage.Token;
@@ -33,6 +35,7 @@ public class ParserFactory
     private LL1ParserCompiler ll1compiler;
     private LR0ParserCompiler lr0compiler;
     private SLR1ParserCompiler slr1compiler;
+    private LR1ParserCompiler lr1compiler;
 
     public ParserFactory()
     {
@@ -41,6 +44,7 @@ public class ParserFactory
         this.ll1compiler = new LL1ParserCompiler();
         this.lr0compiler = new LR0ParserCompiler();
         this.slr1compiler = new SLR1ParserCompiler();
+        this.lr1compiler = new LR1ParserCompiler();
     }
 
     public Parser factory(List<String> input) throws TokenizerException, AmbiguousParseTableException
@@ -81,7 +85,15 @@ public class ParserFactory
         {
         }
 
-        return this.buildSLR1Parser(grammar);
+        try
+        {
+            return this.buildSLR1Parser(grammar);
+        }
+        catch (AmbiguousParseTableException apte)
+        {
+        }
+
+        return this.buildLR1Parser(grammar);
     }
 
     private Parser buildLL1Parser(Grammar grammar) throws AmbiguousParseTableException
@@ -103,5 +115,12 @@ public class ParserFactory
         LR0ParseTable parseTable = this.slr1compiler.compile(grammar);
 
         return new SLR1Parser(parseTable);
+    }
+
+    private Parser buildLR1Parser(Grammar grammar) throws AmbiguousParseTableException
+    {
+        LR0ParseTable parseTable = this.lr1compiler.compile(grammar);
+
+        return new LR1Parser(parseTable);
     }
 }

@@ -26,6 +26,7 @@ import larp.parser.contextfreelanguage.LR0ParseTable;
 import larp.parser.contextfreelanguage.LR0ReduceAction;
 import larp.parser.contextfreelanguage.LR0ReduceReduceConflictException;
 import larp.parser.contextfreelanguage.LR0ShiftAction;
+import larp.parser.contextfreelanguage.LR1Parser;
 import larp.parser.contextfreelanguage.Parser;
 import larp.parser.contextfreelanguage.SLR1Parser;
 import larp.parsetree.contextfreelanguage.EndOfStringNode;
@@ -174,6 +175,7 @@ public class ParserFactoryTest
         input.add("A: \"d\"");
 
         Parser parser = factory.factory(input);
+        assertEquals(LR1Parser.class, parser.getClass());
     }
 
     @Test
