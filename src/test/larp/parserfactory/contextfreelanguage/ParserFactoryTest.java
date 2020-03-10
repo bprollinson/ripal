@@ -233,8 +233,7 @@ public class ParserFactoryTest
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
-        input.add("S: S\"+\"S");
-        input.add("S: S\"*\"S");
+        input.add("S: S\"b\"S");
         input.add("S: \"a\"");
 
         factory.factory(input);
