@@ -156,7 +156,6 @@ public class ParserFactoryTest
         expectedTable.addCell(state4, new EndOfStringNode(), new LR0ReduceAction(2));
         expectedTable.addCell(state5, new EndOfStringNode(), new LR0ReduceAction(3));
         expectedTable.addCell(state6, new EndOfStringNode(), new LR0AcceptAction());
-
         SLR1Parser expectedParser = new SLR1Parser(expectedTable);
 
         Parser parser = factory.factory(input);
@@ -174,7 +173,42 @@ public class ParserFactoryTest
         input.add("S: \"d\"\"c\"");
         input.add("A: \"d\"");
 
+        Grammar expectedGrammar = new Grammar();
+        expectedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        expectedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"));
+        expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("b"), new NonTerminalNode("A"), new TerminalNode("c"));
+        expectedGrammar.addProduction(new NonTerminalNode("S"), new TerminalNode("d"), new TerminalNode("c"));
+        expectedGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("d"));
+
+        LR0ClosureRuleSetDFAState state1 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state2 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state3 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state4 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state5 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state6 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state7 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state8 = new LR0ClosureRuleSetDFAState("", false);
+        LR0ClosureRuleSetDFAState state9 = new LR0ClosureRuleSetDFAState("", false);
+
+        LR0ParseTable expectedTable = new LR0ParseTable(expectedGrammar, state1);
+        expectedTable.addCell(state1, new TerminalNode("b"), new LR0ShiftAction(state3));
+        expectedTable.addCell(state1, new TerminalNode("d"), new LR0ShiftAction(state7));
+        expectedTable.addCell(state1, new NonTerminalNode("S"), new LR0GotoAction(state9));
+        expectedTable.addCell(state1, new NonTerminalNode("A"), new LR0GotoAction(state2));
+        expectedTable.addCell(state2, new EndOfStringNode(), new LR0ReduceAction(1));
+        expectedTable.addCell(state3, new TerminalNode("d"), new LR0ShiftAction(state6));
+        expectedTable.addCell(state3, new NonTerminalNode("A"), new LR0GotoAction(state4));
+        expectedTable.addCell(state4, new TerminalNode("c"), new LR0ShiftAction(state5));
+        expectedTable.addCell(state5, new EndOfStringNode(), new LR0ReduceAction(2));
+        expectedTable.addCell(state6, new TerminalNode("c"), new LR0ReduceAction(4));
+        expectedTable.addCell(state7, new TerminalNode("c"), new LR0ShiftAction(state8));
+        expectedTable.addCell(state7, new EndOfStringNode(), new LR0ReduceAction(4));
+        expectedTable.addCell(state8, new EndOfStringNode(), new LR0ReduceAction(3));
+        expectedTable.addCell(state9, new EndOfStringNode(), new LR0AcceptAction());
+        LR1Parser expectedParser = new LR1Parser(expectedTable);
+
         Parser parser = factory.factory(input);
+        assertTrue(expectedParser.structureEquals(parser));
         assertEquals(LR1Parser.class, parser.getClass());
     }
 
