@@ -321,7 +321,74 @@ public class LR1ClosureRuleSetDFACompilerTest
     @Test
     public void testCompileKeepsStatesWithSameRulesButDifferentLookaheadsSeparate()
     {
-        assertTrue(false);
+        LR1ClosureRuleSetDFACompiler compiler = new LR1ClosureRuleSetDFACompiler();
+
+        Grammar augmentedGrammar = new Grammar();
+        augmentedGrammar.addProduction(new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode());
+        augmentedGrammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"), new NonTerminalNode("A"), new TerminalNode("c"));
+        augmentedGrammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+
+        Set<Node> expectedEndOfStringLookaheadSymbols = new HashSet<Node>();
+        expectedEndOfStringLookaheadSymbols.add(new EndOfStringNode());
+        Set<Node> expectedBLookaheadSymbols = new HashSet<Node>();
+        expectedBLookaheadSymbols.add(new TerminalNode("b"));
+        Set<Node> expectedCLookaheadSymbols = new HashSet<Node>();
+        expectedCLookaheadSymbols.add(new TerminalNode("c"));
+
+        Set<GrammarClosureRule> closureRule0 = new HashSet<GrammarClosureRule>();
+        closureRule0.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S'"), new DotNode(), new NonTerminalNode("S"), new EndOfStringNode()));
+        closureRule0.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S"), new DotNode(), new NonTerminalNode("A"), new TerminalNode("b"), new NonTerminalNode("A"), new TerminalNode("c")));
+        closureRule0.add(this.buildClosureRule(expectedBLookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
+        LR0ClosureRuleSetDFAState s0 = new LR0ClosureRuleSetDFAState("", false, closureRule0);
+
+        Set<GrammarClosureRule> closureRule1 = new HashSet<GrammarClosureRule>();
+        closureRule1.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S"), new NonTerminalNode("A"), new DotNode(), new TerminalNode("b"), new NonTerminalNode("A"), new TerminalNode("c")));
+        LR0ClosureRuleSetDFAState s1 = new LR0ClosureRuleSetDFAState("", false, closureRule1);
+
+        Set<GrammarClosureRule> closureRule2 = new HashSet<GrammarClosureRule>();
+        closureRule2.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"), new DotNode(), new NonTerminalNode("A"), new TerminalNode("c")));
+        closureRule2.add(this.buildClosureRule(expectedCLookaheadSymbols, new NonTerminalNode("A"), new DotNode(), new TerminalNode("a")));
+        LR0ClosureRuleSetDFAState s2 = new LR0ClosureRuleSetDFAState("", false, closureRule2);
+
+        Set<GrammarClosureRule> closureRule3 = new HashSet<GrammarClosureRule>();
+        closureRule3.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"), new NonTerminalNode("A"), new DotNode(), new TerminalNode("c")));
+        LR0ClosureRuleSetDFAState s3 = new LR0ClosureRuleSetDFAState("", false, closureRule3);
+
+        Set<GrammarClosureRule> closureRule4 = new HashSet<GrammarClosureRule>();
+        closureRule4.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"), new NonTerminalNode("A"), new TerminalNode("c"), new DotNode()));
+        LR0ClosureRuleSetDFAState s4 = new LR0ClosureRuleSetDFAState("", false, closureRule4);
+
+        Set<GrammarClosureRule> closureRule5 = new HashSet<GrammarClosureRule>();
+        closureRule5.add(this.buildClosureRule(expectedCLookaheadSymbols, new NonTerminalNode("A"), new TerminalNode("a"), new DotNode()));
+        LR0ClosureRuleSetDFAState s5 = new LR0ClosureRuleSetDFAState("", false, closureRule5);
+
+        Set<GrammarClosureRule> closureRule6 = new HashSet<GrammarClosureRule>();
+        closureRule6.add(this.buildClosureRule(expectedBLookaheadSymbols, new NonTerminalNode("S"), new TerminalNode("a"), new DotNode()));
+        LR0ClosureRuleSetDFAState s6 = new LR0ClosureRuleSetDFAState("", false, closureRule6);
+
+        Set<GrammarClosureRule> closureRule7 = new HashSet<GrammarClosureRule>();
+        closureRule7.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S'"), new NonTerminalNode("S"), new DotNode(), new EndOfStringNode()));
+        LR0ClosureRuleSetDFAState s7 = new LR0ClosureRuleSetDFAState("", false, closureRule7);
+
+        Set<GrammarClosureRule> closureRule8 = new HashSet<GrammarClosureRule>();
+        closureRule8.add(this.buildClosureRule(expectedEndOfStringLookaheadSymbols, new NonTerminalNode("S'"), new NonTerminalNode("S"), new EndOfStringNode(), new DotNode()));
+        LR0ClosureRuleSetDFAState s8 = new LR0ClosureRuleSetDFAState("", true, closureRule8);
+
+        s0.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new NonTerminalNode("A"), s1));
+        s1.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new TerminalNode("b"), s2));
+        s2.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new NonTerminalNode("A"), s3));
+        s3.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new TerminalNode("c"), s4));
+        s2.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new TerminalNode("a"), s5));
+        s0.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new TerminalNode("a"), s6));
+        s0.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new NonTerminalNode("S"), s7));
+        s7.addTransition(new StateTransition<Node, LR0ClosureRuleSetDFAState>(new EndOfStringNode(), s8));
+        LR0ClosureRuleSetDFA expectedProductionSetDFA = new LR0ClosureRuleSetDFA(s0, augmentedGrammar);
+
+        Grammar grammar = new Grammar();
+        grammar.addProduction(new NonTerminalNode("S"), new NonTerminalNode("A"), new TerminalNode("b"), new NonTerminalNode("A"), new TerminalNode("c"));
+        grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
+
+        assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(grammar)));
     }
 
     private GrammarClosureRule buildClosureRule(Set<Node> lookaheadSymbols, NonTerminalNode nonTerminalNode, Node... rightHandNodes)
