@@ -318,6 +318,12 @@ public class LR1ClosureRuleSetDFACompilerTest
         assertTrue(expectedProductionSetDFA.structureEquals(compiler.compile(grammar)));
     }
 
+    @Test
+    public void testCompileKeepsStatesWithSameRulesButDifferentLookaheadsSeparate()
+    {
+        assertTrue(false);
+    }
+
     private GrammarClosureRule buildClosureRule(Set<Node> lookaheadSymbols, NonTerminalNode nonTerminalNode, Node... rightHandNodes)
     {
         ProductionNode productionNode = new ProductionNode();
