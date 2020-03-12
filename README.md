@@ -8,6 +8,9 @@ For more information, see [LICENSE.md](LICENSE.md).
 
 ## Version History
 
+### 5.0.0
+1. LR1 parsing
+
 ### 4.0.0
 1. SLR1 parsing
 
@@ -254,6 +257,10 @@ When construcing the parse table:
 * For each production in the current state's set in the form A -> prefix.
   * Map the combination of each terminal node in the context-free grammar plus the end of string node that fall within the follow set of A and the current state to a reduce action corresponding to the production index
 
+### Step 3: Convert Parse Tree into Parse Tale (LR1)
+
+...
+
 ### Step 4: Attempt to Match String using Parse Table (LL1)
 
 * If the provided context-free-grammar has no rules, reject
@@ -265,7 +272,7 @@ When construcing the parse table:
 * While the remaining input is empty and the top symbol of the stack is a non-terminal node corresponding to a parse table entry mapping to the end-of-string node, remove the top symbol, then add the right-hand side of the context-free-grammar rule corresponding to that context-free-grammar rule
 * If the stack and remaining input string are empty, accept, otherwise reject
 
-### Step 4: Attempt to Match String using Parse Table (LR0 / SLR1)
+### Step 4: Attempt to Match String using Parse Table (LR0 / SLR1 / LR1)
 
 * Initialize the parse stack with the parse table's start state
 * Initialize the current state to the parse table's start state
