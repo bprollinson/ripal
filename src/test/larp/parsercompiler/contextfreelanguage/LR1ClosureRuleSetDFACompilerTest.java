@@ -363,7 +363,7 @@ public class LR1ClosureRuleSetDFACompilerTest
         LR0ClosureRuleSetDFAState s5 = new LR0ClosureRuleSetDFAState("", false, closureRule5);
 
         Set<GrammarClosureRule> closureRule6 = new HashSet<GrammarClosureRule>();
-        closureRule6.add(this.buildClosureRule(expectedBLookaheadSymbols, new NonTerminalNode("S"), new TerminalNode("a"), new DotNode()));
+        closureRule6.add(this.buildClosureRule(expectedBLookaheadSymbols, new NonTerminalNode("A"), new TerminalNode("a"), new DotNode()));
         LR0ClosureRuleSetDFAState s6 = new LR0ClosureRuleSetDFAState("", false, closureRule6);
 
         Set<GrammarClosureRule> closureRule7 = new HashSet<GrammarClosureRule>();
