@@ -257,7 +257,17 @@ When construcing the parse table:
 * For each production in the current state's set in the form A -> prefix.
   * Map the combination of each terminal node in the context-free grammar plus the end of string node that fall within the follow set of A and the current state to a reduce action corresponding to the production index
 
-### Step 3: Convert Parse Tree into Parse Tale (LR1)
+### Step 3: Convert Parse Tree into Parse Table (LR1)
+
+Follow the same steps as is done for LR0, with the changes noted below.
+
+When calculating DFA closures:
+* Store an additional set of lookaheads in each closure item
+* For the initial closure item of S' -> .S $
+  * Initialize the lookahead set to {$}
+* When calculating further lookaheads within a set of closure items spawning from A -> .B C {L}
+  * For each production in the form B -> .D and each token T in the first set of C L, add B -> .D {T} to the closure set
+* When creating a closure item for a new closure set spawning from an item A -> .B C {L}, the new closure item will be in the form A -> B .C {L}
 
 ...
 
