@@ -266,7 +266,7 @@ When calculating DFA closures:
 * For the initial closure item of S' -> .S $
   * Initialize the lookahead set to {$}
 * When calculating further lookaheads within a set of closure items spawning from A -> .B C {L}
-  * For each production in the form B -> .D and each token T in the first set of C L, add B -> .D {T} to the closure set
+  * For each production in the form B -> .D in the grammar and each token T in the first set of C L, add B -> .D {T} to the closure set
 * When creating a closure item for a new closure set spawning from an item A -> .B C {L}, the new closure item will be in the form A -> B .C {L}
 
 When construction the parse table:
