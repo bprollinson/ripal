@@ -269,7 +269,9 @@ When calculating DFA closures:
   * For each production in the form B -> .D and each token T in the first set of C L, add B -> .D {T} to the closure set
 * When creating a closure item for a new closure set spawning from an item A -> .B C {L}, the new closure item will be in the form A -> B .C {L}
 
-...
+When construction the parse table:
+* For each production in the current state's set in the form A -> prefix. {L}
+  * Map the combination of {L} and the current state to a reduce action corresponding to the production index
 
 ### Step 4: Attempt to Match String using Parse Table (LL1)
 
