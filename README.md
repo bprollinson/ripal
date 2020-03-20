@@ -1,8 +1,8 @@
-# LARP: Language Analysis and Responsive Parsing
+# RIPAL: Responsive and Intuitive Parsing for the Analysis of Language
 
 ## Licensing
 
-LARP: Language Analysis and Responsive Parsing is licensed under LGPL v. 2.1.
+RIPAL: Responsive and Intuitive Parsing for the Analysis of Language is licensed under LGPL v. 2.1.
 
 For more information, see [LICENSE.md](LICENSE.md).
 
