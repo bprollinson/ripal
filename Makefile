@@ -10,10 +10,9 @@ program:
 test:
 	make clean
 	find src/test -name "*.java" > ./sources.txt
-	javac -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar -Xlint:unchecked @sources.txt
+	javac -cp src/main:src/test:junit-platform-console-standalone-1.10.2.jar -Xlint:unchecked @sources.txt
 	rm sources.txt
-	$(eval TEST_PATHS=$(shell bash -c "find src/test/ripal/ -name \"*.java\" | sed -e 's/^src\/test\///' -e 's/.java$$//' -e 's/\//./g'"))
-	java -cp src/main:src/test:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore ${TEST_PATHS}
+	java -jar junit-platform-console-standalone-1.10.2.jar execute --class-path src/main:src/test --select-package ripal
 	make clean
 clean:
 	find . -name "*.class" -exec rm {} \;
