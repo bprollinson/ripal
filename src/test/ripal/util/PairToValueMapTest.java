@@ -46,7 +46,7 @@ public class PairToValueMapTest
         PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
         pairToValueMap.put("a", "b", 1);
 
-        assertEquals(new Integer(1), pairToValueMap.get("a", "b"));
+        assertEquals(Integer.valueOf(1), pairToValueMap.get("a", "b"));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class PairToValueMapTest
         pairToValueMap.put("a", "b", 1);
         pairToValueMap.put("a", "c", 2);
 
-        assertEquals(new Integer(2), pairToValueMap.get("a", "c"));
+        assertEquals(Integer.valueOf(2), pairToValueMap.get("a", "c"));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class PairToValueMapTest
         pairToValueMap.put("a", "b", 1);
         pairToValueMap.put("c", "b", 2);
 
-        assertEquals(new Integer(2), pairToValueMap.get("c", "b"));
+        assertEquals(Integer.valueOf(2), pairToValueMap.get("c", "b"));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class PairToValueMapTest
         PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
         pairToValueMap.put(null, "b", 1);
 
-        assertEquals(new Integer(1), pairToValueMap.get(null, "b"));
+        assertEquals(Integer.valueOf(1), pairToValueMap.get(null, "b"));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class PairToValueMapTest
         PairToValueMap<String, String, Integer> pairToValueMap = new PairToValueMap<String, String, Integer>();
         pairToValueMap.put("a", null, 1);
 
-        assertEquals(new Integer(1), pairToValueMap.get("a", null));
+        assertEquals(Integer.valueOf(1), pairToValueMap.get("a", null));
     }
 
     @Test
