@@ -8,6 +8,11 @@ For more information, see [LICENSE.md](LICENSE.md).
 
 ## Version History
 
+### 6.0.0
+1. Updating RIPAL to run on Java 22
+2. Upgrading to latest JUnit standalone executor for compatibility with JUnit 5
+3. Updating unit tests to use JUnit 5 syntax
+
 ### 5.0.0
 1. LR1 parsing
 
