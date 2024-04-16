@@ -7,8 +7,9 @@
 
 package ripal.parsercompiler.contextfreelanguage;
 
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import ripal.grammar.contextfreelanguage.Grammar;
 import ripal.parser.contextfreelanguage.AmbiguousLR0ParseTableException;
@@ -122,7 +123,7 @@ public class LR1ParserCompilerTest
         assertTrue(expectedTable.structureEquals(compiler.compile(grammar)));
     }
 
-    @Test(expected = LR0ShiftReduceConflictException.class)
+    @Test
     public void testCompileThrowsExceptionForShiftReduceConflict() throws AmbiguousLR0ParseTableException
     {
         LR1ParserCompiler compiler = new LR1ParserCompiler();
@@ -132,10 +133,15 @@ public class LR1ParserCompilerTest
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"), new TerminalNode("b"));
 
-        compiler.compile(grammar);
+        assertThrows(
+            LR0ShiftReduceConflictException.class,
+            () -> {
+                compiler.compile(grammar);
+            }
+        );
     }
 
-    @Test(expected = LR0ReduceReduceConflictException.class)
+    @Test
     public void testCompileThrowsExceptionForReduceReduceConflict() throws AmbiguousLR0ParseTableException
     {
         LR1ParserCompiler compiler = new LR1ParserCompiler();
@@ -144,10 +150,15 @@ public class LR1ParserCompilerTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        compiler.compile(grammar);
+        assertThrows(
+            LR0ReduceReduceConflictException.class,
+            () -> {
+                compiler.compile(grammar);
+            }
+        );
     }
 
-    @Test(expected = LR0ShiftReduceConflictException.class)
+    @Test
     public void testCompilerThrowsExceptionForShiftReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
     {
         LR1ParserCompiler compiler = new LR1ParserCompiler();
@@ -157,10 +168,15 @@ public class LR1ParserCompilerTest
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
-        compiler.compile(grammar);
+        assertThrows(
+            LR0ShiftReduceConflictException.class,
+            () -> {
+                compiler.compile(grammar);
+            }
+        );
     }
 
-    @Test(expected = LR0ReduceReduceConflictException.class)
+    @Test
     public void testCompilerThrowsExceptionForReduceReduceConflictInvolvingEpsilon() throws AmbiguousLR0ParseTableException
     {
         LR1ParserCompiler compiler = new LR1ParserCompiler();
@@ -169,6 +185,11 @@ public class LR1ParserCompilerTest
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
         grammar.addProduction(new NonTerminalNode("S"), new EpsilonNode());
 
-        compiler.compile(grammar);
+        assertThrows(
+            LR0ReduceReduceConflictException.class,
+            () -> {
+                compiler.compile(grammar);
+            }
+        );
     }
 }

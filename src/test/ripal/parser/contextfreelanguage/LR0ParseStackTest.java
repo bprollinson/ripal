@@ -7,10 +7,11 @@
 
 package ripal.parser.contextfreelanguage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import ripal.parsetree.contextfreelanguage.NonTerminalNode;
 
@@ -30,11 +31,17 @@ public class LR0ParseStackTest
         assertEquals(new NonTerminalNode("A"), stack.peek());
     }
 
-    @Test(expected = LR0ParseStackEmptyException.class)
+    @Test
     public void testPeekThrowsExceptionWhenStackIsEmpty() throws LR0ParseStackEmptyException
     {
         LR0ParseStack stack = new LR0ParseStack();
-        stack.peek();
+
+        assertThrows(
+            LR0ParseStackEmptyException.class,
+            () -> {
+                stack.peek();
+            }
+        );
     }
 
     @Test
@@ -53,11 +60,17 @@ public class LR0ParseStackTest
         assertEquals(expectedStack, stack);
     }
 
-    @Test(expected = LR0ParseStackEmptyException.class)
+    @Test
     public void testPopThrowsExceptionWhenStackIsEmpty() throws LR0ParseStackEmptyException
     {
         LR0ParseStack stack = new LR0ParseStack();
-        stack.pop();
+
+        assertThrows(
+            LR0ParseStackEmptyException.class,
+            () -> {
+                stack.pop();
+            }
+        );
     }
 
     @Test
@@ -87,11 +100,17 @@ public class LR0ParseStackTest
         assertEquals(state, stack.getTopState());
     }
 
-    @Test(expected = LR0ParseStackEmptyException.class)
+    @Test
     public void testGetTopStateThrowsExceptionWhenStateNotFound() throws LR0ParseStackEmptyException
     {
         LR0ParseStack stack = new LR0ParseStack();
-        stack.getTopState();
+
+        assertThrows(
+            LR0ParseStackEmptyException.class,
+            () -> {
+                stack.getTopState();
+            }
+        );
     }
 
     @Test

@@ -7,9 +7,10 @@
 
 package ripal.parserfactory.contextfreelanguage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import ripal.grammar.contextfreelanguage.Grammar;
 import ripal.grammartokenizer.contextfreelanguage.IncorrectGrammarStatementPrefixException;
@@ -228,7 +229,7 @@ public class ParserFactoryTest
         assertEquals(LL1Parser.class, parser.getClass());
     }
 
-    @Test(expected = LR0ShiftReduceConflictException.class)
+    @Test
     public void testFactoryThrowsLR0ShiftReduceExceptionForNonLL1NonLR1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
@@ -236,10 +237,15 @@ public class ParserFactoryTest
         input.add("S: S\"b\"S");
         input.add("S: \"a\"");
 
-        factory.factory(input);
+        assertThrows(
+            LR0ShiftReduceConflictException.class,
+            () -> {
+                factory.factory(input);
+            }
+        );
     }
 
-    @Test(expected = LR0ReduceReduceConflictException.class)
+    @Test
     public void testFactoryThrowsLR0ReduceReduceExceptionForNonLL1NonLR1Grammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
@@ -247,16 +253,26 @@ public class ParserFactoryTest
         input.add("S: \"s\"");
         input.add("S: \"s\"");
 
-        factory.factory(input);
+        assertThrows(
+            LR0ReduceReduceConflictException.class,
+            () -> {
+                factory.factory(input);
+            }
+        );
     }
 
-    @Test(expected = IncorrectGrammarStatementPrefixException.class)
+    @Test
     public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectGrammar() throws TokenizerException, AmbiguousParseTableException
     {
         ParserFactory factory = new ParserFactory();
         List<String> input = new ArrayList<String>();
         input.add("");
 
-        factory.factory(input);
+        assertThrows(
+            IncorrectGrammarStatementPrefixException.class,
+            () -> {
+                factory.factory(input);
+            }
+        );
     }
 }

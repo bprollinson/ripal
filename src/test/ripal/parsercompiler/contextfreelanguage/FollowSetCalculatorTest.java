@@ -7,8 +7,8 @@
 
 package ripal.parsercompiler.contextfreelanguage;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import ripal.grammar.contextfreelanguage.Grammar;
 import ripal.parsetree.contextfreelanguage.EndOfStringNode;

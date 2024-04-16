@@ -7,16 +7,22 @@
 
 package ripal.grammartokenizer.contextfreelanguage;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 public class GrammarFinalQuoteNestingCorrectAssertionTest
 {
-    @Test(expected = IncorrectGrammarQuoteNestingException.class)
+    @Test
     public void testValidateThrowsExceptionWhenInTerminal() throws IncorrectGrammarQuoteNestingException
     {
         GrammarFinalQuoteNestingCorrectAssertion assertion = new GrammarFinalQuoteNestingCorrectAssertion(true);
 
-        assertion.validate();
+        assertThrows(
+            IncorrectGrammarQuoteNestingException.class,
+            () -> {
+                assertion.validate();
+            }
+        );
     }
 
     @Test

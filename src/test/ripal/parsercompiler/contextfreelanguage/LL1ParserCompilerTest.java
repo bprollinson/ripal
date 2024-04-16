@@ -7,8 +7,9 @@
 
 package ripal.parsercompiler.contextfreelanguage;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 import ripal.grammar.contextfreelanguage.Grammar;
 import ripal.parser.contextfreelanguage.AmbiguousLL1ParseTableException;
@@ -148,7 +149,7 @@ public class LL1ParserCompilerTest
         assertEquals(expectedTable, compiler.compile(grammar));
     }
 
-    @Test(expected = LL1ApplyApplyConflictException.class)
+    @Test
     public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoTerminals() throws AmbiguousLL1ParseTableException
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
@@ -157,10 +158,15 @@ public class LL1ParserCompilerTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
 
-        compiler.compile(grammar);
+        assertThrows(
+            LL1ApplyApplyConflictException.class,
+            () -> {
+                compiler.compile(grammar);
+            }
+        );
     }
 
-    @Test(expected = LL1ApplyApplyConflictException.class)
+    @Test
     public void testCompileThrowsExceptionForFirstAmbiguityBetweenTwoNonTerminals() throws AmbiguousLL1ParseTableException
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
@@ -171,10 +177,15 @@ public class LL1ParserCompilerTest
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("a"));
 
-        compiler.compile(grammar);
+        assertThrows(
+            LL1ApplyApplyConflictException.class,
+            () -> {
+                compiler.compile(grammar);
+            }
+        );
     }
 
-    @Test(expected = LL1ApplyApplyConflictException.class)
+    @Test
     public void testCompileThrowsExceptionForFirstAmbiguityBetweenTerminalAndNonTerminal() throws AmbiguousLL1ParseTableException
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
@@ -184,10 +195,15 @@ public class LL1ParserCompilerTest
         grammar.addProduction(new NonTerminalNode("S"), new TerminalNode("a"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
-        compiler.compile(grammar);
+        assertThrows(
+            LL1ApplyApplyConflictException.class,
+            () -> {
+                compiler.compile(grammar);
+            }
+        );
     }
 
-    @Test(expected = LL1ApplyApplyConflictException.class)
+    @Test
     public void testCompileThrowsExceptionForAmbiguousGrammarContainingCycle() throws AmbiguousLL1ParseTableException
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
@@ -197,7 +213,12 @@ public class LL1ParserCompilerTest
         grammar.addProduction(new NonTerminalNode("A"), new NonTerminalNode("S"));
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("a"));
 
-        compiler.compile(grammar);
+        assertThrows(
+            LL1ApplyApplyConflictException.class,
+            () -> {
+                compiler.compile(grammar);
+            }
+        );
     }
 
     @Test
@@ -299,7 +320,7 @@ public class LL1ParserCompilerTest
         assertEquals(expectedTable, compiler.compile(grammar));
     }
 
-    @Test(expected = LL1ApplyApplyConflictException.class)
+    @Test
     public void testCompileThrowsExceptionForFirstFollowAmbiguity() throws AmbiguousLL1ParseTableException
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
@@ -310,10 +331,15 @@ public class LL1ParserCompilerTest
         grammar.addProduction(new NonTerminalNode("A"), new TerminalNode("b"));
         grammar.addProduction(new NonTerminalNode("B"), new TerminalNode("b"));
 
-        compiler.compile(grammar);
+        assertThrows(
+            LL1ApplyApplyConflictException.class,
+            () -> {
+                compiler.compile(grammar);
+            }
+        );
     }
 
-    @Test(expected = LL1ApplyApplyConflictException.class)
+    @Test
     public void testCompileThrowsExceptionForFollowFollowAmbiguity() throws AmbiguousLL1ParseTableException
     {
         LL1ParserCompiler compiler = new LL1ParserCompiler();
@@ -323,7 +349,12 @@ public class LL1ParserCompilerTest
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
         grammar.addProduction(new NonTerminalNode("A"), new EpsilonNode());
 
-        compiler.compile(grammar);
+        assertThrows(
+            LL1ApplyApplyConflictException.class,
+            () -> {
+                compiler.compile(grammar);
+            }
+        );
     }
 
     @Test

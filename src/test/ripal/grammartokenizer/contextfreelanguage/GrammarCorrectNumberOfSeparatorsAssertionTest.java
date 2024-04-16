@@ -7,24 +7,35 @@
 
 package ripal.grammartokenizer.contextfreelanguage;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 public class GrammarCorrectNumberOfSeparatorsAssertionTest
 {
-    @Test(expected = IncorrectGrammarSeparatorException.class)
+    @Test
     public void testValidateThrowsExceptionForLessThanOneSeparatorToken() throws IncorrectGrammarSeparatorException
     {
         GrammarCorrectNumberOfSeparatorsAssertion assertion = new GrammarCorrectNumberOfSeparatorsAssertion(0);
 
-        assertion.validate();
+        assertThrows(
+            IncorrectGrammarSeparatorException.class,
+            () -> {
+                assertion.validate();
+            }
+        );
     }
 
-    @Test(expected = IncorrectGrammarSeparatorException.class)
+    @Test
     public void testValidateThrowsExceptionForMoreThanOneSeparatorToken() throws IncorrectGrammarSeparatorException
     {
         GrammarCorrectNumberOfSeparatorsAssertion assertion = new GrammarCorrectNumberOfSeparatorsAssertion(2);
 
-        assertion.validate();
+        assertThrows(
+            IncorrectGrammarSeparatorException.class,
+            () -> {
+                assertion.validate();
+            }
+        );
     }
 
     @Test

@@ -7,16 +7,22 @@
 
 package ripal.grammartokenizer.contextfreelanguage;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 public class GrammarEscapeCharacterPositionCorrectAssertionTest
 {
-    @Test(expected = IncorrectGrammarEscapeCharacterPositionException.class)
+    @Test
     public void testValidateThrowsExceptionWhenNotInTerminal() throws IncorrectGrammarEscapeCharacterPositionException
     {
         GrammarEscapeCharacterPositionCorrectAssertion assertion = new GrammarEscapeCharacterPositionCorrectAssertion(false);
 
-        assertion.validate();
+        assertThrows(
+            IncorrectGrammarEscapeCharacterPositionException.class,
+            () -> {
+                assertion.validate();
+            }
+        );
     }
 
     @Test

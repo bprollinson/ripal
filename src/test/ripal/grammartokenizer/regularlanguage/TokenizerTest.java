@@ -7,8 +7,9 @@
 
 package ripal.grammartokenizer.regularlanguage;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 import ripal.token.regularlanguage.CharacterToken;
 import ripal.token.regularlanguage.CloseParenthesisToken;
@@ -238,12 +239,17 @@ public class TokenizerTest
         assertEquals(expectedResult, result);
     }
 
-    @Test(expected = IncorrectExpressionNestingException.class)
+    @Test
     public void testTokenizeThrowsExceptionForNegativeParenthesisNesting() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        tokenizer.tokenize(")(");
+        assertThrows(
+            IncorrectExpressionNestingException.class,
+            () -> {
+                tokenizer.tokenize(")(");
+            }
+        );
     }
 
     @Test
@@ -262,20 +268,30 @@ public class TokenizerTest
         assertEquals(expectedResult, result);
     }
 
-    @Test(expected = DanglingExpressionEscapeCharacterException.class)
+    @Test
     public void testTokenizeThrowsExceptionForDanglingEscapeCharacter() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        List<Token> result = tokenizer.tokenize("\\");
+        assertThrows(
+            DanglingExpressionEscapeCharacterException.class,
+            () -> {
+                tokenizer.tokenize("\\");
+            }
+        );
     }
 
-    @Test(expected = IncorrectExpressionNestingException.class)
+    @Test
     public void testTokenizeThrowsExceptionForUnclosedParenthesisAtEndOfString() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        tokenizer.tokenize("(");
+        assertThrows(
+            IncorrectExpressionNestingException.class,
+            () -> {
+                tokenizer.tokenize("(");
+            }
+        );
     }
 
     @Test
@@ -314,19 +330,29 @@ public class TokenizerTest
         assertEquals(expectedResult, result);
     }
 
-    @Test(expected = IncorrectExpressionNestingException.class)
+    @Test
     public void testExceptionForNegativeParenthesisNestingPrioritizedOverExceptionForDanglingEscapeCharacter() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        tokenizer.tokenize(")(\\");
+        assertThrows(
+            IncorrectExpressionNestingException.class,
+            () -> {
+                tokenizer.tokenize(")(\\");
+            }
+        );
     }
 
-    @Test(expected = DanglingExpressionEscapeCharacterException.class)
+    @Test
     public void testExceptionForDangingEscapeCharacterPrioritizedOverExceptionForUnclosedParenthesisAtEndOfString() throws TokenizerException
     {
         Tokenizer tokenizer = new Tokenizer();
 
-        tokenizer.tokenize("(\\");
+        assertThrows(
+            DanglingExpressionEscapeCharacterException.class,
+            () -> {
+                tokenizer.tokenize("(\\");;
+            }
+        );
     }
 }

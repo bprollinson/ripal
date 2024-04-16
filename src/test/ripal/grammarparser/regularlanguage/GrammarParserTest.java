@@ -7,8 +7,8 @@
 
 package ripal.grammarparser.regularlanguage;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import ripal.parsetree.regularlanguage.CharacterNode;
 import ripal.parsetree.regularlanguage.ConcatenationNode;

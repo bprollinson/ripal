@@ -7,16 +7,22 @@
 
 package ripal.grammartokenizer.regularlanguage;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 public class ExpressionFinalEscapingStatusValidAssertionTest
 {
-    @Test(expected = DanglingExpressionEscapeCharacterException.class)
+    @Test
     public void testValidateThrowsExceptionWhenEscaping() throws DanglingExpressionEscapeCharacterException
     {
         ExpressionFinalEscapingStatusValidAssertion assertion = new ExpressionFinalEscapingStatusValidAssertion(true);
 
-        assertion.validate();
+        assertThrows(
+            DanglingExpressionEscapeCharacterException.class,
+            () -> {
+                assertion.validate();
+            }
+        );
     }
 
     @Test

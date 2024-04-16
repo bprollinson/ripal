@@ -7,9 +7,10 @@
 
 package ripal.parser.contextfreelanguage;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import ripal.grammar.contextfreelanguage.Grammar;
 import ripal.parsetree.contextfreelanguage.Node;
@@ -19,7 +20,7 @@ import ripal.util.PairToValueMap;
 
 public class LL1ParseTableTest
 {
-    @Test(expected = LL1ApplyApplyConflictException.class)
+    @Test
     public void testAddCellThrowsExceptionForCellThatAlreadyExists() throws AmbiguousLL1ParseTableException
     {
         Grammar grammar = new Grammar();
@@ -27,7 +28,13 @@ public class LL1ParseTableTest
 
         LL1ParseTable parseTable = new LL1ParseTable(grammar);
         parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
-        parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+
+        assertThrows(
+            LL1ApplyApplyConflictException.class,
+            () -> {
+                parseTable.addCell(new NonTerminalNode("S"), new TerminalNode("a"), 0);
+            }
+        );
     }
 
     @Test

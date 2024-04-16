@@ -7,8 +7,9 @@
 
 package ripal.parserfactory.regularlanguage;
 
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import ripal.automaton.DFA;
 import ripal.automaton.DFAState;
@@ -47,10 +48,16 @@ public class ParserFactoryTest
         assertTrue(expectedDFA.structureEquals(dfa));
     }
 
-    @Test(expected = IncorrectExpressionNestingException.class)
+    @Test
     public void testFactoryThrowsSyntaxTokenizerExceptionForIncorrectExpression() throws TokenizerException
     {
         ParserFactory factory = new ParserFactory();
-        DFA dfa = factory.factory(")(");
+
+        assertThrows(
+            IncorrectExpressionNestingException.class,
+            () -> {
+                factory.factory(")(");
+            }
+        );
     }
 }

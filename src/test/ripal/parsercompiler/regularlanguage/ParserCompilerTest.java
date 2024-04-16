@@ -7,8 +7,8 @@
 
 package ripal.parsercompiler.regularlanguage;
 
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import ripal.automaton.EpsilonNFA;
 import ripal.automaton.EpsilonNFAState;

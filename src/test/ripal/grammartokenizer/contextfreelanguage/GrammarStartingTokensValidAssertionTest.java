@@ -7,7 +7,8 @@
 
 package ripal.grammartokenizer.contextfreelanguage;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 import ripal.token.contextfreelanguage.NonTerminalToken;
 import ripal.token.contextfreelanguage.SeparatorToken;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class GrammarStartingTokensValidAssertionTest
 {
-    @Test(expected = IncorrectGrammarStatementPrefixException.class)
+    @Test
     public void testValidateThrowsExceptionForFewerThanThreeTokens() throws TokenizerException
     {
         List<Token> tokens = new ArrayList<Token>();
@@ -26,10 +27,15 @@ public class GrammarStartingTokensValidAssertionTest
         tokens.add(new SeparatorToken());
         GrammarStartingTokensValidAssertion assertion = new GrammarStartingTokensValidAssertion(tokens);
 
-        assertion.validate();
+        assertThrows(
+            IncorrectGrammarStatementPrefixException.class,
+            () -> {
+                assertion.validate();
+            }
+        );
     }
 
-    @Test(expected = IncorrectGrammarStatementPrefixException.class)
+    @Test
     public void testValidateThrowsExceptionWhenFirstTokenIsNotANonterminal() throws TokenizerException
     {
         List<Token> tokens = new ArrayList<Token>();
@@ -38,10 +44,15 @@ public class GrammarStartingTokensValidAssertionTest
         tokens.add(new NonTerminalToken("S"));
         GrammarStartingTokensValidAssertion assertion = new GrammarStartingTokensValidAssertion(tokens);
 
-        assertion.validate();
+        assertThrows(
+            IncorrectGrammarStatementPrefixException.class,
+            () -> {
+                assertion.validate();
+            }
+        );
     }
 
-    @Test(expected = IncorrectGrammarStatementPrefixException.class)
+    @Test
     public void testValidateThrowsExceptionWhenSecondTokenIsNotASeparator() throws TokenizerException
     {
         List<Token> tokens = new ArrayList<Token>();
@@ -50,7 +61,12 @@ public class GrammarStartingTokensValidAssertionTest
         tokens.add(new NonTerminalToken("S"));
         GrammarStartingTokensValidAssertion assertion = new GrammarStartingTokensValidAssertion(tokens);
 
-        assertion.validate();
+        assertThrows(
+            IncorrectGrammarStatementPrefixException.class,
+            () -> {
+                assertion.validate();
+            }
+        );
     }
 
     @Test

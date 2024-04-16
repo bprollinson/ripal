@@ -7,16 +7,22 @@
 
 package ripal.grammartokenizer.contextfreelanguage;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 public class GrammarFinalEscapingStatusValidAssertionTest
 {
-    @Test(expected = DanglingGrammarEscapeCharacterException.class)
+    @Test
     public void testValidateThrowsExceptionWhenEscaping() throws DanglingGrammarEscapeCharacterException
     {
         GrammarFinalEscapingStatusValidAssertion assertion = new GrammarFinalEscapingStatusValidAssertion(true);
 
-        assertion.validate();
+        assertThrows(
+            DanglingGrammarEscapeCharacterException.class,
+            () -> {
+                assertion.validate();
+            }
+        );
     }
 
     @Test

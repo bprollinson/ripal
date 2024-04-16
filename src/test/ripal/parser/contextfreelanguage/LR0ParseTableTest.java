@@ -7,10 +7,11 @@
 
 package ripal.parser.contextfreelanguage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import ripal.automaton.State;
 import ripal.grammar.contextfreelanguage.Grammar;
@@ -50,7 +51,7 @@ public class LR0ParseTableTest
         assertEquals(state, parseTable.getStartState());
     }
 
-    @Test(expected = LR0ShiftReduceConflictException.class)
+    @Test
     public void testAddCellThrowsExceptionForShiftActionWhenCellContainsReduceAction() throws AmbiguousLR0ParseTableException
     {
         Grammar grammar = new Grammar();
@@ -61,10 +62,16 @@ public class LR0ParseTableTest
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state2));
+
+        assertThrows(
+            LR0ShiftReduceConflictException.class,
+            () -> {
+                parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state2));
+            }
+        );
     }
 
-    @Test(expected = LR0ShiftReduceConflictException.class)
+    @Test
     public void testAddCellThrowsExceptionForReduceActionWhenCellContainsShiftAction() throws AmbiguousLR0ParseTableException
     {
         Grammar grammar = new Grammar();
@@ -75,10 +82,16 @@ public class LR0ParseTableTest
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ShiftAction(state2));
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        assertThrows(
+            LR0ShiftReduceConflictException.class,
+            () -> {
+                parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+            }
+        );
     }
 
-    @Test(expected = LR0ReduceReduceConflictException.class)
+    @Test
     public void testAddCellThrowsExceptionForReduceActionWhenCellContainsReduceAction() throws AmbiguousLR0ParseTableException
     {
         Grammar grammar = new Grammar();
@@ -89,10 +102,16 @@ public class LR0ParseTableTest
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
-        parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+
+        assertThrows(
+            LR0ReduceReduceConflictException.class,
+            () -> {
+                parseTable.addCell(state, new TerminalNode("a"), new LR0ReduceAction(0));
+            }
+        );
     }
 
-    @Test(expected = LR0OtherConflictException.class)
+    @Test
     public void testAddCellThrowsExceptionForOtherTypeOfConflict() throws AmbiguousLR0ParseTableException
     {
         Grammar grammar = new Grammar();
@@ -102,7 +121,13 @@ public class LR0ParseTableTest
 
         LR0ParseTable parseTable = new LR0ParseTable(grammar, state);
         parseTable.addCell(state, new TerminalNode("a"), new LR0AcceptAction());
-        parseTable.addCell(state, new TerminalNode("a"), new LR0AcceptAction());
+
+        assertThrows(
+            LR0OtherConflictException.class,
+            () -> {
+                parseTable.addCell(state, new TerminalNode("a"), new LR0AcceptAction());
+            }
+        );
     }
 
     @Test

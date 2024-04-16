@@ -7,16 +7,22 @@
 
 package ripal.grammartokenizer.regularlanguage;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 public class ExpressionIntermediateNestingLevelValidAssertionTest
 {
-    @Test(expected = IncorrectExpressionNestingException.class)
+    @Test
     public void testValidateThrowsExceptionForNegativeNestingLevel() throws IncorrectExpressionNestingException
     {
         ExpressionIntermediateNestingLevelValidAssertion assertion = new ExpressionIntermediateNestingLevelValidAssertion(-1);
 
-        assertion.validate();
+        assertThrows(
+            IncorrectExpressionNestingException.class,
+            () -> {
+                assertion.validate();
+            }
+        );
     }
 
     @Test
